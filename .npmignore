@@ -5,3 +5,8 @@ build/example
 /*.json
 !package.json
 !lerna.json
+
+# Editor directories and files
+.history
+.idea
+.vscode
