@@ -6,9 +6,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["npm/weex-mzui/index"] = factory();
+		exports["npm/@flyme/weex-ui/index"] = factory();
 	else
-		root["npm/weex-mzui/index"] = factory();
+		root["npm/@flyme/weex-ui/index"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -132,7 +132,7 @@ __vue_styles__.push(__webpack_require__(3)
 __vue_exports__ = __webpack_require__(4)
 
 /* template */
-var __vue_template__ = __webpack_require__(5)
+var __vue_template__ = __webpack_require__(6)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -191,7 +191,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _theme = __webpack_require__(20);
+var _theme = __webpack_require__(5);
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; } //
 //
@@ -266,10 +266,11 @@ exports.default = {
     }
   },
   methods: {
-    changState: function changState(e) {
+    changeState: function changeState(e) {
       if (this.isAnimate || this.disabled) return;
       this.checked = !this.checked;
       this.toggleState();
+      this.$emit('change', this.checked);
     },
     toggleState: function toggleState() {
       var _ref,
@@ -314,39 +315,6 @@ exports.default = {
 
 /***/ }),
 /* 5 */
-/***/ (function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: ["fm-switch"],
-    style: _vm.getBgStyle,
-    on: {
-      "click": _vm.changState
-    }
-  }, [_c('div', {
-    ref: "ctrBall",
-    staticClass: ["ctr-ball"],
-    style: _vm.ballStyle
-  })])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-
-/***/ }),
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -381,6 +349,25 @@ var THEME = exports.THEME = {
         backgroundColor: '#ffcd45'
     }
 };
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: ["fm-switch"],
+    style: _vm.getBgStyle,
+    on: {
+      "click": _vm.changeState
+    }
+  }, [_c('div', {
+    ref: "ctrBall",
+    staticClass: ["ctr-ball"],
+    style: _vm.ballStyle
+  })])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
 
 /***/ })
 /******/ ]);

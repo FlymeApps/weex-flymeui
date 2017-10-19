@@ -6,9 +6,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["npm/weex-mzui/index"] = factory();
+		exports["npm/@flyme/weex-ui/index"] = factory();
 	else
-		root["npm/weex-mzui/index"] = factory();
+		root["npm/@flyme/weex-ui/index"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -489,7 +489,7 @@ var Component = __webpack_require__(2)(
   /* script */
   __webpack_require__(9),
   /* template */
-  __webpack_require__(10),
+  __webpack_require__(11),
   /* scopeId */
   "data-v-ceed072a",
   /* cssModules */
@@ -550,7 +550,7 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-switch[data-v-ceed072a] {\n  flex-direction: row;\n  align-items: center;\n  width: 100px;\n  height: 50px;\n  border-radius: 25px;\n}\n.ctr-ball[data-v-ceed072a] {\n  width: 34px;\n  height: 34px;\n  border-radius: 17px;\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-mzui/packages/fm-switch/index.vue?1c56cd61"],"names":[],"mappings":";AAWA;EACA,oBAAA;EACA,oBAAA;EACA,aAAA;EACA,aAAA;EACA,oBAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;EACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n    <div class=\"fm-switch\" @click=\"changState\" :style=\"getBgStyle\">\n        <div \n          class=\"ctr-ball\" \n          :style=\"ballStyle\"\n          ref=\"ctrBall\"></div>\n    </div>\n</template>\n\n<style scoped>\n\n  .fm-switch {\n    flex-direction: row;\n    align-items: center;\n    width: 100px;\n    height: 50px;\n    border-radius: 25px;\n  }\n\n  .ctr-ball {\n    width: 34px;\n    height: 34px;\n    border-radius: 17px;\n  }\n\n</style>\n\n<script>\n\nimport { THEME } from './theme'\nconst animation = weex.requireModule('animation')\n\nexport default {\n    name: 'fm-switch',\n    props: {\n      checked: {\n        type: Boolean,\n        default: false\n      },\n      theme: {\n        type: String,\n        default: 'default'\n      },\n      disabled: {\n        type: Boolean,\n        default: false\n      }\n    },\n    data() {\n      return {\n        isAnimate: false,\n        focusColor: '#198ded',\n        blurColor: '#7e97ac',\n        ballStyle: {\n          backgroundColor: this.blurColor\n        }\n      }\n    },\n    computed: {\n      getBgStyle() {\n        let style = this.theme === 'default' ? {\n          borderWidth: 4,\n          borderColor: '#7e97ac'\n        } : THEME[this.theme]\n        if (this.disabled) {\n          style.opacity = 0.3\n        } else {\n          style.opacity = 1\n        }\n        return style\n      }\n    },\n    methods: {\n      changState(e) {\n        if (this.isAnimate || this.disabled) return\n        this.checked = !this.checked\n        this.toggleState()\n      },\n      toggleState(){\n          this.isAnimate = true\n          const style = this.checked ? {\n            backgroundColor: this.focusColor,\n            transform: 'scale(1)',\n            transform: 'translate(50px, 0)',\n            transformOrigin: 'center center'\n          } : {\n            backgroundColor: this.blurColor,\n            transform: 'scale(0.6)',\n            transformOrigin: 'center center'\n          }\n          const ctrBall = this.$refs.ctrBall\n          animation.transition(ctrBall, {\n            styles: style,\n            timingFunction: 'ease',\n            duration: 260\n          }, () => {\n            this.isAnimate = false\n          })\n      }\n    },\n    mounted() {\n      const { bgStyle, focusColor, blurColor } = this\n      if (this.theme !== 'default') {\n          this.focusColor = this.blurColor = '#fff'\n      }\n      this.checked ? this.ballStyle = {\n          backgroundColor: this.focusColor,\n          transform: 'scale(1.0)',\n          transform: 'translate(50px, 0)'\n      } : this.ballStyle = {\n          backgroundColor: this.blurColor,\n          transform: 'scale(0.6)'\n      }\n    }\n}\n</script>"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-switch[data-v-ceed072a] {\n  flex-direction: row;\n  align-items: center;\n  width: 100px;\n  height: 50px;\n  border-radius: 25px;\n}\n.ctr-ball[data-v-ceed072a] {\n  width: 34px;\n  height: 34px;\n  border-radius: 17px;\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-mzui/packages/fm-switch/index.vue?4e4432ae"],"names":[],"mappings":";AAWA;EACA,oBAAA;EACA,oBAAA;EACA,aAAA;EACA,aAAA;EACA,oBAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;EACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n    <div class=\"fm-switch\" @click=\"changeState\" :style=\"getBgStyle\">\n        <div \n          class=\"ctr-ball\" \n          :style=\"ballStyle\"\n          ref=\"ctrBall\"></div>\n    </div>\n</template>\n\n<style scoped>\n\n  .fm-switch {\n    flex-direction: row;\n    align-items: center;\n    width: 100px;\n    height: 50px;\n    border-radius: 25px;\n  }\n\n  .ctr-ball {\n    width: 34px;\n    height: 34px;\n    border-radius: 17px;\n  }\n\n</style>\n\n<script>\n\nimport { THEME } from './theme'\nconst animation = weex.requireModule('animation')\n\nexport default {\n    name: 'fm-switch',\n    props: {\n      checked: {\n        type: Boolean,\n        default: false\n      },\n      theme: {\n        type: String,\n        default: 'default'\n      },\n      disabled: {\n        type: Boolean,\n        default: false\n      }\n    },\n    data() {\n      return {\n        isAnimate: false,\n        focusColor: '#198ded',\n        blurColor: '#7e97ac',\n        ballStyle: {\n          backgroundColor: this.blurColor\n        }\n      }\n    },\n    computed: {\n      getBgStyle() {\n        let style = this.theme === 'default' ? {\n          borderWidth: 4,\n          borderColor: '#7e97ac'\n        } : THEME[this.theme]\n        if (this.disabled) {\n          style.opacity = 0.3\n        } else {\n          style.opacity = 1\n        }\n        return style\n      }\n    },\n    methods: {\n      changeState(e) {\n        if (this.isAnimate || this.disabled) return\n        this.checked = !this.checked\n        this.toggleState()\n        this.$emit('change', this.checked)\n      },\n      toggleState(){\n          this.isAnimate = true\n          const style = this.checked ? {\n            backgroundColor: this.focusColor,\n            transform: 'scale(1)',\n            transform: 'translate(50px, 0)',\n            transformOrigin: 'center center'\n          } : {\n            backgroundColor: this.blurColor,\n            transform: 'scale(0.6)',\n            transformOrigin: 'center center'\n          }\n          const ctrBall = this.$refs.ctrBall\n          animation.transition(ctrBall, {\n            styles: style,\n            timingFunction: 'ease',\n            duration: 260\n          }, () => {\n            this.isAnimate = false\n          })\n      }\n    },\n    mounted() {\n      const { bgStyle, focusColor, blurColor } = this\n      if (this.theme !== 'default') {\n          this.focusColor = this.blurColor = '#fff'\n      }\n      this.checked ? this.ballStyle = {\n          backgroundColor: this.focusColor,\n          transform: 'scale(1.0)',\n          transform: 'translate(50px, 0)'\n      } : this.ballStyle = {\n          backgroundColor: this.blurColor,\n          transform: 'scale(0.6)'\n      }\n    }\n}\n</script>"],"sourceRoot":""}]);
 
 // exports
 
@@ -601,7 +601,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _theme = __webpack_require__(28);
+var _theme = __webpack_require__(10);
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; } //
 //
@@ -676,10 +676,11 @@ exports.default = {
     }
   },
   methods: {
-    changState: function changState(e) {
+    changeState: function changeState(e) {
       if (this.isAnimate || this.disabled) return;
       this.checked = !this.checked;
       this.toggleState();
+      this.$emit('change', this.checked);
     },
     toggleState: function toggleState() {
       var _ref,
@@ -726,50 +727,6 @@ exports.default = {
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "fm-switch",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(_vm.getBgStyle)),
-    on: {
-      "click": _vm.changState
-    }
-  }, [_c('div', {
-    ref: "ctrBall",
-    staticClass: "ctr-ball",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(_vm.ballStyle))
-  })])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-ceed072a", module.exports)
-  }
-}
-
-/***/ }),
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
 
 
@@ -802,6 +759,33 @@ var THEME = exports.THEME = {
         backgroundColor: '#ffcd45'
     }
 };
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "fm-switch",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(_vm.getBgStyle)),
+    on: {
+      "click": _vm.changeState
+    }
+  }, [_c('div', {
+    ref: "ctrBall",
+    staticClass: "ctr-ball",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(_vm.ballStyle))
+  })])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-ceed072a", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

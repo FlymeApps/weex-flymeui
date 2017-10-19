@@ -1,5 +1,5 @@
 <template>
-    <div class="fm-switch" @click="changState" :style="getBgStyle">
+    <div class="fm-switch" @click="changeState" :style="getBgStyle">
         <div 
           class="ctr-ball" 
           :style="ballStyle"
@@ -71,10 +71,11 @@ export default {
       }
     },
     methods: {
-      changState(e) {
+      changeState(e) {
         if (this.isAnimate || this.disabled) return
         this.checked = !this.checked
         this.toggleState()
+        this.$emit('change', this.checked)
       },
       toggleState(){
           this.isAnimate = true
