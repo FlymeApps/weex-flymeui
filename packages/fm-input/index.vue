@@ -1,0 +1,111 @@
+<template>
+<div class="fm-input-wrap">
+	<textarea v-if="type === 'textarea'"
+		:class="inputClz" 
+		:value="value" 
+		:rows="rows" 
+		:maxlength="maxlength" 
+		:placeholder="placeholder" 
+		@input="input"
+		@change="change"
+		@focus="focus"
+		@blur="blur"
+		ref="input" />
+	<input v-else 
+		:type="type"
+		:class="inputClz" 
+		:value="value" 
+		:maxlength="maxlength" 
+		:placeholder="placeholder"
+		@input="input"
+		@change="change"
+		@focus="focus"
+		@blur="blur"
+		ref="input" />
+	<text v-if="hasError" class="error-msg">{{errorMessage}}</text>
+</div>
+</template>
+
+<style scoped>
+.fm-input-wrap {
+	padding-top: 50px;
+	padding-right: 12.5px;
+	padding-left: 12.5px; 
+}
+.fm-textarea {
+	padding-bottom: 18.75px;
+	padding-right: 16.67px;
+	padding-left: 16.67px;
+	border-bottom-style: solid;
+	border-bottom-width: 2.5px;
+	border-bottom-color: #E6E6E6;
+	font-size: 33.33px;
+	line-height: 50px;
+	color: #000000;
+	placeholder-color: #dddddd;
+	caret-color: #198ded;
+}
+.fm-textarea:focus {
+	border-bottom-color: #198ded;
+}
+.fm-textarea-error {
+	border-bottom-color: #df2b18;
+}
+.error-msg {
+	font-size: 25px;
+	color: #df2b18;
+	margin-left: 16.67px;
+}
+</style>
+
+<script>
+const dom = weex.requireModule('dom')
+
+export default {
+	data() {
+		return {
+			rows: 1
+		}
+	},
+
+	props: {
+		value: [String, Number],
+		placeholder: {
+			type: String,
+			default: '请输入'
+		},
+		maxlength: [String, Number],
+		hasError: Boolean,
+		errorMessage: {
+			type: 'String',
+			default: '输入有误'
+		},
+		type: String
+	},
+
+	computed: {
+		inputClz() {
+			let clz = ['fm-textarea']
+			if (this.hasError) {
+				clz.push('fm-textarea-error')
+			}
+			return clz
+		}
+	},
+
+	methods: {
+		input (evt) {
+			this.$emit('input', evt)
+		},
+		change (evt) {
+			this.$emit('change', evt)
+		},
+		focus (evt) {
+			this.$emit('focus', evt)
+		},
+		blur (evt) {
+			this.$emit('blur', evt)
+		}
+	}
+}
+</script>

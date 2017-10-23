@@ -3,17 +3,17 @@ export default {
         props: {
             checked: {
                 type: 'boolean',
-                requird: false,
+                required: false,
                 default: false
             },
             theme: {
                 type: 'string',
-                requird: false,
+                required: false,
                 default: 'default'
             },
             disabled: {
                 type: 'boolean',
-                requird: false,
+                required: false,
                 default: false
             }
         },
