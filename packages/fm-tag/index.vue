@@ -41,7 +41,7 @@
 <script>
 export default {
     props: {
-      type: {
+      tagType: {
         type: String,
         default: 'solid'
       },
@@ -64,12 +64,12 @@ export default {
     },
     computed: {
       showSolid () {
-        const { type, value } = this;
-        return type === 'solid' && value !== '';
+        const { tagType, value } = this;
+        return tagType === 'solid' && value !== '';
       },
       showHollow () {
-        const { type, value } = this;
-        return type === 'hollow' && value !== '';
+        const { tagType, value } = this;
+        return tagType === 'hollow' && value !== '';
       },
       tagTextStyle () {
         const { color, showSolid } = this;

@@ -142,7 +142,6 @@ export default {
 				}
 
 				this.transX = this.per ? (this.per * this.value) : (this.max * this.value / 100)
-				console.log(this.transX)
 			})
 		}, 100)
 	},

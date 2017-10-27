@@ -8,8 +8,8 @@
 		:placeholder="placeholder" 
 		@input="input"
 		@change="change"
-		@focus="focus"
-		@blur="blur"
+		@focus="beFocus"
+		@blur="beBlur"
 		ref="input" />
 	<input v-else 
 		:type="type"
@@ -19,8 +19,8 @@
 		:placeholder="placeholder"
 		@input="input"
 		@change="change"
-		@focus="focus"
-		@blur="blur"
+		@focus="beFocus"
+		@blur="beBlur"
 		ref="input" />
 	<text v-if="hasError" class="error-msg">{{errorMessage}}</text>
 </div>
@@ -64,7 +64,8 @@ const dom = weex.requireModule('dom')
 export default {
 	data() {
 		return {
-			rows: 1
+			rows: 1,
+			input: this.$refs.input
 		}
 	},
 
@@ -100,11 +101,23 @@ export default {
 		change (evt) {
 			this.$emit('change', evt)
 		},
-		focus (evt) {
+		beFocus (evt) {
 			this.$emit('focus', evt)
 		},
-		blur (evt) {
+		beBlur (evt) {
 			this.$emit('blur', evt)
+		},
+		focus () {
+			this.$refs.input.focus()
+		},
+		blur () {
+			this.$refs.input.blur()
+		},
+		setSelectionRange (start, end) {
+			this.$refs.input.setSelectionRange(start, end)
+		},
+		getEditSelectionRange (callback) {
+			this.$refs.input.getEditSelectionRange(callback)
 		}
 	}
 }

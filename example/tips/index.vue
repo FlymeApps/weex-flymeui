@@ -40,7 +40,7 @@
 	</div>
 </template>
 
-<style>
+<style scoped>
 .mzui-demo {
 	position: absolute;
 	top: 0;

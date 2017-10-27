@@ -7,6 +7,9 @@ import FmButton from './packages/fm-button';
 import FmInput from './packages/fm-input';
 import FmTabView from './packages/fm-tab-view';
 import FmTips from './packages/fm-tips';
+import FmRichText from './packages/fm-rich-text';
+import FmSpecialRichText from './packages/fm-special-rich-text';
+import FmFoldableText from './packages/fm-foldable-text';
 
 export {
   FmSwitch,
@@ -17,5 +20,8 @@ export {
   FmButton,
   FmInput,
   FmTabView,
-  FmTips
+  FmTips,
+  FmRichText,
+  FmSpecialRichText,
+  FmFoldableText
 }

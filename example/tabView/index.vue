@@ -54,13 +54,13 @@ export default {
 		return {
 			items: [{
 				name: 'item1',
-				text: 'Tab1adsa'
+				text: 'Tab1'
 			}, {
 				name: 'item2',
 				text: 'Tab2'
 			}, {
 				name: 'item3',
-				text: 'Tab3asdasd'
+				text: 'Tab3'
 			}]
 		}
 	},

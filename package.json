@@ -1,6 +1,6 @@
 {
-  "name": "@flyme/weex-ui",
-  "version": "0.0.1",
+  "name": "@flyme/weex-flymeui",
+  "version": "0.0.5",
   "main": "index.js",
   "lib": "vue",
   "type": "weex",

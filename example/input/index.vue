@@ -1,12 +1,18 @@
 <template>
     <div class="mzui-demo">
         <scroller class="scroller">
-            <fm-input placeholder="placeholder" ref="test"/>
+            <title title="fm-input"></title>
+            <category title="默认的输入框"></category>
+            <fm-input />
+            <category title="带初始值的输入框"></category>
             <fm-input type="textarea" placeholder="textarea" />
             <fm-input value="value" />
+            <category title="限制最大输入长度"></category>
             <fm-input maxlength="20" placeholder="maxlength:20" />
+            <category title="不同的输入类型"></category>
             <fm-input type="time" placeholder="time" />
             <fm-input type="password" placeholder="password" />
+            <category title="输入有误"></category>
             <fm-input hasError value="hasError" />
         </scroller>
     </div>

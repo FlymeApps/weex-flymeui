@@ -1,5 +1,5 @@
 <template>
-    <text :class="textClz">{{ text }}</text>
+    <text :class="textClz" :style="getStyle">{{textValue}}</text>
 </template>
 
 <style scoped>
@@ -42,19 +42,30 @@
         line-height: 56px;
         color: #000;
     }
+    .margin-text {
+        margin-right: 6px;
+    }
 </style>
 
 <script>
 export default {
     props: {
-        text: [String, Number],
+        textValue: [String, Number],
         medium: Boolean,
         bold: Boolean,
         light: Boolean,
         title: Boolean,
         small: Boolean,
         large: Boolean,
-        huge: Boolean
+        huge: Boolean,
+        textStyle: {
+            type: Object,
+            default: () => ({})
+        },
+        hasTextMargin: {
+            type: Boolean,
+            default: true
+        }
     },
 
     computed: {
@@ -81,9 +92,29 @@ export default {
             if (this.huge) {
                 clz.push('huge')
             }
-
+            if (this.hasTextMargin) {
+                clz.push('margin-text')
+            }
             return clz
-        }
+        },
+        getStyle () {
+            let style = {};
+            const textStyle = this.textStyle;
+            if (textStyle && textStyle.fontSize) {
+                console.log(textStyle)
+                style = {
+                    ...style,
+                    fontSize: `${textStyle.fontSize}px`
+                }
+            }
+            if (textStyle && textStyle.color) {
+                style = {
+                    ...style,
+                    color: textStyle.color
+                }
+            }
+            return style;
+      }
     }
 }
 </script>
