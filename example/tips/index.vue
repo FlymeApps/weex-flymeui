@@ -51,8 +51,9 @@
 }
 
 .wrap {
-	padding-left: 20px;
-	padding-top: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
 }
 
 .scroller {
@@ -60,16 +61,15 @@
 }
 
 .btnText {
-	height: 35px;
-	font-size: 29.17px;
+	font-size: 14px;
 	color: #ffffff;
 }
 
 .split {
-	width: 2px;
-	height: 31.25px;
-	margin-left: 20.83px;
-	margin-right: 20.83px;
+	width: 1px;
+	height: 14px;
+	margin-left: 9px;
+	margin-right: 9px;
 	background-color: #ffffff;
 	opacity: .4;
 }

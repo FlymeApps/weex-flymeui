@@ -14,56 +14,57 @@
 
 <style scoped>
 .slider-wrap {
-	padding-right: 15.75px;
-	padding-left: 15.75px;
+	padding-right: 7.5px;
+	padding-left: 7.5px;
 }
 .level-text-wrap {
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	margin-bottom: -15px;
+	margin-bottom: -7.2px;
 }
 .level-text {
 	flex: 1;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	font-size: 14px;
+	padding-top: 2.4px;
+	padding-bottom: 2.4px;
 	text-align: center;
 }
 .all {
-	height: 6.25px;
-	margin-top: 30px;
+	height: 3px;
+	margin-top: 14.4px;
 	background-color: #e6e6e6;
 }
 .selected {
-	margin-top: -6.25px;
-	height: 6.25px;
+	margin-top: -3px;
+	height: 3px;
 	background-color: #198ded;
 }
 .dot-wrap {
-	height: 60px;
-	width: 80px;
-	margin-top: -33px;
-	margin-left: -40px;
+	height: 28.8px;
+	width: 38.8px;
+	margin-top: -15.84px;
+	margin-left: -19.2px;
 	align-items: center;
 	justify-content: center;
 }
 .dot {
-	height: 31.25px;
-	width: 31.25px;
+	height: 15px;
+	width: 15px;
 	background-color: #198ded;
-	border-radius: 30px;
+	border-radius: 14.4px;
 }
 .num {
-	width: 54.2px;
-	height: 54.2px;
-	margin-left: -27.1px;
-	border-radius: 55px;
+	width: 26px;
+	height: 26px;
+	margin-left: -13px;
+	border-radius: 26.4px;
 	background-color: #198ded;
 	color: #ffffff;
-	font-size: 29.2px;
+	font-size: 14px;
 	font-weight: 700;
 	text-align: center;
-	line-height: 54px;
+	line-height: 26px;
 }
 </style>
 

@@ -62,8 +62,8 @@ export default {
                 value: '&#xe6ad;',
                 color: 'red',
                 style: {
-                    size: 29.17,
-                    lineHeight: 43
+                    size: 12,
+                    lineHeight: 21
                 }
             }, {
                 type: 'link',
@@ -89,14 +89,14 @@ export default {
                     color: '#7e97ac',
                     fontColor: '#7e97ac',
                     style: {
-                        width: 56
+                        width: 27
                     }
                 },
                 {
                     type: 'text',
                     value: '蓝小胖：Weex-FlymeUI 是基于 Weex 和 Flyme 6 控件标准开发而成的跨平台组件…',
                     style: {
-                        fontSize: 28
+                        fontSize: 16
                     }
                 }
             ],
@@ -105,14 +105,14 @@ export default {
                     type: 'icon',
                     value: '&#xe6e4;',
                     style: {
-                        size: 28
+                        size: 14
                     }
                 },
                 {
                     type: 'text',
                     value: '蓝小胖：Weex-FlymeUI 是基于 Weex 和 Flyme 6 控件标准开发而成的跨平台组件…',
                     style: {
-                        fontSize: 28
+                        fontSize: 14
                     }
                 }
             ],

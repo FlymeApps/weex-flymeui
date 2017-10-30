@@ -15,8 +15,8 @@
 
 <style scoped>
   .fm-image {
-    width: 90px;
-    height: 24px;
+    width: 43px;
+    height: 12px;
     margin-right: 6px;
   }
 </style>
@@ -33,7 +33,7 @@
       },
       iconStyle: {
         type: [Number, Object],
-        default: 34
+        default: 14
       },
       color: {
         type: String,
@@ -41,12 +41,12 @@
       }
     },
     data: () => ({
-      width: 90
+      width: 43
     }),
     computed: {
       computedStyle () {
         if (Object.prototype.toString.call(this.iconStyle).slice(8, -1).toLowerCase() !== 'object') {
-          this.iconStyle = { height: 24 }
+          this.iconStyle = { height: 12 }
         }
         const { width, iconStyle } = this
         if (iconStyle && iconStyle.width && iconStyle.height) {
@@ -87,7 +87,7 @@
     created () {
       dom.addRule('fontFace', {
         'fontFamily': 'flymeicon',
-        'src': "url('http://172.17.201.32:8082/iconfont.ttf')"
+        'src': "url('http://weixin.res.flyme.cn/upload/iconfont.ttf')"
       })
     },
     methods: {

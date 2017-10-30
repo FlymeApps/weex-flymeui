@@ -73,8 +73,8 @@
   }
 
   .item {
-    width: 230px;
-    margin-bottom: 20px;
+    width: 100px;
+    margin-bottom: 10px;
   }
 
   .scroller {
@@ -82,7 +82,8 @@
   }
 
   .text {
-    margin-top: 20px;
+    font-size: 14px;
+    margin-top: 10px;
   }
 </style>
 

@@ -28,19 +28,19 @@
 
 <style scoped>
 .fm-input-wrap {
-	padding-top: 50px;
-	padding-right: 12.5px;
-	padding-left: 12.5px; 
+	padding-top: 24px;
+	padding-right: 6px;
+	padding-left: 6px; 
 }
 .fm-textarea {
-	padding-bottom: 18.75px;
-	padding-right: 16.67px;
-	padding-left: 16.67px;
+	padding-bottom: 9px;
+	padding-right: 8px;
+	padding-left: 8px;
 	border-bottom-style: solid;
-	border-bottom-width: 2.5px;
+	border-bottom-width: 1px;
 	border-bottom-color: #E6E6E6;
-	font-size: 33.33px;
-	line-height: 50px;
+	font-size: 16px;
+	line-height: 12px;
 	color: #000000;
 	placeholder-color: #dddddd;
 	caret-color: #198ded;
@@ -52,9 +52,9 @@
 	border-bottom-color: #df2b18;
 }
 .error-msg {
-	font-size: 25px;
+	font-size: 12px;
 	color: #df2b18;
-	margin-left: 16.67px;
+	margin-left: 8px;
 }
 </style>
 

@@ -16,9 +16,9 @@
       </div>
       <category title="空心标签"></category>
       <div class="cell">
-          <fm-tag value="HQ" size="big" type="hollow" color="#f12528" fontColor="#3bc06b"></fm-tag>
-          <fm-tag value="热映" size="big" type="hollow" color="#ffaf00" fontColor="#f12528"></fm-tag>
-          <fm-tag value="票" size="big" type="hollow" color="#3bc06b" fontColor="#3bc06b"></fm-tag>
+          <fm-tag value="HQ" size="big" tagType="hollow" color="#f12528" fontColor="#3bc06b"></fm-tag>
+          <fm-tag value="热映" size="big" tagType="hollow" color="#ffaf00" fontColor="#f12528"></fm-tag>
+          <fm-tag value="票" size="big" tagType="hollow" color="#3bc06b" fontColor="#3bc06b"></fm-tag>
       </div>
     </scroller>
   </div>
@@ -35,7 +35,7 @@
   }
 
   .cell {
-    padding: 30px;
+    padding: 15px;
     flex-direction: row;
     align-items: flex-start;
   }

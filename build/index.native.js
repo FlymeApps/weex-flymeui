@@ -402,14 +402,14 @@ module.exports = {
   "fm-switch": {
     "flexDirection": "row",
     "alignItems": "center",
-    "width": 100,
-    "height": 50,
-    "borderRadius": 25
+    "width": 48,
+    "height": 24,
+    "borderRadius": 24
   },
   "ctr-ball": {
-    "width": 34,
-    "height": 34,
-    "borderRadius": 17
+    "width": 16,
+    "height": 16,
+    "borderRadius": 8
   }
 }
 
@@ -487,7 +487,7 @@ exports.default = {
   computed: {
     getBgStyle: function getBgStyle() {
       var style = this.theme === 'default' ? {
-        borderWidth: 4,
+        borderWidth: 2,
         borderColor: '#7e97ac'
       } : _theme.THEME[this.theme];
       if (this.disabled) {
@@ -513,7 +513,7 @@ exports.default = {
       var style = this.checked ? (_ref = {
         backgroundColor: this.focusColor,
         transform: 'scale(1)'
-      }, _defineProperty(_ref, 'transform', 'translate(50px, 0)'), _defineProperty(_ref, 'transformOrigin', 'center center'), _ref) : {
+      }, _defineProperty(_ref, 'transform', 'translate(24px, 0)'), _defineProperty(_ref, 'transformOrigin', 'center center'), _ref) : {
         backgroundColor: this.blurColor,
         transform: 'scale(0.6)',
         transformOrigin: 'center center'
@@ -539,7 +539,7 @@ exports.default = {
     this.checked ? this.ballStyle = _defineProperty({
       backgroundColor: this.focusColor,
       transform: 'scale(1.0)'
-    }, 'transform', 'translate(50px, 0)') : this.ballStyle = {
+    }, 'transform', 'translate(24px, 0)') : this.ballStyle = {
       backgroundColor: this.blurColor,
       transform: 'scale(0.6)'
     };
@@ -655,19 +655,19 @@ module.exports = {
     "alignItems": "flex-start"
   },
   "tag-item": {
-    "paddingTop": 7,
-    "paddingRight": 7,
-    "paddingBottom": 7,
-    "paddingLeft": 7,
+    "paddingTop": 3,
+    "paddingRight": 3,
+    "paddingBottom": 3,
+    "paddingLeft": 3,
     "justifyContent": "center",
     "alignItems": "center",
     "overflow": "hidden"
   },
   "tag-border": {
-    "borderBottomLeftRadius": 4,
-    "borderBottomRightRadius": 4,
-    "borderTopLeftRadius": 4,
-    "borderTopRightRadius": 4
+    "borderBottomLeftRadius": 1.5,
+    "borderBottomRightRadius": 1.5,
+    "borderTopLeftRadius": 1.5,
+    "borderTopRightRadius": 1.5
   },
   "tag-hollow": {
     "borderWidth": 1
@@ -775,7 +775,7 @@ exports.default = {
       var fontColor = this.fontColor,
           size = this.size;
 
-      return { color: fontColor, fontSize: size === 'small' ? '19px' : '21px' };
+      return { color: fontColor, fontSize: size === 'small' ? '8px' : '10px' };
     }
   }
 };
@@ -788,7 +788,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: ["fm-tag"],
     style: {
-      margin: _vm.size === 'small' ? '2.34px' : '4.68px'
+      margin: _vm.size === 'small' ? '1px' : '1.5px'
     }
   }, [(_vm.showSolid || _vm.showHollow) ? _c('div', {
     class: ['tag-item', 'tag-border', _vm.showHollow && 'tag-hollow'],
@@ -851,12 +851,13 @@ module.exports = __vue_exports__
 
 module.exports = {
   "text": {
-    "fontSize": 29.17,
-    "lineHeight": 43,
+    "fontSize": 14,
+    "lineHeight": 21,
     "color": "#999999",
     "fontFamily": "\"Source Han Sans CN\", Roboto, sans-serif"
   },
   "medium": {
+    "fontFamily": "sans-serif-medium",
     "fontWeight": "500"
   },
   "bold": {
@@ -864,30 +865,30 @@ module.exports = {
   },
   "light": {
     "fontWeight": "400",
-    "lineHeight": 38
+    "lineHeight": 18
   },
   "title": {
-    "fontSize": 33,
+    "fontSize": 16,
     "fontWeight": "500",
-    "lineHeight": 48,
+    "lineHeight": 23,
     "color": "#000000"
   },
   "small": {
-    "fontSize": 25
+    "fontSize": 12
   },
   "large": {
-    "fontSize": 33,
+    "fontSize": 16,
     "fontWeight": "500",
-    "lineHeight": 50,
+    "lineHeight": 24,
     "color": "#000000"
   },
   "huge": {
-    "fontSize": 38,
-    "lineHeight": 56,
+    "fontSize": 18,
+    "lineHeight": 27,
     "color": "#000000"
   },
   "margin-text": {
-    "marginRight": 6
+    "marginRight": 3
   }
 }
 
@@ -904,6 +905,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
 //
 //
 //
@@ -1086,8 +1088,8 @@ module.exports = __vue_exports__
 
 module.exports = {
   "fm-image": {
-    "width": 90,
-    "height": 24,
+    "width": 43,
+    "height": 12,
     "marginRight": 6
   }
 }
@@ -1137,7 +1139,7 @@ exports.default = {
     },
     iconStyle: {
       type: [Number, Object],
-      default: 34
+      default: 14
     },
     color: {
       type: String,
@@ -1146,13 +1148,13 @@ exports.default = {
   },
   data: function data() {
     return {
-      width: 90
+      width: 43
     };
   },
   computed: {
     computedStyle: function computedStyle() {
       if (Object.prototype.toString.call(this.iconStyle).slice(8, -1).toLowerCase() !== 'object') {
-        this.iconStyle = { height: 24 };
+        this.iconStyle = { height: 12 };
       }
       var width = this.width,
           iconStyle = this.iconStyle;
@@ -1198,7 +1200,7 @@ exports.default = {
   created: function created() {
     dom.addRule('fontFace', {
       'fontFamily': 'flymeicon',
-      'src': "url('http://172.17.201.32:8082/iconfont.ttf')"
+      'src': "url('http://weixin.res.flyme.cn/upload/iconfont.ttf')"
     });
   },
 
@@ -1686,56 +1688,57 @@ module.exports = __vue_exports__
 
 module.exports = {
   "slider-wrap": {
-    "paddingRight": 15.75,
-    "paddingLeft": 15.75
+    "paddingRight": 7.5,
+    "paddingLeft": 7.5
   },
   "level-text-wrap": {
     "flexDirection": "row",
     "alignItems": "center",
     "justifyContent": "center",
-    "marginBottom": -15
+    "marginBottom": -7.2
   },
   "level-text": {
     "flex": 1,
-    "paddingTop": 5,
-    "paddingBottom": 5,
+    "fontSize": 14,
+    "paddingTop": 2.4,
+    "paddingBottom": 2.4,
     "textAlign": "center"
   },
   "all": {
-    "height": 6.25,
-    "marginTop": 30,
+    "height": 3,
+    "marginTop": 14.4,
     "backgroundColor": "#e6e6e6"
   },
   "selected": {
-    "marginTop": -6.25,
-    "height": 6.25,
+    "marginTop": -3,
+    "height": 3,
     "backgroundColor": "#198ded"
   },
   "dot-wrap": {
-    "height": 60,
-    "width": 80,
-    "marginTop": -33,
-    "marginLeft": -40,
+    "height": 28.8,
+    "width": 38.8,
+    "marginTop": -15.84,
+    "marginLeft": -19.2,
     "alignItems": "center",
     "justifyContent": "center"
   },
   "dot": {
-    "height": 31.25,
-    "width": 31.25,
+    "height": 15,
+    "width": 15,
     "backgroundColor": "#198ded",
-    "borderRadius": 30
+    "borderRadius": 14.4
   },
   "num": {
-    "width": 54.2,
-    "height": 54.2,
-    "marginLeft": -27.1,
-    "borderRadius": 55,
+    "width": 26,
+    "height": 26,
+    "marginLeft": -13,
+    "borderRadius": 26.4,
     "backgroundColor": "#198ded",
     "color": "#ffffff",
-    "fontSize": 29.2,
+    "fontSize": 14,
     "fontWeight": "700",
     "textAlign": "center",
-    "lineHeight": 54
+    "lineHeight": 26
   }
 }
 
@@ -1749,6 +1752,7 @@ module.exports = {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+//
 //
 //
 //
@@ -2054,18 +2058,18 @@ module.exports = __vue_exports__
 
 module.exports = {
   "fm-btn-wrap": {
-    "height": 50,
+    "height": 24,
     "alignItems": "center",
     "flexDirection": "row",
-    "maxWidth": 208.3333
+    "maxWidth": 100
   },
   "fm-btn": {
-    "height": 50,
-    "paddingLeft": 25,
-    "paddingRight": 25,
-    "lineHeight": 50,
-    "borderRadius": 50,
-    "fontSize": 29.1667,
+    "height": 24,
+    "paddingLeft": 12,
+    "paddingRight": 12,
+    "lineHeight": 24,
+    "borderRadius": 24,
+    "fontSize": 14,
     "fontWeight": "700",
     "textAlign": "center",
     "opacity": 0
@@ -2074,11 +2078,11 @@ module.exports = {
     "width": 100
   },
   "fm-btn-large": {
-    "paddingLeft": 16.6667,
-    "paddingRight": 16.6667
+    "paddingLeft": 8,
+    "paddingRight": 8
   },
   "fm-btn-max": {
-    "width": 208.3333
+    "width": 100
   }
 }
 
@@ -2131,9 +2135,9 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 
-var small_size = 100; //48dp
-var large_size = 166.6667; //80dp
-var max_size = 208.3333; //100dp
+var small_size = 48; //48dp
+var large_size = 80; //80dp
+var max_size = 100; //100dp
 var dis_color = '#cccccc';
 var transparent = 'transparent';
 
@@ -2187,8 +2191,7 @@ exports.default = {
 				sty.color = this.color;
 				if (this.bgColor == transparent) {
 					sty.borderColor = this.color;
-					sty.borderWidth = '3px';
-					sty.borderStyle = 'solid';
+					sty.borderWidth = 1.44, sty.borderStyle = 'solid', sty.lineHeight = 21.12;
 				}
 			}
 			if (this.disabled) {
@@ -2211,7 +2214,7 @@ exports.default = {
 	},
 
 	mounted: function mounted() {
-		var w = this.text.length * 29.1667 + 50;
+		var w = this.text.length * 14 + 50;
 
 		if (w < small_size) {
 			this.small = true;
@@ -2318,19 +2321,19 @@ module.exports = __vue_exports__
 
 module.exports = {
   "fm-input-wrap": {
-    "paddingTop": 50,
-    "paddingRight": 12.5,
-    "paddingLeft": 12.5
+    "paddingTop": 24,
+    "paddingRight": 6,
+    "paddingLeft": 6
   },
   "fm-textarea": {
-    "paddingBottom": 18.75,
-    "paddingRight": 16.67,
-    "paddingLeft": 16.67,
+    "paddingBottom": 9,
+    "paddingRight": 8,
+    "paddingLeft": 8,
     "borderBottomStyle": "solid",
-    "borderBottomWidth": 2.5,
+    "borderBottomWidth": 1,
     "borderBottomColor": "#E6E6E6",
-    "fontSize": 33.33,
-    "lineHeight": 50,
+    "fontSize": 16,
+    "lineHeight": 12,
     "color": "#000000",
     "placeholderColor": "#dddddd",
     "caretColor": "#198ded",
@@ -2340,9 +2343,9 @@ module.exports = {
     "borderBottomColor": "#df2b18"
   },
   "error-msg": {
-    "fontSize": 25,
+    "fontSize": 12,
     "color": "#df2b18",
-    "marginLeft": 16.67
+    "marginLeft": 8
   }
 }
 
@@ -2596,9 +2599,9 @@ module.exports = __vue_exports__
 
 module.exports = {
   "header-wrap": {
-    "marginTop": 18.75,
-    "marginRight": 45.83,
-    "marginLeft": 45.83
+    "marginTop": 9,
+    "marginRight": 22,
+    "marginLeft": 22
   },
   "header": {
     "flexDirection": "row",
@@ -2613,19 +2616,19 @@ module.exports = {
     "color": "#f34949"
   },
   "text": {
-    "fontSize": 29.17,
+    "fontSize": 14,
     "fontWeight": "700",
     "textAlign": "center",
     "color": "#666666"
   },
   "bottom-line": {
-    "height": 5,
-    "marginTop": 18.75,
+    "height": 2.4,
+    "marginTop": 9,
     "backgroundColor": "#f34949"
   },
   "slider-wrap": {
     "flexDirection": "row",
-    "borderTopWidth": 2,
+    "borderTopWidth": 1,
     "borderColor": "#dddddd"
   }
 }
@@ -2754,7 +2757,7 @@ exports.default = {
 		},
 		itemStyle: function itemStyle() {
 			return {
-				width: (this.width || 750) + 'px'
+				width: (this.width || 360) + 'px'
 			};
 		}
 	},
@@ -2766,12 +2769,12 @@ exports.default = {
 
 			var head = (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object' && platform.toLowerCase() === 'web' ? _this.$refs.header.$children[0].$children[0] : _this.$refs.header.children[0].children[0];
 			dom.getComponentRect(head, function (opt) {
-				_this.lineWidth = opt.size.width + 25;
-				_this.lineLeft = opt.size.left - 46 - 12.5;
+				_this.lineWidth = opt.size.width + 12;
+				_this.lineLeft = opt.size.left - 22 - 6;
 			});
 			dom.getComponentRect(_this.$refs.slider, function (opt) {
 				_this.width = opt.size.width;
-				_this.line = _this.width / (_this.width - 92) * _this.items.length;
+				_this.line = _this.width / (_this.width - 44) * _this.items.length;
 				_this.min = -_this.width * (_this.items.length - 1);
 			});
 		}, 100);
@@ -2958,47 +2961,43 @@ module.exports = __vue_exports__
 module.exports = {
   "tip-wrap": {
     "flexDirection": "row",
-    "height": 92,
-    "maxWidth": 630,
-    "paddingTop": 15
+    "height": 40,
+    "paddingTop": 7.2
   },
   "arrow": {
     "position": "absolute",
-    "top": 7.5,
-    "width": 15,
-    "height": 15,
+    "top": 3.6,
+    "width": 7.2,
+    "height": 7.2,
     "transform": "rotate(45deg)"
   },
   "content-wrap": {
     "flexDirection": "row",
     "alignItems": "center",
-    "paddingTop": 18.75,
-    "paddingRight": 20.83,
-    "paddingBottom": 18.75,
-    "paddingLeft": 20.83,
-    "borderRadius": 4
+    "paddingTop": 9,
+    "paddingBottom": 9,
+    "paddingLeft": 10,
+    "borderRadius": 2
   },
   "content": {
-    "height": 35,
-    "maxWidth": 512,
-    "fontSize": 29.17,
+    "height": 17,
+    "maxWidth": 226,
+    "fontSize": 14,
     "color": "#ffffff"
   },
   "split": {
-    "width": 2,
-    "height": 31.25,
-    "marginLeft": 20.83,
-    "marginRight": 20.83,
+    "width": 1,
+    "height": 14,
+    "marginLeft": 9,
     "backgroundColor": "#ffffff",
     "opacity": 0.4
   },
   "close": {
-    "width": 31.25,
-    "height": 31.25,
-    "lineHeight": 32,
     "color": "#ffffff",
-    "fontSize": 50,
-    "transform": "rotate(45deg)"
+    "fontSize": 18,
+    "marginTop": 3,
+    "marginLeft": 10,
+    "marginRight": 10
   }
 }
 
@@ -3012,66 +3011,12 @@ module.exports = {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+var _fmIcon = __webpack_require__(2);
+
+var _fmIcon2 = _interopRequireDefault(_fmIcon);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
 	data: function data() {
@@ -3080,7 +3025,7 @@ exports.default = {
 		};
 	},
 
-
+	components: { FmIcon: _fmIcon2.default },
 	computed: {
 		background: function background() {
 			return {
@@ -3097,9 +3042,9 @@ exports.default = {
 				backgroundColor: this.bgColor
 			};
 			if (this.right) {
-				sty.right = '38px';
+				sty.right = '18px';
 			} else {
-				sty.left = '38px';
+				sty.left = '18px';
 			}
 
 			return sty;
@@ -3121,7 +3066,62 @@ exports.default = {
 			this.$emit('close');
 		}
 	}
-};
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 /* 50 */
@@ -3138,12 +3138,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: ["content"]
   }, [_vm._v(_vm._s(_vm.message))]), _c('text', {
     staticClass: ["split"]
-  }), _c('text', {
+  }), _c('fm-icon', {
     staticClass: ["close"],
+    attrs: {
+      "value": "&#xe6c0;"
+    },
     on: {
       "click": _vm.close
     }
-  }, [_vm._v("+")])], 2), _c('text', {
+  })], 2), _c('text', {
     staticClass: ["arrow"],
     style: _vm.arrowStyle
   })]) : _vm._e()
@@ -3230,8 +3233,8 @@ module.exports = {
   },
   "default-text": {
     "color": "#A5A5A5",
-    "fontSize": 24,
-    "lineHeight": 30
+    "fontSize": 12,
+    "lineHeight": 16
   }
 }
 
@@ -4121,8 +4124,8 @@ module.exports = {
     "top": 0,
     "left": 0,
     "color": "#A5A5A5",
-    "fontSize": 24,
-    "lineHeight": 30
+    "fontSize": 12,
+    "lineHeight": 16
   }
 }
 
@@ -4207,8 +4210,8 @@ module.exports = {
         var iconStyle = r1.style;
         var textStyle = r2.style;
         var style = {};
-        var fontSize = 24;
-        var tagWidth = iconStyle && iconStyle.width ? iconStyle.width : 24;
+        var fontSize = 12;
+        var tagWidth = iconStyle && iconStyle.width ? iconStyle.width : 12;
 
         if (textStyle && textStyle.fontSize) {
           fontSize = textStyle.fontSize;
@@ -4246,8 +4249,8 @@ module.exports = {
       if (Utils.isNonEmptyArray(configList) && configList.length === 2) {
         var iconStyle = configList[0].style;
         var textStyle = configList[1].style;
-        var fontSize = 24;
-        var tagHeight = iconStyle && iconStyle.height ? iconStyle.height : 26;
+        var fontSize = 12;
+        var tagHeight = iconStyle && iconStyle.height ? iconStyle.height : 13;
         if (textStyle && textStyle.fontSize) {
           fontSize = textStyle.fontSize;
         }
@@ -4368,24 +4371,27 @@ module.exports = {
     "position": "relative"
   },
   "text": {
+    "fontFamily": "\"Source Han Sans CN\", Roboto, sans-serif",
     "color": "#999999"
   },
   "text_small": {
-    "fontSize": 25,
-    "lineHeight": 30
+    "fontSize": 12,
+    "lineHeight": 14
   },
   "text_large": {
-    "fontSize": 33,
+    "fontFamily": "sans-serif-medium",
+    "fontSize": 16,
     "fontWeight": "500",
-    "lineHeight": 50
+    "lineHeight": 24
   },
   "text_huge": {
-    "fontSize": 38,
-    "lineHeight": 56
+    "fontFamily": "sans-serif-medium",
+    "fontSize": 18,
+    "lineHeight": 26
   },
   "more": {
     "position": "absolute",
-    "right": 10,
+    "right": 6,
     "bottom": 0
   },
   "test": {
@@ -4403,6 +4409,11 @@ module.exports = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
 //
 //
 //
@@ -4457,7 +4468,7 @@ exports.default = {
     props: {
         width: {
             type: Number,
-            default: 750
+            default: 340
         },
         text: {
             type: String,
@@ -4476,26 +4487,28 @@ exports.default = {
             default: true
         },
         large: Boolean,
-        huge: Boolean
+        huge: Boolean,
+        textStyle: Object,
+        tipStyle: Object,
+        tipValue: {
+            type: String,
+            default: '更多'
+        }
     },
     mounted: function mounted() {
-        // setTimeout(() => {
-        //     dom.getComponentRect(this.$refs.plane, option => {
-        //         this.expandHeight = option.size.height
-        //         this.foldFlag = true
-        //     })
-        // }, 100);
         if (this.foldText === '') {
-            var fontSize = this.large ? 33 : this.huge ? 38 : 25;
+            var textStyle = this.textStyle;
+
+            var fontSize = textStyle && textStyle.fontSize ? textStyle.fontSize : this.large ? 16 : this.huge ? 18 : 12;
             // 计算折叠后的文本
-            var size1 = fontSize + fontSize * 0.08; // 汉字
-            var size2 = fontSize * 0.487; // 英文
+            var size1 = fontSize + fontSize * 0.03; // 汉字
+            var size2 = fontSize * 0.56; // 英文
             var size3 = fontSize * 0.556; // 数字
-            var size4 = fontSize * 0.347; // 全角
-            var size5 = fontSize * 0.18; // 半角
+            var size4 = fontSize * 0.77; // 全角
+            var size5 = fontSize * 0.2; // 半角
             var tSize = 0,
                 tmpStr = '';
-            var maxWith = this.width * this.lines - size1 * 2;
+            var maxWith = this.width * this.lines - size1 * this.tipValue.length;
             var _iteratorNormalCompletion = true;
             var _didIteratorError = false;
             var _iteratorError = undefined;
@@ -4516,7 +4529,7 @@ exports.default = {
                     } else if (/^[·《》，。？、：；“”‘’——【】]/.test(c)) {
                         // 全角
                         tSize += size4;
-                    } else if (/^[`~!@#\$%\^&\*\(\)_\-\+=\{\}\[\]|\\:;"'<>,.\?\/]/.test(c)) {
+                    } else if (/^[`~!@#\$%\^&\*\(\)_\-\+=\{\}\[\]|\\:;"'<>,.\?\/\s]/.test(c)) {
                         // 半角
                         tSize += size5;
                     } else {
@@ -4524,7 +4537,7 @@ exports.default = {
                         tSize += size1;
                     }
                     if (tSize >= maxWith) {
-                        tmpStr += '...';
+                        tmpStr += '..';
                         break;
                     }
                     tmpStr += c;
@@ -4552,30 +4565,19 @@ exports.default = {
         getText: function getText() {
             return this.folded ? this.foldText : this.text;
         },
-        hackText: function hackText() {
-            if (!this.hackCp) {
-                this.hackCp = weex.document.createElement('text', {
-                    style: {
-                        fontSize: 40,
-                        left: 50
-                    }
-                });
-                this.$refs.container.appendChild(this.hackCp);
-            }
-            return this.hackCp;
-        },
         planeStyle: function planeStyle() {
             return {
                 width: this.width
             };
         },
         moreStyle: function moreStyle() {
-            return {
-                fontSize: this.large ? 33 : this.huge ? 38 : 25,
-                lineHeight: this.large ? 50 : this.huge ? 56 : 30,
+            return _extends({
+                fontSize: this.large ? 16 : this.huge ? 18 : 12,
+                lineHeight: this.large ? 24 : this.huge ? 26 : 14,
                 color: '#198ded',
-                fontWeight: '600'
-            };
+                fontWeight: '600',
+                backgroundColor: '#fff'
+            }, this.tipStyle);
         },
         textClz: function textClz() {
             var clz = ['text', 'text_small'];
@@ -4590,45 +4592,6 @@ exports.default = {
     methods: {
         fold: function fold() {
             this.folded = !this.folded;
-            // let width = 0
-            // // ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
-            // for (let c of '`~!@#$%^&*()-_=+<>,.?/:;"{}[]|\\\'') {
-            //     this.hackText.setAttr('value', c, false)
-            //     setTimeout(() => {
-            //         dom.getComponentRect(this.hackText, option => {
-            //             width += option.size.width
-            //             console.log(width)
-            //         })
-            //     }, 100)
-            // }
-            // return
-            // var plane = this.$refs.plane;
-            // if (this.unexpandHeight == '') {
-            //     const result = dom.getComponentRect(plane, option => {
-            //         this.unexpandHeight = option.size.height + 'px';
-            //     })
-            // }
-            // if (this.animationHeight == this.expandHeight) {
-
-            //     this.animationHeight = this.unexpandHeight;
-            // } else {
-            //     this.lines = 0;
-            //     this.animationHeight = this.expandHeight;
-            // }
-
-            // var self = this;
-            // animation.transition(plane, {
-            //     styles: {
-            //         height: this.animationHeight
-            //     },
-            //     duration: 150, //ms
-            //     timingFunction: 'linear',
-            //     delay: 0 //ms
-            // }, function() {
-            //     if (self.animationHeight == self.unexpandHeight) {
-            //         self.foldFlag = !self.foldFlag
-            //     }
-            // })
         }
     }
 };
@@ -4649,12 +4612,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     style: _vm.planeStyle
   }, [_c('text', {
     ref: "text",
-    class: _vm.textClz
+    class: _vm.textClz,
+    style: _vm.textStyle
   }, [_vm._v(_vm._s(_vm.getText))]), (_vm.folded) ? _c('text', {
     ref: "more",
     staticClass: ["more"],
     style: _vm.moreStyle
-  }, [_vm._v("更多")]) : _vm._e()])])
+  }, [_vm._v(_vm._s(_vm.tipValue))]) : _vm._e()])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 

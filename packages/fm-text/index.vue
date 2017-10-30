@@ -4,13 +4,14 @@
 
 <style scoped>
     .text {
-        font-size: 29.17px;
-        line-height: 43px;
+        font-size: 14px;
+        line-height: 21px;
         color: #999;
         font-family: "Source Han Sans CN", Roboto, sans-serif;
     }
 
     .medium {
+        font-family: sans-serif-medium;
         font-weight: 500;
     }
     .bold {
@@ -18,32 +19,32 @@
     }
     .light {
         font-weight: 400;
-        line-height: 38px;
+        line-height: 18px;
     }
 
     .title {
-        font-size: 33px;
+        font-size: 16px;
         font-weight: 500;
-        line-height: 48px;
+        line-height: 23px;
         color: #000;
     }
 
     .small {
-        font-size: 25px;
+        font-size: 12px;
     }
     .large {
-        font-size: 33px;
+        font-size: 16px;
         font-weight: 500;
-        line-height: 50px;
+        line-height: 24px;
         color: #000;
     }
     .huge {
-        font-size: 38px;
-        line-height: 56px;
+        font-size: 18px;
+        line-height: 27px;
         color: #000;
     }
     .margin-text {
-        margin-right: 6px;
+        margin-right: 3px;
     }
 </style>
 

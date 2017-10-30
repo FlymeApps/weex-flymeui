@@ -1,5 +1,5 @@
 <template>
-    <div class="fm-tag" :style="{margin: size === 'small' ? '2.34px' : '4.68px'}">
+    <div class="fm-tag" :style="{margin: size === 'small' ? '1px' : '1.5px'}">
         <div v-if="showSolid || showHollow"
             :class="['tag-item','tag-border',showHollow && 'tag-hollow']"
             :style="tagTextStyle">
@@ -15,17 +15,17 @@
   }
 
   .tag-item {
-    padding: 7px;
+    padding: 3px;
     justify-content: center;
     align-items: center;
     overflow: hidden;
   }
 
   .tag-border {
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+    border-bottom-left-radius: 1.5px;
+    border-bottom-right-radius: 1.5px;
+    border-top-left-radius: 1.5px;
+    border-top-right-radius: 1.5px;
   }
 
   .tag-hollow {
@@ -77,7 +77,7 @@ export default {
       },
       textStyle() {
         const { fontColor, size } = this;
-        return {color: fontColor, fontSize: size === 'small' ? '19px' : '21px'}
+        return {color: fontColor, fontSize: size === 'small' ? '8px' : '10px'}
       }
     }
 }

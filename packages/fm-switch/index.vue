@@ -12,15 +12,15 @@
   .fm-switch {
     flex-direction: row;
     align-items: center;
-    width: 100px;
-    height: 50px;
-    border-radius: 25px;
+    width: 48px;
+    height: 24px;
+    border-radius: 24px;
   }
 
   .ctr-ball {
-    width: 34px;
-    height: 34px;
-    border-radius: 17px;
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
   }
 
 </style>
@@ -59,7 +59,7 @@ export default {
     computed: {
       getBgStyle() {
         let style = this.theme === 'default' ? {
-          borderWidth: 4,
+          borderWidth: 2,
           borderColor: '#7e97ac'
         } : THEME[this.theme]
         if (this.disabled) {
@@ -82,7 +82,7 @@ export default {
           const style = this.checked ? {
             backgroundColor: this.focusColor,
             transform: 'scale(1)',
-            transform: 'translate(50px, 0)',
+            transform: 'translate(24px, 0)',
             transformOrigin: 'center center'
           } : {
             backgroundColor: this.blurColor,
@@ -107,7 +107,7 @@ export default {
       this.checked ? this.ballStyle = {
           backgroundColor: this.focusColor,
           transform: 'scale(1.0)',
-          transform: 'translate(50px, 0)'
+          transform: 'translate(24px, 0)'
       } : this.ballStyle = {
           backgroundColor: this.blurColor,
           transform: 'scale(0.6)'

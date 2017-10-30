@@ -26,8 +26,8 @@
     top: 0;
     left: 0;
     color: #A5A5A5;
-    font-size: 24px;
-    line-height: 30px;
+    font-size: 12px;
+    line-height: 16px;
   }
 </style>
 
@@ -55,8 +55,8 @@
           const iconStyle = r1.style;
           const textStyle = r2.style;
           let style = {};
-          let fontSize = 24;
-          const tagWidth = iconStyle && iconStyle.width ? iconStyle.width : 24;
+          let fontSize = 12;
+          const tagWidth = iconStyle && iconStyle.width ? iconStyle.width : 12;
 
           if (textStyle && textStyle.fontSize) {
             fontSize = textStyle.fontSize;
@@ -96,8 +96,8 @@
         if (Utils.isNonEmptyArray(configList) && configList.length === 2) {
           const iconStyle = configList[0].style;
           const textStyle = configList[1].style;
-          let fontSize = 24;
-          const tagHeight = iconStyle && iconStyle.height ? iconStyle.height : 26;
+          let fontSize = 12;
+          const tagHeight = iconStyle && iconStyle.height ? iconStyle.height : 13;
           if (textStyle && textStyle.fontSize) {
             fontSize = textStyle.fontSize;
           }

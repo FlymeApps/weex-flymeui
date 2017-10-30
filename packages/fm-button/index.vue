@@ -7,18 +7,18 @@
 
 <style scoped>
 .fm-btn-wrap {
-	height: 50px;
+	height: 24px;
 	align-items: center;
 	flex-direction: row;
-	max-width: 208.3333px;
+	max-width: 100px;
 }
 .fm-btn {
-	height: 50px;
-	padding-left: 25px;
-	padding-right: 25px;
-	line-height: 50px;
-	border-radius: 50px;
-	font-size: 29.1667px;
+	height: 24px;
+	padding-left: 12px;
+	padding-right: 12px;
+	line-height: 24px;
+	border-radius: 24px;
+	font-size: 14px;
 	font-weight: 700;
 	text-align: center;
 	opacity: 0;
@@ -27,19 +27,19 @@
 	width: 100px;
 }
 .fm-btn-large {
-	padding-left: 16.6667px;
-	padding-right: 16.6667px;
+	padding-left: 8px;
+	padding-right: 8px;
 }
 .fm-btn-max {
-	width: 208.3333px;
+	width: 100px;
 }
 </style>
 
 <script>
 
-const small_size = 100      //48dp
-const large_size = 166.6667 //80dp
-const max_size = 208.3333   //100dp
+const small_size = 48      //48dp
+const large_size = 80 //80dp
+const max_size = 100   //100dp
 const dis_color = '#cccccc'
 const transparent = 'transparent'
 
@@ -92,8 +92,9 @@ export default {
 				sty.color = this.color
 				if (this.bgColor == transparent) {
 					sty.borderColor = this.color
-					sty.borderWidth = '3px'
-					sty.borderStyle = 'solid'
+					sty.borderWidth = 1.44,
+					sty.borderStyle = 'solid',
+					sty.lineHeight = 21.12
 				}
 			}
 			if (this.disabled) {
@@ -116,7 +117,7 @@ export default {
 	},
 
 	mounted() {
-		let w = this.text.length * 29.1667 + 50
+		let w = this.text.length * 14 + 50
 
 		if (w < small_size) {
 			this.small = true

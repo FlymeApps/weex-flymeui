@@ -7,21 +7,21 @@
 
 <style scoped>
   .wxc-title {
-    margin-top: 20px;
-    margin-left: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
     flex-direction: row;
     align-items: center;
   }
 
   .logo {
-    width: 120px;
-    height: 120px;
-    margin-left: 20px;
+    width: 60px;
+    height: 60px;
+    margin-left: 10px;
   }
 
   .text {
-    margin-left: 20px;
-    font-size: 30px;
+    margin-left: 10px;
+    font-size: 16px;
     font-weight: 600;
     color: #000;
   }

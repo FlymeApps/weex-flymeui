@@ -4,25 +4,29 @@
       <title title="fm-foldable-text"></title>
       <category title="可折叠文本"></category>
       <div class="container">
-        <fm-foldable-text :text="text" width="730"></fm-foldable-text>
+        <fm-foldable-text :text="text" width="340"></fm-foldable-text>
       </div>
       <category title="不同大小"></category>
       <div class="container">
-        <fm-foldable-text :text="text" width="730"></fm-foldable-text>
+        <fm-foldable-text :text="text" width="340"></fm-foldable-text>
       </div>
       <div class="container">
-        <fm-foldable-text :text="text" large width="730"></fm-foldable-text>
+        <fm-foldable-text :text="text" large width="340"></fm-foldable-text>
       </div>
       <div class="container">
-        <fm-foldable-text :text="text" huge width="730"></fm-foldable-text>
+        <fm-foldable-text :text="text" huge width="340"></fm-foldable-text>
       </div>
       <category title="限制不同行数"></category>
       <div class="container">
-        <fm-foldable-text :text="text" width="730" lines="3"></fm-foldable-text>
+        <fm-foldable-text :text="text" width="340" lines="3"></fm-foldable-text>
       </div>
       <category title="默认不折叠状态"></category>
       <div class="container">
-        <fm-foldable-text :text="text" width="730" :folded="false"></fm-foldable-text>
+        <fm-foldable-text :text="text" width="340" :folded="false"></fm-foldable-text>
+      </div>
+      <category title="自定义样式"></category>
+      <div class="container">
+        <fm-foldable-text :text="text" width="340" :textStyle="{fontSize: 18, lineHeight: 30, color: 'red'}" :tipStyle="{fontSize: 18, lineHeight: 30, color: 'green'}"></fm-foldable-text>
       </div>
     </scroller>
   </div>

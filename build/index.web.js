@@ -783,7 +783,7 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-switch[data-v-058cc90e] {\n  flex-direction: row;\n  align-items: center;\n  width: 100px;\n  height: 50px;\n  border-radius: 25px;\n}\n.ctr-ball[data-v-058cc90e] {\n  width: 34px;\n  height: 34px;\n  border-radius: 17px;\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-switch/index.vue?4e4432ae"],"names":[],"mappings":";AAWA;EACA,oBAAA;EACA,oBAAA;EACA,aAAA;EACA,aAAA;EACA,oBAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;EACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n    <div class=\"fm-switch\" @click=\"changeState\" :style=\"getBgStyle\">\n        <div \n          class=\"ctr-ball\" \n          :style=\"ballStyle\"\n          ref=\"ctrBall\"></div>\n    </div>\n</template>\n\n<style scoped>\n\n  .fm-switch {\n    flex-direction: row;\n    align-items: center;\n    width: 100px;\n    height: 50px;\n    border-radius: 25px;\n  }\n\n  .ctr-ball {\n    width: 34px;\n    height: 34px;\n    border-radius: 17px;\n  }\n\n</style>\n\n<script>\n\nimport { THEME } from './theme'\nconst animation = weex.requireModule('animation')\n\nexport default {\n    name: 'fm-switch',\n    props: {\n      checked: {\n        type: Boolean,\n        default: false\n      },\n      theme: {\n        type: String,\n        default: 'default'\n      },\n      disabled: {\n        type: Boolean,\n        default: false\n      }\n    },\n    data() {\n      return {\n        isAnimate: false,\n        focusColor: '#198ded',\n        blurColor: '#7e97ac',\n        ballStyle: {\n          backgroundColor: this.blurColor\n        }\n      }\n    },\n    computed: {\n      getBgStyle() {\n        let style = this.theme === 'default' ? {\n          borderWidth: 4,\n          borderColor: '#7e97ac'\n        } : THEME[this.theme]\n        if (this.disabled) {\n          style.opacity = 0.3\n        } else {\n          style.opacity = 1\n        }\n        return style\n      }\n    },\n    methods: {\n      changeState(e) {\n        if (this.isAnimate || this.disabled) return\n        this.checked = !this.checked\n        this.toggleState()\n        this.$emit('change', this.checked)\n      },\n      toggleState(){\n          this.isAnimate = true\n          const style = this.checked ? {\n            backgroundColor: this.focusColor,\n            transform: 'scale(1)',\n            transform: 'translate(50px, 0)',\n            transformOrigin: 'center center'\n          } : {\n            backgroundColor: this.blurColor,\n            transform: 'scale(0.6)',\n            transformOrigin: 'center center'\n          }\n          const ctrBall = this.$refs.ctrBall\n          animation.transition(ctrBall, {\n            styles: style,\n            timingFunction: 'ease',\n            duration: 260\n          }, () => {\n            this.isAnimate = false\n          })\n      }\n    },\n    mounted() {\n      const { bgStyle, focusColor, blurColor } = this\n      if (this.theme !== 'default') {\n          this.focusColor = this.blurColor = '#fff'\n      }\n      this.checked ? this.ballStyle = {\n          backgroundColor: this.focusColor,\n          transform: 'scale(1.0)',\n          transform: 'translate(50px, 0)'\n      } : this.ballStyle = {\n          backgroundColor: this.blurColor,\n          transform: 'scale(0.6)'\n      }\n    }\n}\n</script>"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-switch[data-v-058cc90e] {\n  flex-direction: row;\n  align-items: center;\n  width: 48px;\n  height: 24px;\n  border-radius: 24px;\n}\n.ctr-ball[data-v-058cc90e] {\n  width: 16px;\n  height: 16px;\n  border-radius: 8px;\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-switch/index.vue?f0e4519e"],"names":[],"mappings":";AAWA;EACA,oBAAA;EACA,oBAAA;EACA,YAAA;EACA,aAAA;EACA,oBAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;EACA,mBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n    <div class=\"fm-switch\" @click=\"changeState\" :style=\"getBgStyle\">\n        <div \n          class=\"ctr-ball\" \n          :style=\"ballStyle\"\n          ref=\"ctrBall\"></div>\n    </div>\n</template>\n\n<style scoped>\n\n  .fm-switch {\n    flex-direction: row;\n    align-items: center;\n    width: 48px;\n    height: 24px;\n    border-radius: 24px;\n  }\n\n  .ctr-ball {\n    width: 16px;\n    height: 16px;\n    border-radius: 8px;\n  }\n\n</style>\n\n<script>\n\nimport { THEME } from './theme'\nconst animation = weex.requireModule('animation')\n\nexport default {\n    name: 'fm-switch',\n    props: {\n      checked: {\n        type: Boolean,\n        default: false\n      },\n      theme: {\n        type: String,\n        default: 'default'\n      },\n      disabled: {\n        type: Boolean,\n        default: false\n      }\n    },\n    data() {\n      return {\n        isAnimate: false,\n        focusColor: '#198ded',\n        blurColor: '#7e97ac',\n        ballStyle: {\n          backgroundColor: this.blurColor\n        }\n      }\n    },\n    computed: {\n      getBgStyle() {\n        let style = this.theme === 'default' ? {\n          borderWidth: 2,\n          borderColor: '#7e97ac'\n        } : THEME[this.theme]\n        if (this.disabled) {\n          style.opacity = 0.3\n        } else {\n          style.opacity = 1\n        }\n        return style\n      }\n    },\n    methods: {\n      changeState(e) {\n        if (this.isAnimate || this.disabled) return\n        this.checked = !this.checked\n        this.toggleState()\n        this.$emit('change', this.checked)\n      },\n      toggleState(){\n          this.isAnimate = true\n          const style = this.checked ? {\n            backgroundColor: this.focusColor,\n            transform: 'scale(1)',\n            transform: 'translate(24px, 0)',\n            transformOrigin: 'center center'\n          } : {\n            backgroundColor: this.blurColor,\n            transform: 'scale(0.6)',\n            transformOrigin: 'center center'\n          }\n          const ctrBall = this.$refs.ctrBall\n          animation.transition(ctrBall, {\n            styles: style,\n            timingFunction: 'ease',\n            duration: 260\n          }, () => {\n            this.isAnimate = false\n          })\n      }\n    },\n    mounted() {\n      const { bgStyle, focusColor, blurColor } = this\n      if (this.theme !== 'default') {\n          this.focusColor = this.blurColor = '#fff'\n      }\n      this.checked ? this.ballStyle = {\n          backgroundColor: this.focusColor,\n          transform: 'scale(1.0)',\n          transform: 'translate(24px, 0)'\n      } : this.ballStyle = {\n          backgroundColor: this.blurColor,\n          transform: 'scale(0.6)'\n      }\n    }\n}\n</script>"],"sourceRoot":""}]);
 
 // exports
 
@@ -897,7 +897,7 @@ exports.default = {
   computed: {
     getBgStyle: function getBgStyle() {
       var style = this.theme === 'default' ? {
-        borderWidth: 4,
+        borderWidth: 2,
         borderColor: '#7e97ac'
       } : _theme.THEME[this.theme];
       if (this.disabled) {
@@ -923,7 +923,7 @@ exports.default = {
       var style = this.checked ? (_ref = {
         backgroundColor: this.focusColor,
         transform: 'scale(1)'
-      }, _defineProperty(_ref, 'transform', 'translate(50px, 0)'), _defineProperty(_ref, 'transformOrigin', 'center center'), _ref) : {
+      }, _defineProperty(_ref, 'transform', 'translate(24px, 0)'), _defineProperty(_ref, 'transformOrigin', 'center center'), _ref) : {
         backgroundColor: this.blurColor,
         transform: 'scale(0.6)',
         transformOrigin: 'center center'
@@ -949,7 +949,7 @@ exports.default = {
     this.checked ? this.ballStyle = _defineProperty({
       backgroundColor: this.focusColor,
       transform: 'scale(1.0)'
-    }, 'transform', 'translate(50px, 0)') : this.ballStyle = {
+    }, 'transform', 'translate(24px, 0)') : this.ballStyle = {
       backgroundColor: this.blurColor,
       transform: 'scale(0.6)'
     };
@@ -1093,7 +1093,7 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-tag[data-v-2072c04b] {\n  align-items: flex-start;\n}\n.tag-item[data-v-2072c04b] {\n  padding: 7px;\n  justify-content: center;\n  align-items: center;\n  overflow: hidden;\n}\n.tag-border[data-v-2072c04b] {\n  border-bottom-left-radius: 4px;\n  border-bottom-right-radius: 4px;\n  border-top-left-radius: 4px;\n  border-top-right-radius: 4px;\n}\n.tag-hollow[data-v-2072c04b] {\n  border-width: 1px;\n}\n.tag-text[data-v-2072c04b] {\n  font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n  font-weight: bold;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag/index.vue?680b651b"],"names":[],"mappings":";AAYA;EACA,wBAAA;CACA;AAEA;EACA,aAAA;EACA,wBAAA;EACA,oBAAA;EACA,iBAAA;CACA;AAEA;EACA,+BAAA;EACA,gCAAA;EACA,4BAAA;EACA,6BAAA;CACA;AAEA;EACA,kBAAA;CACA;AAEA;EACA,sDAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n    <div class=\"fm-tag\" :style=\"{margin: size === 'small' ? '2.34px' : '4.68px'}\">\n        <div v-if=\"showSolid || showHollow\"\n            :class=\"['tag-item','tag-border',showHollow && 'tag-hollow']\"\n            :style=\"tagTextStyle\">\n        <text class=\"tag-text\" ref='content' :style=\"textStyle\">{{value}}</text>\n        </div>\n    </div>\n</template>\n\n<style scoped>\n\n  .fm-tag {\n    align-items: flex-start;\n  }\n\n  .tag-item {\n    padding: 7px;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n  }\n\n  .tag-border {\n    border-bottom-left-radius: 4px;\n    border-bottom-right-radius: 4px;\n    border-top-left-radius: 4px;\n    border-top-right-radius: 4px;\n  }\n\n  .tag-hollow {\n    border-width: 1px;\n  }\n\n  .tag-text {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    font-weight: bold;\n  }\n</style>\n\n<script>\nexport default {\n    props: {\n      tagType: {\n        type: String,\n        default: 'solid'\n      },\n      size: {\n        type: String,\n        default: 'small'\n      },\n      value: {\n        type: [String, Number],\n        default: '标签'\n      },\n      color: {\n        type: String,\n        default: '#198ded'\n      },\n      fontColor: {\n        type: String,\n        default: '#fff'\n      }\n    },\n    computed: {\n      showSolid () {\n        const { tagType, value } = this;\n        return tagType === 'solid' && value !== '';\n      },\n      showHollow () {\n        const { tagType, value } = this;\n        return tagType === 'hollow' && value !== '';\n      },\n      tagTextStyle () {\n        const { color, showSolid } = this;\n        return showSolid ? { backgroundColor: color } : { borderColor: color }\n      },\n      textStyle() {\n        const { fontColor, size } = this;\n        return {color: fontColor, fontSize: size === 'small' ? '19px' : '21px'}\n      }\n    }\n}\n</script>\n\n\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-tag[data-v-2072c04b] {\n  align-items: flex-start;\n}\n.tag-item[data-v-2072c04b] {\n  padding: 3px;\n  justify-content: center;\n  align-items: center;\n  overflow: hidden;\n}\n.tag-border[data-v-2072c04b] {\n  border-bottom-left-radius: 1.5px;\n  border-bottom-right-radius: 1.5px;\n  border-top-left-radius: 1.5px;\n  border-top-right-radius: 1.5px;\n}\n.tag-hollow[data-v-2072c04b] {\n  border-width: 1px;\n}\n.tag-text[data-v-2072c04b] {\n  font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n  font-weight: bold;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag/index.vue?08715863"],"names":[],"mappings":";AAYA;EACA,wBAAA;CACA;AAEA;EACA,aAAA;EACA,wBAAA;EACA,oBAAA;EACA,iBAAA;CACA;AAEA;EACA,iCAAA;EACA,kCAAA;EACA,8BAAA;EACA,+BAAA;CACA;AAEA;EACA,kBAAA;CACA;AAEA;EACA,sDAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n    <div class=\"fm-tag\" :style=\"{margin: size === 'small' ? '1px' : '1.5px'}\">\n        <div v-if=\"showSolid || showHollow\"\n            :class=\"['tag-item','tag-border',showHollow && 'tag-hollow']\"\n            :style=\"tagTextStyle\">\n        <text class=\"tag-text\" ref='content' :style=\"textStyle\">{{value}}</text>\n        </div>\n    </div>\n</template>\n\n<style scoped>\n\n  .fm-tag {\n    align-items: flex-start;\n  }\n\n  .tag-item {\n    padding: 3px;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n  }\n\n  .tag-border {\n    border-bottom-left-radius: 1.5px;\n    border-bottom-right-radius: 1.5px;\n    border-top-left-radius: 1.5px;\n    border-top-right-radius: 1.5px;\n  }\n\n  .tag-hollow {\n    border-width: 1px;\n  }\n\n  .tag-text {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    font-weight: bold;\n  }\n</style>\n\n<script>\nexport default {\n    props: {\n      tagType: {\n        type: String,\n        default: 'solid'\n      },\n      size: {\n        type: String,\n        default: 'small'\n      },\n      value: {\n        type: [String, Number],\n        default: '标签'\n      },\n      color: {\n        type: String,\n        default: '#198ded'\n      },\n      fontColor: {\n        type: String,\n        default: '#fff'\n      }\n    },\n    computed: {\n      showSolid () {\n        const { tagType, value } = this;\n        return tagType === 'solid' && value !== '';\n      },\n      showHollow () {\n        const { tagType, value } = this;\n        return tagType === 'hollow' && value !== '';\n      },\n      tagTextStyle () {\n        const { color, showSolid } = this;\n        return showSolid ? { backgroundColor: color } : { borderColor: color }\n      },\n      textStyle() {\n        const { fontColor, size } = this;\n        return {color: fontColor, fontSize: size === 'small' ? '8px' : '10px'}\n      }\n    }\n}\n</script>\n\n\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -1195,7 +1195,7 @@ exports.default = {
       var fontColor = this.fontColor,
           size = this.size;
 
-      return { color: fontColor, fontSize: size === 'small' ? '19px' : '21px' };
+      return { color: fontColor, fontSize: size === 'small' ? '8px' : '10px' };
     }
   }
 };
@@ -1209,7 +1209,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "fm-tag",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle({
-      margin: _vm.size === 'small' ? '2.34px' : '4.68px'
+      margin: _vm.size === 'small' ? '1px' : '1.5px'
     }))
   }, [(_vm.showSolid || _vm.showHollow) ? _c('div', {
     class: ['tag-item', 'tag-border', _vm.showHollow && 'tag-hollow'],
@@ -1303,7 +1303,7 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.text[data-v-68596e9c] {\n    font-size: 29.17px;\n    line-height: 43px;\n    color: #999;\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n}\n.medium[data-v-68596e9c] {\n    font-weight: 500;\n}\n.bold[data-v-68596e9c] {\n    font-weight: 700;\n}\n.light[data-v-68596e9c] {\n    font-weight: 400;\n    line-height: 38px;\n}\n.title[data-v-68596e9c] {\n    font-size: 33px;\n    font-weight: 500;\n    line-height: 48px;\n    color: #000;\n}\n.small[data-v-68596e9c] {\n    font-size: 25px;\n}\n.large[data-v-68596e9c] {\n    font-size: 33px;\n    font-weight: 500;\n    line-height: 50px;\n    color: #000;\n}\n.huge[data-v-68596e9c] {\n    font-size: 38px;\n    line-height: 56px;\n    color: #000;\n}\n.margin-text[data-v-68596e9c] {\n    margin-right: 6px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-text/index.vue?823adfbc"],"names":[],"mappings":";AAKA;IACA,mBAAA;IACA,kBAAA;IACA,YAAA;IACA,sDAAA;CACA;AAEA;IACA,iBAAA;CACA;AACA;IACA,iBAAA;CACA;AACA;IACA,iBAAA;IACA,kBAAA;CACA;AAEA;IACA,gBAAA;IACA,iBAAA;IACA,kBAAA;IACA,YAAA;CACA;AAEA;IACA,gBAAA;CACA;AACA;IACA,gBAAA;IACA,iBAAA;IACA,kBAAA;IACA,YAAA;CACA;AACA;IACA,gBAAA;IACA,kBAAA;IACA,YAAA;CACA;AACA;IACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n    <text :class=\"textClz\" :style=\"getStyle\">{{textValue}}</text>\n</template>\n\n<style scoped>\n    .text {\n        font-size: 29.17px;\n        line-height: 43px;\n        color: #999;\n        font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    }\n\n    .medium {\n        font-weight: 500;\n    }\n    .bold {\n        font-weight: 700;\n    }\n    .light {\n        font-weight: 400;\n        line-height: 38px;\n    }\n\n    .title {\n        font-size: 33px;\n        font-weight: 500;\n        line-height: 48px;\n        color: #000;\n    }\n\n    .small {\n        font-size: 25px;\n    }\n    .large {\n        font-size: 33px;\n        font-weight: 500;\n        line-height: 50px;\n        color: #000;\n    }\n    .huge {\n        font-size: 38px;\n        line-height: 56px;\n        color: #000;\n    }\n    .margin-text {\n        margin-right: 6px;\n    }\n</style>\n\n<script>\nexport default {\n    props: {\n        textValue: [String, Number],\n        medium: Boolean,\n        bold: Boolean,\n        light: Boolean,\n        title: Boolean,\n        small: Boolean,\n        large: Boolean,\n        huge: Boolean,\n        textStyle: {\n            type: Object,\n            default: () => ({})\n        },\n        hasTextMargin: {\n            type: Boolean,\n            default: true\n        }\n    },\n\n    computed: {\n        textClz () {\n            let clz = ['text']\n            if (this.medium) {\n                clz.push('medium')\n            }\n            if (this.light) {\n                clz.push('light')\n            }\n            if (this.title) {\n                clz.push('title')\n            }\n            if (this.bold) {\n                clz.push('bold')\n            }\n            if (this.small) {\n                clz.push('small')\n            }\n            if (this.large) {\n                clz.push('large')\n            }\n            if (this.huge) {\n                clz.push('huge')\n            }\n            if (this.hasTextMargin) {\n                clz.push('margin-text')\n            }\n            return clz\n        },\n        getStyle () {\n            let style = {};\n            const textStyle = this.textStyle;\n            if (textStyle && textStyle.fontSize) {\n                console.log(textStyle)\n                style = {\n                    ...style,\n                    fontSize: `${textStyle.fontSize}px`\n                }\n            }\n            if (textStyle && textStyle.color) {\n                style = {\n                    ...style,\n                    color: textStyle.color\n                }\n            }\n            return style;\n      }\n    }\n}\n</script>"],"sourceRoot":""}]);
+exports.push([module.i, "\n.text[data-v-68596e9c] {\n    font-size: 14px;\n    line-height: 21px;\n    color: #999;\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n}\n.medium[data-v-68596e9c] {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n}\n.bold[data-v-68596e9c] {\n    font-weight: 700;\n}\n.light[data-v-68596e9c] {\n    font-weight: 400;\n    line-height: 18px;\n}\n.title[data-v-68596e9c] {\n    font-size: 16px;\n    font-weight: 500;\n    line-height: 23px;\n    color: #000;\n}\n.small[data-v-68596e9c] {\n    font-size: 12px;\n}\n.large[data-v-68596e9c] {\n    font-size: 16px;\n    font-weight: 500;\n    line-height: 24px;\n    color: #000;\n}\n.huge[data-v-68596e9c] {\n    font-size: 18px;\n    line-height: 27px;\n    color: #000;\n}\n.margin-text[data-v-68596e9c] {\n    margin-right: 3px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-text/index.vue?721959a9"],"names":[],"mappings":";AAKA;IACA,gBAAA;IACA,kBAAA;IACA,YAAA;IACA,sDAAA;CACA;AAEA;IACA,+BAAA;IACA,iBAAA;CACA;AACA;IACA,iBAAA;CACA;AACA;IACA,iBAAA;IACA,kBAAA;CACA;AAEA;IACA,gBAAA;IACA,iBAAA;IACA,kBAAA;IACA,YAAA;CACA;AAEA;IACA,gBAAA;CACA;AACA;IACA,gBAAA;IACA,iBAAA;IACA,kBAAA;IACA,YAAA;CACA;AACA;IACA,gBAAA;IACA,kBAAA;IACA,YAAA;CACA;AACA;IACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n    <text :class=\"textClz\" :style=\"getStyle\">{{textValue}}</text>\n</template>\n\n<style scoped>\n    .text {\n        font-size: 14px;\n        line-height: 21px;\n        color: #999;\n        font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    }\n\n    .medium {\n        font-family: sans-serif-medium;\n        font-weight: 500;\n    }\n    .bold {\n        font-weight: 700;\n    }\n    .light {\n        font-weight: 400;\n        line-height: 18px;\n    }\n\n    .title {\n        font-size: 16px;\n        font-weight: 500;\n        line-height: 23px;\n        color: #000;\n    }\n\n    .small {\n        font-size: 12px;\n    }\n    .large {\n        font-size: 16px;\n        font-weight: 500;\n        line-height: 24px;\n        color: #000;\n    }\n    .huge {\n        font-size: 18px;\n        line-height: 27px;\n        color: #000;\n    }\n    .margin-text {\n        margin-right: 3px;\n    }\n</style>\n\n<script>\nexport default {\n    props: {\n        textValue: [String, Number],\n        medium: Boolean,\n        bold: Boolean,\n        light: Boolean,\n        title: Boolean,\n        small: Boolean,\n        large: Boolean,\n        huge: Boolean,\n        textStyle: {\n            type: Object,\n            default: () => ({})\n        },\n        hasTextMargin: {\n            type: Boolean,\n            default: true\n        }\n    },\n\n    computed: {\n        textClz () {\n            let clz = ['text']\n            if (this.medium) {\n                clz.push('medium')\n            }\n            if (this.light) {\n                clz.push('light')\n            }\n            if (this.title) {\n                clz.push('title')\n            }\n            if (this.bold) {\n                clz.push('bold')\n            }\n            if (this.small) {\n                clz.push('small')\n            }\n            if (this.large) {\n                clz.push('large')\n            }\n            if (this.huge) {\n                clz.push('huge')\n            }\n            if (this.hasTextMargin) {\n                clz.push('margin-text')\n            }\n            return clz\n        },\n        getStyle () {\n            let style = {};\n            const textStyle = this.textStyle;\n            if (textStyle && textStyle.fontSize) {\n                console.log(textStyle)\n                style = {\n                    ...style,\n                    fontSize: `${textStyle.fontSize}px`\n                }\n            }\n            if (textStyle && textStyle.color) {\n                style = {\n                    ...style,\n                    color: textStyle.color\n                }\n            }\n            return style;\n      }\n    }\n}\n</script>"],"sourceRoot":""}]);
 
 // exports
 
@@ -1321,6 +1321,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
 //
 //
 //
@@ -1533,7 +1534,7 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-image[data-v-77aa90fe] {\n  width: 90px;\n  height: 24px;\n  margin-right: 6px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-icon/index.vue?6dd1acff"],"names":[],"mappings":";AAgBA;EACA,YAAA;EACA,aAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n    <image v-if=\"isImg\" class=\"fm-image\"\n          :src=\"value\"\n          @load=\"onLoad\"\n          @click=\"e=>$emit('click', e)\"\n          @longpress=\"e=>$emit('longpress', e)\"\n          :style=\"{ width: computedStyle.width, height: computedStyle.height }\">\n    </image>\n    <text v-else :style=\"getStyle\"\n          @click=\"e=>$emit('click', e)\"\n          @longpress=\"e=>$emit('longpress', e)\"\n          >{{ getFontName }}\n    </text>\n</template>\n\n<style scoped>\n  .fm-image {\n    width: 90px;\n    height: 24px;\n    margin-right: 6px;\n  }\n</style>\n\n<script>\n  const dom = weex.requireModule('dom')\n  // 引入he模块，使用它解决weex-template-compiler在编译阶段进行decode\n  const he = require(\"he\");\n  export default {\n    props: {\n      value: {\n        type: String,\n        default: ''\n      },\n      iconStyle: {\n        type: [Number, Object],\n        default: 34\n      },\n      color: {\n        type: String,\n        default: '#000000'\n      }\n    },\n    data: () => ({\n      width: 90\n    }),\n    computed: {\n      computedStyle () {\n        if (Object.prototype.toString.call(this.iconStyle).slice(8, -1).toLowerCase() !== 'object') {\n          this.iconStyle = { height: 24 }\n        }\n        const { width, iconStyle } = this\n        if (iconStyle && iconStyle.width && iconStyle.height) {\n          return {\n            width: `${iconStyle.width}px`,\n            height: `${iconStyle.height}px`\n          }\n        } else {\n          return {\n            width: `${width}px`,\n            height: `${iconStyle.height}px`\n          }\n        }\n      },\n      isImg() {\n        let { value } = this\n        if (value.indexOf(\"http\") === 0 || value.indexOf(\"//\") === 0) {\n          return true\n        }\n        return false\n      },\n      getStyle () {\n        const { iconStyle } = this\n        let style = { fontFamily: 'flymeicon', color: this.color }\n        if (Object.prototype.toString.call(this.iconStyle).slice(8, -1).toLowerCase() === 'object') {\n          iconStyle.size && (style.fontSize = `${iconStyle.size}px`)\n          iconStyle.lineHeight && (style.lineHeight = `${iconStyle.lineHeight}px`)\n        } else {\n          style.fontSize = iconStyle\n        }\n        return style\n      },\n      // 匹配对应的字体图标的unicode\n      getFontName: function() {\n          return he.decode(this.value)\n      }\n    },\n    created () {\n      dom.addRule('fontFace', {\n        'fontFamily': 'flymeicon',\n        'src': \"url('http://172.17.201.32:8082/iconfont.ttf')\"\n      })\n    },\n    methods: {\n      onLoad (e) {\n        if (e.success && e.size && e.size.naturalWidth > 0) {\n          const width = e.size.naturalWidth\n          const height = e.size.naturalHeight\n          this.width = width * (this.iconStyle.height / height)\n        }\n      }\n    }\n  }\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-image[data-v-77aa90fe] {\n  width: 43px;\n  height: 12px;\n  margin-right: 6px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-icon/index.vue?565a4016"],"names":[],"mappings":";AAgBA;EACA,YAAA;EACA,aAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n    <image v-if=\"isImg\" class=\"fm-image\"\n          :src=\"value\"\n          @load=\"onLoad\"\n          @click=\"e=>$emit('click', e)\"\n          @longpress=\"e=>$emit('longpress', e)\"\n          :style=\"{ width: computedStyle.width, height: computedStyle.height }\">\n    </image>\n    <text v-else :style=\"getStyle\"\n          @click=\"e=>$emit('click', e)\"\n          @longpress=\"e=>$emit('longpress', e)\"\n          >{{ getFontName }}\n    </text>\n</template>\n\n<style scoped>\n  .fm-image {\n    width: 43px;\n    height: 12px;\n    margin-right: 6px;\n  }\n</style>\n\n<script>\n  const dom = weex.requireModule('dom')\n  // 引入he模块，使用它解决weex-template-compiler在编译阶段进行decode\n  const he = require(\"he\");\n  export default {\n    props: {\n      value: {\n        type: String,\n        default: ''\n      },\n      iconStyle: {\n        type: [Number, Object],\n        default: 14\n      },\n      color: {\n        type: String,\n        default: '#000000'\n      }\n    },\n    data: () => ({\n      width: 43\n    }),\n    computed: {\n      computedStyle () {\n        if (Object.prototype.toString.call(this.iconStyle).slice(8, -1).toLowerCase() !== 'object') {\n          this.iconStyle = { height: 12 }\n        }\n        const { width, iconStyle } = this\n        if (iconStyle && iconStyle.width && iconStyle.height) {\n          return {\n            width: `${iconStyle.width}px`,\n            height: `${iconStyle.height}px`\n          }\n        } else {\n          return {\n            width: `${width}px`,\n            height: `${iconStyle.height}px`\n          }\n        }\n      },\n      isImg() {\n        let { value } = this\n        if (value.indexOf(\"http\") === 0 || value.indexOf(\"//\") === 0) {\n          return true\n        }\n        return false\n      },\n      getStyle () {\n        const { iconStyle } = this\n        let style = { fontFamily: 'flymeicon', color: this.color }\n        if (Object.prototype.toString.call(this.iconStyle).slice(8, -1).toLowerCase() === 'object') {\n          iconStyle.size && (style.fontSize = `${iconStyle.size}px`)\n          iconStyle.lineHeight && (style.lineHeight = `${iconStyle.lineHeight}px`)\n        } else {\n          style.fontSize = iconStyle\n        }\n        return style\n      },\n      // 匹配对应的字体图标的unicode\n      getFontName: function() {\n          return he.decode(this.value)\n      }\n    },\n    created () {\n      dom.addRule('fontFace', {\n        'fontFamily': 'flymeicon',\n        'src': \"url('http://weixin.res.flyme.cn/upload/iconfont.ttf')\"\n      })\n    },\n    methods: {\n      onLoad (e) {\n        if (e.success && e.size && e.size.naturalWidth > 0) {\n          const width = e.size.naturalWidth\n          const height = e.size.naturalHeight\n          this.width = width * (this.iconStyle.height / height)\n        }\n      }\n    }\n  }\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -1583,7 +1584,7 @@ exports.default = {
     },
     iconStyle: {
       type: [Number, Object],
-      default: 34
+      default: 14
     },
     color: {
       type: String,
@@ -1592,13 +1593,13 @@ exports.default = {
   },
   data: function data() {
     return {
-      width: 90
+      width: 43
     };
   },
   computed: {
     computedStyle: function computedStyle() {
       if (Object.prototype.toString.call(this.iconStyle).slice(8, -1).toLowerCase() !== 'object') {
-        this.iconStyle = { height: 24 };
+        this.iconStyle = { height: 12 };
       }
       var width = this.width,
           iconStyle = this.iconStyle;
@@ -1644,7 +1645,7 @@ exports.default = {
   created: function created() {
     dom.addRule('fontFace', {
       'fontFamily': 'flymeicon',
-      'src': "url('http://172.17.201.32:8082/iconfont.ttf')"
+      'src': "url('http://weixin.res.flyme.cn/upload/iconfont.ttf')"
     });
   },
 
@@ -2163,7 +2164,7 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.slider-wrap[data-v-18ede8e6] {\n\tpadding-right: 15.75px;\n\tpadding-left: 15.75px;\n}\n.level-text-wrap[data-v-18ede8e6] {\n\tflex-direction: row;\n\talign-items: center;\n\tjustify-content: center;\n\tmargin-bottom: -15px;\n}\n.level-text[data-v-18ede8e6] {\n\tflex: 1;\n\tpadding-top: 5px;\n\tpadding-bottom: 5px;\n\ttext-align: center;\n}\n.all[data-v-18ede8e6] {\n\theight: 6.25px;\n\tmargin-top: 30px;\n\tbackground-color: #e6e6e6;\n}\n.selected[data-v-18ede8e6] {\n\tmargin-top: -6.25px;\n\theight: 6.25px;\n\tbackground-color: #198ded;\n}\n.dot-wrap[data-v-18ede8e6] {\n\theight: 60px;\n\twidth: 80px;\n\tmargin-top: -33px;\n\tmargin-left: -40px;\n\talign-items: center;\n\tjustify-content: center;\n}\n.dot[data-v-18ede8e6] {\n\theight: 31.25px;\n\twidth: 31.25px;\n\tbackground-color: #198ded;\n\tborder-radius: 30px;\n}\n.num[data-v-18ede8e6] {\n\twidth: 54.2px;\n\theight: 54.2px;\n\tmargin-left: -27.1px;\n\tborder-radius: 55px;\n\tbackground-color: #198ded;\n\tcolor: #ffffff;\n\tfont-size: 29.2px;\n\tfont-weight: 700;\n\ttext-align: center;\n\tline-height: 54px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-slider/index.vue?4ebba11a"],"names":[],"mappings":";AAeA;CACA,uBAAA;CACA,sBAAA;CACA;AACA;CACA,oBAAA;CACA,oBAAA;CACA,wBAAA;CACA,qBAAA;CACA;AACA;CACA,QAAA;CACA,iBAAA;CACA,oBAAA;CACA,mBAAA;CACA;AACA;CACA,eAAA;CACA,iBAAA;CACA,0BAAA;CACA;AACA;CACA,oBAAA;CACA,eAAA;CACA,0BAAA;CACA;AACA;CACA,aAAA;CACA,YAAA;CACA,kBAAA;CACA,mBAAA;CACA,oBAAA;CACA,wBAAA;CACA;AACA;CACA,gBAAA;CACA,eAAA;CACA,0BAAA;CACA,oBAAA;CACA;AACA;CACA,cAAA;CACA,eAAA;CACA,qBAAA;CACA,oBAAA;CACA,0BAAA;CACA,eAAA;CACA,kBAAA;CACA,iBAAA;CACA,mBAAA;CACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n<div class=\"slider-wrap\">\n\t<div v-if=\"!!levelTexts && this.per\" class=\"level-text-wrap\" :style=\"textStyle\">\n\t\t<text class=\"level-text\" v-for=\"(text, idx) in levelTexts\" @click=\"levelClick(idx)\">{{text}}</text>\n\t</div>\n\t<text v-else-if=\"showProgress\" class=\"num\" :style=\"progressStyle\">{{progressText}}</text>\n\t<div class=\"all\" ref=\"bg\"></div>\n\t<div class=\"selected\" :style=\"selStyle\"></div>\n\t<div class=\"dot-wrap\" :style=\"dotStyle\" @touchmove=\"move\" @touchstart=\"start\" @touchend=\"end\">\n\t\t<div class=\"dot\"></div>\n\t</div>\n</div>\n</template>\n\n<style scoped>\n.slider-wrap {\n\tpadding-right: 15.75px;\n\tpadding-left: 15.75px;\n}\n.level-text-wrap {\n\tflex-direction: row;\n\talign-items: center;\n\tjustify-content: center;\n\tmargin-bottom: -15px;\n}\n.level-text {\n\tflex: 1;\n\tpadding-top: 5px;\n\tpadding-bottom: 5px;\n\ttext-align: center;\n}\n.all {\n\theight: 6.25px;\n\tmargin-top: 30px;\n\tbackground-color: #e6e6e6;\n}\n.selected {\n\tmargin-top: -6.25px;\n\theight: 6.25px;\n\tbackground-color: #198ded;\n}\n.dot-wrap {\n\theight: 60px;\n\twidth: 80px;\n\tmargin-top: -33px;\n\tmargin-left: -40px;\n\talign-items: center;\n\tjustify-content: center;\n}\n.dot {\n\theight: 31.25px;\n\twidth: 31.25px;\n\tbackground-color: #198ded;\n\tborder-radius: 30px;\n}\n.num {\n\twidth: 54.2px;\n\theight: 54.2px;\n\tmargin-left: -27.1px;\n\tborder-radius: 55px;\n\tbackground-color: #198ded;\n\tcolor: #ffffff;\n\tfont-size: 29.2px;\n\tfont-weight: 700;\n\ttext-align: center;\n\tline-height: 54px;\n}\n</style>\n\n<script>\nconst dom = weex.requireModule('dom')\n\nexport default {\n\tdata () {\n\t\treturn {\n\t\t\ttransX: 0,\n\t\t\tstartX: 0,\n\t\t\tmax: 0,\n\t\t\tper: 0,\n\t\t\tcomparePer: 0,\n\t\t\tprogressOpacity: 0,\n\t\t\tprogressText: null,\n\t\t\tlevelAlias: 0\n\t\t}\n\t},\n\n\tprops: {\n\t\tlevel: [String, Number],\n\t\tlevelTexts: Array,\n\t\tshowProgress: Boolean,\n\t\tvertical: Boolean,\n\t\tvalue: {\n\t\t\ttype: [String, Number],\n\t\t\tdefault: 0\n\t\t}\n\t},\n\n\tcomputed: {\n\t\ttextStyle () {\n\t\t\treturn {\n\t\t\t\twidth: `${this.max + this.per}px`,\n\t\t\t\t'margin-left': `${-this.per/2}px`\n\t\t\t}\n\t\t},\n\t\tdotStyle () {\n\t\t\treturn {\n\t\t\t\ttransform: `translateX(${this.transX}px)`\n\t\t\t}\n\t\t},\n\t\tselStyle () {\n\t\t\treturn {\n\t\t\t\twidth: `${this.transX}px`\n\t\t\t}\n\t\t},\n\t\tprogressStyle () {\n\t\t\treturn {\n\t\t\t\ttransform: `translateX(${this.transX}px)`,\n\t\t\t\topacity: this.progressOpacity\n\t\t\t}\n\t\t}\n\t},\n\n\tcreated () {\n\t\tthis.screen = 'screenY'//this.vertical ? 'screenY' : 'screenX'\n\t},\n\n\tmounted () {\n\t\tsetTimeout(() => {\n\t\t\tdom.getComponentRect(this.$refs.bg, opt => {\n\n\t\t\t\tthis.max = opt.size.width\n\n\t\t\t\tif (this.levelTexts) {\n\t\t\t\t\tthis.levelAlias = Math.max(this.levelTexts.length - 1, 0)\n\t\t\t\t} else {\n\t\t\t\t\tthis.levelAlias = this.level\n\t\t\t\t}\n\n\t\t\t\tif (this.levelAlias && this.levelAlias > 0) {\n\t\t\t\t\tthis.per = this.max / this.levelAlias\n\t\t\t\t\tthis.comparePer = this.per / 2\n\t\t\t\t}\n\n\t\t\t\tthis.transX = this.per ? (this.per * this.value) : (this.max * this.value / 100)\n\t\t\t})\n\t\t}, 100)\n\t},\n\n\tmethods: {\n\t\tlevelClick (idx) {\n\t\t\tthis.transX = Math.min(this.per * idx, this.max)\n\t\t\tthis.end()\n\t\t},\n\t\tstart (event) {\n\t\t\tthis.startX = event.changedTouches[0].screenX\n\t\t\tthis.progressOpacity = 1\n\t\t},\n\t\tmove (event) {\n\t\t\tlet x = +event.changedTouches[0].screenX\n\t\t\tlet sub = x - this.startX\n\t\t\tlet target\n\n\t\t\tif (this.per) {\n\t\t\t\tif (Math.abs(sub) >= this.comparePer) {\n\t\t\t\t\ttarget = this.transX + (sub > 0 ? this.per : -this.per)\n\t\t\t\t\tthis.startX = target\n\t\t\t\t}\n\t\t\t} else {\n\t\t\t\ttarget = this.transX + sub\n\t\t\t\tthis.startX = x\n\t\t\t}\n\t\t\t\n\t\t\tif (target !== undefined) {\n\t\t\t\tthis.transX = Math.min(Math.max(target, 0), this.max)\n\t\t\t}\n\t\t\t\n\t\t\tthis.progressText = this.per \n\t\t\t\t? Math.round(this.transX / this.per)\n\t\t\t\t: Math.floor(this.transX / this.max * 100)\n\t\t},\n\t\tend (event) {\n\t\t\tthis.progressOpacity = 0\n\t\t\tthis.$emit('selected', {\n\t\t\t\trate: this.transX / this.max,\n\t\t\t\tlevel: this.per ? Math.round(this.transX / this.per) : 0\n\t\t\t})\n\t\t}\n\t}\n}\n</script>"],"sourceRoot":""}]);
+exports.push([module.i, "\n.slider-wrap[data-v-18ede8e6] {\n\tpadding-right: 7.5px;\n\tpadding-left: 7.5px;\n}\n.level-text-wrap[data-v-18ede8e6] {\n\tflex-direction: row;\n\talign-items: center;\n\tjustify-content: center;\n\tmargin-bottom: -7.2px;\n}\n.level-text[data-v-18ede8e6] {\n\tflex: 1;\n\tfont-size: 14px;\n\tpadding-top: 2.4px;\n\tpadding-bottom: 2.4px;\n\ttext-align: center;\n}\n.all[data-v-18ede8e6] {\n\theight: 3px;\n\tmargin-top: 14.4px;\n\tbackground-color: #e6e6e6;\n}\n.selected[data-v-18ede8e6] {\n\tmargin-top: -3px;\n\theight: 3px;\n\tbackground-color: #198ded;\n}\n.dot-wrap[data-v-18ede8e6] {\n\theight: 28.8px;\n\twidth: 38.8px;\n\tmargin-top: -15.84px;\n\tmargin-left: -19.2px;\n\talign-items: center;\n\tjustify-content: center;\n}\n.dot[data-v-18ede8e6] {\n\theight: 15px;\n\twidth: 15px;\n\tbackground-color: #198ded;\n\tborder-radius: 14.4px;\n}\n.num[data-v-18ede8e6] {\n\twidth: 26px;\n\theight: 26px;\n\tmargin-left: -13px;\n\tborder-radius: 26.4px;\n\tbackground-color: #198ded;\n\tcolor: #ffffff;\n\tfont-size: 14px;\n\tfont-weight: 700;\n\ttext-align: center;\n\tline-height: 26px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-slider/index.vue?319e26ba"],"names":[],"mappings":";AAeA;CACA,qBAAA;CACA,oBAAA;CACA;AACA;CACA,oBAAA;CACA,oBAAA;CACA,wBAAA;CACA,sBAAA;CACA;AACA;CACA,QAAA;CACA,gBAAA;CACA,mBAAA;CACA,sBAAA;CACA,mBAAA;CACA;AACA;CACA,YAAA;CACA,mBAAA;CACA,0BAAA;CACA;AACA;CACA,iBAAA;CACA,YAAA;CACA,0BAAA;CACA;AACA;CACA,eAAA;CACA,cAAA;CACA,qBAAA;CACA,qBAAA;CACA,oBAAA;CACA,wBAAA;CACA;AACA;CACA,aAAA;CACA,YAAA;CACA,0BAAA;CACA,sBAAA;CACA;AACA;CACA,YAAA;CACA,aAAA;CACA,mBAAA;CACA,sBAAA;CACA,0BAAA;CACA,eAAA;CACA,gBAAA;CACA,iBAAA;CACA,mBAAA;CACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n<div class=\"slider-wrap\">\n\t<div v-if=\"!!levelTexts && this.per\" class=\"level-text-wrap\" :style=\"textStyle\">\n\t\t<text class=\"level-text\" v-for=\"(text, idx) in levelTexts\" @click=\"levelClick(idx)\">{{text}}</text>\n\t</div>\n\t<text v-else-if=\"showProgress\" class=\"num\" :style=\"progressStyle\">{{progressText}}</text>\n\t<div class=\"all\" ref=\"bg\"></div>\n\t<div class=\"selected\" :style=\"selStyle\"></div>\n\t<div class=\"dot-wrap\" :style=\"dotStyle\" @touchmove=\"move\" @touchstart=\"start\" @touchend=\"end\">\n\t\t<div class=\"dot\"></div>\n\t</div>\n</div>\n</template>\n\n<style scoped>\n.slider-wrap {\n\tpadding-right: 7.5px;\n\tpadding-left: 7.5px;\n}\n.level-text-wrap {\n\tflex-direction: row;\n\talign-items: center;\n\tjustify-content: center;\n\tmargin-bottom: -7.2px;\n}\n.level-text {\n\tflex: 1;\n\tfont-size: 14px;\n\tpadding-top: 2.4px;\n\tpadding-bottom: 2.4px;\n\ttext-align: center;\n}\n.all {\n\theight: 3px;\n\tmargin-top: 14.4px;\n\tbackground-color: #e6e6e6;\n}\n.selected {\n\tmargin-top: -3px;\n\theight: 3px;\n\tbackground-color: #198ded;\n}\n.dot-wrap {\n\theight: 28.8px;\n\twidth: 38.8px;\n\tmargin-top: -15.84px;\n\tmargin-left: -19.2px;\n\talign-items: center;\n\tjustify-content: center;\n}\n.dot {\n\theight: 15px;\n\twidth: 15px;\n\tbackground-color: #198ded;\n\tborder-radius: 14.4px;\n}\n.num {\n\twidth: 26px;\n\theight: 26px;\n\tmargin-left: -13px;\n\tborder-radius: 26.4px;\n\tbackground-color: #198ded;\n\tcolor: #ffffff;\n\tfont-size: 14px;\n\tfont-weight: 700;\n\ttext-align: center;\n\tline-height: 26px;\n}\n</style>\n\n<script>\nconst dom = weex.requireModule('dom')\n\nexport default {\n\tdata () {\n\t\treturn {\n\t\t\ttransX: 0,\n\t\t\tstartX: 0,\n\t\t\tmax: 0,\n\t\t\tper: 0,\n\t\t\tcomparePer: 0,\n\t\t\tprogressOpacity: 0,\n\t\t\tprogressText: null,\n\t\t\tlevelAlias: 0\n\t\t}\n\t},\n\n\tprops: {\n\t\tlevel: [String, Number],\n\t\tlevelTexts: Array,\n\t\tshowProgress: Boolean,\n\t\tvertical: Boolean,\n\t\tvalue: {\n\t\t\ttype: [String, Number],\n\t\t\tdefault: 0\n\t\t}\n\t},\n\n\tcomputed: {\n\t\ttextStyle () {\n\t\t\treturn {\n\t\t\t\twidth: `${this.max + this.per}px`,\n\t\t\t\t'margin-left': `${-this.per/2}px`\n\t\t\t}\n\t\t},\n\t\tdotStyle () {\n\t\t\treturn {\n\t\t\t\ttransform: `translateX(${this.transX}px)`\n\t\t\t}\n\t\t},\n\t\tselStyle () {\n\t\t\treturn {\n\t\t\t\twidth: `${this.transX}px`\n\t\t\t}\n\t\t},\n\t\tprogressStyle () {\n\t\t\treturn {\n\t\t\t\ttransform: `translateX(${this.transX}px)`,\n\t\t\t\topacity: this.progressOpacity\n\t\t\t}\n\t\t}\n\t},\n\n\tcreated () {\n\t\tthis.screen = 'screenY'//this.vertical ? 'screenY' : 'screenX'\n\t},\n\n\tmounted () {\n\t\tsetTimeout(() => {\n\t\t\tdom.getComponentRect(this.$refs.bg, opt => {\n\n\t\t\t\tthis.max = opt.size.width\n\n\t\t\t\tif (this.levelTexts) {\n\t\t\t\t\tthis.levelAlias = Math.max(this.levelTexts.length - 1, 0)\n\t\t\t\t} else {\n\t\t\t\t\tthis.levelAlias = this.level\n\t\t\t\t}\n\n\t\t\t\tif (this.levelAlias && this.levelAlias > 0) {\n\t\t\t\t\tthis.per = this.max / this.levelAlias\n\t\t\t\t\tthis.comparePer = this.per / 2\n\t\t\t\t}\n\n\t\t\t\tthis.transX = this.per ? (this.per * this.value) : (this.max * this.value / 100)\n\t\t\t})\n\t\t}, 100)\n\t},\n\n\tmethods: {\n\t\tlevelClick (idx) {\n\t\t\tthis.transX = Math.min(this.per * idx, this.max)\n\t\t\tthis.end()\n\t\t},\n\t\tstart (event) {\n\t\t\tthis.startX = event.changedTouches[0].screenX\n\t\t\tthis.progressOpacity = 1\n\t\t},\n\t\tmove (event) {\n\t\t\tlet x = +event.changedTouches[0].screenX\n\t\t\tlet sub = x - this.startX\n\t\t\tlet target\n\n\t\t\tif (this.per) {\n\t\t\t\tif (Math.abs(sub) >= this.comparePer) {\n\t\t\t\t\ttarget = this.transX + (sub > 0 ? this.per : -this.per)\n\t\t\t\t\tthis.startX = target\n\t\t\t\t}\n\t\t\t} else {\n\t\t\t\ttarget = this.transX + sub\n\t\t\t\tthis.startX = x\n\t\t\t}\n\t\t\t\n\t\t\tif (target !== undefined) {\n\t\t\t\tthis.transX = Math.min(Math.max(target, 0), this.max)\n\t\t\t}\n\t\t\t\n\t\t\tthis.progressText = this.per \n\t\t\t\t? Math.round(this.transX / this.per)\n\t\t\t\t: Math.floor(this.transX / this.max * 100)\n\t\t},\n\t\tend (event) {\n\t\t\tthis.progressOpacity = 0\n\t\t\tthis.$emit('selected', {\n\t\t\t\trate: this.transX / this.max,\n\t\t\t\tlevel: this.per ? Math.round(this.transX / this.per) : 0\n\t\t\t})\n\t\t}\n\t}\n}\n</script>"],"sourceRoot":""}]);
 
 // exports
 
@@ -2178,6 +2179,7 @@ exports.push([module.i, "\n.slider-wrap[data-v-18ede8e6] {\n\tpadding-right: 15.
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+//
 //
 //
 //
@@ -2524,7 +2526,7 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-btn-wrap[data-v-45eab412] {\n\theight: 50px;\n\talign-items: center;\n\tflex-direction: row;\n\tmax-width: 208.3333px;\n}\n.fm-btn[data-v-45eab412] {\n\theight: 50px;\n\tpadding-left: 25px;\n\tpadding-right: 25px;\n\tline-height: 50px;\n\tborder-radius: 50px;\n\tfont-size: 29.1667px;\n\tfont-weight: 700;\n\ttext-align: center;\n\topacity: 0;\n}\n.fm-btn-small[data-v-45eab412] {\n\twidth: 100px;\n}\n.fm-btn-large[data-v-45eab412] {\n\tpadding-left: 16.6667px;\n\tpadding-right: 16.6667px;\n}\n.fm-btn-max[data-v-45eab412] {\n\twidth: 208.3333px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-button/index.vue?078cecae"],"names":[],"mappings":";AAQA;CACA,aAAA;CACA,oBAAA;CACA,oBAAA;CACA,sBAAA;CACA;AACA;CACA,aAAA;CACA,mBAAA;CACA,oBAAA;CACA,kBAAA;CACA,oBAAA;CACA,qBAAA;CACA,iBAAA;CACA,mBAAA;CACA,WAAA;CACA;AACA;CACA,aAAA;CACA;AACA;CACA,wBAAA;CACA,yBAAA;CACA;AACA;CACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n<div class=\"fm-btn-wrap\">\n\t<text ref=\"text\" class=\"fm-btn\" :class=\"btnClz\" :style=\"btnStyle\"\n\t\t@click=\"btnClick\">{{text}}</text>\n</div>\n</template>\n\n<style scoped>\n.fm-btn-wrap {\n\theight: 50px;\n\talign-items: center;\n\tflex-direction: row;\n\tmax-width: 208.3333px;\n}\n.fm-btn {\n\theight: 50px;\n\tpadding-left: 25px;\n\tpadding-right: 25px;\n\tline-height: 50px;\n\tborder-radius: 50px;\n\tfont-size: 29.1667px;\n\tfont-weight: 700;\n\ttext-align: center;\n\topacity: 0;\n}\n.fm-btn-small {\n\twidth: 100px;\n}\n.fm-btn-large {\n\tpadding-left: 16.6667px;\n\tpadding-right: 16.6667px;\n}\n.fm-btn-max {\n\twidth: 208.3333px;\n}\n</style>\n\n<script>\n\nconst small_size = 100      //48dp\nconst large_size = 166.6667 //80dp\nconst max_size = 208.3333   //100dp\nconst dis_color = '#cccccc'\nconst transparent = 'transparent'\n\nexport default {\n\tdata() {\n\t\treturn {\n\t\t\tlarge: false,\n\t\t\tsmall: false,\n\t\t\tmax: false,\n\t\t\tshow: false\n\t\t}\n\t},\n\n\tprops: {\n\t\ttext: String,\n\t\tbgColor: {\n\t\t\ttype: String,\n\t\t\tdefault: '#198ded'\n\t\t},\n\t\tcolor: {\n\t\t\ttype: String,\n\t\t\tdefault: '#ffffff'\n\t\t},\n\t\tdisabled: Boolean\n\t},\n\n\tcomputed: {\n\t\tbtnClz() {\n\t\t\tlet clz = []\n\n\t\t\tif (this.large) {\n\t\t\t\tclz.push('fm-btn-large')\n\t\t\t}\n\t\t\tif (this.small) {\n\t\t\t\tclz.push('fm-btn-small')\n\t\t\t}\n\t\t\tif (this.max) {\n\t\t\t\tclz.push('fm-btn-max')\n\t\t\t}\n\n\t\t\treturn clz\n\t\t},\n\t\tbtnStyle() {\n\t\t\tlet sty = {}\n\n\t\t\tif (this.bgColor != transparent) {\n\t\t\t\tsty.backgroundColor = this.bgColor\n\t\t\t}\n\t\t\tif (this.color) {\n\t\t\t\tsty.color = this.color\n\t\t\t\tif (this.bgColor == transparent) {\n\t\t\t\t\tsty.borderColor = this.color\n\t\t\t\t\tsty.borderWidth = '3px'\n\t\t\t\t\tsty.borderStyle = 'solid'\n\t\t\t\t}\n\t\t\t}\n\t\t\tif (this.disabled) {\n\t\t\t\tsty.backgroundColor = dis_color\n\t\t\t}\n\t\t\tif (this.show) {\n\t\t\t\tsty.opacity = 1;\n\t\t\t}\n\n\t\t\treturn sty\n\t\t}\n\t},\n\n\tmethods: {\n\t\tbtnClick(evt) {\n\t\t\tif (!this.disabled) {\n\t\t\t\tthis.$emit('click', evt)\n\t\t\t}\n\t\t}\n\t},\n\n\tmounted() {\n\t\tlet w = this.text.length * 29.1667 + 50\n\n\t\tif (w < small_size) {\n\t\t\tthis.small = true\n\t\t} else if (w > large_size) {\n\t\t\tthis.large = true\n\t\t}\n\n\t\tif (w >= max_size) {\n\t\t\tthis.max = true\n\t\t}\n\n\t\tthis.show = true\n\t}\n}\n</script>"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-btn-wrap[data-v-45eab412] {\n\theight: 24px;\n\talign-items: center;\n\tflex-direction: row;\n\tmax-width: 100px;\n}\n.fm-btn[data-v-45eab412] {\n\theight: 24px;\n\tpadding-left: 12px;\n\tpadding-right: 12px;\n\tline-height: 24px;\n\tborder-radius: 24px;\n\tfont-size: 14px;\n\tfont-weight: 700;\n\ttext-align: center;\n\topacity: 0;\n}\n.fm-btn-small[data-v-45eab412] {\n\twidth: 100px;\n}\n.fm-btn-large[data-v-45eab412] {\n\tpadding-left: 8px;\n\tpadding-right: 8px;\n}\n.fm-btn-max[data-v-45eab412] {\n\twidth: 100px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-button/index.vue?40dca438"],"names":[],"mappings":";AAQA;CACA,aAAA;CACA,oBAAA;CACA,oBAAA;CACA,iBAAA;CACA;AACA;CACA,aAAA;CACA,mBAAA;CACA,oBAAA;CACA,kBAAA;CACA,oBAAA;CACA,gBAAA;CACA,iBAAA;CACA,mBAAA;CACA,WAAA;CACA;AACA;CACA,aAAA;CACA;AACA;CACA,kBAAA;CACA,mBAAA;CACA;AACA;CACA,aAAA;CACA","file":"index.vue","sourcesContent":["<template>\n<div class=\"fm-btn-wrap\">\n\t<text ref=\"text\" class=\"fm-btn\" :class=\"btnClz\" :style=\"btnStyle\"\n\t\t@click=\"btnClick\">{{text}}</text>\n</div>\n</template>\n\n<style scoped>\n.fm-btn-wrap {\n\theight: 24px;\n\talign-items: center;\n\tflex-direction: row;\n\tmax-width: 100px;\n}\n.fm-btn {\n\theight: 24px;\n\tpadding-left: 12px;\n\tpadding-right: 12px;\n\tline-height: 24px;\n\tborder-radius: 24px;\n\tfont-size: 14px;\n\tfont-weight: 700;\n\ttext-align: center;\n\topacity: 0;\n}\n.fm-btn-small {\n\twidth: 100px;\n}\n.fm-btn-large {\n\tpadding-left: 8px;\n\tpadding-right: 8px;\n}\n.fm-btn-max {\n\twidth: 100px;\n}\n</style>\n\n<script>\n\nconst small_size = 48      //48dp\nconst large_size = 80 //80dp\nconst max_size = 100   //100dp\nconst dis_color = '#cccccc'\nconst transparent = 'transparent'\n\nexport default {\n\tdata() {\n\t\treturn {\n\t\t\tlarge: false,\n\t\t\tsmall: false,\n\t\t\tmax: false,\n\t\t\tshow: false\n\t\t}\n\t},\n\n\tprops: {\n\t\ttext: String,\n\t\tbgColor: {\n\t\t\ttype: String,\n\t\t\tdefault: '#198ded'\n\t\t},\n\t\tcolor: {\n\t\t\ttype: String,\n\t\t\tdefault: '#ffffff'\n\t\t},\n\t\tdisabled: Boolean\n\t},\n\n\tcomputed: {\n\t\tbtnClz() {\n\t\t\tlet clz = []\n\n\t\t\tif (this.large) {\n\t\t\t\tclz.push('fm-btn-large')\n\t\t\t}\n\t\t\tif (this.small) {\n\t\t\t\tclz.push('fm-btn-small')\n\t\t\t}\n\t\t\tif (this.max) {\n\t\t\t\tclz.push('fm-btn-max')\n\t\t\t}\n\n\t\t\treturn clz\n\t\t},\n\t\tbtnStyle() {\n\t\t\tlet sty = {}\n\n\t\t\tif (this.bgColor != transparent) {\n\t\t\t\tsty.backgroundColor = this.bgColor\n\t\t\t}\n\t\t\tif (this.color) {\n\t\t\t\tsty.color = this.color\n\t\t\t\tif (this.bgColor == transparent) {\n\t\t\t\t\tsty.borderColor = this.color\n\t\t\t\t\tsty.borderWidth = 1.44,\n\t\t\t\t\tsty.borderStyle = 'solid',\n\t\t\t\t\tsty.lineHeight = 21.12\n\t\t\t\t}\n\t\t\t}\n\t\t\tif (this.disabled) {\n\t\t\t\tsty.backgroundColor = dis_color\n\t\t\t}\n\t\t\tif (this.show) {\n\t\t\t\tsty.opacity = 1;\n\t\t\t}\n\n\t\t\treturn sty\n\t\t}\n\t},\n\n\tmethods: {\n\t\tbtnClick(evt) {\n\t\t\tif (!this.disabled) {\n\t\t\t\tthis.$emit('click', evt)\n\t\t\t}\n\t\t}\n\t},\n\n\tmounted() {\n\t\tlet w = this.text.length * 14 + 50\n\n\t\tif (w < small_size) {\n\t\t\tthis.small = true\n\t\t} else if (w > large_size) {\n\t\t\tthis.large = true\n\t\t}\n\n\t\tif (w >= max_size) {\n\t\t\tthis.max = true\n\t\t}\n\n\t\tthis.show = true\n\t}\n}\n</script>"],"sourceRoot":""}]);
 
 // exports
 
@@ -2578,9 +2580,9 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 
-var small_size = 100; //48dp
-var large_size = 166.6667; //80dp
-var max_size = 208.3333; //100dp
+var small_size = 48; //48dp
+var large_size = 80; //80dp
+var max_size = 100; //100dp
 var dis_color = '#cccccc';
 var transparent = 'transparent';
 
@@ -2634,8 +2636,7 @@ exports.default = {
 				sty.color = this.color;
 				if (this.bgColor == transparent) {
 					sty.borderColor = this.color;
-					sty.borderWidth = '3px';
-					sty.borderStyle = 'solid';
+					sty.borderWidth = 1.44, sty.borderStyle = 'solid', sty.lineHeight = 21.12;
 				}
 			}
 			if (this.disabled) {
@@ -2658,7 +2659,7 @@ exports.default = {
 	},
 
 	mounted: function mounted() {
-		var w = this.text.length * 29.1667 + 50;
+		var w = this.text.length * 14 + 50;
 
 		if (w < small_size) {
 			this.small = true;
@@ -2797,7 +2798,7 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-input-wrap[data-v-10b8a20a] {\n\tpadding-top: 50px;\n\tpadding-right: 12.5px;\n\tpadding-left: 12.5px;\n}\n.fm-textarea[data-v-10b8a20a] {\n\tpadding-bottom: 18.75px;\n\tpadding-right: 16.67px;\n\tpadding-left: 16.67px;\n\tborder-bottom-style: solid;\n\tborder-bottom-width: 2.5px;\n\tborder-bottom-color: #E6E6E6;\n\tfont-size: 33.33px;\n\tline-height: 50px;\n\tcolor: #000000;\n\tplaceholder-color: #dddddd;\n\tcaret-color: #198ded;\n}\n.fm-textarea[data-v-10b8a20a]:focus {\n\tborder-bottom-color: #198ded;\n}\n.fm-textarea-error[data-v-10b8a20a] {\n\tborder-bottom-color: #df2b18;\n}\n.error-msg[data-v-10b8a20a] {\n\tfont-size: 25px;\n\tcolor: #df2b18;\n\tmargin-left: 16.67px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-input/index.vue?224780c2"],"names":[],"mappings":";AA6BA;CACA,kBAAA;CACA,sBAAA;CACA,qBAAA;CACA;AACA;CACA,wBAAA;CACA,uBAAA;CACA,sBAAA;CACA,2BAAA;CACA,2BAAA;CACA,6BAAA;CACA,mBAAA;CACA,kBAAA;CACA,eAAA;CACA,2BAAA;CACA,qBAAA;CACA;AACA;CACA,6BAAA;CACA;AACA;CACA,6BAAA;CACA;AACA;CACA,gBAAA;CACA,eAAA;CACA,qBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n<div class=\"fm-input-wrap\">\n\t<textarea v-if=\"type === 'textarea'\"\n\t\t:class=\"inputClz\" \n\t\t:value=\"value\" \n\t\t:rows=\"rows\" \n\t\t:maxlength=\"maxlength\" \n\t\t:placeholder=\"placeholder\" \n\t\t@input=\"input\"\n\t\t@change=\"change\"\n\t\t@focus=\"beFocus\"\n\t\t@blur=\"beBlur\"\n\t\tref=\"input\" />\n\t<input v-else \n\t\t:type=\"type\"\n\t\t:class=\"inputClz\" \n\t\t:value=\"value\" \n\t\t:maxlength=\"maxlength\" \n\t\t:placeholder=\"placeholder\"\n\t\t@input=\"input\"\n\t\t@change=\"change\"\n\t\t@focus=\"beFocus\"\n\t\t@blur=\"beBlur\"\n\t\tref=\"input\" />\n\t<text v-if=\"hasError\" class=\"error-msg\">{{errorMessage}}</text>\n</div>\n</template>\n\n<style scoped>\n.fm-input-wrap {\n\tpadding-top: 50px;\n\tpadding-right: 12.5px;\n\tpadding-left: 12.5px; \n}\n.fm-textarea {\n\tpadding-bottom: 18.75px;\n\tpadding-right: 16.67px;\n\tpadding-left: 16.67px;\n\tborder-bottom-style: solid;\n\tborder-bottom-width: 2.5px;\n\tborder-bottom-color: #E6E6E6;\n\tfont-size: 33.33px;\n\tline-height: 50px;\n\tcolor: #000000;\n\tplaceholder-color: #dddddd;\n\tcaret-color: #198ded;\n}\n.fm-textarea:focus {\n\tborder-bottom-color: #198ded;\n}\n.fm-textarea-error {\n\tborder-bottom-color: #df2b18;\n}\n.error-msg {\n\tfont-size: 25px;\n\tcolor: #df2b18;\n\tmargin-left: 16.67px;\n}\n</style>\n\n<script>\nconst dom = weex.requireModule('dom')\n\nexport default {\n\tdata() {\n\t\treturn {\n\t\t\trows: 1,\n\t\t\tinput: this.$refs.input\n\t\t}\n\t},\n\n\tprops: {\n\t\tvalue: [String, Number],\n\t\tplaceholder: {\n\t\t\ttype: String,\n\t\t\tdefault: '请输入'\n\t\t},\n\t\tmaxlength: [String, Number],\n\t\thasError: Boolean,\n\t\terrorMessage: {\n\t\t\ttype: 'String',\n\t\t\tdefault: '输入有误'\n\t\t},\n\t\ttype: String\n\t},\n\n\tcomputed: {\n\t\tinputClz() {\n\t\t\tlet clz = ['fm-textarea']\n\t\t\tif (this.hasError) {\n\t\t\t\tclz.push('fm-textarea-error')\n\t\t\t}\n\t\t\treturn clz\n\t\t}\n\t},\n\n\tmethods: {\n\t\tinput (evt) {\n\t\t\tthis.$emit('input', evt)\n\t\t},\n\t\tchange (evt) {\n\t\t\tthis.$emit('change', evt)\n\t\t},\n\t\tbeFocus (evt) {\n\t\t\tthis.$emit('focus', evt)\n\t\t},\n\t\tbeBlur (evt) {\n\t\t\tthis.$emit('blur', evt)\n\t\t},\n\t\tfocus () {\n\t\t\tthis.$refs.input.focus()\n\t\t},\n\t\tblur () {\n\t\t\tthis.$refs.input.blur()\n\t\t},\n\t\tsetSelectionRange (start, end) {\n\t\t\tthis.$refs.input.setSelectionRange(start, end)\n\t\t},\n\t\tgetEditSelectionRange (callback) {\n\t\t\tthis.$refs.input.getEditSelectionRange(callback)\n\t\t}\n\t}\n}\n</script>"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-input-wrap[data-v-10b8a20a] {\n\tpadding-top: 24px;\n\tpadding-right: 6px;\n\tpadding-left: 6px;\n}\n.fm-textarea[data-v-10b8a20a] {\n\tpadding-bottom: 9px;\n\tpadding-right: 8px;\n\tpadding-left: 8px;\n\tborder-bottom-style: solid;\n\tborder-bottom-width: 1px;\n\tborder-bottom-color: #E6E6E6;\n\tfont-size: 16px;\n\tline-height: 12px;\n\tcolor: #000000;\n\tplaceholder-color: #dddddd;\n\tcaret-color: #198ded;\n}\n.fm-textarea[data-v-10b8a20a]:focus {\n\tborder-bottom-color: #198ded;\n}\n.fm-textarea-error[data-v-10b8a20a] {\n\tborder-bottom-color: #df2b18;\n}\n.error-msg[data-v-10b8a20a] {\n\tfont-size: 12px;\n\tcolor: #df2b18;\n\tmargin-left: 8px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-input/index.vue?7ee64cb0"],"names":[],"mappings":";AA6BA;CACA,kBAAA;CACA,mBAAA;CACA,kBAAA;CACA;AACA;CACA,oBAAA;CACA,mBAAA;CACA,kBAAA;CACA,2BAAA;CACA,yBAAA;CACA,6BAAA;CACA,gBAAA;CACA,kBAAA;CACA,eAAA;CACA,2BAAA;CACA,qBAAA;CACA;AACA;CACA,6BAAA;CACA;AACA;CACA,6BAAA;CACA;AACA;CACA,gBAAA;CACA,eAAA;CACA,iBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n<div class=\"fm-input-wrap\">\n\t<textarea v-if=\"type === 'textarea'\"\n\t\t:class=\"inputClz\" \n\t\t:value=\"value\" \n\t\t:rows=\"rows\" \n\t\t:maxlength=\"maxlength\" \n\t\t:placeholder=\"placeholder\" \n\t\t@input=\"input\"\n\t\t@change=\"change\"\n\t\t@focus=\"beFocus\"\n\t\t@blur=\"beBlur\"\n\t\tref=\"input\" />\n\t<input v-else \n\t\t:type=\"type\"\n\t\t:class=\"inputClz\" \n\t\t:value=\"value\" \n\t\t:maxlength=\"maxlength\" \n\t\t:placeholder=\"placeholder\"\n\t\t@input=\"input\"\n\t\t@change=\"change\"\n\t\t@focus=\"beFocus\"\n\t\t@blur=\"beBlur\"\n\t\tref=\"input\" />\n\t<text v-if=\"hasError\" class=\"error-msg\">{{errorMessage}}</text>\n</div>\n</template>\n\n<style scoped>\n.fm-input-wrap {\n\tpadding-top: 24px;\n\tpadding-right: 6px;\n\tpadding-left: 6px; \n}\n.fm-textarea {\n\tpadding-bottom: 9px;\n\tpadding-right: 8px;\n\tpadding-left: 8px;\n\tborder-bottom-style: solid;\n\tborder-bottom-width: 1px;\n\tborder-bottom-color: #E6E6E6;\n\tfont-size: 16px;\n\tline-height: 12px;\n\tcolor: #000000;\n\tplaceholder-color: #dddddd;\n\tcaret-color: #198ded;\n}\n.fm-textarea:focus {\n\tborder-bottom-color: #198ded;\n}\n.fm-textarea-error {\n\tborder-bottom-color: #df2b18;\n}\n.error-msg {\n\tfont-size: 12px;\n\tcolor: #df2b18;\n\tmargin-left: 8px;\n}\n</style>\n\n<script>\nconst dom = weex.requireModule('dom')\n\nexport default {\n\tdata() {\n\t\treturn {\n\t\t\trows: 1,\n\t\t\tinput: this.$refs.input\n\t\t}\n\t},\n\n\tprops: {\n\t\tvalue: [String, Number],\n\t\tplaceholder: {\n\t\t\ttype: String,\n\t\t\tdefault: '请输入'\n\t\t},\n\t\tmaxlength: [String, Number],\n\t\thasError: Boolean,\n\t\terrorMessage: {\n\t\t\ttype: 'String',\n\t\t\tdefault: '输入有误'\n\t\t},\n\t\ttype: String\n\t},\n\n\tcomputed: {\n\t\tinputClz() {\n\t\t\tlet clz = ['fm-textarea']\n\t\t\tif (this.hasError) {\n\t\t\t\tclz.push('fm-textarea-error')\n\t\t\t}\n\t\t\treturn clz\n\t\t}\n\t},\n\n\tmethods: {\n\t\tinput (evt) {\n\t\t\tthis.$emit('input', evt)\n\t\t},\n\t\tchange (evt) {\n\t\t\tthis.$emit('change', evt)\n\t\t},\n\t\tbeFocus (evt) {\n\t\t\tthis.$emit('focus', evt)\n\t\t},\n\t\tbeBlur (evt) {\n\t\t\tthis.$emit('blur', evt)\n\t\t},\n\t\tfocus () {\n\t\t\tthis.$refs.input.focus()\n\t\t},\n\t\tblur () {\n\t\t\tthis.$refs.input.blur()\n\t\t},\n\t\tsetSelectionRange (start, end) {\n\t\t\tthis.$refs.input.setSelectionRange(start, end)\n\t\t},\n\t\tgetEditSelectionRange (callback) {\n\t\t\tthis.$refs.input.getEditSelectionRange(callback)\n\t\t}\n\t}\n}\n</script>"],"sourceRoot":""}]);
 
 // exports
 
@@ -3093,7 +3094,7 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.header-wrap[data-v-745d9462] {\n\tmargin-top: 18.75px;\n\tmargin-right: 45.83px;\n\tmargin-left: 45.83px;\n}\n.header[data-v-745d9462] {\n\tflex-direction: row;\n\tjustify-content: center;\n}\n.title[data-v-745d9462] {\n\tflex: 1;\n\tflex-direction: row;\n\tjustify-content: center;\n}\n.text-selected[data-v-745d9462] {\n\tcolor: #f34949;\n}\n.text[data-v-745d9462] {\n\tfont-size: 29.17px;\n\tfont-weight: 700;\n\ttext-align: center;\n\tcolor: #666666;\n}\n.bottom-line[data-v-745d9462] {\n\theight: 5px;\n\tmargin-top: 18.75px;\n\tbackground-color: #f34949;\n}\n.slider-wrap[data-v-745d9462] {\n\tflex-direction: row;\n\tborder-top-width: 2px;\n\tborder-color: #dddddd;\n}\n.body[data-v-745d9462] {\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tab-view/index.vue?671b20e4"],"names":[],"mappings":";AA2BA;CACA,oBAAA;CACA,sBAAA;CACA,qBAAA;CACA;AACA;CACA,oBAAA;CACA,wBAAA;CACA;AACA;CACA,QAAA;CACA,oBAAA;CACA,wBAAA;CACA;AACA;CACA,eAAA;CACA;AACA;CACA,mBAAA;CACA,iBAAA;CACA,mBAAA;CACA,eAAA;CACA;AACA;CACA,YAAA;CACA,oBAAA;CACA,0BAAA;CACA;AACA;CACA,oBAAA;CACA,sBAAA;CACA,sBAAA;CACA;AACA;CACA","file":"index.vue","sourcesContent":["<template>\n<div class=\"tab-wrap\">\n\t<div class=\"header-wrap\">\n\t\t<div class=\"header\" ref=\"header\">\n\t\t\t<div v-for=\"(item, idx) in items\" \n\t\t\t\t:key=\"item.name\" \n\t\t\t\tclass=\"title\" \n\t\t\t\t@click=\"titleClick(idx)\">\n\t\t\t\t<text :class=\"['text', idx == current ? 'text-selected' : '']\" >{{item.text}}</text>\t\n\t\t\t</div>\n\t\t</div>\n\t\t<text class=\"bottom-line\" :style=\"lineStyle\" ref=\"line\"></text>\n\t</div>\n\t<div class=\"slider-wrap\" \n\t\tref=\"slider\" \n\t\t:style=\"listStyle\"\n\t\t@touchmove=\"move\" \n\t\t@touchstart=\"start\" \n\t\t@touchend=\"end\">\n\t\t<div v-for=\"(item, idx) in items\" class=\"body\" :style=\"itemStyle\">\n\t\t\t<slot :name=\"item.name\"></slot>\n\t\t</div>\n\t</div>\n</div>\n</template>\n\n<style scoped>\n.header-wrap {\n\tmargin-top: 18.75px;\n\tmargin-right: 45.83px;\n\tmargin-left: 45.83px;\n}\n.header {\n\tflex-direction: row;\n\tjustify-content: center;\n}\n.title {\n\tflex: 1;\n\tflex-direction: row;\n\tjustify-content: center;\n}\n.text-selected {\n\tcolor: #f34949;\n}\n.text {\n\tfont-size: 29.17px;\n\tfont-weight: 700;\n\ttext-align: center;\n\tcolor: #666666;\n}\n.bottom-line {\n\theight: 5px;\n\tmargin-top: 18.75px;\n\tbackground-color: #f34949;\n}\n.slider-wrap {\n\tflex-direction: row;\n\tborder-top-width: 2px;\n\tborder-color: #dddddd;\n}\n.body {\n}\n</style>\n\n<script>\nconst dom = weex.requireModule('dom')\nconst animation = weex.requireModule('animation')\n\nexport default {\n\tdata () {\n\t\treturn {\n\t\t\twidth: 0,//单个tab宽度\n\t\t\tmin: 0,\n\t\t\ttransX: 0,\n\t\t\tstartX: 0,\n\t\t\tmoveX: 0,\n\t\t\tcurrent: 0,//当前tab index\n\t\t\tlineWidth: 0,//标题下划线宽度\n\t\t\tlineLeft: 0,\n\t\t\tline: 0//标题下划线translate计算比例\n\t\t}\n\t},\n\tprops: {\n\t\titems: {\n\t\t\ttype: Array,\n\t\t\trequired: true\n\t\t}\n\t},\n\tcomputed: {\n\t\tlineStyle () {\n\t\t\treturn {\n\t\t\t\twidth: `${this.lineWidth}px`,\n\t\t\t\t'margin-left': `${this.lineLeft}px`,\n\t\t\t\ttransform: `translateX(${-this.transX/this.line}px)`\n\t\t\t}\n\t\t},\n\t\tlistStyle () {\n\t\t\tlet sty = {\n\t\t\t\topacity: this.width === 0 ? 0 : 1\n\t\t\t}\n\t\t\t\n\t\t\tif (this.width > 0) {\n\t\t\t\tsty.width = `${this.width * this.items.length}px`\n\t\t\t\tsty.transform = `translateX(${this.transX}px)`\n\t\t\t}\n\n\t\t\treturn sty\n\t\t},\n\t\titemStyle () {\n\t\t\treturn {\n\t\t\t\twidth: `${this.width || 750}px`\n\t\t\t}\n\t\t}\n\t},\n\tmounted () {\n\t\tsetTimeout(() => {\n\t\t\tlet { platform } = weex.config.env;\n\t\t\tlet head = (typeof(window) === 'object' && platform.toLowerCase() === 'web') ? this.$refs.header.$children[0].$children[0] : this.$refs.header.children[0].children[0]\n\t\t\tdom.getComponentRect(head, opt => {\n\t\t\t\tthis.lineWidth = opt.size.width + 25\n\t\t\t\tthis.lineLeft = opt.size.left - 46 - 12.5\n\t\t\t})\n\t\t\tdom.getComponentRect(this.$refs.slider, opt => {\n\t\t\t\tthis.width = opt.size.width\n\t\t\t\tthis.line = this.width / (this.width - 92) * this.items.length\n\t\t\t\tthis.min = -this.width * (this.items.length - 1)\n\t\t\t})\n\t\t}, 100)\n\t},\n\tmethods: {\n\t\ttitleClick (idx) {\n\t\t\tthis.slide(-idx * this.width, -idx)\n\t\t\tthis.$emit('titleclick', idx)\n\t\t},\n\t\tstart (evt) {\n\t\t\tif (this.sliding) return\n\t\t\tthis.startX = evt.changedTouches[0].screenX\n\t\t\tthis.moveX = this.startX\n\t\t},\n\t\tmove (evt) {\n\t\t\tif (this.sliding) return\n\t\t\tlet x = evt.changedTouches[0].screenX\n\t\t\tlet sub = x - this.moveX\n\n\t\t\tthis.transX = Math.max(this.min, Math.min(0, this.transX + sub))\n\t\t\tthis.moveX = x\n\t\t},\n\t\tend (evt) {\n\t\t\tthis.sliding = true\n\n\t\t\tlet x = evt.changedTouches[0].screenX\n\t\t\tlet direct = x - this.startX > 0\n\t\t\tlet num = Math.floor(Math.abs(this.transX) / this.width)\n\t\t\tlet decimal = this.transX % this.width / this.width\n\t\t\tlet int = this.transX > 0 ? num : -num\n\t\t\tlet max = -this.items.length + 1\n\n\t\t\tif (decimal > .2 && direct) {\n\t\t\t\tint = Math.min(0, int + 1)\n\t\t\t} else if (decimal < -.2 && !direct) {\n\t\t\t\tint = Math.max(max, int - 1)\n\t\t\t}\n\n\t\t\tthis.slide(int * this.width, int)\n\t\t},\n\t\tslide (trans, idx) {\n\t\t\tanimation.transition(this.$refs.slider, {\n\t\t\t\tstyles: {\n\t\t\t\t\ttransform: `translateX(${trans}px)`\n\t\t\t\t},\n\t\t\t\tduration: 200,\n\t\t\t\ttimingFunction: 'ease-out'\n\t\t\t}, () => {\n\t\t\t\tthis.current = -idx\n\t\t\t\tthis.transX = trans\n\t\t\t\tthis.sliding = false\n\t\t\t\tthis.$emit('slidend', {selected: this.current})\n\t\t\t})\n\t\t\tanimation.transition(this.$refs.line, {\n\t\t\t\tstyles: {\n\t\t\t\t\ttransform: `translateX(${-trans/this.line}px)`\n\t\t\t\t},\n\t\t\t\tduration: 200,\n\t\t\t\ttimingFunction: 'ease-out'\n\t\t\t})\n\t\t}\n\t}\n}\n</script>"],"sourceRoot":""}]);
+exports.push([module.i, "\n.header-wrap[data-v-745d9462] {\n\tmargin-top: 9px;\n\tmargin-right: 22px;\n\tmargin-left: 22px;\n}\n.header[data-v-745d9462] {\n\tflex-direction: row;\n\tjustify-content: center;\n}\n.title[data-v-745d9462] {\n\tflex: 1;\n\tflex-direction: row;\n\tjustify-content: center;\n}\n.text-selected[data-v-745d9462] {\n\tcolor: #f34949;\n}\n.text[data-v-745d9462] {\n\tfont-size: 14px;\n\tfont-weight: 700;\n\ttext-align: center;\n\tcolor: #666666;\n}\n.bottom-line[data-v-745d9462] {\n\theight: 2.4px;\n\tmargin-top: 9px;\n\tbackground-color: #f34949;\n}\n.slider-wrap[data-v-745d9462] {\n\tflex-direction: row;\n\tborder-top-width: 1px;\n\tborder-color: #dddddd;\n}\n.body[data-v-745d9462] {\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tab-view/index.vue?97e53d10"],"names":[],"mappings":";AA2BA;CACA,gBAAA;CACA,mBAAA;CACA,kBAAA;CACA;AACA;CACA,oBAAA;CACA,wBAAA;CACA;AACA;CACA,QAAA;CACA,oBAAA;CACA,wBAAA;CACA;AACA;CACA,eAAA;CACA;AACA;CACA,gBAAA;CACA,iBAAA;CACA,mBAAA;CACA,eAAA;CACA;AACA;CACA,cAAA;CACA,gBAAA;CACA,0BAAA;CACA;AACA;CACA,oBAAA;CACA,sBAAA;CACA,sBAAA;CACA;AACA;CACA","file":"index.vue","sourcesContent":["<template>\n<div class=\"tab-wrap\">\n\t<div class=\"header-wrap\">\n\t\t<div class=\"header\" ref=\"header\">\n\t\t\t<div v-for=\"(item, idx) in items\" \n\t\t\t\t:key=\"item.name\" \n\t\t\t\tclass=\"title\" \n\t\t\t\t@click=\"titleClick(idx)\">\n\t\t\t\t<text :class=\"['text', idx == current ? 'text-selected' : '']\" >{{item.text}}</text>\t\n\t\t\t</div>\n\t\t</div>\n\t\t<text class=\"bottom-line\" :style=\"lineStyle\" ref=\"line\"></text>\n\t</div>\n\t<div class=\"slider-wrap\" \n\t\tref=\"slider\" \n\t\t:style=\"listStyle\"\n\t\t@touchmove=\"move\" \n\t\t@touchstart=\"start\" \n\t\t@touchend=\"end\">\n\t\t<div v-for=\"(item, idx) in items\" class=\"body\" :style=\"itemStyle\">\n\t\t\t<slot :name=\"item.name\"></slot>\n\t\t</div>\n\t</div>\n</div>\n</template>\n\n<style scoped>\n.header-wrap {\n\tmargin-top: 9px;\n\tmargin-right: 22px;\n\tmargin-left: 22px;\n}\n.header {\n\tflex-direction: row;\n\tjustify-content: center;\n}\n.title {\n\tflex: 1;\n\tflex-direction: row;\n\tjustify-content: center;\n}\n.text-selected {\n\tcolor: #f34949;\n}\n.text {\n\tfont-size: 14px;\n\tfont-weight: 700;\n\ttext-align: center;\n\tcolor: #666666;\n}\n.bottom-line {\n\theight: 2.4px;\n\tmargin-top: 9px;\n\tbackground-color: #f34949;\n}\n.slider-wrap {\n\tflex-direction: row;\n\tborder-top-width: 1px;\n\tborder-color: #dddddd;\n}\n.body {\n}\n</style>\n\n<script>\nconst dom = weex.requireModule('dom')\nconst animation = weex.requireModule('animation')\n\nexport default {\n\tdata () {\n\t\treturn {\n\t\t\twidth: 0,//单个tab宽度\n\t\t\tmin: 0,\n\t\t\ttransX: 0,\n\t\t\tstartX: 0,\n\t\t\tmoveX: 0,\n\t\t\tcurrent: 0,//当前tab index\n\t\t\tlineWidth: 0,//标题下划线宽度\n\t\t\tlineLeft: 0,\n\t\t\tline: 0//标题下划线translate计算比例\n\t\t}\n\t},\n\tprops: {\n\t\titems: {\n\t\t\ttype: Array,\n\t\t\trequired: true\n\t\t}\n\t},\n\tcomputed: {\n\t\tlineStyle () {\n\t\t\treturn {\n\t\t\t\twidth: `${this.lineWidth}px`,\n\t\t\t\t'margin-left': `${this.lineLeft}px`,\n\t\t\t\ttransform: `translateX(${-this.transX/this.line}px)`\n\t\t\t}\n\t\t},\n\t\tlistStyle () {\n\t\t\tlet sty = {\n\t\t\t\topacity: this.width === 0 ? 0 : 1\n\t\t\t}\n\t\t\t\n\t\t\tif (this.width > 0) {\n\t\t\t\tsty.width = `${this.width * this.items.length}px`\n\t\t\t\tsty.transform = `translateX(${this.transX}px)`\n\t\t\t}\n\n\t\t\treturn sty\n\t\t},\n\t\titemStyle () {\n\t\t\treturn {\n\t\t\t\twidth: `${this.width || 360}px`\n\t\t\t}\n\t\t}\n\t},\n\tmounted () {\n\t\tsetTimeout(() => {\n\t\t\tlet { platform } = weex.config.env;\n\t\t\tlet head = (typeof(window) === 'object' && platform.toLowerCase() === 'web') ? this.$refs.header.$children[0].$children[0] : this.$refs.header.children[0].children[0]\n\t\t\tdom.getComponentRect(head, opt => {\n\t\t\t\tthis.lineWidth = opt.size.width + 12\n\t\t\t\tthis.lineLeft = opt.size.left - 22 - 6\n\t\t\t})\n\t\t\tdom.getComponentRect(this.$refs.slider, opt => {\n\t\t\t\tthis.width = opt.size.width\n\t\t\t\tthis.line = this.width / (this.width - 44) * this.items.length\n\t\t\t\tthis.min = -this.width * (this.items.length - 1)\n\t\t\t})\n\t\t}, 100)\n\t},\n\tmethods: {\n\t\ttitleClick (idx) {\n\t\t\tthis.slide(-idx * this.width, -idx)\n\t\t\tthis.$emit('titleclick', idx)\n\t\t},\n\t\tstart (evt) {\n\t\t\tif (this.sliding) return\n\t\t\tthis.startX = evt.changedTouches[0].screenX\n\t\t\tthis.moveX = this.startX\n\t\t},\n\t\tmove (evt) {\n\t\t\tif (this.sliding) return\n\t\t\tlet x = evt.changedTouches[0].screenX\n\t\t\tlet sub = x - this.moveX\n\n\t\t\tthis.transX = Math.max(this.min, Math.min(0, this.transX + sub))\n\t\t\tthis.moveX = x\n\t\t},\n\t\tend (evt) {\n\t\t\tthis.sliding = true\n\n\t\t\tlet x = evt.changedTouches[0].screenX\n\t\t\tlet direct = x - this.startX > 0\n\t\t\tlet num = Math.floor(Math.abs(this.transX) / this.width)\n\t\t\tlet decimal = this.transX % this.width / this.width\n\t\t\tlet int = this.transX > 0 ? num : -num\n\t\t\tlet max = -this.items.length + 1\n\n\t\t\tif (decimal > .2 && direct) {\n\t\t\t\tint = Math.min(0, int + 1)\n\t\t\t} else if (decimal < -.2 && !direct) {\n\t\t\t\tint = Math.max(max, int - 1)\n\t\t\t}\n\n\t\t\tthis.slide(int * this.width, int)\n\t\t},\n\t\tslide (trans, idx) {\n\t\t\tanimation.transition(this.$refs.slider, {\n\t\t\t\tstyles: {\n\t\t\t\t\ttransform: `translateX(${trans}px)`\n\t\t\t\t},\n\t\t\t\tduration: 200,\n\t\t\t\ttimingFunction: 'ease-out'\n\t\t\t}, () => {\n\t\t\t\tthis.current = -idx\n\t\t\t\tthis.transX = trans\n\t\t\t\tthis.sliding = false\n\t\t\t\tthis.$emit('slidend', {selected: this.current})\n\t\t\t})\n\t\t\tanimation.transition(this.$refs.line, {\n\t\t\t\tstyles: {\n\t\t\t\t\ttransform: `translateX(${-trans/this.line}px)`\n\t\t\t\t},\n\t\t\t\tduration: 200,\n\t\t\t\ttimingFunction: 'ease-out'\n\t\t\t})\n\t\t}\n\t}\n}\n</script>"],"sourceRoot":""}]);
 
 // exports
 
@@ -3222,7 +3223,7 @@ exports.default = {
 		},
 		itemStyle: function itemStyle() {
 			return {
-				width: (this.width || 750) + 'px'
+				width: (this.width || 360) + 'px'
 			};
 		}
 	},
@@ -3234,12 +3235,12 @@ exports.default = {
 
 			var head = (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object' && platform.toLowerCase() === 'web' ? _this.$refs.header.$children[0].$children[0] : _this.$refs.header.children[0].children[0];
 			dom.getComponentRect(head, function (opt) {
-				_this.lineWidth = opt.size.width + 25;
-				_this.lineLeft = opt.size.left - 46 - 12.5;
+				_this.lineWidth = opt.size.width + 12;
+				_this.lineLeft = opt.size.left - 22 - 6;
 			});
 			dom.getComponentRect(_this.$refs.slider, function (opt) {
 				_this.width = opt.size.width;
-				_this.line = _this.width / (_this.width - 92) * _this.items.length;
+				_this.line = _this.width / (_this.width - 44) * _this.items.length;
 				_this.min = -_this.width * (_this.items.length - 1);
 			});
 		}, 100);
@@ -3467,7 +3468,7 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.tip-wrap[data-v-9924f606] {\n\tflex-direction: row;\n\theight: 92px;\n\tmax-width: 630px;\n\tpadding-top: 15px;\n}\n.arrow[data-v-9924f606] {\n\tposition: absolute;\n\ttop: 7.5px;\n\twidth: 15px;\n\theight: 15px;\n\ttransform: rotate(45deg);\n}\n.content-wrap[data-v-9924f606] {\n\tflex-direction: row;\n\talign-items: center;\n\tpadding-top: 18.75px;\n\tpadding-right: 20.83px;\n\tpadding-bottom: 18.75px;\n\tpadding-left: 20.83px;\n\tborder-radius: 4px;\n}\n.content[data-v-9924f606] {\n\theight: 35px;\n\tmax-width: 512px;\n\tfont-size: 29.17px;\n\tcolor: #ffffff;\n}\n.split[data-v-9924f606] {\n\twidth: 2px;\n\theight: 31.25px;\n\tmargin-left: 20.83px;\n\tmargin-right: 20.83px;\n\tbackground-color: #ffffff;\n\topacity: .4;\n}\n.close[data-v-9924f606] {\n\twidth: 31.25px;\n\theight: 31.25px;\n\tline-height: 32px;\n\tcolor: #ffffff;\n\tfont-size: 50px;\n\ttransform: rotate(45deg);\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tips/index.vue?6375c262"],"names":[],"mappings":";AAaA;CACA,oBAAA;CACA,aAAA;CACA,iBAAA;CACA,kBAAA;CACA;AACA;CACA,mBAAA;CACA,WAAA;CACA,YAAA;CACA,aAAA;CACA,yBAAA;CACA;AACA;CACA,oBAAA;CACA,oBAAA;CACA,qBAAA;CACA,uBAAA;CACA,wBAAA;CACA,sBAAA;CACA,mBAAA;CACA;AACA;CACA,aAAA;CACA,iBAAA;CACA,mBAAA;CACA,eAAA;CACA;AACA;CACA,WAAA;CACA,gBAAA;CACA,qBAAA;CACA,sBAAA;CACA,0BAAA;CACA,YAAA;CACA;AACA;CACA,eAAA;CACA,gBAAA;CACA,kBAAA;CACA,eAAA;CACA,gBAAA;CACA,yBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n<div v-if=\"show\" class=\"tip-wrap\" :style=\"wrapStyle\">\n\t<div class=\"content-wrap\" :style=\"background\">\n\t\t<slot></slot>\n\t\t<text class=\"content\">{{message}}</text>\n\t\t<text class=\"split\"></text>\n\t\t<text class=\"close\" @click=\"close\">+</text>\n\t</div>\n\t<text class=\"arrow\" :style=\"arrowStyle\"></text>\n</div>\n</template>\n\n<style scoped>\n.tip-wrap {\n\tflex-direction: row;\n\theight: 92px;\n\tmax-width: 630px;\n\tpadding-top: 15px;\n}\n.arrow {\n\tposition: absolute;\n\ttop: 7.5px;\n\twidth: 15px;\n\theight: 15px;\n\ttransform: rotate(45deg);\n}\n.content-wrap {\n\tflex-direction: row;\n\talign-items: center;\n\tpadding-top: 18.75px;\n\tpadding-right: 20.83px;\n\tpadding-bottom: 18.75px;\n\tpadding-left: 20.83px;\n\tborder-radius: 4px;\n}\n.content {\n\theight: 35px;\n\tmax-width: 512px;\n\tfont-size: 29.17px;\n\tcolor: #ffffff;\n}\n.split {\n\twidth: 2px;\n\theight: 31.25px;\n\tmargin-left: 20.83px;\n\tmargin-right: 20.83px;\n\tbackground-color: #ffffff;\n\topacity: .4;\n}\n.close {\n\twidth: 31.25px;\n\theight: 31.25px;\n\tline-height: 32px;\n\tcolor: #ffffff;\n\tfont-size: 50px;\n\ttransform: rotate(45deg);\n}\n\n</style>\n\n<script>\nexport default {\n\tdata () {\n\t\treturn {\n\t\t\tshow: true\n\t\t}\n\t},\n\n\tcomputed: {\n\t\tbackground () {\n\t\t\treturn {\n\t\t\t\tbackgroundColor: this.bgColor\n\t\t\t}\n\t\t},\n\t\twrapStyle () {\n\t\t\treturn {\n\t\t\t\t'justify-content': this.right ? 'flex-end' : 'flex-start'\n\t\t\t}\n\t\t},\n\t\tarrowStyle () {\n\t\t\tlet sty = {\n\t\t\t\tbackgroundColor: this.bgColor\n\t\t\t}\n\t\t\tif (this.right) {\n\t\t\t\tsty.right = '38px'\n\t\t\t} else {\n\t\t\t\tsty.left = '38px'\n\t\t\t}\n\n\t\t\treturn sty\n\t\t}\n\t},\n\n\tprops: {\n\t\tmessage: String,\n\t\tbgColor: {\n\t\t\ttype: String,\n\t\t\tdefault: '#198ded'\n\t\t},\n\t\tright: Boolean\n\t},\n\n\tmethods: {\n\t\tclose () {\n\t\t\tthis.show = false\n\t\t\tthis.$emit('close')\n\t\t}\n\t}\n}\n</script>"],"sourceRoot":""}]);
+exports.push([module.i, "\n.tip-wrap[data-v-9924f606] {\n\tflex-direction: row;\n\theight: 40px;\n\tpadding-top: 7.2px;\n}\n.arrow[data-v-9924f606] {\n\tposition: absolute;\n\ttop: 3.6px;\n\twidth: 7.2px;\n\theight: 7.2px;\n\ttransform: rotate(45deg);\n}\n.content-wrap[data-v-9924f606] {\n\tflex-direction: row;\n\talign-items: center;\n\tpadding-top: 9px;\n\tpadding-bottom: 9px;\n\tpadding-left: 10px;\n\tborder-radius: 2px;\n}\n.content[data-v-9924f606] {\n\theight: 17px;\n\tmax-width: 226px;\n\tfont-size: 14px;\n\tcolor: #ffffff;\n}\n.split[data-v-9924f606] {\n\twidth: 1px;\n\theight: 14px;\n\tmargin-left: 9px;\n\tbackground-color: #ffffff;\n\topacity: .4;\n}\n.close[data-v-9924f606] {\n\tcolor: #ffffff;\n\tfont-size: 18px;\n\tmargin-top: 3px;\n\tmargin-left: 10px;\n\tmargin-right: 10px;\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tips/index.vue?81fda80e"],"names":[],"mappings":";AAaA;CACA,oBAAA;CACA,aAAA;CACA,mBAAA;CACA;AACA;CACA,mBAAA;CACA,WAAA;CACA,aAAA;CACA,cAAA;CACA,yBAAA;CACA;AACA;CACA,oBAAA;CACA,oBAAA;CACA,iBAAA;CACA,oBAAA;CACA,mBAAA;CACA,mBAAA;CACA;AACA;CACA,aAAA;CACA,iBAAA;CACA,gBAAA;CACA,eAAA;CACA;AACA;CACA,WAAA;CACA,aAAA;CACA,iBAAA;CACA,0BAAA;CACA,YAAA;CACA;AACA;CACA,eAAA;CACA,gBAAA;CACA,gBAAA;CACA,kBAAA;CACA,mBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n<div v-if=\"show\" class=\"tip-wrap\" :style=\"wrapStyle\">\n\t<div class=\"content-wrap\" :style=\"background\">\n\t\t<slot></slot>\n\t\t<text class=\"content\">{{message}}</text>\n\t\t<text class=\"split\"></text>\n\t\t<fm-icon class=\"close\" @click=\"close\" value=\"&#xe6c0;\" />\n\t</div>\n\t<text class=\"arrow\" :style=\"arrowStyle\"></text>\n</div>\n</template>\n\n<style scoped>\n.tip-wrap {\n\tflex-direction: row;\n\theight: 40px;\n\tpadding-top: 7.2px;\n}\n.arrow {\n\tposition: absolute;\n\ttop: 3.6px;\n\twidth: 7.2px;\n\theight: 7.2px;\n\ttransform: rotate(45deg);\n}\n.content-wrap {\n\tflex-direction: row;\n\talign-items: center;\n\tpadding-top: 9px;\n\tpadding-bottom: 9px;\n\tpadding-left: 10px;\n\tborder-radius: 2px;\n}\n.content {\n\theight: 17px;\n\tmax-width: 226px;\n\tfont-size: 14px;\n\tcolor: #ffffff;\n}\n.split {\n\twidth: 1px;\n\theight: 14px;\n\tmargin-left: 9px;\n\tbackground-color: #ffffff;\n\topacity: .4;\n}\n.close {\n\tcolor: #ffffff;\n\tfont-size: 18px;\n\tmargin-top: 3px;\n\tmargin-left: 10px;\n\tmargin-right: 10px;\n}\n\n</style>\n\n<script>\nimport FmIcon from '../fm-icon'\nexport default {\n\tdata () {\n\t\treturn {\n\t\t\tshow: true\n\t\t}\n\t},\n\tcomponents: { FmIcon },\n\tcomputed: {\n\t\tbackground () {\n\t\t\treturn {\n\t\t\t\tbackgroundColor: this.bgColor\n\t\t\t}\n\t\t},\n\t\twrapStyle () {\n\t\t\treturn {\n\t\t\t\t'justify-content': this.right ? 'flex-end' : 'flex-start'\n\t\t\t}\n\t\t},\n\t\tarrowStyle () {\n\t\t\tlet sty = {\n\t\t\t\tbackgroundColor: this.bgColor\n\t\t\t}\n\t\t\tif (this.right) {\n\t\t\t\tsty.right = '18px'\n\t\t\t} else {\n\t\t\t\tsty.left = '18px'\n\t\t\t}\n\n\t\t\treturn sty\n\t\t}\n\t},\n\n\tprops: {\n\t\tmessage: String,\n\t\tbgColor: {\n\t\t\ttype: String,\n\t\t\tdefault: '#198ded'\n\t\t},\n\t\tright: Boolean\n\t},\n\n\tmethods: {\n\t\tclose () {\n\t\t\tthis.show = false\n\t\t\tthis.$emit('close')\n\t\t}\n\t}\n}\n</script>"],"sourceRoot":""}]);
 
 // exports
 
@@ -3482,66 +3483,12 @@ exports.push([module.i, "\n.tip-wrap[data-v-9924f606] {\n\tflex-direction: row;\
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+var _fmIcon = __webpack_require__(5);
+
+var _fmIcon2 = _interopRequireDefault(_fmIcon);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
 	data: function data() {
@@ -3550,7 +3497,7 @@ exports.default = {
 		};
 	},
 
-
+	components: { FmIcon: _fmIcon2.default },
 	computed: {
 		background: function background() {
 			return {
@@ -3567,9 +3514,9 @@ exports.default = {
 				backgroundColor: this.bgColor
 			};
 			if (this.right) {
-				sty.right = '38px';
+				sty.right = '18px';
 			} else {
-				sty.left = '38px';
+				sty.left = '18px';
 			}
 
 			return sty;
@@ -3591,7 +3538,62 @@ exports.default = {
 			this.$emit('close');
 		}
 	}
-};
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 /* 63 */
@@ -3614,14 +3616,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "split",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))
-  }), _vm._v(" "), _c('text', {
+  }), _vm._v(" "), _c('fm-icon', {
     staticClass: "close",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "value": "&#xe6c0;"
+    },
     on: {
       "click": _vm.close
     }
-  }, [_vm._v("+")])], 2), _vm._v(" "), _c('text', {
+  })], 2), _vm._v(" "), _c('text', {
     staticClass: "arrow",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(_vm.arrowStyle))
@@ -3730,7 +3735,7 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-rich-text[data-v-a8d59aa2] {\n  justify-content: flex-start;\n  align-items: center;\n  flex-wrap: wrap;\n  flex-direction: row;\n  flex-shrink: 1;\n}\n.default-text[data-v-a8d59aa2] {\n  color: #A5A5A5;\n  font-size: 24px;\n  line-height: 30px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rich-text/index.vue?15d7b3ca"],"names":[],"mappings":";AAkCA;EACA,4BAAA;EACA,oBAAA;EACA,gBAAA;EACA,oBAAA;EACA,eAAA;CACA;AAEA;EACA,eAAA;EACA,gBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div>\n    <div class=\"fm-rich-text\" v-if=\"isNotEmptyArray\">\n      <div v-for=\"v in configList\">\n        <fm-text v-if=\"v.type=='text' && v.text\"\n                            :text-value=\"v.text\"\n                            :text-style=\"v.style\"\n                            :has-text-margin=\"hasTextMargin\"></fm-text>\n\n        <fm-rich-text-link v-if=\"v.type=='link' && v.href && v.text\"\n                            :link-value=\"v.text\"\n                            :link-style=\"v.style\"\n                            :link-href=\"v.href\"\n                            :has-text-margin=\"hasTextMargin\"\n                            @fmRichTextLinkClick=\"linkBeClick\"></fm-rich-text-link>\n\n        <fm-icon v-if=\"v.type=='icon'\"\n                            :color=\"v.color\"\n                            :value=\"v.value\"\n                            :iconStyle=\"v.style\"></fm-icon>\n\n        <fm-tag v-if=\"v.type=='tag'\"\n                           :tagType=\"v.tagType\"\n                           :size=\"v.size\"\n                           :value=\"v.value\"\n                           :color=\"v.color\"\n                           :fontColor=\"v.fontColor\"></fm-tag>\n      </div>\n    </div>\n    <fm-text :text-value=\"configList\" v-if=\"isString\"></fm-text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-rich-text {\n    justify-content: flex-start;\n    align-items: center;\n    flex-wrap: wrap;\n    flex-direction: row;\n    flex-shrink: 1;\n  }\n\n  .default-text {\n    color: #A5A5A5;\n    font-size: 24px;\n    line-height: 30px;\n  }\n</style>\n\n<script>\n  const Utils = require('./utils');\n  import FmText from '../fm-text'\n  import FmIcon from '../fm-icon'\n  import FmTag from '../fm-tag'\n  import FmRichTextLink from './fm-rich-text-link.vue'\n  module.exports = {\n    components: {\n      FmText, FmIcon, FmTag, FmRichTextLink\n    },\n    props: {\n      configList: {\n        type: [Array, String],\n        default: function () {\n          return []\n        }\n      },\n      hasTextMargin: {\n        type: Boolean,\n        default: true\n      }\n    },\n    data: () => ({}),\n    computed: {\n      isNotEmptyArray () {\n        return Utils.isNonEmptyArray(this.configList);\n      },\n      isString () {\n        return Utils.isString(this.configList);\n      }\n    },\n    methods: {\n        linkBeClick(obj) {\n            this.$emit('linkBeClick', obj)\n        }\n    }\n  };\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-rich-text[data-v-a8d59aa2] {\n  justify-content: flex-start;\n  align-items: center;\n  flex-wrap: wrap;\n  flex-direction: row;\n  flex-shrink: 1;\n}\n.default-text[data-v-a8d59aa2] {\n  color: #A5A5A5;\n  font-size: 12px;\n  line-height: 16px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rich-text/index.vue?51faf661"],"names":[],"mappings":";AAkCA;EACA,4BAAA;EACA,oBAAA;EACA,gBAAA;EACA,oBAAA;EACA,eAAA;CACA;AAEA;EACA,eAAA;EACA,gBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div>\n    <div class=\"fm-rich-text\" v-if=\"isNotEmptyArray\">\n      <div v-for=\"v in configList\">\n        <fm-text v-if=\"v.type=='text' && v.text\"\n                            :text-value=\"v.text\"\n                            :text-style=\"v.style\"\n                            :has-text-margin=\"hasTextMargin\"></fm-text>\n\n        <fm-rich-text-link v-if=\"v.type=='link' && v.href && v.text\"\n                            :link-value=\"v.text\"\n                            :link-style=\"v.style\"\n                            :link-href=\"v.href\"\n                            :has-text-margin=\"hasTextMargin\"\n                            @fmRichTextLinkClick=\"linkBeClick\"></fm-rich-text-link>\n\n        <fm-icon v-if=\"v.type=='icon'\"\n                            :color=\"v.color\"\n                            :value=\"v.value\"\n                            :iconStyle=\"v.style\"></fm-icon>\n\n        <fm-tag v-if=\"v.type=='tag'\"\n                           :tagType=\"v.tagType\"\n                           :size=\"v.size\"\n                           :value=\"v.value\"\n                           :color=\"v.color\"\n                           :fontColor=\"v.fontColor\"></fm-tag>\n      </div>\n    </div>\n    <fm-text :text-value=\"configList\" v-if=\"isString\"></fm-text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-rich-text {\n    justify-content: flex-start;\n    align-items: center;\n    flex-wrap: wrap;\n    flex-direction: row;\n    flex-shrink: 1;\n  }\n\n  .default-text {\n    color: #A5A5A5;\n    font-size: 12px;\n    line-height: 16px;\n  }\n</style>\n\n<script>\n  const Utils = require('./utils');\n  import FmText from '../fm-text'\n  import FmIcon from '../fm-icon'\n  import FmTag from '../fm-tag'\n  import FmRichTextLink from './fm-rich-text-link.vue'\n  module.exports = {\n    components: {\n      FmText, FmIcon, FmTag, FmRichTextLink\n    },\n    props: {\n      configList: {\n        type: [Array, String],\n        default: function () {\n          return []\n        }\n      },\n      hasTextMargin: {\n        type: Boolean,\n        default: true\n      }\n    },\n    data: () => ({}),\n    computed: {\n      isNotEmptyArray () {\n        return Utils.isNonEmptyArray(this.configList);\n      },\n      isString () {\n        return Utils.isString(this.configList);\n      }\n    },\n    methods: {\n        linkBeClick(obj) {\n            this.$emit('linkBeClick', obj)\n        }\n    }\n  };\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -4660,7 +4665,7 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-special-rich-text[data-v-584ad4ca] {\n  position: relative;\n}\n.tag-div[data-v-584ad4ca] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  color: #A5A5A5;\n  font-size: 24px;\n  line-height: 30px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-special-rich-text/index.vue?593250b2"],"names":[],"mappings":";AAmBA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;EACA,OAAA;EACA,QAAA;EACA,eAAA;EACA,gBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"fm-special-rich-text\">\n    <div class=\"tag-div\"\n         :style=\"{top:top+'px'}\">\n      <fm-icon v-if=\"newList[0].type == 'icon' && newList[0].value\"\n                          :value=\"newList[0].value\"\n                          :iconStyle=\"newList[0].style\"></fm-icon>\n      <fm-tag v-if=\"newList[0].type=='tag'\"\n                          :tagType=\"newList[0].tagType\"\n                          :size=\"newList[0].size\"\n                          :value=\"newList[0].value\"\n                          :color=\"newList[0].color\"\n                          :fontColor=\"newList[0].fontColor\"></fm-tag>\n    </div>\n    <fm-text :text-value=\"newList[1].value\" :textStyle=\"newList[1].style\" v-if=\"newList[1].value\"></fm-text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-special-rich-text {\n    position: relative;\n  }\n\n  .tag-div {\n    position: absolute;\n    top: 0;\n    left: 0;\n    color: #A5A5A5;\n    font-size: 24px;\n    line-height: 30px;\n  }\n</style>\n\n<script>\n  const Utils = require('../fm-rich-text/utils');\n  import FmText from '../fm-text'\n  import FmIcon from '../fm-icon'\n  import FmTag from '../fm-tag'\n  module.exports = {\n    components: {\n      FmText, FmIcon, FmTag\n    },\n    props: {\n      configList: {\n        type: [Array, String],\n        default: () => ({})\n      }\n    },\n    computed: {\n      newList () {\n        const { configList } = this;\n        if (Utils.isNonEmptyArray(configList) && configList.length === 2) {\n          let r1 = configList[0];\n          let r2 = configList[1];\n          const iconStyle = r1.style;\n          const textStyle = r2.style;\n          let style = {};\n          let fontSize = 24;\n          const tagWidth = iconStyle && iconStyle.width ? iconStyle.width : 24;\n\n          if (textStyle && textStyle.fontSize) {\n            fontSize = textStyle.fontSize;\n            style = {\n              fontSize: textStyle.fontSize,\n              lineHeight: textStyle.fontSize * 1.4\n            }\n          }\n\n          if (textStyle && textStyle.color) {\n            style = {\n              ...style,\n              color: textStyle.color\n            }\n          }\n\n          if (r1.type === 'tag' && iconStyle && iconStyle.width) {\n            r1 = {\n              ...r1,\n              style: { ...iconStyle, width: null }\n            }\n          }\n          const newValue = r2.value ? new Array(Math.ceil(tagWidth / fontSize) + 1).join('   ') + `  ${r2.value}` : '';\n          r2 = {\n            ...r2,\n            style,\n            value: newValue\n          }\n          return [r1, r2];\n        } else {\n          return [];\n        }\n      },\n      top () {\n        const { configList } = this;\n        if (configList[0].type === 'tag') return 0\n        if (Utils.isNonEmptyArray(configList) && configList.length === 2) {\n          const iconStyle = configList[0].style;\n          const textStyle = configList[1].style;\n          let fontSize = 24;\n          const tagHeight = iconStyle && iconStyle.height ? iconStyle.height : 26;\n          if (textStyle && textStyle.fontSize) {\n            fontSize = textStyle.fontSize;\n          }\n          return Math.ceil((fontSize * 1.3 - tagHeight) / 2);\n        } else {\n          return 0;\n        }\n      }\n    }\n  };\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-special-rich-text[data-v-584ad4ca] {\n  position: relative;\n}\n.tag-div[data-v-584ad4ca] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  color: #A5A5A5;\n  font-size: 12px;\n  line-height: 16px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-special-rich-text/index.vue?23c88351"],"names":[],"mappings":";AAmBA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;EACA,OAAA;EACA,QAAA;EACA,eAAA;EACA,gBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"fm-special-rich-text\">\n    <div class=\"tag-div\"\n         :style=\"{top:top+'px'}\">\n      <fm-icon v-if=\"newList[0].type == 'icon' && newList[0].value\"\n                          :value=\"newList[0].value\"\n                          :iconStyle=\"newList[0].style\"></fm-icon>\n      <fm-tag v-if=\"newList[0].type=='tag'\"\n                          :tagType=\"newList[0].tagType\"\n                          :size=\"newList[0].size\"\n                          :value=\"newList[0].value\"\n                          :color=\"newList[0].color\"\n                          :fontColor=\"newList[0].fontColor\"></fm-tag>\n    </div>\n    <fm-text :text-value=\"newList[1].value\" :textStyle=\"newList[1].style\" v-if=\"newList[1].value\"></fm-text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-special-rich-text {\n    position: relative;\n  }\n\n  .tag-div {\n    position: absolute;\n    top: 0;\n    left: 0;\n    color: #A5A5A5;\n    font-size: 12px;\n    line-height: 16px;\n  }\n</style>\n\n<script>\n  const Utils = require('../fm-rich-text/utils');\n  import FmText from '../fm-text'\n  import FmIcon from '../fm-icon'\n  import FmTag from '../fm-tag'\n  module.exports = {\n    components: {\n      FmText, FmIcon, FmTag\n    },\n    props: {\n      configList: {\n        type: [Array, String],\n        default: () => ({})\n      }\n    },\n    computed: {\n      newList () {\n        const { configList } = this;\n        if (Utils.isNonEmptyArray(configList) && configList.length === 2) {\n          let r1 = configList[0];\n          let r2 = configList[1];\n          const iconStyle = r1.style;\n          const textStyle = r2.style;\n          let style = {};\n          let fontSize = 12;\n          const tagWidth = iconStyle && iconStyle.width ? iconStyle.width : 12;\n\n          if (textStyle && textStyle.fontSize) {\n            fontSize = textStyle.fontSize;\n            style = {\n              fontSize: textStyle.fontSize,\n              lineHeight: textStyle.fontSize * 1.4\n            }\n          }\n\n          if (textStyle && textStyle.color) {\n            style = {\n              ...style,\n              color: textStyle.color\n            }\n          }\n\n          if (r1.type === 'tag' && iconStyle && iconStyle.width) {\n            r1 = {\n              ...r1,\n              style: { ...iconStyle, width: null }\n            }\n          }\n          const newValue = r2.value ? new Array(Math.ceil(tagWidth / fontSize) + 1).join('   ') + `  ${r2.value}` : '';\n          r2 = {\n            ...r2,\n            style,\n            value: newValue\n          }\n          return [r1, r2];\n        } else {\n          return [];\n        }\n      },\n      top () {\n        const { configList } = this;\n        if (configList[0].type === 'tag') return 0\n        if (Utils.isNonEmptyArray(configList) && configList.length === 2) {\n          const iconStyle = configList[0].style;\n          const textStyle = configList[1].style;\n          let fontSize = 12;\n          const tagHeight = iconStyle && iconStyle.height ? iconStyle.height : 13;\n          if (textStyle && textStyle.fontSize) {\n            fontSize = textStyle.fontSize;\n          }\n          return Math.ceil((fontSize * 1.3 - tagHeight) / 2);\n        } else {\n          return 0;\n        }\n      }\n    }\n  };\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -4746,8 +4751,8 @@ module.exports = {
         var iconStyle = r1.style;
         var textStyle = r2.style;
         var style = {};
-        var fontSize = 24;
-        var tagWidth = iconStyle && iconStyle.width ? iconStyle.width : 24;
+        var fontSize = 12;
+        var tagWidth = iconStyle && iconStyle.width ? iconStyle.width : 12;
 
         if (textStyle && textStyle.fontSize) {
           fontSize = textStyle.fontSize;
@@ -4785,8 +4790,8 @@ module.exports = {
       if (Utils.isNonEmptyArray(configList) && configList.length === 2) {
         var iconStyle = configList[0].style;
         var textStyle = configList[1].style;
-        var fontSize = 24;
-        var tagHeight = iconStyle && iconStyle.height ? iconStyle.height : 26;
+        var fontSize = 12;
+        var tagHeight = iconStyle && iconStyle.height ? iconStyle.height : 13;
         if (textStyle && textStyle.fontSize) {
           fontSize = textStyle.fontSize;
         }
@@ -4942,7 +4947,7 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.container[data-v-52ae49d0] {\n    position: relative;\n}\n.text[data-v-52ae49d0] {\n    color: #999;\n}\n.text_small[data-v-52ae49d0] {\n    font-size: 25px;\n    line-height: 30px;\n}\n.text_large[data-v-52ae49d0] {\n    font-size: 33px;\n    font-weight: 500;\n    line-height: 50px;\n}\n.text_huge[data-v-52ae49d0] {\n    font-size: 38px;\n    line-height: 56px;\n}\n.more[data-v-52ae49d0] {\n    position: absolute;\n    right: 10px;\n    bottom: 0;\n}\n.test[data-v-52ae49d0] {\n    flex-direction: row;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-foldable-text/index.vue?0a98a49c"],"names":[],"mappings":";AAWA;IACA,mBAAA;CACA;AACA;IACA,YAAA;CACA;AACA;IACA,gBAAA;IACA,kBAAA;CACA;AACA;IACA,gBAAA;IACA,iBAAA;IACA,kBAAA;CACA;AACA;IACA,gBAAA;IACA,kBAAA;CACA;AACA;IACA,mBAAA;IACA,YAAA;IACA,UAAA;CACA;AACA;IACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n    <div class=\"wrapper\" @click=\"fold\">\n        <!-- <div class=\"test\" ref=\"container\"></div> -->\n        <div class=\"container\" ref=\"plane\" :style=\"planeStyle\">\n            <text :class=\"textClz\" ref=\"text\">{{getText}}</text>\n            <text class=\"more\" v-if=\"folded\" ref=\"more\" :style=\"moreStyle\">更多</text>\n        </div>\n    </div>\n</template>\n\n<style scoped>\n.container {\n    position: relative;\n}\n.text {\n    color: #999;\n}\n.text_small {\n    font-size: 25px;\n    line-height: 30px;\n}\n.text_large {\n    font-size: 33px;\n    font-weight: 500;\n    line-height: 50px;\n}\n.text_huge {\n    font-size: 38px;\n    line-height: 56px;\n}\n.more {\n    position: absolute;\n    right: 10px;\n    bottom: 0;\n}\n.test {\n    flex-direction: row;\n}\n</style>\n\n<script>\nexport default {\n    data() {\n        return {\n            expandHeight: '',\n            unexpandHeight: '',\n            animationHeight: '',\n            foldText: ''\n        }\n    },\n    props: {\n        width: {\n            type: Number,\n            default: 750\n        },\n        text: {\n            type: String,\n            default: ''\n        },\n        lines: {\n            type: Number,\n            default: 2\n        },\n        folded: {\n            type: Boolean,\n            default: true\n        },\n        small: {\n            type: Boolean,\n            default: true\n        },\n        large: Boolean,\n        huge: Boolean\n    },\n    mounted() {\n        // setTimeout(() => {\n        //     dom.getComponentRect(this.$refs.plane, option => {\n        //         this.expandHeight = option.size.height\n        //         this.foldFlag = true\n        //     })\n        // }, 100);\n        if (this.foldText === '') {\n            let fontSize = this.large ? 33 : this.huge ? 38 : 25\n            // 计算折叠后的文本\n            let size1 = fontSize + fontSize * 0.08 // 汉字\n            let size2 = fontSize * 0.487 // 英文\n            let size3 = fontSize * 0.556 // 数字\n            let size4 = fontSize * 0.347 // 全角\n            let size5 = fontSize * 0.18 // 半角\n            let tSize = 0, tmpStr = ''\n            let maxWith = this.width * this.lines - size1 * 2\n            for (let c of this.text) {\n                if (/^[\\u4e00-\\u9fa5]/.test(c)) {\n                    // 汉字\n                    tSize += size1\n                } else if (/^[a-zA-Z]/.test(c)){\n                    // 英文\n                    tSize += size2\n                } else if (/^[0-9]/.test(c)){\n                    // 数字\n                    tSize += size3\n                } else if (/^[·《》，。？、：；“”‘’——【】]/.test(c)) {\n                    // 全角\n                    tSize += size4\n                } else if (/^[`~!@#\\$%\\^&\\*\\(\\)_\\-\\+=\\{\\}\\[\\]|\\\\:;\"'<>,.\\?\\/]/.test(c)) {\n                    // 半角\n                    tSize += size5\n                } else {\n                    // 其他\n                    tSize += size1\n                }\n                if (tSize >= maxWith) {\n                    tmpStr += '...'\n                    break\n                }\n                tmpStr += c\n            }\n            this.foldText = tmpStr\n        }\n    },\n    computed: {\n        getText() {\n            return this.folded ? this.foldText : this.text\n        },\n        hackText() {\n            if (!this.hackCp) {\n                this.hackCp = weex.document.createElement('text', {\n                    style: {\n                        fontSize: 40,\n                        left: 50\n                    }\n                })\n                this.$refs.container.appendChild(this.hackCp)\n            }\n            return this.hackCp\n        },\n        planeStyle() {\n            return {\n                width: this.width\n            }\n        },\n        moreStyle() {\n            return {\n                fontSize: this.large ? 33 : this.huge ? 38 : 25,\n                lineHeight: this.large ? 50 : this.huge ? 56 : 30,\n                color: '#198ded',\n                fontWeight: '600'\n            }\n        },\n        textClz() {\n            let clz = ['text', 'text_small']\n            if (this.large) {\n                clz.push('text_large')\n            } else if (this.huge) {\n                clz.push('text_huge')\n            }\n            return clz\n        }\n    },\n    methods: {\n        fold() {\n            this.folded = !this.folded\n            // let width = 0\n            // // ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\n            // for (let c of '`~!@#$%^&*()-_=+<>,.?/:;\"{}[]|\\\\\\'') {\n            //     this.hackText.setAttr('value', c, false)\n            //     setTimeout(() => {\n            //         dom.getComponentRect(this.hackText, option => {\n            //             width += option.size.width\n            //             console.log(width)\n            //         })\n            //     }, 100)\n            // }\n            // return\n            // var plane = this.$refs.plane;\n            // if (this.unexpandHeight == '') {\n            //     const result = dom.getComponentRect(plane, option => {\n            //         this.unexpandHeight = option.size.height + 'px';\n            //     })\n            // }\n            // if (this.animationHeight == this.expandHeight) {\n\n            //     this.animationHeight = this.unexpandHeight;\n            // } else {\n            //     this.lines = 0;\n            //     this.animationHeight = this.expandHeight;\n            // }\n\n            // var self = this;\n            // animation.transition(plane, {\n            //     styles: {\n            //         height: this.animationHeight\n            //     },\n            //     duration: 150, //ms\n            //     timingFunction: 'linear',\n            //     delay: 0 //ms\n            // }, function() {\n            //     if (self.animationHeight == self.unexpandHeight) {\n            //         self.foldFlag = !self.foldFlag\n            //     }\n            // })\n        }\n    }\n}\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.container[data-v-52ae49d0] {\n    position: relative;\n}\n.text[data-v-52ae49d0] {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    color: #999;\n}\n.text_small[data-v-52ae49d0] {\n    font-size: 12px;\n    line-height: 14px;\n}\n.text_large[data-v-52ae49d0] {\n    font-family: sans-serif-medium;\n    font-size: 16px;\n    font-weight: 500;\n    line-height: 24px;\n}\n.text_huge[data-v-52ae49d0] {\n    font-family: sans-serif-medium;\n    font-size: 18px;\n    line-height: 26px;\n}\n.more[data-v-52ae49d0] {\n    position: absolute;\n    right: 6px;\n    bottom: 0;\n}\n.test[data-v-52ae49d0] {\n    flex-direction: row;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-foldable-text/index.vue?218b3de5"],"names":[],"mappings":";AAUA;IACA,mBAAA;CACA;AACA;IACA,sDAAA;IACA,YAAA;CACA;AACA;IACA,gBAAA;IACA,kBAAA;CACA;AACA;IACA,+BAAA;IACA,gBAAA;IACA,iBAAA;IACA,kBAAA;CACA;AACA;IACA,+BAAA;IACA,gBAAA;IACA,kBAAA;CACA;AACA;IACA,mBAAA;IACA,WAAA;IACA,UAAA;CACA;AACA;IACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n    <div class=\"wrapper\" @click=\"fold\">\n        <div class=\"container\" ref=\"plane\" :style=\"planeStyle\">\n            <text :class=\"textClz\" ref=\"text\" :style=\"textStyle\">{{ getText }}</text>\n            <text class=\"more\" v-if=\"folded\" ref=\"more\" :style=\"moreStyle\">{{ tipValue }}</text>\n        </div>\n    </div>\n</template>\n\n<style scoped>\n.container {\n    position: relative;\n}\n.text {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    color: #999;\n}\n.text_small {\n    font-size: 12px;\n    line-height: 14px;\n}\n.text_large {\n    font-family: sans-serif-medium;\n    font-size: 16px;\n    font-weight: 500;\n    line-height: 24px;\n}\n.text_huge {\n    font-family: sans-serif-medium;\n    font-size: 18px;\n    line-height: 26px;\n}\n.more {\n    position: absolute;\n    right: 6px;\n    bottom: 0;\n}\n.test {\n    flex-direction: row;\n}\n</style>\n\n<script>\nexport default {\n    data() {\n        return {\n            expandHeight: '',\n            unexpandHeight: '',\n            animationHeight: '',\n            foldText: ''\n        }\n    },\n    props: {\n        width: {\n            type: Number,\n            default: 340\n        },\n        text: {\n            type: String,\n            default: ''\n        },\n        lines: {\n            type: Number,\n            default: 2\n        },\n        folded: {\n            type: Boolean,\n            default: true\n        },\n        small: {\n            type: Boolean,\n            default: true\n        },\n        large: Boolean,\n        huge: Boolean,\n        textStyle: Object,\n        tipStyle: Object,\n        tipValue: {\n            type: String,\n            default: '更多'\n        }\n    },\n    mounted() {\n        if (this.foldText === '') {\n            const { textStyle } = this\n            let fontSize = (textStyle && textStyle.fontSize) ? textStyle.fontSize : this.large ? 16 : this.huge ? 18 : 12\n            // 计算折叠后的文本\n            let size1 = fontSize + fontSize * 0.03 // 汉字\n            let size2 = fontSize * 0.56 // 英文\n            let size3 = fontSize * 0.556 // 数字\n            let size4 = fontSize * 0.77 // 全角\n            let size5 = fontSize * 0.2 // 半角\n            let tSize = 0, tmpStr = ''\n            let maxWith = this.width * this.lines - size1 * this.tipValue.length\n            for (let c of this.text) {\n                if (/^[\\u4e00-\\u9fa5]/.test(c)) {\n                    // 汉字\n                    tSize += size1\n                } else if (/^[a-zA-Z]/.test(c)){\n                    // 英文\n                    tSize += size2\n                } else if (/^[0-9]/.test(c)){\n                    // 数字\n                    tSize += size3\n                } else if (/^[·《》，。？、：；“”‘’——【】]/.test(c)) {\n                    // 全角\n                    tSize += size4\n                } else if (/^[`~!@#\\$%\\^&\\*\\(\\)_\\-\\+=\\{\\}\\[\\]|\\\\:;\"'<>,.\\?\\/\\s]/.test(c)) {\n                    // 半角\n                    tSize += size5\n                } else {\n                    // 其他\n                    tSize += size1\n                }\n                if (tSize >= maxWith) {\n                    tmpStr += '..'\n                    break\n                }\n                tmpStr += c\n            }\n            this.foldText = tmpStr\n        }\n    },\n    computed: {\n        getText() {\n            return this.folded ? this.foldText : this.text\n        },\n        planeStyle() {\n            return {\n                width: this.width\n            }\n        },\n        moreStyle() {\n            return {\n                fontSize: this.large ? 16 : this.huge ? 18 : 12,\n                lineHeight: this.large ? 24 : this.huge ? 26 : 14,\n                color: '#198ded',\n                fontWeight: '600',\n                backgroundColor: '#fff',\n                ...this.tipStyle\n            }\n        },\n        textClz() {\n            let clz = ['text', 'text_small']\n            if (this.large) {\n                clz.push('text_large')\n            } else if (this.huge) {\n                clz.push('text_huge')\n            }\n            return clz\n        }\n    },\n    methods: {\n        fold() {\n            this.folded = !this.folded\n        }\n    }\n}\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -4957,6 +4962,11 @@ exports.push([module.i, "\n.container[data-v-52ae49d0] {\n    position: relative
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
 //
 //
 //
@@ -5011,7 +5021,7 @@ exports.default = {
     props: {
         width: {
             type: Number,
-            default: 750
+            default: 340
         },
         text: {
             type: String,
@@ -5030,26 +5040,28 @@ exports.default = {
             default: true
         },
         large: Boolean,
-        huge: Boolean
+        huge: Boolean,
+        textStyle: Object,
+        tipStyle: Object,
+        tipValue: {
+            type: String,
+            default: '更多'
+        }
     },
     mounted: function mounted() {
-        // setTimeout(() => {
-        //     dom.getComponentRect(this.$refs.plane, option => {
-        //         this.expandHeight = option.size.height
-        //         this.foldFlag = true
-        //     })
-        // }, 100);
         if (this.foldText === '') {
-            var fontSize = this.large ? 33 : this.huge ? 38 : 25;
+            var textStyle = this.textStyle;
+
+            var fontSize = textStyle && textStyle.fontSize ? textStyle.fontSize : this.large ? 16 : this.huge ? 18 : 12;
             // 计算折叠后的文本
-            var size1 = fontSize + fontSize * 0.08; // 汉字
-            var size2 = fontSize * 0.487; // 英文
+            var size1 = fontSize + fontSize * 0.03; // 汉字
+            var size2 = fontSize * 0.56; // 英文
             var size3 = fontSize * 0.556; // 数字
-            var size4 = fontSize * 0.347; // 全角
-            var size5 = fontSize * 0.18; // 半角
+            var size4 = fontSize * 0.77; // 全角
+            var size5 = fontSize * 0.2; // 半角
             var tSize = 0,
                 tmpStr = '';
-            var maxWith = this.width * this.lines - size1 * 2;
+            var maxWith = this.width * this.lines - size1 * this.tipValue.length;
             var _iteratorNormalCompletion = true;
             var _didIteratorError = false;
             var _iteratorError = undefined;
@@ -5070,7 +5082,7 @@ exports.default = {
                     } else if (/^[·《》，。？、：；“”‘’——【】]/.test(c)) {
                         // 全角
                         tSize += size4;
-                    } else if (/^[`~!@#\$%\^&\*\(\)_\-\+=\{\}\[\]|\\:;"'<>,.\?\/]/.test(c)) {
+                    } else if (/^[`~!@#\$%\^&\*\(\)_\-\+=\{\}\[\]|\\:;"'<>,.\?\/\s]/.test(c)) {
                         // 半角
                         tSize += size5;
                     } else {
@@ -5078,7 +5090,7 @@ exports.default = {
                         tSize += size1;
                     }
                     if (tSize >= maxWith) {
-                        tmpStr += '...';
+                        tmpStr += '..';
                         break;
                     }
                     tmpStr += c;
@@ -5106,30 +5118,19 @@ exports.default = {
         getText: function getText() {
             return this.folded ? this.foldText : this.text;
         },
-        hackText: function hackText() {
-            if (!this.hackCp) {
-                this.hackCp = weex.document.createElement('text', {
-                    style: {
-                        fontSize: 40,
-                        left: 50
-                    }
-                });
-                this.$refs.container.appendChild(this.hackCp);
-            }
-            return this.hackCp;
-        },
         planeStyle: function planeStyle() {
             return {
                 width: this.width
             };
         },
         moreStyle: function moreStyle() {
-            return {
-                fontSize: this.large ? 33 : this.huge ? 38 : 25,
-                lineHeight: this.large ? 50 : this.huge ? 56 : 30,
+            return _extends({
+                fontSize: this.large ? 16 : this.huge ? 18 : 12,
+                lineHeight: this.large ? 24 : this.huge ? 26 : 14,
                 color: '#198ded',
-                fontWeight: '600'
-            };
+                fontWeight: '600',
+                backgroundColor: '#fff'
+            }, this.tipStyle);
         },
         textClz: function textClz() {
             var clz = ['text', 'text_small'];
@@ -5144,45 +5145,6 @@ exports.default = {
     methods: {
         fold: function fold() {
             this.folded = !this.folded;
-            // let width = 0
-            // // ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
-            // for (let c of '`~!@#$%^&*()-_=+<>,.?/:;"{}[]|\\\'') {
-            //     this.hackText.setAttr('value', c, false)
-            //     setTimeout(() => {
-            //         dom.getComponentRect(this.hackText, option => {
-            //             width += option.size.width
-            //             console.log(width)
-            //         })
-            //     }, 100)
-            // }
-            // return
-            // var plane = this.$refs.plane;
-            // if (this.unexpandHeight == '') {
-            //     const result = dom.getComponentRect(plane, option => {
-            //         this.unexpandHeight = option.size.height + 'px';
-            //     })
-            // }
-            // if (this.animationHeight == this.expandHeight) {
-
-            //     this.animationHeight = this.unexpandHeight;
-            // } else {
-            //     this.lines = 0;
-            //     this.animationHeight = this.expandHeight;
-            // }
-
-            // var self = this;
-            // animation.transition(plane, {
-            //     styles: {
-            //         height: this.animationHeight
-            //     },
-            //     duration: 150, //ms
-            //     timingFunction: 'linear',
-            //     delay: 0 //ms
-            // }, function() {
-            //     if (self.animationHeight == self.unexpandHeight) {
-            //         self.foldFlag = !self.foldFlag
-            //     }
-            // })
         }
     }
 };
@@ -5208,13 +5170,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     ref: "text",
     class: _vm.textClz,
     staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
+    style: (_vm.$processStyle(_vm.textStyle))
   }, [_vm._v(_vm._s(_vm.getText))]), _vm._v(" "), (_vm.folded) ? _c('text', {
     ref: "more",
     staticClass: "more",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(_vm.moreStyle))
-  }, [_vm._v("更多")]) : _vm._e()])])
+  }, [_vm._v(_vm._s(_vm.tipValue))]) : _vm._e()])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

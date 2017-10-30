@@ -1,9 +1,8 @@
 <template>
     <div class="wrapper" @click="fold">
-        <!-- <div class="test" ref="container"></div> -->
         <div class="container" ref="plane" :style="planeStyle">
-            <text :class="textClz" ref="text">{{getText}}</text>
-            <text class="more" v-if="folded" ref="more" :style="moreStyle">更多</text>
+            <text :class="textClz" ref="text" :style="textStyle">{{ getText }}</text>
+            <text class="more" v-if="folded" ref="more" :style="moreStyle">{{ tipValue }}</text>
         </div>
     </div>
 </template>
@@ -13,24 +12,27 @@
     position: relative;
 }
 .text {
+    font-family: "Source Han Sans CN", Roboto, sans-serif;
     color: #999;
 }
 .text_small {
-    font-size: 25px;
-    line-height: 30px;
+    font-size: 12px;
+    line-height: 14px;
 }
 .text_large {
-    font-size: 33px;
+    font-family: sans-serif-medium;
+    font-size: 16px;
     font-weight: 500;
-    line-height: 50px;
+    line-height: 24px;
 }
 .text_huge {
-    font-size: 38px;
-    line-height: 56px;
+    font-family: sans-serif-medium;
+    font-size: 18px;
+    line-height: 26px;
 }
 .more {
     position: absolute;
-    right: 10px;
+    right: 6px;
     bottom: 0;
 }
 .test {
@@ -51,7 +53,7 @@ export default {
     props: {
         width: {
             type: Number,
-            default: 750
+            default: 340
         },
         text: {
             type: String,
@@ -70,25 +72,26 @@ export default {
             default: true
         },
         large: Boolean,
-        huge: Boolean
+        huge: Boolean,
+        textStyle: Object,
+        tipStyle: Object,
+        tipValue: {
+            type: String,
+            default: '更多'
+        }
     },
     mounted() {
-        // setTimeout(() => {
-        //     dom.getComponentRect(this.$refs.plane, option => {
-        //         this.expandHeight = option.size.height
-        //         this.foldFlag = true
-        //     })
-        // }, 100);
         if (this.foldText === '') {
-            let fontSize = this.large ? 33 : this.huge ? 38 : 25
+            const { textStyle } = this
+            let fontSize = (textStyle && textStyle.fontSize) ? textStyle.fontSize : this.large ? 16 : this.huge ? 18 : 12
             // 计算折叠后的文本
-            let size1 = fontSize + fontSize * 0.08 // 汉字
-            let size2 = fontSize * 0.487 // 英文
+            let size1 = fontSize + fontSize * 0.03 // 汉字
+            let size2 = fontSize * 0.56 // 英文
             let size3 = fontSize * 0.556 // 数字
-            let size4 = fontSize * 0.347 // 全角
-            let size5 = fontSize * 0.18 // 半角
+            let size4 = fontSize * 0.77 // 全角
+            let size5 = fontSize * 0.2 // 半角
             let tSize = 0, tmpStr = ''
-            let maxWith = this.width * this.lines - size1 * 2
+            let maxWith = this.width * this.lines - size1 * this.tipValue.length
             for (let c of this.text) {
                 if (/^[\u4e00-\u9fa5]/.test(c)) {
                     // 汉字
@@ -102,7 +105,7 @@ export default {
                 } else if (/^[·《》，。？、：；“”‘’——【】]/.test(c)) {
                     // 全角
                     tSize += size4
-                } else if (/^[`~!@#\$%\^&\*\(\)_\-\+=\{\}\[\]|\\:;"'<>,.\?\/]/.test(c)) {
+                } else if (/^[`~!@#\$%\^&\*\(\)_\-\+=\{\}\[\]|\\:;"'<>,.\?\/\s]/.test(c)) {
                     // 半角
                     tSize += size5
                 } else {
@@ -110,7 +113,7 @@ export default {
                     tSize += size1
                 }
                 if (tSize >= maxWith) {
-                    tmpStr += '...'
+                    tmpStr += '..'
                     break
                 }
                 tmpStr += c
@@ -122,18 +125,6 @@ export default {
         getText() {
             return this.folded ? this.foldText : this.text
         },
-        hackText() {
-            if (!this.hackCp) {
-                this.hackCp = weex.document.createElement('text', {
-                    style: {
-                        fontSize: 40,
-                        left: 50
-                    }
-                })
-                this.$refs.container.appendChild(this.hackCp)
-            }
-            return this.hackCp
-        },
         planeStyle() {
             return {
                 width: this.width
@@ -141,10 +132,12 @@ export default {
         },
         moreStyle() {
             return {
-                fontSize: this.large ? 33 : this.huge ? 38 : 25,
-                lineHeight: this.large ? 50 : this.huge ? 56 : 30,
+                fontSize: this.large ? 16 : this.huge ? 18 : 12,
+                lineHeight: this.large ? 24 : this.huge ? 26 : 14,
                 color: '#198ded',
-                fontWeight: '600'
+                fontWeight: '600',
+                backgroundColor: '#fff',
+                ...this.tipStyle
             }
         },
         textClz() {
@@ -160,45 +153,6 @@ export default {
     methods: {
         fold() {
             this.folded = !this.folded
-            // let width = 0
-            // // ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
-            // for (let c of '`~!@#$%^&*()-_=+<>,.?/:;"{}[]|\\\'') {
-            //     this.hackText.setAttr('value', c, false)
-            //     setTimeout(() => {
-            //         dom.getComponentRect(this.hackText, option => {
-            //             width += option.size.width
-            //             console.log(width)
-            //         })
-            //     }, 100)
-            // }
-            // return
-            // var plane = this.$refs.plane;
-            // if (this.unexpandHeight == '') {
-            //     const result = dom.getComponentRect(plane, option => {
-            //         this.unexpandHeight = option.size.height + 'px';
-            //     })
-            // }
-            // if (this.animationHeight == this.expandHeight) {
-
-            //     this.animationHeight = this.unexpandHeight;
-            // } else {
-            //     this.lines = 0;
-            //     this.animationHeight = this.expandHeight;
-            // }
-
-            // var self = this;
-            // animation.transition(plane, {
-            //     styles: {
-            //         height: this.animationHeight
-            //     },
-            //     duration: 150, //ms
-            //     timingFunction: 'linear',
-            //     delay: 0 //ms
-            // }, function() {
-            //     if (self.animationHeight == self.unexpandHeight) {
-            //         self.foldFlag = !self.foldFlag
-            //     }
-            // })
         }
     }
 }
