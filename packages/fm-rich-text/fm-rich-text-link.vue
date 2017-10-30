@@ -37,7 +37,7 @@
       onLinkClick (e) {
         const self = this;
         // Utils.goToH5Page(self.linkHref);
-        self.$emit('fmRichTextLinkClick', { element: e, href: self.linkHref });
+        self.$emit('fmRichTextLinkClick', { event: e, href: self.linkHref });
       }
     }
   };
