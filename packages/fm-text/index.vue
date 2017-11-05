@@ -99,22 +99,9 @@ export default {
             return clz
         },
         getStyle () {
-            let style = {};
-            const textStyle = this.textStyle;
-            if (textStyle && textStyle.fontSize) {
-                console.log(textStyle)
-                style = {
-                    ...style,
-                    fontSize: `${textStyle.fontSize}px`
-                }
+            return {
+                ...this.textStyle
             }
-            if (textStyle && textStyle.color) {
-                style = {
-                    ...style,
-                    color: textStyle.color
-                }
-            }
-            return style;
       }
     }
 }

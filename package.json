@@ -11,7 +11,7 @@
   "scripts": {
     "build": "webpack --progress",
     "watch": "webpack --progress --watch",
-    "serve": "anywhere -d build/example/ -p 8080",
+    "serve": "anywhere -d dist/example/ -p 8080",
     "start": "npm run build; npm run serve",
     "dev": "npm run start; npm run serve & npm run watch"
   },
@@ -43,7 +43,8 @@
     "webpack": "~3.6.0",
     "webpack-dev-server": "~2.9.1",
     "weex-loader": "~0.5.3",
-    "weex-vue-loader": "~0.4.2"
+    "weex-vue-loader": "~0.4.2",
+    "vue-router": "^2.5.3"
   },
   "dependencies": {
     "url-parse": "^1.1.9"

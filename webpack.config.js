@@ -11,7 +11,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const plugins = [
-  new CleanWebpackPlugin(['build'], {
+  new CleanWebpackPlugin(['dist'], {
     verbose: true
   }),
   new webpack.DefinePlugin({
@@ -27,6 +27,9 @@ const plugins = [
   new CopyWebpackPlugin([
     { from: 'example/*/index.html' }
   ]),
+  new CopyWebpackPlugin([
+    { from: 'example/index.html', to: 'example' }
+  ])
 ];
 
 console.log('Building..., Please wait a moment.');
@@ -44,6 +47,7 @@ const getEntry = dir => {
 };
 
 const example = getEntry('example');
+example['example/index'] = './example/index.js';
 const entry = Object.assign({
   'index': './index.js'
 }, example);
@@ -53,7 +57,7 @@ const getBaseConfig = () => ({
   entry,
   context: __dirname,
   output: {
-    path: path.join(__dirname, 'build'),
+    path: path.join(__dirname, 'dist'),
     publicPath: '/',
     filename: '[name].js',
     libraryTarget: 'umd',

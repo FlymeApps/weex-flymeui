@@ -10,6 +10,7 @@ import FmTips from './packages/fm-tips';
 import FmRichText from './packages/fm-rich-text';
 import FmSpecialRichText from './packages/fm-special-rich-text';
 import FmFoldableText from './packages/fm-foldable-text';
+import FmImage from './packages/fm-image';
 
 export {
   FmSwitch,
@@ -23,5 +24,6 @@ export {
   FmTips,
   FmRichText,
   FmSpecialRichText,
-  FmFoldableText
+  FmFoldableText,
+  FmImage
 }
