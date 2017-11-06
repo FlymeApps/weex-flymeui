@@ -69,5 +69,20 @@ export default {
         componentList: [
             
         ]
+    },
+    ApiModule: {
+        name: 'Native接口',
+        subname: '提供Native能力',
+        componentList: [
+            {
+                name: 'Navigator',
+                subname: '页面导航',
+                path: 'button'
+            }, {
+                name: 'Flyme Login',
+                subname: 'Flyme账号信息',
+                path: 'switch'
+            }
+        ]
     }
 }
