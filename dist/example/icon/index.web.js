@@ -72,7 +72,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 115);
+/******/ 	return __webpack_require__(__webpack_require__.s = 116);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -5673,7 +5673,8 @@ function setTitle(title) {
 /* 112 */,
 /* 113 */,
 /* 114 */,
-/* 115 */
+/* 115 */,
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5683,7 +5684,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(116);
+var _index = __webpack_require__(117);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -5698,18 +5699,18 @@ _index2.default.el = '#root';
 exports.default = new Vue(_index2.default);
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(117)
+__webpack_require__(118)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(119),
-  /* template */
   __webpack_require__(120),
+  /* template */
+  __webpack_require__(121),
   /* scopeId */
   "data-v-63b8fbc2",
   /* cssModules */
@@ -5736,13 +5737,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(118);
+var content = __webpack_require__(119);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -5762,7 +5763,7 @@ if(false) {
 }
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -5776,7 +5777,7 @@ exports.push([module.i, "\n.mzui-demo[data-v-63b8fbc2] {\n  position: absolute;\
 
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6257,7 +6258,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

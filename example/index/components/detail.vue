@@ -5,7 +5,7 @@
         </div>
         <scroller class="scroller">
             <div class="header">
-                <fm-image :scale="1/2" :src="'http://172.17.201.27:8888/'+ type +'.png'"/>
+                <fm-image :scale="1/2" :src="'http://design.flyme.cn/weexui/assets/'+ type +'.png'"/>
                 <div style="margin-left: 16.667px;">
                     <fm-text class="title" :textValue="category.name" medium
                                       :text-style="{fontSize: 21, color: '#000', fontWeight: 500, lineHeight: 23}" />

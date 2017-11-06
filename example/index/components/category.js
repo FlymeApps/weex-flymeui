@@ -54,7 +54,7 @@ export default {
             subname: 'FmSwitch',
             path: 'switch'
         }, {
-            name: '输入款',
+            name: '输入框',
             subname: 'FmInput',
             path: 'input'
         }, {

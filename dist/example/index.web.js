@@ -72,7 +72,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 181);
+/******/ 	return __webpack_require__(__webpack_require__.s = 182);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -5661,7 +5661,88 @@ function setTitle(title) {
 }
 
 /***/ }),
-/* 103 */,
+/* 103 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    base: {
+        name: '基础组件',
+        subname: 'Underlying conponent',
+        componentList: [{
+            name: '文本',
+            subname: 'FmText',
+            path: 'text'
+        }, {
+            name: '富文本',
+            subname: 'RichText',
+            path: 'richText'
+        }, {
+            name: '图标',
+            subname: 'FmIcon',
+            path: 'icon'
+        }, {
+            name: '标签',
+            subname: 'FmTag',
+            path: 'tag'
+        }, {
+            name: '折叠文本',
+            subname: 'FmFoldableText',
+            path: 'tag'
+        }]
+    },
+    container: {
+        name: '容器组件',
+        subname: 'Container conponent',
+        componentList: [{
+            name: '标签页',
+            subname: 'FmTabView',
+            path: 'tabView'
+        }]
+    },
+    interaction: {
+        name: '交互组件',
+        subname: 'Interactive conponent',
+        componentList: [{
+            name: '引导提示',
+            subname: 'FmTips',
+            path: 'tips'
+        }]
+    },
+    form: {
+        name: '表单组件',
+        subname: 'Form conponent',
+        componentList: [{
+            name: '按钮',
+            subname: 'FmButton',
+            path: 'button'
+        }, {
+            name: '开关按钮',
+            subname: 'FmSwitch',
+            path: 'switch'
+        }, {
+            name: '输入框',
+            subname: 'FmInput',
+            path: 'input'
+        }, {
+            name: '滑块',
+            subname: 'FmSlider',
+            path: 'slider'
+        }]
+    },
+    other: {
+        name: '其他组件',
+        subname: 'Other conponent',
+        componentList: []
+    }
+};
+
+/***/ }),
 /* 104 */,
 /* 105 */,
 /* 106 */,
@@ -5739,7 +5820,8 @@ function setTitle(title) {
 /* 178 */,
 /* 179 */,
 /* 180 */,
-/* 181 */
+/* 181 */,
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5749,19 +5831,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _vueRouter = __webpack_require__(182);
+var _vueRouter = __webpack_require__(183);
 
 var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
-var _index = __webpack_require__(183);
+var _index = __webpack_require__(184);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _home = __webpack_require__(188);
+var _home = __webpack_require__(189);
 
 var _home2 = _interopRequireDefault(_home);
 
-var _detail = __webpack_require__(193);
+var _detail = __webpack_require__(194);
 
 var _detail2 = _interopRequireDefault(_detail);
 
@@ -5791,7 +5873,7 @@ exports.default = new Vue({
 router.push('/');
 
 /***/ }),
-/* 182 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8252,18 +8334,18 @@ if (inBrowser && window.Vue) {
 exports.default = VueRouter;
 
 /***/ }),
-/* 183 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(184)
+__webpack_require__(185)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(186),
-  /* template */
   __webpack_require__(187),
+  /* template */
+  __webpack_require__(188),
   /* scopeId */
   "data-v-04080dbf",
   /* cssModules */
@@ -8290,13 +8372,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 184 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(185);
+var content = __webpack_require__(186);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -8316,7 +8398,7 @@ if(false) {
 }
 
 /***/ }),
-/* 185 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -8330,7 +8412,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"source
 
 
 /***/ }),
-/* 186 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8349,7 +8431,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {};
 
 /***/ }),
-/* 187 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -8368,18 +8450,18 @@ if (false) {
 }
 
 /***/ }),
-/* 188 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(189)
+__webpack_require__(190)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(191),
-  /* template */
   __webpack_require__(192),
+  /* template */
+  __webpack_require__(193),
   /* scopeId */
   "data-v-8754c130",
   /* cssModules */
@@ -8406,13 +8488,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 189 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(190);
+var content = __webpack_require__(191);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -8432,7 +8514,7 @@ if(false) {
 }
 
 /***/ }),
-/* 190 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -8440,13 +8522,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.flymeui[data-v-8754c130] {\n    position: absolute;\n    top: 0;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    background-color: #fafafa;\n}\n.header[data-v-8754c130] {\n    margin-top: 89px;\n    margin-bottom: 31px;\n    margin-left: 25.6666px;\n}\n.desc[data-v-8754c130] {\n    width: 258.3333px;\n    margin-top: 18px;\n}\n.list[data-v-8754c130] {\n    flex-direction: row;\n    flex-wrap: wrap;\n    justify-content: space-between;\n    padding: 16px;\n}\n.item[data-v-8754c130] {\n    justify-content: space-between;\n    background-color: #fff;\n    width: 160px;\n    height: 120px;\n    margin-bottom: 6.66666;\n    padding: 16.6667px;\n    box-shadow: 0 0 6.6667px 0 rgba(0, 0, 0, 0.04);\n}\n.item-icon[data-v-8754c130] {\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/example/index/components/home.vue?083221a2"],"names":[],"mappings":";AAsBA;IACA,mBAAA;IACA,OAAA;IACA,SAAA;IACA,QAAA;IACA,UAAA;IACA,0BAAA;CACA;AAEA;IACA,iBAAA;IACA,oBAAA;IACA,uBAAA;CACA;AAEA;IACA,kBAAA;IACA,iBAAA;CACA;AAEA;IACA,oBAAA;IACA,gBAAA;IACA,+BAAA;IACA,cAAA;CACA;AAEA;IACA,+BAAA;IACA,uBAAA;IACA,aAAA;IACA,cAAA;IACA,uBAAA;IACA,mBAAA;IACA,+CAAA;CACA;AAEA;CAEA","file":"home.vue","sourcesContent":["<template>\n    <div class=\"flymeui\">\n        <scroller class=\"scroller\">\n            <div class=\"header\">\n                <fm-image :scale=\"1/3\" src=\"http://172.17.201.27:8888/design_logo.png\"/>\n                <fm-text class=\"desc\" textValue=\"为你提供最全面的公共规范内容展示，让你方便调用动画参数、设计参数以及控件代码\" \n                                      :style=\"{fontSize: 14, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}\" />\n            </div>\n            <div class=\"list\">\n                <div v-for=\"(item, key) in category\" class=\"item\" @click=\"jump(key)\">\n                    <fm-image :scale=\"1/3\" class=\"item-icon\" :src=\"'http://172.17.201.27:8888/'+ key +'.png'\"/>\n                    <div>\n                        <fm-text :textValue=\"item.name\" title :style=\"{fontSize: 16, color: '#000', fontWeight: 400}\" />\n                        <fm-text :textValue=\"item.componentList.length + ' 个项目'\" :style=\"{fontSize: 12, color: 'rgba(0, 0, 0, 0.4)', fontWeight: 400}\"/>\n                    </div>\n                </div>\n            </div>\n        </scroller>\n    </div>\n</template>\n\n<style scoped>\n    .flymeui {\n        position: absolute;\n        top: 0;\n        right: 0;\n        left: 0;\n        bottom: 0;\n        background-color: #fafafa;\n    }\n\n    .header {\n        margin-top: 89px;\n        margin-bottom: 31px;\n        margin-left: 25.6666px;\n    }\n\n    .desc {\n        width: 258.3333px;\n        margin-top: 18px;\n    }\n\n    .list {\n        flex-direction: row;\n        flex-wrap: wrap;\n        justify-content: space-between;\n        padding: 16px;\n    }\n\n    .item {\n        justify-content: space-between;\n        background-color: #fff;\n        width: 160px;\n        height: 120px;\n        margin-bottom: 6.66666;\n        padding: 16.6667px;\n        box-shadow: 0 0 6.6667px 0 rgba(0, 0, 0, 0.04);\n    }\n\n    .item-icon {\n        \n    }\n\n</style>\n\n<script>\nimport { FmText, FmImage } from '../../../index';\nimport Title from '../../_mods/title.vue';\nimport Category from '../../_mods/category.vue';\nimport { setTitle } from '../../_mods/set-nav';\nimport category from './category.js'\n\nexport default {\n    data() {\n        return {\n            category: category\n        }\n    },\n    components: { Title, Category, FmText, FmImage },\n    methods: {\n        jump(type) {\n            if (this.$router) {\n                this.$router.push({ name: 'detail', params: { type: type } })\n            }\n        }\n    }\n}\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.flymeui[data-v-8754c130] {\n    position: absolute;\n    top: 0;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    background-color: #fafafa;\n}\n.scroller[data-v-8754c130] {\n    background-color: #fafafa;\n}\n.header[data-v-8754c130] {\n    margin-top: 89px;\n    margin-bottom: 31px;\n    margin-left: 25.6666px;\n}\n.desc[data-v-8754c130] {\n    width: 258.3333px;\n    margin-top: 18px;\n}\n.list[data-v-8754c130] {\n    flex-direction: row;\n    flex-wrap: wrap;\n    justify-content: space-between;\n    padding: 16px;\n}\n.item[data-v-8754c130] {\n    justify-content: space-between;\n    background-color: #fff;\n    width: 160px;\n    height: 120px;\n    margin-bottom: 6.66666;\n    padding: 16.6667px;\n    box-shadow: 0 0 6.6667px 0 rgba(0, 0, 0, 0.04);\n}\n.item-icon[data-v-8754c130] {\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/example/index/components/home.vue?55345115"],"names":[],"mappings":";AAsBA;IACA,mBAAA;IACA,OAAA;IACA,SAAA;IACA,QAAA;IACA,UAAA;IACA,0BAAA;CACA;AAEA;IACA,0BAAA;CACA;AAEA;IACA,iBAAA;IACA,oBAAA;IACA,uBAAA;CACA;AAEA;IACA,kBAAA;IACA,iBAAA;CACA;AAEA;IACA,oBAAA;IACA,gBAAA;IACA,+BAAA;IACA,cAAA;CACA;AAEA;IACA,+BAAA;IACA,uBAAA;IACA,aAAA;IACA,cAAA;IACA,uBAAA;IACA,mBAAA;IACA,+CAAA;CACA;AAEA;CAEA","file":"home.vue","sourcesContent":["<template>\n    <div class=\"flymeui\">\n        <scroller class=\"scroller\">\n            <div class=\"header\">\n                <fm-image :scale=\"1/3\" src=\"http://design.flyme.cn/weexui/assets/design_logo.png\"/>\n                <fm-text class=\"desc\" textValue=\"为你提供最全面的公共规范内容展示，让你方便调用动画参数、设计参数以及控件代码\" \n                                      :style=\"{fontSize: 14, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}\" />\n            </div>\n            <div class=\"list\">\n                <div v-for=\"(item, key) in category\" class=\"item\" @click=\"jump(key)\">\n                    <fm-image :scale=\"1/3\" class=\"item-icon\" :src=\"'http://design.flyme.cn/weexui/assets/'+ key +'.png'\"/>\n                    <div>\n                        <fm-text :textValue=\"item.name\" title :style=\"{fontSize: 16, color: '#000', fontWeight: 400}\" />\n                        <fm-text :textValue=\"item.componentList.length + ' 个项目'\" :style=\"{fontSize: 12, color: 'rgba(0, 0, 0, 0.4)', fontWeight: 400}\"/>\n                    </div>\n                </div>\n            </div>\n        </scroller>\n    </div>\n</template>\n\n<style scoped>\n    .flymeui {\n        position: absolute;\n        top: 0;\n        right: 0;\n        left: 0;\n        bottom: 0;\n        background-color: #fafafa;\n    }\n\n    .scroller {\n        background-color: #fafafa;\n    }\n\n    .header {\n        margin-top: 89px;\n        margin-bottom: 31px;\n        margin-left: 25.6666px;\n    }\n\n    .desc {\n        width: 258.3333px;\n        margin-top: 18px;\n    }\n\n    .list {\n        flex-direction: row;\n        flex-wrap: wrap;\n        justify-content: space-between;\n        padding: 16px;\n    }\n\n    .item {\n        justify-content: space-between;\n        background-color: #fff;\n        width: 160px;\n        height: 120px;\n        margin-bottom: 6.66666;\n        padding: 16.6667px;\n        box-shadow: 0 0 6.6667px 0 rgba(0, 0, 0, 0.04);\n    }\n\n    .item-icon {\n        \n    }\n\n</style>\n\n<script>\nimport { FmText, FmImage } from '../../../index';\nimport Title from '../../_mods/title.vue';\nimport Category from '../../_mods/category.vue';\nimport { setTitle } from '../../_mods/set-nav';\nimport category from './category.js'\n\nexport default {\n    data() {\n        return {\n            category: category\n        }\n    },\n    components: { Title, Category, FmText, FmImage },\n    methods: {\n        jump(type) {\n            if (this.$router) {\n                this.$router.push({ name: 'detail', params: { type: type } })\n            }\n        }\n    }\n}\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 191 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8468,7 +8550,7 @@ var _category2 = _interopRequireDefault(_category);
 
 var _setNav = __webpack_require__(102);
 
-var _category3 = __webpack_require__(203);
+var _category3 = __webpack_require__(103);
 
 var _category4 = _interopRequireDefault(_category3);
 
@@ -8554,9 +8636,13 @@ exports.default = {
 //
 //
 //
+//
+//
+//
+//
 
 /***/ }),
-/* 192 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -8577,7 +8663,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     style: (_vm.$processStyle(undefined)),
     attrs: {
       "scale": 1 / 3,
-      "src": "http://172.17.201.27:8888/design_logo.png"
+      "src": "http://design.flyme.cn/weexui/assets/design_logo.png"
     }
   }), _vm._v(" "), _c('fm-text', {
     staticClass: "desc",
@@ -8610,7 +8696,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       style: (_vm.$processStyle(undefined)),
       attrs: {
         "scale": 1 / 3,
-        "src": 'http://172.17.201.27:8888/' + key + '.png'
+        "src": 'http://design.flyme.cn/weexui/assets/' + key + '.png'
       }
     }), _vm._v(" "), _c('div', [_c('fm-text', {
       staticStyle: _vm.$processStyle(undefined),
@@ -8645,18 +8731,18 @@ if (false) {
 }
 
 /***/ }),
-/* 193 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(194)
+__webpack_require__(195)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(196),
-  /* template */
   __webpack_require__(197),
+  /* template */
+  __webpack_require__(203),
   /* scopeId */
   "data-v-6dacbccc",
   /* cssModules */
@@ -8683,13 +8769,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 194 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(195);
+var content = __webpack_require__(196);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -8709,7 +8795,7 @@ if(false) {
 }
 
 /***/ }),
-/* 195 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -8717,13 +8803,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.actionBar[data-v-6dacbccc] {\n    height: 64px;\n    padding-top: 20px;\n}\n.actionIcon[data-v-6dacbccc] {\n    margin-top: 10px;\n    margin-right: 15px;\n    margin-left: 17px;\n}\n.flymeui[data-v-6dacbccc] {\n    position: absolute;\n    top: 0;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    background-color: #fafafa;\n}\n.header[data-v-6dacbccc] {\n    flex-direction: row;\n    align-items: flex-end;\n    margin-top: 23.6667px;\n    margin-bottom: 34.6667px;\n    margin-left: 24px;\n}\n.list[data-v-6dacbccc] {\n    margin-left: 9.333px;\n    margin-right: 9.333px;\n    padding: 9.333px;\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/example/index/components/detail.vue?4efddcbe"],"names":[],"mappings":";AAyBA;IACA,aAAA;IACA,kBAAA;CACA;AAEA;IACA,iBAAA;IACA,mBAAA;IACA,kBAAA;CACA;AAEA;IACA,mBAAA;IACA,OAAA;IACA,SAAA;IACA,QAAA;IACA,UAAA;IACA,0BAAA;CACA;AAEA;IACA,oBAAA;IACA,sBAAA;IACA,sBAAA;IACA,yBAAA;IACA,kBAAA;CACA;AAEA;IACA,qBAAA;IACA,sBAAA;IACA,iBAAA;CACA","file":"detail.vue","sourcesContent":["<template>\n    <div class=\"flymeui\">\n        <div class=\"actionBar\">\n            <fm-icon class=\"actionIcon\" @click=\"back\" value=\"&#xe6b5;\" icon-style=\"24\" color=\"#999\"/>\n        </div>\n        <scroller class=\"scroller\">\n            <div class=\"header\">\n                <fm-image :scale=\"1/2\" :src=\"'http://172.17.201.27:8888/'+ type +'.png'\"/>\n                <div style=\"margin-left: 16.667px;\">\n                    <fm-text class=\"title\" :textValue=\"category.name\" medium\n                                      :text-style=\"{fontSize: 21, color: '#000', fontWeight: 500, lineHeight: 23}\" />\n                    <fm-text class=\"subTitle\" :textValue=\"category.subname\" \n                                      :text-style=\"{fontSize: 12, color: '#000', fontWeight: 300, lineHeight: 14, marginTop: 2}\" />\n                </div>\n            </div>\n            <div class=\"list\">\n                <template v-for=\"item in category.componentList\" >\n                    <d-cell :title=\"item.name\" :subTitle=\"item.subname\" @click=\"jump(item.path)\"></d-cell>\n                </template>\n            </div>\n        </scroller>\n    </div>\n</template>\n\n<style scoped>\n    .actionBar {\n        height: 64px;\n        padding-top: 20px;\n    }\n\n    .actionIcon {\n        margin-top: 10px;\n        margin-right: 15px;\n        margin-left: 17px;\n    }\n\n    .flymeui {\n        position: absolute;\n        top: 0;\n        right: 0;\n        left: 0;\n        bottom: 0;\n        background-color: #fafafa;\n    }\n\n    .header {\n        flex-direction: row;\n        align-items: flex-end;\n        margin-top: 23.6667px;\n        margin-bottom: 34.6667px;\n        margin-left: 24px;\n    }\n\n    .list {\n        margin-left: 9.333px;\n        margin-right: 9.333px;\n        padding: 9.333px;\n    }\n\n</style>\n\n<script>\nimport { FmText, FmImage, FmIcon } from '../../../index';\nimport DCell from './cell.vue';\nimport Title from '../../_mods/title.vue';\nimport Category from '../../_mods/category.vue';\nimport { setTitle } from '../../_mods/set-nav';\nimport category from './category.js'\nconst navigator = weex.requireModule('navigator')\nlet env = weex.config.env\nlet url = weex.config.bundleUrl\n\nexport default {\n    props: {\n        type: String,\n        category: Object\n    },\n    components: { Title, Category, FmText, FmImage, FmIcon, DCell },\n    created() {\n        this.$route.params.type ? this.type = this.$route.params.type : this.$router.go(-1)\n        this.category = category[this.type]\n    },\n    methods: {\n        back() {\n            this.$router.go(-1)\n        },\n        jump(path) {\n            if (env.platform === 'Web') {\n                window.location.href = path\n            } else {\n                let target = url.replace(/index.native.js/, path + '/index.native.js')\n                navigator.push({\n                    url: target,\n                    animated: \"true\"\n                })\n            }\n        }\n    }\n}\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.actionBar[data-v-6dacbccc] {\n    height: 64px;\n    padding-top: 20px;\n}\n.actionIcon[data-v-6dacbccc] {\n    margin-top: 10px;\n    margin-right: 15px;\n    margin-left: 17px;\n}\n.flymeui[data-v-6dacbccc] {\n    position: absolute;\n    top: 0;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    background-color: #fafafa;\n}\n.header[data-v-6dacbccc] {\n    flex-direction: row;\n    align-items: flex-end;\n    margin-top: 23.6667px;\n    margin-bottom: 34.6667px;\n    margin-left: 24px;\n}\n.list[data-v-6dacbccc] {\n    margin-left: 9.333px;\n    margin-right: 9.333px;\n    padding: 9.333px;\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/example/index/components/detail.vue?2ce15bf8"],"names":[],"mappings":";AAyBA;IACA,aAAA;IACA,kBAAA;CACA;AAEA;IACA,iBAAA;IACA,mBAAA;IACA,kBAAA;CACA;AAEA;IACA,mBAAA;IACA,OAAA;IACA,SAAA;IACA,QAAA;IACA,UAAA;IACA,0BAAA;CACA;AAEA;IACA,oBAAA;IACA,sBAAA;IACA,sBAAA;IACA,yBAAA;IACA,kBAAA;CACA;AAEA;IACA,qBAAA;IACA,sBAAA;IACA,iBAAA;CACA","file":"detail.vue","sourcesContent":["<template>\n    <div class=\"flymeui\">\n        <div class=\"actionBar\">\n            <fm-icon class=\"actionIcon\" @click=\"back\" value=\"&#xe6b5;\" icon-style=\"24\" color=\"#999\"/>\n        </div>\n        <scroller class=\"scroller\">\n            <div class=\"header\">\n                <fm-image :scale=\"1/2\" :src=\"'http://design.flyme.cn/weexui/assets/'+ type +'.png'\"/>\n                <div style=\"margin-left: 16.667px;\">\n                    <fm-text class=\"title\" :textValue=\"category.name\" medium\n                                      :text-style=\"{fontSize: 21, color: '#000', fontWeight: 500, lineHeight: 23}\" />\n                    <fm-text class=\"subTitle\" :textValue=\"category.subname\" \n                                      :text-style=\"{fontSize: 12, color: '#000', fontWeight: 300, lineHeight: 14, marginTop: 2}\" />\n                </div>\n            </div>\n            <div class=\"list\">\n                <template v-for=\"item in category.componentList\" >\n                    <d-cell :title=\"item.name\" :subTitle=\"item.subname\" @click=\"jump(item.path)\"></d-cell>\n                </template>\n            </div>\n        </scroller>\n    </div>\n</template>\n\n<style scoped>\n    .actionBar {\n        height: 64px;\n        padding-top: 20px;\n    }\n\n    .actionIcon {\n        margin-top: 10px;\n        margin-right: 15px;\n        margin-left: 17px;\n    }\n\n    .flymeui {\n        position: absolute;\n        top: 0;\n        right: 0;\n        left: 0;\n        bottom: 0;\n        background-color: #fafafa;\n    }\n\n    .header {\n        flex-direction: row;\n        align-items: flex-end;\n        margin-top: 23.6667px;\n        margin-bottom: 34.6667px;\n        margin-left: 24px;\n    }\n\n    .list {\n        margin-left: 9.333px;\n        margin-right: 9.333px;\n        padding: 9.333px;\n    }\n\n</style>\n\n<script>\nimport { FmText, FmImage, FmIcon } from '../../../index';\nimport DCell from './cell.vue';\nimport Title from '../../_mods/title.vue';\nimport Category from '../../_mods/category.vue';\nimport { setTitle } from '../../_mods/set-nav';\nimport category from './category.js'\nconst navigator = weex.requireModule('navigator')\nlet env = weex.config.env\nlet url = weex.config.bundleUrl\n\nexport default {\n    props: {\n        type: String,\n        category: Object\n    },\n    components: { Title, Category, FmText, FmImage, FmIcon, DCell },\n    created() {\n        this.$route.params.type ? this.type = this.$route.params.type : this.$router.go(-1)\n        this.category = category[this.type]\n    },\n    methods: {\n        back() {\n            this.$router.go(-1)\n        },\n        jump(path) {\n            if (env.platform === 'Web') {\n                window.location.href = path\n            } else {\n                let target = url.replace(/index.native.js/, path + '/index.native.js')\n                navigator.push({\n                    url: target,\n                    animated: \"true\"\n                })\n            }\n        }\n    }\n}\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 196 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8749,7 +8835,7 @@ var _category2 = _interopRequireDefault(_category);
 
 var _setNav = __webpack_require__(102);
 
-var _category3 = __webpack_require__(203);
+var _category3 = __webpack_require__(103);
 
 var _category4 = _interopRequireDefault(_category3);
 
@@ -8849,107 +8935,6 @@ exports.default = {
         }
     }
 };
-
-/***/ }),
-/* 197 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "flymeui",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [_c('div', {
-    staticClass: "actionBar",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [_c('fm-icon', {
-    staticClass: "actionIcon",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    attrs: {
-      "value": "&#xe6b5;",
-      "icon-style": "24",
-      "color": "#999"
-    },
-    on: {
-      "click": _vm.back
-    }
-  })], 1), _vm._v(" "), _c('scroller', {
-    staticClass: "scroller",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [_c('div', {
-    staticClass: "header",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [_c('fm-image', {
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    attrs: {
-      "scale": 1 / 2,
-      "src": 'http://172.17.201.27:8888/' + _vm.type + '.png'
-    }
-  }), _vm._v(" "), _c('div', {
-    staticStyle: _vm.$processStyle({
-      "margin-left": "16.667px"
-    }),
-    style: (_vm.$processStyle(undefined))
-  }, [_c('fm-text', {
-    staticClass: "title",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    attrs: {
-      "textValue": _vm.category.name,
-      "medium": "",
-      "text-style": {
-        fontSize: 21,
-        color: '#000',
-        fontWeight: 500,
-        lineHeight: 23
-      }
-    }
-  }), _vm._v(" "), _c('fm-text', {
-    staticClass: "subTitle",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    attrs: {
-      "textValue": _vm.category.subname,
-      "text-style": {
-        fontSize: 12,
-        color: '#000',
-        fontWeight: 300,
-        lineHeight: 14,
-        marginTop: 2
-      }
-    }
-  })], 1)], 1), _vm._v(" "), _c('div', {
-    staticClass: "list",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [_vm._l((_vm.category.componentList), function(item) {
-    return [_c('d-cell', {
-      staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle(undefined)),
-      attrs: {
-        "title": item.name,
-        "subTitle": item.subname
-      },
-      on: {
-        "click": function($event) {
-          _vm.jump(item.path)
-        }
-      }
-    })]
-  })], 2)])], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-6dacbccc", module.exports)
-  }
-}
 
 /***/ }),
 /* 198 */
@@ -9172,83 +9157,102 @@ if (false) {
 /* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = {
-    base: {
-        name: '基础组件',
-        subname: 'Underlying conponent',
-        componentList: [{
-            name: '文本',
-            subname: 'FmText',
-            path: 'text'
-        }, {
-            name: '富文本',
-            subname: 'RichText',
-            path: 'richText'
-        }, {
-            name: '图标',
-            subname: 'FmIcon',
-            path: 'icon'
-        }, {
-            name: '标签',
-            subname: 'FmTag',
-            path: 'tag'
-        }, {
-            name: '折叠文本',
-            subname: 'FmFoldableText',
-            path: 'tag'
-        }]
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "flymeui",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_c('div', {
+    staticClass: "actionBar",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_c('fm-icon', {
+    staticClass: "actionIcon",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "value": "&#xe6b5;",
+      "icon-style": "24",
+      "color": "#999"
     },
-    container: {
-        name: '容器组件',
-        subname: 'Container conponent',
-        componentList: [{
-            name: '标签页',
-            subname: 'FmTabView',
-            path: 'tabView'
-        }]
-    },
-    interaction: {
-        name: '交互组件',
-        subname: 'Interactive conponent',
-        componentList: [{
-            name: '引导提示',
-            subname: 'FmTips',
-            path: 'tips'
-        }]
-    },
-    form: {
-        name: '表单组件',
-        subname: 'Form conponent',
-        componentList: [{
-            name: '按钮',
-            subname: 'FmButton',
-            path: 'button'
-        }, {
-            name: '开关按钮',
-            subname: 'FmSwitch',
-            path: 'switch'
-        }, {
-            name: '输入款',
-            subname: 'FmInput',
-            path: 'input'
-        }, {
-            name: '滑块',
-            subname: 'FmSlider',
-            path: 'slider'
-        }]
-    },
-    other: {
-        name: '其他组件',
-        subname: 'Other conponent',
-        componentList: []
+    on: {
+      "click": _vm.back
     }
-};
+  })], 1), _vm._v(" "), _c('scroller', {
+    staticClass: "scroller",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_c('div', {
+    staticClass: "header",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_c('fm-image', {
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "scale": 1 / 2,
+      "src": 'http://design.flyme.cn/weexui/assets/' + _vm.type + '.png'
+    }
+  }), _vm._v(" "), _c('div', {
+    staticStyle: _vm.$processStyle({
+      "margin-left": "16.667px"
+    }),
+    style: (_vm.$processStyle(undefined))
+  }, [_c('fm-text', {
+    staticClass: "title",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "textValue": _vm.category.name,
+      "medium": "",
+      "text-style": {
+        fontSize: 21,
+        color: '#000',
+        fontWeight: 500,
+        lineHeight: 23
+      }
+    }
+  }), _vm._v(" "), _c('fm-text', {
+    staticClass: "subTitle",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "textValue": _vm.category.subname,
+      "text-style": {
+        fontSize: 12,
+        color: '#000',
+        fontWeight: 300,
+        lineHeight: 14,
+        marginTop: 2
+      }
+    }
+  })], 1)], 1), _vm._v(" "), _c('div', {
+    staticClass: "list",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_vm._l((_vm.category.componentList), function(item) {
+    return [_c('d-cell', {
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(undefined)),
+      attrs: {
+        "title": item.name,
+        "subTitle": item.subname
+      },
+      on: {
+        "click": function($event) {
+          _vm.jump(item.path)
+        }
+      }
+    })]
+  })], 2)])], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-6dacbccc", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

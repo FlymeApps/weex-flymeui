@@ -72,7 +72,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 150);
+/******/ 	return __webpack_require__(__webpack_require__.s = 151);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -5047,7 +5047,88 @@ function setTitle(title) {
 }
 
 /***/ }),
-/* 85 */,
+/* 85 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    base: {
+        name: '基础组件',
+        subname: 'Underlying conponent',
+        componentList: [{
+            name: '文本',
+            subname: 'FmText',
+            path: 'text'
+        }, {
+            name: '富文本',
+            subname: 'RichText',
+            path: 'richText'
+        }, {
+            name: '图标',
+            subname: 'FmIcon',
+            path: 'icon'
+        }, {
+            name: '标签',
+            subname: 'FmTag',
+            path: 'tag'
+        }, {
+            name: '折叠文本',
+            subname: 'FmFoldableText',
+            path: 'tag'
+        }]
+    },
+    container: {
+        name: '容器组件',
+        subname: 'Container conponent',
+        componentList: [{
+            name: '标签页',
+            subname: 'FmTabView',
+            path: 'tabView'
+        }]
+    },
+    interaction: {
+        name: '交互组件',
+        subname: 'Interactive conponent',
+        componentList: [{
+            name: '引导提示',
+            subname: 'FmTips',
+            path: 'tips'
+        }]
+    },
+    form: {
+        name: '表单组件',
+        subname: 'Form conponent',
+        componentList: [{
+            name: '按钮',
+            subname: 'FmButton',
+            path: 'button'
+        }, {
+            name: '开关按钮',
+            subname: 'FmSwitch',
+            path: 'switch'
+        }, {
+            name: '输入框',
+            subname: 'FmInput',
+            path: 'input'
+        }, {
+            name: '滑块',
+            subname: 'FmSlider',
+            path: 'slider'
+        }]
+    },
+    other: {
+        name: '其他组件',
+        subname: 'Other conponent',
+        componentList: []
+    }
+};
+
+/***/ }),
 /* 86 */,
 /* 87 */,
 /* 88 */,
@@ -5112,7 +5193,8 @@ function setTitle(title) {
 /* 147 */,
 /* 148 */,
 /* 149 */,
-/* 150 */
+/* 150 */,
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5122,19 +5204,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _vueRouter = __webpack_require__(151);
+var _vueRouter = __webpack_require__(152);
 
 var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
-var _index = __webpack_require__(152);
+var _index = __webpack_require__(153);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _home = __webpack_require__(156);
+var _home = __webpack_require__(157);
 
 var _home2 = _interopRequireDefault(_home);
 
-var _detail = __webpack_require__(160);
+var _detail = __webpack_require__(161);
 
 var _detail2 = _interopRequireDefault(_detail);
 
@@ -5164,7 +5246,7 @@ exports.default = new Vue({
 router.push('/');
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7625,21 +7707,21 @@ if (inBrowser && window.Vue) {
 exports.default = VueRouter;
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(153)
+__vue_styles__.push(__webpack_require__(154)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(154)
+__vue_exports__ = __webpack_require__(155)
 
 /* template */
-var __vue_template__ = __webpack_require__(155)
+var __vue_template__ = __webpack_require__(156)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -7669,13 +7751,13 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports) {
 
 module.exports = {}
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7694,7 +7776,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {};
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -7705,21 +7787,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(157)
+__vue_styles__.push(__webpack_require__(158)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(158)
+__vue_exports__ = __webpack_require__(159)
 
 /* template */
-var __vue_template__ = __webpack_require__(159)
+var __vue_template__ = __webpack_require__(160)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -7749,7 +7831,7 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 157 */
+/* 158 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -7759,6 +7841,9 @@ module.exports = {
     "right": 0,
     "left": 0,
     "bottom": 0,
+    "backgroundColor": "#fafafa"
+  },
+  "scroller": {
     "backgroundColor": "#fafafa"
   },
   "header": {
@@ -7794,7 +7879,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7816,7 +7901,7 @@ var _category2 = _interopRequireDefault(_category);
 
 var _setNav = __webpack_require__(84);
 
-var _category3 = __webpack_require__(168);
+var _category3 = __webpack_require__(85);
 
 var _category4 = _interopRequireDefault(_category3);
 
@@ -7902,9 +7987,13 @@ exports.default = {
 //
 //
 //
+//
+//
+//
+//
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -7917,7 +8006,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('fm-image', {
     attrs: {
       "scale": 1 / 3,
-      "src": "http://172.17.201.27:8888/design_logo.png"
+      "src": "http://design.flyme.cn/weexui/assets/design_logo.png"
     }
   }), _c('fm-text', {
     staticClass: ["desc"],
@@ -7943,7 +8032,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: ["item-icon"],
       attrs: {
         "scale": 1 / 3,
-        "src": 'http://172.17.201.27:8888/' + key + '.png'
+        "src": 'http://design.flyme.cn/weexui/assets/' + key + '.png'
       }
     }), _c('div', [_c('fm-text', {
       style: {
@@ -7970,21 +8059,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 160 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(161)
+__vue_styles__.push(__webpack_require__(162)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(162)
+__vue_exports__ = __webpack_require__(163)
 
 /* template */
-var __vue_template__ = __webpack_require__(163)
+var __vue_template__ = __webpack_require__(168)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -8014,7 +8103,7 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 161 */
+/* 162 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -8053,7 +8142,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 162 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8079,7 +8168,7 @@ var _category2 = _interopRequireDefault(_category);
 
 var _setNav = __webpack_require__(84);
 
-var _category3 = __webpack_require__(168);
+var _category3 = __webpack_require__(85);
 
 var _category4 = _interopRequireDefault(_category3);
 
@@ -8179,80 +8268,6 @@ exports.default = {
         }
     }
 };
-
-/***/ }),
-/* 163 */
-/***/ (function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: ["flymeui"]
-  }, [_c('div', {
-    staticClass: ["actionBar"]
-  }, [_c('fm-icon', {
-    staticClass: ["actionIcon"],
-    attrs: {
-      "value": "&#xe6b5;",
-      "iconStyle": "24",
-      "color": "#999"
-    },
-    on: {
-      "click": _vm.back
-    }
-  })], 1), _c('scroller', {
-    staticClass: ["scroller"]
-  }, [_c('div', {
-    staticClass: ["header"]
-  }, [_c('fm-image', {
-    attrs: {
-      "scale": 1 / 2,
-      "src": 'http://172.17.201.27:8888/' + _vm.type + '.png'
-    }
-  }), _c('div', {
-    staticStyle: {
-      marginLeft: "16.667px"
-    }
-  }, [_c('fm-text', {
-    staticClass: ["title"],
-    attrs: {
-      "textValue": _vm.category.name,
-      "medium": "",
-      "textStyle": {
-        fontSize: 21,
-        color: '#000',
-        fontWeight: 500,
-        lineHeight: 23
-      }
-    }
-  }), _c('fm-text', {
-    staticClass: ["subTitle"],
-    attrs: {
-      "textValue": _vm.category.subname,
-      "textStyle": {
-        fontSize: 12,
-        color: '#000',
-        fontWeight: 300,
-        lineHeight: 14,
-        marginTop: 2
-      }
-    }
-  })], 1)], 1), _c('div', {
-    staticClass: ["list"]
-  }, [_vm._l((_vm.category.componentList), function(item) {
-    return [_c('d-cell', {
-      attrs: {
-        "title": item.name,
-        "subTitle": item.subname
-      },
-      on: {
-        "click": function($event) {
-          _vm.jump(item.path)
-        }
-      }
-    })]
-  })], 2)])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
 
 /***/ }),
 /* 164 */
@@ -8446,85 +8461,77 @@ module.exports.render._withStripped = true
 
 /***/ }),
 /* 168 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = {
-    base: {
-        name: '基础组件',
-        subname: 'Underlying conponent',
-        componentList: [{
-            name: '文本',
-            subname: 'FmText',
-            path: 'text'
-        }, {
-            name: '富文本',
-            subname: 'RichText',
-            path: 'richText'
-        }, {
-            name: '图标',
-            subname: 'FmIcon',
-            path: 'icon'
-        }, {
-            name: '标签',
-            subname: 'FmTag',
-            path: 'tag'
-        }, {
-            name: '折叠文本',
-            subname: 'FmFoldableText',
-            path: 'tag'
-        }]
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: ["flymeui"]
+  }, [_c('div', {
+    staticClass: ["actionBar"]
+  }, [_c('fm-icon', {
+    staticClass: ["actionIcon"],
+    attrs: {
+      "value": "&#xe6b5;",
+      "iconStyle": "24",
+      "color": "#999"
     },
-    container: {
-        name: '容器组件',
-        subname: 'Container conponent',
-        componentList: [{
-            name: '标签页',
-            subname: 'FmTabView',
-            path: 'tabView'
-        }]
-    },
-    interaction: {
-        name: '交互组件',
-        subname: 'Interactive conponent',
-        componentList: [{
-            name: '引导提示',
-            subname: 'FmTips',
-            path: 'tips'
-        }]
-    },
-    form: {
-        name: '表单组件',
-        subname: 'Form conponent',
-        componentList: [{
-            name: '按钮',
-            subname: 'FmButton',
-            path: 'button'
-        }, {
-            name: '开关按钮',
-            subname: 'FmSwitch',
-            path: 'switch'
-        }, {
-            name: '输入款',
-            subname: 'FmInput',
-            path: 'input'
-        }, {
-            name: '滑块',
-            subname: 'FmSlider',
-            path: 'slider'
-        }]
-    },
-    other: {
-        name: '其他组件',
-        subname: 'Other conponent',
-        componentList: []
+    on: {
+      "click": _vm.back
     }
-};
+  })], 1), _c('scroller', {
+    staticClass: ["scroller"]
+  }, [_c('div', {
+    staticClass: ["header"]
+  }, [_c('fm-image', {
+    attrs: {
+      "scale": 1 / 2,
+      "src": 'http://design.flyme.cn/weexui/assets/' + _vm.type + '.png'
+    }
+  }), _c('div', {
+    staticStyle: {
+      marginLeft: "16.667px"
+    }
+  }, [_c('fm-text', {
+    staticClass: ["title"],
+    attrs: {
+      "textValue": _vm.category.name,
+      "medium": "",
+      "textStyle": {
+        fontSize: 21,
+        color: '#000',
+        fontWeight: 500,
+        lineHeight: 23
+      }
+    }
+  }), _c('fm-text', {
+    staticClass: ["subTitle"],
+    attrs: {
+      "textValue": _vm.category.subname,
+      "textStyle": {
+        fontSize: 12,
+        color: '#000',
+        fontWeight: 300,
+        lineHeight: 14,
+        marginTop: 2
+      }
+    }
+  })], 1)], 1), _c('div', {
+    staticClass: ["list"]
+  }, [_vm._l((_vm.category.componentList), function(item) {
+    return [_c('d-cell', {
+      attrs: {
+        "title": item.name,
+        "subTitle": item.subname
+      },
+      on: {
+        "click": function($event) {
+          _vm.jump(item.path)
+        }
+      }
+    })]
+  })], 2)])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
 
 /***/ })
 /******/ ]);
