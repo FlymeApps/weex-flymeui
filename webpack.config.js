@@ -25,7 +25,10 @@ const plugins = [
     raw: true
   }),
   new CopyWebpackPlugin([
-    { from: 'example/*/index.html' }
+    { from: 'example/component/*/index.html' }
+  ]),
+  new CopyWebpackPlugin([
+    { from: 'example/module/*/index.html' }
   ]),
   new CopyWebpackPlugin([
     { from: 'example/index.html', to: 'example' }
@@ -46,11 +49,12 @@ const getEntry = dir => {
   return ret;
 };
 
-const example = getEntry('example');
-example['example/index'] = './example/index.js';
+const component = getEntry('example/component');
+const moduleEntry = getEntry('example/module/');
 const entry = Object.assign({
   'index': './index.js'
-}, example);
+}, component, moduleEntry);
+entry['example/index'] = './example/index.js';
 
 const getBaseConfig = () => ({
   devtool: '#source-map',

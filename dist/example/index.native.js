@@ -72,7 +72,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 151);
+/******/ 	return __webpack_require__(__webpack_require__.s = 156);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -382,10 +382,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/mnt/WORK/workspace/creator/creator/weex-flymeui/packages/fm-switch/index.vue"
+__vue_options__.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-switch/index.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-508ce4f4"
+__vue_options__._scopeId = "data-v-5ab3654c"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -634,10 +634,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/mnt/WORK/workspace/creator/creator/weex-flymeui/packages/fm-tag/index.vue"
+__vue_options__.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag/index.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-e2545d44"
+__vue_options__._scopeId = "data-v-f51b0150"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -833,10 +833,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/mnt/WORK/workspace/creator/creator/weex-flymeui/packages/fm-text/index.vue"
+__vue_options__.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-text/index.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-29d259ff"
+__vue_options__._scopeId = "data-v-06cb6b45"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -1057,10 +1057,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/mnt/WORK/workspace/creator/creator/weex-flymeui/packages/fm-icon/index.vue"
+__vue_options__.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-icon/index.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-54acbb6a"
+__vue_options__._scopeId = "data-v-9aba98de"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -1192,7 +1192,7 @@ exports.default = {
   created: function created() {
     dom.addRule('fontFace', {
       'fontFamily': 'flymeicon',
-      'src': "url('http://weixin.res.flyme.cn/upload/iconfont.ttf')"
+      'src': "url('http://design.flyme.cn/weexui/assets/iconfont.ttf')"
     });
   },
 
@@ -1657,10 +1657,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/mnt/WORK/workspace/creator/creator/weex-flymeui/packages/fm-slider/index.vue"
+__vue_options__.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-slider/index.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-19244a1a"
+__vue_options__._scopeId = "data-v-7667b2b9"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -2027,10 +2027,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/mnt/WORK/workspace/creator/creator/weex-flymeui/packages/fm-button/index.vue"
+__vue_options__.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-button/index.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-90eacff8"
+__vue_options__._scopeId = "data-v-3a846fca"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -2290,10 +2290,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/mnt/WORK/workspace/creator/creator/weex-flymeui/packages/fm-input/index.vue"
+__vue_options__.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-input/index.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-5986c74e"
+__vue_options__._scopeId = "data-v-1bafdec8"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -2568,10 +2568,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/mnt/WORK/workspace/creator/creator/weex-flymeui/packages/fm-tab-view/index.vue"
+__vue_options__.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tab-view/index.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-a2ad91a2"
+__vue_options__._scopeId = "data-v-5a8c3575"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -2929,10 +2929,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/mnt/WORK/workspace/creator/creator/weex-flymeui/packages/fm-tips/index.vue"
+__vue_options__.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tips/index.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-116c964a"
+__vue_options__._scopeId = "data-v-2334b0e0"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -3194,10 +3194,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/mnt/WORK/workspace/creator/creator/weex-flymeui/packages/fm-rich-text/index.vue"
+__vue_options__.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rich-text/index.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-8a842cfc"
+__vue_options__._scopeId = "data-v-e98a9808"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -3364,7 +3364,7 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/mnt/WORK/workspace/creator/creator/weex-flymeui/packages/fm-rich-text/fm-rich-text-link.vue"
+__vue_options__.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rich-text/fm-rich-text-link.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 __vue_options__.style = __vue_options__.style || {}
@@ -3784,13 +3784,8 @@ function set(part, value, fn) {
       break;
 
     case 'pathname':
-    case 'hash':
-      if (value) {
-        var char = part === 'pathname' ? '/' : '#';
-        url[part] = value.charAt(0) !== char ? char + value : value;
-      } else {
-        url[part] = value;
-      }
+      url.pathname = value.length && value.charAt(0) !== '/' ? '/' + value : value;
+
       break;
 
     default:
@@ -4091,10 +4086,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/mnt/WORK/workspace/creator/creator/weex-flymeui/packages/fm-special-rich-text/index.vue"
+__vue_options__.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-special-rich-text/index.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-1654c96e"
+__vue_options__._scopeId = "data-v-530479e8"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -4342,10 +4337,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/mnt/WORK/workspace/creator/creator/weex-flymeui/packages/fm-foldable-text/index.vue"
+__vue_options__.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-foldable-text/index.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-c3ad41ba"
+__vue_options__._scopeId = "data-v-142f46c6"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -4664,7 +4659,7 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/mnt/WORK/workspace/creator/creator/weex-flymeui/packages/fm-image/index.vue"
+__vue_options__.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-image/index.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 __vue_options__.style = __vue_options__.style || {}
@@ -4760,298 +4755,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 76 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __vue_exports__, __vue_options__
-var __vue_styles__ = []
-
-/* styles */
-__vue_styles__.push(__webpack_require__(78)
-)
-
-/* script */
-__vue_exports__ = __webpack_require__(79)
-
-/* template */
-var __vue_template__ = __webpack_require__(80)
-__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-if (
-  typeof __vue_exports__.default === "object" ||
-  typeof __vue_exports__.default === "function"
-) {
-if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-__vue_options__ = __vue_exports__ = __vue_exports__.default
-}
-if (typeof __vue_options__ === "function") {
-  __vue_options__ = __vue_options__.options
-}
-__vue_options__.__file = "/mnt/WORK/workspace/creator/creator/weex-flymeui/example/_mods/title.vue"
-__vue_options__.render = __vue_template__.render
-__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-02f784ce"
-__vue_options__.style = __vue_options__.style || {}
-__vue_styles__.forEach(function (module) {
-  for (var name in module) {
-    __vue_options__.style[name] = module[name]
-  }
-})
-if (typeof __register_static_styles__ === "function") {
-  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
-}
-
-module.exports = __vue_exports__
-
-
-/***/ }),
-/* 77 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __vue_exports__, __vue_options__
-var __vue_styles__ = []
-
-/* styles */
-__vue_styles__.push(__webpack_require__(81)
-)
-
-/* script */
-__vue_exports__ = __webpack_require__(82)
-
-/* template */
-var __vue_template__ = __webpack_require__(83)
-__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-if (
-  typeof __vue_exports__.default === "object" ||
-  typeof __vue_exports__.default === "function"
-) {
-if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-__vue_options__ = __vue_exports__ = __vue_exports__.default
-}
-if (typeof __vue_options__ === "function") {
-  __vue_options__ = __vue_options__.options
-}
-__vue_options__.__file = "/mnt/WORK/workspace/creator/creator/weex-flymeui/example/_mods/category.vue"
-__vue_options__.render = __vue_template__.render
-__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-5eb0bf4d"
-__vue_options__.style = __vue_options__.style || {}
-__vue_styles__.forEach(function (module) {
-  for (var name in module) {
-    __vue_options__.style[name] = module[name]
-  }
-})
-if (typeof __register_static_styles__ === "function") {
-  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
-}
-
-module.exports = __vue_exports__
-
-
-/***/ }),
-/* 78 */
-/***/ (function(module, exports) {
-
-module.exports = {
-  "wxc-title": {
-    "marginTop": 10,
-    "marginLeft": 10,
-    "flexDirection": "row",
-    "alignItems": "center"
-  },
-  "logo": {
-    "width": 60,
-    "height": 60,
-    "marginLeft": 10
-  },
-  "text": {
-    "marginLeft": 10,
-    "fontSize": 16,
-    "fontWeight": "600",
-    "color": "#000000"
-  }
-}
-
-/***/ }),
-/* 79 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-exports.default = {
-  props: {
-    title: String
-  }
-};
-
-/***/ }),
-/* 80 */
-/***/ (function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: ["wxc-title"]
-  }, [_c('image', {
-    staticClass: ["logo"],
-    attrs: {
-      "src": "http://design.flyme.cn/book/images/Flyme_logo.png"
-    }
-  }), _c('text', {
-    staticClass: ["text"]
-  }, [_vm._v(_vm._s(_vm.title))])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-
-/***/ }),
-/* 81 */
-/***/ (function(module, exports) {
-
-module.exports = {
-  "category": {
-    "marginTop": 10,
-    "paddingLeft": 12,
-    "width": 360,
-    "height": 34,
-    "backgroundColor": "#198ded",
-    "justifyContent": "center"
-  },
-  "category-text": {
-    "color": "#ffffff",
-    "fontWeight": "600",
-    "fontSize": 14
-  }
-}
-
-/***/ }),
-/* 82 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-exports.default = {
-  props: {
-    title: String
-  }
-};
-
-/***/ }),
-/* 83 */
-/***/ (function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: ["category"]
-  }, [_c('text', {
-    staticClass: ["category-text"]
-  }, [_vm._v(_vm._s(_vm.title))])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-
-/***/ }),
-/* 84 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.setTitle = setTitle;
-/**
- * Created by suenyinkit on 2017/10/18.
- * demo设置标题和右上角按钮
- */
-var navigationBar = weex.requireModule('navigationBar');
-var navigator = weex.requireModule('navigator');
-
-function setTitle(title) {
-  if (navigationBar && navigationBar.setTitle) {
-    var NOOP = function NOOP() {};
-    navigationBar.setTitle({
-      title: title
-    }, NOOP, NOOP);
-
-    var CALLBACK = function CALLBACK(event) {
-      if (event.index != undefined) {
-        navigator.push({
-          url: 'https://h5.m.taobao.com/trip/weex-ui/index.html?_wx_tpl=https%3A%2F%2Fh5.m.taobao.com%2Ftrip%2Fweex-ui%2Fdemo%2Findex.native-min.js',
-          animated: true
-        }, NOOP);
-      }
-    };
-    navigationBar.setRightItem({
-      items: [{
-        icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAABCUExURUxpcTMzMzMzMzAwMDIyMjIyMjExMTAwMDIyMjIyMjIyMjIyMjIyMjIyMjIyMjMzMzIyMjAwMDMzMzMzMzIyMjMzMxR9TlYAAAAVdFJOUwCgvzCfgD9AYMCQcO+P389/IG9Q0HT9VioAAADRSURBVEjH7ZXrDoMgDEZhVgFvu/L+r7pZgQlSLcuSJYvfHwKcU5HUKMSRj6P7Xhfx9hVdyBcYjmcbyEvJNmZeCK7hea5xCTzPgAXPMZCv3/M9A1b7aAx83hnA54XoSAOI82rCAPL98gZs3EfOgM37Wxuwc9+pgTw0V4qvGoiM1vd/l+fDfusW/NyOeaEPgFswyUI1nObckoLGl1BTHkEYbXzGqYERiR9sgmCTknEHf0mo5+EQfiM0GOx1HM5+TglkcoIsFe5bgsp+iIpM9V+//CcugShOKAURTAAAAABJRU5ErkJggg=='
-      }]
-    }, CALLBACK, NOOP);
-  }
-}
-
-/***/ }),
+/* 76 */,
+/* 77 */,
+/* 78 */,
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */,
+/* 84 */,
 /* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5068,23 +4780,23 @@ exports.default = {
         componentList: [{
             name: '文本',
             subname: 'FmText',
-            path: 'text'
+            path: 'component/text'
         }, {
             name: '富文本',
             subname: 'RichText',
-            path: 'richText'
+            path: 'component/richText'
         }, {
             name: '图标',
             subname: 'FmIcon',
-            path: 'icon'
+            path: 'component/icon'
         }, {
             name: '标签',
             subname: 'FmTag',
-            path: 'tag'
+            path: 'component/tag'
         }, {
             name: '折叠文本',
             subname: 'FmFoldableText',
-            path: 'tag'
+            path: 'component/foldableText'
         }]
     },
     container: {
@@ -5093,7 +4805,7 @@ exports.default = {
         componentList: [{
             name: '标签页',
             subname: 'FmTabView',
-            path: 'tabView'
+            path: 'component/tabView'
         }]
     },
     interaction: {
@@ -5102,7 +4814,7 @@ exports.default = {
         componentList: [{
             name: '引导提示',
             subname: 'FmTips',
-            path: 'tips'
+            path: 'component/tips'
         }]
     },
     form: {
@@ -5111,19 +4823,19 @@ exports.default = {
         componentList: [{
             name: '按钮',
             subname: 'FmButton',
-            path: 'button'
+            path: 'component/button'
         }, {
             name: '开关按钮',
             subname: 'FmSwitch',
-            path: 'switch'
+            path: 'component/switch'
         }, {
             name: '输入框',
             subname: 'FmInput',
-            path: 'input'
+            path: 'component/input'
         }, {
             name: '滑块',
             subname: 'FmSlider',
-            path: 'slider'
+            path: 'component/slider'
         }]
     },
     other: {
@@ -5137,11 +4849,11 @@ exports.default = {
         componentList: [{
             name: 'Navigator',
             subname: '页面导航',
-            path: 'button'
+            path: 'module/button'
         }, {
             name: 'Flyme Login',
             subname: 'Flyme账号信息',
-            path: 'switch'
+            path: 'module/switch'
         }]
     }
 };
@@ -5212,7 +4924,12 @@ exports.default = {
 /* 148 */,
 /* 149 */,
 /* 150 */,
-/* 151 */
+/* 151 */,
+/* 152 */,
+/* 153 */,
+/* 154 */,
+/* 155 */,
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5222,19 +4939,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _vueRouter = __webpack_require__(152);
+var _vueRouter = __webpack_require__(157);
 
 var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
-var _index = __webpack_require__(153);
+var _index = __webpack_require__(158);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _home = __webpack_require__(157);
+var _home = __webpack_require__(162);
 
 var _home2 = _interopRequireDefault(_home);
 
-var _detail = __webpack_require__(161);
+var _detail = __webpack_require__(166);
 
 var _detail2 = _interopRequireDefault(_detail);
 
@@ -5264,7 +4981,7 @@ exports.default = new Vue({
 router.push('/');
 
 /***/ }),
-/* 152 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7725,21 +7442,21 @@ if (inBrowser && window.Vue) {
 exports.default = VueRouter;
 
 /***/ }),
-/* 153 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(154)
+__vue_styles__.push(__webpack_require__(159)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(155)
+__vue_exports__ = __webpack_require__(160)
 
 /* template */
-var __vue_template__ = __webpack_require__(156)
+var __vue_template__ = __webpack_require__(161)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -7751,10 +7468,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/mnt/WORK/workspace/creator/creator/weex-flymeui/example/index.vue"
+__vue_options__.__file = "/Users/suen/Documents/develop/project/weex-flymeui/example/index.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-476ae1d2"
+__vue_options__._scopeId = "data-v-312bac68"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -7769,13 +7486,13 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 154 */
+/* 159 */
 /***/ (function(module, exports) {
 
 module.exports = {}
 
 /***/ }),
-/* 155 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7794,7 +7511,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {};
 
 /***/ }),
-/* 156 */
+/* 161 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -7805,21 +7522,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 157 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(158)
+__vue_styles__.push(__webpack_require__(163)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(159)
+__vue_exports__ = __webpack_require__(164)
 
 /* template */
-var __vue_template__ = __webpack_require__(160)
+var __vue_template__ = __webpack_require__(165)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -7831,10 +7548,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/mnt/WORK/workspace/creator/creator/weex-flymeui/example/index/components/home.vue"
+__vue_options__.__file = "/Users/suen/Documents/develop/project/weex-flymeui/example/index/components/home.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-b7a8250a"
+__vue_options__._scopeId = "data-v-48a00175"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -7849,7 +7566,7 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 158 */
+/* 163 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -7897,7 +7614,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 159 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7909,30 +7626,90 @@ Object.defineProperty(exports, "__esModule", {
 
 var _index = __webpack_require__(5);
 
-var _title = __webpack_require__(76);
-
-var _title2 = _interopRequireDefault(_title);
-
-var _category = __webpack_require__(77);
+var _category = __webpack_require__(85);
 
 var _category2 = _interopRequireDefault(_category);
 
-var _setNav = __webpack_require__(84);
-
-var _category3 = __webpack_require__(85);
-
-var _category4 = _interopRequireDefault(_category3);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     data: function data() {
         return {
-            category: _category4.default
+            category: _category2.default
         };
     },
 
-    components: { Title: _title2.default, Category: _category2.default, FmText: _index.FmText, FmImage: _index.FmImage },
+    components: { FmText: _index.FmText, FmImage: _index.FmImage },
     methods: {
         jump: function jump(type) {
             if (this.$router) {
@@ -7940,78 +7717,10 @@ exports.default = {
             }
         }
     }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+};
 
 /***/ }),
-/* 160 */
+/* 165 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -8077,21 +7786,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 161 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(162)
+__vue_styles__.push(__webpack_require__(167)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(163)
+__vue_exports__ = __webpack_require__(168)
 
 /* template */
-var __vue_template__ = __webpack_require__(168)
+var __vue_template__ = __webpack_require__(173)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -8103,10 +7812,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/mnt/WORK/workspace/creator/creator/weex-flymeui/example/index/components/detail.vue"
+__vue_options__.__file = "/Users/suen/Documents/develop/project/weex-flymeui/example/index/components/detail.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-14a4b6ed"
+__vue_options__._scopeId = "data-v-6c63b467"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -8121,7 +7830,7 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 162 */
+/* 167 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -8160,7 +7869,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 163 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8172,27 +7881,17 @@ Object.defineProperty(exports, "__esModule", {
 
 var _index = __webpack_require__(5);
 
-var _cell = __webpack_require__(164);
+var _cell = __webpack_require__(169);
 
 var _cell2 = _interopRequireDefault(_cell);
 
-var _title = __webpack_require__(76);
-
-var _title2 = _interopRequireDefault(_title);
-
-var _category = __webpack_require__(77);
+var _category = __webpack_require__(85);
 
 var _category2 = _interopRequireDefault(_category);
 
-var _setNav = __webpack_require__(84);
-
-var _category3 = __webpack_require__(85);
-
-var _category4 = _interopRequireDefault(_category3);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
+var navigator = weex.requireModule('navigator'); //
 //
 //
 //
@@ -8254,7 +7953,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 
-var navigator = weex.requireModule('navigator');
 var env = weex.config.env;
 var url = weex.config.bundleUrl;
 
@@ -8263,10 +7961,10 @@ exports.default = {
         type: String,
         category: Object
     },
-    components: { Title: _title2.default, Category: _category2.default, FmText: _index.FmText, FmImage: _index.FmImage, FmIcon: _index.FmIcon, DCell: _cell2.default },
+    components: { FmText: _index.FmText, FmImage: _index.FmImage, FmIcon: _index.FmIcon, DCell: _cell2.default },
     created: function created() {
         this.$route.params.type ? this.type = this.$route.params.type : this.$router.go(-1);
-        this.category = _category4.default[this.type];
+        this.category = _category2.default[this.type];
     },
 
     methods: {
@@ -8288,21 +7986,21 @@ exports.default = {
 };
 
 /***/ }),
-/* 164 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(165)
+__vue_styles__.push(__webpack_require__(170)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(166)
+__vue_exports__ = __webpack_require__(171)
 
 /* template */
-var __vue_template__ = __webpack_require__(167)
+var __vue_template__ = __webpack_require__(172)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -8314,10 +8012,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/mnt/WORK/workspace/creator/creator/weex-flymeui/example/index/components/cell.vue"
+__vue_options__.__file = "/Users/suen/Documents/develop/project/weex-flymeui/example/index/components/cell.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-eb14ef04"
+__vue_options__._scopeId = "data-v-2ee99c78"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -8332,7 +8030,7 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 165 */
+/* 170 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -8359,7 +8057,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 166 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8426,7 +8124,7 @@ exports.default = {
 //
 
 /***/ }),
-/* 167 */
+/* 172 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -8478,7 +8176,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 168 */
+/* 173 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

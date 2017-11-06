@@ -62,10 +62,7 @@
 <script>
 import { FmText, FmImage, FmIcon } from '../../../index';
 import DCell from './cell.vue';
-import Title from '../../_mods/title.vue';
-import Category from '../../_mods/category.vue';
-import { setTitle } from '../../_mods/set-nav';
-import category from './category.js'
+import category from '../../category.js'
 const navigator = weex.requireModule('navigator')
 let env = weex.config.env
 let url = weex.config.bundleUrl
@@ -75,7 +72,7 @@ export default {
         type: String,
         category: Object
     },
-    components: { Title, Category, FmText, FmImage, FmIcon, DCell },
+    components: { FmText, FmImage, FmIcon, DCell },
     created() {
         this.$route.params.type ? this.type = this.$route.params.type : this.$router.go(-1)
         this.category = category[this.type]

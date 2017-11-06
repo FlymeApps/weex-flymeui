@@ -87,7 +87,7 @@
     created () {
       dom.addRule('fontFace', {
         'fontFamily': 'flymeicon',
-        'src': "url('http://weixin.res.flyme.cn/upload/iconfont.ttf')"
+        'src': "url('http://design.flyme.cn/weexui/assets/iconfont.ttf')"
       })
     },
     methods: {

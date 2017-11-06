@@ -69,10 +69,7 @@
 
 <script>
 import { FmText, FmImage } from '../../../index';
-import Title from '../../_mods/title.vue';
-import Category from '../../_mods/category.vue';
-import { setTitle } from '../../_mods/set-nav';
-import category from './category.js'
+import category from '../../category.js'
 
 export default {
     data() {
@@ -80,7 +77,7 @@ export default {
             category: category
         }
     },
-    components: { Title, Category, FmText, FmImage },
+    components: { FmText, FmImage },
     methods: {
         jump(type) {
             if (this.$router) {
