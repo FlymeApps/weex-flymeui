@@ -8,9 +8,8 @@
 </template>
 
 <script>
-  const Utils = require('./utils');
   import FmText from '../fm-text'
-  module.exports = {
+  export default {
     components: { FmText },
     props: {
       linkValue: {

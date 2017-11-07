@@ -36,7 +36,7 @@
   import FmText from '../fm-text'
   import FmIcon from '../fm-icon'
   import FmTag from '../fm-tag'
-  module.exports = {
+  export default {
     components: {
       FmText, FmIcon, FmTag
     },

@@ -53,7 +53,7 @@
   import FmIcon from '../fm-icon'
   import FmTag from '../fm-tag'
   import FmRichTextLink from './fm-rich-text-link.vue'
-  module.exports = {
+  export default {
     components: {
       FmText, FmIcon, FmTag, FmRichTextLink
     },
