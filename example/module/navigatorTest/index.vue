@@ -1,23 +1,15 @@
 <template>
     <div class="flymeui">
-        <scroller class="scroller">
-            <div class="header">
-                <div style="margin-left: 16.667px;">
-                    <fm-text class="title" textValue="Navigator" medium
-                                      :text-style="{fontSize: 21, color: '#000', fontWeight: 500, lineHeight: 23}" />
-                    <fm-text class="subTitle" textValue="页面导航" 
-                                      :text-style="{fontSize: 12, color: '#000', fontWeight: 300, lineHeight: 14, marginTop: 2}" />
-                </div>
+        <div class="container">
+            <div class="logo">
+                <fm-image :scale="1/3" src="http://design.flyme.cn/weexui/assets/design_logo.png"/>
+                <fm-text class="desc" textValue="为你提供最全面的公共规范内容展示，让你方便调用动画参数、设计参数以及控件代码" 
+                                      :style="{fontSize: 14, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
             </div>
-            <div class="list">
-                <d-cell title="背景颜色" subTitle="配置跳转后的界面背景颜色" @click="demo1"></d-cell>
-                <d-cell title="全屏模式" subTitle="配置跳转后的界面是否全屏" @click="demo2"></d-cell>
-                <d-cell title="沉浸式状态栏" subTitle="配置使用沉浸式状态栏" @click="demo3"></d-cell>
-                <d-cell title="状态栏 ( StatusBar )" subTitle="自定义状态栏" @click="demo4"></d-cell>
-                <d-cell title="标题栏 ( ActionBar )" subTitle="自定义标题栏" @click="demo5"></d-cell>
-                <d-cell title="底部导航 ( NavigationBar )" subTitle="自定义底部导航" @click="demo6"></d-cell>
+            <div class="bottom">
+                <fm-input />
             </div>
-        </scroller>
+        </div>
     </div>
 </template>
 
@@ -42,35 +34,41 @@
         background-color: #fafafa;
     }
 
-    .scroller {
+    .container {
+        position: relative;
+        flex: 1;
         background-color: #fafafa;
     }
-
-    .header {
-        flex-direction: row;
-        align-items: flex-end;
-        margin-top: 23.6667px;
-        margin-bottom: 34.6667px;
-        margin-left: 24px;
+    
+    .logo {
+        margin-top: 64px;
+        align-items: center;
+        justify-content: space-between;
     }
 
-    .list {
-        margin-left: 9.333px;
-        margin-right: 9.333px;
-        padding: 9.333px;
+    .desc {
+        width: 258.3333px;
+        margin-top: 18px;
+    }
+
+    .bottom {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
     }
 </style>
 
 <script>
-import { FmText, FmImage, FmIcon } from '../../../index';
+import { FmText, FmImage, FmIcon, FmInput } from '../../../index';
 import DCell from '../../index/components/cell.vue';
 
 const navigator = weex.requireModule('navigator')
 
-let url = weex.config.bundleUrl.replace(/navigator\/index.native.js/, 'navigatorTest/index.native.js')
+let url = weex.config.bundleUrl
 
 export default {
-    components: { FmText, FmIcon, DCell },
+    components: { FmText, FmIcon, FmInput, FmImage, DCell },
     methods: {
       back() {
         navigator.pop()

@@ -77,7 +77,7 @@ export default {
             {
                 name: 'Navigator',
                 subname: '页面导航',
-                path: 'module/button'
+                path: 'module/navigator'
             }, {
                 name: 'Flyme Login',
                 subname: 'Flyme账号信息',
