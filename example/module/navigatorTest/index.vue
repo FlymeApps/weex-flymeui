@@ -5,6 +5,18 @@
                 <fm-image :scale="1/3" src="http://design.flyme.cn/weexui/assets/design_logo.png"/>
                 <fm-text class="desc" textValue="为你提供最全面的公共规范内容展示，让你方便调用动画参数、设计参数以及控件代码" 
                                       :style="{fontSize: 14, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
+
+               <fm-text class="desc" textValue="参数使用文档请参考:http://design.flyme.cn/book/book.html?bookId=59df3445a5a0a611eee9f119&doc=59df4b0567e2271c7fc46b3e" 
+                                      :style="{fontSize: 14, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
+<fm-text class="desc" textValue="参数使用文档请参考:http://design.flyme.cn/book/book.html?bookId=59df3445a5a0a611eee9f119&doc=59df4b0567e2271c7fc46b3e" 
+                                      :style="{fontSize: 14, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
+
+<fm-text class="desc" textValue="参数使用文档请参考:http://design.flyme.cn/book/book.html?bookId=59df3445a5a0a611eee9f119&doc=59df4b0567e2271c7fc46b3e" 
+                                      :style="{fontSize: 14, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
+
+<fm-text class="desc" textValue="参数使用文档请参考:http://design.flyme.cn/book/book.html?bookId=59df3445a5a0a611eee9f119&doc=59df4b0567e2271c7fc46b3e" 
+                                      :style="{fontSize: 14, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
+
             </div>
             <div class="bottom">
                 <fm-input />
@@ -49,6 +61,11 @@
     .desc {
         width: 258.3333px;
         margin-top: 18px;
+    }
+
+    .content {
+        width: 258.3333px;
+        margin-top: 100px;
     }
 
     .bottom {

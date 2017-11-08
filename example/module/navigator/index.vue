@@ -10,12 +10,13 @@
                 </div>
             </div>
             <div class="list">
-                <d-cell title="背景颜色" subTitle="配置跳转后的界面背景颜色" @click="demo1"></d-cell>
+                <d-cell title="默认状态栏" subTitle="使用默认状态栏,白色背景" @click="demo1"></d-cell>
                 <d-cell title="全屏模式" subTitle="配置跳转后的界面是否全屏" @click="demo2"></d-cell>
-                <d-cell title="沉浸式状态栏" subTitle="配置使用沉浸式状态栏" @click="demo3"></d-cell>
-                <d-cell title="状态栏 ( StatusBar )" subTitle="自定义状态栏" @click="demo4"></d-cell>
-                <d-cell title="标题栏 ( ActionBar )" subTitle="自定义标题栏" @click="demo5"></d-cell>
-                <d-cell title="底部导航 ( NavigationBar )" subTitle="自定义底部导航" @click="demo6"></d-cell>
+                <d-cell title="输入框" subTitle="配置SoftInputMode" @click="demo3"></d-cell>
+                <d-cell title="沉浸式状态栏" subTitle="配置使用沉浸式状态栏" @click="demo4"></d-cell>
+                <d-cell title="状态栏 ( StatusBar )" subTitle="自定义状态栏" @click="demo5"></d-cell>
+                <d-cell title="标题栏 ( ActionBar )" subTitle="自定义标题栏" @click="demo6"></d-cell>
+                <d-cell title="底部导航 ( NavigationBar )" subTitle="自定义底部导航" @click="demo7"></d-cell>
             </div>
         </scroller>
     </div>
@@ -75,48 +76,63 @@ export default {
       back() {
         navigator.pop()
       },
-      demo1() {
+      demo1() {   // 默认状态栏
         navigator.push({
             url: url,
-            animated: true,
-            theme: {
-              backgroundColor: "#4422CC"  // activity 背景色
-            }
+            animated: true   
         })
       },
-      demo2() {
+      demo2() {  // 全屏
         navigator.push({
             url: url,
             animated: 'true',
             theme: {
-              fullScreen: true  // 是否全屏，首先判断，全屏时statusBar、navigationBar、actionBar不起作用
+              fullScreen: true  ,// 是否全屏，首先判断，全屏时statusBar、navigationBar、actionBar不起作用
+              softmode: "adjustResize"
             }
         })
       },
-      demo3() {
+      demo3() {  //softmode
         navigator.push({
             url: url,
             animated: true,
             theme: {
-              immersion: true  // 沉浸式状态栏
+              immersion: false , // 沉浸式状态栏
+              softmode: "adjustResize"
             }
         })
       },
-      demo4() {
+      demo4() {  //沉浸式状态栏
+        navigator.push({
+            url: url,
+            animated: true,
+            theme: {
+              immersion: true , // 沉浸式状态栏
+              softmode: "adjustResize",
+              theme: {
+              statusBar: {  // 状态栏 
+                transparent: true, // 设置后color、alpha不起作用，状态栏颜色同actionbar
+                darkIcon: false //是否使用深色图标
+              }
+            }
+            }
+        })
+      },
+      demo5() {
         navigator.push({
             url: url,
             animated: true,
             theme: {
               statusBar: {  // 状态栏 
                 color: "#FFB4B4B4", //状态栏颜色,颜色值使用 #AARRGGBB 格式
-                alpha: 1, // alpha值 0.0-1.0之间，设置alpha后color 的#AARRGGBB的AA不起作用
+                alpha: 1.0, // alpha值 0.0-1.0之间，设置alpha后color 的#AARRGGBB的AA不起作用
                 transparent: false, // 设置后color、alpha不起作用，状态栏颜色同actionbar
                 darkIcon: false //是否使用深色图标
               }
             }
         })
       },
-      damo5() {
+      demo6() {
         navigator.push({
             url: url,
             animated: true,
@@ -132,11 +148,14 @@ export default {
             }
         })
       },
-      damo6() {
+      demo7() {
         navigator.push({
             url: url,
             animated: true,
             theme: {
+              statusBar: {  // 状态栏 
+                darkIcon: true //是否使用深色图标
+              },
               naviBar: { // NavigationBar 
                 hide: true,  // 是否隐藏
                 color: "#FFFFFFFF",   // 颜色值使用 #AARRGGBB 格式
