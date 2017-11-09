@@ -1,7 +1,7 @@
 <template>
 	<div class="mzui-demo">
 		<scroller class="scroller">
-			<title title="fm-tips"></title>
+			<title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59eff237a5a0a6738061af04"></title>
 			<category title="默认样式"></category>
 			<div class="wrap">
 				<fm-text class="title" text="需要提示的文字" />

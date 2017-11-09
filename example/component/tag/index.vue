@@ -1,7 +1,7 @@
 <template>
   <div class="mzui-demo">
     <scroller class="scroller">
-      <title title="fm-tag"></title>
+      <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59efe977a5a0a6738061aefd"></title>
       <category title="小标签"></category>
       <div class="cell">
         <fm-tag value="新手上路"></fm-tag>

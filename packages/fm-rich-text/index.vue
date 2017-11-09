@@ -48,7 +48,7 @@
 </style>
 
 <script>
-  const Utils = require('./utils');
+  import Utils from'./utils'
   import FmText from '../fm-text'
   import FmIcon from '../fm-icon'
   import FmTag from '../fm-tag'

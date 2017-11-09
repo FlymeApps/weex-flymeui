@@ -1,7 +1,7 @@
 <template>
     <div class="mzui-demo">
         <scroller class="scroller">
-            <title title="fm-input"></title>
+            <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59effc7867e2274f086396b6"></title>
             <category title="默认的输入框"></category>
             <fm-input />
             <category title="带初始值的输入框"></category>

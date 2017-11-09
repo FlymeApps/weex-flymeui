@@ -1,7 +1,7 @@
 <template>
   <div class="mzui-demo">
     <scroller class="scroller">
-      <title title="fm-switch"></title>
+      <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59eff86c67e2274f086396b2"></title>
       <category title="基本样式"></category>
       <div class="list">
         <div class="item">

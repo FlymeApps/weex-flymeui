@@ -1,6 +1,6 @@
 <template>
   	<div class="mzui-demo">
-		<title title="fm-tab-view"></title>
+		<title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59f007ab67e2274f086396b8"></title>
 		<category title="TabView"></category>
 		<fm-tab-view :items="items" @slidend="end">
 			<text class="item item1" slot="item1">我是tab1</text>

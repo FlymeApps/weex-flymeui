@@ -1,6 +1,6 @@
 <template>
   <div class="mzui-demo">
-    <scroller class="scroller">
+    <scroller link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59f2fdef67e2274f086396bd">
       <title title="fm-foldable-text"></title>
       <category title="可折叠文本"></category>
       <div class="container">

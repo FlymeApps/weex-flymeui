@@ -1,5 +1,7 @@
 <template>
-    <text :class="textClz" :style="getStyle">{{textValue}}</text>
+    <div @click="fmClick">
+        <text :class="textClz" :style="getStyle">{{textValue}}</text>
+    </div>
 </template>
 
 <style scoped>
@@ -66,7 +68,8 @@ export default {
         hasTextMargin: {
             type: Boolean,
             default: true
-        }
+        },
+        fmClick: Function
     },
 
     computed: {
@@ -102,7 +105,12 @@ export default {
             return {
                 ...this.textStyle
             }
-      }
+        }
+    },
+    methods: {
+        click(e) {
+            this.$emit('fmClick', e);
+        }
     }
 }
 </script>

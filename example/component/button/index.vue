@@ -1,7 +1,7 @@
 <template>
   <div class="mzui-demo">
     <scroller class="scroller">
-      <title title="fm-button"></title>
+      <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59efee69a5a0a6738061aeff"></title>
       <category title="默认按钮"></category>
         <div class="container row">
           <fm-button class="btn" text="安装" @click="click" />

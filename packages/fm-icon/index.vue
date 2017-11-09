@@ -2,13 +2,13 @@
     <image v-if="isImg" class="fm-image"
           :src="value"
           @load="onLoad"
-          @click="e=>$emit('click', e)"
-          @longpress="e=>$emit('longpress', e)"
+          @click="fmClick"
+          @longpress="fmLongpress"
           :style="{ width: computedStyle.width, height: computedStyle.height }">
     </image>
     <text v-else :style="getStyle"
-          @click="e=>$emit('click', e)"
-          @longpress="e=>$emit('longpress', e)"
+          @click="fmClick"
+          @longpress="fmLongpress"
           >{{ getFontName }}
     </text>
 </template>
@@ -38,7 +38,9 @@
       color: {
         type: String,
         default: '#000000'
-      }
+      },
+      fmClick: Function,
+      fmLongpress: Function
     },
     data: () => ({
       width: 43

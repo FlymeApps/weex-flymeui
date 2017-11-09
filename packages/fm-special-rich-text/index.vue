@@ -32,7 +32,7 @@
 </style>
 
 <script>
-  const Utils = require('../fm-rich-text/utils');
+  import Utils from'../fm-rich-text/utils'
   import FmText from '../fm-text'
   import FmIcon from '../fm-icon'
   import FmTag from '../fm-tag'

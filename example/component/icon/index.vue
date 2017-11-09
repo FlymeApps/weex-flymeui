@@ -1,7 +1,7 @@
 <template>
   <div class="mzui-demo">
     <scroller class="scroller">
-      <title title="fm-icon"></title>
+      <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59ef295e67e2274f086396ae"></title>
       <category title="默认 icon"></category>
       <div class="row">
         <fm-icon class="icon" value="&#xe6a3;"/>

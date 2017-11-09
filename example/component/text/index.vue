@@ -1,7 +1,7 @@
 <template>
   <div class="mzui-demo">
     <scroller class="scroller">
-      <title title="fm-text"></title>
+      <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59ef0ed6a5a0a6738061aefb"></title>
       <category title="基本样式"></category>
         <div class="container">
             <FmText class="text" textValue="nomal基本样式" />
