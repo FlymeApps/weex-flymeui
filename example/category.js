@@ -94,6 +94,10 @@ export default {
                 name: 'Native 交互',
                 subname: '提供原生的交互弹框调用',
                 path: 'module/view'
+            }, {
+                name: 'Flyme 网络状态',
+                subname: '提供网路连接相关接口',
+                path: 'module/netinfo'
             }
         ]
     }
