@@ -4,7 +4,7 @@
       <fm-text class="desc" textValue="为你提供最全面的公共规范内容展示，让你方便调用动画参数、设计参数以及控件代码" 
                             :style="{fontSize: 14, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
       <div class="doc">
-        <fm-text :fmClick="click" class="link" textValue="查看使用文档" :style="{fontSize: 12, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400, textDecoration: 'underline'}" />
+        <fm-text :fmClick="click" class="link" textValue="查看使用文档" :style="{fontSize: 12, color: '#198ded', fontWeight: 400, textDecoration: 'underline'}" />
       </div>
   </div>
 </template>

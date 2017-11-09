@@ -1,14 +1,7 @@
 <template>
     <div class="flymeui">
         <scroller class="scroller">
-            <div class="header">
-                <div style="margin-left: 16.667px;">
-                    <fm-text class="title" textValue="Navigator" medium
-                                      :text-style="{fontSize: 21, color: '#000', fontWeight: 500, lineHeight: 23}" />
-                    <fm-text class="subTitle" textValue="页面导航" 
-                                      :text-style="{fontSize: 12, color: '#000', fontWeight: 300, lineHeight: 14, marginTop: 2}" />
-                </div>
-            </div>
+            <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59ef0ed6a5a0a6738061aefb"></title>
             <div class="list">
                 <d-cell title="默认状态栏" subTitle="使用默认状态栏,白色背景" @click="demo1"></d-cell>
                 <d-cell title="全屏模式" subTitle="配置跳转后的界面是否全屏" @click="demo2"></d-cell>
@@ -63,6 +56,7 @@
 </style>
 
 <script>
+import Title from '../../_mods/title.vue';
 import { FmText, FmImage, FmIcon } from '../../../index';
 import DCell from '../../index/components/cell.vue';
 
@@ -71,7 +65,7 @@ const navigator = weex.requireModule('navigator')
 let url = weex.config.bundleUrl.replace(/navigator\/index.native.js/, 'navigatorTest/index.native.js')
 
 export default {
-    components: { FmText, FmIcon, DCell },
+    components: { FmText, FmIcon, DCell, Title },
     methods: {
       back() {
         navigator.pop()

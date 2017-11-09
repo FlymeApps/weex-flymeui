@@ -80,8 +80,20 @@ export default {
                 path: 'module/navigator'
             }, {
                 name: 'Flyme Login',
-                subname: 'Flyme账号信息',
-                path: 'module/switch'
+                subname: '提供 Flyme 账号相关信息获取',
+                path: 'module/userinfo'
+            }, {
+                name: 'Flyme 信息分享',
+                subname: '提供 Flyme 分享接口',
+                path: 'module/share'
+            }, {
+                name: 'Flyme 设备信息',
+                subname: '提供信息的获取接口',
+                path: 'module/device'
+            }, {
+                name: 'Native 交互',
+                subname: '提供原生的交互弹框调用',
+                path: 'module/view'
             }
         ]
     }
