@@ -2,7 +2,7 @@
     <div class="wrapper" @click="fold">
         <div class="container" ref="plane" :style="planeStyle">
             <text :class="textClz" ref="text" :style="textStyle">{{ getText }}</text>
-            <text class="more" v-if="folded" ref="more" :style="moreStyle">{{ tipValue }}</text>
+            <text class="more" v-if="foldable && folded" ref="more" :style="moreStyle">{{ tipValue }}</text>
         </div>
     </div>
 </template>
@@ -47,7 +47,8 @@ export default {
             expandHeight: '',
             unexpandHeight: '',
             animationHeight: '',
-            foldText: ''
+            foldText: '',
+            foldable: true
         }
     },
     props: {
@@ -85,13 +86,14 @@ export default {
             const { textStyle } = this
             let fontSize = (textStyle && textStyle.fontSize) ? textStyle.fontSize : this.large ? 16 : this.huge ? 18 : 12
             // 计算折叠后的文本
-            let size1 = fontSize + fontSize * 0.03 // 汉字
+            let size1 = fontSize + 12 * 0.04 // 汉字
             let size2 = fontSize * 0.56 // 英文
             let size3 = fontSize * 0.556 // 数字
-            let size4 = fontSize * 0.77 // 全角
+            let size4 = fontSize * 0.80 // 全角
             let size5 = fontSize * 0.2 // 半角
             let tSize = 0, tmpStr = ''
-            let maxWith = this.width * this.lines - size1 * this.tipValue.length
+            let hideWidth = this.width * this.lines + fontSize // 不显示“更多”情况下所能容纳最大的字体宽度
+            let maxWith = this.width * this.lines - size1 * this.tipValue.length // 显示“更多”情况下所能容纳最大的字体宽度
             for (let c of this.text) {
                 if (/^[\u4e00-\u9fa5]/.test(c)) {
                     // 汉字
@@ -113,17 +115,22 @@ export default {
                     tSize += size1
                 }
                 if (tSize >= maxWith) {
-                    tmpStr += '..'
-                    break
+                    if (tSize >= hideWidth) {
+                        tmpStr += '..'
+                        break
+                    }
+                } else {
+                    tmpStr += c
                 }
-                tmpStr += c
             }
+            // 文字不超过范围 不折叠
+            (tSize < hideWidth) && (this.foldable = false) && (this.folded = false)
             this.foldText = tmpStr
         }
     },
     computed: {
         getText() {
-            return this.folded ? this.foldText : this.text
+            return this.folded && this.foldable ? this.foldText : this.text
         },
         planeStyle() {
             return {
@@ -136,7 +143,6 @@ export default {
                 lineHeight: this.large ? 24 : this.huge ? 26 : 14,
                 color: '#198ded',
                 fontWeight: '600',
-                backgroundColor: '#fff',
                 ...this.tipStyle
             }
         },
@@ -152,7 +158,7 @@ export default {
     },
     methods: {
         fold() {
-            this.folded = !this.folded
+            this.foldable && (this.folded = !this.folded)
         }
     }
 }

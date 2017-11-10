@@ -4,6 +4,9 @@
       <title title="fm-foldable-text"></title>
       <category title="可折叠文本"></category>
       <div class="container">
+        <fm-foldable-text text="该标准从一开始就是针对 JavaScript 语言制定的，但是之所以不叫 JavaScript，有两个原因。一是商标，Java 是 Sun 公司的的" width="340" lines="2"></fm-foldable-text>
+      </div>
+      <div class="container">
         <fm-foldable-text :text="text" width="340"></fm-foldable-text>
       </div>
       <category title="不同大小"></category>
