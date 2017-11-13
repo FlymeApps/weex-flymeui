@@ -97,7 +97,7 @@ export default {
             }, {
                 name: 'Flyme 网络状态',
                 subname: '提供网路连接相关接口',
-                path: 'module/netinfo'
+                path: 'module/netInfo'
             }
         ]
     }
