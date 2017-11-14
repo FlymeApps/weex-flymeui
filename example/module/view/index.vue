@@ -3,8 +3,12 @@
         <scroller class="scroller">
             <title link="http://design.flyme.cn/book/book.html?bookId=59df3445a5a0a611eee9f119&doc=59e41a2967e2271c7fc46b4e"></title>
             <div class="list">
-                <d-cell title="两个按钮的弹框" subTitle="弹出两个按钮的弹框" @click="demo1"></d-cell>
-                <d-cell title="列表弹框" subTitle="弹出列表弹框" @click="demo2"></d-cell>
+                <d-cell title="Toast" subTitle="Toast提示" @click="demo1"></d-cell>
+                <d-cell title="Toast" subTitle="Toast提示(duration)" @click="demo2"></d-cell>
+                <d-cell title="Toast" subTitle="Toast提示(gravity)" @click="demo3"></d-cell>
+                <d-cell title="两个按钮的弹框" subTitle="弹出两个按钮的弹框" @click="demo4"></d-cell>
+                <d-cell title="列表弹框" subTitle="弹出列表弹框" @click="demo5"></d-cell>
+                
             </div>
         </scroller>
     </div>
@@ -65,7 +69,16 @@ export default {
       back() {
         navigator.pop()
       },
-      demo1() {   // 两个按钮的弹框
+      demo1() {
+          modal.toast({message: "toast content !"})
+       },
+       demo2() {
+          modal.toast({message: "toast content !",duration:5})
+       },
+       demo3() {
+          modal.toast({message: "toast content !",duration:1,gravity:"center"})
+       },
+      demo4() {   // 两个按钮的弹框
         view.showDialog({
           type: 'two_btn',
           data: {
@@ -77,7 +90,7 @@ export default {
           modal.toast({ message: res })
         })
       },
-      demo2() {  // 列表弹框
+      demo5() {  // 列表弹框
         view.showDialog({
           type: 'handle_select',
           data: {
