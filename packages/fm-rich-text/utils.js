@@ -11,7 +11,7 @@ const Utils = {
    * @returns {string}
    * @private
    */
-  _typeof (obj) {
+  _typeof: function (obj) {
     return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
   },
 
@@ -27,7 +27,7 @@ const Utils = {
    * console.log(isPlainObject({})); // true
    * console.log(isPlainObject('')); // false
    */
-  isPlainObject (obj) {
+  isPlainObject: function (obj) {
     return Utils._typeof(obj) === 'object';
   },
 
@@ -43,7 +43,7 @@ const Utils = {
    * console.log(isString({})); // false
    * console.log(isString('')); // true
    */
-  isString (obj) {
+  isString: function (obj) {
     return typeof(obj) === 'string';
   },
 
@@ -59,30 +59,8 @@ const Utils = {
    * console.log(isNonEmptyArray([])); // false
    * console.log(isNonEmptyArray([1,1,1,1])); // true
    */
-  isNonEmptyArray (obj = []) {
+  isNonEmptyArray: function (obj) {
     return obj && obj.length > 0 && Array.isArray(obj) && typeof obj !== 'undefined';
-  },
-  appendProtocol (url) {
-    if (/^\/\//.test(url)) {
-      const {
-        bundleUrl
-      } = weex.config;
-      return `http${/^https:/.test(bundleUrl) ? 's' : ''}:${url}`;
-    }
-    return url;
-  },
-  encodeURLParams (url) {
-    const parsedUrl = new UrlParser(url, true);
-    return parsedUrl.toString();
-  },
-  goToH5Page (jumpUrl, animated = false, callback = null) {
-    const Navigator = weex.requireModule('navigator');
-    const jumpUrlObj = new Utils.UrlParser(jumpUrl, true);
-    const url = Utils.appendProtocol(jumpUrlObj.toString());
-    Navigator.push({
-      url: Utils.encodeURLParams(url),
-      animated: animated,
-    }, callback);
   }
 }
 export default Utils

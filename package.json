@@ -1,6 +1,6 @@
 {
   "name": "@flyme/weex-flymeui",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "main": "index.js",
   "lib": "vue",
   "type": "weex",
@@ -13,7 +13,8 @@
     "watch": "webpack --progress --watch",
     "serve": "anywhere -d dist/example/ -p 8080",
     "start": "npm run build; npm run serve",
-    "dev": "npm run start; npm run serve & npm run watch"
+    "dev": "npm run start; npm run serve & npm run watch",
+    "public": "cnpm publish --registry=http://registry.cnpm.meizu.com"
   },
   "keywords": [
     "Weex Ui",
