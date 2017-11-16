@@ -98,6 +98,10 @@ export default {
                 name: 'Flyme 网络状态',
                 subname: '提供网路连接相关接口',
                 path: 'module/netInfo'
+            }, {
+                name: 'Flyme 地理位置',
+                subname: '提供地理单次或实时获取相关接口',
+                path: 'module/location'
             }
         ]
     }
