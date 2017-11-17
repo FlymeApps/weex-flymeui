@@ -111,14 +111,14 @@ export default {
             enableRefresh: true
         }
         location.watchPosition(res => {
-            this.watchId = res.registerId
+            this.watchId = res.watchId
             modal.toast({ message: res })
         }, err => {
             modal.toast({ message: err })
         }, option)
       },
       demo5() {  // 移除地理位置监听
-        if (!watchId) {
+        if (!this.watchId) {
             modal.toast({ message: '目前没有正在监听' })
         }
         location.clearWatch(this.watchId)
