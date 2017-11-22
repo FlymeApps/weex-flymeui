@@ -1,7 +1,5 @@
 <template>
-    <div @click="fmClick">
-        <text :class="textClz" :style="getStyle">{{textValue}}</text>
-    </div>
+    <text @click="fmClick" :class="textClz" :style="getStyle"><slot></slot>{{textValue}}</text>
 </template>
 
 <style scoped>

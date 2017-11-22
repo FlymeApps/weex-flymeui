@@ -12,30 +12,29 @@
 </template>
 
 <style scoped>
-
     .detail-cell {
         padding-left: 21.6667px;
         padding-right: 21.6667px;
         height: 84px;
-				background-color: #fff;
+		background-color: #fff;
     }
 
-		.content {
-				flex: 1;
-				flex-direction: row;
-				justify-content: space-between;
-				align-items: center;
-		}
-		
-		.border {
-				height: 2px;
-				background-color: #ccc;
-				transform: scaleY(0.3333);
-		}
+	.content {
+		flex: 1;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+	
+	.border {
+		height: 2px;
+		background-color: #ccc;
+		transform: scaleY(0.3333);
+	}
 
-		.cellIcon {
-				transform: rotate(180deg);
-		}
+	.cellIcon {
+		transform: rotate(180deg);
+	}
 
 </style>
 

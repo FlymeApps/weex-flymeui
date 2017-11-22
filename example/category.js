@@ -102,6 +102,10 @@ export default {
                 name: 'Flyme 地理位置',
                 subname: '提供地理单次或实时获取相关接口',
                 path: 'module/location'
+            }, {
+                name: 'Flyme 传感器相关',
+                subname: '提供方向、加速度、陀螺仪等传感器的数据获取',
+                path: 'module/sensor'
             }
         ]
     }
