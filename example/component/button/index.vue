@@ -27,7 +27,8 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="sass" scoped>
+  @import "../../../packages/style/mixin.scss";
   .mzui-demo {
     position: absolute;
     top: 0;
@@ -38,9 +39,9 @@
   }
   
   .container {
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px; 
+    padding-top: size(60);
+    padding-left: size(60);
+    padding-right: size(60);
   }
 
   .row {
@@ -48,7 +49,7 @@
   }
 
   .btn {
-    margin-right: 20px;
+    margin-right: size(60);
   }
   
   .scroller {
@@ -61,8 +62,6 @@ import { FmButton, FmText } from '../../../index';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
 import { setTitle } from '../../_mods/set-nav';
-
-console.log(weex.config.env.weexVersion)
 
 const modal = weex.requireModule('modal');
 

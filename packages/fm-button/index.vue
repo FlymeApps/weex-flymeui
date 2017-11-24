@@ -5,33 +5,30 @@
 </div>
 </template>
 
-<style scoped>
+<style lang="sass" scoped>
+@import "../style/mixin.scss";
 .fm-btn-wrap {
-	height: 24px;
+	height: size(72);
 	align-items: center;
 	flex-direction: row;
-	max-width: 100px;
+	max-width: size(300);
 }
 .fm-btn {
-	height: 24px;
-	padding-left: 12px;
-	padding-right: 12px;
-	line-height: 24px;
-	border-radius: 24px;
-	font-size: 14px;
+	height: size(72);
+	padding-left: size(36);
+	padding-right: size(36);
+	line-height: size(72);
+	border-radius: size(72);
+	font-size: size(42);
 	font-weight: 700;
 	text-align: center;
 	opacity: 0;
+	min-width: size(144);
+	max-width: size(300);
 }
-.fm-btn-small {
-	width: 100px;
-}
-.fm-btn-large {
-	padding-left: 8px;
-	padding-right: 8px;
-}
-.fm-btn-max {
-	width: 100px;
+.fm-btn-max-padding {
+	padding-left: size(24);
+	padding-right: size(24);
 }
 </style>
 
@@ -42,12 +39,11 @@ const large_size = 80 //80dp
 const max_size = 100   //100dp
 const dis_color = '#cccccc'
 const transparent = 'transparent'
+const dom = weex.requireModule('dom')
 
 export default {
 	data() {
 		return {
-			large: false,
-			small: false,
 			max: false,
 			show: false
 		}
@@ -70,14 +66,8 @@ export default {
 		btnClz() {
 			let clz = []
 
-			if (this.large) {
-				clz.push('fm-btn-large')
-			}
-			if (this.small) {
-				clz.push('fm-btn-small')
-			}
 			if (this.max) {
-				clz.push('fm-btn-max')
+				clz.push('fm-btn-max-padding')
 			}
 
 			return clz
@@ -94,7 +84,7 @@ export default {
 					sty.borderColor = this.color
 					sty.borderWidth = 1.44,
 					sty.borderStyle = 'solid',
-					sty.lineHeight = 21.12
+					sty.lineHeight = 21.121
 				}
 			}
 			if (this.disabled) {
@@ -117,19 +107,22 @@ export default {
 	},
 
 	mounted() {
-		let w = this.text.length * 14 + 50
+		dom.getComponentRect(this.$refs.text, option => {
+			console.log('getComponentRect:', option)
+		})
+		// let w = this.text.length * 14 + 50
 
-		if (w < small_size) {
-			this.small = true
-		} else if (w > large_size) {
-			this.large = true
-		}
+		// if (w < small_size) {
+		// 	this.small = true
+		// } else if (w > large_size) {
+		// 	this.large = true
+		// }
 
-		if (w >= max_size) {
-			this.max = true
-		}
+		// if (w >= max_size) {
+		// 	this.max = true
+		// }
 
-		this.show = true
+		// this.show = true
 	}
 }
 </script>

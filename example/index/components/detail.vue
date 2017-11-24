@@ -1,16 +1,16 @@
 <template>
     <div class="flymeui">
         <div class="actionBar">
-            <fm-icon class="actionIcon" :fm-click="back" value="&#xe6b5;" icon-style="24" color="#999"/>
+            <fm-icon class="actionIcon" :fm-click="back" value="&#xe6b5;" icon-style="72" color="#999"/>
         </div>
         <scroller class="scroller">
             <div class="header">
-                <fm-image :scale="1/2" :src="'http://design.flyme.cn/weexui/assets/'+ type +'.png'"/>
-                <div style="margin-left: 16.667px;">
+                <fm-image :scale="3/2" :src="'http://design.flyme.cn/weexui/assets/'+ type +'.png'"/>
+                <div style="margin-left: 50px;">
                     <fm-text class="title" :textValue="category.name" medium
-                                      :text-style="{fontSize: 21, color: '#000', fontWeight: 500, lineHeight: 23}" />
+                                      :text-style="{fontSize: 63, color: '#000', fontWeight: 500, lineHeight: 69}" />
                     <fm-text class="subTitle" :textValue="category.subname" 
-                                      :text-style="{fontSize: 12, color: '#000', fontWeight: 300, lineHeight: 14, marginTop: 2}" />
+                                      :text-style="{fontSize: 36, color: '#000', fontWeight: 300, lineHeight: 42, marginTop: 6}" />
                 </div>
             </div>
             <div class="list">
@@ -22,16 +22,17 @@
     </div>
 </template>
 
-<style scoped>
+<style lang="sass" scoped>
+    @import "../../../packages/style/mixin.scss";
     .actionBar {
-        height: 64px;
-        padding-top: 20px;
+        height: size(192);
+        padding-top: size(60);
     }
 
     .actionIcon {
-        margin-top: 10px;
-        margin-right: 15px;
-        margin-left: 17px;
+        margin-top: size(30);
+        margin-right: size(45);
+        margin-left: size(51);
     }
 
     .flymeui {
@@ -46,15 +47,15 @@
     .header {
         flex-direction: row;
         align-items: flex-end;
-        margin-top: 23.6667px;
-        margin-bottom: 34.6667px;
-        margin-left: 24px;
+        margin-top: size(71);
+        margin-bottom: size(104);
+        margin-left: size(72);
     }
 
     .list {
-        margin-left: 9.333px;
-        margin-right: 9.333px;
-        padding: 9.333px;
+        margin-left: size(27);
+        margin-right: size(27);
+        padding: size(27);
     }
 
 </style>

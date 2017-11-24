@@ -2,10 +2,11 @@
     <text @click="fmClick" :class="textClz" :style="getStyle"><slot></slot>{{textValue}}</text>
 </template>
 
-<style scoped>
+<style lang="sass" scoped>
+    @import "../style/mixin.scss";
     .text {
-        font-size: 14px;
-        line-height: 21px;
+        font-size: size(42);
+        line-height: size(63);
         color: #999;
         font-family: "Source Han Sans CN", Roboto, sans-serif;
     }
@@ -19,32 +20,32 @@
     }
     .light {
         font-weight: 400;
-        line-height: 18px;
+        line-height: size(54);
     }
 
     .title {
-        font-size: 16px;
+        font-size: size(48);
         font-weight: 500;
-        line-height: 23px;
+        line-height: size(69);
         color: #000;
     }
 
     .small {
-        font-size: 12px;
+        font-size: size(36);
     }
     .large {
-        font-size: 16px;
+        font-size: size(48);
         font-weight: 500;
-        line-height: 24px;
+        line-height: size(72);
         color: #000;
     }
     .huge {
-        font-size: 18px;
-        line-height: 27px;
+        font-size: size(54);
+        line-height: size(81);
         color: #000;
     }
     .margin-text {
-        margin-right: 3px;
+        margin-right: size(9);
     }
 </style>
 

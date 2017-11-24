@@ -2,16 +2,16 @@
     <div class="flymeui">
         <scroller class="scroller">
             <div class="header">
-                <fm-image :scale="1/3" src="http://design.flyme.cn/weexui/assets/design_logo.png"/>
+                <fm-image :scale="1" src="http://design.flyme.cn/weexui/assets/design_logo.png"/>
                 <fm-text class="desc" textValue="为你提供最全面的公共规范内容展示，让你方便调用动画参数、设计参数以及控件代码" 
-                                      :style="{fontSize: 14, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
+                                      :text-style="{fontSize: 42, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
             </div>
             <div class="list">
                 <div v-for="(item, key) in category" class="item" @click="jump(key)">
-                    <fm-image :scale="1/3" class="item-icon" :src="'http://design.flyme.cn/weexui/assets/'+ key +'.png'"/>
+                    <fm-image :scale="1" class="item-icon" :src="'http://design.flyme.cn/weexui/assets/'+ key +'.png'"/>
                     <div>
-                        <fm-text :textValue="item.name" title :style="{fontSize: 16, color: '#000', fontWeight: 400}" />
-                        <fm-text :textValue="item.componentList.length + ' 个项目'" :style="{fontSize: 12, color: 'rgba(0, 0, 0, 0.4)', fontWeight: 400}"/>
+                        <fm-text :textValue="item.name" title :text-style="{fontSize: 48, color: '#000', fontWeight: 400}" />
+                        <fm-text :textValue="item.componentList.length + ' 个项目'" :text-style="{fontSize: 36, color: 'rgba(0, 0, 0, 0.4)', fontWeight: 400}"/>
                     </div>
                 </div>
             </div>
@@ -19,7 +19,8 @@
     </div>
 </template>
 
-<style scoped>
+<style lang="sass" scoped>
+    @import "../../../packages/style/mixin.scss";
     .flymeui {
         position: absolute;
         top: 0;
@@ -34,35 +35,31 @@
     }
 
     .header {
-        margin-top: 89px;
-        margin-bottom: 31px;
-        margin-left: 25.6666px;
+        margin-top: size(267);
+        margin-bottom: size(93);
+        margin-left: size(77);
     }
 
     .desc {
-        width: 258.3333px;
-        margin-top: 18px;
+        width: size(775);
+        margin-top: size(54);
     }
 
     .list {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-between;
-        padding: 16px;
+        padding: size(48);
     }
 
     .item {
         justify-content: space-between;
         background-color: #fff;
-        width: 160px;
-        height: 120px;
-        margin-bottom: 6.66666;
-        padding: 16.6667px;
-        box-shadow: 0 0 6.6667px 0 rgba(0, 0, 0, 0.04);
-    }
-
-    .item-icon {
-        
+        width: size(480);
+        height: size(360);
+        margin-bottom: size(20);
+        padding: size(50);
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.04);
     }
 
 </style>

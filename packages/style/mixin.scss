@@ -1,0 +1,4 @@
+$viewport_base: 1080px;  // 视图基准宽度 默认为 1080px
+@function size($size) {
+    @return $size / 1080px * $viewport_base
+}

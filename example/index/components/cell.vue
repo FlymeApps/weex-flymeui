@@ -2,20 +2,21 @@
   <div class="detail-cell" @click="click" bubble="true">
 		<div class="content">
 			<div class="desc">
-				<fm-text :text-value="title" medium="" :text-style="{ fontSize: 16, color: '#000', fontWeight: 500, lineHeight: 18}" />
-				<fm-text :text-value="subTitle" :text-style="{ fontSize: 12, color: 'rgba(0,0,0,0.4)', fontWeight: 300, lineHeight: 14, marginTop: 8.6667 }" />
+				<fm-text :text-value="title" medium="" :text-style="{ fontSize: 48, color: '#000', fontWeight: 500, lineHeight: 54}" />
+				<fm-text :text-value="subTitle" :text-style="{ fontSize: 32, color: 'rgba(0,0,0,0.4)', fontWeight: 300, lineHeight: 42, marginTop: 8.6667 }" />
 			</div>
-			<fm-icon class="cellIcon" value="&#xe6b5;" color="#999" icon-style="24" />
+			<fm-icon class="cellIcon" value="&#xe6b5;" color="#999" icon-style="72" />
 		</div>
 		<div class="border"></div>
   </div>
 </template>
 
-<style scoped>
+<style lang="sass" scoped>
+    @import "../../../packages/style/mixin.scss";
     .detail-cell {
-        padding-left: 21.6667px;
-        padding-right: 21.6667px;
-        height: 84px;
+        padding-left: size(65);
+        padding-right: size(65);
+        height: size(252);
 		background-color: #fff;
     }
 
@@ -27,7 +28,7 @@
 	}
 	
 	.border {
-		height: 2px;
+		height: size(6);
 		background-color: #ccc;
 		transform: scaleY(0.3333);
 	}
@@ -51,7 +52,7 @@ export default {
 	methods: {
 		click(e) {
 			this.$emit('click', e)
-      e.stopPropagation()
+      		e.stopPropagation()
 		}
 	}
 }

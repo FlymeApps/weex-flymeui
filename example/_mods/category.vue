@@ -4,22 +4,22 @@
   </div>
 </template>
 
-<style scoped>
-  .category {
-    margin-top: 10px;
-    padding-left: 12px;
-    width: 360px;
-    height: 34px;
-    background-color: #198ded;
-    justify-content: center;
-  }
+<style lang="sass" scoped>
+    @import "../../packages/style/mixin.scss";
+    .category {
+      margin-top: size(30);
+      padding-left: size(36);
+      width: size(1080);
+      height: size(102);
+      background-color: #198ded;
+      justify-content: center;
+    }
 
-  .category-text {
-    color: #fff;
-    font-weight: 600;
-    font-size: 14px;
-  }
-
+    .category-text {
+      color: #fff;
+      font-weight: 600;
+      font-size: size(42);
+    }
 </style>
 
 <script>

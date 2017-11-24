@@ -13,11 +13,12 @@
     </text>
 </template>
 
-<style scoped>
+<style lang="sass" scoped>
+  @import "../style/mixin.scss";
   .fm-image {
-    width: 43px;
-    height: 12px;
-    margin-right: 6px;
+    width: size(129);
+    height: size(36);
+    margin-right: size(18);
   }
 </style>
 
@@ -33,7 +34,7 @@
       },
       iconStyle: {
         type: [Number, Object],
-        default: 14
+        default: 42
       },
       color: {
         type: String,
@@ -43,12 +44,12 @@
       fmLongpress: Function
     },
     data: () => ({
-      width: 43
+      width: 129
     }),
     computed: {
       computedStyle () {
         if (Object.prototype.toString.call(this.iconStyle).slice(8, -1).toLowerCase() !== 'object') {
-          this.iconStyle = { height: 12 }
+          this.iconStyle = { height: 36 }
         }
         const { width, iconStyle } = this
         if (iconStyle && iconStyle.width && iconStyle.height) {
