@@ -1,40 +1,56 @@
 <template>
-    <div class="fm-tag" :style="{margin: size === 'small' ? '1px' : '1.5px'}">
+    <div :class="tagClass">
         <div v-if="showSolid || showHollow"
             :class="['tag-item','tag-border',showHollow && 'tag-hollow']"
             :style="tagTextStyle">
-        <text class="tag-text" ref='content' :style="textStyle">{{value}}</text>
+        <text :class="textClass" ref='content' :style="textStyle">{{value}}</text>
         </div>
     </div>
 </template>
 
-<style scoped>
-
+<style lang="sass" scoped>
+  @import "../style/mixin.scss";
   .fm-tag {
     align-items: flex-start;
   }
 
   .tag-item {
-    padding: 3px;
+    padding: size(9);
     justify-content: center;
     align-items: center;
     overflow: hidden;
   }
 
   .tag-border {
-    border-bottom-left-radius: 1.5px;
-    border-bottom-right-radius: 1.5px;
-    border-top-left-radius: 1.5px;
-    border-top-right-radius: 1.5px;
+    border-bottom-left-radius: size(4.5);
+    border-bottom-right-radius: size(4.5);
+    border-top-left-radius: size(4.5);
+    border-top-right-radius: size(4.5);
   }
 
   .tag-hollow {
-    border-width: 1px;
+    border-width: size(3);
   }
 
   .tag-text {
     font-family: "Source Han Sans CN", Roboto, sans-serif;
     font-weight: bold;
+  }
+
+  .tag-font-small {
+    font-size: size(24);
+  }
+
+  .tag-font-big {
+    font-size: size(30);
+  }
+
+  .tag-margin-small {
+    margin: size(3);
+  }
+
+  .tag-margin-big {
+    margin: size(6);
   }
 </style>
 
@@ -76,8 +92,20 @@ export default {
         return showSolid ? { backgroundColor: color } : { borderColor: color }
       },
       textStyle() {
-        const { fontColor, size } = this;
-        return {color: fontColor, fontSize: size === 'small' ? '8px' : '10px'}
+        const { fontColor } = this;
+        return { color: fontColor }
+      },
+      textClass() {
+        let clz = ["tag-text"]
+        const { size } = this;
+        fontSize: size === 'small' ? clz.push("tag-font-small") : clz.push("tag-font-big")
+        return clz
+      },
+      tagClass() {
+        let clz = ["fm-tag"]
+        const { size } = this;
+        fontSize: size === 'small' ? clz.push("tag-margin-small") : clz.push("tag-margin-small")
+        return clz
       }
     }
 }

@@ -11,11 +11,11 @@
       </div>
       <category title="自定义大小颜色 icon"></category>
       <div class="example">
-        <fm-icon class="icon" iconStyle='18' value="&#xe6c6;" color='#198ded' />
-        <fm-icon class="icon" iconStyle='24' value="&#xe6b6;" color='#04c0cf' />
-        <fm-icon class="icon" iconStyle='36' value="&#xe6a3;" color='#de2a2a' />
-        <fm-icon class="icon" iconStyle='24' value="&#xe6bb;" color='#7e97ac' />
-        <fm-icon class="icon" iconStyle='18' value="&#xe6cb;" color='#ffaf00' />
+        <fm-icon class="icon" iconStyle='54' value="&#xe6c6;" color='#198ded' />
+        <fm-icon class="icon" iconStyle='72' value="&#xe6b6;" color='#04c0cf' />
+        <fm-icon class="icon" iconStyle='108' value="&#xe6a3;" color='#de2a2a' />
+        <fm-icon class="icon" iconStyle='72' value="&#xe6bb;" color='#7e97ac' />
+        <fm-icon class="icon" iconStyle='54' value="&#xe6cb;" color='#ffaf00' />
       </div>
       <category title="所有提供的 icon"></category>
         <div class="row">
@@ -413,7 +413,7 @@
   }
 
   .cell {
-    padding: 15px;
+    padding: 45px;
     flex-direction: row;
     align-items: flex-start;
   }
@@ -427,7 +427,7 @@
     text-align: left;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 10px;
+    padding: 30px;
   }
 
   .row {
@@ -438,11 +438,11 @@
   }
 
   .col {
-    width: 72px;
+    width: 216px;
   }
 
   .icon, .disc {
-    margin: 10px;
+    margin: 30px;
     text-align: center;
   }
 </style>

@@ -14,6 +14,7 @@
 	max-width: size(300);
 }
 .fm-btn {
+	opacity: 0;
 	height: size(72);
 	padding-left: size(36);
 	padding-right: size(36);
@@ -22,13 +23,20 @@
 	font-size: size(42);
 	font-weight: 700;
 	text-align: center;
-	opacity: 0;
 	min-width: size(144);
 	max-width: size(300);
 }
 .fm-btn-max-padding {
 	padding-left: size(24);
 	padding-right: size(24);
+}
+.fm-btn-show {
+
+}
+.fm-btn-hollow {
+	border-width: size(4.32);
+	line-height: size(63.363);
+	border-stye: solid;
 }
 </style>
 
@@ -70,6 +78,10 @@ export default {
 				clz.push('fm-btn-max-padding')
 			}
 
+			if (this.bgColor == transparent) {
+				clz.push('fm-btn-hollow')
+			}
+
 			return clz
 		},
 		btnStyle() {
@@ -82,9 +94,6 @@ export default {
 				sty.color = this.color
 				if (this.bgColor == transparent) {
 					sty.borderColor = this.color
-					sty.borderWidth = 1.44,
-					sty.borderStyle = 'solid',
-					sty.lineHeight = 21.121
 				}
 			}
 			if (this.disabled) {
@@ -108,21 +117,11 @@ export default {
 
 	mounted() {
 		dom.getComponentRect(this.$refs.text, option => {
-			console.log('getComponentRect:', option)
+			if (option.size.width >= 240) {
+				this.max = true
+			}
+			this.show = true
 		})
-		// let w = this.text.length * 14 + 50
-
-		// if (w < small_size) {
-		// 	this.small = true
-		// } else if (w > large_size) {
-		// 	this.large = true
-		// }
-
-		// if (w >= max_size) {
-		// 	this.max = true
-		// }
-
-		// this.show = true
 	}
 }
 </script>

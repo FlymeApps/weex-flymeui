@@ -4,16 +4,18 @@
             <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59effc7867e2274f086396b6"></title>
             <category title="默认的输入框"></category>
             <fm-input />
+            <category title="密文模式"></category>
+            <fm-input type="password" placeholder="password" />
+            <category title="日期输入"></category>
+            <fm-input type="time" placeholder="time" />
+            <category title="修改 placeholder"></category>
+            <fm-input type="text" placeholder="placeholder" />
             <category title="带初始值的输入框"></category>
-            <fm-input type="textarea" placeholder="textarea" />
             <fm-input value="value" />
             <category title="限制最大输入长度"></category>
             <fm-input maxlength="20" placeholder="maxlength:20" />
-            <category title="不同的输入类型"></category>
-            <fm-input type="time" placeholder="time" />
-            <fm-input type="password" placeholder="password" />
-            <category title="输入有误"></category>
-            <fm-input hasError value="hasError" />
+            <category title="输入校验"></category>
+            <fm-input type="text" :inputPattern="/^[0-9]{1,20}$/" inputErrorMessage="请输入数字" />
         </scroller>
     </div>
 </template>
@@ -28,12 +30,12 @@
         background-color: #fff;
     }
     .title {
-        margin-top: 20px;
-        margin-bottom: 10px;
+        margin-top: 60px;
+        margin-bottom: 30px;
         color: #aaa;
     }
     .contaniner {
-        padding: 10px;
+        padding: 30px;
     }
 </style>
 

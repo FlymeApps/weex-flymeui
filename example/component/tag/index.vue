@@ -35,7 +35,7 @@
   }
 
   .cell {
-    padding: 15px;
+    padding: 45px;
     flex-direction: row;
     align-items: flex-start;
   }
