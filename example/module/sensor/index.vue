@@ -40,14 +40,14 @@
 
 <style scoped>
     .actionBar {
-        height: 64px;
-        padding-top: 20px;
+        height: 192px;
+        padding-top: 60px;
     }
 
     .actionIcon {
-        margin-top: 10px;
-        margin-right: 15px;
-        margin-left: 17px;
+        margin-top: 30px;
+        margin-right: 45px;
+        margin-left: 51px;
     }
 
     .flymeui {
@@ -66,19 +66,19 @@
     .header {
         flex-direction: row;
         align-items: flex-end;
-        margin-top: 23.6667px;
-        margin-bottom: 34.6667px;
-        margin-left: 24px;
+        margin-top: 71px;
+        margin-bottom: 104px;
+        margin-left: 72px;
     }
 
     .list {
-        margin-left: 9.333px;
-        margin-right: 9.333px;
-        padding: 9.333px;
+        margin-left: 28px;
+        margin-right: 28px;
+        padding: 28px;
     }
 
     .apiTitle {
-        padding: 9.333px 0 0 0;
+        padding: 28px 0 0 0;
         background-color: #fff;
     }
     
@@ -88,7 +88,7 @@
 
     .data {
         text-align: left;
-        padding-left: 21.6667px;
+        padding-left: 65px;
     }
 </style>
 
