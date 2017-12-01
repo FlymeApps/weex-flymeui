@@ -1,28 +1,35 @@
 <template>
-<div class="fm-image">
     <image :style="getStyle" @load="onLoad" ref="img" :src="src"/>
-</div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            width: 1,
-            height: 1
-        }
-    },
+    data: () => ({
+        loaded: false
+    }),
     props: {
         src: {
             type: String,
             default: ''
         },
-        imgStyle: {
-            type: Object
-        },
         scale: {
             type: Number,
+            default: 0
+        },
+        width: {
+            type: Number,
             default: 1
+        },
+        height: {
+            type: Number,
+            default: 1
+        },
+        occupyingColor: {
+            type: Number,
+            default: 'transparent'
+        },
+        imgStyle: {
+            type: Object
         }
     },
     computed: {
@@ -30,13 +37,15 @@ export default {
             return {
                 width: this.width,
                 height: this.height,
+                backgroundColor: this.loaded ? 'transparent' : this.occupyingColor,
                 ...this.imgStyle
             }
         }
     },
     methods: {
         onLoad (e) {
-            if (e.success && e.size && e.size.naturalWidth > 0) {
+            e.success && (this.loaded = true)
+            if (e.success && e.size && e.size.naturalWidth > 0 && this.scale) {
                 this.width = e.size.naturalWidth * this.scale
                 this.height = e.size.naturalHeight * this.scale
             }

@@ -2,7 +2,7 @@
     <div class="flymeui">
         <scroller class="scroller">
             <div class="header">
-                <fm-image :scale="1" src="http://design.flyme.cn/weexui/assets/design_logo.png"/>
+                <fm-image width="655" height="105" :scale="1" src="http://design.flyme.cn/weexui/assets/design_logo.png"/>
                 <fm-text class="desc" textValue="为你提供最全面的公共规范内容展示，让你方便调用动画参数、设计参数以及控件代码" 
                                       :text-style="{fontSize: 42, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
             </div>
