@@ -14,6 +14,7 @@ import FmImage from './packages/fm-image';
 import FmOverlay from './packages/fm-overlay';
 import FmDialog from './packages/fm-dialog';
 import FmDialogBtn from './packages/fm-dialog-btn';
+import { confirm, alert } from './packages/module/dialog.js';
 
 export {
   FmSwitch,
@@ -31,5 +32,7 @@ export {
   FmImage,
   FmOverlay,
   FmDialog,
-  FmDialogBtn
+  FmDialogBtn,
+  confirm,
+  alert
 }

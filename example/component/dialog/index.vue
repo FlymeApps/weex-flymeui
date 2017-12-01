@@ -8,6 +8,11 @@
           <fm-button class="btn" text="多个按钮" @click="click2" />
           <fm-button class="btn" text="多行弹框" @click="click3" />
         </div>
+      <category title="js 调用弹框"></category>
+        <div class="container row">
+          <fm-button class="btn" text="对话框" @click="click4" />
+          <fm-button class="btn" text="提示框" @click="click5" />
+        </div>
         <!-- <fm-dialog :show="show"
                    title="退出浏览器并清空历史记录"
                    content="弹框内容区域此处展示各种描述弹框内容区域此处展示各种"
@@ -23,7 +28,7 @@
                    :title="title"
                    :content="content"
                    @fmDialogBtnClicked="btnClick"
-                   :can-auto-close="false"
+                   :can-auto-close="true"
                    :btns="btns">
                    </fm-dialog>
     </scroller>
@@ -62,7 +67,7 @@
 </style>
 
 <script>
-import { FmButton, FmDialog, FmDialogBtn } from '../../../index';
+import { FmButton, FmDialog, FmDialogBtn, confirm, alert } from '../../../index';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
 import { setTitle } from '../../_mods/set-nav';
@@ -105,6 +110,26 @@ export default {
         this.content = ''
         this.btns = []
         this.show = true
+      },
+      click4() {
+        confirm({
+          title: '这是 js 调用弹出的弹框',
+          message: '用户操作后返回的是一个 Promise 对象，可自行做处理。弹框的取消以及确定字体可以通过 cancelText 以及 confirmText 属性进行更改'
+        }).then(() => {
+          modal.toast({ message: '确定' })
+        }, () => {
+          modal.toast({ message: '取消' })
+        })
+      },
+      click5() {
+        alert({
+          title: '这是 js 调用弹出的提示框',
+          message: '用户操作后返回的是一个 Promise 对象，可自行做处理。弹框的确定按钮可以通过 confirmText 属性进行更改'
+        }).then(() => {
+          modal.toast({ message: '提示框消失了' })
+        }, () => {
+          modal.toast({ message: '点击蒙层消失了' })
+        })
       },
       btnClick(btn) {
         if (btn.type === 'cancel') {

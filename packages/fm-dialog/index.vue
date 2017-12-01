@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="self_show">
       <fm-overlay v-if="self_show"
                   :show="self_show"
                   :hasAnimation="true"
@@ -67,6 +67,8 @@
 
 <script>
 const animation = weex.requireModule('animation');
+const type_alert = 'alert'
+const type_confirm = 'confirm'
 import FmOverlay from '../fm-overlay'
 import FmText from '../fm-text'
 import FmDialogBtn from '../fm-dialog-btn'
@@ -121,10 +123,19 @@ export default {
         type: Boolean,
         default: true
       },
-      btns: Array,
+      btns: {
+        type: Array,
+        default: []
+      },
       btnDirection: {
         type: String,
         default: 'row'
+      },
+      cancelCb: Function,
+      confirmCb: Function,
+      type: {
+        type: String,
+        default: type_confirm
       }
     },
     data: () => ({
@@ -153,13 +164,20 @@ export default {
       dialogBtns() {
         let btns = []
         if (!this.btns || !this.btns.length) {
-            btns = [{
+          if (this.type === type_alert) {
+            btns =   [{
+              text: this.confirmText,
+              type: 'confirm'
+            }]
+          } else if (this.type === type_confirm) {
+            btns =   [{
               text: this.cancelText,
               type: 'cancel'
             }, {
               text: this.confirmText,
               type: 'confirm'
             }]
+          }
         } else {
           btns = btns.concat(this.btns)
         }
@@ -180,12 +198,15 @@ export default {
     },
     methods: {
       overlayClick() {
+        this.cancelCb && this.cancelCb()
         this.canAutoClose && this.$emit('fmDialogBtnClicked', { type: 'cancel' })
       },
       btnClick(btn) {
         if (btn.type && btn.type === 'cancel') {
+          this.cancelCb && this.cancelCb()
           this.$emit('fmDialogBtnClicked', { type: 'cancel' })
         } else if (btn.type && btn.type === 'confirm') {
+          this.confirmCb && this.confirmCb()
           this.$emit('fmDialogBtnClicked', { type: 'confirm' })
         } else {
           this.$emit('fmDialogBtnClicked', btn)
