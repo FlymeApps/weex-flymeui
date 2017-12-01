@@ -106,6 +106,10 @@ export default {
                 name: 'Flyme 传感器相关',
                 subname: '提供方向、加速度、陀螺仪等传感器的数据获取',
                 path: 'module/sensor'
+            }, {
+                name: '媒体接口 -- 扫码',
+                subname: '调起相机扫码',
+                path: 'module/scan'
             }
         ]
     }
