@@ -11,6 +11,9 @@ import FmRichText from './packages/fm-rich-text';
 import FmSpecialRichText from './packages/fm-special-rich-text';
 import FmFoldableText from './packages/fm-foldable-text';
 import FmImage from './packages/fm-image';
+import FmOverlay from './packages/fm-overlay';
+import FmDialog from './packages/fm-dialog';
+import FmDialogBtn from './packages/fm-dialog-btn';
 
 export {
   FmSwitch,
@@ -25,5 +28,8 @@ export {
   FmRichText,
   FmSpecialRichText,
   FmFoldableText,
-  FmImage
+  FmImage,
+  FmOverlay,
+  FmDialog,
+  FmDialogBtn
 }

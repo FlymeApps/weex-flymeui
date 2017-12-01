@@ -1,0 +1,121 @@
+<template>
+  <div class="mzui-demo">
+    <scroller class="scroller">
+      <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59efee69a5a0a6738061aeff"></title>
+      <category title="确认弹框"></category>
+        <div class="container row">
+          <fm-button class="btn" text="两个按钮" @click="click1" />
+          <fm-button class="btn" text="多个按钮" @click="click2" />
+          <fm-button class="btn" text="多行弹框" @click="click3" />
+        </div>
+        <!-- <fm-dialog :show="show"
+                   title="退出浏览器并清空历史记录"
+                   content="弹框内容区域此处展示各种描述弹框内容区域此处展示各种"
+                   @fmDialogBtnClicked="btnClick"
+                   :can-auto-close="false">
+                   <div slot="btn-group">
+                      <fm-dialog-btn type="1" text="12321"></fm-dialog-btn>
+                      <fm-dialog-btn type="2" text="12321"></fm-dialog-btn>
+                      <fm-dialog-btn type="3" text="12321"></fm-dialog-btn>
+                   </div>
+                   </fm-dialog> -->
+        <fm-dialog :show="show"
+                   :title="title"
+                   :content="content"
+                   @fmDialogBtnClicked="btnClick"
+                   :can-auto-close="false"
+                   :btns="btns">
+                   </fm-dialog>
+    </scroller>
+  </div>
+</template>
+
+<style lang="sass" scoped>
+  @import "../../../packages/style/mixin.scss";
+  .mzui-demo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #fff;
+  }
+  
+  .container {
+    padding-top: size(60);
+    padding-left: size(60);
+    padding-right: size(60);
+  }
+
+  .row {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    margin-right: size(60);
+  }
+  
+  .scroller {
+    flex: 1;
+  }
+</style>
+
+<script>
+import { FmButton, FmDialog, FmDialogBtn } from '../../../index';
+import Title from '../../_mods/title.vue';
+import Category from '../../_mods/category.vue';
+import { setTitle } from '../../_mods/set-nav';
+
+const modal = weex.requireModule('modal');
+
+export default {
+    components: { Title, Category, FmButton, FmDialog, FmDialogBtn },
+    data: ()=> ({
+      show: false,
+      title: '',
+      content: '',
+      btns: []
+    }),
+    methods: {
+      click1() {
+        this.title = '两个按钮的弹框'
+        this.content = 'fm-dialog 默认两个按钮，按钮文字可通过 cancelText 以及 confirmText 修改'
+        this.btns = []
+        this.show = true
+      },
+      click2() {
+        this.title = '多个按钮的弹框'
+        this.content = '按钮超过 2 个会变成竖排按钮，需要一行多个按钮可通过 slot="btn-group" 进行插入'
+        this.btns = [{
+          text: '按钮1'
+        }, {
+          text: '按钮2'
+        }, {
+          text: '按钮3'
+        }, {
+          text: '按钮4'
+        }, {
+          text: '按钮5'
+        }]
+        this.show = true;
+      },
+      click3() {
+        this.title = '这是多行标题的弹框通过 props-title 或者通过 slot="title" 插入这是多行标题的弹框通过 props-title 或者通过 slot="title" 插入'
+        this.content = ''
+        this.btns = []
+        this.show = true
+      },
+      btnClick(btn) {
+        if (btn.type === 'cancel') {
+          modal.toast({ message: '取消' })
+        } else if (btn.type === 'confirm') {
+          modal.toast({ message: '确定' })
+        } else {
+          modal.toast({ message: btn.text })
+        }
+        this.show = false;
+      }
+    }
+}
+</script>

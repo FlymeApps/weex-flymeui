@@ -1,0 +1,99 @@
+<template>
+  <div>
+    <div class="fm-overlay"
+         ref="fm-overlay"
+         v-if="show"
+         :watch="shouldShow"
+         @click="overlayClicked"
+         :style="overlayStyle">
+    </div>
+  </div>
+</template>
+
+<style lang="sass" scoped>
+  @import "../style/mixin.scss";
+  .fm-overlay {
+    width: size(1080);
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+  }
+</style>
+
+<script>
+  const animation = weex.requireModule('animation');
+  export default {
+    props: {
+      show: {
+        type: Boolean,
+        default: true
+      },
+      hasAnimation: {
+        type: Boolean,
+        default: true
+      },
+      duration: {
+        type: [Number, String],
+        default: 300
+      },
+      timingFunction: {
+        type: Array,
+        default: () => (['ease-in', 'ease-out'])
+      },
+      opacity: {
+        type: [Number, String],
+        default: 0.5
+      },
+      canAutoClose: {
+        type: Boolean,
+        default: true
+      }
+    },
+    computed: {
+      overlayStyle () {
+        return {
+          opacity: this.hasAnimation ? 0 : 1,
+          backgroundColor: `rgba(0, 0, 0,${this.opacity})`
+        }
+      },
+      shouldShow () {
+        const { show, hasAnimation } = this;
+        hasAnimation && setTimeout(() => {
+          this.appearOverlay(show);
+        }, 50);
+        return show;
+      }
+    },
+    methods: {
+      overlayClicked (e) {
+        this.canAutoClose && this.appearOverlay(false)
+        this.$emit('fmOverlayBodyClicked', {})
+      },
+      appearOverlay (bool, duration = this.duration) {
+        const { hasAnimation, timingFunction, canAutoClose } = this;
+        const needEmit = !bool && canAutoClose;
+        needEmit && (this.$emit('fmOverlayBodyClicking', {}));
+        const overlayEl = this.$refs['fm-overlay'];
+        if (hasAnimation && overlayEl) {
+          animation.transition(overlayEl, {
+            styles: {
+              opacity: bool ? 1 : 0
+            },
+            duration,
+            timingFunction: timingFunction[bool ? 0 : 1],
+            delay: 0
+          }, () => {
+            // needEmit && (this.$emit('fmOverlayBodyClicked', {}));
+          });
+        } else {
+          needEmit && (this.$emit('fmOverlayBodyClicked', {}));
+        }
+      },
+      hide() {
+        this.appearOverlay(false)
+      }
+    }
+  }
+</script>

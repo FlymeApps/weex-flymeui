@@ -7,6 +7,42 @@
         <fm-tag value="新手上路"></fm-tag>
         <fm-tag value="热映" color="#f12528"></fm-tag>
         <fm-tag value="票" color="#ffaf00"></fm-tag>
+        <fm-tag value="新手上路"></fm-tag>
+        <fm-tag value="热映" color="#f12528"></fm-tag>
+        <fm-tag value="票" color="#ffaf00"></fm-tag>
+        <fm-tag value="新手上路"></fm-tag>
+        <fm-tag value="热映" color="#f12528"></fm-tag>
+        <fm-tag value="票" color="#ffaf00"></fm-tag>
+        <fm-tag value="新手上路"></fm-tag>
+        <fm-tag value="热映" color="#f12528"></fm-tag>
+        <fm-tag value="票" color="#ffaf00"></fm-tag>
+        <fm-tag value="热映" color="#f12528"></fm-tag>
+        <fm-tag value="票" color="#ffaf00"></fm-tag>
+        <fm-tag value="新手上路"></fm-tag>
+        <fm-tag value="热映" color="#f12528"></fm-tag>
+        <fm-tag value="票" color="#ffaf00"></fm-tag>
+        <fm-tag value="新手上路"></fm-tag>
+        <fm-tag value="热映" color="#f12528"></fm-tag>
+        <fm-tag value="票" color="#ffaf00"></fm-tag>
+        <fm-tag value="新手上路"></fm-tag>
+        <fm-tag value="热映" color="#f12528"></fm-tag>
+        <fm-tag value="票" color="#ffaf00"></fm-tag>
+        <fm-tag value="新手上路"></fm-tag>
+        <fm-tag value="热映" color="#f12528"></fm-tag>
+        <fm-tag value="热映" color="#f12528"></fm-tag>
+        <fm-tag value="票" color="#ffaf00"></fm-tag>
+        <fm-tag value="新手上路"></fm-tag>
+        <fm-tag value="热映" color="#f12528"></fm-tag>
+        <fm-tag value="票" color="#ffaf00"></fm-tag>
+        <fm-tag value="新手上路"></fm-tag>
+        <fm-tag value="新手上路"></fm-tag>
+        <fm-tag value="热映" color="#f12528"></fm-tag>
+        <fm-tag value="票" color="#ffaf00"></fm-tag>
+        <fm-tag value="新手上路"></fm-tag>
+        <fm-tag value="票" color="#ffaf00"></fm-tag>
+        <fm-tag value="新手上路"></fm-tag>
+        <fm-tag value="热映" color="#f12528"></fm-tag>
+        <fm-tag value="票" color="#ffaf00"></fm-tag>
       </div>
       <category title="大标签"></category>
       <div class="cell">
@@ -38,6 +74,7 @@
     padding: 45px;
     flex-direction: row;
     align-items: flex-start;
+    flex-wrap: wrap;
   }
   
   .scroller {

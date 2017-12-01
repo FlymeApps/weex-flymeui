@@ -40,6 +40,18 @@ export default {
             name: '引导提示',
             subname: 'FmTips',
             path: 'component/tips'
+        },{
+            name: '蒙层',
+            subname: 'FmOverlay',
+            path: 'component/overlay'
+        },{
+            name: '对话框',
+            subname: 'FmDialog',
+            path: 'component/dialog'
+        },{
+            name: '对话框',
+            subname: 'FmDialog',
+            path: 'component/dialog'
         }]
     },
     form: {

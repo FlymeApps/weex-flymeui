@@ -23,8 +23,8 @@
 		@focus="beFocus"
 		@blur="beBlur"
 		ref="input" />
-	<fm-icon v-if="delShow" class="delete" value="&#xe6c0" icon-style="48" color="#fff" @fmClick="delClick" />
-	<fm-icon v-if="visibleShow" class="visible" value="&#xe6a9" icon-style="72" color="#666" @fmClick="toggleVisible" />
+	<fm-icon v-if="delShow" class="delete" value="&#xe6c0;" icon-style="48" color="#fff" @fmClick="delClick" />
+	<fm-icon v-if="visibleShow" class="visible" :value="visibleValue" icon-style="72" color="#666" @fmClick="toggleVisible" />
 	<text v-if="hasError" class="error-msg">{{inputErrorMessage}}</text>
 </div>
 </template>
@@ -88,10 +88,6 @@ export default {
 
 	mounted() {
 		if (this.type === 'password') {
-			this.type = 'text'
-			this.$nextTick(() => {
-				this.type = 'password'
-			})
 		 	this.pwdModel = true
 		}
 	},
@@ -100,7 +96,8 @@ export default {
 		return {
 			rows: 1,
 			focus: false,
-			pwdModel: false
+			pwdModel: false,
+			pwdVisible: false
 		}
 	},
 
@@ -123,6 +120,9 @@ export default {
 	},
 
 	computed: {
+		visibleValue() {
+			return this.type === 'password' ? '&#xe6a9;' : '&#xe6e8;'
+		},
 		inputClz() {
 			let clz = ['fm-textarea']
 			if (this.hasError) {
@@ -160,11 +160,13 @@ export default {
 			this.value = ''
 		},
 		toggleVisible(e) {
-			if (this.type === 'password') {
-				this.type = 'text'
-			} else {
-				this.type = 'password'
-			}
+			this.pwdVisible ? this.$refs.input.setType('password') : this.$refs.input.setType('visible')
+			this.pwdVisible = !this.pwdVisible
+			// if (this.type === 'password') {
+			// 	this.type = 'text'
+			// } else {
+			// 	this.type = 'password'
+			// }
 		},
 		input (evt) {
 			this.value = evt.value
