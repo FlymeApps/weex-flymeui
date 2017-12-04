@@ -28,6 +28,14 @@ export default {
         name: '容器组件',
         subname: 'Container conponent',
         componentList: [{
+            name: '蒙层',
+            subname: 'FmOverlay',
+            path: 'component/overlay'
+        },{
+            name: '侧边弹出窗口',
+            subname: 'FmPopup',
+            path: 'component/popup'
+        },{
             name: '标签页',
             subname: 'FmTabView',
             path: 'component/tabView'
@@ -41,17 +49,13 @@ export default {
             subname: 'FmTips',
             path: 'component/tips'
         },{
-            name: '蒙层',
-            subname: 'FmOverlay',
-            path: 'component/overlay'
-        },{
             name: '对话框',
             subname: 'FmDialog',
             path: 'component/dialog'
         },{
-            name: '底部弹框',
-            subname: 'FmPopup',
-            path: 'component/popup'
+            name: '底部删除弹框',
+            subname: 'FmActionSheet',
+            path: 'component/actionSheet'
         }]
     },
     form: {

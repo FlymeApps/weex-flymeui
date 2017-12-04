@@ -47,9 +47,9 @@
 </style>
 
 <script>
-	const animation = weex.requireModule('animation');
-	const { platform } = weex.config.env;
-	const isWeb = typeof (window) === 'object' && platform.toLowerCase() === 'web';
+	const animation = weex.requireModule('animation')
+	const { platform } = weex.config.env
+	const isWeb = typeof (window) === 'object' && platform.toLowerCase() === 'web'
 	import FmOverlay from '../fm-overlay'
 
 	export default {
@@ -107,50 +107,50 @@
         return this.show
       },
       _height () {
-        this.appearPopup(this.show, 150);
-        return this.height;
+        this.appearPopup(this.show, 150)
+        return this.height
       },
       transformValue () {
-        return this.getTransform(this.pos, this.width, this.height, true);
+        return this.getTransform(this.pos, this.width, this.height, true)
       },
       padStyle () {
-        const { pos, width, height, popupColor } = this;
+        const { pos, width, height, popupColor } = this
         let style = {
           width: `${width}px`,
           backgroundColor: popupColor
-        };
+        }
         pos === 'top' && (style = {
           ...style,
           top: `${-height}px`,
           height: `${height}px`
-        });
+        })
         pos === 'bottom' && (style = {
           ...style,
           bottom: `${-height}px`,
           height: `${height}px`
-        });
+        })
         pos === 'left' && (style = {
           ...style,
           left: `${-width}px`
-        });
+        })
         pos === 'right' && (style = {
           ...style,
           right: `${-width}px`
-        });
-        return style;
+        })
+        return style
       }
 		},
 		methods: {
       handleTouchEnd (e) {
-        const { platform } = weex.config.env;
-        platform === 'Web' && e.preventDefault && e.preventDefault();
+        const { platform } = weex.config.env
+        platform === 'Web' && e.preventDefault && e.preventDefault()
       },
       hide () {
-        this.appearPopup(false);
-        this.$refs.overlay.appearOverlay(false);
+        this.appearPopup(false)
+        this.$refs.overlay.appearOverlay(false)
       },
       fmOverlayBodyClicking () {
-        this.isShow && this.appearPopup(false);
+        this.isShow && this.appearPopup(false)
       },
       appearPopup (bool, duration = 300) {
         this.isShow = bool
@@ -169,7 +169,7 @@
           if (!bool) {
             this.$emit('fmPopupOverlayClicked', { pos: this.pos })
           }
-        });
+        })
       },
       getTransform (pos, width, height, bool) {
         let _size = pos === 'top' || pos === 'bottom' ? height : width
@@ -180,19 +180,19 @@
         bool && (_size = 0)
         switch (pos) {
           case 'top':
-            _transform = `translateY(${_size}px)`;
-            break;
+            _transform = `translateY(${_size}px)`
+            break
           case 'bottom':
-            _transform = `translateY(-${_size}px)`;
-            break;
+            _transform = `translateY(-${_size}px)`
+            break
           case 'left':
-            _transform = `translateX(${_size}px)`;
-            break;
+            _transform = `translateX(${_size}px)`
+            break
           case 'right':
-            _transform = `translateX(-${_size}px)`;
-            break;
+            _transform = `translateX(-${_size}px)`
+            break
         }
-        return _transform;
+        return _transform
       }
 		}
 	}

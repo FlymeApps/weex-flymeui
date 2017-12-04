@@ -13,9 +13,10 @@ import FmFoldableText from './packages/fm-foldable-text';
 import FmImage from './packages/fm-image';
 import FmOverlay from './packages/fm-overlay';
 import FmDialog from './packages/fm-dialog';
-import FmDialogBtn from './packages/fm-dialog-btn';
+import FmSampleBtn from './packages/fm-sample-btn';
 import { confirm, alert } from './packages/module/dialog.js';
 import FmPopup from './packages/fm-popup';
+import FmActionSheet from './packages/fm-action-sheet';
 
 export {
   FmSwitch,
@@ -33,8 +34,9 @@ export {
   FmImage,
   FmOverlay,
   FmDialog,
-  FmDialogBtn,
+  FmSampleBtn,
   confirm,
   alert,
-  FmPopup
+  FmPopup,
+  FmActionSheet
 }

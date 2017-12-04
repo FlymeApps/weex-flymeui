@@ -124,7 +124,7 @@ export default {
 			this.isRightShow = false
 		},
 		clickHide() {
-			this.$refs.popup.hide();
+			this.$refs.popup.hide()
 		}
 	}
 }
