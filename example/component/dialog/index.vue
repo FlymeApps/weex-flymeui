@@ -28,6 +28,7 @@
                    :title="title"
                    :content="content"
                    @fmDialogBtnClicked="btnClick"
+                   @fmDialogOverlayClicked="dialogOverlayClick"
                    :can-auto-close="true"
                    :btns="btns">
                    </fm-dialog>
@@ -139,7 +140,11 @@ export default {
         } else {
           modal.toast({ message: btn.text })
         }
-        this.show = false;
+        this.show = false
+      },
+      dialogOverlayClick() {
+        this.show = false
+        modal.toast({ message: '点击了蒙层' })
       }
     }
 }

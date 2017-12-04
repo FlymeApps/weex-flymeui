@@ -15,6 +15,7 @@ import FmOverlay from './packages/fm-overlay';
 import FmDialog from './packages/fm-dialog';
 import FmDialogBtn from './packages/fm-dialog-btn';
 import { confirm, alert } from './packages/module/dialog.js';
+import FmPopup from './packages/fm-popup';
 
 export {
   FmSwitch,
@@ -34,5 +35,6 @@ export {
   FmDialog,
   FmDialogBtn,
   confirm,
-  alert
+  alert,
+  FmPopup
 }

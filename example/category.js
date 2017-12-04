@@ -49,9 +49,9 @@ export default {
             subname: 'FmDialog',
             path: 'component/dialog'
         },{
-            name: '对话框',
-            subname: 'FmDialog',
-            path: 'component/dialog'
+            name: '底部弹框',
+            subname: 'FmPopup',
+            path: 'component/popup'
         }]
     },
     form: {

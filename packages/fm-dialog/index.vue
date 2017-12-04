@@ -1,15 +1,15 @@
 <template>
   <div class="container" v-if="self_show">
       <fm-overlay v-if="self_show"
-                  :show="self_show"
                   :hasAnimation="true"
-                  :canAutoClose="canAutoClose"
-                  @fmOverlayBodyClicked="overlayClick"
+                  :canAutoClose="false"
+                  @fmOverlayBodyClicked="overlayClicked"
                   ref="fm-overlay"></fm-overlay>
       <div class="dialog-box"
            ref="dialog-box"
            v-if="self_show"
-           :style="dialogStyle">
+           :style="dialogStyle" 
+           @touchend="handleTouchEnd">
         <div class="dialog-content">
           <slot name="title">
             <fm-text class="content-title" medium title>{{ title }}</fm-text>
@@ -66,7 +66,7 @@
 </style>
 
 <script>
-const animation = weex.requireModule('animation');
+const animation = weex.requireModule('animation')
 const type_alert = 'alert'
 const type_confirm = 'confirm'
 import FmOverlay from '../fm-overlay'
@@ -197,17 +197,21 @@ export default {
       }
     },
     methods: {
-      overlayClick() {
+      handleTouchEnd (e) {
+        const { platform } = weex.config.env
+        platform === 'Web' && e.preventDefault && e.preventDefault()
+      },
+      overlayClicked() {
+        this.canAutoClose && (this.appearDialog(false) || this.$emit('fmDialogOverlayClicked', {}))
         this.cancelCb && this.cancelCb()
-        this.canAutoClose && this.$emit('fmDialogBtnClicked', { type: 'cancel' })
       },
       btnClick(btn) {
         if (btn.type && btn.type === 'cancel') {
-          this.cancelCb && this.cancelCb()
           this.$emit('fmDialogBtnClicked', { type: 'cancel' })
+          this.cancelCb && this.cancelCb()
         } else if (btn.type && btn.type === 'confirm') {
-          this.confirmCb && this.confirmCb()
           this.$emit('fmDialogBtnClicked', { type: 'confirm' })
+          this.confirmCb && this.confirmCb()
         } else {
           this.$emit('fmDialogBtnClicked', btn)
         }

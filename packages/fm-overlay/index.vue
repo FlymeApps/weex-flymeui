@@ -23,7 +23,7 @@
 </style>
 
 <script>
-  const animation = weex.requireModule('animation');
+  const animation = weex.requireModule('animation')
   export default {
     props: {
       show: {
@@ -59,23 +59,22 @@
         }
       },
       shouldShow () {
-        const { show, hasAnimation } = this;
+        const { show, hasAnimation } = this
         hasAnimation && setTimeout(() => {
-          this.appearOverlay(show);
-        }, 50);
-        return show;
+          this.appearOverlay(show)
+        }, 50)
+        return show
       }
     },
     methods: {
       overlayClicked (e) {
-        this.canAutoClose && this.appearOverlay(false)
-        this.$emit('fmOverlayBodyClicked', {})
+        this.canAutoClose ? this.appearOverlay(false) : this.$emit('fmOverlayBodyClicked', {})
       },
       appearOverlay (bool, duration = this.duration) {
-        const { hasAnimation, timingFunction, canAutoClose } = this;
+        const { hasAnimation, timingFunction, canAutoClose } = this
         const needEmit = !bool && canAutoClose;
-        needEmit && (this.$emit('fmOverlayBodyClicking', {}));
-        const overlayEl = this.$refs['fm-overlay'];
+        needEmit && (this.$emit('fmOverlayBodyClicking', {}))
+        const overlayEl = this.$refs['fm-overlay']
         if (hasAnimation && overlayEl) {
           animation.transition(overlayEl, {
             styles: {
@@ -85,10 +84,10 @@
             timingFunction: timingFunction[bool ? 0 : 1],
             delay: 0
           }, () => {
-            // needEmit && (this.$emit('fmOverlayBodyClicked', {}));
+            needEmit && (this.$emit('fmOverlayBodyClicked', {}))
           });
         } else {
-          needEmit && (this.$emit('fmOverlayBodyClicked', {}));
+          needEmit && (this.$emit('fmOverlayBodyClicked', {}))
         }
       },
       hide() {
