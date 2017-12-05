@@ -1,36 +1,40 @@
 <template>
   <div :class="wrapperClz">
-    <slot name="left">
-      <div v-if="imgSrc" :class="imgClz">
-        <fm-image v-if="scene === 'avatar'" class="img-avatar"
-                  :src="imgSrc"
-                  width="120"
-                  height="120"
-                  :occupyingColor="occupyingColor"></fm-image>
-        <fm-image v-else-if="scene === 'icon'" class="img-icon"
-                  :src="imgSrc"
-                  width="96"
-                  height="96"
-                  :occupyingColor="occupyingColor"></fm-image>
-        <fm-image v-else-if="scene === 'app-small'" class="img-app-small"
-                  :src="imgSrc"
-                  width="135"
-                  height="135"
-                  :occupyingColor="occupyingColor"></fm-image>
-        <fm-image v-else-if="scene === 'app-big'" class="img-app-big"
-                  :src="imgSrc"
-                  width="192"
-                  height="192"
-                  :occupyingColor="occupyingColor"></fm-image>
-      </div>
-    </slot>
-    <div :class="contentClz">
-      <fm-text v-if="title" class="title" medium title :text-style="{lineHeight: 50}">{{ title }}</fm-text>
-      <fm-text v-if="subTitle" class="subTitle" small>{{ subTitle }}</fm-text>
-      <fm-text v-if="description" class="description">{{ description }}</fm-text>
+    <div v-if="imgSrc" :class="imgClz">
+      <fm-image v-if="scene === 'avatar'" class="img-avatar"
+                :src="imgSrc"
+                width="120"
+                height="120"
+                :occupyingColor="occupyingColor"></fm-image>
+      <fm-image v-else-if="scene === 'icon'" class="img-icon"
+                :src="imgSrc"
+                width="96"
+                height="96"
+                :occupyingColor="occupyingColor"></fm-image>
+      <fm-image v-else-if="scene === 'app-small'" class="img-app-small"
+                :src="imgSrc"
+                width="135"
+                height="135"
+                :occupyingColor="occupyingColor"></fm-image>
+      <fm-image v-else-if="scene === 'app-big'" class="img-app-big"
+                :src="imgSrc"
+                width="192"
+                height="192"
+                :occupyingColor="occupyingColor"></fm-image>
     </div>
-    <slot name="right">
-    </slot>
+    <div :class="contentClz">
+      <slot name="left">
+      </slot>
+      <div class="text">
+        <slot name="title">
+          <fm-text v-if="title" class="title" medium title :text-style="{lineHeight: 50}">{{ title }}</fm-text>
+        </slot>
+        <fm-text v-if="subTitle" class="subTitle" small>{{ subTitle }}</fm-text>
+        <fm-text v-if="description" class="description">{{ description }}</fm-text>
+      </div>
+      <slot name="right">
+      </slot>
+    </div>
   </div>
 </template>
 
@@ -47,11 +51,15 @@
 
   .content {
     flex: 1;
-    justify-content: center;
+    flex-direction: row;
     padding: 51px 0;
 		border-bottom-style: solid;
 		border-bottom-width: 1px;
 		border-bottom-color: #E6E6E6;
+  }
+
+  .text {
+    justify-content: center;
   }
 
   .content-min {
