@@ -20,7 +20,7 @@
         </div>
         <div class="dialog-footer" :style="btnStyle">
           <slot name="btn-group">
-            <fm-sample-btn v-for="(btn, index) in dialogBtns" :text="btn.text" :type="btn.type" :msg="btn" @click="btnClick" :key="index"></fm-sample-btn>
+            <fm-sample-btn v-for="(btn, index) in dialogBtns" scene="dialog" :text="btn.text" :type="btn.type" :msg="btn" @click="btnClick" :key="index"></fm-sample-btn>
           </slot>
         </div>
       </div>

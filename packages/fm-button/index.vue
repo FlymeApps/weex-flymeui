@@ -11,11 +11,9 @@
 	height: size(72);
 	align-items: center;
 	flex-direction: row;
-	max-width: size(300);
 }
 .fm-btn {
 	opacity: 0;
-	height: size(72);
 	padding-left: size(36);
 	padding-right: size(36);
 	line-height: size(72);
@@ -30,12 +28,15 @@
 	padding-left: size(24);
 	padding-right: size(24);
 }
+.fm-btn-freeSize {
+	max-width: size(1080);
+}
 .fm-btn-show {
-
+	// max-width: size(1080);
 }
 .fm-btn-hollow {
-	border-width: size(4.32);
-	line-height: size(63.363);
+	border-width: size(4);
+	line-height: size(64);
 	border-stye: solid;
 }
 </style>
@@ -67,7 +68,11 @@ export default {
 			type: String,
 			default: '#ffffff'
 		},
-		disabled: Boolean
+		disabled: Boolean,
+		freeSize: {
+			type: Boolean,
+			default: true
+		}
 	},
 
 	computed: {
@@ -80,6 +85,10 @@ export default {
 
 			if (this.bgColor == transparent) {
 				clz.push('fm-btn-hollow')
+			}
+
+			if (this.freeSize) {
+				clz.push('fm-btn-freeSize')
 			}
 
 			return clz

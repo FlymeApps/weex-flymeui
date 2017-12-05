@@ -17,6 +17,7 @@ import FmSampleBtn from './packages/fm-sample-btn';
 import { confirm, alert } from './packages/module/dialog.js';
 import FmPopup from './packages/fm-popup';
 import FmActionSheet from './packages/fm-action-sheet';
+import FmCell from './packages/fm-cell';
 
 export {
   FmSwitch,
@@ -38,5 +39,6 @@ export {
   confirm,
   alert,
   FmPopup,
-  FmActionSheet
+  FmActionSheet,
+  FmCell
 }

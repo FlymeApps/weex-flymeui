@@ -19,6 +19,10 @@ export default {
             subname: 'FmTag',
             path: 'component/tag'
         }, {
+            name: '通用列表项',
+            subname: 'FmCell',
+            path: 'component/list'
+        }, {
             name: '折叠文本',
             subname: 'FmFoldableText',
             path: 'component/foldableText'

@@ -11,7 +11,8 @@
 <style lang="sass" scoped>
   @import "../style/mixin.scss";
   .fm-tag {
-    align-items: flex-start;
+    align-items: center;
+	  flex-direction: row;
   }
 
   .tag-item {
