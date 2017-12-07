@@ -18,6 +18,7 @@ import { confirm, alert } from './packages/module/dialog.js';
 import FmPopup from './packages/fm-popup';
 import FmActionSheet from './packages/fm-action-sheet';
 import FmCell from './packages/fm-cell';
+import FmRater from './packages/fm-rater';
 
 export {
   FmSwitch,
@@ -40,5 +41,6 @@ export {
   alert,
   FmPopup,
   FmActionSheet,
-  FmCell
+  FmCell,
+  FmRater
 }

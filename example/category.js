@@ -78,6 +78,10 @@ export default {
             subname: 'FmInput',
             path: 'component/input'
         }, {
+            name: '星级评分',
+            subname: 'FmRater',
+            path: 'component/rater'
+        }, {
             name: '滑块',
             subname: 'FmSlider',
             path: 'component/slider'
