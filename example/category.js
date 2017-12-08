@@ -81,6 +81,10 @@ export default {
             name: '输入框',
             subname: 'FmInput',
             path: 'component/input'
+        },{
+            name: '多选列表',
+            subname: 'FmCheckListGroup & FmCheckboox',
+            path: 'component/checklist'
         }, {
             name: '星级评分',
             subname: 'FmRater',

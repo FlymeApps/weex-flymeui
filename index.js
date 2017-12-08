@@ -21,6 +21,8 @@ import FmCell from './packages/fm-cell';
 import FmRater from './packages/fm-rater';
 import FmSnackBar from './packages/fm-snack-bar';
 import showSnackBar from './packages/module/snackbar.js';
+import FmCheckbox from './packages/fm-checkbox';
+import FmCheckListGroup from './packages/fm-check-list-group';
 
 export {
   FmSwitch,
@@ -46,5 +48,7 @@ export {
   FmCell,
   FmRater,
   FmSnackBar,
-  showSnackBar
+  showSnackBar,
+  FmCheckbox,
+  FmCheckListGroup
 }
