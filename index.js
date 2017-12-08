@@ -19,6 +19,8 @@ import FmPopup from './packages/fm-popup';
 import FmActionSheet from './packages/fm-action-sheet';
 import FmCell from './packages/fm-cell';
 import FmRater from './packages/fm-rater';
+import FmSnackBar from './packages/fm-snack-bar';
+import showSnackBar from './packages/module/snackbar.js';
 
 export {
   FmSwitch,
@@ -42,5 +44,7 @@ export {
   FmPopup,
   FmActionSheet,
   FmCell,
-  FmRater
+  FmRater,
+  FmSnackBar,
+  showSnackBar
 }

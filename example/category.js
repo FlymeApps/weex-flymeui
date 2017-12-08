@@ -53,6 +53,10 @@ export default {
             subname: 'FmTips',
             path: 'component/tips'
         },{
+            name: '底部提示信息',
+            subname: 'FmSnackBar',
+            path: 'component/snackbar'
+        },{
             name: '对话框',
             subname: 'FmDialog',
             path: 'component/dialog'

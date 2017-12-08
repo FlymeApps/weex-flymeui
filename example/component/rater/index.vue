@@ -6,10 +6,10 @@
             <div class="container">
                 <fm-rater :starImgs="star_normal_urls" :starBgImg="star_bg_url"></fm-rater>
             </div>
-            <!-- <div class="container">
+            <div class="container">
                 <fm-rater :starImgs="star_normal_urls" :starBgImg="star_bg_url" size="small"></fm-rater>
-            </div> -->
-            <!-- <category title="不同主题颜色( native 支持 base64 )"></category>
+            </div>
+            <category title="不同主题颜色( native 支持 base64 )"></category>
             <div class="container">
                 <fm-rater theme="normal"></fm-rater>
             </div>
@@ -63,7 +63,7 @@
             <category title="分数更改后回调"></category>
             <div class="container">
                 <fm-rater :starImgs="star_normal_urls" :starBgImg="star_bg_url" @fmRaterScoreChanged="scoreChanged"></fm-rater>
-            </div> -->
+            </div>
         </scroller>
     </div>
 </template>

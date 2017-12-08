@@ -21,7 +21,7 @@ function addDialog() {
     if (weex.config.env.platform === 'Web') {
       document.body.appendChild(vc_dialog.$el)
     } else {
-			weex.document.body.appendChild(vc_dialog.$el);
+			weex.document.body.appendChild(vc_dialog.$el)
 		}
     added = true
   }
@@ -84,6 +84,6 @@ function alert(options) {
 }
 
 export {
-		confirm,
-		alert
+  confirm,
+  alert
 }

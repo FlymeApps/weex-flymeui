@@ -100,20 +100,20 @@
 			isOverShow: true
 		}),
 		computed: {
-      isNeedShow () {
+      isNeedShow() {
         setTimeout(() => {
           this.appearPopup(this.show)
         }, 50)
         return this.show
       },
-      _height () {
+      _height() {
         this.appearPopup(this.show, 150)
         return this.height
       },
-      transformValue () {
+      transformValue() {
         return this.getTransform(this.pos, this.width, this.height, true)
       },
-      padStyle () {
+      padStyle() {
         const { pos, width, height, popupColor } = this
         let style = {
           width: `${width}px`,
@@ -141,18 +141,18 @@
       }
 		},
 		methods: {
-      handleTouchEnd (e) {
+      handleTouchEnd(e) {
         const { platform } = weex.config.env
         platform === 'Web' && e.preventDefault && e.preventDefault()
       },
-      hide () {
+      hide() {
         this.appearPopup(false)
         this.$refs.overlay.appearOverlay(false)
       },
-      fmOverlayBodyClicking () {
+      fmOverlayBodyClicking() {
         this.isShow && this.appearPopup(false)
       },
-      appearPopup (bool, duration = 300) {
+      appearPopup(bool, duration = 300) {
         this.isShow = bool
         const popupEl = this.$refs['fm-popup']
         if (!popupEl) {
@@ -171,7 +171,7 @@
           }
         })
       },
-      getTransform (pos, width, height, bool) {
+      getTransform(pos, width, height, bool) {
         let _size = pos === 'top' || pos === 'bottom' ? height : width
         let _transform
         if (isWeb) {
