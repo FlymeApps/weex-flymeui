@@ -71,8 +71,6 @@
 
 <script>
 const animation = weex.requireModule('animation')
-const { platform } = weex.config.env
-const isWeb = typeof (window) === 'object' && platform.toLowerCase() === 'web'
 import FmIcon from '../fm-icon'
 export default {
 	components: { FmIcon },

@@ -83,7 +83,7 @@ export default {
             path: 'component/input'
         },{
             name: '多选列表',
-            subname: 'FmCheckListGroup & FmCheckboox',
+            subname: 'FmCheckListGroup & FmCheckbox',
             path: 'component/checklist'
         }, {
             name: '星级评分',
@@ -98,9 +98,11 @@ export default {
     other: {
         name: '其他组件',
         subname: 'Other conponent',
-        componentList: [
-            
-        ]
+        componentList: [{
+            name: '动效器',
+            subname: 'FmActionView',
+            path: 'component/actionView'
+        }]
     },
     ApiModule: {
         name: 'Native接口',
