@@ -2,10 +2,39 @@
   <div class="mzui-demo">
     <scroller class="scroller">
       <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59efee69a5a0a6738061aeff"></title>
-      <category title="不同方向的 popup"></category>
-      <fm-check-list-group>
-        <fm-checkbox value="简体中文"></fm-checkbox>
-      </fm-check-list-group>
+      <category title="单独使用"></category>
+        <fm-checkbox :checked="true" @fmCheckboxChecked="check">简体中文</fm-checkbox>
+        <fm-checkbox @fmCheckboxChecked="check">繁体中文</fm-checkbox>
+      <category title="组合使用"></category>
+        <fm-check-list-group>
+          <fm-checkbox>简体中文</fm-checkbox>
+          <fm-checkbox>繁体中文</fm-checkbox>
+          <fm-checkbox>英文</fm-checkbox>
+        </fm-check-list-group>
+      <category title="选中回调"></category>
+        <fm-check-list-group @fmCheckListGroupChecked="groupChecked">
+          <fm-checkbox>简体中文</fm-checkbox>
+          <fm-checkbox>繁体中文</fm-checkbox>
+          <fm-checkbox>英文</fm-checkbox>
+        </fm-check-list-group>
+      <category title="默认选中"></category>
+        <fm-check-list-group v-model="list">
+          <fm-checkbox :checked="true">简体中文</fm-checkbox>
+          <fm-checkbox>繁体中文</fm-checkbox>
+          <fm-checkbox>英文</fm-checkbox>
+        </fm-check-list-group>
+      <category title="设置至少选中"></category>
+        <fm-check-list-group min="1">
+          <fm-checkbox :checked="true">简体中文</fm-checkbox>
+          <fm-checkbox>繁体中文</fm-checkbox>
+          <fm-checkbox>英文</fm-checkbox>
+        </fm-check-list-group>
+      <category title="设置至多选中"></category>
+        <fm-check-list-group max="2">
+          <fm-checkbox :checked="true">简体中文</fm-checkbox>
+          <fm-checkbox>繁体中文</fm-checkbox>
+          <fm-checkbox>英文</fm-checkbox>
+        </fm-check-list-group>
     </scroller>
   </div>
 </template>
@@ -56,61 +85,14 @@ const modal = weex.requireModule('modal');
 export default {
 	components: { Title, Category, FmCheckbox, FmCheckListGroup },
 	data: ()=> ({
-    show: false,
-    staryTimeShow: false,
-    stayShow: false
+    list: ['简体中文', '英文']
 	}),
-	mounted() {
-	},
 	methods: {
-		click1() {
-      this.show = true
+    check(e) {
+      modal.toast({ message: (e.value + (e.checked ? '被选中了' : '被取消选中了')) })
     },
-    fmSnackBarDismissed() {
-      this.show = false
-    },
-		click2() {
-      this.staryTimeShow = true
-    },
-    fmSnackBarStayTimeDismissed() {
-      this.staryTimeShow = false
-    },
-		click3() {
-      this.stayShow = true
-    },
-    fmSnackBarStayDismissed() {
-      this.stayShow = false
-    },
-    click4() {
-      showSnackBar({
-        title: 'js 调用弹出的 SnackBar'
-      }).then(() => {
-
-      }, () => {
-        modal.toast({ message: '消失了' })
-      })
-    },
-    click5() {
-      showSnackBar({
-        title: '已自动开启夜间模式',
-        closeText: '撤销',
-        autoClose: false
-      }).then(() => {
-        modal.toast({ message: '点击了撤销' })
-      }, () => {
-        modal.toast({ message: '消失了' })
-      })
-    },
-    click6() {
-      showSnackBar({
-        title: '无网络连接，请点击设置',
-        autoClose: false,
-        type: 'jump'
-      }).then(() => {
-        modal.toast({ message: '点击跳转' })
-      }, () => {
-        modal.toast({ message: '消失了' })
-      })
+    groupChecked(l) {
+      modal.toast({ message: l.toString() })
     }
 	}
 }

@@ -1,8 +1,11 @@
 <template>
   <div class="fm-checkbox">
       <div class="checkbox-content" @click="toggleChecked">
-				<text class="label" :style="{ color: checked ? '#198DED': '#000000' }">{{ value }}</text>
-				<div class="icon-wrap" ref="fm-icon" :style="iconStyle">
+				<text class="label"  v-if="$slots.default || value" :style="{ color: _checked ? '#198DED': '#000000' }">
+					<slot></slot>
+      		<template v-if="!$slots.default">{{ value }}</template>
+				</text>
+				<div class="icon-wrap" ref="fm-icon" :style="{ width: isChecked ? 72 : 1 }">
 					<fm-icon class="icon" value="&#xe6de;" icon-style="48" color="#0A73C9" />
 				</div>
 			</div>
@@ -74,28 +77,67 @@ import FmIcon from '../fm-icon'
 export default {
 	components: { FmIcon },
 	props: {
-		value: String,
+		value: {
+			type: String,
+			default: ''
+		},
 		checked: Boolean,
 		disabled: Boolean
 	},
 	data: () => ({
-		isChecked: false
+		isChecked: false,
+		selfChecked: false
 	}),
 	computed: {
-		iconStyle() {
-			let { isChecked } = this
-			return {
-				width: isChecked ? 72 : 1
+		_checked: {
+			get() {
+				return this.isGroup ? this.store.indexOf(this.value) !== -1 ? true : false : this.selfChecked
+			},
+			set(val) {
+				if (this.isGroup) {
+					if (val) {
+						this.isLimitExceeded = false
+						this._checkboxGroup.max !== undefined &&
+						this.store.length >= this._checkboxGroup.max &&
+						(this.isLimitExceeded = true)
+
+						this.isLimitExceeded === false && 
+						(this.addToStore() || this.appearIcon(val))
+					} else {
+						this.isLimitExceeded = false
+						this._checkboxGroup.min !== undefined &&
+						this.store.length <= this._checkboxGroup.min &&
+						(this.isLimitExceeded = true)
+						
+						this.isLimitExceeded === false && 
+						(this.deleteFromStore() || this.appearIcon(val))
+					}
+				} else {
+					this.selfChecked = val
+					this.appearIcon(val)
+				}
+				this.$emit('fmCheckboxChecked', { value: this.value, checked: val })
 			}
 		},
 		isGroup() {
-			
+			let parent = this.$parent
+			while (parent) {
+				if (parent.$options.componentName !== 'FmCheckListGroup') {
+					parent = parent.$parent
+				} else {
+					this._checkboxGroup = parent
+					return true
+				}
+			}
+			return false
+		},
+		store() {
+			return this._checkboxGroup ? this._checkboxGroup.value : this.value;
 		}
 	},
 	methods: {
 		toggleChecked() {
-			!this.disabled && (this.checked = !this.checked)
-			!this.disabled && this.appearIcon(this.checked)
+			!this.disabled && (this._checked = !this._checked)
 		},
 		appearIcon(bool, duration = 150) {
 			const iconEl = this.$refs['fm-icon']
@@ -116,10 +158,29 @@ export default {
 			}, () => {
 				this.isChecked = bool
 			})
+		},
+		addToStore() {
+			if (
+				Array.isArray(this.store) &&
+				this.store.indexOf(this.value) === -1
+			) {
+				this.store.push(this.value)
+			}
+		},
+		deleteFromStore() {
+			if (
+				Array.isArray(this.store) &&
+				this.store.indexOf(this.value) !== -1
+			) {
+				this.store.splice(this.store.indexOf(this.value), 1)
+			}
 		}
 	},
-	mounted() {
-		console.log(this)
+	created() {
+		this.isGroup
+		this.$slots.default && (this.value = this.$slots.default[0].text)
+		this.checked && (this.addToStore() || ((this.selfChecked = true) && (this.isChecked = true)))
+		this._checked && ((this.selfChecked = true) && (this.isChecked = true))
 	}
 }
 </script>
