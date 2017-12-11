@@ -4,7 +4,7 @@
 		<slot></slot>
 		<text class="content">{{message}}</text>
 		<text class="split"></text>
-		<fm-icon class="close" @click="close" value="&#xe6c0;" />
+		<fm-icon class="close" @fmClick="close" value="&#xe6c0;" />
 	</div>
 	<text class="arrow" :style="arrowStyle"></text>
 </div>
@@ -13,43 +13,43 @@
 <style scoped>
 .tip-wrap {
 	flex-direction: row;
-	height: 40px;
-	padding-top: 7.2px;
+	height: 120px;
+	padding-top: 21.6px;
 }
 .arrow {
 	position: absolute;
-	top: 3.6px;
-	width: 7.2px;
-	height: 7.2px;
+	top: 10.8px;
+	width: 21.6px;
+	height: 21.6px;
 	transform: rotate(45deg);
 }
 .content-wrap {
 	flex-direction: row;
 	align-items: center;
-	padding-top: 9px;
-	padding-bottom: 9px;
-	padding-left: 10px;
-	border-radius: 2px;
+	padding-top: 27px;
+	padding-bottom: 27px;
+	padding-left: 30px;
+	border-radius: 6px;
 }
 .content {
-	height: 17px;
-	max-width: 226px;
-	font-size: 14px;
+	height: 51px;
+	max-width: 678px;
+	font-size: 42px;
 	color: #ffffff;
 }
 .split {
-	width: 1px;
-	height: 14px;
-	margin-left: 9px;
+	width: 3px;
+	height: 42px;
+	margin-left: 27px;
 	background-color: #ffffff;
 	opacity: .4;
 }
 .close {
 	color: #ffffff;
-	font-size: 18px;
-	margin-top: 3px;
-	margin-left: 10px;
-	margin-right: 10px;
+	font-size: 54px;
+	margin-top: 9px;
+	margin-left: 30px;
+	margin-right: 30px;
 }
 
 </style>

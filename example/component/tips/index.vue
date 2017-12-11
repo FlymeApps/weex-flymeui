@@ -51,25 +51,25 @@
 }
 
 .wrap {
-	padding-left: 10px;
-	padding-right: 10px;
-	padding-top: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 30px;
 }
 
 .scroller {
-	padding-bottom: 20px;
+	padding-bottom: 60px;
 }
 
 .btnText {
-	font-size: 14px;
+	font-size: 42px;
 	color: #ffffff;
 }
 
 .split {
-	width: 1px;
-	height: 14px;
-	margin-left: 9px;
-	margin-right: 9px;
+	width: 3px;
+	height: 42px;
+	margin-left: 27px;
+	margin-right: 27px;
 	background-color: #ffffff;
 	opacity: .4;
 }

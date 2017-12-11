@@ -14,57 +14,57 @@
 
 <style scoped>
 .slider-wrap {
-	padding-right: 7.5px;
-	padding-left: 7.5px;
+	padding-right: 22.5px;
+	padding-left: 22.5px;
 }
 .level-text-wrap {
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	margin-bottom: -7.2px;
+	margin-bottom: -21.6px;
 }
 .level-text {
 	flex: 1;
-	font-size: 14px;
-	padding-top: 2.4px;
-	padding-bottom: 2.4px;
+	font-size: 42px;
+	padding-top: 7.2px;
+	padding-bottom: 7.2px;
 	text-align: center;
 }
 .all {
-	height: 3px;
-	margin-top: 14.4px;
+	height: 9px;
+	margin-top: 43.2px;
 	background-color: #e6e6e6;
 }
 .selected {
-	margin-top: -3px;
-	height: 3px;
+	margin-top: -9px;
+	height: 9px;
 	background-color: #198ded;
 }
 .dot-wrap {
-	height: 28.8px;
-	width: 38.8px;
-	margin-top: -15.84px;
-	margin-left: -19.2px;
+	height: 86.4px;
+	width: 116.4px;
+	margin-top: -47.52px;
+	margin-left: -57.6px;
 	align-items: center;
 	justify-content: center;
 }
 .dot {
-	height: 15px;
-	width: 15px;
+	height: 45px;
+	width: 45px;
 	background-color: #198ded;
-	border-radius: 14.4px;
+	border-radius: 43.2px;
 }
 .num {
-	width: 26px;
-	height: 26px;
-	margin-left: -13px;
-	border-radius: 26.4px;
+	width: 78px;
+	height: 78px;
+	margin-left: -39px;
+	border-radius: 79.2px;
 	background-color: #198ded;
 	color: #ffffff;
-	font-size: 14px;
+	font-size: 42px;
 	font-weight: 700;
 	text-align: center;
-	line-height: 26px;
+	line-height: 78px;
 }
 </style>
 

@@ -42,8 +42,8 @@
 
   .default-text {
     color: #A5A5A5;
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 36px;
+    line-height: 48px;
   }
 </style>
 

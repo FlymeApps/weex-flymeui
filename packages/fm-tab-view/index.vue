@@ -26,9 +26,9 @@
 
 <style scoped>
 .header-wrap {
-	margin-top: 9px;
-	margin-right: 22px;
-	margin-left: 22px;
+	margin-top: 27px;
+	margin-right: 66px;
+	margin-left: 66px;
 }
 .header {
 	flex-direction: row;
@@ -43,19 +43,19 @@
 	color: #f34949;
 }
 .text {
-	font-size: 14px;
+	font-size: 42px;
 	font-weight: 700;
 	text-align: center;
 	color: #666666;
 }
 .bottom-line {
-	height: 2.4px;
-	margin-top: 9px;
+	height: 7.2px;
+	margin-top: 27px;
 	background-color: #f34949;
 }
 .slider-wrap {
 	flex-direction: row;
-	border-top-width: 1px;
+	border-top-width: 3px;
 	border-color: #dddddd;
 }
 .body {
@@ -108,7 +108,7 @@ export default {
 		},
 		itemStyle () {
 			return {
-				width: `${this.width || 360}px`
+				width: `${this.width || 1080}px`
 			}
 		}
 	},
@@ -117,12 +117,12 @@ export default {
 			let { platform } = weex.config.env;
 			let head = (typeof(window) === 'object' && platform.toLowerCase() === 'web') ? this.$refs.header.$children[0].$children[0] : this.$refs.header.children[0].children[0]
 			dom.getComponentRect(head, opt => {
-				this.lineWidth = opt.size.width + 12
-				this.lineLeft = opt.size.left - 22 - 6
+				this.lineWidth = opt.size.width + 36
+				this.lineLeft = opt.size.left - 66 - 18
 			})
 			dom.getComponentRect(this.$refs.slider, opt => {
 				this.width = opt.size.width
-				this.line = this.width / (this.width - 44) * this.items.length
+				this.line = this.width / (this.width - 132) * this.items.length
 				this.min = -this.width * (this.items.length - 1)
 			})
 		}, 100)

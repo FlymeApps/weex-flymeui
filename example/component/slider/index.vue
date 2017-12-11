@@ -31,13 +31,13 @@
         background-color: #fff;
     }
     .title {
-        font-size: 14px;
-        margin-top: 20px;
-        margin-bottom: 10px;
-        color: #aaa;
+        font-size: 42px;
+        margin-top: 60px;
+        margin-bottom: 30px;
+        color: #AAAAAA;
     }
     .contaniner {
-        padding: 10px;
+        padding: 30px;
     }
 </style>
 

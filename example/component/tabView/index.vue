@@ -22,12 +22,12 @@
 }
 
 .item {
-	font-size: 18px;
+	font-size: 54px;
 	text-align: center;
 	color: #fff;
-	height: 360px;
-	margin-top: 2px;
-	padding-top: 50px;
+	height: 1080px;
+	margin-top: 6px;
+	padding-top: 150px;
 }
 .item1 {
 	background-color: #54ae56;

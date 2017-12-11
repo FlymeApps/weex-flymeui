@@ -65,7 +65,7 @@
   }
 
   .list {
-    padding: 24px;
+    padding: 72px;
     padding-bottom: 0;
     flex-direction: row;
     flex-wrap: wrap;
@@ -73,8 +73,8 @@
   }
 
   .item {
-    width: 100px;
-    margin-bottom: 10px;
+    width: 300px;
+    margin-bottom: 30px;
   }
 
   .scroller {
@@ -82,8 +82,8 @@
   }
 
   .text {
-    font-size: 14px;
-    margin-top: 10px;
+    font-size: 42px;
+    margin-top: 30px;
   }
 </style>
 

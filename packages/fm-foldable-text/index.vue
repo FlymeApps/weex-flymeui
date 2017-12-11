@@ -16,24 +16,28 @@
     color: #999;
 }
 .text_small {
-    font-size: 12px;
-    line-height: 14px;
+    font-size: 36px;
+    line-height: 42px;
 }
 .text_large {
     font-family: sans-serif-medium;
-    font-size: 16px;
     font-weight: 500;
-    line-height: 24px;
+    font-size: 48px;
+    font-weight: 500;
+    line-height: 72px;
 }
 .text_huge {
     font-family: sans-serif-medium;
-    font-size: 18px;
-    line-height: 26px;
+    font-weight: 500;
+    font-size: 54px;
+    line-height: 78px;
 }
 .more {
     position: absolute;
-    right: 6px;
+    right: 18px;
     bottom: 0;
+    font-family: sans-serif-medium;
+    font-weight: 500;
 }
 .test {
     flex-direction: row;
@@ -54,7 +58,7 @@ export default {
     props: {
         width: {
             type: Number,
-            default: 340
+            default: 1020
         },
         text: {
             type: String,
@@ -84,9 +88,9 @@ export default {
     mounted() {
         if (this.foldText === '') {
             const { textStyle } = this
-            let fontSize = (textStyle && textStyle.fontSize) ? textStyle.fontSize : this.large ? 16 : this.huge ? 18 : 12
+            let fontSize = (textStyle && textStyle.fontSize) ? textStyle.fontSize : this.large ? 48 : this.huge ? 54 : 36
             // 计算折叠后的文本
-            let size1 = fontSize + 12 * 0.04 // 汉字
+            let size1 = fontSize + 36 * 0.04 // 汉字
             let size2 = fontSize * 0.56 // 英文
             let size3 = fontSize * 0.556 // 数字
             let size4 = fontSize * 0.80 // 全角
@@ -139,8 +143,8 @@ export default {
         },
         moreStyle() {
             return {
-                fontSize: this.large ? 16 : this.huge ? 18 : 12,
-                lineHeight: this.large ? 24 : this.huge ? 26 : 14,
+                fontSize: this.large ? 48 : this.huge ? 54 : 36,
+                lineHeight: this.large ? 72 : this.huge ? 78 : 42,
                 color: '#198ded',
                 fontWeight: '600',
                 ...this.tipStyle

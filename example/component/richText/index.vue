@@ -32,7 +32,7 @@
         background-color: #fff;
     }
     .special-rich {
-        margin: 10px;
+        margin: 30px;
     }
 </style>
 
@@ -62,8 +62,8 @@ export default {
                 value: '&#xe6ad;',
                 color: 'red',
                 style: {
-                    size: 12,
-                    lineHeight: 21
+                    size: 36,
+                    lineHeight: 63
                 }
             }, {
                 type: 'link',
@@ -89,14 +89,14 @@ export default {
                     color: '#7e97ac',
                     fontColor: '#7e97ac',
                     style: {
-                        width: 27
+                        width: 81
                     }
                 },
                 {
                     type: 'text',
                     value: '蓝小胖：Weex-FlymeUI 是基于 Weex 和 Flyme 6 控件标准开发而成的跨平台组件…',
                     style: {
-                        fontSize: 16
+                        fontSize: 48
                     }
                 }
             ],
@@ -105,14 +105,14 @@ export default {
                     type: 'icon',
                     value: '&#xe6e4;',
                     style: {
-                        size: 14
+                        size: 42
                     }
                 },
                 {
                     type: 'text',
                     value: '蓝小胖：Weex-FlymeUI 是基于 Weex 和 Flyme 6 控件标准开发而成的跨平台组件…',
                     style: {
-                        fontSize: 14
+                        fontSize: 42
                     }
                 }
             ],

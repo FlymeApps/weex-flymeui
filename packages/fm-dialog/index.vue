@@ -8,8 +8,7 @@
       <div class="dialog-box"
            ref="dialog-box"
            v-if="self_show"
-           :style="dialogStyle" 
-           @touchend="handleTouchEnd">
+           :style="dialogStyle">
         <div class="dialog-content">
           <slot name="title">
             <fm-text class="content-title" medium title>{{ title }}</fm-text>

@@ -26,8 +26,8 @@
     top: 0;
     left: 0;
     color: #A5A5A5;
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 36px;
+    line-height: 48px;
   }
 </style>
 
@@ -48,18 +48,18 @@
     },
     computed: {
       newList () {
-        const { configList } = this;
+        const { configList } = this
         if (Utils.isNonEmptyArray(configList) && configList.length === 2) {
-          let r1 = configList[0];
-          let r2 = configList[1];
-          const iconStyle = r1.style;
-          const textStyle = r2.style;
-          let style = {};
-          let fontSize = 12;
-          const tagWidth = iconStyle && iconStyle.width ? iconStyle.width : 12;
+          let r1 = configList[0]
+          let r2 = configList[1]
+          const iconStyle = r1.style
+          const textStyle = r2.style
+          let style = {}
+          let fontSize = 36
+          const tagWidth = iconStyle && iconStyle.width ? iconStyle.width : 36
 
           if (textStyle && textStyle.fontSize) {
-            fontSize = textStyle.fontSize;
+            fontSize = textStyle.fontSize
             style = {
               fontSize: textStyle.fontSize,
               lineHeight: textStyle.fontSize * 1.4
@@ -79,33 +79,33 @@
               style: { ...iconStyle, width: null }
             }
           }
-          const newValue = r2.value ? new Array(Math.ceil(tagWidth / fontSize) + 1).join('   ') + `  ${r2.value}` : '';
+          const newValue = r2.value ? new Array(Math.ceil(tagWidth / fontSize) + 1).join('   ') + `  ${r2.value}` : ''
           r2 = {
             ...r2,
             style,
             value: newValue
           }
-          return [r1, r2];
+          return [r1, r2]
         } else {
-          return [];
+          return []
         }
       },
       top () {
-        const { configList } = this;
+        const { configList } = this
         if (configList[0].type === 'tag') return 0
         if (Utils.isNonEmptyArray(configList) && configList.length === 2) {
-          const iconStyle = configList[0].style;
-          const textStyle = configList[1].style;
-          let fontSize = 12;
-          const tagHeight = iconStyle && iconStyle.height ? iconStyle.height : 13;
+          const iconStyle = configList[0].style
+          const textStyle = configList[1].style
+          let fontSize = 36
+          const tagHeight = iconStyle && iconStyle.height ? iconStyle.height : 39
           if (textStyle && textStyle.fontSize) {
-            fontSize = textStyle.fontSize;
+            fontSize = textStyle.fontSize
           }
-          return Math.ceil((fontSize * 1.3 - tagHeight) / 2);
+          return Math.ceil((fontSize * 1.3 - tagHeight) / 2)
         } else {
-          return 0;
+          return 0
         }
       }
     }
-  };
+  }
 </script>
