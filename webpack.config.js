@@ -85,6 +85,13 @@ const getBaseConfig = () => ({
     }, {
       test: /\.vue(\?[^?]+)?$/,
       use: []
+    }, {
+      test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+      loader: 'url-loader',
+      query: {
+        limit: 300000,
+        name: '[name].[ext]'
+      }
     }]
   },
   plugins,

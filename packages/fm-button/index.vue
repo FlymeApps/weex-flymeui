@@ -5,38 +5,37 @@
 </div>
 </template>
 
-<style lang="sass" scoped>
-@import "../style/mixin.scss";
+<style scoped>
 .fm-btn-wrap {
-	height: size(72);
+	height: 72;
 	align-items: center;
 	flex-direction: row;
 }
 .fm-btn {
 	opacity: 0;
-	padding-left: size(36);
-	padding-right: size(36);
-	line-height: size(72);
-	border-radius: size(72);
-	font-size: size(42);
+	padding-left: 36;
+	padding-right: 36;
+	line-height: 72;
+	border-radius: 72;
+	font-size: 42;
 	font-weight: 700;
 	text-align: center;
-	min-width: size(144);
-	max-width: size(300);
+	min-width: 144;
+	max-width: 300;
 }
 .fm-btn-max-padding {
-	padding-left: size(24);
-	padding-right: size(24);
+	padding-left: 24;
+	padding-right: 24;
 }
 .fm-btn-freeSize {
-	max-width: size(1080);
+	max-width: 1080;
 }
 .fm-btn-show {
-	// max-width: size(1080);
+	
 }
 .fm-btn-hollow {
-	border-width: size(4);
-	line-height: size(64);
+	border-width: 4;
+	line-height: 64;
 	border-stye: solid;
 }
 </style>
