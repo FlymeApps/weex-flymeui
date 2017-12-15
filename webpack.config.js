@@ -89,7 +89,7 @@ const getBaseConfig = () => ({
       test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
       loader: 'url-loader',
       query: {
-        limit: 300000,
+        limit: 2048,
         name: '[name].[ext]'
       }
     }]
