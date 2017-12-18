@@ -107,7 +107,7 @@
 </style>
 
 <script>
-  import FmIcon from '../fm-icon'
+  import FmIcon from './fm-icon.vue'
   export default {
     components: { FmIcon },
     props: {
