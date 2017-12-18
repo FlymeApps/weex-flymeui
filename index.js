@@ -24,6 +24,7 @@ import showSnackBar from './packages/module/snackbar.js';
 import FmCheckbox from './packages/fm-checkbox';
 import FmCheckListGroup from './packages/fm-check-list-group';
 import FmActionView from './packages/fm-action-view';
+import FmSearchbar from './packages/fm-searchbar';
 
 export {
   FmSwitch,
@@ -52,5 +53,6 @@ export {
   showSnackBar,
   FmCheckbox,
   FmCheckListGroup,
-  FmActionView
+  FmActionView,
+  FmSearchbar
 }

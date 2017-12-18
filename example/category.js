@@ -26,6 +26,10 @@ export default {
             name: '折叠文本',
             subname: 'FmFoldableText',
             path: 'component/foldableText'
+        }, {
+            name: '搜索框',
+            subname: 'FmSearchbar',
+            path: 'component/searchbar'
         }]
     },
     container: {
