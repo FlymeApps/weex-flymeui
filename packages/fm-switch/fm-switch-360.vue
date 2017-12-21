@@ -67,7 +67,7 @@
         let style =
           theme === 'default'
             ? {
-                borderWidth: 2,
+                borderWidth: 6,
                 borderColor: '#7e97ac'
               }
             : THEME[theme]
@@ -85,16 +85,21 @@
         return style
       }
     },
+    watch: {
+      checked(bool) {
+        this.toggleState(bool)
+      }
+    },
     methods: {
       changeState(e) {
         if (this.isAnimate || this.disabled) return
         this.checked = !this.checked
-        this.toggleState()
+        this.toggleState(this.checked)
         this.$emit('fmSwitchStateChange', this.checked)
       },
-      toggleState() {
+      toggleState(bool) {
         this.isAnimate = true
-        const style = this.checked
+        const style = bool
           ? {
               backgroundColor: this.focusColor,
               transform: 'scale(1)',
@@ -107,6 +112,9 @@
               transformOrigin: 'center center'
             }
         const ctrBall = this.$refs.ctrBall
+        if (!ctrBall) {
+          return
+        }
         animation.transition(
           ctrBall,
           {

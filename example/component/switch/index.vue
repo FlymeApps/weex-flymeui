@@ -48,7 +48,7 @@
       <category title="属性定制"></category>
       <div class="list">
         <div class="item">
-            <fm-switch checked="true"></fm-switch>
+            <fm-switch :checked="isChecked"></fm-switch>
             <text class="text">默认打开</text>
         </div>
         <div class="item">
@@ -103,6 +103,15 @@
   const modal = weex.requireModule('modal')
 
   export default {
-    components: { Title, Category, FmSwitch, FmSwitch360 }
+    components: { Title, Category, FmSwitch, FmSwitch360 },
+    data: () => ({
+      isChecked: false
+    }),
+    methods: {
+      change(bool) {
+        this.isChecked = bool
+        console.log(this.isChecked)
+      }
+    }
   }
 </script>
