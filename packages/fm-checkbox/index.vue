@@ -15,12 +15,11 @@
 
 <style scoped>
   .fm-checkbox {
-      
   }
 
   .border {
     margin: 0 48px;
-    background-color: #E6E6E6;
+    background-color: #e6e6e6;
     height: 1px;
   }
 
@@ -34,7 +33,7 @@
   }
 
   .checkbox-content:active {
-    background-color: #EEEEEE;
+    background-color: #eeeeee;
   }
 
   .label {
@@ -46,7 +45,7 @@
   }
 
   .checked {
-    color: #198DED;
+    color: #198ded;
   }
 
   .icon-wrap {
@@ -62,125 +61,128 @@
 
   .icon {
     font-size: 72px;
-    color: #198DED;
+    color: #198ded;
     font-weight: bold;
     width: 72px;
     height: 64px;
     justify-content: center;
   }
-
 </style>
 
 <script>
-const animation = weex.requireModule('animation')
-import FmIcon from '../fm-icon'
-export default {
-  components: { FmIcon },
-  props: {
-    value: {
+  const animation = weex.requireModule('animation')
+  import FmIcon from '../fm-icon'
+  export default {
+    components: { FmIcon },
+    props: {
+      value: {
         type: String,
         default: ''
-    },
-    checked: Boolean,
-    disabled: Boolean
-  },
-  data: () => ({
-    isChecked: false,
-    selfChecked: false
-  }),
-  computed: {
-    _checked: {
-      get() {
-          return this.isGroup ? this.store.indexOf(this.value) !== -1 ? true : false : this.selfChecked
       },
-      set(val) {
-        if (this.isGroup) {
-          if (val) {
-            this.isLimitExceeded = false
-            this._checkboxGroup.max !== undefined &&
-            this.store.length >= this._checkboxGroup.max &&
-            (this.isLimitExceeded = true)
+      checked: Boolean,
+      disabled: Boolean
+    },
+    data: () => ({
+      isChecked: false,
+      selfChecked: false
+    }),
+    computed: {
+      _checked: {
+        get() {
+          return this.isGroup
+            ? this.store.indexOf(this.value) !== -1 ? true : false
+            : this.selfChecked
+        },
+        set(val) {
+          if (this.isGroup) {
+            if (val) {
+              this.isLimitExceeded = false
+              this._checkboxGroup.max !== undefined &&
+                this.store.length >= this._checkboxGroup.max &&
+                (this.isLimitExceeded = true)
 
-            this.isLimitExceeded === false && 
-            (this.addToStore() || this.appearIcon(val))
+              this.isLimitExceeded === false &&
+                (this.addToStore() || this.appearIcon(val))
+            } else {
+              this.isLimitExceeded = false
+              this._checkboxGroup.min !== undefined &&
+                this.store.length <= this._checkboxGroup.min &&
+                (this.isLimitExceeded = true)
+
+              this.isLimitExceeded === false &&
+                (this.deleteFromStore() || this.appearIcon(val))
+            }
           } else {
-            this.isLimitExceeded = false
-            this._checkboxGroup.min !== undefined &&
-            this.store.length <= this._checkboxGroup.min &&
-            (this.isLimitExceeded = true)
-            
-            this.isLimitExceeded === false && 
-            (this.deleteFromStore() || this.appearIcon(val))
+            this.selfChecked = val
+            this.appearIcon(val)
           }
-        } else {
-          this.selfChecked = val
-          this.appearIcon(val)
+          this.$emit('fmCheckboxChecked', { value: this.value, checked: val })
         }
-        this.$emit('fmCheckboxChecked', { value: this.value, checked: val })
+      },
+      isGroup() {
+        let parent = this.$parent
+        while (parent) {
+          if (parent.$options.componentName !== 'FmCheckListGroup') {
+            parent = parent.$parent
+          } else {
+            this._checkboxGroup = parent
+            return true
+          }
+        }
+        return false
+      },
+      store() {
+        return this._checkboxGroup ? this._checkboxGroup.value : this.value
       }
     },
-    isGroup() {
-      let parent = this.$parent
-      while (parent) {
-        if (parent.$options.componentName !== 'FmCheckListGroup') {
-          parent = parent.$parent
-        } else {
-          this._checkboxGroup = parent
-          return true
-        }
-      }
-      return false
-    },
-    store() {
-      return this._checkboxGroup ? this._checkboxGroup.value : this.value;
-    }
-  },
-  methods: {
-    toggleChecked() {
+    methods: {
+      toggleChecked() {
         !this.disabled && (this._checked = !this._checked)
+      },
+      appearIcon(bool, duration = 150) {
+        const iconEl = this.$refs['fm-icon']
+        if (!iconEl) {
+          return
+        }
+        let style = bool
+          ? {
+              opacity: 1,
+              width: 72
+            }
+          : {
+              opacity: 0
+            }
+        animation.transition(
+          iconEl,
+          {
+            styles: style,
+            duration,
+            delay: 0,
+            timingFunction: 'ease-out'
+          },
+          () => {
+            this.isChecked = bool
+          }
+        )
+      },
+      addToStore() {
+        if (Array.isArray(this.store) && this.store.indexOf(this.value) === -1) {
+          this.store.push(this.value)
+        }
+      },
+      deleteFromStore() {
+        if (Array.isArray(this.store) && this.store.indexOf(this.value) !== -1) {
+          this.store.splice(this.store.indexOf(this.value), 1)
+        }
+      }
     },
-    appearIcon(bool, duration = 150) {
-      const iconEl = this.$refs['fm-icon']
-      if (!iconEl) {
-        return
-      }
-      let style = bool ? {
-        opacity: 1,
-        width: 72
-      } : {
-        opacity: 0
-      }
-      animation.transition(iconEl, {
-        styles: style,
-        duration,
-        delay: 0,
-        timingFunction: 'ease-out'
-      }, () => {
-        this.isChecked = bool
-      })
-    },
-    addToStore() {
-      if (
-        Array.isArray(this.store) &&
-        this.store.indexOf(this.value) === -1
-      ) {
-        this.store.push(this.value)
-      }
-    },
-    deleteFromStore() {
-      if (
-        Array.isArray(this.store) &&
-        this.store.indexOf(this.value) !== -1
-      ) {
-        this.store.splice(this.store.indexOf(this.value), 1)
-      }
+    created() {
+      this.isGroup
+      this.$slots.default && (this.value = this.$slots.default[0].text)
+      this.checked &&
+        (this.addToStore() ||
+          ((this.selfChecked = true) && (this.isChecked = true)))
+      this._checked && ((this.selfChecked = true) && (this.isChecked = true))
     }
-  },
-  created() {
-    this.isGroup
-    this.$slots.default && (this.value = this.$slots.default[0].text)
-    this.checked && (this.addToStore() || ((this.selfChecked = true) && (this.isChecked = true)))
-    this._checked && ((this.selfChecked = true) && (this.isChecked = true))
   }
-}
 </script>
