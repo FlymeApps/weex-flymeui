@@ -1,23 +1,20 @@
 <template>
   <cell class="check-cell-wrap" @longpress="onLongpress" @click="onClick">
-    <div class="wrapper">
-      <div class="content">
-        <text>{{ identity }}</text>
-      </div>
+    <div class="wrapper" ref="wrapper">
+      <slot></slot>
     </div>
     <div class="right">
-      <check-icon :show="checking" :checked="_selected"></check-icon>
+      <check-icon :show="checking" :checked="_selected" :disabled="disabled"></check-icon>
     </div>
   </cell>
 </template>
 
 <style scoped>
   .check-cell-wrap {
-    height: 200px;
-  }
-
-  .wrapper {
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
   }
 
   .check-cell-wrap:active {
@@ -25,34 +22,31 @@
   }
 
   .right {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 60px;
-    justify-content: center;
-    align-items: center;
+    width: 24px;
+    height: 24px;
   }
 </style>
 
 <script>
-  const modal = weex.requireModule('modal')
+  const dom = weex.requireModule('dom')
   import CheckIcon from './check-icon.vue'
 
   export default {
     components: { CheckIcon },
     props: {
       identity: {
-        type: String,
+        type: [String, Object, Number, Array],
         required: true
+      },
+      disabled: {
+        type: Boolean,
+        default: false
       }
     },
-    data: () => ({
-      value: '初始化'
-    }),
     computed: {
       _selected: {
         get() {
-          return this.store[this.identity] ? true : false
+          return this.store.indexOf(this.identity) !== -1 ? true : false
         },
         set(val) {
           if (val) {
@@ -83,7 +77,7 @@
     },
     methods: {
       onClick(e) {
-        if (this._group.checking) {
+        if (this._group.checking && !this.disabled) {
           this.toggleSelected()
         }
       },
@@ -91,18 +85,21 @@
         !this.disabled && (this._selected = !this._selected)
       },
       onLongpress(e) {
-        !this._group.checking && (this._group.checking = true)
-        // setTimeout(() => {
-        //   this._group.checking = false
-        // }, 2000)
+        !this._group.checking &&
+          (this._group.checking = true) &&
+          (this._selected = true)
       },
       addToStore() {
         const { identity } = this
-        this.$set(this.store, identity, {})
+        if (Array.isArray(this.store) && this.store.indexOf(identity) === -1) {
+          this.store.push(identity)
+        }
       },
       deleteFromStore() {
         const { identity } = this
-        this.store[identity] && this.$delete(this.store, identity)
+        if (Array.isArray(this.store) && this.store.indexOf(identity) !== -1) {
+          this.store.splice(this.store.indexOf(identity), 1)
+        }
       }
     },
     created() {

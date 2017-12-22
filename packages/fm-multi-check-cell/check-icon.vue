@@ -1,45 +1,38 @@
 <template>
   <div class="check-icon">
     <div class="animate-wrap" :hack="isNeedShow" ref="animate-wrap" :style="wrapStyle">
-      <!-- <div class="unchecked"></div> -->
-      <image 
+      <image
         class="unchecked"
-        src="http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_off.png" />
+        :src="bgImg" />
       <image 
         class="checked"
-        src="http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on.png" 
+        :src="getCheckedImg" 
         ref="check-icon"
         :watch="isNeedChecked" />
-      <!-- <div :watch="isNeedChecked" class="checked" ref="check-icon">
-        <fm-icon value="&#xe6de;" color="#FFFFFF" size="40" />>
-      </div> -->
     </div>
   </div>
 </template>
 
 <style scoped>
   .animate-wrap {
-    width: 72px;
-    height: 72px;
+    width: 24px;
+    height: 24px;
   }
 
   .unchecked {
-    width: 72px;
-    height: 72px;
-    /* border-color: #d9d9d9;
-                border-radius: 30px;
-                border-width: 6px; */
+    width: 24px;
+    height: 24px;
   }
 
   .checked {
     position: absolute;
     left: 0;
     top: 0;
-    width: 72px;
-    height: 72px;
-    /* background-color: #198ded;
-                border-radius: 30px; */
+    width: 24px;
+    height: 24px;
     transform: scale(0);
+    background-color: #ffffff;
+    border-radius: 12px;
   }
 </style>
 
@@ -56,6 +49,25 @@
       checked: {
         type: Boolean,
         default: false
+      },
+      bgImg: {
+        type: String,
+        default:
+          'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_off.png'
+      },
+      checkedImg: {
+        type: String,
+        default:
+          'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on.png'
+      },
+      checkedDisableImg: {
+        type: String,
+        default:
+          'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on_disable.png'
+      },
+      disabled: {
+        type: Boolean,
+        default: false
       }
     },
     watch: {
@@ -65,6 +77,10 @@
     },
     data: () => ({}),
     computed: {
+      getCheckedImg() {
+        const { disabled, checkedImg, checkedDisableImg } = this
+        return disabled ? checkedDisableImg : checkedImg
+      },
       wrapStyle() {
         return this.show
           ? {

@@ -7,7 +7,7 @@
         <div class="item">
             <fm-switch></fm-switch>
             <fm-switch360 
-              border-color="red" 
+              border-color="#000000" 
               background-color="green" 
               focus-color="gray" 
               blur-color="white"
@@ -112,6 +112,11 @@
         this.isChecked = bool
         console.log(this.isChecked)
       }
+    },
+    mounted() {
+      setTimeout(() => {
+        this.isChecked = true
+      }, 3000)
     }
   }
 </script>

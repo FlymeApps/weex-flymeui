@@ -4,10 +4,6 @@
   </list>  
 </template>
 
-<style scoped>
-
-</style>
-
 <script>
   import FmMultiCheckCell from '../fm-multi-check-cell'
   export default {
@@ -20,11 +16,24 @@
       },
       value: {
         type: Object,
-        default: () => ({})
+        default: () => []
       }
     },
-    mounted() {
-      // console.log(this.$refs.group.$scopedSlots)
+    methods: {
+      finish() {
+        this.checking = false
+      },
+      active() {
+        this.checking = true
+      }
+    },
+    watch: {
+      value(value) {
+        this.$emit('fmMultiCheckGroupSelected', value)
+      },
+      checking(value) {
+        value && this.$emit('fmMultiCheckGroupChecking', value)
+      }
     }
   }
 </script>

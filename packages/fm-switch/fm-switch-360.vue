@@ -67,7 +67,7 @@
         let style =
           theme === 'default'
             ? {
-                borderWidth: 6,
+                borderWidth: 2,
                 borderColor: '#7e97ac'
               }
             : THEME[theme]
