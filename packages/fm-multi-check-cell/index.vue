@@ -87,6 +87,7 @@
       onLongpress(e) {
         !this._group.checking &&
           (this._group.checking = true) &&
+          !this.disabled &&
           (this._selected = true)
       },
       addToStore() {
