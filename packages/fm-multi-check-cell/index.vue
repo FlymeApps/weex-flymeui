@@ -1,5 +1,5 @@
 <template>
-  <cell class="check-cell-wrap" @longpress="onLongpress" @click="onClick">
+  <cell class="check-cell-wrap" @longpress="onLongpress" @click="onClick" ripple="normal">
     <div class="wrapper" ref="wrapper">
       <slot></slot>
     </div>

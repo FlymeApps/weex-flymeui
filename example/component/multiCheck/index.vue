@@ -10,7 +10,8 @@
       ref="multiSelect" 
       @fmMultiCheckGroupSelected="selecting">
       <fm-multi-check-cell v-for="(item, index) in dataSource" :key="index" :identity="item.name" :disabled="item.disabled">
-        <div class="test">
+        <div class="test" bubble="true">
+          <div class="click-test" @click="beClick" @longpress="longpress"></div>
           <text class="cell-text">{{ item.name }}</text>
         </div>
       </fm-multi-check-cell>
@@ -45,6 +46,12 @@
     border-bottom-style: solid;
     border-bottom-width: 0.3px;
     border-bottom-color: #e6e6e6;
+  }
+
+  .click-test {
+    width: 100px;
+    height: 100px;
+    background-color: blue;
   }
 </style>
 
@@ -127,6 +134,13 @@
         } else {
           this.checkData = []
         }
+      },
+      beClick(e) {
+        modal.toast({ message: 'childClick' })
+      },
+      longpress(e) {
+        this.$refs.multiSelect.active()
+        modal.toast({ message: 'longpress' })
       }
     }
   }

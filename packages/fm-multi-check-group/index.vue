@@ -32,7 +32,7 @@
         this.$emit('fmMultiCheckGroupSelected', value)
       },
       checking(value) {
-        value && this.$emit('fmMultiCheckGroupChecking', value)
+        this.$emit('fmMultiCheckGroupStateChange', value)
       }
     }
   }
