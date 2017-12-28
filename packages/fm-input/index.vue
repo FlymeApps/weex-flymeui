@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div class="fm-wrapper">
     <textarea v-if="type === 'textarea'"
       :class="inputClz"
@@ -30,6 +31,37 @@
     <fm-icon v-if="visibleShow" class="visible" :value="visibleValue" icon-style="72" color="#666" @fmClick="toggleVisible" />
     <text v-if="hasError" class="error-msg">{{inputErrorMessage}}</text>
   </div>
+=======
+<div class="fm-wrapper">
+	<textarea v-if="type === 'textarea'"
+		:class="inputClz"
+		:value="value"
+		:rows="rows"
+		:maxlength="maxlength"
+		:placeholder="placeholder"
+		@input="input"
+		@change="change"
+		@focus="beFocus"
+		@blur="beBlur"
+		ref="input" />
+	<input v-else
+		:type="type"
+		:nightMode="nightMode"
+		:class="inputClz" 
+		:style="inputStyle"
+		:value="value"
+		:maxlength="maxlength" 
+		:placeholder="placeholder"
+		@input="input"
+		@change="change"
+		@focus="beFocus"
+		@blur="beBlur"
+		ref="input" />
+	<fm-icon v-if="delShow" class="delete" value="&#xe6c0;" icon-style="48" color="#fff" @fmClick="delClick" />
+	<fm-icon v-if="visibleShow" class="visible" :value="visibleValue" icon-style="72" color="#666" @fmClick="toggleVisible" />
+	<text v-if="hasError" class="error-msg">{{inputErrorMessage}}</text>
+</div>
+>>>>>>> flexible-zize
 </template>
 
 <style lang="sass" scoped>
@@ -104,6 +136,7 @@ export default {
     }
   },
 
+<<<<<<< HEAD
   props: {
     value: {
       type: [String, Number],
@@ -127,6 +160,29 @@ export default {
       default: 'default'
     }
   },
+=======
+	props: {
+		value: {
+			type: [String, Number],
+			default: ''
+		},
+		placeholder: {
+			type: String,
+			default: '请输入'
+		},
+		maxlength: [String, Number],
+		inputPattern: RegExp,
+		inputErrorMessage: {
+			type: String,
+			default: '输入有误'
+		},
+		type: String,
+		nightMode: {
+			type: Boolean,
+			default: false
+		}
+	},
+>>>>>>> flexible-zize
 
   computed: {
     visibleValue() {
