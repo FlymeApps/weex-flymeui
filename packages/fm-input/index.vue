@@ -13,6 +13,7 @@
 		ref="input" />
 	<input v-else
 		:type="type"
+		:nightMode="nightMode"
 		:class="inputClz" 
 		:style="inputStyle"
 		:value="value"
@@ -116,7 +117,11 @@ export default {
 			type: String,
 			default: '输入有误'
 		},
-		type: String
+		type: String,
+		nightMode: {
+			type: Boolean,
+			default: false
+		}
 	},
 
 	computed: {

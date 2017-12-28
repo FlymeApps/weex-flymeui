@@ -59,6 +59,7 @@
 import Title from '../../_mods/title.vue';
 import { FmText, FmImage, FmIcon } from '../../../index';
 import DCell from '../../index/components/cell.vue';
+const eventTrack = weex.requireModule('eventReport')
 
 const navigator = weex.requireModule('navigator')
 
@@ -71,10 +72,13 @@ export default {
         navigator.pop()
       },
       demo1() {   // 默认状态栏
+
+        eventTrack.eventReport('click_navigator', {appname:'creatorsdkdemo',method:"demo1"});
         navigator.push({
             url: url,
             animated: true   
         })
+        
       },
       demo2() {  // 全屏
         navigator.push({
@@ -85,6 +89,7 @@ export default {
               softmode: "adjustResize"
             }
         })
+        eventTrack.eventReport('click_navigator', {appname:'creatorsdkdemo',method:"demo2"});
       },
       demo3() {  //softmode
         navigator.push({
@@ -95,6 +100,7 @@ export default {
               softmode: "adjustResize"
             }
         })
+        eventTrack.eventReport('click_navigator', {appname:'creatorsdkdemo',method:"demo3"});
       },
       demo4() {  //沉浸式状态栏
         navigator.push({
@@ -111,6 +117,7 @@ export default {
             }
             }
         })
+        eventTrack.eventReport('click_navigator', {appname:'creatorsdkdemo',method:"demo4"});
       },
       demo5() {
         navigator.push({
@@ -125,6 +132,7 @@ export default {
               }
             }
         })
+        eventTrack.eventReport('click_navigator', {appname:'creatorsdkdemo',method:"demo5"});
       },
       demo6() {
         navigator.push({
@@ -141,6 +149,7 @@ export default {
               }
             }
         })
+        eventTrack.eventReport('click_navigator', {appname:'creatorsdkdemo',method:"demo6"});
       },
       demo7() {
         navigator.push({
@@ -151,15 +160,52 @@ export default {
                 darkIcon: true //是否使用深色图标
               },
               naviBar: { // NavigationBar 
-                hide: true,  // 是否隐藏
-                color: "#FFFFFFFF",   // 颜色值使用 #AARRGGBB 格式
-                alpha: 0.3 , // alpha值 0.0-1.0之间 设置alpha后color 的#AARRGGBB的AA不起作用
-                transparent: true, 
+                color: "#6600FF00",   // 颜色值使用 #AARRGGBB 格式
                 darkIcon: true // 是否使用深色图标
               }
             }
         })
+
+        let naviBar= { // NavigationBar 
+                transparent: true,   // 颜色值使用 #AARRGGBB 格式
+                darkIcon: true // 是否使用深色图标
+              }
+         navigator.setNavigationBar(JSON.stringify(naviBar));
+
+         eventTrack.eventReport('click_navigator', {appname:'creatorsdkdemo',method:"demo7"});
       }
     }
+    ,
+  beforeCreat: function () {
+    // `this` 指向 vm 实例
+   console.log("navigator_beforeCreat")
+   eventTrack.eventReport('navigator_beforeCreat', {appname:'creatorsdkdemo',method:"destroyed"});
+  },
+  created: function () {
+    // `this` 指向 vm 实例
+   console.log("navigator_created")
+   eventTrack.eventReport('navigator_created', {appname:'creatorsdkdemo',method:"destroyed"});
+  }
+    ,
+  mounted: function () {
+    // `this` 指向 vm 实例
+    let naviBar= { // NavigationBar 
+                color: "#00FF00",   // 颜色值使用 #AARRGGBB 格式
+                darkIcon: true // 是否使用深色图标
+              }
+   // navigator.setNavigationBar(JSON.stringify(naviBar));
+   eventTrack.onPageCreate();
+  }
+  ,
+  beforeDestroy: function () {
+    // `this` 指向 vm 实例
+   console.log("navigator_beforeDestroy")
+   eventTrack.eventReport('navigator_beforeDestroy', {appname:'creatorsdkdemo',method:"destroyed"});
+  },
+  destroyed: function () {
+    // `this` 指向 vm 实例
+   console.log("navigator_destroyed")
+   eventTrack.eventReport('navigator_destroyed', {appname:'creatorsdkdemo',method:"destroyed"});
+  }
 }
 </script>
