@@ -3,10 +3,10 @@
     <div class="fm-status-bar"></div>
     <div class="fm-search-bar">
       <slot name="left">
-        <fm-icon @click="onBack" class="search-bar-back" value="&#xe6b5;" icon-style="24" />
+        <fm-icon @click="onBack" class="search-bar-back" value="&#xe6b5;" icon-style="72" />
       </slot>
         <div class="search-input-wrap">
-          <fm-icon class="search-bar-icon" value="&#xe6d4;" icon-style="14" color="#919191" />
+          <fm-icon class="search-bar-icon" value="&#xe6d4;" icon-style="42" color="#919191" />
           <input @blur="onBlur"
                 @focus="onFocus"
                 @input="onInput"
@@ -18,7 +18,7 @@
                 :type="inputType"
                 :placeholder="placeholder"
                 class="search-bar-input"/>
-          <fm-icon v-if="delShow" class="search-bar-delete" value="&#xe6c0;" icon-style="16" color="#FFFFFF" @fmClick="delClick" />
+          <fm-icon v-if="delShow" class="search-bar-delete" value="&#xe6c0;" icon-style="48" color="#FFFFFF" @fmClick="delClick" />
         </div>
       <slot name="right">
         <text class="search-enter" @click="onSearch" :style="searchBtnStyle">{{ searchBtnText }}</text>
@@ -29,21 +29,21 @@
 
 <style scoped>
   .fm-status-bar {
-    height: 22px;
-    width: 360px;
+    height: 66px;
+    width: 1080px;
     background-color: #ffffff;
   }
 
   .fm-search-bar {
-    padding-left: 17px;
+    padding-left: 51px;
     background-color: #ffffff;
-    width: 360px;
-    height: 44px;
+    width: 1080px;
+    height: 132px;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     border-bottom-style: solid;
-    border-bottom-width: 0.6px;
+    border-bottom-width: 1px;
     border-bottom-color: rgba(0, 0, 0, 0.1);
   }
 
@@ -51,23 +51,23 @@
     position: absolute;
     flex-direction: row;
     align-items: center;
-    top: 7px;
-    left: 55px;
-    right: 76px;
-    padding: 0 5px 0 8px;
-    height: 30px;
+    top: 21px;
+    left: 165px;
+    right: 228px;
+    padding: 0 15px 0 24px;
+    height: 90px;
     background-color: #f2f2f2;
     outline: none;
-    border-radius: 15px;
+    border-radius: 45px;
   }
 
   .search-bar-input {
-    width: 176px;
-    height: 30px;
-    margin-left: 3px;
-    margin-right: 3px;
-    line-height: 30px;
-    font-size: 14px;
+    width: 528px;
+    height: 90px;
+    margin-left: 9px;
+    margin-right: 9px;
+    line-height: 90px;
+    font-size: 42px;
     background-color: transparent;
     font-family: sans-serif-medium;
     font-weight: 500;
@@ -75,33 +75,33 @@
   }
 
   .search-bar-icon {
-    line-height: 14px;
-    height: 14px;
+    line-height: 42px;
+    height: 42px;
     font-weight: 700;
   }
 
   .search-bar-back {
-    line-height: 24px;
-    height: 24px;
+    line-height: 72px;
+    height: 72px;
     font-weight: 700;
   }
 
   .search-bar-delete {
-    width: 20px;
-    height: 20px;
+    width: 60px;
+    height: 60px;
     font-weight: 700;
-    padding: 2;
+    padding: 6;
     background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
+    border-radius: 30px;
   }
 
   .search-enter {
     font-family: sans-serif-medium;
     font-weight: 500;
-    font-size: 16px;
-    line-height: 32px;
+    font-size: 48px;
+    line-height: 96px;
     color: rgba(0, 0, 0, 0.6);
-    width: 76px;
+    width: 228px;
     text-align: center;
   }
 </style>

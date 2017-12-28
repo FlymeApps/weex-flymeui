@@ -24,7 +24,7 @@
 		<fm-searchbar
 			:searchBtnStyle="{ color: '#198ded' }"
 			@submit="submit">
-			<image slot="left" src="http://design.flyme.cn/weexui/assets/star_normal.png" style="width: 24px;height: 24px;" width="24" height="24" />
+			<image slot="left" src="http://design.flyme.cn/weexui/assets/star_normal.png" style="width: 72px;height: 72px;" />
 		</fm-searchbar>
 	</div>
 </template>
