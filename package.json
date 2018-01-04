@@ -10,7 +10,7 @@
     },
     "scripts": {
         "build": "webpack --progress",
-        "build:theme": "gulp build --gulpfile packages/style/gulpfile.js",
+        "build:theme": "gulp build --gulpfile lib/theme-paint/gulpfile.js",
         "watch": "webpack --progress --watch",
         "serve": "anywhere -d dist/example/ -p 8080",
         "start": "npm run build; npm run serve",
@@ -55,7 +55,8 @@
     },
     "dependencies": {
         "gulp": "^3.9.1",
-        "gulp-sass": "^3.1.0"
+        "gulp-sass": "^3.1.0",
+        "minimist": "^1.2.0"
     },
     "directories": {
         "example": "example"
