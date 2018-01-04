@@ -60,7 +60,7 @@ import Title from '../../_mods/title.vue';
 import { FmText, FmImage, FmIcon } from '../../../index';
 import DCell from '../../index/components/cell.vue';
 const eventTrack = weex.requireModule('eventReport')
-
+var modal = weex.requireModule('modal')
 const navigator = weex.requireModule('navigator')
 
 let url = weex.config.bundleUrl.replace(/navigator\/index.native.js/, 'navigatorTest/index.native.js')
@@ -176,7 +176,7 @@ export default {
       }
     }
     ,
-  beforeCreat: function () {
+  beforeCreate: function () {
     // `this` 指向 vm 实例
    console.log("navigator_beforeCreat")
    eventTrack.eventReport('navigator_beforeCreat', {appname:'creatorsdkdemo',method:"destroyed"});
@@ -200,10 +200,18 @@ export default {
   beforeDestroy: function () {
     // `this` 指向 vm 实例
    console.log("navigator_beforeDestroy")
+   modal.toast({
+          message: 'beforeDestroy',
+          duration: 0.3
+        })
    eventTrack.eventReport('navigator_beforeDestroy', {appname:'creatorsdkdemo',method:"destroyed"});
   },
   destroyed: function () {
     // `this` 指向 vm 实例
+    modal.toast({
+          message: 'destroyed',
+          duration: 0.3
+        })
    console.log("navigator_destroyed")
    eventTrack.eventReport('navigator_destroyed', {appname:'creatorsdkdemo',method:"destroyed"});
   }

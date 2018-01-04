@@ -59,7 +59,6 @@
         height: size(360);
         margin-bottom: size(20);
         padding: size(50);
-        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.04);
     }
 
 </style>
