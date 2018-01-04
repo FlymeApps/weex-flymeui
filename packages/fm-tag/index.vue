@@ -8,29 +8,28 @@
     </div>
 </template>
 
-<style lang="sass" scoped>
-  @import "../style/mixin.scss";
+<style scoped>
   .fm-tag {
     align-items: center;
 	  flex-direction: row;
   }
 
   .tag-item {
-    padding: size(9);
+    padding: 9;
     justify-content: center;
     align-items: center;
     overflow: hidden;
   }
 
   .tag-border {
-    border-bottom-left-radius: size(4.5);
-    border-bottom-right-radius: size(4.5);
-    border-top-left-radius: size(4.5);
-    border-top-right-radius: size(4.5);
+    border-bottom-left-radius: 4.5;
+    border-bottom-right-radius: 4.5;
+    border-top-left-radius: 4.5;
+    border-top-right-radius: 4.5;
   }
 
   .tag-hollow {
-    border-width: size(3);
+    border-width: 3;
   }
 
   .tag-text {
@@ -39,19 +38,19 @@
   }
 
   .tag-font-small {
-    font-size: size(24);
+    font-size: 24;
   }
 
   .tag-font-big {
-    font-size: size(30);
+    font-size: 30;
   }
 
   .tag-margin-small {
-    margin: size(3);
+    margin: 3;
   }
 
   .tag-margin-big {
-    margin: size(6);
+    margin: 6;
   }
 </style>
 

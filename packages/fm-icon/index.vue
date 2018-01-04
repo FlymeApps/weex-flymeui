@@ -13,12 +13,11 @@
     </text>
 </template>
 
-<style lang="sass" scoped>
-  @import "../style/mixin.scss";
+<style scoped>
   .fm-image {
-    width: size(129);
-    height: size(36);
-    margin-right: size(18);
+    width: 129;
+    height: 36;
+    margin-right: 18;
   }
 </style>
 

@@ -6,6 +6,12 @@
       <div class="list">
         <div class="item">
             <fm-switch></fm-switch>
+            <fm-switch360 
+              border-color="#000000" 
+              background-color="green" 
+              focus-color="gray" 
+              blur-color="white"
+              @fmSwitchStateChange="change"></fm-switch360>
         </div>
       </div>
       <category title="不同主题样式"></category>
@@ -42,7 +48,7 @@
       <category title="属性定制"></category>
       <div class="list">
         <div class="item">
-            <fm-switch checked="true"></fm-switch>
+            <fm-switch :checked="isChecked"></fm-switch>
             <text class="text">默认打开</text>
         </div>
         <div class="item">
@@ -88,14 +94,29 @@
 </style>
 
 <script>
-import { FmSwitch } from '../../../index';
-import Title from '../../_mods/title.vue';
-import Category from '../../_mods/category.vue';
-import { setTitle } from '../../_mods/set-nav';
+  import { FmSwitch } from '../../../index'
+  import FmSwitch360 from '../../../packages/fm-switch/fm-switch-360.vue'
+  import Title from '../../_mods/title.vue'
+  import Category from '../../_mods/category.vue'
+  import { setTitle } from '../../_mods/set-nav'
 
-const modal = weex.requireModule('modal');
+  const modal = weex.requireModule('modal')
 
-export default {
-    components: { Title, Category, FmSwitch },
-}
+  export default {
+    components: { Title, Category, FmSwitch, FmSwitch360 },
+    data: () => ({
+      isChecked: false
+    }),
+    methods: {
+      change(bool) {
+        this.isChecked = bool
+        console.log(this.isChecked)
+      }
+    },
+    mounted() {
+      setTimeout(() => {
+        this.isChecked = true
+      }, 3000)
+    }
+  }
 </script>

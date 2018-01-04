@@ -1,60 +1,59 @@
 {
-  "name": "@flyme/weex-flymeui",
-  "version": "0.0.9",
-  "main": "index.js",
-  "lib": "vue",
-  "type": "weex",
-  "repository": {
-    "type": "git",
-    "url": "http://gitlab.meizu.com/sunyanjie/weex-mzui"
-  },
-  "scripts": {
-    "build": "webpack --progress",
-    "watch": "webpack --progress --watch",
-    "serve": "anywhere -d dist/example/ -p 8080",
-    "start": "npm run build; npm run serve",
-    "dev": "npm run start; npm run serve & npm run watch",
-    "public": "cnpm publish --registry=http://registry.cnpm.meizu.com"
-  },
-  "keywords": [
-    "Weex Ui",
-    "Weex",
-    "UI library"
-  ],
-  "author": "suenyinkit",
-  "license": "MIT",
-  "devDependencies": {
-    "anywhere": "^1.4.0",
-    "babel-core": "~6.26.0",
-    "babel-eslint": "~8.0.1",
-    "babel-loader": "~7.1.2",
-    "babel-preset-es2015": "~6.24.1",
-    "babel-preset-stage-0": "~6.24.1",
-    "babel-runtime": "~6.26.0",
-    "clean-webpack-plugin": "~0.1.17",
-    "copy-webpack-plugin": "~4.0.1",
-    "css-loader": "~0.28.7",
-    "eslint": "^3.8.1",
-    "glob": "^7.1.2",
-    "lerna": "~2.2.0",
-    "node-sass": "^4.7.2",
-    "sass-loader": "^6.0.6",
-    "scss-loader": "0.0.1",
-    "url-parse": "~1.1.9",
-    "vue": "^2.4.1",
-    "vue-loader": "11.3.3",
-    "vue-router": "^2.5.3",
-    "vue-template-compiler": "^2.4.1",
-    "webpack": "~3.6.0",
-    "webpack-dev-server": "~2.9.1",
-    "weex-loader": "~0.6.0-beta.3",
-    "weex-vue-loader": "~0.5.0-beta.3"
-  },
-  "dependencies": {
-    "url-parse": "^1.1.9"
-  },
-  "directories": {
-    "example": "example"
-  },
-  "description": ""
+    "name": "@flyme/weex-flymeui",
+    "version": "0.1.2",
+    "main": "index.js",
+    "lib": "vue",
+    "type": "weex",
+    "repository": {
+        "type": "git",
+        "url": "http://gitlab.meizu.com/sunyanjie/weex-flymeui"
+    },
+    "scripts": {
+        "build": "webpack --progress",
+        "watch": "webpack --progress --watch",
+        "serve": "anywhere -d dist/example/ -p 8080",
+        "start": "npm run build; npm run serve",
+        "dev": "npm run start; npm run serve & npm run watch",
+        "public": "cnpm publish --registry=http://registry.cnpm.meizu.com"
+    },
+    "keywords": [
+        "Weex Ui",
+        "Weex",
+        "UI library"
+    ],
+    "author": "suenyinkit",
+    "license": "MIT",
+    "devDependencies": {
+        "anywhere": "^1.4.0",
+        "babel-core": "~6.26.0",
+        "babel-eslint": "~8.0.1",
+        "babel-loader": "~7.1.2",
+        "babel-preset-es2015": "~6.24.1",
+        "babel-preset-stage-0": "~6.24.1",
+        "babel-runtime": "~6.26.0",
+        "clean-webpack-plugin": "~0.1.17",
+        "copy-webpack-plugin": "~4.0.1",
+        "css-loader": "~0.28.7",
+        "eslint": "^3.8.1",
+        "glob": "^7.1.2",
+        "lerna": "~2.2.0",
+        "node-sass": "^4.7.2",
+        "sass-loader": "^6.0.6",
+        "scss-loader": "0.0.1",
+        "vue": "^2.4.1",
+        "vue-loader": "11.3.3",
+        "vue-router": "^2.5.3",
+        "vue-template-compiler": "^2.4.1",
+        "webpack": "~3.6.0",
+        "webpack-dev-server": "~2.9.1",
+        "weex-loader": "~0.6.0-beta.3",
+        "weex-vue-loader": "~0.5.0-beta.3",
+        "file-loader": "^1.1.5",
+        "url-loader": "^0.6.2",
+        "url-parse": "^1.1.9"
+    },
+    "directories": {
+        "example": "example"
+    },
+    "description": ""
 }

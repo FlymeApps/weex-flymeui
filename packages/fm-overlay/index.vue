@@ -10,10 +10,9 @@
   </div>
 </template>
 
-<style lang="sass" scoped>
-  @import "../style/mixin.scss";
+<style scoped>
   .fm-overlay {
-    width: size(1080);
+    width: 1080;
     position: fixed;
     left: 0;
     top: 0;

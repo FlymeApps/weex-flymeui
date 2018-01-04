@@ -87,6 +87,9 @@ export default {
                 window.location.href = path
             } else {
                 let target = url.replace(/index.native.js/, path + '/index.native.js')
+                if (path.startsWith('http')) {
+                    target = path
+                }
                 navigator.push({
                     url: target,
                     animated: "true"
