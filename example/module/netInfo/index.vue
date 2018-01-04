@@ -5,6 +5,7 @@
             <div class="list">
                 <d-cell title="网络状态" subTitle="检查当前网络状态" @click="demo1"></d-cell>
                 <d-cell title="网络类型" subTitle="获取当前网络连接类型" @click="demo2"></d-cell>
+                <d-cell title="网络请求" subTitle="请求网络数据" @click="demo3"></d-cell>
             </div>
         </scroller>
     </div>
@@ -59,6 +60,8 @@ const netinfo = weex.requireModule('netinfo')
 
 const modal = weex.requireModule('modal')
 
+const stream = weex.requireModule('stream')
+
 export default {
     components: { FmText, FmIcon, DCell, Title },
     methods: {
@@ -73,6 +76,15 @@ export default {
       demo2() {  // 获取当前网络链接类型
         netinfo.getNetType(res => {
           modal.toast({ message: res })
+        })
+      },
+      demo3() {  // 获取当前网络链接类型
+        stream.fetch({
+          method: 'GET',
+          type: 'json',
+          url: 'https://api.github.com/repos/vuejs/vue?a='
+        }, res => {
+            modal.toast({ message:  res.ok ? res.data.stargazers_count : '(network error)' })
         })
       }
     }

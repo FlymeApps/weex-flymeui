@@ -21,6 +21,7 @@
       :autofocus="autofocus"
       :disabled="disabled"
       :return-key-type="returnKeyType"
+      :nightMode="nightMode"
       @input="input"
       @change="change"
       @focus="beFocus"
@@ -88,6 +89,7 @@
   export default {
     components: { FmIcon },
 
+<<<<<<< HEAD
     mounted() {
       if (this.type === 'password') {
         this.pwdModel = true
@@ -100,6 +102,61 @@
         focus: false,
         pwdModel: false,
         pwdVisible: false
+=======
+  mounted() {
+    if (this.type === 'password') {
+       this.pwdModel = true
+    }
+  },
+
+  data() {
+    return {
+      rows: 1,
+      focus: false,
+      pwdModel: false,
+      pwdVisible: false
+    }
+  },
+
+
+  props: {
+    value: {
+      type: [String, Number],
+      default: ''
+    },
+    placeholder: {
+      type: String,
+      default: '请输入'
+    },
+    maxlength: [String, Number],
+    inputPattern: RegExp,
+    inputErrorMessage: {
+      type: String,
+      default: '输入有误'
+    },
+    type: String,
+    autofocus: Boolean,
+    disabled: Boolean,
+    returnKeyType: {
+      type: String,
+      default: 'default'
+    },
+    nightMode: {
+			type: Boolean,
+			default: false
+		}
+  },
+
+
+  computed: {
+    visibleValue() {
+      return this.type === 'password' ? '&#xe6a9;' : '&#xe6e8;'
+    },
+    inputClz() {
+      let clz = ['fm-textarea']
+      if (this.hasError) {
+        clz.push('fm-textarea-error')
+>>>>>>> master
       }
     },
 
