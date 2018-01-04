@@ -1,7 +1,7 @@
 <template>
     <div class="mzui-demo">
         <scroller class="scroller">
-            <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59efee69a5a0a6738061aeff"></title>
+            <title link="http://apps.flyme.cn/docs/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=5a33913867e2277e77dcf949"></title>
             <category title="不同大小"></category>
             <div class="container">
                 <fm-rater :starImgs="star_normal_urls" :starBgImg="star_bg_url"></fm-rater>

@@ -92,6 +92,9 @@ const getBaseConfig = () => ({
         limit: 2048,
         name: '[name].[ext]'
       }
+    }, {
+      test: /\.scss$/,
+      loader: 'style!css!sass'
     }]
   },
   plugins,
@@ -131,8 +134,7 @@ nativeCfg.output.filename = '[name].native.js';
 nativeCfg.module.rules[1].use.push('weex-loader');
 
 const exportConfig = [
-  webCfg,
-  nativeCfg
+  webCfg
 ];
 
 module.exports = exportConfig;

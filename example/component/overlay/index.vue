@@ -1,7 +1,7 @@
 <template>
     <div class="mzui-demo">
         <scroller class="scroller">
-            <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59effc7867e2274f086396b6"></title>
+            <title link="http://apps.flyme.cn/docs/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=5a33908567e2277e77dcf93d"></title>
             <category title="动画蒙版"></category>
             <fm-button class="btn" text="有动画" @click="openOverlay" />
             <category title="无动画蒙版"></category>
@@ -54,8 +54,6 @@ export default {
 
     methods: {
       openOverlay () {
-        console.log(123)
-        console.log(this.hasAnimation)
         this.hasAnimation = true;
         this.show = true;
       },

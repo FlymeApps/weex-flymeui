@@ -22,17 +22,16 @@
     </div>
 </template>
 
-<style lang="sass" scoped>
-    @import "../../../packages/style/mixin.scss";
+<style scoped>
     .actionBar {
-        height: size(192);
-        padding-top: size(60);
+        height: 192px;
+        padding-top: 60px;
     }
 
     .actionIcon {
-        margin-top: size(30);
-        margin-right: size(45);
-        margin-left: size(51);
+        margin-top: 30px;
+        margin-right: 45px;
+        margin-left: 51px;
     }
 
     .flymeui {
@@ -47,15 +46,15 @@
     .header {
         flex-direction: row;
         align-items: flex-end;
-        margin-top: size(71);
-        margin-bottom: size(104);
-        margin-left: size(72);
+        margin-top: 71px;
+        margin-bottom: 104px;
+        margin-left: 72px;
     }
 
     .list {
-        margin-left: size(27);
-        margin-right: size(27);
-        padding: size(27);
+        margin-left: 27px;
+        margin-right: 27px;
+        padding: 27px;
     }
 
 </style>

@@ -87,8 +87,7 @@
   </div>
 </template>
 
-<style lang="sass" scoped>
-  @import "../../../packages/style/mixin.scss";
+<style scoped>
   .mzui-demo {
     position: absolute;
     top: 0;

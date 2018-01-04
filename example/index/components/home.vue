@@ -19,8 +19,7 @@
     </div>
 </template>
 
-<style lang="sass" scoped>
-    @import "../../../packages/style/mixin.scss";
+<style scoped>
     .flymeui {
         position: absolute;
         top: 0;
@@ -35,30 +34,30 @@
     }
 
     .header {
-        margin-top: size(267);
-        margin-bottom: size(93);
-        margin-left: size(77);
+        margin-top: 267px;
+        margin-bottom: 93px;
+        margin-left: 77px;
     }
 
     .desc {
-        width: size(775);
-        margin-top: size(54);
+        width: 775px;
+        margin-top: 54px;
     }
 
     .list {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-between;
-        padding: size(48);
+        padding: 48px;
     }
 
     .item {
         justify-content: space-between;
         background-color: #fff;
-        width: size(480);
-        height: size(360);
-        margin-bottom: size(20);
-        padding: size(50);
+        width: 480px;
+        height: 360px;
+        margin-bottom: 20px;
+        padding: 50px;
         box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.04);
     }
 

@@ -11,13 +11,12 @@
   </div>
 </template>
 
-<style lang="sass" scoped>
-    @import "../../../packages/style/mixin.scss";
+<style scoped>
     .detail-cell {
-        padding-left: size(65);
-        padding-right: size(65);
-        height: size(252);
-		background-color: #fff;
+			padding-left: 65px;
+			padding-right: 65px;
+			height: 252px;
+			background-color: #fff;
     }
 
 	.content {
@@ -28,7 +27,7 @@
 	}
 	
 	.border {
-		height: size(6);
+		height: 6px;
 		background-color: #ccc;
 		transform: scaleY(0.3333);
 	}

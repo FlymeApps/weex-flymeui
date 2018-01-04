@@ -4,13 +4,12 @@
   </div>
 </template>
 
-<style lang="sass" scoped>
-    @import "../../packages/style/mixin.scss";
+<style scoped>
     .category {
-      margin-top: size(30);
-      padding-left: size(36);
-      width: size(1080);
-      height: size(102);
+      margin-top: 30px;
+      padding-left: 36px;
+      width: 1080px;
+      height: 102px;
       background-color: #198ded;
       justify-content: center;
     }
@@ -18,7 +17,7 @@
     .category-text {
       color: #fff;
       font-weight: 600;
-      font-size: size(42);
+      font-size: 42px;
     }
 </style>
 

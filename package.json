@@ -10,6 +10,7 @@
     },
     "scripts": {
         "build": "webpack --progress",
+        "build:theme": "gulp build --gulpfile packages/style/gulpfile.js",
         "watch": "webpack --progress --watch",
         "serve": "anywhere -d dist/example/ -p 8080",
         "start": "npm run build; npm run serve",
@@ -35,11 +36,13 @@
         "copy-webpack-plugin": "~4.0.1",
         "css-loader": "~0.28.7",
         "eslint": "^3.8.1",
+        "file-loader": "^1.1.5",
         "glob": "^7.1.2",
         "lerna": "~2.2.0",
         "node-sass": "^4.7.2",
         "sass-loader": "^6.0.6",
-        "scss-loader": "0.0.1",
+        "url-loader": "^0.6.2",
+        "url-parse": "^1.1.9",
         "vue": "^2.4.1",
         "vue-loader": "11.3.3",
         "vue-router": "^2.5.3",
@@ -47,13 +50,14 @@
         "webpack": "~3.6.0",
         "webpack-dev-server": "~2.9.1",
         "weex-loader": "~0.6.0-beta.3",
-        "weex-vue-loader": "~0.5.0-beta.3",
-        "file-loader": "^1.1.5",
-        "url-loader": "^0.6.2",
-        "url-parse": "^1.1.9"
+        "weex-vue-loader": "~0.5.0-beta.3"
     },
     "directories": {
         "example": "example"
     },
-    "description": ""
+    "description": "",
+    "dependencies": {
+        "gulp": "^3.9.1",
+        "gulp-sass": "^3.1.0"
+    }
 }

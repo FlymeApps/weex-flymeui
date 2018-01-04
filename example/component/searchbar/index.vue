@@ -44,7 +44,7 @@
 </style>
 
 <script>
-	import { FmSearchbar } from '../../../index'
+	import FmSearchbar from '../../../packages/fm-searchbar'
 	import Title from '../../_mods/title.vue'
 	import Category from '../../_mods/category.vue'
 	import { setTitle } from '../../_mods/set-nav'

@@ -16,6 +16,7 @@
                 :value="value"
                 ref="input"
                 :type="inputType"
+                :return-key-type="returnKeyType"
                 :placeholder="placeholder"
                 class="search-bar-input"/>
           <fm-icon v-if="delShow" class="search-bar-delete" value="&#xe6c0;" icon-style="48" color="#FFFFFF" @fmClick="delClick" />
@@ -108,7 +109,11 @@
 
 <script>
   import FmIcon from '../fm-icon'
+  import Locale from '../../src/mixins/locale'
+  import { t } from '../../src/locale'
+
   export default {
+    mixins: [Locale],
     components: { FmIcon },
     props: {
       value: {
@@ -124,11 +129,17 @@
       },
       searchBtnText: {
         type: String,
-        default: '搜索'
+        default() {
+          return t('el.searchbar.search');
+        }
       },
       searchBtnStyle: {
         type: Object,
         default: () => ({})
+      },
+      returnKeyType: {
+        type: String,
+        default: 'default'
       }
     },
     data: () => ({

@@ -34,8 +34,7 @@
   </div>
 </template>
 
-<style lang="sass" scoped>
-  @import "../../../packages/style/mixin.scss";
+<style scoped>
   .mzui-demo {
     position: absolute;
     top: 0;
@@ -50,11 +49,11 @@
   }
 
   .text {
-      margin-bottom: size(60);
+      margin-bottom: 60px;
   }
 
   .container {
-      padding: size(60);
+      padding: 60px;
       padding-bottom: 0px;
   }
 </style>

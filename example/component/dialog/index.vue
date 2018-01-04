@@ -1,7 +1,7 @@
 <template>
   <div class="mzui-demo">
     <scroller class="scroller">
-      <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59efee69a5a0a6738061aeff"></title>
+      <title link="http://apps.flyme.cn/docs/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=5a3390d167e2277e77dcf943"></title>
       <category title="确认弹框"></category>
         <div class="container row">
           <fm-button class="btn" text="两个按钮" @click="click1" />
@@ -63,8 +63,7 @@
   </div>
 </template>
 
-<style lang="sass" scoped>
-  @import "../../../packages/style/mixin.scss";
+<style scoped>
   .mzui-demo {
     position: absolute;
     top: 0;
@@ -75,9 +74,9 @@
   }
   
   .container {
-    padding-top: size(60);
-    padding-left: size(60);
-    padding-right: size(60);
+    padding-top: 60px;
+    padding-left: 60px;
+    padding-right: 60px;
   }
 
   .row {
@@ -86,7 +85,7 @@
   }
 
   .btn {
-    margin-right: size(60);
+    margin-right: 60px;
   }
   
   .scroller {

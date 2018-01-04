@@ -4,8 +4,7 @@
           @load="onLoad"
           @click="click"
           @longpress="longpress"
-          :style="{ width: computedStyle.width, height: computedStyle.height }">
-    </image>
+          :style="{ width: computedStyle.width, height: computedStyle.height }" />
     <text v-else :style="getStyle"
           @click="click"
           @longpress="longpress"

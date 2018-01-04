@@ -1,5 +1,5 @@
 <template>
-    <text @click="fmClick" :class="textClz" :style="getStyle"><slot></slot>{{textValue}}</text>
+    <text :class="textClz" :style="getStyle"><slot></slot>{{textValue}}</text>
 </template>
 
 <style scoped>
@@ -106,9 +106,7 @@ export default {
         }
     },
     methods: {
-        click(e) {
-            this.$emit('fmClick', e);
-        }
+        
     }
 }
 </script>
