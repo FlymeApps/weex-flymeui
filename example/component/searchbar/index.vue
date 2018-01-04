@@ -48,6 +48,9 @@
 	import Title from '../../_mods/title.vue'
 	import Category from '../../_mods/category.vue'
 	import { setTitle } from '../../_mods/set-nav'
+	import lang from '@flyme/weex-flymeui/lib/locale/lang/en'
+	import locale from '@flyme/weex-flymeui/lib/locale'
+	locale.use(lang)
 
 	const modal = weex.requireModule('modal')
 

@@ -109,8 +109,8 @@
 
 <script>
   import FmIcon from '../fm-icon'
-  import Locale from '../../src/mixins/locale'
-  import { t } from '../../src/locale'
+  import Locale from '@flyme/weex-flymeui/lib/mixins/locale'
+  import { t } from '@flyme/weex-flymeui/lib/locale'
 
   export default {
     mixins: [Locale],

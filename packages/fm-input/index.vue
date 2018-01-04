@@ -32,7 +32,7 @@
   </div>
 </template>
 
-<style lang="css" src="../style/lib/input.css" scoped>
+<style lang="css" src="../../lib/theme-paint/lib/input.css" scoped>
 </style>
 
 <script>
