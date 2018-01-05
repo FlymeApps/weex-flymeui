@@ -45,7 +45,7 @@
     computed: {
       computedStyle () {
         if (Object.prototype.toString.call(this.iconStyle).slice(8, -1).toLowerCase() !== 'object') {
-          this.iconStyle = { height: 36 }
+          this.iconStyle = { width: 36, height: 36 }
         }
         const { width, iconStyle } = this
         if (iconStyle && iconStyle.width && iconStyle.height) {

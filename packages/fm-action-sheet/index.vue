@@ -25,7 +25,11 @@
 <script>
 import FmPopup from '../fm-popup'
 import FmSampleBtn from '../fm-sample-btn'
+import Locale from '@flyme/weex-flymeui/lib/mixins/locale'
+import { t } from '@flyme/weex-flymeui/lib/locale'
+
 export default {
+  mixins: [Locale],
   components: { FmPopup, FmSampleBtn },
   props: {
     show: {
@@ -38,7 +42,9 @@ export default {
     },
     confirmText: {
       type: String,
-      default: '删除'
+      default() {
+        return t('el.common.delete');
+      }
     },
     confirmColor: {
       type: String,
@@ -46,7 +52,9 @@ export default {
     },
     cancelText: {
       type: String,
-      default: '取消'
+      default() {
+        return t('el.common.cancel');
+      }
     },
     actionBtns: Array
   },

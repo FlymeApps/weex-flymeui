@@ -55,59 +55,65 @@
 </style>
 
 <script>
+import Locale from '@flyme/weex-flymeui/lib/mixins/locale'
+import { t } from '@flyme/weex-flymeui/lib/locale'
+
 export default {
-    props: {
-      tagType: {
-        type: String,
-        default: 'solid'
-      },
-      size: {
-        type: String,
-        default: 'small'
-      },
-      value: {
-        type: [String, Number],
-        default: '标签'
-      },
-      color: {
-        type: String,
-        default: '#198ded'
-      },
-      fontColor: {
-        type: String,
-        default: '#fff'
+  mixins: [Locale],
+  props: {
+    tagType: {
+      type: String,
+      default: 'solid'
+    },
+    size: {
+      type: String,
+      default: 'small'
+    },
+    value: {
+      type: [String, Number],
+      default() {
+        return t('el.tag.tagName')
       }
     },
-    computed: {
-      showSolid () {
-        const { tagType, value } = this;
-        return tagType === 'solid' && value !== '';
-      },
-      showHollow () {
-        const { tagType, value } = this;
-        return tagType === 'hollow' && value !== '';
-      },
-      tagTextStyle () {
-        const { color, showSolid } = this;
-        return showSolid ? { backgroundColor: color } : { borderColor: color }
-      },
-      textStyle() {
-        const { fontColor } = this;
-        return { color: fontColor }
-      },
-      textClass() {
-        let clz = ["tag-text"]
-        const { size } = this;
-        fontSize: size === 'small' ? clz.push("tag-font-small") : clz.push("tag-font-big")
-        return clz
-      },
-      tagClass() {
-        let clz = ["fm-tag"]
-        const { size } = this;
-        fontSize: size === 'small' ? clz.push("tag-margin-small") : clz.push("tag-margin-small")
-        return clz
-      }
+    color: {
+      type: String,
+      default: '#198ded'
+    },
+    fontColor: {
+      type: String,
+      default: '#fff'
     }
+  },
+  computed: {
+    showSolid () {
+      const { tagType, value } = this;
+      return tagType === 'solid' && value !== '';
+    },
+    showHollow () {
+      const { tagType, value } = this;
+      return tagType === 'hollow' && value !== '';
+    },
+    tagTextStyle () {
+      const { color, showSolid } = this;
+      return showSolid ? { backgroundColor: color } : { borderColor: color }
+    },
+    textStyle() {
+      const { fontColor } = this;
+      return { color: fontColor }
+    },
+    textClass() {
+      let clz = ["tag-text"]
+      const { size } = this;
+      fontSize: size === 'small' ? clz.push("tag-font-small") : clz.push("tag-font-big")
+      return clz
+    },
+    tagClass() {
+      let clz = ["fm-tag"]
+      const { size } = this;
+      fontSize: size === 'small' ? clz.push("tag-margin-small") : clz.push("tag-margin-small")
+      return clz
+    }
+  }
 }
 </script>
 

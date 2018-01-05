@@ -3,6 +3,8 @@
 		<text>默认态</text>
 		<fm-searchbar
 			@submit="submit"
+			:value="searchText"
+			@input="inputing"
 			@back="back" />
 		<text>修改 placeholder</text>
 		<fm-searchbar
@@ -55,6 +57,11 @@
 	const modal = weex.requireModule('modal')
 
 	export default {
+		data() {
+			return {
+				searchText: 'asdasd'
+			}
+		},
 	  components: { Title, Category, FmSearchbar },
 	  methods: {
 	    submit(e) {
@@ -62,7 +69,11 @@
 	    },
 	    back(e) {
 	      modal.toast({ message: '返回' })
-	    }
+			},
+			inputing(e) {
+				this.searchText = e.value
+				console.lang(this.searchText)
+			}
 	  }
 	}
 </script>

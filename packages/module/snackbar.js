@@ -1,4 +1,5 @@
 import SnackBar from '../fm-snack-bar'
+import { t } from '@flyme/weex-flymeui/lib/locale'
 
 let VCSnackBar = Vue.extend(SnackBar)
 
@@ -7,7 +8,7 @@ function snackbar(options) {
 		title: '',
 		backgroundColor: '#323232',
 		titleColor: '#FFFFFF',
-		closeText: '关闭',
+		closeText: t('el.common.close'),
 		closeColor: '#198DED',
 		autoClose: true,
 		stayTime: 3000,

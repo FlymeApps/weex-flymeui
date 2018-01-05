@@ -97,20 +97,7 @@ const getBaseConfig = () => ({
       loader: 'style!css!sass'
     }]
   },
-  plugins,
-  devServer: {
-    inline: true,
-    hot: true,
-    headers: {
-      "Cache-Control": "no-cache"
-    }
-  },
-  resolve: {
-    extensions: ['.js'],
-    modules: [
-      'node_modules'
-    ]
-  }
+  plugins
 });
 
 const webCfg = getBaseConfig();
