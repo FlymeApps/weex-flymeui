@@ -21,6 +21,7 @@
       :autofocus="autofocus"
       :disabled="disabled"
       :return-key-type="returnKeyType"
+      :nightMode="nightMode"
       @input="input"
       @change="change"
       @focus="beFocus"
@@ -43,10 +44,19 @@ import { t } from '@flyme/weex-flymeui/lib/locale'
 export default {
   mixins: [Locale],
   components: { FmIcon },
-
+  
   mounted() {
     if (this.type === 'password') {
       this.pwdModel = true
+    }
+  },
+
+  data() {
+    return {
+      rows: 1,
+      focus: false,
+      pwdModel: false,
+      pwdVisible: false
     }
   },
 
@@ -74,9 +84,7 @@ export default {
     inputPattern: RegExp,
     inputErrorMessage: {
       type: String,
-      default() {
-        return t('el.input.inputError')
-      }
+      default: '输入有误'
     },
     type: String,
     autofocus: Boolean,
@@ -84,7 +92,11 @@ export default {
     returnKeyType: {
       type: String,
       default: 'default'
-    }
+    },
+    nightMode: {
+			type: Boolean,
+			default: false
+		}
   },
 
   computed: {

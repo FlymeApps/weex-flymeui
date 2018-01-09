@@ -114,6 +114,18 @@ export default {
             name: 'Recylist',
             subname: 'Recylist',
             path: 'http://172.17.132.159:8877/dist/recylist.js?userId=7001561&nickname=fuyong'
+        }, {
+            name: 'native弹框',
+            subname: 'native弹框',
+            path: 'component/nativeDialog'
+        }, {
+            name: 'nativeTab',
+            subname: 'nativeTab',
+            path: 'component/nativeTab'
+        }, {
+            name: 'nativeShadow',
+            subname: 'nativeShadow',
+            path: 'component/nativeShadow'
         }]
     },
     ApiModule: {
