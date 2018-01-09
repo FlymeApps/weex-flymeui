@@ -97,7 +97,13 @@ const getBaseConfig = () => ({
       loader: 'style!css!sass'
     }]
   },
-  plugins
+  plugins,
+  resolve: {
+    extensions: ['.js'],
+    modules: [
+      'node_modules'
+    ]
+  }
 });
 
 const webCfg = getBaseConfig();

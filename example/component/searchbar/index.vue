@@ -9,6 +9,8 @@
 		<text>修改 placeholder</text>
 		<fm-searchbar
 			placeholder="输入进行搜索"
+			placeholder-color="blue"
+			input-color="red"
 			@submit="submit" />
 		<text>自动选中</text>
 		<fm-searchbar

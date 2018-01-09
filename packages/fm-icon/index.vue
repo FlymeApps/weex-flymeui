@@ -21,7 +21,6 @@
 </style>
 
 <script>
-  const dom = weex.requireModule('dom')
   // 引入he模块，使用它解决weex-template-compiler在编译阶段进行decode
   const he = require("he");
   export default {
@@ -83,7 +82,8 @@
           return he.decode(this.value)
       }
     },
-    created () {
+    beforeCreate () {
+      const dom = weex.requireModule('dom')
       dom.addRule('fontFace', {
         'fontFamily': 'flymeicon',
         'src': "url('http://design.flyme.cn/weexui/assets/iconfont.ttf')"

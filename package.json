@@ -10,12 +10,11 @@
     },
     "scripts": {
         "build": "webpack --progress",
-        "build:theme": "gulp build --gulpfile lib/theme-paint/gulpfile.js",
         "watch": "webpack --progress --watch",
         "serve": "anywhere -d dist/example/ -p 8080",
-        "start": "npm run build; npm run serve",
-        "dev": "npm run start; npm run serve & npm run watch",
-        "public": "cnpm publish --registry=http://registry.cnpm.meizu.com"
+        "build:theme": "gulp build --gulpfile lib/theme-paint/gulpfile.js",
+        "public": "cnpm publish --registry=http://registry.cnpm.meizu.com",
+        "start": "npm run build; npm run serve & npm run watch"
     },
     "keywords": [
         "Weex Ui",
@@ -39,7 +38,6 @@
         "eslint": "^3.8.1",
         "file-loader": "^1.1.5",
         "glob": "^7.1.2",
-        "lerna": "~2.2.0",
         "node-sass": "^4.7.2",
         "sass-loader": "^6.0.6",
         "url-loader": "^0.6.2",
@@ -49,7 +47,6 @@
         "vue-router": "^2.5.3",
         "vue-template-compiler": "^2.4.1",
         "webpack": "~3.6.0",
-        "webpack-dev-server": "~2.9.1",
         "weex-loader": "~0.6.0-beta.3",
         "weex-vue-loader": "~0.5.0-beta.3"
     },
