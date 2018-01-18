@@ -21,6 +21,7 @@
       :autofocus="autofocus"
       :disabled="disabled"
       :return-key-type="returnKeyType"
+      :nightMode="nightMode"
       @input="input"
       @change="change"
       @focus="beFocus"
@@ -77,6 +78,10 @@
       returnKeyType: {
         type: String,
         default: 'default'
+      },
+      nightMode: {
+        type: Boolean,
+        default: false
       }
     },
 
