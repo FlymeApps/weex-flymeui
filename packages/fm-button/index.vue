@@ -1,6 +1,6 @@
 <template>
-<div class="fm-btn-wrap">
-	<text ref="text" class="fm-btn" :class="btnClz" :style="btnStyle"
+<div class="fm-btn-wrap" :style="btnStyle">
+	<text ref="text" class="fm-btn" :class="btnClz" :style="textStyle"
 		@click="btnClick">{{text}}</text>
 </div>
 </template>
@@ -10,13 +10,13 @@
 	height: 72;
 	align-items: center;
 	flex-direction: row;
+	border-radius: 72;
 }
 .fm-btn {
 	opacity: 0;
 	padding-left: 36;
 	padding-right: 36;
 	line-height: 72;
-	border-radius: 72;
 	font-size: 42;
 	font-weight: 700;
 	text-align: center;
@@ -98,14 +98,23 @@ export default {
 			if (this.bgColor != transparent) {
 				sty.backgroundColor = this.bgColor
 			}
+			if (this.disabled) {
+				sty.backgroundColor = dis_color
+			}
+			if (this.show) {
+				sty.opacity = 1;
+			}
+
+			return sty
+		},
+		textStyle() {
+			let sty = {}
+
 			if (this.color) {
 				sty.color = this.color
 				if (this.bgColor == transparent) {
 					sty.borderColor = this.color
 				}
-			}
-			if (this.disabled) {
-				sty.backgroundColor = dis_color
 			}
 			if (this.show) {
 				sty.opacity = 1;
