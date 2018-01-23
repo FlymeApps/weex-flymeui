@@ -1,7 +1,6 @@
 <template>
-<div class="fm-btn-wrap" :style="btnStyle">
-	<text ref="text" class="fm-btn" :class="btnClz" :style="textStyle"
-		@click="btnClick">{{text}}</text>
+<div class="fm-btn-wrap" :style="btnStyle" @click="btnClick">
+	<text ref="text" class="fm-btn" :class="btnClz" :style="textStyle">{{text}}</text>
 </div>
 </template>
 

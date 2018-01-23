@@ -19,7 +19,7 @@
         </div>
         <div class="dialog-footer" :style="btnStyle">
           <slot name="btn-group">
-            <fm-sample-btn v-for="(btn, index) in dialogBtns" scene="dialog" :text="btn.text" :type="btn.type" :msg="btn" @click="btnClick" :key="index"></fm-sample-btn>
+            <fm-simple-btn v-for="(btn, index) in dialogBtns" scene="dialog" :text="btn.text" :type="btn.type" :msg="btn" @click="btnClick" :key="index"></fm-simple-btn>
           </slot>
         </div>
       </div>
@@ -70,9 +70,9 @@ const type_alert = 'alert'
 const type_confirm = 'confirm'
 import FmOverlay from '../fm-overlay'
 import FmText from '../fm-text'
-import FmSampleBtn from '../fm-sample-btn'
+import FmSimpleBtn from '../fm-simple-btn'
 export default {
-  components: { FmOverlay, FmText, FmSampleBtn },
+  components: { FmOverlay, FmText, FmSimpleBtn },
   props: {
       show: {
         type: Boolean,

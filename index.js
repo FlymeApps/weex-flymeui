@@ -13,7 +13,7 @@ import FmFoldableText from './packages/fm-foldable-text';
 import FmImage from './packages/fm-image';
 import FmOverlay from './packages/fm-overlay';
 import FmDialog from './packages/fm-dialog';
-import FmSampleBtn from './packages/fm-sample-btn';
+import FmSimpleBtn from './packages/fm-simple-btn';
 import { confirm, alert } from './packages/module/dialog.js';
 import FmPopup from './packages/fm-popup';
 import FmActionSheet from './packages/fm-action-sheet';
@@ -44,7 +44,7 @@ export {
     FmImage,
     FmOverlay,
     FmDialog,
-    FmSampleBtn,
+    FmSimpleBtn,
     confirm,
     alert,
     FmPopup,

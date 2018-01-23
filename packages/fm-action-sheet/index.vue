@@ -7,14 +7,14 @@
             :overlay-cfg="overlayCfg"
             pos="bottom"
             :height="_height">
-    <fm-sample-btn v-for="(btn, index) in btns" 
+    <fm-simple-btn v-for="(btn, index) in btns" 
                     scene="actionSheet" 
                     :color="btn.color" 
                     :key="index" 
                     :text="btn.text" 
                     :type="btn.type"
                     :msg="btn.msg" 
-                    @click="btnClick"></fm-sample-btn>
+                    @click="btnClick"></fm-simple-btn>
   </fm-popup>
 </template>
 
@@ -24,9 +24,9 @@
 
 <script>
 import FmPopup from '../fm-popup'
-import FmSampleBtn from '../fm-sample-btn'
+import FmSimpleBtn from '../fm-simple-btn'
 export default {
-  components: { FmPopup, FmSampleBtn },
+  components: { FmPopup, FmSimpleBtn },
   props: {
     show: {
       type: Boolean,
