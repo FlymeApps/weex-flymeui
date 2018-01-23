@@ -6,14 +6,16 @@
     index="i" 
     append='tree'
     @loadmore="$onLoadMore()" 
-    showScrollbar="true" style='width:360px'>
+    showScrollbar="true" style='width:360px'
+    @mlongclick="$onCellLongpress">
 
-    <cell-slot template-type="check-cell">
+    <cell-slot template-type="check-cell" :itemId="item.itemId" @click="$onCellCheck(item, i)">
       <div>
-        <div class="cell" @longpress="$onCellLongpress()" @click="$onCellCheck(item, i)" ripple="normal">
+        <div class="cell">
           <!-- Content start -->
           <div class="content">
             <text>{{ item.itemId }}</text>
+            <text v-once :a="i">{{ i }}</text>
           </div>
           <!-- Content end -->
 
@@ -105,8 +107,9 @@
        * InSide Function 
        */
       // Handle cell be longpress
-      $onCellLongpress(i) {
+      $onCellLongpress(e) {
         if (!this.checking) {
+          const index = e.index
           let tmp = []
           this.recycleList.getListDataSize(res => {
             this.checking = true
@@ -116,6 +119,7 @@
               this.dataSource[i].checking = this.checking;
               tmp.push(this.dataSource[i])
             }
+            tmp[index].checked = true
             this.dataSource = tmp
             this.recycleList.setListData(this.dataSource)
             this.$emit('fmRcyCheckStateChange', true)
