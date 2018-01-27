@@ -79,7 +79,7 @@
       },
       // 匹配对应的字体图标的unicode
       getFontName: function() {
-          return he.decode(this.value)
+        return he.decode(this.value)
       }
     },
     beforeCreate () {

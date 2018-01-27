@@ -9,7 +9,7 @@
     showScrollbar="true" style='width:360px'
     @mlongclick="$onCellLongpress">
 
-    <cell-slot template-type="check-cell" :itemId="item.itemId" @click="$onCellCheck(item, i)">
+    <cell-slot template-type="check-cell" :itemId="item.itemId" @click="$onCellCheck(item, i)" ripple="normal">
       <div>
         <div class="cell">
           <!-- Content start -->

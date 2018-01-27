@@ -13,7 +13,7 @@ import FmFoldableText from './packages/fm-foldable-text';
 import FmImage from './packages/fm-image';
 import FmOverlay from './packages/fm-overlay';
 import FmDialog from './packages/fm-dialog';
-import FmSampleBtn from './packages/fm-sample-btn';
+import FmSimpleBtn from './packages/fm-simple-btn';
 import { confirm, alert } from './packages/module/dialog.js';
 import FmPopup from './packages/fm-popup';
 import FmActionSheet from './packages/fm-action-sheet';
@@ -27,6 +27,7 @@ import FmActionView from './packages/fm-action-view';
 import FmSearchbar from './packages/fm-searchbar';
 import FmMultiCheckGroup from './packages/fm-multi-check-group';
 import FmMultiCheckCell from './packages/fm-multi-check-cell';
+import FmRcyCheck from './packages/fm-rcy-check';
 
 export {
     FmSwitch,
@@ -44,7 +45,7 @@ export {
     FmImage,
     FmOverlay,
     FmDialog,
-    FmSampleBtn,
+    FmSimpleBtn,
     confirm,
     alert,
     FmPopup,
@@ -58,5 +59,6 @@ export {
     FmActionView,
     FmSearchbar,
     FmMultiCheckGroup,
-    FmMultiCheckCell
+    FmMultiCheckCell,
+    FmRcyCheck
 }
