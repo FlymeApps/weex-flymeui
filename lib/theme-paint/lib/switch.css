@@ -1,0 +1,14 @@
+@charset "UTF-8";
+/** 默认主题色 blue **/
+.fm-switch {
+  flex-direction: row;
+  align-items: center;
+  width: 144px;
+  height: 72px;
+  border-radius: 72px;
+  background-color: #198ded; }
+
+.ctr-ball {
+  width: 48px;
+  height: 48px;
+  border-radius: 24px; }

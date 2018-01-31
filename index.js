@@ -27,6 +27,7 @@ import FmActionView from './packages/fm-action-view';
 import FmSearchbar from './packages/fm-searchbar';
 import FmMultiCheckGroup from './packages/fm-multi-check-group';
 import FmMultiCheckCell from './packages/fm-multi-check-cell';
+import FmRcyCheck from './packages/fm-rcy-check';
 
 export {
     FmSwitch,
@@ -58,5 +59,6 @@ export {
     FmActionView,
     FmSearchbar,
     FmMultiCheckGroup,
-    FmMultiCheckCell
+    FmMultiCheckCell,
+    FmRcyCheck
 }

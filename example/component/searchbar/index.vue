@@ -3,10 +3,14 @@
 		<text>默认态</text>
 		<fm-searchbar
 			@submit="submit"
+			:value="searchText"
+			@input="inputing"
 			@back="back" />
 		<text>修改 placeholder</text>
 		<fm-searchbar
 			placeholder="输入进行搜索"
+			placeholder-color="blue"
+			input-color="red"
 			@submit="submit" />
 		<text>自动选中</text>
 		<fm-searchbar
@@ -48,10 +52,18 @@
 	import Title from '../../_mods/title.vue'
 	import Category from '../../_mods/category.vue'
 	import { setTitle } from '../../_mods/set-nav'
+	import lang from '@flyme/weex-flymeui/lib/locale/lang/en'
+	import locale from '@flyme/weex-flymeui/lib/locale'
+	locale.use(lang)
 
 	const modal = weex.requireModule('modal')
 
 	export default {
+		data() {
+			return {
+				searchText: 'asdasd'
+			}
+		},
 	  components: { Title, Category, FmSearchbar },
 	  methods: {
 	    submit(e) {
@@ -59,7 +71,11 @@
 	    },
 	    back(e) {
 	      modal.toast({ message: '返回' })
-	    }
+			},
+			inputing(e) {
+				this.searchText = e.value
+				console.lang(this.searchText)
+			}
 	  }
 	}
 </script>

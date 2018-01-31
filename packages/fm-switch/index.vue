@@ -7,24 +7,7 @@
     </div>
 </template>
 
-<style scoped>
-  .fm-switch {
-    flex-direction: row;
-    align-items: center;
-    width: 144px;
-    height: 72px;
-    border-radius: 72px;
-  }
-
-  .ctr-ball {
-    width: 48px;
-    height: 48px;
-    border-radius: 24px;
-  }
-</style>
-
 <script>
-  import { THEME } from './theme'
   const animation = weex.requireModule('animation')
 
   export default {
@@ -34,21 +17,18 @@
         type: Boolean,
         default: false
       },
-      theme: {
-        type: String,
-        default: 'default'
-      },
+      common: Boolean,
       disabled: {
         type: Boolean,
         default: false
       },
       blurColor: {
         type: String,
-        default: '#7e97ac'
+        default: '#FFFFFF'
       },
       focusColor: {
         type: String,
-        default: '#198ded'
+        default: '#FFFFFF'
       },
       borderColor: String,
       backgroundColor: String
@@ -63,14 +43,15 @@
     },
     computed: {
       getBgStyle() {
-        const { theme, borderColor, backgroundColor, disabled } = this
+        const { common, borderColor, backgroundColor, disabled } = this
         let style =
-          theme === 'default'
+          common
             ? {
                 borderWidth: 6,
-                borderColor: '#7e97ac'
+                borderColor: '#7E97AC',
+                backgroundColor: 'none'
               }
-            : THEME[theme]
+            : {}
         if (disabled) {
           style.opacity = 0.3
         } else {
@@ -130,8 +111,9 @@
     },
     mounted() {
       const { bgStyle, focusColor, blurColor } = this
-      if (this.theme !== 'default') {
-        this.focusColor = this.blurColor = '#fff'
+      if (this.common) {
+        this.focusColor = '#198DED'
+        this.blurColor = '#7E97AC'
       }
       this.checked
         ? (this.ballStyle = {

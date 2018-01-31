@@ -71,168 +71,176 @@ const type_confirm = 'confirm'
 import FmOverlay from '../fm-overlay'
 import FmText from '../fm-text'
 import FmSimpleBtn from '../fm-simple-btn'
+import Locale from '@flyme/weex-flymeui/lib/mixins/locale'
+import { t } from '@flyme/weex-flymeui/lib/locale'
+
 export default {
+  mixins: [Locale],
   components: { FmOverlay, FmText, FmSimpleBtn },
   props: {
-      show: {
-        type: Boolean,
-        default: false
-      },
-      title: {
-        type: String,
-        default: ''
-      },
-      content: {
-        type: String,
-        default: ''
-      },
-      top: {
-        type: Number,
-        default: 400
-      },
-      cancelText: {
-        type: String,
-        default: '取消'
-      },
-      confirmText: {
-        type: String,
-        default: '确定'
-      },
-      mainBtnColor: {
-        type: String,
-        default: '#EE9900'
-      },
-      secondBtnColor: {
-        type: String,
-        default: '#666666'
-      },
-      hasAnimation: {
-        type: Boolean,
-        default: true
-      },
-      duration: {
-        type: [Number, String],
-        default: 300
-      },
-      timingFunction: {
-        type: Array,
-        default: () => (['ease-out', 'ease-out'])
-      },
-      canAutoClose: {
-        type: Boolean,
-        default: true
-      },
-      btns: {
-        type: Array,
-        default: []
-      },
-      btnDirection: {
-        type: String,
-        default: 'row'
-      },
-      cancelCb: Function,
-      confirmCb: Function,
-      type: {
-        type: String,
-        default: type_confirm
+    show: {
+      type: Boolean,
+      default: false
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    content: {
+      type: String,
+      default: ''
+    },
+    top: {
+      type: Number,
+      default: 400
+    },
+    cancelText: {
+      type: String,
+      default() {
+        return t('el.common.cancel')
       }
     },
-    data: () => ({
-      pageHeight: 1334,
-      self_show: false
-    }),
-    created () {
-      const { env: { deviceHeight, deviceWidth } } = weex.config
-      this.pageHeight = deviceHeight / deviceWidth * 1080
-      this.self_show = this.show
-    },
-    watch: {
-      show: function(val, oldVal) {
-        if (val) {
-          this.self_show = true
-          setTimeout(() => {
-            this.appearDialog(true)
-          }, 50);
-        } else {
-          this.$refs['fm-overlay'].hide()
-          this.appearDialog(false)
-        }
+    confirmText: {
+      type: String,
+      default() {
+        return t('el.common.confirm')
       }
     },
-    computed: {
-      dialogBtns() {
-        let btns = []
-        if (!this.btns || !this.btns.length) {
-          if (this.type === type_alert) {
-            btns =   [{
-              text: this.confirmText,
-              type: 'confirm'
-            }]
-          } else if (this.type === type_confirm) {
-            btns =   [{
-              text: this.cancelText,
-              type: 'cancel'
-            }, {
-              text: this.confirmText,
-              type: 'confirm'
-            }]
-          }
-        } else {
-          btns = btns.concat(this.btns)
-        }
-        return btns
-      },
-      dialogStyle() {
-        return {
-          opacity: this.hasAnimation ? 0 : 1,
-          top: this.top
-        }
-      },
-      btnStyle() {
-        const { btnDirection, btns } = this
-        return {
-          flexDirection: btns.length > 2 ? 'column' : btnDirection
-        }
-      }
+    mainBtnColor: {
+      type: String,
+      default: '#EE9900'
     },
-    methods: {
-      handleTouchEnd (e) {
-        const { platform } = weex.config.env
-        platform === 'Web' && e.preventDefault && e.preventDefault()
-      },
-      overlayClicked() {
-        this.canAutoClose && (this.appearDialog(false) || this.$emit('fmDialogOverlayClicked', {}))
-        this.cancelCb && this.cancelCb()
-      },
-      btnClick(btn) {
-        if (btn.type && btn.type === 'cancel') {
-          this.$emit('fmDialogBtnClicked', { type: 'cancel' })
-          this.cancelCb && this.cancelCb()
-        } else if (btn.type && btn.type === 'confirm') {
-          this.$emit('fmDialogBtnClicked', { type: 'confirm' })
-          this.confirmCb && this.confirmCb()
-        } else {
-          this.$emit('fmDialogBtnClicked', btn)
-        }
-      },
-      appearDialog (bool, duration = this.duration) {
-        const { hasAnimation, timingFunction } = this;
-        const dialogEl = this.$refs['dialog-box']
-        if (hasAnimation && dialogEl) {
-          animation.transition(dialogEl, {
-            styles: {
-              opacity: bool ? 1 : 0
-            },
-            duration,
-            timingFunction: timingFunction[bool ? 0 : 1],
-            delay: 0
-          }, () => {
-            this.self_show = bool
-          });
-        } else {
-          this.self_show = bool
-        }
+    secondBtnColor: {
+      type: String,
+      default: '#666666'
+    },
+    hasAnimation: {
+      type: Boolean,
+      default: true
+    },
+    duration: {
+      type: [Number, String],
+      default: 300
+    },
+    timingFunction: {
+      type: Array,
+      default: () => (['ease-out', 'ease-out'])
+    },
+    canAutoClose: {
+      type: Boolean,
+      default: true
+    },
+    btns: {
+      type: Array,
+      default: []
+    },
+    btnDirection: {
+      type: String,
+      default: 'row'
+    },
+    cancelCb: Function,
+    confirmCb: Function,
+    type: {
+      type: String,
+      default: type_confirm
+    }
+  },
+  data: () => ({
+    pageHeight: 1334,
+    self_show: false
+  }),
+  created () {
+    const { env: { deviceHeight, deviceWidth } } = weex.config
+    this.pageHeight = deviceHeight / deviceWidth * 1080
+    this.self_show = this.show
+  },
+  watch: {
+    show: function(val, oldVal) {
+      if (val) {
+        this.self_show = true
+        setTimeout(() => {
+          this.appearDialog(true)
+        }, 50);
+      } else {
+        this.$refs['fm-overlay'].hide()
+        this.appearDialog(false)
       }
     }
+  },
+  computed: {
+    dialogBtns() {
+      let btns = []
+      if (!this.btns || !this.btns.length) {
+        if (this.type === type_alert) {
+          btns =   [{
+            text: this.confirmText,
+            type: 'confirm'
+          }]
+        } else if (this.type === type_confirm) {
+          btns =   [{
+            text: this.cancelText,
+            type: 'cancel'
+          }, {
+            text: this.confirmText,
+            type: 'confirm'
+          }]
+        }
+      } else {
+        btns = btns.concat(this.btns)
+      }
+      return btns
+    },
+    dialogStyle() {
+      return {
+        opacity: this.hasAnimation && this.self_show ? 0 : 1,
+        top: this.top
+      }
+    },
+    btnStyle() {
+      const { btnDirection, btns } = this
+      return {
+        flexDirection: btns.length > 2 ? 'column' : btnDirection
+      }
+    }
+  },
+  methods: {
+    handleTouchEnd (e) {
+      const { platform } = weex.config.env
+      platform === 'Web' && e.preventDefault && e.preventDefault()
+    },
+    overlayClicked() {
+      this.canAutoClose && (this.appearDialog(false) || this.$emit('fmDialogOverlayClicked', {}))
+      this.cancelCb && this.cancelCb()
+    },
+    btnClick(btn) {
+      if (btn.type && btn.type === 'cancel') {
+        this.$emit('fmDialogBtnClicked', { type: 'cancel' })
+        this.cancelCb && this.cancelCb()
+      } else if (btn.type && btn.type === 'confirm') {
+        this.$emit('fmDialogBtnClicked', { type: 'confirm' })
+        this.confirmCb && this.confirmCb()
+      } else {
+        this.$emit('fmDialogBtnClicked', btn)
+      }
+    },
+    appearDialog (bool, duration = this.duration) {
+      const { hasAnimation, timingFunction } = this;
+      const dialogEl = this.$refs['dialog-box']
+      if (hasAnimation && dialogEl) {
+        animation.transition(dialogEl, {
+          styles: {
+            opacity: bool ? 1 : 0
+          },
+          duration,
+          timingFunction: timingFunction[bool ? 0 : 1],
+          delay: 0
+        }, () => {
+          this.self_show = bool
+        });
+      } else {
+        this.self_show = bool
+      }
+    }
+  }
 }
 </script>

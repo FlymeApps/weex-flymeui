@@ -54,18 +54,11 @@
     .item {
         justify-content: space-between;
         background-color: #fff;
-<<<<<<< HEAD
         width: 480px;
         height: 360px;
         margin-bottom: 20px;
         padding: 50px;
         box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.04);
-=======
-        width: size(480);
-        height: size(360);
-        margin-bottom: size(20);
-        padding: size(50);
->>>>>>> 58d1ba9e9111b5bc97439f8e3a1c3b4d6ade77c6
     }
 
 </style>

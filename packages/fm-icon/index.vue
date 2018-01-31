@@ -21,7 +21,6 @@
 </style>
 
 <script>
-  const dom = weex.requireModule('dom')
   // 引入he模块，使用它解决weex-template-compiler在编译阶段进行decode
   const he = require("he");
   export default {
@@ -45,7 +44,7 @@
     computed: {
       computedStyle () {
         if (Object.prototype.toString.call(this.iconStyle).slice(8, -1).toLowerCase() !== 'object') {
-          this.iconStyle = { height: 36 }
+          this.iconStyle = { width: 36, height: 36 }
         }
         const { width, iconStyle } = this
         if (iconStyle && iconStyle.width && iconStyle.height) {
@@ -80,10 +79,11 @@
       },
       // 匹配对应的字体图标的unicode
       getFontName: function() {
-          return he.decode(this.value)
+        return he.decode(this.value)
       }
     },
-    created () {
+    beforeCreate () {
+      const dom = weex.requireModule('dom')
       dom.addRule('fontFace', {
         'fontFamily': 'flymeicon',
         'src': "url('http://design.flyme.cn/weexui/assets/iconfont.ttf')"

@@ -1,4 +1,5 @@
 import Dialog from '../fm-dialog'
+import { t } from '@flyme/weex-flymeui/lib/locale'
 
 let VCDialog = Vue.extend(Dialog)
 let vc_dialog = new VCDialog().$mount()
@@ -37,8 +38,8 @@ function resetDialog() {
 		vc_dialog.content = ''
 		vc_dialog.canAutoClose = true
 		vc_dialog.type = 'alert'
-		vc_dialog.cancelText = '取消'
-		vc_dialog.confirmText = '确定'
+		vc_dialog.cancelText = t('el.common.cancel')
+		vc_dialog.confirmText = t('el.common.confirm')
 	}, 300)
 }
 

@@ -16,7 +16,9 @@
                 :value="value"
                 ref="input"
                 :type="inputType"
+                :return-key-type="returnKeyType"
                 :placeholder="placeholder"
+                :style="{color: inputColor, 'placeholder-color': placeholderColor}"
                 class="search-bar-input"/>
           <fm-icon v-if="delShow" class="search-bar-delete" value="&#xe6c0;" icon-style="16" color="#FFFFFF" @fmClick="delClick" />
         </div>
@@ -129,6 +131,18 @@
       searchBtnStyle: {
         type: Object,
         default: () => ({})
+      },
+      returnKeyType: {
+        type: String,
+        default: 'default'
+      },
+      placeholderColor: {
+        type: String,
+        default: '#999999'
+      },
+      inputColor: {
+        type: String,
+        default: '#999999'
       }
     },
     data: () => ({

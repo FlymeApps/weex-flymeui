@@ -48,7 +48,7 @@
                    @fmDialogBtnClicked="inputClick"
                    @fmDialogOverlayClicked="inputOverlayClick"
                    :can-auto-close="true">
-          <fm-input slot="content" type="text" placeholder="输入点什么.." :autofocus="true" @input="inputing" />
+          <fm-input :value="inputText" slot="content" type="text" placeholder="输入点什么.." :autofocus="true" @input="inputing" />
         </fm-dialog>
 
         <fm-dialog :show="show"
@@ -108,7 +108,7 @@ export default {
       checkListShow: false,
       inputShow: false,
       checkList: [],
-      inputText: '',
+      inputText: '123',
       title: '',
       content: '',
       btns: []
@@ -168,7 +168,7 @@ export default {
       },
       click7() {
         this.inputShow = true
-        this.inputText = ''
+        // this.inputText = ''
       },
       btnClick(btn) {
         if (btn.type === 'cancel') {

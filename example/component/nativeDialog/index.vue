@@ -18,8 +18,7 @@
   </div>
 </template>
 
-<style lang="sass" scoped>
-  @import "../../../packages/style/mixin.scss";
+<style scoped>
   .mzui-demo {
     position: absolute;
     top: 0;
@@ -30,9 +29,9 @@
   }
   
   .container {
-    padding-top: size(60);
-    padding-left: size(60);
-    padding-right: size(60);
+    padding-top: 60px;
+    padding-left: 60px;
+    padding-right: 60px;
   }
 
   .row {
@@ -40,7 +39,7 @@
   }
 
   .btn {
-    margin-right: size(60);
+    margin-right: 60px;
   }
   
   .scroller {

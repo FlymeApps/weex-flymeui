@@ -10,9 +10,32 @@ const glob = require("glob");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
+const os = require('os');
+const HappyPack = require('happypack');
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
+HappyPack.SERIALIZABLE_OPTIONS = HappyPack.SERIALIZABLE_OPTIONS.concat(['postcss']);
+
 const plugins = [
   new CleanWebpackPlugin(['dist'], {
     verbose: true
+  }),
+  new webpack.optimize.CommonsChunkPlugin({
+    async: 'shared-module',
+    minChunks: (module, count) => (
+      count >= 2
+    )
+  }),
+  new HappyPack({
+    id: 'babel',
+    verbose: true,
+    loaders: ['babel-loader?cacheDirectory=true'],
+    threadPool: happyThreadPool
+  }),
+  new HappyPack({
+    id: 'css',
+    verbose: true,
+    loaders: ['postcss-loader'],
+    threadPool: happyThreadPool
   }),
   new webpack.DefinePlugin({
     "process.env": {
@@ -76,12 +99,8 @@ const getBaseConfig = () => ({
   module: {
     rules: [{
       test: /\.js$/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-          cacheDirectory: true,
-        }
-      }
+      use: 'happypack/loader?id=babel',
+      exclude: /node_modules/
     }, {
       test: /\.vue(\?[^?]+)?$/,
       use: []
@@ -94,17 +113,10 @@ const getBaseConfig = () => ({
       }
     }, {
       test: /\.scss$/,
-      loader: 'style!css!sass'
+      use: 'happypack/loader?id=sass'
     }]
   },
   plugins,
-  devServer: {
-    inline: true,
-    hot: true,
-    headers: {
-      "Cache-Control": "no-cache"
-    }
-  },
   resolve: {
     extensions: ['.js'],
     modules: [
@@ -118,6 +130,10 @@ webCfg.output.filename = '[name].web.js';
 webCfg.module.rules[1].use.push({
   loader: 'vue-loader',
   options: {
+    optimizeSSR: false,
+    loaders: {
+      js: 'happypack/loader?id=babel'
+    },
     compilerModules: [
       {
         postTransformNode: el => {
@@ -134,7 +150,8 @@ nativeCfg.output.filename = '[name].native.js';
 nativeCfg.module.rules[1].use.push('weex-loader');
 
 const exportConfig = [
-  webCfg
+  webCfg,
+  nativeCfg
 ];
 
 module.exports = exportConfig;

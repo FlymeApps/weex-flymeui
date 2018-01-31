@@ -45,7 +45,11 @@
 </style>
 
 <script>
+import Locale from '@flyme/weex-flymeui/lib/mixins/locale'
+import { t } from '@flyme/weex-flymeui/lib/locale'
+
 export default {
+    mixins: [Locale],
     data() {
         return {
             expandHeight: '',
@@ -82,7 +86,9 @@ export default {
         tipStyle: Object,
         tipValue: {
             type: String,
-            default: '更多'
+            default() {
+                return t('el.foldabletext.more')
+            }
         }
     },
     mounted() {

@@ -6,12 +6,13 @@
       <div class="list">
         <div class="item">
             <fm-switch></fm-switch>
-            <fm-switch360 
+            <fm-switch common></fm-switch>
+            <!-- <fm-switch360 
               border-color="#000000" 
               background-color="green" 
               focus-color="gray" 
               blur-color="white"
-              @fmSwitchStateChange="change"></fm-switch360>
+              @fmSwitchStateChange="change"></fm-switch360> -->
         </div>
       </div>
       <category title="不同主题样式"></category>
@@ -105,7 +106,7 @@
   export default {
     components: { Title, Category, FmSwitch, FmSwitch360 },
     data: () => ({
-      isChecked: false
+      isChecked: true
     }),
     methods: {
       change(bool) {
@@ -114,9 +115,9 @@
       }
     },
     mounted() {
-      setTimeout(() => {
-        this.isChecked = true
-      }, 3000)
+      // setTimeout(() => {
+      //   this.isChecked = true
+      // }, 3000)
     }
   }
 </script>
