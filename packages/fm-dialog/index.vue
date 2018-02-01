@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-if="self_show">
+  <div class="container">
       <fm-overlay v-if="self_show"
                   :hasAnimation="true"
                   :canAutoClose="false"
@@ -147,7 +147,8 @@ export default {
   },
   data: () => ({
     pageHeight: 1334,
-    self_show: false
+    self_show: false,
+    dialogOpacity: 0
   }),
   created () {
     const { env: { deviceHeight, deviceWidth } } = weex.config
@@ -192,7 +193,7 @@ export default {
     },
     dialogStyle() {
       return {
-        opacity: this.hasAnimation && this.self_show ? 0 : 1,
+        opacity: this.dialogOpacity,
         top: this.top
       }
     },
@@ -226,6 +227,7 @@ export default {
     appearDialog (bool, duration = this.duration) {
       const { hasAnimation, timingFunction } = this;
       const dialogEl = this.$refs['dialog-box']
+      this.dialogOpacity = bool ? 0 : 1
       if (hasAnimation && dialogEl) {
         animation.transition(dialogEl, {
           styles: {
@@ -236,9 +238,11 @@ export default {
           delay: 0
         }, () => {
           this.self_show = bool
+          this.dialogOpacity = bool ? 1 : 0
         });
       } else {
         this.self_show = bool
+        this.dialogOpacity = bool ? 1 : 0
       }
     }
   }
