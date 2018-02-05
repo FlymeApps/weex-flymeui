@@ -12,15 +12,16 @@
 	border-radius: 72;
 }
 .fm-btn {
-	opacity: 0;
 	padding-left: 36;
 	padding-right: 36;
 	line-height: 72;
-	font-size: 42;
+	font-size: 36;
 	font-weight: 700;
 	text-align: center;
 	min-width: 144;
 	max-width: 300;
+	font-family: sans-serif-medium;
+	font-weight: 500;
 }
 .fm-btn-max-padding {
 	padding-left: 24;
@@ -51,8 +52,7 @@ const dom = weex.requireModule('dom')
 export default {
 	data() {
 		return {
-			max: false,
-			show: false
+			max: false
 		}
 	},
 
@@ -100,9 +100,6 @@ export default {
 			if (this.disabled) {
 				sty.backgroundColor = dis_color
 			}
-			if (this.show) {
-				sty.opacity = 1;
-			}
 
 			return sty
 		},
@@ -114,9 +111,6 @@ export default {
 				if (this.bgColor == transparent) {
 					sty.borderColor = this.color
 				}
-			}
-			if (this.show) {
-				sty.opacity = 1;
 			}
 
 			return sty
@@ -137,7 +131,6 @@ export default {
 				if (option.size.width >= 240) {
 					this.max = true
 				}
-				this.show = true
 			})
 		}, 50)
 	}
