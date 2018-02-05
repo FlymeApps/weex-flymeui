@@ -132,12 +132,14 @@ export default {
 	},
 
 	mounted() {
-		dom.getComponentRect(this.$refs.text, option => {
-			if (option.size.width >= 240) {
-				this.max = true
-			}
-			this.show = true
-		})
+		setTimeout(() => {
+			dom.getComponentRect(this.$refs.text, option => {
+				if (option.size.width >= 240) {
+					this.max = true
+				}
+				this.show = true
+			})
+		}, 50)
 	}
 }
 </script>
