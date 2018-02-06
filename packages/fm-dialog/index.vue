@@ -3,12 +3,14 @@
       <fm-overlay v-if="self_show"
                   :hasAnimation="true"
                   :canAutoClose="false"
+                  :opacity="overlayOpacity"
                   @fmOverlayBodyClicked="overlayClicked"
                   ref="fm-overlay"></fm-overlay>
       <div class="dialog-box"
            ref="dialog-box"
            v-if="self_show"
-           :style="dialogStyle">
+           :style="dialogStyle"
+           @touchend="handleTouchEnd">
         <div class="dialog-content">
           <slot name="title">
             <fm-text class="content-title" medium title>{{ title }}</fm-text>
@@ -39,8 +41,8 @@
     left: 72px;
     width: 936px;
     background-color: #FFFFFF;
-    border-radius: 8px;
-    box-shadow: rgba(0,0,0, .3) 0 0 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);
   }
 
   .content-title {
@@ -143,6 +145,10 @@ export default {
     type: {
       type: String,
       default: type_confirm
+    },
+    overlayOpacity: {
+      type: Number,
+      default: 0.5
     }
   },
   data: () => ({
@@ -206,8 +212,8 @@ export default {
   },
   methods: {
     handleTouchEnd (e) {
-      const { platform } = weex.config.env
-      platform === 'Web' && e.preventDefault && e.preventDefault()
+      // 原生上有点击穿透问题
+      e.preventDefault && e.preventDefault()
     },
     overlayClicked() {
       this.canAutoClose && (this.appearDialog(false) || this.$emit('fmDialogOverlayClicked', {}))

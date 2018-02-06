@@ -35,7 +35,8 @@
                    title="选择语言"
                    @fmDialogBtnClicked="checkListClick"
                    @fmDialogOverlayClicked="checkListOverlayClick"
-                   :can-auto-close="true">
+                   :can-auto-close="true"
+                   :overlayOpacity="0.1">
           <fm-check-list-group slot="content" @fmCheckListGroupChecked="groupChecked">
             <fm-checkbox>简体中文</fm-checkbox>
             <fm-checkbox>繁体中文</fm-checkbox>
