@@ -21,7 +21,7 @@
         </div>
         <div class="dialog-footer" :style="btnStyle">
           <slot name="btn-group">
-            <fm-simple-btn v-for="(btn, index) in dialogBtns" scene="dialog" :text="btn.text" :type="btn.type" :msg="btn" @click="btnClick" :key="index"></fm-simple-btn>
+            <fm-simple-btn v-for="(btn, index) in dialogBtns" scene="dialog" v-bind="btn" @click="btnClick" :key="index"></fm-simple-btn>
           </slot>
         </div>
       </div>
@@ -108,13 +108,13 @@ export default {
         return t('el.common.confirm')
       }
     },
-    mainBtnColor: {
+    confirmColor: {
       type: String,
-      default: '#EE9900'
+      default: '#198DED'
     },
-    secondBtnColor: {
+    cancelColor: {
       type: String,
-      default: '#666666'
+      default: '#198DED'
     },
     hasAnimation: {
       type: Boolean,
@@ -181,14 +181,17 @@ export default {
         if (this.type === type_alert) {
           btns =   [{
             text: this.confirmText,
+            color: this.confirmColor,
             type: 'confirm'
           }]
         } else if (this.type === type_confirm) {
           btns =   [{
             text: this.cancelText,
+            color: this.cancelColor,
             type: 'cancel'
           }, {
             text: this.confirmText,
+            color: this.confirmColor,
             type: 'confirm'
           }]
         }

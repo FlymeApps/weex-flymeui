@@ -125,7 +125,8 @@ export default {
         this.title = '多个按钮的弹框'
         this.content = '按钮超过 2 个会变成竖排按钮，需要一行多个按钮可通过 slot="btn-group" 进行插入'
         this.btns = [{
-          text: '按钮1'
+          text: '按钮1',
+          color: 'red'
         }, {
           text: '按钮2'
         }, {
