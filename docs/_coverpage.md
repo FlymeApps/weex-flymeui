@@ -1,3 +1,4 @@
+<img src="http://design.flyme.cn/images/logo.png">
 
 # <span style="font-weight:400;">Weex FlymeUI</span> <span style="font-size:14px"></span>
 
