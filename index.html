@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weex FlymeUI</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+  <style>
+    .docs-header {
+      margin-top: 0!important;
+      position: absolute;
+      top: 40px;
+      right: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    window.$docsify = {
+      name: 'Weex FlymeUI',
+      search: 'auto',
+      themeColor: '#198DED',
+      repo: 'http://gitlab.meizu.com/sunyanjie/weex-flymeui',
+      coverpage: 'docs/_coverpage.md',
+      homepage: 'README.md',
+      loadSidebar: 'docs/_sidebar.md',
+      // loadNavbar: 'docs/_navbar.md',
+      auto2top: true,
+      alias: {
+        '/.*/_sidebar.md': 'docs/_sidebar.md',
+        '/packages/(.*)/': 'packages/$1/README.md',
+        '/guide/(.*)': '/docs/guide/$1.md'
+      },
+      basePath: location.port === '3000' ? '/' : '/weex-flymeui/',
+      plugins: [
+        function(hook, vm) {
+          hook.beforeEach(function (html) {
+            var url = 'https://github.com/Yanjiie/weex-flymeui/blob/master/' + vm.route.file
+            var editHtml = '<a href="' + url + '"><img class="emoji" src="https://assets-cdn.github.com/images/icons/emoji/memo.png" alt="memo"/> Edit Document</a>'
+
+            return '<div class="docs-header">'
+              + editHtml
+              + '</div>'
+              + '\n\n'
+              + html
+          })
+        }
+      ]
+    }
+  </script>
+  <script>
+    if (typeof navigator.serviceWorker !== 'undefined') {
+      navigator.serviceWorker.register('./docs/dist/sw.js')
+    }
+  </script>
+  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+</body>
+</html>

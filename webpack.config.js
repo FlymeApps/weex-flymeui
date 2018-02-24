@@ -72,12 +72,16 @@ const getEntry = dir => {
   return ret;
 };
 
-const component = getEntry('example/component');
-const moduleEntry = getEntry('example/module/');
-const entry = Object.assign({
-  'index': './index.js'
-}, component, moduleEntry);
-entry['example/index'] = './example/index.js';
+// const component = getEntry('example/component');
+// const moduleEntry = getEntry('example/module/');
+// const entry = Object.assign({
+//   'index': './index.js'
+// }, component, moduleEntry);
+// entry['example/index'] = './example/index.js';
+
+const entry = {
+  'example/component/tab/index': './example/component/tab/index.js'
+}
 
 const getBaseConfig = () => ({
   devtool: '#source-map',
