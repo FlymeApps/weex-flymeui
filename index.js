@@ -25,6 +25,7 @@ import FmCheckbox from './packages/fm-checkbox';
 import FmCheckListGroup from './packages/fm-check-list-group';
 import FmActionView from './packages/fm-action-view';
 import FmSearchbar from './packages/fm-searchbar';
+import FmTitlebar from './packages/fm-titlebar';
 import FmMultiCheckGroup from './packages/fm-multi-check-group';
 import FmMultiCheckCell from './packages/fm-multi-check-cell';
 import FmRcyCheck from './packages/fm-rcy-check';
@@ -58,6 +59,7 @@ export {
     FmCheckListGroup,
     FmActionView,
     FmSearchbar,
+    FmTitlebar,
     FmMultiCheckGroup,
     FmMultiCheckCell,
     FmRcyCheck
