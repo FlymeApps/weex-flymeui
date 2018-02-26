@@ -1,0 +1,11 @@
+sudo: false
+language: node_js
+notifications:
+  email:
+  - suenyinkit@163.com
+node_js:
+  - "7"
+  - "8"
+  - "9"
+script:
+  - npm run build
