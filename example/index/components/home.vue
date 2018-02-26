@@ -7,11 +7,13 @@
                                       :text-style="{fontSize: 42, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
             </div>
             <div class="list">
-                <div v-for="(item, key) in category" class="item" @click="jump(key)">
-                    <fm-image :scale="1" class="item-icon" :src="'http://design.flyme.cn/weexui/assets/'+ key +'.png'"/>
-                    <div>
-                        <fm-text :textValue="item.name" title :text-style="{fontSize: 48, color: '#000', fontWeight: 400}" />
-                        <fm-text :textValue="item.componentList.length + ' 个项目'" :text-style="{fontSize: 36, color: 'rgba(0, 0, 0, 0.4)', fontWeight: 400}"/>
+                <div v-for="(item, key) in category" :key="key" class="item-wrap" @click="jump(key)">
+                    <div class="item">
+                        <fm-image :scale="1" class="item-icon" :src="'http://design.flyme.cn/weexui/assets/'+ key +'.png'"/>
+                        <div>
+                            <fm-text :textValue="item.name" title :text-style="{fontSize: 48, color: '#000', fontWeight: 400}" />
+                            <fm-text :textValue="item.componentList.length + ' 个项目'" :text-style="{fontSize: 36, color: 'rgba(0, 0, 0, 0.4)', fontWeight: 400}"/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -51,14 +53,17 @@
         padding: 48px;
     }
 
-    .item {
+    .item-wrap {
         justify-content: space-between;
         background-color: #fff;
         width: 480px;
         height: 360px;
         margin-bottom: 20px;
-        padding: 50px;
         box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.04);
+    }
+
+    .item {
+        padding: 50px;
     }
 
 </style>

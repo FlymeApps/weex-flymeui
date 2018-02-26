@@ -3,7 +3,7 @@
         <div v-if="showSolid || showHollow"
             :class="['tag-item','tag-border',showHollow && 'tag-hollow']"
             :style="tagTextStyle">
-        <text :class="textClass" ref='content' :style="textStyle">{{value}}</text>
+          <text :class="textClass" ref='content' :style="textStyle"><slot></slot><template v-if="!$slots.default">{{ value }}</template></text>
         </div>
     </div>
 </template>
@@ -113,6 +113,9 @@ export default {
       fontSize: size === 'small' ? clz.push("tag-margin-small") : clz.push("tag-margin-small")
       return clz
     }
+  },
+  created() {
+    this.$slots.default && (this.value = this.$slots.default[0].text)
   }
 }
 </script>
