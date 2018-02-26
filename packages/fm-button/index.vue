@@ -120,7 +120,7 @@ export default {
 	methods: {
 		btnClick(evt) {
 			if (!this.disabled) {
-				this.$emit('click', evt)
+				this.$emit('buttonClicked', evt)
 			}
 		}
 	},

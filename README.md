@@ -6,9 +6,6 @@
 [![npm](https://img.shields.io/npm/v/weex-flymeui.svg?style=flat-square)](https://www.npmjs.com/package/weex-flymeui?_blank)
 [![license](https://img.shields.io/github/license/Yanjiie/weex-flymeui.svg?style=flat-square)](https://github.com/Yanjiie/weex-flymeui/blob/master/LICENSE)
 
-
-
-
 > 遵循 [Flyme](https://www.flyme.cn/) 系统设计风格、基于 [Weex](https://github.com/apache/incubator-weex) 的跨平台通用组件库。
 
 **技术支持**
@@ -19,7 +16,7 @@
 ![Flyme Design](http://design.flyme.cn/images/logo.png)
 ## 安装
 ```
-npm install --save @flyme/weex-flymeui --registry=http://registry.cnpm.meizu.com
+npm i weex-flymeui -S
 ```
 
 ## 使用
@@ -31,7 +28,8 @@ npm install --save @flyme/weex-flymeui --registry=http://registry.cnpm.meizu.com
 </template>
 
 <script
-  import { FmButton } from '@flyme/weex-flymeui';
+  import { FmButton } from 'weex-flymeui';
+  // import FmButton from 'weex-flymeui/packages/fm-button';
   export default {
     components: { FmButton },
     methods: {
