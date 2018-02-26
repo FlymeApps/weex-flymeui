@@ -1,9 +1,11 @@
 <template>
   <div class="mzui-demo">
     <scroller class="scroller">
-      <title link="http://apps.flyme.cn/docs/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=5a3390c267e2277e77dcf941"></title>
+      <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-titlebar/"></title>
       <category title="基本态"></category>
-      <fm-titlebar title="基本态" rightText="asd" />
+      <fm-titlebar title="基本态" rightText="更多" />
+      <category title="修改背景颜色"></category>
+      <fm-titlebar title="首页" background-color="#7E97AC" left-color="#687E8F" />
       <category title="功能按钮"></category>
       <fm-titlebar title="icon 按钮" :rightBtns="{
                                       type: 'icon',
@@ -32,7 +34,6 @@
           <fm-tag color="#F12528" size="big">精选</fm-tag><text class="title">电影合集</text>
         </div>
       </fm-titlebar>
-      
     </scroller>
   </div>
 </template>

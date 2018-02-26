@@ -3,7 +3,7 @@
     <div class="fm-status-bar" v-if="statusbar" :style="{ backgroundColor: backgroundColor }"></div>
     <div class="fm-title-bar" :style="barStyle">
       <slot name="left" v-if="hasPrev">
-        <fm-icon @fmClick="onBack" class="title-bar-back" value="&#xe6b5;" icon-style="72" />
+        <fm-icon @fmClick="onBack" class="title-bar-back" value="&#xe6b5;" icon-style="72" :color="leftColor" />
       </slot>
 			<div class="title-wrap">
 				<slot name="middle">
@@ -41,7 +41,6 @@
     line-height: 72px;
     height: 72px;
     font-weight: 700;
-    color: rgba(0, 0, 0, 0.6);
   }
 
 	.title-wrap {
@@ -117,6 +116,10 @@
 			backgroundColor: {
 				type: String,
 				default: '#FFFFFF'
+			},
+			leftColor: {
+				type: String,
+				default: 'rgba(0, 0, 0, 0.6)'
 			},
 			rightBtns: [Object, Array],
 			rightText: String,

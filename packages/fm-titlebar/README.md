@@ -54,11 +54,12 @@
 | title-color | `String` |`N`| `rgba(0, 0, 0, 0.6)` | 标题的颜色 |
 | right-text | `String` |`N`| `-` | 右侧 button 的文案 |
 | background-color | `String` |`N`| `#FFFFFF` | 背景颜色 |
+| left-color | `String` |`N`| `#rgba(0, 0, 0, 0.6)` | 返回按钮颜色 |
 | statusbar | `Boolean` |`N`| `false` | 是否预留状态栏位置 |
 | use-default-return | `Boolean` |`N`| `true` | 是否使用默认的返回 |
-| hasPrev | `Boolean` | `N` |`true`| 是否存在上一页，此项参数决定左边按钮是否显示 |
-| borderStyle | `Object` | `N` | `-` | 底部边框的样式，允许值：`borderBottomStyle`, `borderBottomWidth`, `borderBottomColor` |
-| rightBtns | `Object` `Array` | `N` | `-` | 设置右边多按钮，超过 3 个会被截取 |
+| has-prev | `Boolean` | `N` |`true`| 是否存在上一页，此项参数决定左边按钮是否显示 |
+| border-style | `Object` | `N` | `-` | 底部边框的样式，允许值：`borderBottomStyle`, `borderBottomWidth`, `borderBottomColor` |
+| right-btns | `Object` `Array` | `N` | `-` | 设置右边多按钮，超过 3 个会被截取 |
 | show | `Boolean` | `N` | `true` | 是否显示 |
 
 ## Slot

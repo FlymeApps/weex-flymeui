@@ -74,6 +74,8 @@
           iconStyle.lineHeight && (style.lineHeight = `${iconStyle.lineHeight}px`)
         } else {
           style.fontSize = iconStyle
+          style.height = iconStyle
+          style.lineHeight = iconStyle
         }
         return style
       },
