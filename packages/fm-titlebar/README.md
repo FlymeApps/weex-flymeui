@@ -54,7 +54,7 @@
 | title-color | `String` |`N`| `rgba(0, 0, 0, 0.6)` | 标题的颜色 |
 | right-text | `String` |`N`| `-` | 右侧 button 的文案 |
 | background-color | `String` |`N`| `#FFFFFF` | 背景颜色 |
-| left-color | `String` |`N`| `#rgba(0, 0, 0, 0.6)` | 返回按钮颜色 |
+| left-color | `String` |`N`| `rgba(0, 0, 0, 0.6)` | 返回按钮颜色 |
 | statusbar | `Boolean` |`N`| `false` | 是否预留状态栏位置 |
 | use-default-return | `Boolean` |`N`| `true` | 是否使用默认的返回 |
 | has-prev | `Boolean` | `N` |`true`| 是否存在上一页，此项参数决定左边按钮是否显示 |
@@ -80,6 +80,6 @@
 ## 事件回调
 
 ```
-// @fmTitlebarleftBtnClicked="fmTitlebarleftBtnClick"
-// @fmTitlebarRightBtnClicked="fmTitlebarRightBtnClick"
+@fmTitlebarLeftBtnClicked="fmTitlebarLeftBtnClick"
+@fmTitlebarRightBtnClicked="fmTitlebarRightBtnClick"
 ```

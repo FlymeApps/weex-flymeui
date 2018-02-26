@@ -158,7 +158,12 @@
     },
     methods: {
 			onBack(e) {
-				this.useDefaultReturn ? Navigator.pop() : this.$emit('fmTitlebarleftBtnClicked', e)
+        const self = this
+        if (self.useDefaultReturn) {
+          Navigator.pop({}, e => {
+          })
+        }
+        self.$emit('fmTitlebarLeftBtnClicked', {})
 			},
 			rightBtnClick(idx, item) {
 				this.$emit('fmTitlebarRightBtnClicked', { idx: idx, value: item })
