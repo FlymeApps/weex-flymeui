@@ -10,11 +10,11 @@
       <fm-titlebar title="标题"
                    right-text="更多"
                    background-color="#FFFFFF"
-                   @fmRightButtonClicked="fmRightButtonClicked"></wxc-minibar>
+                   @fmRightButtonClicked="fmRightButtonClicked"></fm-titlebar>
       <text class="text">多按钮</text>
       <fm-titlebar title="标题"
                    :rightBtns="btns"
-                   @fmRightButtonClicked="fmRightButtonClicked"></wxc-minibar>
+                   @fmRightButtonClicked="fmRightButtonClicked"></fm-titlebar>
     </div>
   </div>
 </template>
