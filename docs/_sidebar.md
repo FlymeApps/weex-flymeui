@@ -6,6 +6,7 @@
 
 - 基础组件
   - [fm-titlebar 导航栏](packages/fm-titlebar/)
+  - [fm-searchbar 搜索栏](packages/fm-searchbar/)
   - [fm-text 文本](packages/fm-text/)
   - [fm-icon 图标](packages/fm-icon/)
   - [fm-tag 标签](packages/fm-tag/)

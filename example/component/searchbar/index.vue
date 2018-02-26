@@ -1,35 +1,57 @@
 <template>
 	<div class="mzui-demo">
-		<text>默认态</text>
-		<fm-searchbar
-			@submit="submit"
-			:value="searchText"
-			@input="inputing"
-			@back="back" />
-		<text>修改 placeholder</text>
-		<fm-searchbar
-			placeholder="输入进行搜索"
-			placeholder-color="blue"
-			input-color="red"
-			@submit="submit" />
-		<text>自动选中</text>
-		<fm-searchbar
-			:autofocus="true"
-			@submit="submit" />
-		<text>更改搜索按钮文字</text>
-		<fm-searchbar
-			searchBtnText="检索"
-			@submit="submit" />
-		<text>更改搜索按钮文字颜色</text>
-		<fm-searchbar
-			:searchBtnStyle="{ color: '#198ded' }"
-			@submit="submit" />
-		<text>左侧按钮自定义</text>
-		<fm-searchbar
-			:searchBtnStyle="{ color: '#198ded' }"
-			@submit="submit">
-			<image slot="left" src="http://design.flyme.cn/weexui/assets/star_normal.png" style="width: 72px;height: 72px;" />
-		</fm-searchbar>
+    <scroller class="scroller">
+      <title link="http://apps.flyme.cn/docs/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=5a3390c267e2277e77dcf941"></title>
+      <category title="基本态"></category>
+			<fm-searchbar />
+
+      <category title="预留状态栏"></category>
+			<fm-searchbar :statusbar="true" />
+
+      <category title="去除左边按钮"></category>
+			<fm-searchbar :has-prev="false" />
+
+      <category title="不同的背景颜色"></category>
+			<fm-searchbar background-color="#FFAF00" />
+			<fm-searchbar background-color="#FFAF00" input-background="#FFFFFF" left-color="#FFFFFF" />
+
+      <category title="动态绑定"></category>
+			<fm-searchbar
+				:value="searchText"
+				@fmSearchbarSubmit="submit" />
+
+      <category title="自定义 placeholder"></category>
+			<fm-searchbar
+				placeholder="输入进行搜索"
+				@fmSearchbarSubmit="submit" />
+			<fm-searchbar
+				placeholder="不同的 placeholder 颜色"
+				placeholder-color="#198DED"
+				@fmSearchbarSubmit="submit" />
+
+      <category title="自定义搜索文字"></category>
+			<fm-searchbar
+				searchText="检索"
+				@fmSearchbarSubmit="submit" />
+			<fm-searchbar
+				searchBtnText="检索"
+				@fmSearchbarSubmit="submit"
+				:searchTextStyle="{ color: '#198DED' }" />
+
+      <category title="插槽"></category>
+			<fm-searchbar
+				@fmSearchbarSubmit="submit">
+				<fm-icon slot="input-right" iconStyle='66' value="&#xe6e9;" color='rgba(0, 0, 0, 0.6)' />
+			</fm-searchbar>
+			<fm-searchbar
+				@fmSearchbarSubmit="submit">
+				<fm-icon slot="left" iconStyle='66' value="&#xe6e9;" color='rgba(0, 0, 0, 0.6)' />
+			</fm-searchbar>
+			<fm-searchbar
+				@fmSearchbarSubmit="submit">
+				<fm-icon slot="right" iconStyle='66' value="&#xe6e9;" color='rgba(0, 0, 0, 0.6)' />
+			</fm-searchbar>
+    </scroller>
 	</div>
 </template>
 
@@ -42,31 +64,26 @@
 	  bottom: 0;
 	  background-color: #fff;
 	}
-	.special-rich {
-	  margin: 30px;
-	}
 </style>
 
 <script>
 	import FmSearchbar from '../../../packages/fm-searchbar'
+	import FmIcon from '../../../packages/fm-icon'
 	import Title from '../../_mods/title.vue'
 	import Category from '../../_mods/category.vue'
 	import { setTitle } from '../../_mods/set-nav'
-	import lang from '@flyme/weex-flymeui/lib/locale/lang/en'
-	import locale from '@flyme/weex-flymeui/lib/locale'
-	locale.use(lang)
 
 	const modal = weex.requireModule('modal')
 
 	export default {
 		data() {
 			return {
-				searchText: 'asdasd'
+				searchText: '搜索内容'
 			}
 		},
-	  components: { Title, Category, FmSearchbar },
+	  components: { Title, Category, FmSearchbar, FmIcon },
 	  methods: {
-	    submit(e) {
+	    fmSearchbarSubmit(e) {
 	      modal.toast({ message: e.value })
 	    },
 	    back(e) {
@@ -74,7 +91,6 @@
 			},
 			inputing(e) {
 				this.searchText = e.value
-				console.lang(this.searchText)
 			}
 	  }
 	}

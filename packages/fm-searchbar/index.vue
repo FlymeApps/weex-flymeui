@@ -1,12 +1,13 @@
+<!-- Created by Yanjiie on 18/02/26-->
 <template>
-  <div>
-    <div class="fm-status-bar"></div>
-    <div class="fm-search-bar">
-      <slot name="left">
-        <fm-icon @click="onBack" class="search-bar-back" value="&#xe6b5;" icon-style="72" />
+  <div v-if="show">
+    <div class="fm-status-bar" v-if="statusbar" :style="{ backgroundColor: backgroundColor }"></div>
+    <div class="fm-search-bar" :style="barStyle">
+      <slot name="left" v-if="hasPrev">
+        <fm-icon @fmClick="onBack" class="search-bar-back" value="&#xe6b5;" icon-style="72" :color="leftColor"/>
       </slot>
-        <div class="search-input-wrap">
-          <fm-icon class="search-bar-icon" value="&#xe6d4;" icon-style="42" color="#919191" />
+        <div class="search-input-wrap" :style="inputBackground ? { backgroundColor: inputBackground} : {}">
+          <fm-icon class="search-bar-icon" value="&#xe6d4;" icon-style="42" :color="iconColor" />
           <input @blur="onBlur"
                 @focus="onFocus"
                 @input="onInput"
@@ -21,9 +22,12 @@
                 :style="{color: inputColor, 'placeholder-color': placeholderColor}"
                 class="search-bar-input"/>
           <fm-icon v-if="delShow" class="search-bar-delete" value="&#xe6c0;" icon-style="48" color="#FFFFFF" @fmClick="delClick" />
+          <div v-else class="right-btn">
+            <slot name="input-right"></slot>
+          </div>
         </div>
       <slot name="right">
-        <text class="search-enter" @click="onSearch" :style="searchBtnStyle">{{ searchBtnText }}</text>
+        <text class="search-enter" @click="onSearch" :style="searchTextStyle">{{ searchText }}</text>
       </slot>
     </div> 
   </div> 
@@ -37,43 +41,42 @@
   }
 
   .fm-search-bar {
-    padding-left: 51px;
+    padding: 0 48px;
     background-color: #ffffff;
     width: 1080px;
-    height: 132px;
+    height: 144px;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     border-bottom-style: solid;
-    border-bottom-width: 1px;
+    border-bottom-width: 2px;
     border-bottom-color: rgba(0, 0, 0, 0.1);
   }
 
   .search-input-wrap {
-    position: absolute;
+    flex: 1;
     flex-direction: row;
     align-items: center;
-    top: 21px;
-    left: 165px;
-    right: 228px;
-    padding: 0 15px 0 24px;
+    justify-content: center;
+    padding-left: 35px;
+    margin-right: 48px;
     height: 90px;
-    background-color: #f2f2f2;
+    background-color: rgba(0, 0, 0, 0.05);
     outline: none;
     border-radius: 45px;
   }
 
   .search-bar-input {
-    width: 528px;
+    flex: 1;
     height: 90px;
-    margin-left: 9px;
+    margin-left: 24px;
     margin-right: 9px;
     line-height: 90px;
     font-size: 42px;
     background-color: transparent;
     font-family: sans-serif-medium;
     font-weight: 500;
-    color: #919191;
+    color: #616161;
   }
 
   .search-bar-icon {
@@ -83,6 +86,8 @@
   }
 
   .search-bar-back {
+		margin-left: -18px;
+		margin-right: 30px;
     line-height: 72px;
     height: 72px;
     font-weight: 700;
@@ -91,9 +96,10 @@
   .search-bar-delete {
     width: 60px;
     height: 60px;
+    margin-left: 15px;
     font-weight: 700;
-    padding: 6;
-    background-color: rgba(0, 0, 0, 0.2);
+    padding: 6px 5px;
+    background-color: rgba(77, 77, 77, 0.5);
     border-radius: 30px;
   }
 
@@ -103,8 +109,11 @@
     font-size: 48px;
     line-height: 96px;
     color: rgba(0, 0, 0, 0.6);
-    width: 228px;
     text-align: center;
+  }
+
+  .right-btn {
+    margin-right: 24px;
   }
 </style>
 
@@ -112,15 +121,49 @@
   import FmIcon from '../fm-icon'
   import Locale from '@flyme/weex-flymeui/lib/mixins/locale'
   import { t } from '@flyme/weex-flymeui/lib/locale'
+  const Navigator = weex.requireModule('navigator')
 
   export default {
     mixins: [Locale],
     components: { FmIcon },
     props: {
+			statusbar: {
+				type: Boolean,
+				default: false,
+			},
       value: {
         type: [String, Number],
         default: ''
       },
+			useDefaultReturn: {
+				type: Boolean,
+				default: true,
+			},
+			hasPrev: {
+				type: Boolean,
+				default: true
+			},
+			backgroundColor: {
+				type: String,
+				default: '#FFFFFF'
+      },
+      iconColor: {
+        type: String,
+        default: 'rgba(0, 0, 0, 0.4)'
+      },
+			leftColor: {
+				type: String,
+				default: 'rgba(0, 0, 0, 0.6)'
+			},
+      inputBackground: String,
+			borderStyle: {
+				type: Object,
+				default: () => ({
+          borderBottomStyle: 'solid',
+          borderBottomWidth: 2,
+          borderBottomColor: 'rgba(0, 0, 0, 0.1)'
+        })
+			},
       placeholder: String,
       autofocus: Boolean,
       disabled: Boolean,
@@ -128,27 +171,31 @@
         type: String,
         default: 'text'
       },
-      searchBtnText: {
+      searchText: {
         type: String,
         default() {
           return t('el.searchbar.search');
         }
       },
-      searchBtnStyle: {
+      searchTextStyle: {
         type: Object,
         default: () => ({})
       },
       returnKeyType: {
         type: String,
-        default: 'default'
+        default: 'search'
       },
       placeholderColor: {
         type: String,
-        default: '#999999'
+        default: 'rgba(0, 0, 0, 0.4)'
       },
       inputColor: {
         type: String,
-        default: '#999999'
+        default: '#616161'
+      },
+      show: {
+        type: Boolean,
+        default: true
       }
     },
     data: () => ({
@@ -157,12 +204,27 @@
     computed: {
       delShow() {
         return this.focus && this.value
-      }
+      },
+			barStyle() {
+				let style = {
+          borderBottomStyle: 'solid',
+          borderBottomWidth: 2,
+					borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+				}
+				Object.assign(style, this.borderStyle)
+				style.backgroundColor = this.backgroundColor
+				return style
+			}
     },
     methods: {
-      onBack(e) {
-        this.$emit('back', e)
-      },
+			onBack(e) {
+        const self = this
+        if (self.useDefaultReturn) {
+          Navigator.pop({}, e => {
+          })
+        }
+        self.$emit('fmSearchbarleftBtnClicked', {})
+			},
       delClick(e) {
         this.value = ''
       },
@@ -185,10 +247,10 @@
         this.$refs.input.blur()
       },
       onSubmit(e) {
-        this.$emit('submit', { value: this.value })
+        this.$emit('fmSearchbarSubmit', { value: this.value })
       },
       onSearch(e) {
-        this.$emit('submit', { value: this.value })
+        this.$emit('fmSearchbarSubmit', { value: this.value })
       },
       setSelectionRange(start, end) {
         this.$refs.input.setSelectionRange(start, end)
