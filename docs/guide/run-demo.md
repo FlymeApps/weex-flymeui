@@ -1,13 +1,13 @@
 # 代码克隆
 从 GitLab 拉取代码
 
-```
+```bash
 $ git clone http://gitlab.meizu.com/sunyanjie/weex-flymeui.git
 ```
 
 # 运行示例
 
-```
+```bash
 $ cd weex-flymeui
 $ npm install
 $ npm run build

@@ -15,7 +15,7 @@
 
 ![Flyme Design](http://design.flyme.cn/images/logo.png)
 ## 安装
-```
+```bash
 npm i weex-flymeui -S
 ```
 
@@ -27,7 +27,7 @@ npm i weex-flymeui -S
   </div>
 </template>
 
-<script
+<script></script>
   import { FmButton } from 'weex-flymeui';
   // import FmButton from 'weex-flymeui/packages/fm-button';
   export default {
@@ -43,10 +43,11 @@ npm i weex-flymeui -S
 
 为了不打包所有的组件，可以逐个引入所需的组件。需要需要使用 [babel-plugin-component](https://www.npmjs.com/package/babel-plugin-component) 来只引入需要的组件打包。
 
-```
+```bash
 npm i babel-plugin-component -D
 ```
-```
+
+```json
 // 增加一个plugins的配置到 .babelrc 中
 {
   "plugins": [
@@ -61,7 +62,7 @@ npm i babel-plugin-component -D
 }
 ```
 ## 分开使用（推荐）
-```
+```javascript
 import FmText from "@flyme/weex-flymeui/packages/fm-text"
 import FmImage from "@flyme/weex-flymeui/packages/fm-image"
 ```
@@ -69,7 +70,7 @@ import FmImage from "@flyme/weex-flymeui/packages/fm-image"
 ## Weex-toolkit
 如果你使用 [weex-toolkit](https://github.com/weexteam/weex-toolkit) 来开发你的Weex项目，你需要向 .babelrc 文件中加入 'state-0' 和 'babel-plugin-component'
 
-```
+```bash
 npm i babel-preset-stage-0 babel-plugin-component -D
 ```
 
@@ -99,7 +100,3 @@ meta.setViewport({
   width: 1080px
 })
 ```
-
-
-
-

@@ -23,7 +23,7 @@ $ npm run build:theme -- --theme [主题名称]
 ```
 
 示例：
-```
+```bash
 $ npm run build:theme -- --theme firebrick
 
 > @flyme/weex-flymeui@0.1.2 build:theme /Users/suen/Documents/develop/project/weex-flymeui
