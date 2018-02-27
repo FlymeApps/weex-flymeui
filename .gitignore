@@ -1,5 +1,5 @@
 .DS_Store
-/dist
+dist/example
 node_modules
 .cachefile
 */node_modules
@@ -16,5 +16,4 @@ mods/.sass-cache/
 !.gitignore
 !.editorconfig
 lerna-debug.log
-build/example
 
