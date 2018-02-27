@@ -73,8 +73,8 @@ const type_confirm = 'confirm'
 import FmOverlay from '../fm-overlay'
 import FmText from '../fm-text'
 import FmSimpleBtn from '../fm-simple-btn'
-import Locale from '@flyme/weex-flymeui/lib/mixins/locale'
-import { t } from '@flyme/weex-flymeui/lib/locale'
+import Locale from 'weex-flymeui/lib/mixins/locale'
+import { t } from 'weex-flymeui/lib/locale'
 
 export default {
   mixins: [Locale],

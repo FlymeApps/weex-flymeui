@@ -63,8 +63,8 @@ npm i babel-plugin-component -D
 ```
 ## 分开使用（推荐）
 ```javascript
-import FmText from "@flyme/weex-flymeui/packages/fm-text"
-import FmImage from "@flyme/weex-flymeui/packages/fm-image"
+import FmText from "weex-flymeui/packages/fm-text"
+import FmImage from "weex-flymeui/packages/fm-image"
 ```
 
 ## Weex-toolkit

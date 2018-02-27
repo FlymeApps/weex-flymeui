@@ -1,5 +1,5 @@
 import SnackBar from '../fm-snack-bar'
-import { t } from '@flyme/weex-flymeui/lib/locale'
+import { t } from 'weex-flymeui/lib/locale'
 
 let VCSnackBar = Vue.extend(SnackBar)
 

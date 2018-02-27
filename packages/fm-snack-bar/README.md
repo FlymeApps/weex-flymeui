@@ -23,7 +23,7 @@ FmSnackBar 是一款从底部弹出的提示控件。
 
 ## JS 调用弹出使用
 ```javascript
-import { showSnackBar } from '@flyme/weex-flymeui'
+import { showSnackBar } from 'weex-flymeui'
 // 弹出文字操作 SnackBar
 showSnackBar({
 	title: '已自动开启夜间模式',

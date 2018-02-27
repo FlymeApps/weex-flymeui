@@ -8,9 +8,9 @@
 不同情况请使用以下不同的组件引入：
 ```javascript
 // icon、标签、超链接、单行普通文本混排
-import { FmRichText } from '@flyme/weex-flymeui'
+import { FmRichText } from 'weex-flymeui'
 // icon或标签加多行文本混排
-import { FmRichText, FmSpecialRichText } from '@flyme/weex-flymeui'
+import { FmRichText, FmSpecialRichText } from 'weex-flymeui'
 ```
 
 **注意：FmSpecialRichText 仅支持 text , icon, tag 类型，在 configList 中传入其他类型将会出错**
@@ -41,8 +41,8 @@ import { FmRichText, FmSpecialRichText } from '@flyme/weex-flymeui'
 </template>
 
 <script>
-import { FmRichText } from '@flyme/weex-flymeui'
-import { FmRichText, FmSpecialRichText } from '@flyme/weex-flymeui'
+import { FmRichText } from 'weex-flymeui'
+import { FmRichText, FmSpecialRichText } from 'weex-flymeui'
 export default {
     components: { FmRichText, FmSpecialRichText },
     data() {

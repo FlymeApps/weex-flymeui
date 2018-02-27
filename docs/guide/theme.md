@@ -13,7 +13,7 @@ FlymeUI 的 theme-paint 使用的是 SCSS 编写，组件样式引入时使用�
 
 ```javascript
 // package.json
-"build:theme": "gulp build --gulpfile node_modules/@flyme/weex-flymeui/lib/theme-paint/gulpfile.js"
+"build:theme": "gulp build --gulpfile node_modules/weex-flymeui/lib/theme-paint/gulpfile.js"
 ```
 
 使用如下命令进行主题切换：
@@ -26,7 +26,7 @@ $ npm run build:theme -- --theme [主题名称]
 ```bash
 $ npm run build:theme -- --theme firebrick
 
-> @flyme/weex-flymeui@0.1.2 build:theme /Users/suen/Documents/develop/project/weex-flymeui
+> weex-flymeui@0.1.2 build:theme /Users/suen/Documents/develop/project/weex-flymeui
 > gulp build --gulpfile lib/theme-paint/gulpfile.js "--theme" "firebrick"
 
 [14:22:40] Working directory changed to ~/Documents/develop/project/weex-flymeui/lib/theme-paint

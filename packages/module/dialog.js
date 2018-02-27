@@ -1,5 +1,5 @@
 import Dialog from '../fm-dialog'
-import { t } from '@flyme/weex-flymeui/lib/locale'
+import { t } from 'weex-flymeui/lib/locale'
 
 let VCDialog = Vue.extend(Dialog)
 let vc_dialog = new VCDialog().$mount()

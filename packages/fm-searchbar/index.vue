@@ -119,8 +119,8 @@
 
 <script>
   import FmIcon from '../fm-icon'
-  import Locale from '@flyme/weex-flymeui/lib/mixins/locale'
-  import { t } from '@flyme/weex-flymeui/lib/locale'
+  import Locale from 'weex-flymeui/lib/mixins/locale'
+  import { t } from 'weex-flymeui/lib/locale'
   const Navigator = weex.requireModule('navigator')
 
   export default {
