@@ -18,12 +18,12 @@ FlymeUI 的 theme-paint 使用的是 SCSS 编写，组件样式引入时使用�
 
 使用如下命令进行主题切换：
 
-```bash
+```shell
 $ npm run build:theme -- --theme [主题名称]
 ```
 
 示例：
-```bash
+```shell
 $ npm run build:theme -- --theme firebrick
 
 > weex-flymeui@0.1.2 build:theme /Users/suen/Documents/develop/project/weex-flymeui

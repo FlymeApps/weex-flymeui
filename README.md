@@ -15,21 +15,21 @@
 
 ![Flyme Design](http://design.flyme.cn/images/logo.png)
 ## 安装
-```bash
+```shell
 npm i weex-flymeui -S
 ```
 
 ## 使用
-```javascript
+```html
 <template>
   <div>
     <fm-button text="安装" @click="buttonClicked" bgColor="transparent" color="#198ded" />
   </div>
 </template>
 
-<script></script>
+<script>
   import { FmButton } from 'weex-flymeui';
-  // import FmButton from 'weex-flymeui/packages/fm-button';
+  // 或者 import FmButton from 'weex-flymeui/packages/fm-button';
   export default {
     components: { FmButton },
     methods: {
@@ -41,10 +41,14 @@ npm i weex-flymeui -S
 </script>
 ```
 
+## 使用前的问题
+
+如果你不想打包所有的组件，可以选择分开使用。但需要使用 [babel-plugin-component](https://www.npmjs.com/package/babel-plugin-component) 来只引入需要的组件打包，同时如果没有安装 `babel-preset-stage-0`，也需要一并安装。
+
 为了不打包所有的组件，可以逐个引入所需的组件。需要需要使用 [babel-plugin-component](https://www.npmjs.com/package/babel-plugin-component) 来只引入需要的组件打包。
 
-```bash
-npm i babel-plugin-component -D
+```shell
+npm i babel-preset-stage-0 babel-plugin-component  -D
 ```
 
 ```json
@@ -55,22 +59,27 @@ npm i babel-plugin-component -D
       "component",
       {
         "libraryName": "weex-flymeui",
-        "libDir": "packages"
+        "libDir": "packages",
+        "style": false
       }
     ]
   ]
 }
 ```
-## 分开使用（推荐）
-```javascript
-import FmText from "weex-flymeui/packages/fm-text"
-import FmImage from "weex-flymeui/packages/fm-image"
+
+## 运行 Demo
+
+```shell
+npm i
+npm run start
 ```
+
+一旦编译完成后，将会自动打开一个浏览器，你可以在浏览器打开开发者工具，这时候在 console 中你可以看到一个预览二维码，直接使用你的 Weex App 扫码就可以看到 Demo 效果。
 
 ## Weex-toolkit
 如果你使用 [weex-toolkit](https://github.com/weexteam/weex-toolkit) 来开发你的Weex项目，你需要向 .babelrc 文件中加入 'state-0' 和 'babel-plugin-component'
 
-```bash
+```shell
 npm i babel-preset-stage-0 babel-plugin-component -D
 ```
 
