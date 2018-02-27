@@ -1,5 +1,5 @@
 /node_modules
-/build/example
+/dist/example
 .*
 /*.js
 /*.json
