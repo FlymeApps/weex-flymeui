@@ -8,13 +8,12 @@
 ```html
 <template>
   <div class="container">
-      <text class="text">顶部导航栏搜索组件</text>
-      <fm-searchbar
-        background-color="#FFFFFF"
-        search-text="搜索"
-        :value="searchText"
-        @fmSearchbarSubmit="fmSearchbarSubmit" />
-    </div>
+    <text class="text">顶部导航栏搜索组件</text>
+    <fm-searchbar
+      background-color="#FFFFFF"
+      search-text="搜索"
+      :value="searchText"
+      @fmSearchbarSubmit="fmSearchbarSubmit" />
   </div>
 </template>
 

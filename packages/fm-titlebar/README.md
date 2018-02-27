@@ -6,16 +6,15 @@
 ```html
 <template>
   <div class="container">
-      <text class="text">基本态</text>
-      <fm-titlebar title="标题"
-                   right-text="更多"
-                   background-color="#FFFFFF"
-                   @fmRightButtonClicked="fmRightButtonClicked"></fm-titlebar>
-      <text class="text">多按钮</text>
-      <fm-titlebar title="标题"
-                   :rightBtns="btns"
-                   @fmRightButtonClicked="fmRightButtonClicked"></fm-titlebar>
-    </div>
+    <text class="text">基本态</text>
+    <fm-titlebar title="标题"
+                  right-text="更多"
+                  background-color="#FFFFFF"
+                  @fmRightButtonClicked="fmRightButtonClicked"></fm-titlebar>
+    <text class="text">多按钮</text>
+    <fm-titlebar title="标题"
+                  :rightBtns="btns"
+                  @fmRightButtonClicked="fmRightButtonClicked"></fm-titlebar>
   </div>
 </template>
 

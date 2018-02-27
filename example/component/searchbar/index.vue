@@ -1,7 +1,7 @@
 <template>
 	<div class="mzui-demo">
     <scroller class="scroller">
-      <title link="http://apps.flyme.cn/docs/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=5a3390c267e2277e77dcf941"></title>
+      <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-searchbar/"></title>
       <category title="基本态"></category>
 			<fm-searchbar />
 
