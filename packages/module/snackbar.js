@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import SnackBar from '../fm-snack-bar'
 import { t } from 'weex-flymeui/lib/locale'
 

@@ -30,7 +30,7 @@
         default: ''
       },
       iconStyle: {
-        type: [Number, Object],
+        type: [Number, Object, String],
         default: 42
       },
       color: {

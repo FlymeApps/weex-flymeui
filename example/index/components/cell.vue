@@ -5,7 +5,7 @@
 				<fm-text :text-value="title" medium="" :text-style="{ fontSize: 48, color: '#000', fontWeight: 500, lineHeight: 54}" />
 				<fm-text :text-value="subTitle" :text-style="{ fontSize: 32, color: 'rgba(0,0,0,0.4)', fontWeight: 300, lineHeight: 42, marginTop: 8.6667 }" />
 			</div>
-			<fm-icon class="cellIcon" value="&#xe6b5;" color="#999" icon-style="72" />
+			<fm-icon class="cellIcon" value="&#xe6b5;" color="#999" :icon-style="72" />
 		</div>
 		<div class="border"></div>
   </div>

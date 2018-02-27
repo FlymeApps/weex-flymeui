@@ -134,7 +134,7 @@ export default {
     },
     btns: {
       type: Array,
-      default: []
+      default: () => ([])
     },
     btnDirection: {
       type: String,

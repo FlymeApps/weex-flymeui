@@ -4,10 +4,10 @@
     <div class="fm-status-bar" v-if="statusbar" :style="{ backgroundColor: backgroundColor }"></div>
     <div class="fm-search-bar" :style="barStyle">
       <slot name="left" v-if="hasPrev">
-        <fm-icon @fmClick="onBack" class="search-bar-back" value="&#xe6b5;" icon-style="72" :color="leftColor"/>
+        <fm-icon @fmClick="onBack" class="search-bar-back" value="&#xe6b5;" :icon-style="72" :color="leftColor"/>
       </slot>
         <div class="search-input-wrap" :style="inputBackground ? { backgroundColor: inputBackground} : {}">
-          <fm-icon class="search-bar-icon" value="&#xe6d4;" icon-style="42" :color="iconColor" />
+          <fm-icon class="search-bar-icon" value="&#xe6d4;" :icon-style="42" :color="iconColor" />
           <input @blur="onBlur"
                 @focus="onFocus"
                 @input="onInput"
@@ -21,7 +21,7 @@
                 :placeholder="placeholder"
                 :style="{color: inputColor, 'placeholder-color': placeholderColor}"
                 class="search-bar-input"/>
-          <fm-icon v-if="delShow" class="search-bar-delete" value="&#xe6c0;" icon-style="48" color="#FFFFFF" @fmClick="delClick" />
+          <fm-icon v-if="delShow" class="search-bar-delete" value="&#xe6c0;" :icon-style="48" color="#FFFFFF" @fmClick="delClick" />
           <div v-else class="right-btn">
             <slot name="input-right"></slot>
           </div>

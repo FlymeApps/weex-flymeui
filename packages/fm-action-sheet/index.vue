@@ -56,7 +56,10 @@ export default {
         return t('el.common.cancel');
       }
     },
-    actionBtns: Array
+    actionBtns: {
+      type: Array,
+      default: () => ([])
+    }
   },
   data: () => ({
     

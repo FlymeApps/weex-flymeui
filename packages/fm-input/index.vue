@@ -27,8 +27,8 @@
       @focus="beFocus"
       @blur="beBlur"
       ref="input" />
-    <fm-icon v-if="delShow" class="delete" value="&#xe6c0;" icon-style="48" color="#fff" @fmClick="delClick" />
-    <fm-icon v-if="visibleShow" class="visible" :value="visibleValue" icon-style="72" color="#666" @fmClick="toggleVisible" />
+    <fm-icon v-if="delShow" class="delete" value="&#xe6c0;" :icon-style="48" color="#fff" @fmClick="delClick" />
+    <fm-icon v-if="visibleShow" class="visible" :value="visibleValue" :icon-style="72" color="#666" @fmClick="toggleVisible" />
     <text v-if="hasError" class="error-msg">{{inputErrorMessage}}</text>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
     <div class="flymeui">
         <div class="actionBar">
-            <fm-icon class="actionIcon" @fmClick="back" value="&#xe6b5;" icon-style="72" color="#999"/>
+            <fm-icon class="actionIcon" @fmClick="back" value="&#xe6b5;" :icon-style="72" color="#999"/>
         </div>
         <scroller class="scroller">
             <div class="header">

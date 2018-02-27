@@ -1,14 +1,14 @@
 <template>
   <div class="rater-wrap" ref="rater" @touchstart="raterTouchStart" @touchmove="raterTouchmove" @touchend="raterTouchend">
     <div class="rater-star-bg">
-      <image :class="starClz" :src="getBgImgs"></image>
-      <image :class="starClz" :src="getBgImgs"></image>
-      <image :class="starClz" :src="getBgImgs"></image>
-      <image :class="starClz" :src="getBgImgs"></image>
-      <image :class="starClz" :src="getBgImgs"></image>
+      <image :class="starClz" :src="getBgImgs" />
+      <image :class="starClz" :src="getBgImgs" />
+      <image :class="starClz" :src="getBgImgs" />
+      <image :class="starClz" :src="getBgImgs" />
+      <image :class="starClz" :src="getBgImgs" />
     </div>
     <div class="rater-star" :style="wraperWidth">
-      <image :class="starClz" v-for="(item, index) in getImgs" :key="index" :src="item"></image>
+      <image :class="starClz" v-for="(item, index) in getImgs" :key="index" :src="item" />
     </div>
   </div>
 </template>
@@ -92,36 +92,28 @@ export default {
     starImgs: {
       type: Array,
       default: [
-        require('../../assets/star1.png'),
-        require('../../assets/star2.png'),
-        require('../../assets/star3.png'),
-        require('../../assets/star4.png'),
-        require('../../assets/star5.png')
+        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star1.png',
+        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star2.png',
+        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star3.png',
+        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star4.png',
+        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star5.png'
       ]
     },
     starSpecialImg: {
       type: String,
-      default: () => {
-        return require('../../assets/star_special.png')
-      }
+      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_special.png'
     },
     starDarkImg: {
       type: String,
-      default: () => {
-        return require('../../assets/star_dark.png')
-      }
+      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_dark.png'
     },
     starBgImg: {
       type: String,
-      default: () => {
-        return require('../../assets/star_bg.png')
-      }
+      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_bg.png'
     },
     starDarkBgImg: {
       type: String,
-      default: () => {
-        return require('../../assets/star_dark_bg.png')
-      }
+      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_dark_bg.png'
     }
   },
   data: () => ({

@@ -1,6 +1,6 @@
 {
     "name": "weex-flymeui",
-    "version": "0.0.1-beta",
+    "version": "0.0.1-beta5",
     "description": "A Flyme Style UI library based on Weex for Creator.",
     "main": "index.js",
     "lib": "vue",
@@ -59,8 +59,5 @@
         "gulp": "^3.9.1",
         "gulp-sass": "^3.1.0",
         "minimist": "^1.2.0"
-    },
-    "directories": {
-        "example": "example"
     }
 }
