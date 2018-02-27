@@ -7,7 +7,8 @@
     append='tree'
     @loadmore="$onLoadMore()" 
     showScrollbar="true" style='width:360px'
-    @mlongclick="$onCellLongpress">
+    @mlongclick="$onCellLongpress"
+    for="(item, i) in dataSource">
 
     <cell-slot template-type="check-cell" :itemId="item.itemId" @click="$onCellCheck(item, i)" ripple="normal">
       <div>
