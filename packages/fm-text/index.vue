@@ -6,7 +6,7 @@
     .text {
         font-size: 42;
         line-height: 63;
-        color: #999;
+        color: #999999;
         font-family: "Source Han Sans CN", Roboto, sans-serif;
     }
 
@@ -26,7 +26,7 @@
         font-size: 48;
         font-weight: 500;
         line-height: 69;
-        color: #000;
+        color: #000000;
     }
 
     .small {
@@ -36,12 +36,12 @@
         font-size: 48;
         font-weight: 500;
         line-height: 72;
-        color: #000;
+        color: #000000;
     }
     .huge {
         font-size: 54;
         line-height: 81;
-        color: #000;
+        color: #000000;
     }
     .margin-text {
         margin-right: 9;
@@ -50,6 +50,7 @@
 
 <script>
 export default {
+    name: 'FmText',
     props: {
         textValue: [String, Number],
         medium: Boolean,

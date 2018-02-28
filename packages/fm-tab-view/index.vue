@@ -67,6 +67,7 @@ const dom = weex.requireModule('dom')
 const animation = weex.requireModule('animation')
 
 export default {
+  name: 'FmTabView',
 	data () {
 		return {
 			width: 0,//单个tab宽度

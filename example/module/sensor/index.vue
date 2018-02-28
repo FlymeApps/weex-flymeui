@@ -79,7 +79,7 @@
 
     .apiTitle {
         padding: 28px 0 0 0;
-        background-color: #fff;
+        background-color: #ffffff;
     }
     
     .titleText {
@@ -87,7 +87,6 @@
     }
 
     .data {
-        text-align: left;
         padding-left: 65px;
     }
 </style>

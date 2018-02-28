@@ -68,7 +68,7 @@
     right: 0;
     left: 0;
     bottom: 0;
-    background-color: #fff;
+    background-color: #ffffff;
   }
 
   .list {
@@ -96,7 +96,6 @@
 
 <script>
   import { FmSwitch } from '../../../index'
-  import FmSwitch360 from '../../../packages/fm-switch/fm-switch-360.vue'
   import Title from '../../_mods/title.vue'
   import Category from '../../_mods/category.vue'
   import { setTitle } from '../../_mods/set-nav'
@@ -104,7 +103,7 @@
   const modal = weex.requireModule('modal')
 
   export default {
-    components: { Title, Category, FmSwitch, FmSwitch360 },
+    components: { Title, Category, FmSwitch },
     data: () => ({
       isChecked: true
     }),

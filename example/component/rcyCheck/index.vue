@@ -49,7 +49,7 @@
   .click-test {
     width: 100px;
     height: 100px;
-    background-color: blue;
+    background-color: #0000FF;
   }
 
   .rcy-check {

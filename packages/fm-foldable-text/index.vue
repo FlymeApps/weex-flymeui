@@ -13,7 +13,7 @@
 }
 .text {
     font-family: "Source Han Sans CN", Roboto, sans-serif;
-    color: #999;
+    color: #999999;
 }
 .text_small {
     font-size: 36px;
@@ -49,6 +49,7 @@ import Locale from 'weex-flymeui/lib/mixins/locale'
 import { t } from 'weex-flymeui/lib/locale'
 
 export default {
+    name: 'FmFoldableText',
     mixins: [Locale],
     data() {
         return {

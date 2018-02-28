@@ -124,6 +124,7 @@
   const Navigator = weex.requireModule('navigator')
 
   export default {
+    name: 'FmSearchbar',
     mixins: [Locale],
     components: { FmIcon },
     props: {
@@ -199,11 +200,11 @@
       }
     },
     data: () => ({
-      focus: false
+      _focus: false
     }),
     computed: {
       delShow() {
-        return this.focus && this.value
+        return this._focus && this.value
       },
 			barStyle() {
 				let style = {
@@ -233,11 +234,11 @@
         this.$emit('input', e)
       },
       onFocus(e) {
-        this.focus = true
+        this._focus = true
         this.$emit('focus', e)
       },
       onBlur(e) {
-        this.focus = false
+        this._focus = false
         this.$emit('blur', e)
       },
       focus() {

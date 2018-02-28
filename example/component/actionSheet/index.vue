@@ -23,13 +23,13 @@
     right: 0;
     left: 0;
     bottom: 0;
-    background-color: #fff;
+    background-color: #ffffff;
   }
   
   .container {
-    padding-top: size(60);
-    padding-left: size(60);
-    padding-right: size(60);
+    padding-top: 60px;
+    padding-left: 60px;
+    padding-right: 60px;
   }
 
   .row {

@@ -49,6 +49,7 @@ import FmIcon from '../fm-icon'
 import Locale from 'weex-flymeui/lib/mixins/locale'
 import { t } from 'weex-flymeui/lib/locale'
 export default {
+  name: 'FmSnackBar',
 	mixins: [Locale],
 	components: { FmIcon },
   props: {

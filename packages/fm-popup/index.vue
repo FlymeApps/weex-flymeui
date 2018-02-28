@@ -53,6 +53,7 @@
 	import FmOverlay from '../fm-overlay'
 
 	export default {
+    name: 'FmPopup',
 		components: { FmOverlay },
 		props: {
 			show: {

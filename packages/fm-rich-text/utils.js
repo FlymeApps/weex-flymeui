@@ -1,9 +1,7 @@
 /**
  * Created by Tw93 on 2017/6/26.
  */
-const UrlParser = require('url-parse');
 const Utils = {
-  UrlParser: UrlParser,
   /**
    * 对象类型
    * @memberOf Utils

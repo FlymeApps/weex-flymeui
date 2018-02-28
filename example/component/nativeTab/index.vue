@@ -82,7 +82,6 @@ height:1500px;
     margin-right:75px;
     margin-top: 35px;
     margin-bottom: 35px;
-    flex-direction: column;
     justify-content: center;
     border-width: 2px;
     border-style: solid;

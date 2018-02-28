@@ -24,6 +24,7 @@
 <script>
   const animation = weex.requireModule('animation')
   export default {
+    name: 'FmOverlay',
     props: {
       show: {
         type: Boolean,

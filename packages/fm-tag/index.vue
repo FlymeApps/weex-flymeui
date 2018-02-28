@@ -59,6 +59,7 @@ import Locale from 'weex-flymeui/lib/mixins/locale'
 import { t } from 'weex-flymeui/lib/locale'
 
 export default {
+  name: 'FmTag',
   mixins: [Locale],
   props: {
     tagType: {

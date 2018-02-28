@@ -72,6 +72,7 @@
 const dom = weex.requireModule('dom')
 
 export default {
+  name: 'FmSlider',
 	data () {
 		return {
 			transX: 0,

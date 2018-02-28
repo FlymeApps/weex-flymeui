@@ -33,6 +33,7 @@
 
 <script>
 export default {
+  name: 'FmSimpleBtn',
 	props: {
 		text: String,
 		type: String,

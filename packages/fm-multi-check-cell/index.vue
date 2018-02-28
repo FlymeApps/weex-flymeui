@@ -32,6 +32,7 @@
   import CheckIcon from './check-icon.vue'
 
   export default {
+    name: 'FmMultiCheckCell',
     components: { CheckIcon },
     props: {
       identity: {

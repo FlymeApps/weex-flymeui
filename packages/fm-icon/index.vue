@@ -24,6 +24,7 @@
   // 引入he模块，使用它解决weex-template-compiler在编译阶段进行decode
   const he = require("he");
   export default {
+    name: 'FmIcon',
     props: {
       value: {
         type: String,

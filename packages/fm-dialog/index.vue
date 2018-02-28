@@ -77,6 +77,7 @@ import Locale from 'weex-flymeui/lib/mixins/locale'
 import { t } from 'weex-flymeui/lib/locale'
 
 export default {
+  name: 'FmDialog',
   mixins: [Locale],
   components: { FmOverlay, FmText, FmSimpleBtn },
   props: {

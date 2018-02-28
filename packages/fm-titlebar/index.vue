@@ -82,6 +82,7 @@
   const Navigator = weex.requireModule('navigator')
 
   export default {
+  	name: 'FmTitlebar',
     mixins: [Locale],
     components: { FmIcon },
     props: {

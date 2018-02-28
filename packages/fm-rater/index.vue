@@ -63,6 +63,7 @@ import FmIcon from '../fm-icon'
 import FmImage from '../fm-image'
 const dom = weex.requireModule('dom')
 export default {
+  name: 'FmRater',
   components: { FmIcon, FmImage },
   props: {
     score: {

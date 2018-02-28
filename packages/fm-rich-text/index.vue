@@ -54,6 +54,7 @@
   import FmTag from '../fm-tag'
   import FmRichTextLink from './fm-rich-text-link.vue'
   export default {
+    name: 'FmRichText',
     components: {
       FmText, FmIcon, FmTag, FmRichTextLink
     },

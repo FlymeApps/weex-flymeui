@@ -4,6 +4,7 @@
 
 <script>
 export default {
+    name: 'FmImage',
     data: () => ({
         loaded: false
     }),

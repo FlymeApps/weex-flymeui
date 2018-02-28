@@ -18,13 +18,13 @@
 	right: 0;
 	left: 0;
 	bottom: 0;
-	background-color: #fff;
+	background-color: #ffffff;
 }
 
 .item {
 	font-size: 54px;
 	text-align: center;
-	color: #fff;
+	color: #ffffff;
 	height: 1080px;
 	margin-top: 6px;
 	padding-top: 150px;

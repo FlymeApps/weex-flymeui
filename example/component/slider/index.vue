@@ -28,7 +28,7 @@
         right: 0;
         left: 0;
         bottom: 0;
-        background-color: #fff;
+        background-color: #ffffff;
     }
     .title {
         font-size: 42px;

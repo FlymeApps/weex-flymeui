@@ -50,6 +50,7 @@ const transparent = 'transparent'
 const dom = weex.requireModule('dom')
 
 export default {
+  name: 'FmButton',
 	data() {
 		return {
 			max: false

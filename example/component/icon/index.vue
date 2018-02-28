@@ -409,7 +409,7 @@
     right: 0;
     left: 0;
     bottom: 0;
-    background-color: #fff;
+    background-color: #ffffff;
   }
 
   .cell {
@@ -432,8 +432,6 @@
 
   .row {
     flex-direction: row;
-    text-align: left;
-    justify-content: flex-start;
     align-items: flex-start;
   }
 

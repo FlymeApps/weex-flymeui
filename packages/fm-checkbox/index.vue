@@ -73,6 +73,7 @@
   const animation = weex.requireModule('animation')
   import FmIcon from '../fm-icon'
   export default {
+    name: 'FmCheckbox',
     components: { FmIcon },
     props: {
       value: {

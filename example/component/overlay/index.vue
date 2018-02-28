@@ -23,12 +23,12 @@
         right: 0;
         left: 0;
         bottom: 0;
-        background-color: #fff;
+        background-color: #ffffff;
     }
     .title {
         margin-top: 60px;
         margin-bottom: 30px;
-        color: #aaa;
+        color: #aaaaaa;
     }
     .btn {
         margin: 30px;

@@ -37,6 +37,7 @@
   import FmIcon from '../fm-icon'
   import FmTag from '../fm-tag'
   export default {
+    name: 'FmSpecialRichText',
     components: {
       FmText, FmIcon, FmTag
     },

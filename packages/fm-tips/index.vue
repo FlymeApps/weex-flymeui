@@ -57,6 +57,7 @@
 <script>
 import FmIcon from '../fm-icon'
 export default {
+  name: 'FmTips',
 	data () {
 		return {
 			show: true

@@ -55,7 +55,7 @@
 
     .item-wrap {
         justify-content: space-between;
-        background-color: #fff;
+        background-color: #ffffff;
         width: 480px;
         height: 360px;
         margin-bottom: 20px;

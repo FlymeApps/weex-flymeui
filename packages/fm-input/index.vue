@@ -33,7 +33,7 @@
   </div>
 </template>
 
-<style lang="css" src="../../lib/theme-paint/lib/input.css" scoped>
+<style lang="css" src="weex-flymeui/lib/theme-paint/lib/input.css" scoped>
 </style>
 
 <script>
@@ -42,33 +42,22 @@ import Locale from 'weex-flymeui/lib/mixins/locale'
 import { t } from 'weex-flymeui/lib/locale'
 
 export default {
+  name: 'FmInput',
   mixins: [Locale],
   components: { FmIcon },
-  
   mounted() {
     if (this.type === 'password') {
       this.pwdModel = true
     }
   },
-
   data() {
     return {
       rows: 1,
-      focus: false,
+      _focus: false,
       pwdModel: false,
       pwdVisible: false
     }
   },
-
-  data() {
-    return {
-      rows: 1,
-      focus: false,
-      pwdModel: false,
-      pwdVisible: false
-    }
-  },
-
   props: {
     value: {
       type: [String, Number],
@@ -98,7 +87,6 @@ export default {
 			default: false
 		}
   },
-
   computed: {
     visibleValue() {
       return this.type === 'password' ? '&#xe6a9;' : '&#xe6e8;'
@@ -118,10 +106,10 @@ export default {
       return style
     },
     delShow() {
-      return !this.pwdModel && this.focus && this.value
+      return !this.pwdModel && this._focus && this.value
     },
     visibleShow() {
-      return this.focus && this.pwdModel
+      return this._focus && this.pwdModel
     },
     hasError() {
       const { inputPattern, value } = this
@@ -134,7 +122,6 @@ export default {
       return false
     }
   },
-
   methods: {
     delClick(e) {
       this.value = ''
@@ -158,11 +145,11 @@ export default {
       this.$emit('change', evt)
     },
     beFocus(evt) {
-      this.focus = true
+      this._focus = true
       this.$emit('focus', evt)
     },
     beBlur(evt) {
-      this.focus = false
+      this._focus = false
       this.$emit('blur', evt)
     },
     focus() {

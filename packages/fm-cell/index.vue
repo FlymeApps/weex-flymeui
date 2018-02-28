@@ -101,6 +101,7 @@ const SCENE_SMALL = 'app-small'
 const SCENE_BIG = 'app-big'
 
 export default {
+  name: 'FmCell',
   components: { FmText, FmImage },
   props: {
     title: String,

@@ -11,7 +11,7 @@
   const animation = weex.requireModule('animation')
 
   export default {
-    name: 'fm-switch',
+    name: 'FmSwitch',
     props: {
       checked: {
         type: Boolean,

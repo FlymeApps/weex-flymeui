@@ -16,7 +16,7 @@
 			padding-left: 65px;
 			padding-right: 65px;
 			height: 252px;
-			background-color: #fff;
+			background-color: #ffffff;
     }
 
 	.content {
@@ -28,7 +28,7 @@
 	
 	.border {
 		height: 6px;
-		background-color: #ccc;
+		background-color: #cccccc;
 		transform: scaleY(0.3333);
 	}
 
