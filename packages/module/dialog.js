@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import Dialog from '../fm-dialog'
 import { t } from 'weex-flymeui/lib/locale'
 
