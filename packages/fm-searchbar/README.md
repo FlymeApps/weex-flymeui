@@ -40,7 +40,7 @@
 ## 可配置参数
 | Prop | Type | Required | Default | Description |
 |-------------|------------|--------|-----|-----|
-| value | `String` `Number` |`N`| `-` | 搜索框的内容 |
+| input-value | `String` `Number` |`N`| `''` | 搜索框的输入内容 |
 | placeholder | `String` |`N`| `-` | 输入提示文案 |
 | placeholder-color | `String` |`N`| `rgba(0, 0, 0, 0.4)` | 输入提示文案的颜色 |
 | left-color | `String` |`N`| `rgba(0, 0, 0, 0.6)` | 返回按钮颜色 |
@@ -100,6 +100,8 @@
 
 ## 可供外部使用的方法
 
+- `setValue(val)`
+  - 设置输入框的内容
 - `focus()`
 	`focus()` 方法用于将内置 `input` 组件聚焦。
 - `blur()`
