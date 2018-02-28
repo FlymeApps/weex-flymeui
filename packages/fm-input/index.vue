@@ -33,7 +33,7 @@
   </div>
 </template>
 
-<style lang="css" src="weex-flymeui/lib/theme-paint/lib/input.css" scoped>
+<style lang="css" src="../../lib/theme-paint/lib/input.css" scoped>
 </style>
 
 <script>
@@ -49,17 +49,24 @@ export default {
     if (this.type === 'password') {
       this.pwdModel = true
     }
+    this.value = this.inputValue || ''
   },
   data() {
     return {
+      value: '',
       rows: 1,
-      _focus: false,
+      isFocus: false,
       pwdModel: false,
       pwdVisible: false
     }
   },
+  watch: {
+    inputValue(val) {
+      this.value = val
+    }
+  },
   props: {
-    value: {
+    inputValue: {
       type: [String, Number],
       default: ''
     },
@@ -106,10 +113,10 @@ export default {
       return style
     },
     delShow() {
-      return !this.pwdModel && this._focus && this.value
+      return !this.pwdModel && this.isFocus && this.value
     },
     visibleShow() {
-      return this._focus && this.pwdModel
+      return this.isFocus && this.pwdModel
     },
     hasError() {
       const { inputPattern, value } = this
@@ -145,11 +152,11 @@ export default {
       this.$emit('change', evt)
     },
     beFocus(evt) {
-      this._focus = true
+      this.isFocus = true
       this.$emit('focus', evt)
     },
     beBlur(evt) {
-      this._focus = false
+      this.isFocus = false
       this.$emit('blur', evt)
     },
     focus() {
@@ -163,6 +170,9 @@ export default {
     },
     getEditSelectionRange(callback) {
       this.$refs.input.getEditSelectionRange(callback)
+    },
+    setValue (value) {
+      this.value = value
     }
   }
 }

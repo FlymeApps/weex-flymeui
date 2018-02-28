@@ -7,6 +7,9 @@
     </div>
 </template>
 
+<style lang="css" src="../../lib/theme-paint/lib/switch.css" scoped>
+</style>
+
 <script>
   const animation = weex.requireModule('animation')
 

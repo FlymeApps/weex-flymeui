@@ -17,7 +17,7 @@
 
       <category title="动态绑定"></category>
 			<fm-searchbar
-				:value="searchText"
+				:input-value="searchText"
 				@fmSearchbarSubmit="submit" />
 
       <category title="自定义 placeholder"></category>
@@ -83,7 +83,7 @@
 		},
 	  components: { Title, Category, FmSearchbar, FmIcon },
 	  methods: {
-	    fmSearchbarSubmit(e) {
+	    submit(e) {
 	      modal.toast({ message: e.value })
 	    },
 	    back(e) {

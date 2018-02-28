@@ -96,7 +96,7 @@
   .search-bar-delete {
     width: 60px;
     height: 60px;
-    margin-left: 15px;
+    margin-right: 15px;
     font-weight: 700;
     padding: 6px 5px;
     background-color: rgba(77, 77, 77, 0.5);
@@ -132,7 +132,7 @@
 				type: Boolean,
 				default: false,
 			},
-      value: {
+      inputValue: {
         type: [String, Number],
         default: ''
       },
@@ -199,12 +199,18 @@
         default: true
       }
     },
+    watch: {
+      inputValue(val) {
+        this.value = val
+      }
+    },
     data: () => ({
-      _focus: false
+      isFocus: false,
+      value: ''
     }),
     computed: {
       delShow() {
-        return this._focus && this.value
+        return this.isFocus && this.value !== ''
       },
 			barStyle() {
 				let style = {
@@ -234,11 +240,11 @@
         this.$emit('input', e)
       },
       onFocus(e) {
-        this._focus = true
+        this.isFocus = true
         this.$emit('focus', e)
       },
       onBlur(e) {
-        this._focus = false
+        this.isFocus = false
         this.$emit('blur', e)
       },
       focus() {
@@ -258,7 +264,13 @@
       },
       getEditSelectionRange(callback) {
         this.$refs.input.getEditSelectionRange(callback)
+      },
+      setValue (value) {
+        this.value = value
       }
+    },
+    mounted() {
+      this.value = this.inputValue || ''
     }
   }
 </script>
