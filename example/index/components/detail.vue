@@ -80,6 +80,8 @@ export default {
     methods: {
         back() {
             this.$router.go(-1)
+            var globalEvent = weex.requireModule('globalEvent')
+            globalEvent.removeEventListener("clickbackitem")
         },
         jump(path) {
             if (env.platform === 'Web') {

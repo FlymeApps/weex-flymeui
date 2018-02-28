@@ -83,6 +83,10 @@ export default {
         jump(type) {
             if (this.$router) {
                 this.$router.push({ name: 'detail', params: { type: type } })
+                var globalEvent = weex.requireModule('globalEvent')
+                globalEvent.addEventListener("clickbackitem", () => { 
+                    this.$router.go(-1)
+                });
             }
         }
     }
