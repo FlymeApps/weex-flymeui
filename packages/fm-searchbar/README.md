@@ -47,6 +47,8 @@
 | input-background | `String` |`N`| `rgba(0, 0, 0, 0.05)` | 输入框的背景颜色 |
 | icon-color | `String` |`N`| `rgba(0, 0, 0, 0.4)` | 搜索 icon 的颜色 |
 | search-text | `String` |`N`| `搜索` | 搜索按钮文案 |
+| search-color | `String` |`N`| `rgba(0, 0, 0, 0.4)` | 搜索按钮颜色 |
+| search-highlight-color | `String` |`N`| `#198DED` | 搜索按钮高亮颜色 |
 | search-text-style | `Object` |`N`| `-` | 搜索按钮样式 |
 | background-color | `String` |`N`| `#FFFFFF` | 背景颜色 |
 | statusbar | `Boolean` |`N`| `false` | 是否预留状态栏位置 |
@@ -100,8 +102,7 @@
 
 ## 可供外部使用的方法
 
-- `setValue(val)`
-  - 设置输入框的内容
+- `setValue(val)` 设置输入框的内容
 - `focus()`
 	`focus()` 方法用于将内置 `input` 组件聚焦。
 - `blur()`
