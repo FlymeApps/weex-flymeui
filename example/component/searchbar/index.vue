@@ -11,6 +11,9 @@
       <category title="去除左边按钮"></category>
 			<fm-searchbar :has-prev="false" />
 
+      <category title="去除右边按钮"></category>
+			<fm-searchbar search-text="" />
+
       <category title="不同的背景颜色"></category>
 			<fm-searchbar background-color="#FFAF00" />
 			<fm-searchbar background-color="#FFAF00" input-background="#FFFFFF" left-color="#FFFFFF" />
@@ -72,6 +75,8 @@
 	import Title from '../../_mods/title.vue'
 	import Category from '../../_mods/category.vue'
 	import { setTitle } from '../../_mods/set-nav'
+	import a from '../../../packages/fm-searchbar/export'
+	console.log(a)
 
 	const modal = weex.requireModule('modal')
 

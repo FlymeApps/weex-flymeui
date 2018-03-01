@@ -21,13 +21,13 @@
                 :placeholder="placeholder"
                 :style="{color: inputColor, 'placeholder-color': placeholderColor}"
                 class="search-bar-input"/>
-          <fm-icon v-if="delShow" class="search-bar-delete" value="&#xe6c0;" :icon-style="48" color="#FFFFFF" @fmClick="delClick" />
-          <div v-else class="right-btn">
+          <fm-icon :style="{ opacity: delShow ? 1 : 0 }" class="search-bar-delete" value="&#xe6c0;" :icon-style="48" color="#FFFFFF" @fmClick="delClick" />
+          <div :style="{ opacity: !delShow ? 1 : 0 }" class="right-btn">
             <slot name="input-right"></slot>
           </div>
         </div>
       <slot name="right">
-        <text class="search-enter" @click="onSearch" :style="searchTextStyle">{{ searchText }}</text>
+        <text v-if="searchText" class="search-enter" @click="onSearch" :style="searchTextStyle">{{ searchText }}</text>
       </slot>
     </div> 
   </div> 
@@ -59,7 +59,6 @@
     align-items: center;
     justify-content: center;
     padding-left: 35px;
-    margin-right: 48px;
     height: 90px;
     background-color: rgba(0, 0, 0, 0.05);
     outline: none;
@@ -108,12 +107,17 @@
     font-weight: 500;
     font-size: 48px;
     line-height: 96px;
-    color: rgba(0, 0, 0, 0.6);
+    margin-left: 48px;
+    color: rgba(0, 0, 0, 0.4);
     text-align: center;
   }
 
   .right-btn {
-    margin-right: 24px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 24px;
+    justify-content: center;
   }
 </style>
 
@@ -178,9 +182,17 @@
           return t('el.searchbar.search');
         }
       },
-      searchTextStyle: {
-        type: Object,
-        default: () => ({})
+      searchColor: {
+        type: String,
+        default: 'rgba(0, 0, 0, 0.4)'
+      },
+      searchHighlightColor: {
+        type: String,
+        default: '#198DED'
+      },
+      searchTextSize: {
+        type: String,
+        default: 48
       },
       returnKeyType: {
         type: String,
@@ -210,7 +222,7 @@
     }),
     computed: {
       delShow() {
-        return this.isFocus && this.value !== ''
+        return this.isFocus && this.value
       },
 			barStyle() {
 				let style = {
@@ -221,7 +233,14 @@
 				Object.assign(style, this.borderStyle)
 				style.backgroundColor = this.backgroundColor
 				return style
-			}
+      },
+      searchTextStyle() {
+        const { value, searchColor, searchHighlightColor, searchTextSize } = this
+        return {
+          color: value ? searchHighlightColor : searchColor,
+          fontSize: searchTextSize
+        }
+      }
     },
     methods: {
 			onBack(e) {
