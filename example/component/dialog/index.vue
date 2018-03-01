@@ -4,19 +4,19 @@
       <title link="http://apps.flyme.cn/docs/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=5a3390d167e2277e77dcf943"></title>
       <category title="确认弹框"></category>
         <div class="container row">
-          <fm-button class="btn" text="两个按钮" @click="click1" />
-          <fm-button class="btn" text="多个按钮" @click="click2" />
-          <fm-button class="btn" text="多行弹框" @click="click3" />
+          <fm-button class="btn" text="两个按钮" @buttonClicked="click1" />
+          <fm-button class="btn" text="多个按钮" @buttonClicked="click2" />
+          <fm-button class="btn" text="多行弹框" @buttonClicked="click3" />
         </div>
       <category title="与其他组件混用"></category>
         <div class="container row">
-          <fm-button class="btn" text="弹出选择" @click="click6" />
-          <fm-button class="btn" text="弹出输入" @click="click7" />
+          <fm-button class="btn" text="弹出选择" @buttonClicked="click6" />
+          <fm-button class="btn" text="弹出输入" @buttonClicked="click7" />
         </div>
       <category title="js 调用弹框"></category>
         <div class="container row">
-          <fm-button class="btn" text="对话框" @click="click4" />
-          <fm-button class="btn" text="提示框" @click="click5" />
+          <fm-button class="btn" text="对话框" @buttonClicked="click4" />
+          <fm-button class="btn" text="提示框" @buttonClicked="click5" />
         </div>
 
         <!-- <fm-dialog :show="show"

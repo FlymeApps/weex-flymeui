@@ -4,22 +4,22 @@
       <title link="http://apps.flyme.cn/docs/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=5a3390c267e2277e77dcf941"></title>
       <category title="不同方向的 popup"></category>
         <div class="container row">
-          <fm-button class="btn" text="默认弹出" @click="click1" />
+          <fm-button class="btn" text="默认弹出" @buttonClicked="click1" />
         </div>
         <div class="container row">
-          <fm-button class="btn" text="自定义停留时间( 5s )" @click="click2" />
+          <fm-button class="btn" text="自定义停留时间( 5s )" @buttonClicked="click2" />
         </div>
         <div class="container row">
-          <fm-button class="btn" text="不自动消失" @click="click3" />
+          <fm-button class="btn" text="不自动消失" @buttonClicked="click3" />
         </div>
         <div class="container row">
-          <fm-button class="btn" text="js 调用弹出" @click="click4" />
+          <fm-button class="btn" text="js 调用弹出" @buttonClicked="click4" />
         </div>
         <div class="container row">
-          <fm-button class="btn" text="点击弹出文字操作 SnackBar" @click="click5" />
+          <fm-button class="btn" text="点击弹出文字操作 SnackBar" @buttonClicked="click5" />
         </div>
         <div class="container row">
-          <fm-button class="btn" text="点击弹出警告 SnackBar" @click="click6" />
+          <fm-button class="btn" text="点击弹出警告 SnackBar" @buttonClicked="click6" />
         </div>
         <fm-snack-bar :show="show" @fmSnackBarDismissed="fmSnackBarDismissed" title="默认弹出，单行文字" type="jump"></fm-snack-bar>
         <fm-snack-bar :show="staryTimeShow" :stay-time="5000" @fmSnackBarDismissed="fmSnackBarStayTimeDismissed" title="5s 后消失" type="jump"></fm-snack-bar>

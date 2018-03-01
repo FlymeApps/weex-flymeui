@@ -53,8 +53,7 @@ function snackbar(options) {
 
 function showSnackBar(options) {
 	return new Promise((resolve, reject) => {
-		snackbar({
-			...options,
+		options = Object.assign(options, {
 			clickCb: () => {
 				resolve()
 			},
@@ -62,6 +61,7 @@ function showSnackBar(options) {
 				reject()
 			}
 		})
+		snackbar(options)
 	})
 }
 

@@ -35,7 +35,8 @@
 	}
 
 	.rotate {
-		font-size: 42px;
+		font-size: 54px;
+		font-weight: 700;
 		transform: rotate(180deg);
 	}
 

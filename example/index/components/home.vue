@@ -71,6 +71,7 @@
 <script>
 import { FmText, FmImage } from '../../../index';
 import category from '../../category.js'
+var globalEvent = weex.requireModule('globalEvent')
 
 export default {
     data() {
