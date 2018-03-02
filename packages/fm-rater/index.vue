@@ -41,7 +41,7 @@
   }
 
   .star {
-    
+
   }
 
   .star_small {
@@ -55,13 +55,12 @@
     height: 60px;
     margin: 0 13px;
   }
-
 </style>
 
 <script>
-import FmIcon from '../fm-icon'
-import FmImage from '../fm-image'
-const dom = weex.requireModule('dom')
+import FmIcon from '../fm-icon';
+import FmImage from '../fm-image';
+const dom = weex.requireModule('dom');
 export default {
   name: 'FmRater',
   components: { FmIcon, FmImage },
@@ -122,91 +121,91 @@ export default {
     starCount: 5
   }),
   computed: {
-    starClz() {
-      let clz = ['star']
-      this.size === 'big' ? clz.push('star_big') : clz.push('star_small')
-      return clz
+    starClz () {
+      const clz = ['star'];
+      this.size === 'big' ? clz.push('star_big') : clz.push('star_small');
+      return clz;
     },
-    wraperWidth() {
-      let { score, fullScore, size } = this
-      let half_star_width = size === 'big' ? 43 : 18
-      let percent = score / fullScore
-      let length = score <= 0 ? 0 : percent >= 1 ? 10 : percent.toFixed(1) * 10
-      length = (length === NaN) ? 0 : length
+    wraperWidth () {
+      const { score, fullScore, size } = this;
+      const half_star_width = size === 'big' ? 43 : 18;
+      const percent = score / fullScore;
+      let length = score <= 0 ? 0 : percent >= 1 ? 10 : percent.toFixed(1) * 10;
+      length = isNaN(length) ? 0 : length;
       return !length ? {
         width: 1,
         opacity: 0
       } : {
         width: length * half_star_width,
         opacity: 1
-      }
+      };
     },
-    getImgs() {
-      let { theme } = this
+    getImgs () {
+      const { theme } = this;
       if (theme === 'normal') {
-        return this.starImgs
+        return this.starImgs;
       } else if (theme === 'special') {
-        let arr = []
+        const arr = [];
         for (let i = 0; i < 5; i++) {
-          arr.push(this.starSpecialImg)
+          arr.push(this.starSpecialImg);
         }
-        return arr
+        return arr;
       } else if (theme === 'dark') {
-        let arr = []
+        const arr = [];
         for (let i = 0; i < 5; i++) {
-          arr.push(this.starDarkImg)
+          arr.push(this.starDarkImg);
         }
-        return arr
+        return arr;
       }
     },
-    getBgImgs() {
-      let { theme } = this
+    getBgImgs () {
+      const { theme } = this;
       if (theme === 'normal' || theme === 'special') {
-        return this.starBgImg
+        return this.starBgImg;
       } else if (theme === 'dark') {
-        return this.starDarkBgImg
+        return this.starDarkBgImg;
       }
     }
   },
   methods: {
-    raterTouchStart(e) {
-      let { canChange, canSlide } = this
-      if (!canChange || !canSlide) return
-      this.calculateScore(e.changedTouches[0].pageX, true)
+    raterTouchStart (e) {
+      const { canChange, canSlide } = this;
+      if (!canChange || !canSlide) return;
+      this.calculateScore(e.changedTouches[0].pageX, true);
     },
-    raterTouchmove(e) {
-      let { canChange, canSlide } = this
-      if (!canChange || !canSlide) return
-      this.calculateScore(e.changedTouches[0].pageX, true)
+    raterTouchmove (e) {
+      const { canChange, canSlide } = this;
+      if (!canChange || !canSlide) return;
+      this.calculateScore(e.changedTouches[0].pageX, true);
     },
-    raterTouchend(e) {
-      let { canChange } = this
-      if (!canChange) return
-      this.calculateScore(e.changedTouches[0].pageX, true)
+    raterTouchend (e) {
+      const { canChange } = this;
+      if (!canChange) return;
+      this.calculateScore(e.changedTouches[0].pageX, true);
     },
-    calculateScore(pageX, needEmit) {
-      let { size, fullScore } = this
+    calculateScore (pageX, needEmit) {
+      const { size, fullScore } = this;
       if (weex.config.env.platform === 'Web') {
-        pageX = pageX * 2 / 750 * 1080 - this.offset_left
+        pageX = pageX * 2 / 750 * 1080 - this.offset_left;
       } else if (weex.config.env.platform === 'iOS') {
-        pageX = pageX - this.offset_left
+        pageX = pageX - this.offset_left;
       }
-      let half_star_width = size === 'big' ? 43 : 18
-      let half_star_score = fullScore / 10
-      let star_num = (pageX / half_star_width).toFixed(0)
-      let score_percent = star_num <= 0 ? 0 : star_num >= 10 ? 10 : star_num
-      this.score = score_percent * half_star_score
-      needEmit && this.$emit('fmRaterScoreChanged', { score: this.score })
+      const half_star_width = size === 'big' ? 43 : 18;
+      const half_star_score = fullScore / 10;
+      const star_num = (pageX / half_star_width).toFixed(0);
+      const score_percent = star_num <= 0 ? 0 : star_num >= 10 ? 10 : star_num;
+      this.score = score_percent * half_star_score;
+      needEmit && this.$emit('fmRaterScoreChanged', { score: this.score });
     }
   },
-  mounted() {
-      if (weex.config.env.platform !== 'Android') {
-        setTimeout(() => {
-          dom.getComponentRect(this.$refs.rater, option => {
-            this.offset_left = option.size.left
-          })
-        }, 50)
-      }
+  mounted () {
+    if (weex.config.env.platform !== 'Android') {
+      setTimeout(() => {
+        dom.getComponentRect(this.$refs.rater, option => {
+          this.offset_left = option.size.left;
+        });
+      }, 50);
+    }
   }
-}
+};
 </script>

@@ -70,120 +70,120 @@
 </style>
 
 <script>
-  const animation = weex.requireModule('animation')
-  import FmIcon from '../fm-icon'
-  export default {
-    name: 'FmCheckbox',
-    components: { FmIcon },
-    props: {
-      value: {
-        type: String,
-        default: ''
-      },
-      checked: Boolean,
-      disabled: Boolean
+const animation = weex.requireModule('animation');
+import FmIcon from '../fm-icon';
+export default {
+  name: 'FmCheckbox',
+  components: { FmIcon },
+  props: {
+    value: {
+      type: String,
+      default: ''
     },
-    data: () => ({
-      isChecked: false,
-      selfChecked: false
-    }),
-    computed: {
-      _checked: {
-        get() {
-          return this.isGroup
-            ? this.store.indexOf(this.value) !== -1 ? true : false
-            : this.selfChecked
-        },
-        set(val) {
-          if (this.isGroup) {
-            if (val) {
-              this.isLimitExceeded = false
-              this._checkboxGroup.max !== undefined &&
+    checked: Boolean,
+    disabled: Boolean
+  },
+  data: () => ({
+    isChecked: false,
+    selfChecked: false
+  }),
+  computed: {
+    _checked: {
+      get () {
+        return this.isGroup
+          ? this.store.indexOf(this.value) !== -1
+          : this.selfChecked;
+      },
+      set (val) {
+        if (this.isGroup) {
+          if (val) {
+            this.isLimitExceeded = false;
+            this._checkboxGroup.max !== undefined &&
                 this.store.length >= this._checkboxGroup.max &&
-                (this.isLimitExceeded = true)
+                (this.isLimitExceeded = true);
 
-              this.isLimitExceeded === false &&
-                (this.addToStore() || this.appearIcon(val))
-            } else {
-              this.isLimitExceeded = false
-              this._checkboxGroup.min !== undefined &&
+            this.isLimitExceeded === false &&
+                (this.addToStore() || this.appearIcon(val));
+          } else {
+            this.isLimitExceeded = false;
+            this._checkboxGroup.min !== undefined &&
                 this.store.length <= this._checkboxGroup.min &&
-                (this.isLimitExceeded = true)
+                (this.isLimitExceeded = true);
 
-              this.isLimitExceeded === false &&
-                (this.deleteFromStore() || this.appearIcon(val))
-            }
-          } else {
-            this.selfChecked = val
-            this.appearIcon(val)
+            this.isLimitExceeded === false &&
+                (this.deleteFromStore() || this.appearIcon(val));
           }
-          this.$emit('fmCheckboxChecked', { value: this.value, checked: val })
+        } else {
+          this.selfChecked = val;
+          this.appearIcon(val);
         }
-      },
-      isGroup() {
-        let parent = this.$parent
-        while (parent) {
-          if (parent.$options.componentName !== 'FmCheckListGroup') {
-            parent = parent.$parent
-          } else {
-            this._checkboxGroup = parent
-            return true
-          }
-        }
-        return false
-      },
-      store() {
-        return this._checkboxGroup ? this._checkboxGroup.value : this.value
+        this.$emit('fmCheckboxChecked', { value: this.value, checked: val });
       }
     },
-    methods: {
-      toggleChecked() {
-        !this.disabled && (this._checked = !this._checked)
-      },
-      appearIcon(bool, duration = 150) {
-        const iconEl = this.$refs['fm-icon']
-        if (!iconEl) {
-          return
-        }
-        let style = bool
-          ? {
-              opacity: 1,
-              width: 72
-            }
-          : {
-              opacity: 0
-            }
-        animation.transition(
-          iconEl,
-          {
-            styles: style,
-            duration,
-            delay: 0,
-            timingFunction: 'ease-out'
-          },
-          () => {
-            this.isChecked = bool
-          }
-        )
-      },
-      addToStore() {
-        if (Array.isArray(this.store) && this.store.indexOf(this.value) === -1) {
-          this.store.push(this.value)
-        }
-      },
-      deleteFromStore() {
-        if (Array.isArray(this.store) && this.store.indexOf(this.value) !== -1) {
-          this.store.splice(this.store.indexOf(this.value), 1)
+    isGroup () {
+      let parent = this.$parent;
+      while (parent) {
+        if (parent.$options.componentName !== 'FmCheckListGroup') {
+          parent = parent.$parent;
+        } else {
+          this._checkboxGroup = parent;
+          return true;
         }
       }
+      return false;
     },
-    created() {
-      this.isGroup
-      this.$slots.default && (this.value = this.$slots.default[0].text)
-      this.checked &&
-        (this.addToStore() ||
-          ((this.selfChecked = true) && (this.isChecked = true)))
-      this._checked && ((this.selfChecked = true) && (this.isChecked = true))
+    store () {
+      return this._checkboxGroup ? this._checkboxGroup.value : this.value;
     }
+  },
+  methods: {
+    toggleChecked () {
+      !this.disabled && (this._checked = !this._checked);
+    },
+    appearIcon (bool, duration = 150) {
+      const iconEl = this.$refs['fm-icon'];
+      if (!iconEl) {
+        return;
+      }
+      const style = bool
+        ? {
+          opacity: 1,
+          width: 72
+        }
+        : {
+          opacity: 0
+        };
+      animation.transition(
+        iconEl,
+        {
+          styles: style,
+          duration,
+          delay: 0,
+          timingFunction: 'ease-out'
+        },
+        () => {
+          this.isChecked = bool;
+        }
+      );
+    },
+    addToStore () {
+      if (Array.isArray(this.store) && this.store.indexOf(this.value) === -1) {
+        this.store.push(this.value);
+      }
+    },
+    deleteFromStore () {
+      if (Array.isArray(this.store) && this.store.indexOf(this.value) !== -1) {
+        this.store.splice(this.store.indexOf(this.value), 1);
+      }
+    }
+  },
+  created () {
+    this.isGroup;
+    this.$slots.default && (this.value = this.$slots.default[0].text);
+    this.checked &&
+        (this.addToStore() ||
+          ((this.selfChecked = true) && (this.isChecked = true)));
+    this._checked && ((this.selfChecked = true) && (this.isChecked = true));
   }
+};
 </script>

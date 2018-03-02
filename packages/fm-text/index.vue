@@ -1,5 +1,5 @@
 <template>
-    <text :class="textClz"><slot></slot><template v-if="!$slots.default">{{ value }}</template></text>
+  <text :class="textClz"><slot></slot><template v-if="!$slots.default">{{ value }}</template></text>
 </template>
 
 <style scoped>

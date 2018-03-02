@@ -1,6 +1,6 @@
 <template>
   <div class="dialog-btn">
-			<text :class="btnClz" :style="btnStyle" @click="click()">{{ text }}</text>
+    <text :class="btnClz" :style="btnStyle" @click="click()">{{ text }}</text>
 	</div>
 </template>
 
@@ -34,40 +34,40 @@
 <script>
 export default {
   name: 'FmSimpleBtn',
-	props: {
-		text: String,
-		type: String,
-		color: String,
-		msg: [String, Number, Array, Object],
-		scene: {
-			type: String,
-			defalut: 'dialog'
-		}
-	},
-	computed: {
-		btnClz() {
-			let clz = ['btnText']
-			if (this.scene === 'dialog') {
-				clz.push('dialog-btnText')
-			} else if (this.scene === 'actionSheet') {
-				clz.push('actionSheet-btnText')
-			}
-			return clz
-		},
-		btnStyle() {
-			const { color } = this
-			if (color) {
-				return {
-					color: color
-				}
-			}
-		}
-	},
-	methods: {
-		click() {
-			const { text, msg, type } = this
-			this.$emit('click', { text: text, type: type, msg: msg })
-		}
-	}
-}
+  props: {
+    text: String,
+    type: String,
+    color: String,
+    msg: [String, Number, Array, Object],
+    scene: {
+      type: String,
+      defalut: 'dialog'
+    }
+  },
+  computed: {
+    btnClz () {
+      const clz = ['btnText'];
+      if (this.scene === 'dialog') {
+        clz.push('dialog-btnText');
+      } else if (this.scene === 'actionSheet') {
+        clz.push('actionSheet-btnText');
+      }
+      return clz;
+    },
+    btnStyle () {
+      const { color } = this;
+      if (color) {
+        return {
+          color: color
+        };
+      }
+    }
+  },
+  methods: {
+    click () {
+      const { text, msg, type } = this;
+      this.$emit('click', { text: text, type: type, msg: msg });
+    }
+  }
+};
 </script>

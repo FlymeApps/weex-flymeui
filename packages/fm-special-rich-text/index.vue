@@ -32,81 +32,81 @@
 </style>
 
 <script>
-  import Utils from'../fm-rich-text/utils'
-  import FmText from '../fm-text'
-  import FmIcon from '../fm-icon'
-  import FmTag from '../fm-tag'
-  export default {
-    name: 'FmSpecialRichText',
-    components: {
-      FmText, FmIcon, FmTag
-    },
-    props: {
-      configList: {
-        type: [Array, String],
-        default: () => ({})
+import Utils from '../fm-rich-text/utils';
+import FmText from '../fm-text';
+import FmIcon from '../fm-icon';
+import FmTag from '../fm-tag';
+export default {
+  name: 'FmSpecialRichText',
+  components: {
+    FmText, FmIcon, FmTag
+  },
+  props: {
+    configList: {
+      type: [Array, String],
+      default: () => ({})
+    }
+  },
+  computed: {
+    newList () {
+      const { configList } = this;
+      if (Utils.isNonEmptyArray(configList) && configList.length === 2) {
+        let r1 = configList[0];
+        let r2 = configList[1];
+        const iconStyle = r1.style;
+        const textStyle = r2.style;
+        let style = {};
+        let fontSize = 36;
+        const tagWidth = iconStyle && iconStyle.width ? iconStyle.width : 36;
+
+        if (textStyle && textStyle.fontSize) {
+          fontSize = textStyle.fontSize;
+          style = {
+            fontSize: textStyle.fontSize,
+            lineHeight: textStyle.fontSize * 1.4
+          };
+        }
+
+        if (textStyle && textStyle.color) {
+          style = {
+            ...style,
+            color: textStyle.color
+          };
+        }
+
+        if (r1.type === 'tag' && iconStyle && iconStyle.width) {
+          r1 = {
+            ...r1,
+            style: { ...iconStyle, width: null }
+          };
+        }
+        const newValue = r2.value ? new Array(Math.ceil(tagWidth / fontSize) + 1).join('   ') + `  ${r2.value}` : '';
+        r2 = {
+          ...r2,
+          style,
+          value: newValue
+        };
+        return [r1, r2];
+      } else {
+        return [];
       }
     },
-    computed: {
-      newList () {
-        const { configList } = this
-        if (Utils.isNonEmptyArray(configList) && configList.length === 2) {
-          let r1 = configList[0]
-          let r2 = configList[1]
-          const iconStyle = r1.style
-          const textStyle = r2.style
-          let style = {}
-          let fontSize = 36
-          const tagWidth = iconStyle && iconStyle.width ? iconStyle.width : 36
-
-          if (textStyle && textStyle.fontSize) {
-            fontSize = textStyle.fontSize
-            style = {
-              fontSize: textStyle.fontSize,
-              lineHeight: textStyle.fontSize * 1.4
-            }
-          }
-
-          if (textStyle && textStyle.color) {
-            style = {
-              ...style,
-              color: textStyle.color
-            }
-          }
-
-          if (r1.type === 'tag' && iconStyle && iconStyle.width) {
-            r1 = {
-              ...r1,
-              style: { ...iconStyle, width: null }
-            }
-          }
-          const newValue = r2.value ? new Array(Math.ceil(tagWidth / fontSize) + 1).join('   ') + `  ${r2.value}` : ''
-          r2 = {
-            ...r2,
-            style,
-            value: newValue
-          }
-          return [r1, r2]
-        } else {
-          return []
+    top () {
+      const { configList } = this;
+      if (configList[0].type === 'tag') return 0;
+      if (Utils.isNonEmptyArray(configList) && configList.length === 2) {
+        const iconStyle = configList[0].style;
+        const textStyle = configList[1].style;
+        let fontSize = 36;
+        const tagHeight = iconStyle && iconStyle.height ? iconStyle.height : 39;
+        if (textStyle && textStyle.fontSize) {
+          fontSize = textStyle.fontSize;
         }
-      },
-      top () {
-        const { configList } = this
-        if (configList[0].type === 'tag') return 0
-        if (Utils.isNonEmptyArray(configList) && configList.length === 2) {
-          const iconStyle = configList[0].style
-          const textStyle = configList[1].style
-          let fontSize = 36
-          const tagHeight = iconStyle && iconStyle.height ? iconStyle.height : 39
-          if (textStyle && textStyle.fontSize) {
-            fontSize = textStyle.fontSize
-          }
-          return Math.ceil((fontSize * 1.3 - tagHeight) / 2)
-        } else {
-          return 0
-        }
+        return Math.ceil((fontSize * 1.3 - tagHeight) / 2);
+      } else {
+        return 0;
       }
     }
   }
+};
 </script>

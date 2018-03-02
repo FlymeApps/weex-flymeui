@@ -1,108 +1,107 @@
 <template>
-<div v-if="show" class="tip-wrap" :style="wrapStyle">
-	<div class="content-wrap" :style="background">
-		<slot></slot>
-		<text class="content">{{message}}</text>
-		<text class="split"></text>
-		<fm-icon class="close" @fmClick="close" value="&#xe6c0;" />
-	</div>
-	<text class="arrow" :style="arrowStyle"></text>
-</div>
+  <div v-if="show" class="tip-wrap" :style="wrapStyle">
+    <div class="content-wrap" :style="background">
+      <slot></slot>
+      <text class="content">{{message}}</text>
+      <text class="split"></text>
+      <fm-icon class="close" @fmClick="close" value="&#xe6c0;" />
+    </div>
+    <text class="arrow" :style="arrowStyle"></text>
+  </div>
 </template>
 
 <style scoped>
-.tip-wrap {
-	flex-direction: row;
-	height: 120px;
-	padding-top: 21.6px;
-}
-.arrow {
-	position: absolute;
-	top: 10.8px;
-	width: 21.6px;
-	height: 21.6px;
-	transform: rotate(45deg);
-}
-.content-wrap {
-	flex-direction: row;
-	align-items: center;
-	padding-top: 27px;
-	padding-bottom: 27px;
-	padding-left: 30px;
-	border-radius: 6px;
-}
-.content {
-	height: 51px;
-	max-width: 678px;
-	font-size: 42px;
-	color: #ffffff;
-}
-.split {
-	width: 3px;
-	height: 42px;
-	margin-left: 27px;
-	background-color: #ffffff;
-	opacity: .4;
-}
-.close {
-	color: #ffffff;
-	font-size: 54px;
-	margin-top: 9px;
-	margin-left: 30px;
-	margin-right: 30px;
-}
-
+  .tip-wrap {
+    flex-direction: row;
+    height: 120px;
+    padding-top: 21.6px;
+  }
+  .arrow {
+    position: absolute;
+    top: 10.8px;
+    width: 21.6px;
+    height: 21.6px;
+    transform: rotate(45deg);
+  }
+  .content-wrap {
+    flex-direction: row;
+    align-items: center;
+    padding-top: 27px;
+    padding-bottom: 27px;
+    padding-left: 30px;
+    border-radius: 6px;
+  }
+  .content {
+    height: 51px;
+    max-width: 678px;
+    font-size: 42px;
+    color: #ffffff;
+  }
+  .split {
+    width: 3px;
+    height: 42px;
+    margin-left: 27px;
+    background-color: #ffffff;
+    opacity: .4;
+  }
+  .close {
+    color: #ffffff;
+    font-size: 54px;
+    margin-top: 9px;
+    margin-left: 30px;
+    margin-right: 30px;
+  }
 </style>
 
 <script>
-import FmIcon from '../fm-icon'
+import FmIcon from '../fm-icon';
 export default {
   name: 'FmTips',
-	data () {
-		return {
-			show: true
-		}
-	},
-	components: { FmIcon },
-	computed: {
-		background () {
-			return {
-				backgroundColor: this.bgColor
-			}
-		},
-		wrapStyle () {
-			return {
-				'justify-content': this.right ? 'flex-end' : 'flex-start'
-			}
-		},
-		arrowStyle () {
-			let sty = {
-				backgroundColor: this.bgColor
-			}
-			if (this.right) {
-				sty.right = '18px'
-			} else {
-				sty.left = '18px'
-			}
+  data () {
+    return {
+      show: true
+    };
+  },
+  components: { FmIcon },
+  computed: {
+    background () {
+      return {
+        backgroundColor: this.bgColor
+      };
+    },
+    wrapStyle () {
+      return {
+        'justify-content': this.right ? 'flex-end' : 'flex-start'
+      };
+    },
+    arrowStyle () {
+      const sty = {
+        backgroundColor: this.bgColor
+      };
+      if (this.right) {
+        sty.right = '18px';
+      } else {
+        sty.left = '18px';
+      }
 
-			return sty
-		}
-	},
+      return sty;
+    }
+  },
 
-	props: {
-		message: String,
-		bgColor: {
-			type: String,
-			default: '#198ded'
-		},
-		right: Boolean
-	},
+  props: {
+    message: String,
+    bgColor: {
+      type: String,
+      default: '#198ded'
+    },
+    right: Boolean
+  },
 
-	methods: {
-		close () {
-			this.show = false
-			this.$emit('close')
-		}
-	}
-}
+  methods: {
+    close () {
+      this.show = false;
+      this.$emit('close');
+    }
+  }
+};
 </script>

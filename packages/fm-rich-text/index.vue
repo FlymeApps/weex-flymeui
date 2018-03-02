@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="fm-rich-text" v-if="isNotEmptyArray">
-      <div v-for="v in configList">
+      <div v-for="(v, idx) in configList" :key="idx">
         <fm-text v-if="v.type=='text' && v.text"
                             :text-value="v.text"
                             :text-style="v.style"
@@ -48,41 +48,41 @@
 </style>
 
 <script>
-  import Utils from'./utils'
-  import FmText from '../fm-text'
-  import FmIcon from '../fm-icon'
-  import FmTag from '../fm-tag'
-  import FmRichTextLink from './fm-rich-text-link.vue'
-  export default {
-    name: 'FmRichText',
-    components: {
-      FmText, FmIcon, FmTag, FmRichTextLink
-    },
-    props: {
-      configList: {
-        type: [Array, String],
-        default: function () {
-          return []
-        }
-      },
-      hasTextMargin: {
-        type: Boolean,
-        default: true
+import Utils from './utils';
+import FmText from '../fm-text';
+import FmIcon from '../fm-icon';
+import FmTag from '../fm-tag';
+import FmRichTextLink from './fm-rich-text-link.vue';
+export default {
+  name: 'FmRichText',
+  components: {
+    FmText, FmIcon, FmTag, FmRichTextLink
+  },
+  props: {
+    configList: {
+      type: [Array, String],
+      default: function () {
+        return [];
       }
     },
-    data: () => ({}),
-    computed: {
-      isNotEmptyArray () {
-        return Utils.isNonEmptyArray(this.configList);
-      },
-      isString () {
-        return Utils.isString(this.configList);
-      }
-    },
-    methods: {
-        linkBeClick(obj) {
-            this.$emit('linkBeClick', obj)
-        }
+    hasTextMargin: {
+      type: Boolean,
+      default: true
     }
-  };
+  },
+  data: () => ({}),
+  computed: {
+    isNotEmptyArray () {
+      return Utils.isNonEmptyArray(this.configList);
+    },
+    isString () {
+      return Utils.isString(this.configList);
+    }
+  },
+  methods: {
+    linkBeClick (obj) {
+      this.$emit('linkBeClick', obj);
+    }
+  }
+};
 </script>

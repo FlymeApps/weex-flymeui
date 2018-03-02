@@ -1,63 +1,63 @@
 <template>
-<div class="tab-wrap">
-	<div class="header-wrap">
-		<div class="header" ref="header">
-			<div v-for="(item, idx) in items"
-				:key="item.name"
-				class="title"
-				@click="titleClick(idx)">
-				<text :class="['text', idx == current ? 'text-selected' : '']" >{{item.text}}</text>
-			</div>
-		</div>
-		<text class="bottom-line" :style="lineStyle" ref="line"></text>
-	</div>
-	<div class="slider-wrap"
-		ref="slider"
-		:style="listStyle"
-		@touchmove="move"
-		@touchstart="start"
-		@touchend="end">
-		<div v-for="(item, idx) in items" class="body" :style="itemStyle" :key="idx">
-			<slot :name="item.name"></slot>
-		</div>
-	</div>
-</div>
+  <div class="tab-wrap">
+    <div class="header-wrap">
+      <div class="header" ref="header">
+        <div v-for="(item, idx) in items"
+          :key="item.name"
+          class="title"
+          @click="titleClick(idx)">
+          <text :class="['text', idx == current ? 'text-selected' : '']" >{{item.text}}</text>
+        </div>
+      </div>
+      <text class="bottom-line" :style="lineStyle" ref="line"></text>
+    </div>
+    <div class="slider-wrap"
+      ref="slider"
+      :style="listStyle"
+      @touchmove="move"
+      @touchstart="start"
+      @touchend="end">
+      <div v-for="(item, idx) in items" class="body" :style="itemStyle" :key="idx">
+        <slot :name="item.name"></slot>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-.header-wrap {
-	margin-top: 27px;
-	margin-right: 66px;
-	margin-left: 66px;
-}
-.header {
-	flex-direction: row;
-	justify-content: center;
-}
-.title {
-	flex: 1;
-	flex-direction: row;
-	justify-content: center;
-}
-.text-selected {
-	color: #f34949;
-}
-.text {
-	font-size: 42px;
-	font-weight: 700;
-	text-align: center;
-	color: #666666;
-}
-.bottom-line {
-	height: 7.2px;
-	margin-top: 27px;
-	background-color: #f34949;
-}
-.slider-wrap {
-	flex-direction: row;
-	border-top-width: 3px;
-	border-color: #dddddd;
-}
+  .header-wrap {
+    margin-top: 27px;
+    margin-right: 66px;
+    margin-left: 66px;
+  }
+  .header {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .title {
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .text-selected {
+    color: #f34949;
+  }
+  .text {
+    font-size: 42px;
+    font-weight: 700;
+    text-align: center;
+    color: #666666;
+  }
+  .bottom-line {
+    height: 7.2px;
+    margin-top: 27px;
+    background-color: #f34949;
+  }
+  .slider-wrap {
+    flex-direction: row;
+    border-top-width: 3px;
+    border-color: #dddddd;
+  }
 </style>
 
 <script>

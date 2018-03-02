@@ -35,7 +35,7 @@
     /*兼容H5异常*/
     z-index: 99999;
   }
-  
+
   .dialog-box {
     position: fixed;
     left: 72px;
@@ -63,18 +63,17 @@
     flex-wrap: wrap;
     padding: 36px 0;
   }
-
 </style>
 
 <script>
-const animation = weex.requireModule('animation')
-const type_alert = 'alert'
-const type_confirm = 'confirm'
-import FmOverlay from '../fm-overlay'
-import FmText from '../fm-text'
-import FmSimpleBtn from '../fm-simple-btn'
-import Locale from 'weex-flymeui/lib/mixins/locale'
-import { t } from 'weex-flymeui/lib/locale'
+const animation = weex.requireModule('animation');
+const type_alert = 'alert';
+const type_confirm = 'confirm';
+import FmOverlay from '../fm-overlay';
+import FmText from '../fm-text';
+import FmSimpleBtn from '../fm-simple-btn';
+import Locale from 'weex-flymeui/lib/mixins/locale';
+import { t } from 'weex-flymeui/lib/locale';
 
 export default {
   name: 'FmDialog',
@@ -99,14 +98,14 @@ export default {
     },
     cancelText: {
       type: String,
-      default() {
-        return t('el.common.cancel')
+      default () {
+        return t('el.common.cancel');
       }
     },
     confirmText: {
       type: String,
-      default() {
-        return t('el.common.confirm')
+      default () {
+        return t('el.common.confirm');
       }
     },
     confirmColor: {
@@ -158,35 +157,35 @@ export default {
     dialogOpacity: 0
   }),
   created () {
-    const { env: { deviceHeight, deviceWidth } } = weex.config
-    this.pageHeight = deviceHeight / deviceWidth * 1080
-    this.self_show = this.show
+    const { env: { deviceHeight, deviceWidth }} = weex.config;
+    this.pageHeight = deviceHeight / deviceWidth * 1080;
+    this.self_show = this.show;
   },
   watch: {
-    show: function(val, oldVal) {
+    show: function (val, oldVal) {
       if (val) {
-        this.self_show = true
+        this.self_show = true;
         setTimeout(() => {
-          this.appearDialog(true)
+          this.appearDialog(true);
         }, 50);
       } else {
-        this.$refs['fm-overlay'].hide()
-        this.appearDialog(false)
+        this.$refs['fm-overlay'].hide();
+        this.appearDialog(false);
       }
     }
   },
   computed: {
-    dialogBtns() {
-      let btns = []
+    dialogBtns () {
+      let btns = [];
       if (!this.btns || !this.btns.length) {
         if (this.type === type_alert) {
-          btns =   [{
+          btns = [{
             text: this.confirmText,
             color: this.confirmColor,
             type: 'confirm'
-          }]
+          }];
         } else if (this.type === type_confirm) {
-          btns =   [{
+          btns = [{
             text: this.cancelText,
             color: this.cancelColor,
             type: 'cancel'
@@ -194,50 +193,50 @@ export default {
             text: this.confirmText,
             color: this.confirmColor,
             type: 'confirm'
-          }]
+          }];
         }
       } else {
-        btns = btns.concat(this.btns)
+        btns = btns.concat(this.btns);
       }
-      return btns
+      return btns;
     },
-    dialogStyle() {
+    dialogStyle () {
       return {
         opacity: this.dialogOpacity,
         top: this.top
-      }
+      };
     },
-    btnStyle() {
-      const { btnDirection, btns } = this
+    btnStyle () {
+      const { btnDirection, btns } = this;
       return {
         flexDirection: btns.length > 2 ? 'column' : btnDirection
-      }
+      };
     }
   },
   methods: {
     handleTouchEnd (e) {
       // 原生上有点击穿透问题
-      e.preventDefault && e.preventDefault()
+      e.preventDefault && e.preventDefault();
     },
-    overlayClicked() {
-      this.canAutoClose && (this.appearDialog(false) || this.$emit('fmDialogOverlayClicked', {}))
-      this.cancelCb && this.cancelCb()
+    overlayClicked () {
+      this.canAutoClose && (this.appearDialog(false) || this.$emit('fmDialogOverlayClicked', {}));
+      this.cancelCb && this.cancelCb();
     },
-    btnClick(btn) {
+    btnClick (btn) {
       if (btn.type && btn.type === 'cancel') {
-        this.$emit('fmDialogBtnClicked', { type: 'cancel' })
-        this.cancelCb && this.cancelCb()
+        this.$emit('fmDialogBtnClicked', { type: 'cancel' });
+        this.cancelCb && this.cancelCb();
       } else if (btn.type && btn.type === 'confirm') {
-        this.$emit('fmDialogBtnClicked', { type: 'confirm' })
-        this.confirmCb && this.confirmCb()
+        this.$emit('fmDialogBtnClicked', { type: 'confirm' });
+        this.confirmCb && this.confirmCb();
       } else {
-        this.$emit('fmDialogBtnClicked', btn)
+        this.$emit('fmDialogBtnClicked', btn);
       }
     },
     appearDialog (bool, duration = this.duration) {
       const { hasAnimation, timingFunction } = this;
-      const dialogEl = this.$refs['dialog-box']
-      this.dialogOpacity = bool ? 0 : 1
+      const dialogEl = this.$refs['dialog-box'];
+      this.dialogOpacity = bool ? 0 : 1;
       if (hasAnimation && dialogEl) {
         animation.transition(dialogEl, {
           styles: {
@@ -247,14 +246,14 @@ export default {
           timingFunction: timingFunction[bool ? 0 : 1],
           delay: 0
         }, () => {
-          this.self_show = bool
-          this.dialogOpacity = bool ? 1 : 0
+          this.self_show = bool;
+          this.dialogOpacity = bool ? 1 : 0;
         });
       } else {
-        this.self_show = bool
-        this.dialogOpacity = bool ? 1 : 0
+        this.self_show = bool;
+        this.dialogOpacity = bool ? 1 : 0;
       }
     }
   }
-}
+};
 </script>

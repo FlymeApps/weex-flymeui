@@ -92,13 +92,13 @@
 </style>
 
 <script>
-import FmText from '../fm-text'
-import FmImage from '../fm-image'
+import FmText from '../fm-text';
+import FmImage from '../fm-image';
 
-const SCENE_AVATAR = 'avatar'
-const SCENE_ICON = 'icon'
-const SCENE_SMALL = 'app-small'
-const SCENE_BIG = 'app-big'
+const SCENE_AVATAR = 'avatar';
+const SCENE_ICON = 'icon';
+const SCENE_SMALL = 'app-small';
+const SCENE_BIG = 'app-big';
 
 export default {
   name: 'FmCell',
@@ -118,32 +118,32 @@ export default {
     }
   },
   computed: {
-    wrapperClz() {
-      let clz = ['cell-wrapper']
-      const { subTitle, description, scene } = this
+    wrapperClz () {
+      const clz = ['cell-wrapper'];
+      const { subTitle, description, scene } = this;
       if ((scene === SCENE_AVATAR && !subTitle && !description) || scene === SCENE_ICON || scene === SCENE_SMALL || scene === SCENE_BIG) {
-        clz.push('cell-wrapper-center')
+        clz.push('cell-wrapper-center');
       }
-      return clz
+      return clz;
     },
-    imgClz() {
-      let clz = ['cell-image']
-      const { subTitle, description, scene } = this
+    imgClz () {
+      const clz = ['cell-image'];
+      const { subTitle, description, scene } = this;
       if ((!subTitle && !description) || scene === SCENE_ICON || scene === SCENE_SMALL || scene === SCENE_BIG) {
-        clz.push('cell-image-center')
+        clz.push('cell-image-center');
       }
-      return clz
+      return clz;
     },
-    contentClz() {
-      let clz = ['content']
-      const { subTitle, description } = this
+    contentClz () {
+      const clz = ['content'];
+      const { subTitle, description } = this;
       if (!subTitle && !description) {
-        clz.push('content-min')
+        clz.push('content-min');
       }
-      return clz
+      return clz;
     }
   }
-}
+};
 </script>
 
 
