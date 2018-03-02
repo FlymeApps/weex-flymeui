@@ -71,8 +71,8 @@
 </style>
 
 <script>
-import Locale from 'weex-flymeui/lib/mixins/locale'
-import { t } from 'weex-flymeui/lib/locale'
+import Locale from 'weex-flymeui/lib/mixins/locale';
+import { t } from 'weex-flymeui/lib/locale';
 
 export default {
   name: 'FmTag',
@@ -88,8 +88,8 @@ export default {
     },
     value: {
       type: [String, Number],
-      default() {
-        return t('el.tag.tagName')
+      default () {
+        return t('el.tag.tagName');
       }
     },
     color: {
@@ -112,27 +112,27 @@ export default {
     },
     tagTextStyle () {
       const { color, showSolid } = this;
-      return showSolid ? { backgroundColor: color } : { borderColor: color }
+      return showSolid ? { backgroundColor: color } : { borderColor: color };
     },
-    textStyle() {
+    textStyle () {
       const { fontColor } = this;
-      return { color: fontColor }
+      return { color: fontColor };
     },
-    textClass() {
-      let clz = ["tag-text"]
+    textClass () {
+      const clz = ['tag-text'];
       const { size } = this;
-      clz.push(`tag-font-${size}`)
-      return clz
+      clz.push(`tag-font-${size}`);
+      return clz;
     },
-    tagClass() {
-      let clz = ["fm-tag"]
+    tagClass () {
+      const clz = ['fm-tag'];
       const { size } = this;
-      clz.push(`tag-margin-${size}`)
-      return clz
+      clz.push(`tag-margin-${size}`);
+      return clz;
     }
   },
-  created() {
-    this.$slots.default && (this.value = this.$slots.default[0].text)
+  created () {
+    this.$slots.default && (this.value = this.$slots.default[0].text);
   }
-}
+};
 </script>
