@@ -1,4 +1,4 @@
-import VALUE from 'weex-flymeui/lib/common/variable-type'
+import VALUE from 'weex-flymeui/lib/common/variable-type';
 export default {
   name: 'FmSearchbar',
   desc: '搜索栏组件',
@@ -80,4 +80,4 @@ export default {
       desc: '输入框失去焦点'
     }
   }
-}
+};

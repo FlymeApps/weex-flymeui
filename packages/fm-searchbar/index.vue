@@ -191,7 +191,7 @@
         default: '#198DED'
       },
       searchTextSize: {
-        type: String,
+        type: Number,
         default: 48
       },
       returnKeyType: {

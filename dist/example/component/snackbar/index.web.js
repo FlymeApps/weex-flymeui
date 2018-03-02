@@ -72,7 +72,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 328);
+/******/ 	return __webpack_require__(__webpack_require__.s = 330);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1204,6 +1204,7 @@ exports.default = {
         style.opacity = 1;
       }
       if (borderColor) {
+        style.borderWidth = 6;
         style.borderColor = borderColor;
       }
       if (backgroundColor) {
@@ -1369,7 +1370,7 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-tag[data-v-2072c04b] {\n    align-items: center;\n\t  flex-direction: row;\n}\n.tag-item[data-v-2072c04b] {\n    padding: 9;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n}\n.tag-border[data-v-2072c04b] {\n    border-bottom-left-radius: 4.5;\n    border-bottom-right-radius: 4.5;\n    border-top-left-radius: 4.5;\n    border-top-right-radius: 4.5;\n}\n.tag-hollow[data-v-2072c04b] {\n    border-width: 3;\n}\n.tag-text[data-v-2072c04b] {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    font-weight: bold;\n}\n.tag-font-small[data-v-2072c04b] {\n    font-size: 24;\n}\n.tag-font-big[data-v-2072c04b] {\n    font-size: 30;\n}\n.tag-margin-small[data-v-2072c04b] {\n    margin: 3;\n}\n.tag-margin-big[data-v-2072c04b] {\n    margin: 6;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag/index.vue?193da90a"],"names":[],"mappings":";AAWA;IACA,oBAAA;GACA,oBAAA;CACA;AAEA;IACA,WAAA;IACA,wBAAA;IACA,oBAAA;IACA,iBAAA;CACA;AAEA;IACA,+BAAA;IACA,gCAAA;IACA,4BAAA;IACA,6BAAA;CACA;AAEA;IACA,gBAAA;CACA;AAEA;IACA,sDAAA;IACA,kBAAA;CACA;AAEA;IACA,cAAA;CACA;AAEA;IACA,cAAA;CACA;AAEA;IACA,UAAA;CACA;AAEA;IACA,UAAA;CACA","file":"index.vue","sourcesContent":["<template>\n    <div :class=\"tagClass\">\n        <div v-if=\"showSolid || showHollow\"\n            :class=\"['tag-item','tag-border',showHollow && 'tag-hollow']\"\n            :style=\"tagTextStyle\">\n          <text :class=\"textClass\" ref='content' :style=\"textStyle\"><slot></slot><template v-if=\"!$slots.default\">{{ value }}</template></text>\n        </div>\n    </div>\n</template>\n\n<style scoped>\n  .fm-tag {\n    align-items: center;\n\t  flex-direction: row;\n  }\n\n  .tag-item {\n    padding: 9;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n  }\n\n  .tag-border {\n    border-bottom-left-radius: 4.5;\n    border-bottom-right-radius: 4.5;\n    border-top-left-radius: 4.5;\n    border-top-right-radius: 4.5;\n  }\n\n  .tag-hollow {\n    border-width: 3;\n  }\n\n  .tag-text {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    font-weight: bold;\n  }\n\n  .tag-font-small {\n    font-size: 24;\n  }\n\n  .tag-font-big {\n    font-size: 30;\n  }\n\n  .tag-margin-small {\n    margin: 3;\n  }\n\n  .tag-margin-big {\n    margin: 6;\n  }\n</style>\n\n<script>\nimport Locale from 'weex-flymeui/lib/mixins/locale'\nimport { t } from 'weex-flymeui/lib/locale'\n\nexport default {\n  name: 'FmTag',\n  mixins: [Locale],\n  props: {\n    tagType: {\n      type: String,\n      default: 'solid'\n    },\n    size: {\n      type: String,\n      default: 'small'\n    },\n    value: {\n      type: [String, Number],\n      default() {\n        return t('el.tag.tagName')\n      }\n    },\n    color: {\n      type: String,\n      default: '#198ded'\n    },\n    fontColor: {\n      type: String,\n      default: '#fff'\n    }\n  },\n  computed: {\n    showSolid () {\n      const { tagType, value } = this;\n      return tagType === 'solid' && value !== '';\n    },\n    showHollow () {\n      const { tagType, value } = this;\n      return tagType === 'hollow' && value !== '';\n    },\n    tagTextStyle () {\n      const { color, showSolid } = this;\n      return showSolid ? { backgroundColor: color } : { borderColor: color }\n    },\n    textStyle() {\n      const { fontColor } = this;\n      return { color: fontColor }\n    },\n    textClass() {\n      let clz = [\"tag-text\"]\n      const { size } = this;\n      fontSize: size === 'small' ? clz.push(\"tag-font-small\") : clz.push(\"tag-font-big\")\n      return clz\n    },\n    tagClass() {\n      let clz = [\"fm-tag\"]\n      const { size } = this;\n      fontSize: size === 'small' ? clz.push(\"tag-margin-small\") : clz.push(\"tag-margin-small\")\n      return clz\n    }\n  },\n  created() {\n    this.$slots.default && (this.value = this.$slots.default[0].text)\n  }\n}\n</script>\n\n\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-tag[data-v-2072c04b] {\n    align-items: center;\n\t  flex-direction: row;\n}\n.tag-item[data-v-2072c04b] {\n    padding: 9px;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n}\n.tag-border[data-v-2072c04b] {\n    border-radius: 4.5px;\n}\n.tag-huge[data-v-2072c04b] {\n    border-radius: 100px;\n    height: 72px;\n    padding: 12px 42px;\n}\n.tag-hollow[data-v-2072c04b] {\n    border-width: 3px;\n}\n.tag-text[data-v-2072c04b] {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    font-weight: bold;\n}\n.tag-font-small[data-v-2072c04b] {\n    font-size: 24px;\n}\n.tag-font-big[data-v-2072c04b] {\n    font-size: 30px;\n}\n.tag-font-huge[data-v-2072c04b] {\n    font-size: 42px;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n}\n.tag-margin-small[data-v-2072c04b] {\n    margin-right: 6px;\n    margin-bottom: 6px;\n}\n.tag-margin-big[data-v-2072c04b] {\n    margin-right: 12px;\n    margin-bottom: 12px;\n}\n.tag-margin-huge[data-v-2072c04b] {\n    margin-right: 36px;\n    margin-bottom: 36px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag/index.vue?52e98502"],"names":[],"mappings":";AAWA;IACA,oBAAA;GACA,oBAAA;CACA;AAEA;IACA,aAAA;IACA,wBAAA;IACA,oBAAA;IACA,iBAAA;CACA;AAEA;IACA,qBAAA;CACA;AAEA;IACA,qBAAA;IACA,aAAA;IACA,mBAAA;CACA;AAEA;IACA,kBAAA;CACA;AAEA;IACA,sDAAA;IACA,kBAAA;CACA;AAEA;IACA,gBAAA;CACA;AAEA;IACA,gBAAA;CACA;AAEA;IACA,gBAAA;IACA,+BAAA;IACA,iBAAA;CACA;AAEA;IACA,kBAAA;IACA,mBAAA;CACA;AAEA;IACA,mBAAA;IACA,oBAAA;CACA;AAEA;IACA,mBAAA;IACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div :class=\"tagClass\">\n    <div v-if=\"showSolid || showHollow\"\n        :class=\"['tag-item', 'tag-border', size === 'huge' && 'tag-huge', showHollow && 'tag-hollow']\"\n        :style=\"tagTextStyle\">\n      <text :class=\"textClass\" ref='content' :style=\"textStyle\"><slot></slot><template v-if=\"!$slots.default\">{{ value }}</template></text>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-tag {\n    align-items: center;\n\t  flex-direction: row;\n  }\n\n  .tag-item {\n    padding: 9px;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n  }\n\n  .tag-border {\n    border-radius: 4.5px;\n  }\n\n  .tag-huge {\n    border-radius: 100px;\n    height: 72px;\n    padding: 12px 42px;\n  }\n\n  .tag-hollow {\n    border-width: 3px;\n  }\n\n  .tag-text {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    font-weight: bold;\n  }\n\n  .tag-font-small {\n    font-size: 24px;\n  }\n\n  .tag-font-big {\n    font-size: 30px;\n  }\n\n  .tag-font-huge {\n    font-size: 42px;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n  }\n\n  .tag-margin-small {\n    margin-right: 6px;\n    margin-bottom: 6px;\n  }\n\n  .tag-margin-big {\n    margin-right: 12px;\n    margin-bottom: 12px;\n  }\n\n  .tag-margin-huge {\n    margin-right: 36px;\n    margin-bottom: 36px;\n  }\n</style>\n\n<script>\nimport Locale from 'weex-flymeui/lib/mixins/locale'\nimport { t } from 'weex-flymeui/lib/locale'\n\nexport default {\n  name: 'FmTag',\n  mixins: [Locale],\n  props: {\n    tagType: {\n      type: String,\n      default: 'solid'\n    },\n    size: {\n      type: String,\n      default: 'small'\n    },\n    value: {\n      type: [String, Number],\n      default() {\n        return t('el.tag.tagName')\n      }\n    },\n    color: {\n      type: String,\n      default: '#198DED'\n    },\n    fontColor: {\n      type: String,\n      default: '#FFFFFF'\n    }\n  },\n  computed: {\n    showSolid () {\n      const { tagType, value } = this;\n      return tagType === 'solid' && value !== '';\n    },\n    showHollow () {\n      const { tagType, value } = this;\n      return tagType === 'hollow' && value !== '';\n    },\n    tagTextStyle () {\n      const { color, showSolid } = this;\n      return showSolid ? { backgroundColor: color } : { borderColor: color }\n    },\n    textStyle() {\n      const { fontColor } = this;\n      return { color: fontColor }\n    },\n    textClass() {\n      let clz = [\"tag-text\"]\n      const { size } = this;\n      clz.push(`tag-font-${size}`)\n      return clz\n    },\n    tagClass() {\n      let clz = [\"fm-tag\"]\n      const { size } = this;\n      clz.push(`tag-margin-${size}`)\n      return clz\n    }\n  },\n  created() {\n    this.$slots.default && (this.value = this.$slots.default[0].text)\n  }\n}\n</script>"],"sourceRoot":""}]);
 
 // exports
 
@@ -1449,6 +1450,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
   name: 'FmTag',
@@ -1470,11 +1487,11 @@ exports.default = {
     },
     color: {
       type: String,
-      default: '#198ded'
+      default: '#198DED'
     },
     fontColor: {
       type: String,
-      default: '#fff'
+      default: '#FFFFFF'
     }
   },
   computed: {
@@ -1505,14 +1522,14 @@ exports.default = {
       var clz = ["tag-text"];
       var size = this.size;
 
-      fontSize: size === 'small' ? clz.push("tag-font-small") : clz.push("tag-font-big");
+      clz.push('tag-font-' + size);
       return clz;
     },
     tagClass: function tagClass() {
       var clz = ["fm-tag"];
       var size = this.size;
 
-      fontSize: size === 'small' ? clz.push("tag-margin-small") : clz.push("tag-margin-small");
+      clz.push('tag-margin-' + size);
       return clz;
     }
   },
@@ -9932,7 +9949,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))
   }, [(_vm.showSolid || _vm.showHollow) ? _c('div', {
-    class: ['tag-item', 'tag-border', _vm.showHollow && 'tag-hollow'],
+    class: ['tag-item', 'tag-border', _vm.size === 'huge' && 'tag-huge', _vm.showHollow && 'tag-hollow'],
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(_vm.tagTextStyle))
   }, [_c('text', {
@@ -10023,7 +10040,7 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.text[data-v-68596e9c] {\n    font-size: 42;\n    line-height: 63;\n    color: #999999;\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n}\n.medium[data-v-68596e9c] {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n}\n.bold[data-v-68596e9c] {\n    font-weight: 700;\n}\n.light[data-v-68596e9c] {\n    font-weight: 400;\n    line-height: 54;\n}\n.title[data-v-68596e9c] {\n    font-size: 48;\n    font-weight: 500;\n    line-height: 69;\n    color: #000000;\n}\n.small[data-v-68596e9c] {\n    font-size: 36;\n}\n.large[data-v-68596e9c] {\n    font-size: 48;\n    font-weight: 500;\n    line-height: 72;\n    color: #000000;\n}\n.huge[data-v-68596e9c] {\n    font-size: 54;\n    line-height: 81;\n    color: #000000;\n}\n.margin-text[data-v-68596e9c] {\n    margin-right: 9;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-text/index.vue?1b6d45b9"],"names":[],"mappings":";AAKA;IACA,cAAA;IACA,gBAAA;IACA,eAAA;IACA,sDAAA;CACA;AAEA;IACA,+BAAA;IACA,iBAAA;CACA;AACA;IACA,iBAAA;CACA;AACA;IACA,iBAAA;IACA,gBAAA;CACA;AAEA;IACA,cAAA;IACA,iBAAA;IACA,gBAAA;IACA,eAAA;CACA;AAEA;IACA,cAAA;CACA;AACA;IACA,cAAA;IACA,iBAAA;IACA,gBAAA;IACA,eAAA;CACA;AACA;IACA,cAAA;IACA,gBAAA;IACA,eAAA;CACA;AACA;IACA,gBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n    <text :class=\"textClz\" :style=\"getStyle\"><slot></slot>{{textValue}}</text>\n</template>\n\n<style scoped>\n    .text {\n        font-size: 42;\n        line-height: 63;\n        color: #999999;\n        font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    }\n\n    .medium {\n        font-family: sans-serif-medium;\n        font-weight: 500;\n    }\n    .bold {\n        font-weight: 700;\n    }\n    .light {\n        font-weight: 400;\n        line-height: 54;\n    }\n\n    .title {\n        font-size: 48;\n        font-weight: 500;\n        line-height: 69;\n        color: #000000;\n    }\n\n    .small {\n        font-size: 36;\n    }\n    .large {\n        font-size: 48;\n        font-weight: 500;\n        line-height: 72;\n        color: #000000;\n    }\n    .huge {\n        font-size: 54;\n        line-height: 81;\n        color: #000000;\n    }\n    .margin-text {\n        margin-right: 9;\n    }\n</style>\n\n<script>\nexport default {\n    name: 'FmText',\n    props: {\n        textValue: [String, Number],\n        medium: Boolean,\n        bold: Boolean,\n        light: Boolean,\n        title: Boolean,\n        small: Boolean,\n        large: Boolean,\n        huge: Boolean,\n        textStyle: {\n            type: Object,\n            default: () => ({})\n        },\n        hasTextMargin: {\n            type: Boolean,\n            default: true\n        },\n        fmClick: Function\n    },\n\n    computed: {\n        textClz () {\n            let clz = ['text']\n            if (this.medium) {\n                clz.push('medium')\n            }\n            if (this.light) {\n                clz.push('light')\n            }\n            if (this.title) {\n                clz.push('title')\n            }\n            if (this.bold) {\n                clz.push('bold')\n            }\n            if (this.small) {\n                clz.push('small')\n            }\n            if (this.large) {\n                clz.push('large')\n            }\n            if (this.huge) {\n                clz.push('huge')\n            }\n            if (this.hasTextMargin) {\n                clz.push('margin-text')\n            }\n            return clz\n        },\n        getStyle () {\n            return {\n                ...this.textStyle\n            }\n        }\n    },\n    methods: {\n        \n    }\n}\n</script>"],"sourceRoot":""}]);
+exports.push([module.i, "\n.text[data-v-68596e9c] {\n\tfont-size: 42;\n\tline-height: 63;\n\tcolor: #999999;\n\tfont-family: \"Source Han Sans CN\", Roboto, sans-serif;\n}\n.medium[data-v-68596e9c] {\n\tfont-family: sans-serif-medium;\n\tfont-weight: 500;\n}\n.bold[data-v-68596e9c] {\n\tfont-weight: 700;\n}\n.light[data-v-68596e9c] {\n\tfont-weight: 400;\n}\n.small[data-v-68596e9c] {\n\tfont-size: 36;\n}\n.large[data-v-68596e9c] {\n\tfont-size: 48;\n\tfont-weight: 500;\n\tline-height: 72;\n\tcolor: #000000;\n}\n.huge[data-v-68596e9c] {\n\tfont-size: 54;\n\tline-height: 81;\n\tcolor: #000000;\n}\n.margin-text[data-v-68596e9c] {\n\tmargin-right: 9;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-text/index.vue?6b0b27aa"],"names":[],"mappings":";AAKA;CACA,cAAA;CACA,gBAAA;CACA,eAAA;CACA,sDAAA;CACA;AACA;CACA,+BAAA;CACA,iBAAA;CACA;AACA;CACA,iBAAA;CACA;AACA;CACA,iBAAA;CACA;AACA;CACA,cAAA;CACA;AACA;CACA,cAAA;CACA,iBAAA;CACA,gBAAA;CACA,eAAA;CACA;AACA;CACA,cAAA;CACA,gBAAA;CACA,eAAA;CACA;AACA;CACA,gBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n    <text :class=\"textClz\"><slot></slot><template v-if=\"!$slots.default\">{{ value }}</template></text>\n</template>\n\n<style scoped>\n\t.text {\n\t\tfont-size: 42;\n\t\tline-height: 63;\n\t\tcolor: #999999;\n\t\tfont-family: \"Source Han Sans CN\", Roboto, sans-serif;\n\t}\n\t.medium {\n\t\tfont-family: sans-serif-medium;\n\t\tfont-weight: 500;\n\t}\n\t.bold {\n\t\tfont-weight: 700;\n\t}\n\t.light {\n\t\tfont-weight: 400;\n\t}\n\t.small {\n\t\tfont-size: 36;\n\t}\n\t.large {\n\t\tfont-size: 48;\n\t\tfont-weight: 500;\n\t\tline-height: 72;\n\t\tcolor: #000000;\n\t}\n\t.huge {\n\t\tfont-size: 54;\n\t\tline-height: 81;\n\t\tcolor: #000000;\n\t}\n\t.margin-text {\n\t\tmargin-right: 9;\n\t}\n</style>\n\n<script>\nexport default {\n  name: 'FmText',\n  props: {\n    value: String,\n    fontWeight: {\n      type: String,\n      default: 'normal'\n    },\n    size: {\n      type: String,\n      default: 'normal'\n    },\n    hasTextMargin: {\n      type: Boolean,\n      default: true\n    }\n  },\n  computed: {\n    textClz () {\n      const clz = ['text'];\n      if (this.hasTextMargin) {\n        clz.push('margin-text');\n      }\n      if (this.size !== 'normal') {\n        clz.push(`${this.size}`);\n      }\n      if (this.fontWeight !== 'normal') {\n        clz.push(`${this.fontWeight}`);\n      }\n      return clz;\n    }\n  },\n  created () {\n    this.$slots.default && (this.value = this.$slots.default[0].text);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -10036,21 +10053,8 @@ exports.push([module.i, "\n.text[data-v-68596e9c] {\n    font-size: 42;\n    lin
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -10093,63 +10097,40 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 
 exports.default = {
-    name: 'FmText',
-    props: {
-        textValue: [String, Number],
-        medium: Boolean,
-        bold: Boolean,
-        light: Boolean,
-        title: Boolean,
-        small: Boolean,
-        large: Boolean,
-        huge: Boolean,
-        textStyle: {
-            type: Object,
-            default: function _default() {
-                return {};
-            }
-        },
-        hasTextMargin: {
-            type: Boolean,
-            default: true
-        },
-        fmClick: Function
+  name: 'FmText',
+  props: {
+    value: String,
+    fontWeight: {
+      type: String,
+      default: 'normal'
     },
-
-    computed: {
-        textClz: function textClz() {
-            var clz = ['text'];
-            if (this.medium) {
-                clz.push('medium');
-            }
-            if (this.light) {
-                clz.push('light');
-            }
-            if (this.title) {
-                clz.push('title');
-            }
-            if (this.bold) {
-                clz.push('bold');
-            }
-            if (this.small) {
-                clz.push('small');
-            }
-            if (this.large) {
-                clz.push('large');
-            }
-            if (this.huge) {
-                clz.push('huge');
-            }
-            if (this.hasTextMargin) {
-                clz.push('margin-text');
-            }
-            return clz;
-        },
-        getStyle: function getStyle() {
-            return _extends({}, this.textStyle);
-        }
+    size: {
+      type: String,
+      default: 'normal'
     },
-    methods: {}
+    hasTextMargin: {
+      type: Boolean,
+      default: true
+    }
+  },
+  computed: {
+    textClz: function textClz() {
+      var clz = ['text'];
+      if (this.hasTextMargin) {
+        clz.push('margin-text');
+      }
+      if (this.size !== 'normal') {
+        clz.push('' + this.size);
+      }
+      if (this.fontWeight !== 'normal') {
+        clz.push('' + this.fontWeight);
+      }
+      return clz;
+    }
+  },
+  created: function created() {
+    this.$slots.default && (this.value = this.$slots.default[0].text);
+  }
 };
 
 /***/ }),
@@ -10160,8 +10141,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('text', {
     class: _vm.textClz,
     staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(_vm.getStyle))
-  }, [_vm._t("default"), _vm._v(_vm._s(_vm.textValue))], 2)
+    style: (_vm.$processStyle(undefined))
+  }, [_vm._t("default"), (!_vm.$slots.default) ? [_vm._v(_vm._s(_vm.value))] : _vm._e()], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -11915,7 +11896,7 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.header-wrap[data-v-745d9462] {\n\tmargin-top: 27px;\n\tmargin-right: 66px;\n\tmargin-left: 66px;\n}\n.header[data-v-745d9462] {\n\tflex-direction: row;\n\tjustify-content: center;\n}\n.title[data-v-745d9462] {\n\tflex: 1;\n\tflex-direction: row;\n\tjustify-content: center;\n}\n.text-selected[data-v-745d9462] {\n\tcolor: #f34949;\n}\n.text[data-v-745d9462] {\n\tfont-size: 42px;\n\tfont-weight: 700;\n\ttext-align: center;\n\tcolor: #666666;\n}\n.bottom-line[data-v-745d9462] {\n\theight: 7.2px;\n\tmargin-top: 27px;\n\tbackground-color: #f34949;\n}\n.slider-wrap[data-v-745d9462] {\n\tflex-direction: row;\n\tborder-top-width: 3px;\n\tborder-color: #dddddd;\n}\n.body[data-v-745d9462] {\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tab-view/index.vue?60bf696d"],"names":[],"mappings":";AA2BA;CACA,iBAAA;CACA,mBAAA;CACA,kBAAA;CACA;AACA;CACA,oBAAA;CACA,wBAAA;CACA;AACA;CACA,QAAA;CACA,oBAAA;CACA,wBAAA;CACA;AACA;CACA,eAAA;CACA;AACA;CACA,gBAAA;CACA,iBAAA;CACA,mBAAA;CACA,eAAA;CACA;AACA;CACA,cAAA;CACA,iBAAA;CACA,0BAAA;CACA;AACA;CACA,oBAAA;CACA,sBAAA;CACA,sBAAA;CACA;AACA;CACA","file":"index.vue","sourcesContent":["<template>\n<div class=\"tab-wrap\">\n\t<div class=\"header-wrap\">\n\t\t<div class=\"header\" ref=\"header\">\n\t\t\t<div v-for=\"(item, idx) in items\" \n\t\t\t\t:key=\"item.name\" \n\t\t\t\tclass=\"title\" \n\t\t\t\t@click=\"titleClick(idx)\">\n\t\t\t\t<text :class=\"['text', idx == current ? 'text-selected' : '']\" >{{item.text}}</text>\t\n\t\t\t</div>\n\t\t</div>\n\t\t<text class=\"bottom-line\" :style=\"lineStyle\" ref=\"line\"></text>\n\t</div>\n\t<div class=\"slider-wrap\" \n\t\tref=\"slider\" \n\t\t:style=\"listStyle\"\n\t\t@touchmove=\"move\" \n\t\t@touchstart=\"start\" \n\t\t@touchend=\"end\">\n\t\t<div v-for=\"(item, idx) in items\" class=\"body\" :style=\"itemStyle\">\n\t\t\t<slot :name=\"item.name\"></slot>\n\t\t</div>\n\t</div>\n</div>\n</template>\n\n<style scoped>\n.header-wrap {\n\tmargin-top: 27px;\n\tmargin-right: 66px;\n\tmargin-left: 66px;\n}\n.header {\n\tflex-direction: row;\n\tjustify-content: center;\n}\n.title {\n\tflex: 1;\n\tflex-direction: row;\n\tjustify-content: center;\n}\n.text-selected {\n\tcolor: #f34949;\n}\n.text {\n\tfont-size: 42px;\n\tfont-weight: 700;\n\ttext-align: center;\n\tcolor: #666666;\n}\n.bottom-line {\n\theight: 7.2px;\n\tmargin-top: 27px;\n\tbackground-color: #f34949;\n}\n.slider-wrap {\n\tflex-direction: row;\n\tborder-top-width: 3px;\n\tborder-color: #dddddd;\n}\n.body {\n}\n</style>\n\n<script>\nconst dom = weex.requireModule('dom')\nconst animation = weex.requireModule('animation')\n\nexport default {\n  name: 'FmTabView',\n\tdata () {\n\t\treturn {\n\t\t\twidth: 0,//单个tab宽度\n\t\t\tmin: 0,\n\t\t\ttransX: 0,\n\t\t\tstartX: 0,\n\t\t\tmoveX: 0,\n\t\t\tcurrent: 0,//当前tab index\n\t\t\tlineWidth: 0,//标题下划线宽度\n\t\t\tlineLeft: 0,\n\t\t\tline: 0//标题下划线translate计算比例\n\t\t}\n\t},\n\tprops: {\n\t\titems: {\n\t\t\ttype: Array,\n\t\t\trequired: true\n\t\t}\n\t},\n\tcomputed: {\n\t\tlineStyle () {\n\t\t\treturn {\n\t\t\t\twidth: `${this.lineWidth}px`,\n\t\t\t\t'margin-left': `${this.lineLeft}px`,\n\t\t\t\ttransform: `translateX(${-this.transX/this.line}px)`\n\t\t\t}\n\t\t},\n\t\tlistStyle () {\n\t\t\tlet sty = {\n\t\t\t\topacity: this.width === 0 ? 0 : 1\n\t\t\t}\n\t\t\t\n\t\t\tif (this.width > 0) {\n\t\t\t\tsty.width = `${this.width * this.items.length}px`\n\t\t\t\tsty.transform = `translateX(${this.transX}px)`\n\t\t\t}\n\n\t\t\treturn sty\n\t\t},\n\t\titemStyle () {\n\t\t\treturn {\n\t\t\t\twidth: `${this.width || 1080}px`\n\t\t\t}\n\t\t}\n\t},\n\tmounted () {\n\t\tsetTimeout(() => {\n\t\t\tlet { platform } = weex.config.env;\n\t\t\tlet head = (typeof(window) === 'object' && platform.toLowerCase() === 'web') ? this.$refs.header.$children[0].$children[0] : this.$refs.header.children[0].children[0]\n\t\t\tdom.getComponentRect(head, opt => {\n\t\t\t\tthis.lineWidth = opt.size.width + 36\n\t\t\t\tthis.lineLeft = opt.size.left - 66 - 18\n\t\t\t})\n\t\t\tdom.getComponentRect(this.$refs.slider, opt => {\n\t\t\t\tthis.width = opt.size.width\n\t\t\t\tthis.line = this.width / (this.width - 132) * this.items.length\n\t\t\t\tthis.min = -this.width * (this.items.length - 1)\n\t\t\t})\n\t\t}, 100)\n\t},\n\tmethods: {\n\t\ttitleClick (idx) {\n\t\t\tthis.slide(-idx * this.width, -idx)\n\t\t\tthis.$emit('titleclick', idx)\n\t\t},\n\t\tstart (evt) {\n\t\t\tif (this.sliding) return\n\t\t\tthis.startX = evt.changedTouches[0].screenX\n\t\t\tthis.moveX = this.startX\n\t\t},\n\t\tmove (evt) {\n\t\t\tif (this.sliding) return\n\t\t\tlet x = evt.changedTouches[0].screenX\n\t\t\tlet sub = x - this.moveX\n\n\t\t\tthis.transX = Math.max(this.min, Math.min(0, this.transX + sub))\n\t\t\tthis.moveX = x\n\t\t},\n\t\tend (evt) {\n\t\t\tthis.sliding = true\n\n\t\t\tlet x = evt.changedTouches[0].screenX\n\t\t\tlet direct = x - this.startX > 0\n\t\t\tlet num = Math.floor(Math.abs(this.transX) / this.width)\n\t\t\tlet decimal = this.transX % this.width / this.width\n\t\t\tlet int = this.transX > 0 ? num : -num\n\t\t\tlet max = -this.items.length + 1\n\n\t\t\tif (decimal > .2 && direct) {\n\t\t\t\tint = Math.min(0, int + 1)\n\t\t\t} else if (decimal < -.2 && !direct) {\n\t\t\t\tint = Math.max(max, int - 1)\n\t\t\t}\n\n\t\t\tthis.slide(int * this.width, int)\n\t\t},\n\t\tslide (trans, idx) {\n\t\t\tanimation.transition(this.$refs.slider, {\n\t\t\t\tstyles: {\n\t\t\t\t\ttransform: `translateX(${trans}px)`\n\t\t\t\t},\n\t\t\t\tduration: 200,\n\t\t\t\ttimingFunction: 'ease-out'\n\t\t\t}, () => {\n\t\t\t\tthis.current = -idx\n\t\t\t\tthis.transX = trans\n\t\t\t\tthis.sliding = false\n\t\t\t\tthis.$emit('slidend', {selected: this.current})\n\t\t\t})\n\t\t\tanimation.transition(this.$refs.line, {\n\t\t\t\tstyles: {\n\t\t\t\t\ttransform: `translateX(${-trans/this.line}px)`\n\t\t\t\t},\n\t\t\t\tduration: 200,\n\t\t\t\ttimingFunction: 'ease-out'\n\t\t\t})\n\t\t}\n\t}\n}\n</script>"],"sourceRoot":""}]);
+exports.push([module.i, "\n.header-wrap[data-v-745d9462] {\n\tmargin-top: 27px;\n\tmargin-right: 66px;\n\tmargin-left: 66px;\n}\n.header[data-v-745d9462] {\n\tflex-direction: row;\n\tjustify-content: center;\n}\n.title[data-v-745d9462] {\n\tflex: 1;\n\tflex-direction: row;\n\tjustify-content: center;\n}\n.text-selected[data-v-745d9462] {\n\tcolor: #f34949;\n}\n.text[data-v-745d9462] {\n\tfont-size: 42px;\n\tfont-weight: 700;\n\ttext-align: center;\n\tcolor: #666666;\n}\n.bottom-line[data-v-745d9462] {\n\theight: 7.2px;\n\tmargin-top: 27px;\n\tbackground-color: #f34949;\n}\n.slider-wrap[data-v-745d9462] {\n\tflex-direction: row;\n\tborder-top-width: 3px;\n\tborder-color: #dddddd;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tab-view/index.vue?aaa7609e"],"names":[],"mappings":";AA2BA;CACA,iBAAA;CACA,mBAAA;CACA,kBAAA;CACA;AACA;CACA,oBAAA;CACA,wBAAA;CACA;AACA;CACA,QAAA;CACA,oBAAA;CACA,wBAAA;CACA;AACA;CACA,eAAA;CACA;AACA;CACA,gBAAA;CACA,iBAAA;CACA,mBAAA;CACA,eAAA;CACA;AACA;CACA,cAAA;CACA,iBAAA;CACA,0BAAA;CACA;AACA;CACA,oBAAA;CACA,sBAAA;CACA,sBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n<div class=\"tab-wrap\">\n\t<div class=\"header-wrap\">\n\t\t<div class=\"header\" ref=\"header\">\n\t\t\t<div v-for=\"(item, idx) in items\"\n\t\t\t\t:key=\"item.name\"\n\t\t\t\tclass=\"title\"\n\t\t\t\t@click=\"titleClick(idx)\">\n\t\t\t\t<text :class=\"['text', idx == current ? 'text-selected' : '']\" >{{item.text}}</text>\n\t\t\t</div>\n\t\t</div>\n\t\t<text class=\"bottom-line\" :style=\"lineStyle\" ref=\"line\"></text>\n\t</div>\n\t<div class=\"slider-wrap\"\n\t\tref=\"slider\"\n\t\t:style=\"listStyle\"\n\t\t@touchmove=\"move\"\n\t\t@touchstart=\"start\"\n\t\t@touchend=\"end\">\n\t\t<div v-for=\"(item, idx) in items\" class=\"body\" :style=\"itemStyle\" :key=\"idx\">\n\t\t\t<slot :name=\"item.name\"></slot>\n\t\t</div>\n\t</div>\n</div>\n</template>\n\n<style scoped>\n.header-wrap {\n\tmargin-top: 27px;\n\tmargin-right: 66px;\n\tmargin-left: 66px;\n}\n.header {\n\tflex-direction: row;\n\tjustify-content: center;\n}\n.title {\n\tflex: 1;\n\tflex-direction: row;\n\tjustify-content: center;\n}\n.text-selected {\n\tcolor: #f34949;\n}\n.text {\n\tfont-size: 42px;\n\tfont-weight: 700;\n\ttext-align: center;\n\tcolor: #666666;\n}\n.bottom-line {\n\theight: 7.2px;\n\tmargin-top: 27px;\n\tbackground-color: #f34949;\n}\n.slider-wrap {\n\tflex-direction: row;\n\tborder-top-width: 3px;\n\tborder-color: #dddddd;\n}\n</style>\n\n<script>\nconst dom = weex.requireModule('dom');\nconst animation = weex.requireModule('animation');\n\nexport default {\n  name: 'FmTabView',\n  data () {\n    return {\n      width: 0, // 单个tab宽度\n      min: 0,\n      transX: 0,\n      startX: 0,\n      moveX: 0,\n      current: 0, // 当前tab index\n      lineWidth: 0, // 标题下划线宽度\n      lineLeft: 0,\n      line: 0// 标题下划线translate计算比例\n    };\n  },\n  props: {\n    items: {\n      type: Array,\n      required: true\n    }\n  },\n  computed: {\n    lineStyle () {\n      return {\n        width: `${this.lineWidth}px`,\n        'margin-left': `${this.lineLeft}px`,\n        transform: `translateX(${-this.transX / this.line}px)`\n      };\n    },\n    listStyle () {\n      const sty = {\n        opacity: this.width === 0 ? 0 : 1\n      };\n\n      if (this.width > 0) {\n        sty.width = `${this.width * this.items.length}px`;\n        sty.transform = `translateX(${this.transX}px)`;\n      }\n\n      return sty;\n    },\n    itemStyle () {\n      return {\n        width: `${this.width || 1080}px`\n      };\n    }\n  },\n  mounted () {\n    setTimeout(() => {\n      const { platform } = weex.config.env;\n      const head = (typeof (window) === 'object' && platform.toLowerCase() === 'web') ? this.$refs.header.$children[0].$children[0] : this.$refs.header.children[0].children[0];\n      dom.getComponentRect(head, opt => {\n        this.lineWidth = opt.size.width + 36;\n        this.lineLeft = opt.size.left - 66 - 18;\n      });\n      dom.getComponentRect(this.$refs.slider, opt => {\n        this.width = opt.size.width;\n        this.line = this.width / (this.width - 132) * this.items.length;\n        this.min = -this.width * (this.items.length - 1);\n      });\n    }, 100);\n  },\n  methods: {\n    titleClick (idx) {\n      this.slide(-idx * this.width, -idx);\n      this.$emit('titleclick', idx);\n    },\n    start (evt) {\n      if (this.sliding) return;\n      this.startX = evt.changedTouches[0].screenX;\n      this.moveX = this.startX;\n    },\n    move (evt) {\n      if (this.sliding) return;\n      const x = evt.changedTouches[0].screenX;\n      const sub = x - this.moveX;\n\n      this.transX = Math.max(this.min, Math.min(0, this.transX + sub));\n      this.moveX = x;\n    },\n    end (evt) {\n      this.sliding = true;\n\n      const x = evt.changedTouches[0].screenX;\n      const direct = x - this.startX > 0;\n      const num = Math.floor(Math.abs(this.transX) / this.width);\n      const decimal = this.transX % this.width / this.width;\n      let int = this.transX > 0 ? num : -num;\n      const max = -this.items.length + 1;\n\n      if (decimal > 0.2 && direct) {\n        int = Math.min(0, int + 1);\n      } else if (decimal < -0.2 && !direct) {\n        int = Math.max(max, int - 1);\n      }\n\n      this.slide(int * this.width, int);\n    },\n    slide (trans, idx) {\n      animation.transition(this.$refs.slider, {\n        styles: {\n          transform: `translateX(${trans}px)`\n        },\n        duration: 200,\n        timingFunction: 'ease-out'\n      }, () => {\n        this.current = -idx;\n        this.transX = trans;\n        this.sliding = false;\n        this.$emit('slidend', { selected: this.current });\n      });\n      animation.transition(this.$refs.line, {\n        styles: {\n          transform: `translateX(${-trans / this.line}px)`\n        },\n        duration: 200,\n        timingFunction: 'ease-out'\n      });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -11928,13 +11909,11 @@ exports.push([module.i, "\n.header-wrap[data-v-745d9462] {\n\tmargin-top: 27px;\
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-//
-//
 //
 //
 //
@@ -12002,132 +11981,132 @@ var dom = weex.requireModule('dom');
 var animation = weex.requireModule('animation');
 
 exports.default = {
-	name: 'FmTabView',
-	data: function data() {
-		return {
-			width: 0, //单个tab宽度
-			min: 0,
-			transX: 0,
-			startX: 0,
-			moveX: 0,
-			current: 0, //当前tab index
-			lineWidth: 0, //标题下划线宽度
-			lineLeft: 0,
-			line: 0 //标题下划线translate计算比例
-		};
-	},
+  name: 'FmTabView',
+  data: function data() {
+    return {
+      width: 0, // 单个tab宽度
+      min: 0,
+      transX: 0,
+      startX: 0,
+      moveX: 0,
+      current: 0, // 当前tab index
+      lineWidth: 0, // 标题下划线宽度
+      lineLeft: 0,
+      line: 0 // 标题下划线translate计算比例
+    };
+  },
 
-	props: {
-		items: {
-			type: Array,
-			required: true
-		}
-	},
-	computed: {
-		lineStyle: function lineStyle() {
-			return {
-				width: this.lineWidth + 'px',
-				'margin-left': this.lineLeft + 'px',
-				transform: 'translateX(' + -this.transX / this.line + 'px)'
-			};
-		},
-		listStyle: function listStyle() {
-			var sty = {
-				opacity: this.width === 0 ? 0 : 1
-			};
+  props: {
+    items: {
+      type: Array,
+      required: true
+    }
+  },
+  computed: {
+    lineStyle: function lineStyle() {
+      return {
+        width: this.lineWidth + 'px',
+        'margin-left': this.lineLeft + 'px',
+        transform: 'translateX(' + -this.transX / this.line + 'px)'
+      };
+    },
+    listStyle: function listStyle() {
+      var sty = {
+        opacity: this.width === 0 ? 0 : 1
+      };
 
-			if (this.width > 0) {
-				sty.width = this.width * this.items.length + 'px';
-				sty.transform = 'translateX(' + this.transX + 'px)';
-			}
+      if (this.width > 0) {
+        sty.width = this.width * this.items.length + 'px';
+        sty.transform = 'translateX(' + this.transX + 'px)';
+      }
 
-			return sty;
-		},
-		itemStyle: function itemStyle() {
-			return {
-				width: (this.width || 1080) + 'px'
-			};
-		}
-	},
-	mounted: function mounted() {
-		var _this = this;
+      return sty;
+    },
+    itemStyle: function itemStyle() {
+      return {
+        width: (this.width || 1080) + 'px'
+      };
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
 
-		setTimeout(function () {
-			var platform = weex.config.env.platform;
+    setTimeout(function () {
+      var platform = weex.config.env.platform;
 
-			var head = (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object' && platform.toLowerCase() === 'web' ? _this.$refs.header.$children[0].$children[0] : _this.$refs.header.children[0].children[0];
-			dom.getComponentRect(head, function (opt) {
-				_this.lineWidth = opt.size.width + 36;
-				_this.lineLeft = opt.size.left - 66 - 18;
-			});
-			dom.getComponentRect(_this.$refs.slider, function (opt) {
-				_this.width = opt.size.width;
-				_this.line = _this.width / (_this.width - 132) * _this.items.length;
-				_this.min = -_this.width * (_this.items.length - 1);
-			});
-		}, 100);
-	},
+      var head = (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object' && platform.toLowerCase() === 'web' ? _this.$refs.header.$children[0].$children[0] : _this.$refs.header.children[0].children[0];
+      dom.getComponentRect(head, function (opt) {
+        _this.lineWidth = opt.size.width + 36;
+        _this.lineLeft = opt.size.left - 66 - 18;
+      });
+      dom.getComponentRect(_this.$refs.slider, function (opt) {
+        _this.width = opt.size.width;
+        _this.line = _this.width / (_this.width - 132) * _this.items.length;
+        _this.min = -_this.width * (_this.items.length - 1);
+      });
+    }, 100);
+  },
 
-	methods: {
-		titleClick: function titleClick(idx) {
-			this.slide(-idx * this.width, -idx);
-			this.$emit('titleclick', idx);
-		},
-		start: function start(evt) {
-			if (this.sliding) return;
-			this.startX = evt.changedTouches[0].screenX;
-			this.moveX = this.startX;
-		},
-		move: function move(evt) {
-			if (this.sliding) return;
-			var x = evt.changedTouches[0].screenX;
-			var sub = x - this.moveX;
+  methods: {
+    titleClick: function titleClick(idx) {
+      this.slide(-idx * this.width, -idx);
+      this.$emit('titleclick', idx);
+    },
+    start: function start(evt) {
+      if (this.sliding) return;
+      this.startX = evt.changedTouches[0].screenX;
+      this.moveX = this.startX;
+    },
+    move: function move(evt) {
+      if (this.sliding) return;
+      var x = evt.changedTouches[0].screenX;
+      var sub = x - this.moveX;
 
-			this.transX = Math.max(this.min, Math.min(0, this.transX + sub));
-			this.moveX = x;
-		},
-		end: function end(evt) {
-			this.sliding = true;
+      this.transX = Math.max(this.min, Math.min(0, this.transX + sub));
+      this.moveX = x;
+    },
+    end: function end(evt) {
+      this.sliding = true;
 
-			var x = evt.changedTouches[0].screenX;
-			var direct = x - this.startX > 0;
-			var num = Math.floor(Math.abs(this.transX) / this.width);
-			var decimal = this.transX % this.width / this.width;
-			var int = this.transX > 0 ? num : -num;
-			var max = -this.items.length + 1;
+      var x = evt.changedTouches[0].screenX;
+      var direct = x - this.startX > 0;
+      var num = Math.floor(Math.abs(this.transX) / this.width);
+      var decimal = this.transX % this.width / this.width;
+      var int = this.transX > 0 ? num : -num;
+      var max = -this.items.length + 1;
 
-			if (decimal > .2 && direct) {
-				int = Math.min(0, int + 1);
-			} else if (decimal < -.2 && !direct) {
-				int = Math.max(max, int - 1);
-			}
+      if (decimal > 0.2 && direct) {
+        int = Math.min(0, int + 1);
+      } else if (decimal < -0.2 && !direct) {
+        int = Math.max(max, int - 1);
+      }
 
-			this.slide(int * this.width, int);
-		},
-		slide: function slide(trans, idx) {
-			var _this2 = this;
+      this.slide(int * this.width, int);
+    },
+    slide: function slide(trans, idx) {
+      var _this2 = this;
 
-			animation.transition(this.$refs.slider, {
-				styles: {
-					transform: 'translateX(' + trans + 'px)'
-				},
-				duration: 200,
-				timingFunction: 'ease-out'
-			}, function () {
-				_this2.current = -idx;
-				_this2.transX = trans;
-				_this2.sliding = false;
-				_this2.$emit('slidend', { selected: _this2.current });
-			});
-			animation.transition(this.$refs.line, {
-				styles: {
-					transform: 'translateX(' + -trans / this.line + 'px)'
-				},
-				duration: 200,
-				timingFunction: 'ease-out'
-			});
-		}
-	}
+      animation.transition(this.$refs.slider, {
+        styles: {
+          transform: 'translateX(' + trans + 'px)'
+        },
+        duration: 200,
+        timingFunction: 'ease-out'
+      }, function () {
+        _this2.current = -idx;
+        _this2.transX = trans;
+        _this2.sliding = false;
+        _this2.$emit('slidend', { selected: _this2.current });
+      });
+      animation.transition(this.$refs.line, {
+        styles: {
+          transform: 'translateX(' + -trans / this.line + 'px)'
+        },
+        duration: 200,
+        timingFunction: 'ease-out'
+      });
+    }
+  }
 };
 
 /***/ }),
@@ -12181,6 +12160,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, _vm._l((_vm.items), function(item, idx) {
     return _c('div', {
+      key: idx,
       staticClass: "body",
       staticStyle: _vm.$processStyle(undefined),
       style: (_vm.$processStyle(_vm.itemStyle))
@@ -14529,27 +14509,27 @@ var _locale = __webpack_require__(4);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var VCDialog = Vue.extend(_fmDialog2.default);
-var vc_dialog = new VCDialog().$mount();
+var VC_DIALOG = new VCDialog().$mount();
 
 function dialog(options) {
-  vc_dialog.show = true;
-  vc_dialog.title = options.title;
-  vc_dialog.content = options.content;
-  vc_dialog.type = options.type;
-  vc_dialog.canAutoClose = options.canAutoClose;
-  options.cancelText && (vc_dialog.cancelText = options.cancelText);
-  options.confirmText && (vc_dialog.confirmText = options.confirmText);
-  vc_dialog.cancelCb = options.cancelCb;
-  vc_dialog.confirmCb = options.confirmCb;
+  VC_DIALOG.show = true;
+  VC_DIALOG.title = options.title;
+  VC_DIALOG.content = options.content;
+  VC_DIALOG.type = options.type;
+  VC_DIALOG.canAutoClose = options.canAutoClose;
+  options.cancelText && (VC_DIALOG.cancelText = options.cancelText);
+  options.confirmText && (VC_DIALOG.confirmText = options.confirmText);
+  VC_DIALOG.cancelCb = options.cancelCb;
+  VC_DIALOG.confirmCb = options.confirmCb;
 }
 
 var added = false;
 function addDialog() {
   if (!added) {
     if (weex.config.env.platform === 'Web') {
-      document.body.appendChild(vc_dialog.$el);
+      document.body.appendChild(VC_DIALOG.$el);
     } else {
-      weex.document.body.appendChild(vc_dialog.$el);
+      weex.document.body.appendChild(VC_DIALOG.$el);
     }
     added = true;
   }
@@ -14557,16 +14537,16 @@ function addDialog() {
 
 var noop = function noop() {};
 function resetDialog() {
-  vc_dialog.show = false;
-  vc_dialog.cancelCb = noop;
-  vc_dialog.confirmCb = noop;
+  VC_DIALOG.show = false;
+  VC_DIALOG.cancelCb = noop;
+  VC_DIALOG.confirmCb = noop;
   setTimeout(function () {
-    vc_dialog.title = '';
-    vc_dialog.content = '';
-    vc_dialog.canAutoClose = true;
-    vc_dialog.type = 'alert';
-    vc_dialog.cancelText = (0, _locale.t)('el.common.cancel');
-    vc_dialog.confirmText = (0, _locale.t)('el.common.confirm');
+    VC_DIALOG.title = '';
+    VC_DIALOG.content = '';
+    VC_DIALOG.canAutoClose = true;
+    VC_DIALOG.type = 'alert';
+    VC_DIALOG.cancelText = (0, _locale.t)('el.common.cancel');
+    VC_DIALOG.confirmText = (0, _locale.t)('el.common.confirm');
   }, 300);
 }
 
@@ -16108,7 +16088,7 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-snack-bar[data-v-81772c76] {\n\tposition: fixed;\n\tleft: 0;\n\tright: 0;\n\tbackground-color: #FFFFFF;\n\tflex-direction: row;\n\tpadding: 0 72px;\n\tjustify-content: space-between;\n\talign-items: center;\n\tmin-height: 0;\n}\n.title[data-v-81772c76], .closeText[data-v-81772c76] {\n\tfont-size: 42px;\n\tfont-family: sans-serif-medium;\n\tfont-weight: 500;\n}\n.rotate[data-v-81772c76] {\n\tfont-size: 42px;\n\ttransform: rotate(180deg);\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-snack-bar/index.vue?7083c77d"],"names":[],"mappings":";AAkBA;CACA,gBAAA;CACA,QAAA;CACA,SAAA;CACA,0BAAA;CACA,oBAAA;CACA,gBAAA;CACA,+BAAA;CACA,oBAAA;CACA,cAAA;CACA;AAEA;CACA,gBAAA;CACA,+BAAA;CACA,iBAAA;CACA;AAEA;CACA,gBAAA;CACA,0BAAA;CACA","file":"index.vue","sourcesContent":["<template>\n\t<div ref=\"fm-snack-bar\"\n\t\tv-if=\"show\"\n\t\t:hack=\"isNeedShow\"\n\t\tclass=\"fm-snack-bar\"\n\t\t:style=\"barStyle\"\n\t\t@click=\"snackClick\">\n\t\t<slot name=\"title\">\n\t\t\t<text class=\"title\" :style=\"{ color: titleColor }\">{{ title }}</text>\n\t\t</slot>\n\t\t<slot name=\"right\">\n\t\t\t<fm-icon v-if=\"type === 'jump'\" value=\"&#xe6b5;\" class=\"rotate\" :style=\"{ color: titleColor }\" />\n\t\t\t<text v-else-if=\"type === 'normal'\" class=\"closeText\" :style=\"{ color: closeColor }\" @click=\"ctrClick\">{{ closeText }}</text>\n\t\t</slot>\n\t</div>\n</template>\n\n<style scoped>\n\t.fm-snack-bar {\n\t\tposition: fixed;\n\t\tleft: 0;\n\t\tright: 0;\n\t\tbackground-color: #FFFFFF;\n\t\tflex-direction: row;\n\t\tpadding: 0 72px;\n\t\tjustify-content: space-between;\n\t\talign-items: center;\n\t\tmin-height: 0;\n\t}\n\n\t.title, .closeText {\n\t\tfont-size: 42px;\n\t\tfont-family: sans-serif-medium;\n\t\tfont-weight: 500;\n\t}\n\n\t.rotate {\n\t\tfont-size: 42px;\n\t\ttransform: rotate(180deg);\n\t}\n\n</style>\n\n<script>\nconst animation = weex.requireModule('animation')\nconst { platform } = weex.config.env\nconst isWeb = typeof (window) === 'object' && platform.toLowerCase() === 'web'\nimport FmIcon from '../fm-icon'\nimport Locale from 'weex-flymeui/lib/mixins/locale'\nimport { t } from 'weex-flymeui/lib/locale'\nexport default {\n  name: 'FmSnackBar',\n\tmixins: [Locale],\n\tcomponents: { FmIcon },\n  props: {\n\t\tshow: {\n\t\t\ttype: Boolean,\n\t\t\tdefault: false\n\t\t},\n\t\tbackgroundColor: {\n\t\t\ttype: String,\n\t\t\tdefault: '#323232'\n\t\t},\n\t\ttitle: String,\n\t\ttitleColor: {\n\t\t\ttype: String,\n\t\t\tdefault: '#FFFFFF'\n\t\t},\n\t\tcloseText: {\n\t\t\ttype: String,\n\t\t\tdefault() {\n\t\t\t\treturn t('el.common.close')\n\t\t\t}\n\t\t},\n\t\tcloseColor: {\n\t\t\ttype: String,\n\t\t\tdefault: '#198DED'\n\t\t},\n\t\theight: {\n\t\t\ttype: Number,\n\t\t\tdefault: 144\n\t\t},\n\t\tanimation: {\n\t\t\ttype: Object,\n\t\t\tdefault: () => ({\n\t\t\t\ttimingFunction: 'ease-out'\n\t\t\t})\n\t\t},\n\t\tautoClose: {\n\t\t\ttype: Boolean,\n\t\t\tdefault: true\n\t\t},\n\t\tstayTime: {\n\t\t\ttype: Number,\n\t\t\tdefault: 3000\n\t\t},\n\t\ttype: {\n\t\t\ttype: String,\n\t\t\tdefault: 'normal'\n\t\t},\n\t\tclickCb: Function,\n\t\tdismissCb: Function\n\t},\n\tcomputed: {\n\t\tbarStyle() {\n\t\t\tconst { height, backgroundColor } = this\n\t\t\treturn {\n\t\t\t\tbackgroundColor: backgroundColor,\n\t\t\t\tbottom: `${-height}px`,\n\t\t\t\theight: `${height}px`\n\t\t\t}\n\t\t},\n\t\tisNeedShow () {\n\t\t\tsetTimeout(() => {\n\t\t\t\tthis.appearBar(this.show)\n\t\t\t}, 50)\n\t\t\treturn this.show\n\t\t}\n\t},\n\tdata: () => ({\n\t\ttimer: null\n\t}),\n\tmethods: {\n\t\tappearBar(bool, duration = 150) {\n\t\t\tthis.isShow = bool\n\t\t\tconst popupEl = this.$refs['fm-snack-bar']\n\t\t\tif (!popupEl) {\n\t\t\t\treturn\n\t\t\t}\n\t\t\tanimation.transition(popupEl, {\n\t\t\t\tstyles: {\n\t\t\t\t\ttransform: this.getTransform(this.height, bool)\n\t\t\t\t},\n\t\t\t\tduration,\n\t\t\t\tdelay: 0,\n\t\t\t\t...this.animation\n\t\t\t}, () => {\n\t\t\t\tlet { autoClose, stayTime } = this\n\t\t\t\tif (bool && autoClose) {\n\t\t\t\t\tthis.timer = setTimeout(() => {\n\t\t\t\t\t\tthis.appearBar(false)\n\t\t\t\t\t}, stayTime)\n\t\t\t\t} else if (!bool) {\n\t\t\t\t\tthis.dismissCb && this.dismissCb()\n\t\t\t\t\tthis.$emit('fmSnackBarDismissed', { pos: this.pos })\n\t\t\t\t}\n\t\t\t})\n\t\t},\n\t\tgetTransform(height, bool) {\n\t\t\tbool || (height = 0)\n\t\t\treturn `translateY(-${height}px)`\n\t\t},\n\t\thide() {\n\t\t\tif (this.timer) {\n\t\t\t\tclearTimeout(this.timer)\n\t\t\t\tthis.timer = null\n\t\t\t}\n\t\t\tthis.appearBar(false)\n\t\t},\n\t\tctrClick() {\n\t\t\tthis.clickCb && this.clickCb()\n\t\t\tthis.hide()\n\t\t},\n\t\tsnackClick() {\n\t\t\tlet { type } = this\n\t\t\tif (type === 'jump') {\n\t\t\t\tthis.clickCb && this.clickCb()\n\t\t\t\tthis.hide()\n\t\t\t}\n\t\t\tthis.$emit('fmSnackBarBeClicked', {})\n\t\t}\n\t}\n}\n</script>\n\n\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-snack-bar[data-v-81772c76] {\n\tposition: fixed;\n\tleft: 0;\n\tright: 0;\n\tbackground-color: #FFFFFF;\n\tflex-direction: row;\n\tpadding: 0 72px;\n\tjustify-content: space-between;\n\talign-items: center;\n\tmin-height: 0;\n}\n.title[data-v-81772c76], .closeText[data-v-81772c76] {\n\tfont-size: 42px;\n\tfont-family: sans-serif-medium;\n\tfont-weight: 500;\n}\n.rotate[data-v-81772c76] {\n\tfont-size: 54px;\n\tfont-weight: 700;\n\ttransform: rotate(180deg);\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-snack-bar/index.vue?2b30b2f0"],"names":[],"mappings":";AAkBA;CACA,gBAAA;CACA,QAAA;CACA,SAAA;CACA,0BAAA;CACA,oBAAA;CACA,gBAAA;CACA,+BAAA;CACA,oBAAA;CACA,cAAA;CACA;AAEA;CACA,gBAAA;CACA,+BAAA;CACA,iBAAA;CACA;AAEA;CACA,gBAAA;CACA,iBAAA;CACA,0BAAA;CACA","file":"index.vue","sourcesContent":["<template>\n\t<div ref=\"fm-snack-bar\"\n\t\tv-if=\"show\"\n\t\t:hack=\"isNeedShow\"\n\t\tclass=\"fm-snack-bar\"\n\t\t:style=\"barStyle\"\n\t\t@click=\"snackClick\">\n\t\t<slot name=\"title\">\n\t\t\t<text class=\"title\" :style=\"{ color: titleColor }\">{{ title }}</text>\n\t\t</slot>\n\t\t<slot name=\"right\">\n\t\t\t<fm-icon v-if=\"type === 'jump'\" value=\"&#xe6b5;\" class=\"rotate\" :style=\"{ color: titleColor }\" />\n\t\t\t<text v-else-if=\"type === 'normal'\" class=\"closeText\" :style=\"{ color: closeColor }\" @click=\"ctrClick\">{{ closeText }}</text>\n\t\t</slot>\n\t</div>\n</template>\n\n<style scoped>\n\t.fm-snack-bar {\n\t\tposition: fixed;\n\t\tleft: 0;\n\t\tright: 0;\n\t\tbackground-color: #FFFFFF;\n\t\tflex-direction: row;\n\t\tpadding: 0 72px;\n\t\tjustify-content: space-between;\n\t\talign-items: center;\n\t\tmin-height: 0;\n\t}\n\n\t.title, .closeText {\n\t\tfont-size: 42px;\n\t\tfont-family: sans-serif-medium;\n\t\tfont-weight: 500;\n\t}\n\n\t.rotate {\n\t\tfont-size: 54px;\n\t\tfont-weight: 700;\n\t\ttransform: rotate(180deg);\n\t}\n\n</style>\n\n<script>\nconst animation = weex.requireModule('animation')\nconst { platform } = weex.config.env\nconst isWeb = typeof (window) === 'object' && platform.toLowerCase() === 'web'\nimport FmIcon from '../fm-icon'\nimport Locale from 'weex-flymeui/lib/mixins/locale'\nimport { t } from 'weex-flymeui/lib/locale'\nexport default {\n  name: 'FmSnackBar',\n\tmixins: [Locale],\n\tcomponents: { FmIcon },\n  props: {\n\t\tshow: {\n\t\t\ttype: Boolean,\n\t\t\tdefault: false\n\t\t},\n\t\tbackgroundColor: {\n\t\t\ttype: String,\n\t\t\tdefault: '#323232'\n\t\t},\n\t\ttitle: String,\n\t\ttitleColor: {\n\t\t\ttype: String,\n\t\t\tdefault: '#FFFFFF'\n\t\t},\n\t\tcloseText: {\n\t\t\ttype: String,\n\t\t\tdefault() {\n\t\t\t\treturn t('el.common.close')\n\t\t\t}\n\t\t},\n\t\tcloseColor: {\n\t\t\ttype: String,\n\t\t\tdefault: '#198DED'\n\t\t},\n\t\theight: {\n\t\t\ttype: Number,\n\t\t\tdefault: 144\n\t\t},\n\t\tanimation: {\n\t\t\ttype: Object,\n\t\t\tdefault: () => ({\n\t\t\t\ttimingFunction: 'ease-out'\n\t\t\t})\n\t\t},\n\t\tautoClose: {\n\t\t\ttype: Boolean,\n\t\t\tdefault: true\n\t\t},\n\t\tstayTime: {\n\t\t\ttype: Number,\n\t\t\tdefault: 3000\n\t\t},\n\t\ttype: {\n\t\t\ttype: String,\n\t\t\tdefault: 'normal'\n\t\t},\n\t\tclickCb: Function,\n\t\tdismissCb: Function\n\t},\n\tcomputed: {\n\t\tbarStyle() {\n\t\t\tconst { height, backgroundColor } = this\n\t\t\treturn {\n\t\t\t\tbackgroundColor: backgroundColor,\n\t\t\t\tbottom: `${-height}px`,\n\t\t\t\theight: `${height}px`\n\t\t\t}\n\t\t},\n\t\tisNeedShow () {\n\t\t\tsetTimeout(() => {\n\t\t\t\tthis.appearBar(this.show)\n\t\t\t}, 50)\n\t\t\treturn this.show\n\t\t}\n\t},\n\tdata: () => ({\n\t\ttimer: null\n\t}),\n\tmethods: {\n\t\tappearBar(bool, duration = 150) {\n\t\t\tthis.isShow = bool\n\t\t\tconst popupEl = this.$refs['fm-snack-bar']\n\t\t\tif (!popupEl) {\n\t\t\t\treturn\n\t\t\t}\n\t\t\tanimation.transition(popupEl, {\n\t\t\t\tstyles: {\n\t\t\t\t\ttransform: this.getTransform(this.height, bool)\n\t\t\t\t},\n\t\t\t\tduration,\n\t\t\t\tdelay: 0,\n\t\t\t\t...this.animation\n\t\t\t}, () => {\n\t\t\t\tlet { autoClose, stayTime } = this\n\t\t\t\tif (bool && autoClose) {\n\t\t\t\t\tthis.timer = setTimeout(() => {\n\t\t\t\t\t\tthis.appearBar(false)\n\t\t\t\t\t}, stayTime)\n\t\t\t\t} else if (!bool) {\n\t\t\t\t\tthis.dismissCb && this.dismissCb()\n\t\t\t\t\tthis.$emit('fmSnackBarDismissed', { pos: this.pos })\n\t\t\t\t}\n\t\t\t})\n\t\t},\n\t\tgetTransform(height, bool) {\n\t\t\tbool || (height = 0)\n\t\t\treturn `translateY(-${height}px)`\n\t\t},\n\t\thide() {\n\t\t\tif (this.timer) {\n\t\t\t\tclearTimeout(this.timer)\n\t\t\t\tthis.timer = null\n\t\t\t}\n\t\t\tthis.appearBar(false)\n\t\t},\n\t\tctrClick() {\n\t\t\tthis.clickCb && this.clickCb()\n\t\t\tthis.hide()\n\t\t},\n\t\tsnackClick() {\n\t\t\tlet { type } = this\n\t\t\tif (type === 'jump') {\n\t\t\t\tthis.clickCb && this.clickCb()\n\t\t\t\tthis.hide()\n\t\t\t}\n\t\t\tthis.$emit('fmSnackBarBeClicked', {})\n\t\t}\n\t}\n}\n</script>\n\n\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -16140,6 +16120,7 @@ var _locale3 = __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
 //
 //
 //
@@ -16384,10 +16365,8 @@ if (false) {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _fmSnackBar = __webpack_require__(15);
 
@@ -16400,64 +16379,65 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var VCSnackBar = Vue.extend(_fmSnackBar2.default);
 
 function snackbar(options) {
-	var defaultOptions = {
-		title: '',
-		backgroundColor: '#323232',
-		titleColor: '#FFFFFF',
-		closeText: (0, _locale.t)('el.common.close'),
-		closeColor: '#198DED',
-		autoClose: true,
-		stayTime: 3000,
-		type: 'normal'
-	};
+  var defaultOptions = {
+    title: '',
+    backgroundColor: '#323232',
+    titleColor: '#FFFFFF',
+    closeText: (0, _locale.t)('el.common.close'),
+    closeColor: '#198DED',
+    autoClose: true,
+    stayTime: 3000,
+    type: 'normal'
+  };
 
-	var vc_snackbar = new VCSnackBar().$mount();
-	options = Object.assign(defaultOptions, options);
-	vc_snackbar.show = true;
-	vc_snackbar.title = options.title;
-	vc_snackbar.backgroundColor = options.backgroundColor;
-	vc_snackbar.titleColor = options.titleColor;
-	vc_snackbar.closeText = options.closeText;
-	vc_snackbar.closeColor = options.closeColor;
-	vc_snackbar.autoClose = options.autoClose;
-	vc_snackbar.stayTime = options.stayTime;
-	vc_snackbar.type = options.type;
-	vc_snackbar.clickCb = options.clickCb;
-	vc_snackbar.dismissCb = function () {
-		removeSnackBar();
-		options.dismissCb();
-	};
+  var VC_SNACKBAR = new VCSnackBar().$mount();
+  options = Object.assign(defaultOptions, options);
+  VC_SNACKBAR.show = true;
+  VC_SNACKBAR.title = options.title;
+  VC_SNACKBAR.backgroundColor = options.backgroundColor;
+  VC_SNACKBAR.titleColor = options.titleColor;
+  VC_SNACKBAR.closeText = options.closeText;
+  VC_SNACKBAR.closeColor = options.closeColor;
+  VC_SNACKBAR.autoClose = options.autoClose;
+  VC_SNACKBAR.stayTime = options.stayTime;
+  VC_SNACKBAR.type = options.type;
+  VC_SNACKBAR.clickCb = options.clickCb;
+  VC_SNACKBAR.dismissCb = function () {
+    removeSnackBar();
+    options.dismissCb();
+  };
 
-	addSnackBar();
+  addSnackBar();
 
-	function addSnackBar() {
-		if (weex.config.env.platform === 'Web') {
-			document.body.appendChild(vc_snackbar.$el);
-		} else {
-			weex.document.body.appendChild(vc_snackbar.$el);
-		}
-	}
+  function addSnackBar() {
+    if (weex.config.env.platform === 'Web') {
+      document.body.appendChild(VC_SNACKBAR.$el);
+    } else {
+      weex.document.body.appendChild(VC_SNACKBAR.$el);
+    }
+  }
 
-	function removeSnackBar() {
-		if (weex.config.env.platform === 'Web') {
-			document.body.removeChild(vc_snackbar.$el);
-		} else {
-			weex.document.body.removeChild(vc_snackbar.$el);
-		}
-	}
+  function removeSnackBar() {
+    if (weex.config.env.platform === 'Web') {
+      document.body.removeChild(VC_SNACKBAR.$el);
+    } else {
+      weex.document.body.removeChild(VC_SNACKBAR.$el);
+    }
+  }
 }
 
 function showSnackBar(options) {
-	return new Promise(function (resolve, reject) {
-		snackbar(_extends({}, options, {
-			clickCb: function clickCb() {
-				resolve();
-			},
-			dismissCb: function dismissCb() {
-				reject();
-			}
-		}));
-	});
+  return new Promise(function (resolve, reject) {
+    options = Object.assign(options, {
+      clickCb: function clickCb() {
+        resolve();
+      },
+      dismissCb: function dismissCb() {
+        reject();
+      }
+    });
+    snackbar(options);
+  });
 }
 
 exports.default = showSnackBar;
@@ -17093,7 +17073,7 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-status-bar[data-v-4cf19c5c] {\n    height: 66px;\n    width: 1080px;\n    background-color: #ffffff;\n}\n.fm-search-bar[data-v-4cf19c5c] {\n    padding: 0 48px;\n    background-color: #ffffff;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom-style: solid;\n    border-bottom-width: 2px;\n    border-bottom-color: rgba(0, 0, 0, 0.1);\n}\n.search-input-wrap[data-v-4cf19c5c] {\n    flex: 1;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    padding-left: 35px;\n    margin-right: 48px;\n    height: 90px;\n    background-color: rgba(0, 0, 0, 0.05);\n    outline: none;\n    border-radius: 45px;\n}\n.search-bar-input[data-v-4cf19c5c] {\n    flex: 1;\n    height: 90px;\n    margin-left: 24px;\n    margin-right: 9px;\n    line-height: 90px;\n    font-size: 42px;\n    background-color: transparent;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    color: #616161;\n}\n.search-bar-icon[data-v-4cf19c5c] {\n    line-height: 42px;\n    height: 42px;\n    font-weight: 700;\n}\n.search-bar-back[data-v-4cf19c5c] {\n\t\tmargin-left: -18px;\n\t\tmargin-right: 30px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n}\n.search-bar-delete[data-v-4cf19c5c] {\n    width: 60px;\n    height: 60px;\n    margin-right: 15px;\n    font-weight: 700;\n    padding: 6px 5px;\n    background-color: rgba(77, 77, 77, 0.5);\n    border-radius: 30px;\n}\n.search-enter[data-v-4cf19c5c] {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 96px;\n    color: rgba(0, 0, 0, 0.6);\n    text-align: center;\n}\n.right-btn[data-v-4cf19c5c] {\n    margin-right: 24px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-searchbar/index.vue?a85bb61a"],"names":[],"mappings":";AAoCA;IACA,aAAA;IACA,cAAA;IACA,0BAAA;CACA;AAEA;IACA,gBAAA;IACA,0BAAA;IACA,cAAA;IACA,cAAA;IACA,oBAAA;IACA,oBAAA;IACA,+BAAA;IACA,2BAAA;IACA,yBAAA;IACA,wCAAA;CACA;AAEA;IACA,QAAA;IACA,oBAAA;IACA,oBAAA;IACA,wBAAA;IACA,mBAAA;IACA,mBAAA;IACA,aAAA;IACA,sCAAA;IACA,cAAA;IACA,oBAAA;CACA;AAEA;IACA,QAAA;IACA,aAAA;IACA,kBAAA;IACA,kBAAA;IACA,kBAAA;IACA,gBAAA;IACA,8BAAA;IACA,+BAAA;IACA,iBAAA;IACA,eAAA;CACA;AAEA;IACA,kBAAA;IACA,aAAA;IACA,iBAAA;CACA;AAEA;EACA,mBAAA;EACA,mBAAA;IACA,kBAAA;IACA,aAAA;IACA,iBAAA;CACA;AAEA;IACA,YAAA;IACA,aAAA;IACA,mBAAA;IACA,iBAAA;IACA,iBAAA;IACA,wCAAA;IACA,oBAAA;CACA;AAEA;IACA,+BAAA;IACA,iBAAA;IACA,gBAAA;IACA,kBAAA;IACA,0BAAA;IACA,mBAAA;CACA;AAEA;IACA,mBAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 18/02/26-->\n<template>\n  <div v-if=\"show\">\n    <div class=\"fm-status-bar\" v-if=\"statusbar\" :style=\"{ backgroundColor: backgroundColor }\"></div>\n    <div class=\"fm-search-bar\" :style=\"barStyle\">\n      <slot name=\"left\" v-if=\"hasPrev\">\n        <fm-icon @fmClick=\"onBack\" class=\"search-bar-back\" value=\"&#xe6b5;\" :icon-style=\"72\" :color=\"leftColor\"/>\n      </slot>\n        <div class=\"search-input-wrap\" :style=\"inputBackground ? { backgroundColor: inputBackground} : {}\">\n          <fm-icon class=\"search-bar-icon\" value=\"&#xe6d4;\" :icon-style=\"42\" :color=\"iconColor\" />\n          <input @blur=\"onBlur\"\n                @focus=\"onFocus\"\n                @input=\"onInput\"\n                @return=\"onSubmit\"\n                :autofocus=\"autofocus\"\n                :disabled=\"disabled\"\n                :value=\"value\"\n                ref=\"input\"\n                :type=\"inputType\"\n                :return-key-type=\"returnKeyType\"\n                :placeholder=\"placeholder\"\n                :style=\"{color: inputColor, 'placeholder-color': placeholderColor}\"\n                class=\"search-bar-input\"/>\n          <fm-icon v-if=\"delShow\" class=\"search-bar-delete\" value=\"&#xe6c0;\" :icon-style=\"48\" color=\"#FFFFFF\" @fmClick=\"delClick\" />\n          <div v-else class=\"right-btn\">\n            <slot name=\"input-right\"></slot>\n          </div>\n        </div>\n      <slot name=\"right\">\n        <text class=\"search-enter\" @click=\"onSearch\" :style=\"searchTextStyle\">{{ searchText }}</text>\n      </slot>\n    </div> \n  </div> \n</template>\n\n<style scoped>\n  .fm-status-bar {\n    height: 66px;\n    width: 1080px;\n    background-color: #ffffff;\n  }\n\n  .fm-search-bar {\n    padding: 0 48px;\n    background-color: #ffffff;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom-style: solid;\n    border-bottom-width: 2px;\n    border-bottom-color: rgba(0, 0, 0, 0.1);\n  }\n\n  .search-input-wrap {\n    flex: 1;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    padding-left: 35px;\n    margin-right: 48px;\n    height: 90px;\n    background-color: rgba(0, 0, 0, 0.05);\n    outline: none;\n    border-radius: 45px;\n  }\n\n  .search-bar-input {\n    flex: 1;\n    height: 90px;\n    margin-left: 24px;\n    margin-right: 9px;\n    line-height: 90px;\n    font-size: 42px;\n    background-color: transparent;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    color: #616161;\n  }\n\n  .search-bar-icon {\n    line-height: 42px;\n    height: 42px;\n    font-weight: 700;\n  }\n\n  .search-bar-back {\n\t\tmargin-left: -18px;\n\t\tmargin-right: 30px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n  }\n\n  .search-bar-delete {\n    width: 60px;\n    height: 60px;\n    margin-right: 15px;\n    font-weight: 700;\n    padding: 6px 5px;\n    background-color: rgba(77, 77, 77, 0.5);\n    border-radius: 30px;\n  }\n\n  .search-enter {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 96px;\n    color: rgba(0, 0, 0, 0.6);\n    text-align: center;\n  }\n\n  .right-btn {\n    margin-right: 24px;\n  }\n</style>\n\n<script>\n  import FmIcon from '../fm-icon'\n  import Locale from 'weex-flymeui/lib/mixins/locale'\n  import { t } from 'weex-flymeui/lib/locale'\n  const Navigator = weex.requireModule('navigator')\n\n  export default {\n    name: 'FmSearchbar',\n    mixins: [Locale],\n    components: { FmIcon },\n    props: {\n\t\t\tstatusbar: {\n\t\t\t\ttype: Boolean,\n\t\t\t\tdefault: false,\n\t\t\t},\n      inputValue: {\n        type: [String, Number],\n        default: ''\n      },\n\t\t\tuseDefaultReturn: {\n\t\t\t\ttype: Boolean,\n\t\t\t\tdefault: true,\n\t\t\t},\n\t\t\thasPrev: {\n\t\t\t\ttype: Boolean,\n\t\t\t\tdefault: true\n\t\t\t},\n\t\t\tbackgroundColor: {\n\t\t\t\ttype: String,\n\t\t\t\tdefault: '#FFFFFF'\n      },\n      iconColor: {\n        type: String,\n        default: 'rgba(0, 0, 0, 0.4)'\n      },\n\t\t\tleftColor: {\n\t\t\t\ttype: String,\n\t\t\t\tdefault: 'rgba(0, 0, 0, 0.6)'\n\t\t\t},\n      inputBackground: String,\n\t\t\tborderStyle: {\n\t\t\t\ttype: Object,\n\t\t\t\tdefault: () => ({\n          borderBottomStyle: 'solid',\n          borderBottomWidth: 2,\n          borderBottomColor: 'rgba(0, 0, 0, 0.1)'\n        })\n\t\t\t},\n      placeholder: String,\n      autofocus: Boolean,\n      disabled: Boolean,\n      inputType: {\n        type: String,\n        default: 'text'\n      },\n      searchText: {\n        type: String,\n        default() {\n          return t('el.searchbar.search');\n        }\n      },\n      searchTextStyle: {\n        type: Object,\n        default: () => ({})\n      },\n      returnKeyType: {\n        type: String,\n        default: 'search'\n      },\n      placeholderColor: {\n        type: String,\n        default: 'rgba(0, 0, 0, 0.4)'\n      },\n      inputColor: {\n        type: String,\n        default: '#616161'\n      },\n      show: {\n        type: Boolean,\n        default: true\n      }\n    },\n    watch: {\n      inputValue(val) {\n        this.value = val\n      }\n    },\n    data: () => ({\n      isFocus: false,\n      value: ''\n    }),\n    computed: {\n      delShow() {\n        return this.isFocus && this.value !== ''\n      },\n\t\t\tbarStyle() {\n\t\t\t\tlet style = {\n          borderBottomStyle: 'solid',\n          borderBottomWidth: 2,\n\t\t\t\t\tborderBottomColor: 'rgba(0, 0, 0, 0.1)',\n\t\t\t\t}\n\t\t\t\tObject.assign(style, this.borderStyle)\n\t\t\t\tstyle.backgroundColor = this.backgroundColor\n\t\t\t\treturn style\n\t\t\t}\n    },\n    methods: {\n\t\t\tonBack(e) {\n        const self = this\n        if (self.useDefaultReturn) {\n          Navigator.pop({}, e => {\n          })\n        }\n        self.$emit('fmSearchbarleftBtnClicked', {})\n\t\t\t},\n      delClick(e) {\n        this.value = ''\n      },\n      onInput(e) {\n        this.value = e.value\n        this.$emit('input', e)\n      },\n      onFocus(e) {\n        this.isFocus = true\n        this.$emit('focus', e)\n      },\n      onBlur(e) {\n        this.isFocus = false\n        this.$emit('blur', e)\n      },\n      focus() {\n        this.$refs.input.focus()\n      },\n      blur() {\n        this.$refs.input.blur()\n      },\n      onSubmit(e) {\n        this.$emit('fmSearchbarSubmit', { value: this.value })\n      },\n      onSearch(e) {\n        this.$emit('fmSearchbarSubmit', { value: this.value })\n      },\n      setSelectionRange(start, end) {\n        this.$refs.input.setSelectionRange(start, end)\n      },\n      getEditSelectionRange(callback) {\n        this.$refs.input.getEditSelectionRange(callback)\n      },\n      setValue (value) {\n        this.value = value\n      }\n    },\n    mounted() {\n      this.value = this.inputValue || ''\n    }\n  }\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-status-bar[data-v-4cf19c5c] {\n    height: 66px;\n    width: 1080px;\n    background-color: #ffffff;\n}\n.fm-search-bar[data-v-4cf19c5c] {\n    padding: 0 48px;\n    background-color: #ffffff;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom-style: solid;\n    border-bottom-width: 2px;\n    border-bottom-color: rgba(0, 0, 0, 0.1);\n}\n.search-input-wrap[data-v-4cf19c5c] {\n    flex: 1;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    padding-left: 35px;\n    height: 90px;\n    background-color: rgba(0, 0, 0, 0.05);\n    outline: none;\n    border-radius: 45px;\n}\n.search-bar-input[data-v-4cf19c5c] {\n    flex: 1;\n    height: 90px;\n    margin-left: 24px;\n    margin-right: 9px;\n    line-height: 90px;\n    font-size: 42px;\n    background-color: transparent;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    color: #616161;\n}\n.search-bar-icon[data-v-4cf19c5c] {\n    line-height: 42px;\n    height: 42px;\n    font-weight: 700;\n}\n.search-bar-back[data-v-4cf19c5c] {\n\t\tmargin-left: -18px;\n\t\tmargin-right: 30px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n}\n.search-bar-delete[data-v-4cf19c5c] {\n    width: 60px;\n    height: 60px;\n    margin-right: 15px;\n    font-weight: 700;\n    padding: 6px 5px;\n    background-color: rgba(77, 77, 77, 0.5);\n    border-radius: 30px;\n}\n.search-enter[data-v-4cf19c5c] {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 96px;\n    margin-left: 48px;\n    color: rgba(0, 0, 0, 0.4);\n    text-align: center;\n}\n.right-btn[data-v-4cf19c5c] {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    right: 24px;\n    justify-content: center;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-searchbar/index.vue?d33a5652"],"names":[],"mappings":";AAoCA;IACA,aAAA;IACA,cAAA;IACA,0BAAA;CACA;AAEA;IACA,gBAAA;IACA,0BAAA;IACA,cAAA;IACA,cAAA;IACA,oBAAA;IACA,oBAAA;IACA,+BAAA;IACA,2BAAA;IACA,yBAAA;IACA,wCAAA;CACA;AAEA;IACA,QAAA;IACA,oBAAA;IACA,oBAAA;IACA,wBAAA;IACA,mBAAA;IACA,aAAA;IACA,sCAAA;IACA,cAAA;IACA,oBAAA;CACA;AAEA;IACA,QAAA;IACA,aAAA;IACA,kBAAA;IACA,kBAAA;IACA,kBAAA;IACA,gBAAA;IACA,8BAAA;IACA,+BAAA;IACA,iBAAA;IACA,eAAA;CACA;AAEA;IACA,kBAAA;IACA,aAAA;IACA,iBAAA;CACA;AAEA;EACA,mBAAA;EACA,mBAAA;IACA,kBAAA;IACA,aAAA;IACA,iBAAA;CACA;AAEA;IACA,YAAA;IACA,aAAA;IACA,mBAAA;IACA,iBAAA;IACA,iBAAA;IACA,wCAAA;IACA,oBAAA;CACA;AAEA;IACA,+BAAA;IACA,iBAAA;IACA,gBAAA;IACA,kBAAA;IACA,kBAAA;IACA,0BAAA;IACA,mBAAA;CACA;AAEA;IACA,mBAAA;IACA,OAAA;IACA,UAAA;IACA,YAAA;IACA,wBAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 18/02/26-->\n<template>\n  <div v-if=\"show\">\n    <div class=\"fm-status-bar\" v-if=\"statusbar\" :style=\"{ backgroundColor: backgroundColor }\"></div>\n    <div class=\"fm-search-bar\" :style=\"barStyle\">\n      <slot name=\"left\" v-if=\"hasPrev\">\n        <fm-icon @fmClick=\"onBack\" class=\"search-bar-back\" value=\"&#xe6b5;\" :icon-style=\"72\" :color=\"leftColor\"/>\n      </slot>\n        <div class=\"search-input-wrap\" :style=\"inputBackground ? { backgroundColor: inputBackground} : {}\">\n          <fm-icon class=\"search-bar-icon\" value=\"&#xe6d4;\" :icon-style=\"42\" :color=\"iconColor\" />\n          <input @blur=\"onBlur\"\n                @focus=\"onFocus\"\n                @input=\"onInput\"\n                @return=\"onSubmit\"\n                :autofocus=\"autofocus\"\n                :disabled=\"disabled\"\n                :value=\"value\"\n                ref=\"input\"\n                :type=\"inputType\"\n                :return-key-type=\"returnKeyType\"\n                :placeholder=\"placeholder\"\n                :style=\"{color: inputColor, 'placeholder-color': placeholderColor}\"\n                class=\"search-bar-input\"/>\n          <fm-icon :style=\"{ opacity: delShow ? 1 : 0 }\" class=\"search-bar-delete\" value=\"&#xe6c0;\" :icon-style=\"48\" color=\"#FFFFFF\" @fmClick=\"delClick\" />\n          <div :style=\"{ opacity: !delShow ? 1 : 0 }\" class=\"right-btn\">\n            <slot name=\"input-right\"></slot>\n          </div>\n        </div>\n      <slot name=\"right\">\n        <text v-if=\"searchText\" class=\"search-enter\" @click=\"onSearch\" :style=\"searchTextStyle\">{{ searchText }}</text>\n      </slot>\n    </div> \n  </div> \n</template>\n\n<style scoped>\n  .fm-status-bar {\n    height: 66px;\n    width: 1080px;\n    background-color: #ffffff;\n  }\n\n  .fm-search-bar {\n    padding: 0 48px;\n    background-color: #ffffff;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom-style: solid;\n    border-bottom-width: 2px;\n    border-bottom-color: rgba(0, 0, 0, 0.1);\n  }\n\n  .search-input-wrap {\n    flex: 1;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    padding-left: 35px;\n    height: 90px;\n    background-color: rgba(0, 0, 0, 0.05);\n    outline: none;\n    border-radius: 45px;\n  }\n\n  .search-bar-input {\n    flex: 1;\n    height: 90px;\n    margin-left: 24px;\n    margin-right: 9px;\n    line-height: 90px;\n    font-size: 42px;\n    background-color: transparent;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    color: #616161;\n  }\n\n  .search-bar-icon {\n    line-height: 42px;\n    height: 42px;\n    font-weight: 700;\n  }\n\n  .search-bar-back {\n\t\tmargin-left: -18px;\n\t\tmargin-right: 30px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n  }\n\n  .search-bar-delete {\n    width: 60px;\n    height: 60px;\n    margin-right: 15px;\n    font-weight: 700;\n    padding: 6px 5px;\n    background-color: rgba(77, 77, 77, 0.5);\n    border-radius: 30px;\n  }\n\n  .search-enter {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 96px;\n    margin-left: 48px;\n    color: rgba(0, 0, 0, 0.4);\n    text-align: center;\n  }\n\n  .right-btn {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    right: 24px;\n    justify-content: center;\n  }\n</style>\n\n<script>\n  import FmIcon from '../fm-icon'\n  import Locale from 'weex-flymeui/lib/mixins/locale'\n  import { t } from 'weex-flymeui/lib/locale'\n  const Navigator = weex.requireModule('navigator')\n\n  export default {\n    name: 'FmSearchbar',\n    mixins: [Locale],\n    components: { FmIcon },\n    props: {\n\t\t\tstatusbar: {\n\t\t\t\ttype: Boolean,\n\t\t\t\tdefault: false,\n\t\t\t},\n      inputValue: {\n        type: [String, Number],\n        default: ''\n      },\n\t\t\tuseDefaultReturn: {\n\t\t\t\ttype: Boolean,\n\t\t\t\tdefault: true,\n\t\t\t},\n\t\t\thasPrev: {\n\t\t\t\ttype: Boolean,\n\t\t\t\tdefault: true\n\t\t\t},\n\t\t\tbackgroundColor: {\n\t\t\t\ttype: String,\n\t\t\t\tdefault: '#FFFFFF'\n      },\n      iconColor: {\n        type: String,\n        default: 'rgba(0, 0, 0, 0.4)'\n      },\n\t\t\tleftColor: {\n\t\t\t\ttype: String,\n\t\t\t\tdefault: 'rgba(0, 0, 0, 0.6)'\n\t\t\t},\n      inputBackground: String,\n\t\t\tborderStyle: {\n\t\t\t\ttype: Object,\n\t\t\t\tdefault: () => ({\n          borderBottomStyle: 'solid',\n          borderBottomWidth: 2,\n          borderBottomColor: 'rgba(0, 0, 0, 0.1)'\n        })\n\t\t\t},\n      placeholder: String,\n      autofocus: Boolean,\n      disabled: Boolean,\n      inputType: {\n        type: String,\n        default: 'text'\n      },\n      searchText: {\n        type: String,\n        default() {\n          return t('el.searchbar.search');\n        }\n      },\n      searchColor: {\n        type: String,\n        default: 'rgba(0, 0, 0, 0.4)'\n      },\n      searchHighlightColor: {\n        type: String,\n        default: '#198DED'\n      },\n      searchTextSize: {\n        type: Number,\n        default: 48\n      },\n      returnKeyType: {\n        type: String,\n        default: 'search'\n      },\n      placeholderColor: {\n        type: String,\n        default: 'rgba(0, 0, 0, 0.4)'\n      },\n      inputColor: {\n        type: String,\n        default: '#616161'\n      },\n      show: {\n        type: Boolean,\n        default: true\n      }\n    },\n    watch: {\n      inputValue(val) {\n        this.value = val\n      }\n    },\n    data: () => ({\n      isFocus: false,\n      value: ''\n    }),\n    computed: {\n      delShow() {\n        return this.isFocus && this.value\n      },\n\t\t\tbarStyle() {\n\t\t\t\tlet style = {\n          borderBottomStyle: 'solid',\n          borderBottomWidth: 2,\n\t\t\t\t\tborderBottomColor: 'rgba(0, 0, 0, 0.1)',\n\t\t\t\t}\n\t\t\t\tObject.assign(style, this.borderStyle)\n\t\t\t\tstyle.backgroundColor = this.backgroundColor\n\t\t\t\treturn style\n      },\n      searchTextStyle() {\n        const { value, searchColor, searchHighlightColor, searchTextSize } = this\n        return {\n          color: value ? searchHighlightColor : searchColor,\n          fontSize: searchTextSize\n        }\n      }\n    },\n    methods: {\n\t\t\tonBack(e) {\n        const self = this\n        if (self.useDefaultReturn) {\n          Navigator.pop({}, e => {\n          })\n        }\n        self.$emit('fmSearchbarleftBtnClicked', {})\n\t\t\t},\n      delClick(e) {\n        this.value = ''\n      },\n      onInput(e) {\n        this.value = e.value\n        this.$emit('input', e)\n      },\n      onFocus(e) {\n        this.isFocus = true\n        this.$emit('focus', e)\n      },\n      onBlur(e) {\n        this.isFocus = false\n        this.$emit('blur', e)\n      },\n      focus() {\n        this.$refs.input.focus()\n      },\n      blur() {\n        this.$refs.input.blur()\n      },\n      onSubmit(e) {\n        this.$emit('fmSearchbarSubmit', { value: this.value })\n      },\n      onSearch(e) {\n        this.$emit('fmSearchbarSubmit', { value: this.value })\n      },\n      setSelectionRange(start, end) {\n        this.$refs.input.setSelectionRange(start, end)\n      },\n      getEditSelectionRange(callback) {\n        this.$refs.input.getEditSelectionRange(callback)\n      },\n      setValue (value) {\n        this.value = value\n      }\n    },\n    mounted() {\n      this.value = this.inputValue || ''\n    }\n  }\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -17122,6 +17102,10 @@ var _locale3 = __webpack_require__(4);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Navigator = weex.requireModule('navigator'); //
+//
+//
+//
+//
 //
 //
 //
@@ -17298,11 +17282,17 @@ exports.default = {
         return (0, _locale3.t)('el.searchbar.search');
       }
     },
-    searchTextStyle: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
+    searchColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, 0.4)'
+    },
+    searchHighlightColor: {
+      type: String,
+      default: '#198DED'
+    },
+    searchTextSize: {
+      type: Number,
+      default: 48
     },
     returnKeyType: {
       type: String,
@@ -17334,7 +17324,7 @@ exports.default = {
   },
   computed: {
     delShow: function delShow() {
-      return this.isFocus && this.value !== '';
+      return this.isFocus && this.value;
     },
     barStyle: function barStyle() {
       var style = {
@@ -17345,6 +17335,17 @@ exports.default = {
       Object.assign(style, this.borderStyle);
       style.backgroundColor = this.backgroundColor;
       return style;
+    },
+    searchTextStyle: function searchTextStyle() {
+      var value = this.value,
+          searchColor = this.searchColor,
+          searchHighlightColor = this.searchHighlightColor,
+          searchTextSize = this.searchTextSize;
+
+      return {
+        color: value ? searchHighlightColor : searchColor,
+        fontSize: searchTextSize
+      };
     }
   },
   methods: {
@@ -17463,10 +17464,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "input": _vm.onInput,
       "return": _vm.onSubmit
     }
-  }), _vm._v(" "), (_vm.delShow) ? _c('fm-icon', {
+  }), _vm._v(" "), _c('fm-icon', {
     staticClass: "search-bar-delete",
     staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
+    style: (_vm.$processStyle({
+      opacity: _vm.delShow ? 1 : 0
+    })),
     attrs: {
       "value": "&#xe6c0;",
       "icon-style": 48,
@@ -17475,18 +17478,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "fmClick": _vm.delClick
     }
-  }) : _c('div', {
+  }), _vm._v(" "), _c('div', {
     staticClass: "right-btn",
     staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [_vm._t("input-right")], 2)], 1), _vm._v(" "), _vm._t("right", [_c('text', {
+    style: (_vm.$processStyle({
+      opacity: !_vm.delShow ? 1 : 0
+    }))
+  }, [_vm._t("input-right")], 2)], 1), _vm._v(" "), _vm._t("right", [(_vm.searchText) ? _c('text', {
     staticClass: "search-enter",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(_vm.searchTextStyle)),
     on: {
       "click": _vm.onSearch
     }
-  }, [_vm._v(_vm._s(_vm.searchText))])])], 2)]) : _vm._e()
+  }, [_vm._v(_vm._s(_vm.searchText))]) : _vm._e()])], 2)]) : _vm._e()
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -19502,7 +19507,9 @@ function setTitle(title) {
 /* 325 */,
 /* 326 */,
 /* 327 */,
-/* 328 */
+/* 328 */,
+/* 329 */,
+/* 330 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19512,7 +19519,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(329);
+var _index = __webpack_require__(331);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -19527,18 +19534,18 @@ _index2.default.el = '#root';
 exports.default = new Vue(_index2.default);
 
 /***/ }),
-/* 329 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(330)
+__webpack_require__(332)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(332),
+  __webpack_require__(334),
   /* template */
-  __webpack_require__(333),
+  __webpack_require__(335),
   /* scopeId */
   "data-v-0fb8a2bd",
   /* cssModules */
@@ -19565,13 +19572,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 330 */
+/* 332 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(331);
+var content = __webpack_require__(333);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -19591,7 +19598,7 @@ if(false) {
 }
 
 /***/ }),
-/* 331 */
+/* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -19599,13 +19606,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.mzui-demo[data-v-0fb8a2bd] {\n    position: absolute;\n    top: 0;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    background-color: #ffffff;\n}\n.container[data-v-0fb8a2bd] {\n    padding-top: 60px;\n    padding-left: 60px;\n    padding-right: 60px;\n}\n.row[data-v-0fb8a2bd] {\n    flex-direction: row;\n    flex-wrap: wrap;\n}\n.btn[data-v-0fb8a2bd] {\n    margin-right: 60px;\n}\n.scroller[data-v-0fb8a2bd] {\n    flex: 1;\n}\n.demo-content[data-v-0fb8a2bd] {\n\t\theight: 840px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/example/component/snackbar/index.vue?5b32276e"],"names":[],"mappings":";AA+BA;IACA,mBAAA;IACA,OAAA;IACA,SAAA;IACA,QAAA;IACA,UAAA;IACA,0BAAA;CACA;AAEA;IACA,kBAAA;IACA,mBAAA;IACA,oBAAA;CACA;AAEA;IACA,oBAAA;IACA,gBAAA;CACA;AAEA;IACA,mBAAA;CACA;AAEA;IACA,QAAA;CACA;AAEA;EACA,cAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"mzui-demo\">\n    <scroller class=\"scroller\">\n      <title link=\"http://apps.flyme.cn/docs/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=5a3390c267e2277e77dcf941\"></title>\n      <category title=\"不同方向的 popup\"></category>\n        <div class=\"container row\">\n          <fm-button class=\"btn\" text=\"默认弹出\" @click=\"click1\" />\n        </div>\n        <div class=\"container row\">\n          <fm-button class=\"btn\" text=\"自定义停留时间( 5s )\" @click=\"click2\" />\n        </div>\n        <div class=\"container row\">\n          <fm-button class=\"btn\" text=\"不自动消失\" @click=\"click3\" />\n        </div>\n        <div class=\"container row\">\n          <fm-button class=\"btn\" text=\"js 调用弹出\" @click=\"click4\" />\n        </div>\n        <div class=\"container row\">\n          <fm-button class=\"btn\" text=\"点击弹出文字操作 SnackBar\" @click=\"click5\" />\n        </div>\n        <div class=\"container row\">\n          <fm-button class=\"btn\" text=\"点击弹出警告 SnackBar\" @click=\"click6\" />\n        </div>\n        <fm-snack-bar :show=\"show\" @fmSnackBarDismissed=\"fmSnackBarDismissed\" title=\"默认弹出，单行文字\" type=\"jump\"></fm-snack-bar>\n        <fm-snack-bar :show=\"staryTimeShow\" :stay-time=\"5000\" @fmSnackBarDismissed=\"fmSnackBarStayTimeDismissed\" title=\"5s 后消失\" type=\"jump\"></fm-snack-bar>\n        <fm-snack-bar :show=\"stayShow\" :auto-close=\"false\" @fmSnackBarDismissed=\"fmSnackBarStayDismissed\" title=\"不自动消失的 SnackBar\"></fm-snack-bar>\n    </scroller>\n  </div>\n</template>\n\n<style scoped>\n  .mzui-demo {\n    position: absolute;\n    top: 0;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    background-color: #ffffff;\n  }\n  \n  .container {\n    padding-top: 60px;\n    padding-left: 60px;\n    padding-right: 60px;\n  }\n\n  .row {\n    flex-direction: row;\n    flex-wrap: wrap;\n  }\n\n  .btn {\n    margin-right: 60px;\n  }\n  \n  .scroller {\n    flex: 1;\n  }\n\n  .demo-content {\n\t\theight: 840px;\n  }\n</style>\n\n<script>\nimport { FmButton, FmSnackBar, showSnackBar } from '../../../index';\nimport Title from '../../_mods/title.vue';\nimport Category from '../../_mods/category.vue';\nimport { setTitle } from '../../_mods/set-nav';\n\nconst modal = weex.requireModule('modal');\n\nexport default {\n\tcomponents: { Title, Category, FmButton, FmSnackBar },\n\tdata: ()=> ({\n    show: false,\n    staryTimeShow: false,\n    stayShow: false\n\t}),\n\tmounted() {\n\t},\n\tmethods: {\n\t\tclick1() {\n      this.show = true\n    },\n    fmSnackBarDismissed() {\n      this.show = false\n    },\n\t\tclick2() {\n      this.staryTimeShow = true\n    },\n    fmSnackBarStayTimeDismissed() {\n      this.staryTimeShow = false\n    },\n\t\tclick3() {\n      this.stayShow = true\n    },\n    fmSnackBarStayDismissed() {\n      this.stayShow = false\n    },\n    click4() {\n      showSnackBar({\n        title: 'js 调用弹出的 SnackBar'\n      }).then(() => {\n\n      }, () => {\n        modal.toast({ message: '消失了' })\n      })\n    },\n    click5() {\n      showSnackBar({\n        title: '已自动开启夜间模式',\n        closeText: '撤销',\n        autoClose: false\n      }).then(() => {\n        modal.toast({ message: '点击了撤销' })\n      }, () => {\n        modal.toast({ message: '消失了' })\n      })\n    },\n    click6() {\n      showSnackBar({\n        title: '无网络连接，请点击设置',\n        autoClose: false,\n        type: 'jump'\n      }).then(() => {\n        modal.toast({ message: '点击跳转' })\n      }, () => {\n        modal.toast({ message: '消失了' })\n      })\n    }\n\t}\n}\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.mzui-demo[data-v-0fb8a2bd] {\n    position: absolute;\n    top: 0;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    background-color: #ffffff;\n}\n.container[data-v-0fb8a2bd] {\n    padding-top: 60px;\n    padding-left: 60px;\n    padding-right: 60px;\n}\n.row[data-v-0fb8a2bd] {\n    flex-direction: row;\n    flex-wrap: wrap;\n}\n.btn[data-v-0fb8a2bd] {\n    margin-right: 60px;\n}\n.scroller[data-v-0fb8a2bd] {\n    flex: 1;\n}\n.demo-content[data-v-0fb8a2bd] {\n\t\theight: 840px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/example/component/snackbar/index.vue?c58dd788"],"names":[],"mappings":";AA+BA;IACA,mBAAA;IACA,OAAA;IACA,SAAA;IACA,QAAA;IACA,UAAA;IACA,0BAAA;CACA;AAEA;IACA,kBAAA;IACA,mBAAA;IACA,oBAAA;CACA;AAEA;IACA,oBAAA;IACA,gBAAA;CACA;AAEA;IACA,mBAAA;CACA;AAEA;IACA,QAAA;CACA;AAEA;EACA,cAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"mzui-demo\">\n    <scroller class=\"scroller\">\n      <title link=\"http://apps.flyme.cn/docs/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=5a3390c267e2277e77dcf941\"></title>\n      <category title=\"不同方向的 popup\"></category>\n        <div class=\"container row\">\n          <fm-button class=\"btn\" text=\"默认弹出\" @buttonClicked=\"click1\" />\n        </div>\n        <div class=\"container row\">\n          <fm-button class=\"btn\" text=\"自定义停留时间( 5s )\" @buttonClicked=\"click2\" />\n        </div>\n        <div class=\"container row\">\n          <fm-button class=\"btn\" text=\"不自动消失\" @buttonClicked=\"click3\" />\n        </div>\n        <div class=\"container row\">\n          <fm-button class=\"btn\" text=\"js 调用弹出\" @buttonClicked=\"click4\" />\n        </div>\n        <div class=\"container row\">\n          <fm-button class=\"btn\" text=\"点击弹出文字操作 SnackBar\" @buttonClicked=\"click5\" />\n        </div>\n        <div class=\"container row\">\n          <fm-button class=\"btn\" text=\"点击弹出警告 SnackBar\" @buttonClicked=\"click6\" />\n        </div>\n        <fm-snack-bar :show=\"show\" @fmSnackBarDismissed=\"fmSnackBarDismissed\" title=\"默认弹出，单行文字\" type=\"jump\"></fm-snack-bar>\n        <fm-snack-bar :show=\"staryTimeShow\" :stay-time=\"5000\" @fmSnackBarDismissed=\"fmSnackBarStayTimeDismissed\" title=\"5s 后消失\" type=\"jump\"></fm-snack-bar>\n        <fm-snack-bar :show=\"stayShow\" :auto-close=\"false\" @fmSnackBarDismissed=\"fmSnackBarStayDismissed\" title=\"不自动消失的 SnackBar\"></fm-snack-bar>\n    </scroller>\n  </div>\n</template>\n\n<style scoped>\n  .mzui-demo {\n    position: absolute;\n    top: 0;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    background-color: #ffffff;\n  }\n  \n  .container {\n    padding-top: 60px;\n    padding-left: 60px;\n    padding-right: 60px;\n  }\n\n  .row {\n    flex-direction: row;\n    flex-wrap: wrap;\n  }\n\n  .btn {\n    margin-right: 60px;\n  }\n  \n  .scroller {\n    flex: 1;\n  }\n\n  .demo-content {\n\t\theight: 840px;\n  }\n</style>\n\n<script>\nimport { FmButton, FmSnackBar, showSnackBar } from '../../../index';\nimport Title from '../../_mods/title.vue';\nimport Category from '../../_mods/category.vue';\nimport { setTitle } from '../../_mods/set-nav';\n\nconst modal = weex.requireModule('modal');\n\nexport default {\n\tcomponents: { Title, Category, FmButton, FmSnackBar },\n\tdata: ()=> ({\n    show: false,\n    staryTimeShow: false,\n    stayShow: false\n\t}),\n\tmounted() {\n\t},\n\tmethods: {\n\t\tclick1() {\n      this.show = true\n    },\n    fmSnackBarDismissed() {\n      this.show = false\n    },\n\t\tclick2() {\n      this.staryTimeShow = true\n    },\n    fmSnackBarStayTimeDismissed() {\n      this.staryTimeShow = false\n    },\n\t\tclick3() {\n      this.stayShow = true\n    },\n    fmSnackBarStayDismissed() {\n      this.stayShow = false\n    },\n    click4() {\n      showSnackBar({\n        title: 'js 调用弹出的 SnackBar'\n      }).then(() => {\n\n      }, () => {\n        modal.toast({ message: '消失了' })\n      })\n    },\n    click5() {\n      showSnackBar({\n        title: '已自动开启夜间模式',\n        closeText: '撤销',\n        autoClose: false\n      }).then(() => {\n        modal.toast({ message: '点击了撤销' })\n      }, () => {\n        modal.toast({ message: '消失了' })\n      })\n    },\n    click6() {\n      showSnackBar({\n        title: '无网络连接，请点击设置',\n        autoClose: false,\n        type: 'jump'\n      }).then(() => {\n        modal.toast({ message: '点击跳转' })\n      }, () => {\n        modal.toast({ message: '消失了' })\n      })\n    }\n\t}\n}\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 332 */
+/* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19759,7 +19766,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 333 */
+/* 335 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -19795,7 +19802,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "text": "默认弹出"
     },
     on: {
-      "click": _vm.click1
+      "buttonClicked": _vm.click1
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "container row",
@@ -19809,7 +19816,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "text": "自定义停留时间( 5s )"
     },
     on: {
-      "click": _vm.click2
+      "buttonClicked": _vm.click2
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "container row",
@@ -19823,7 +19830,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "text": "不自动消失"
     },
     on: {
-      "click": _vm.click3
+      "buttonClicked": _vm.click3
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "container row",
@@ -19837,7 +19844,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "text": "js 调用弹出"
     },
     on: {
-      "click": _vm.click4
+      "buttonClicked": _vm.click4
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "container row",
@@ -19851,7 +19858,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "text": "点击弹出文字操作 SnackBar"
     },
     on: {
-      "click": _vm.click5
+      "buttonClicked": _vm.click5
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "container row",
@@ -19865,7 +19872,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "text": "点击弹出警告 SnackBar"
     },
     on: {
-      "click": _vm.click6
+      "buttonClicked": _vm.click6
     }
   })], 1), _vm._v(" "), _c('fm-snack-bar', {
     staticStyle: _vm.$processStyle(undefined),

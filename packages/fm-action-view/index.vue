@@ -5,9 +5,9 @@
 export default {
   name: 'FmActionView',
   props: {
-		act: String
-	}
-}
+    act: String
+  }
+};
 </script>
 
 

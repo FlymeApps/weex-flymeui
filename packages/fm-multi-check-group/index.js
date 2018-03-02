@@ -1,2 +1,2 @@
 export { default }
-from './index.vue'
+  from './index.vue';

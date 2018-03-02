@@ -5,14 +5,17 @@ node_modules
 npm-debug.log
 *.swp
 .sw*
-.history/*
 .idea/*
 .jshintrc
-.travis.yml
 .sass-cache/
 .project
+.history
+.vscode
 mods/.sass-cache/
 !.gitignore
 !.editorconfig
 lerna-debug.log
+dist/example
+dist/*.map
 
+npm-debug*

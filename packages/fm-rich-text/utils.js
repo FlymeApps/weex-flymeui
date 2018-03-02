@@ -42,7 +42,7 @@ const Utils = {
    * console.log(isString('')); // true
    */
   isString: function (obj) {
-    return typeof(obj) === 'string';
+    return typeof (obj) === 'string';
   },
 
   /**
@@ -60,5 +60,5 @@ const Utils = {
   isNonEmptyArray: function (obj) {
     return obj && obj.length > 0 && Array.isArray(obj) && typeof obj !== 'undefined';
   }
-}
-export default Utils
+};
+export default Utils;

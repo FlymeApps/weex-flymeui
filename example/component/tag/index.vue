@@ -50,6 +50,12 @@
           <fm-tag value="热映" size="big" color="#ffaf00"></fm-tag>
           <fm-tag value="票" size="big" color="#3bc06b"></fm-tag>
       </div>
+      <category title="腰圆标签"></category>
+      <div class="cell">
+          <fm-tag value="腰圆标签" size="huge" color="#f12528"></fm-tag>
+          <fm-tag value="推荐" size="huge" color="#ffaf00"></fm-tag>
+          <fm-tag value="你给我听好" size="huge" color="#3bc06b"></fm-tag>
+      </div>
       <category title="空心标签"></category>
       <div class="cell">
           <fm-tag value="HQ" size="big" tagType="hollow" color="#f12528" fontColor="#3bc06b"></fm-tag>

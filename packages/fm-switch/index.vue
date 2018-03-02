@@ -61,6 +61,7 @@
           style.opacity = 1
         }
         if (borderColor) {
+          style.borderWidth = 6
           style.borderColor = borderColor
         }
         if (backgroundColor) {

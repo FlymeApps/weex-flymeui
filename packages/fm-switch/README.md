@@ -1,33 +1,51 @@
 # fm-switch
 
-## 使用
+> Flyme 风格开关按钮组件
+
+![](http://image.res.meizu.com/image/flyme-icon/b4d8e65d3c8c4c7aa1ea341f037267f9z)
+## 使用方法
 ```html
-<fm-switch></fm-switch>
-<fm-switch checked="true"></fm-switch>
-<fm-switch disabled="true"></fm-switch>
-<fm-switch theme="limegreen"></fm-switch>
+<template>
+  <div class="container">
+    <text class="text">基本态</text>
+    <fm-switch />
+    <text class="text">系统样式</text>
+    <fm-switch common />
+    <text class="text">自定义颜色</text>
+    <fm-switch
+      border-color="red" 
+      background-color="green" 
+      focus-color="gray" 
+      blur-color="white" />
+    <text class="text">禁用状态</text>
+    <fm-switch disabled />
+  </div>
+</template>
+
+<script>
+  import { FmSwitch } from 'weex-flymeui';
+  export default {
+    components: { FmSwitch }
+  };
+</script>
 ```
 
-## Props
-| 属性 | 类型 | 可选值 | 示例 | 说明 |
-| -------- | -------- | -------- | -------- | 
-| checked | Boolean | true / false  | checked="true"  | 是否默认打开，默认为 false
-| disabled | Boolean | true / false | disabled="true"  | 是否禁用按钮，默认为 false
-| theme  | String  | 请查阅主题色表  |  theme="limegreen" |  按钮的主题色
+更多详细代码例子可以参考 [demo](https://github.com/Yanjiie/weex-flymeui/blob/master/example/component/switch/index.vue)
 
-## Events
-| 事件名 | 事件类型 
-| -------- | -------- 
-| fmSwitchStateChange | 当按钮的状态被改变时触发，callback 第一个参数类型为 Boolean，对应按钮是否被打开
-
-## 主题色表
-![](http://image.res.meizu.com/image/flyme-icon/c8f2c3dae8514f93a68f8ce6abd1bedcz)
+## 可配置参数
+| Prop | Type | Required | Default | Description |
+|-------------|------------|--------|-----|-----|
+| common | `Boolean` |`N`| `false` | 使用系统样式 |
+| checked | `Boolean` |`N`| `false` | 控制选中状态 |
+| disabled | `Boolean` |`N`| `false` | 禁用按钮 |
+| focus-color | `String` |`N`| `#FFFFFF` | 球的聚焦颜色 |
+| blur-color | `String` |`N`| `#FFFFFF` | 球的失焦颜色 |
+| border-color | `String` |`N`| `#FFFFFF` | 边框颜色 |
+| background-color | `String` |`N`| `#198DED` | 背景颜色 |
 
 
-## 示例
-<div class="img-txt">
-	
-![](http://image.res.meizu.com/image/flyme-icon/b4d8e65d3c8c4c7aa1ea341f037267f9z)
+## 事件回调
 
-</div>
-
+```
+@fmSwitchStateChange="fmSwitchStateChange"
+```

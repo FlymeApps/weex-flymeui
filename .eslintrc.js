@@ -1,4 +1,4 @@
-{
+module.exports = {
   "env": {
     "es6": true,
     "node": true,
@@ -12,7 +12,13 @@
     "Vue": true
   },
   "rules": {
-    "semi": "off"
+    "semi": [2, "always"],
+    "no-control-regex": "off",
+    "no-extend-native": "off",
+    "camelcase": "off"
   },
-  "extends": "vue"
-}
+  "extends": "vue",
+  plugins: [
+    'vuefix'
+  ]
+};

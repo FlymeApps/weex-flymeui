@@ -1,11 +1,11 @@
 <template>
-    <div :class="tagClass">
-        <div v-if="showSolid || showHollow"
-            :class="['tag-item','tag-border',showHollow && 'tag-hollow']"
-            :style="tagTextStyle">
-          <text :class="textClass" ref='content' :style="textStyle"><slot></slot><template v-if="!$slots.default">{{ value }}</template></text>
-        </div>
+  <div :class="tagClass">
+    <div v-if="showSolid || showHollow"
+        :class="['tag-item', 'tag-border', size === 'huge' && 'tag-huge', showHollow && 'tag-hollow']"
+        :style="tagTextStyle">
+      <text :class="textClass" ref='content' :style="textStyle"><slot></slot><template v-if="!$slots.default">{{ value }}</template></text>
     </div>
+  </div>
 </template>
 
 <style scoped>
@@ -15,21 +15,24 @@
   }
 
   .tag-item {
-    padding: 9;
+    padding: 9px;
     justify-content: center;
     align-items: center;
     overflow: hidden;
   }
 
   .tag-border {
-    border-bottom-left-radius: 4.5;
-    border-bottom-right-radius: 4.5;
-    border-top-left-radius: 4.5;
-    border-top-right-radius: 4.5;
+    border-radius: 4.5px;
+  }
+
+  .tag-huge {
+    border-radius: 100px;
+    height: 72px;
+    padding: 12px 42px;
   }
 
   .tag-hollow {
-    border-width: 3;
+    border-width: 3px;
   }
 
   .tag-text {
@@ -38,19 +41,32 @@
   }
 
   .tag-font-small {
-    font-size: 24;
+    font-size: 24px;
   }
 
   .tag-font-big {
-    font-size: 30;
+    font-size: 30px;
+  }
+
+  .tag-font-huge {
+    font-size: 42px;
+    font-family: sans-serif-medium;
+    font-weight: 500;
   }
 
   .tag-margin-small {
-    margin: 3;
+    margin-right: 6px;
+    margin-bottom: 6px;
   }
 
   .tag-margin-big {
-    margin: 6;
+    margin-right: 12px;
+    margin-bottom: 12px;
+  }
+
+  .tag-margin-huge {
+    margin-right: 36px;
+    margin-bottom: 36px;
   }
 </style>
 
@@ -78,11 +94,11 @@ export default {
     },
     color: {
       type: String,
-      default: '#198ded'
+      default: '#198DED'
     },
     fontColor: {
       type: String,
-      default: '#fff'
+      default: '#FFFFFF'
     }
   },
   computed: {
@@ -105,13 +121,13 @@ export default {
     textClass() {
       let clz = ["tag-text"]
       const { size } = this;
-      fontSize: size === 'small' ? clz.push("tag-font-small") : clz.push("tag-font-big")
+      clz.push(`tag-font-${size}`)
       return clz
     },
     tagClass() {
       let clz = ["fm-tag"]
       const { size } = this;
-      fontSize: size === 'small' ? clz.push("tag-margin-small") : clz.push("tag-margin-small")
+      clz.push(`tag-margin-${size}`)
       return clz
     }
   },
@@ -120,5 +136,3 @@ export default {
   }
 }
 </script>
-
-

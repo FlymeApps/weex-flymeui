@@ -1,50 +1,50 @@
-import Dialog from '../fm-dialog'
-import { t } from 'weex-flymeui/lib/locale'
+import Dialog from '../fm-dialog';
+import { t } from 'weex-flymeui/lib/locale';
 
-let VCDialog = Vue.extend(Dialog)
-let vc_dialog = new VCDialog().$mount()
+const VCDialog = Vue.extend(Dialog);
+const VC_DIALOG = new VCDialog().$mount();
 
-function dialog(options) {
-  vc_dialog.show = true
-  vc_dialog.title = options.title
-  vc_dialog.content = options.content
-	vc_dialog.type = options.type
-	vc_dialog.canAutoClose = options.canAutoClose
-  options.cancelText && (vc_dialog.cancelText = options.cancelText)
-  options.confirmText && (vc_dialog.confirmText = options.confirmText)
-  vc_dialog.cancelCb = options.cancelCb
-  vc_dialog.confirmCb = options.confirmCb
+function dialog (options) {
+  VC_DIALOG.show = true;
+  VC_DIALOG.title = options.title;
+  VC_DIALOG.content = options.content;
+  VC_DIALOG.type = options.type;
+  VC_DIALOG.canAutoClose = options.canAutoClose;
+  options.cancelText && (VC_DIALOG.cancelText = options.cancelText);
+  options.confirmText && (VC_DIALOG.confirmText = options.confirmText);
+  VC_DIALOG.cancelCb = options.cancelCb;
+  VC_DIALOG.confirmCb = options.confirmCb;
 }
 
-let added = false
-function addDialog() {
+let added = false;
+function addDialog () {
   if (!added) {
     if (weex.config.env.platform === 'Web') {
-      document.body.appendChild(vc_dialog.$el)
+      document.body.appendChild(VC_DIALOG.$el);
     } else {
-			weex.document.body.appendChild(vc_dialog.$el)
-		}
-    added = true
+      weex.document.body.appendChild(VC_DIALOG.$el);
+    }
+    added = true;
   }
 }
 
-const noop = () => {}
-function resetDialog() {
-  vc_dialog.show = false
-	vc_dialog.cancelCb = noop
-	vc_dialog.confirmCb = noop
-	setTimeout(() => {
-		vc_dialog.title = ''
-		vc_dialog.content = ''
-		vc_dialog.canAutoClose = true
-		vc_dialog.type = 'alert'
-		vc_dialog.cancelText = t('el.common.cancel')
-		vc_dialog.confirmText = t('el.common.confirm')
-	}, 300)
+const noop = () => {};
+function resetDialog () {
+  VC_DIALOG.show = false;
+  VC_DIALOG.cancelCb = noop;
+  VC_DIALOG.confirmCb = noop;
+  setTimeout(() => {
+    VC_DIALOG.title = '';
+    VC_DIALOG.content = '';
+    VC_DIALOG.canAutoClose = true;
+    VC_DIALOG.type = 'alert';
+    VC_DIALOG.cancelText = t('el.common.cancel');
+    VC_DIALOG.confirmText = t('el.common.confirm');
+  }, 300);
 }
 
-function confirm(options) {
-  addDialog()
+function confirm (options) {
+  addDialog();
   return new Promise((resolve, reject) => {
     dialog({
       title: options.title,
@@ -53,19 +53,19 @@ function confirm(options) {
       cancelText: options.cancelText,
       confirmText: options.confirmText,
       cancelCb: () => {
-				resetDialog()
-        reject()
+        resetDialog();
+        reject();
       },
       confirmCb: () => {
-				resetDialog()
-        resolve()
+        resetDialog();
+        resolve();
       }
-    })
-  })
+    });
+  });
 }
 
-function alert(options) {
-  addDialog()
+function alert (options) {
+  addDialog();
   return new Promise((resolve, reject) => {
     dialog({
       title: options.title,
@@ -73,18 +73,18 @@ function alert(options) {
       type: 'alert',
       confirmText: options.confirmText,
       cancelCb: () => {
-				resetDialog()
-        reject()
+        resetDialog();
+        reject();
       },
       confirmCb: () => {
-				resetDialog()
-        resolve()
+        resetDialog();
+        resolve();
       }
-    })
-  })
+    });
+  });
 }
 
 export {
   confirm,
   alert
-}
+};

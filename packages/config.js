@@ -1,9 +1,15 @@
-import FmSwitch from './fm-switch/exports';
-import FmTag from './fm-tag/exports';
-import FmText from './fm-text/exports';
+import FmSwitch from './fm-switch/export';
+import FmTag from './fm-tag/export';
+import FmText from './fm-text/export';
+import FmSearchbar from './fm-searchbar/export';
+import FmTitlebar from './fm-titlebar/export';
+import FmIcon from './fm-icon/export';
 
-export {
+export default {
   FmSwitch,
   FmTag,
-  FmText
-}
+  FmText,
+  FmSearchbar,
+  FmTitlebar,
+  FmIcon
+};

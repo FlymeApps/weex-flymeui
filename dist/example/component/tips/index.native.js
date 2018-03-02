@@ -72,7 +72,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 305);
+/******/ 	return __webpack_require__(__webpack_require__.s = 307);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -797,6 +797,7 @@ exports.default = {
         style.opacity = 1;
       }
       if (borderColor) {
+        style.borderWidth = 6;
         style.borderColor = borderColor;
       }
       if (backgroundColor) {
@@ -935,44 +936,54 @@ module.exports = {
     "flexDirection": "row"
   },
   "tag-item": {
-    "paddingTop": 9,
-    "paddingRight": 9,
-    "paddingBottom": 9,
-    "paddingLeft": 9,
+    "paddingTop": "9",
+    "paddingRight": "9",
+    "paddingBottom": "9",
+    "paddingLeft": "9",
     "justifyContent": "center",
     "alignItems": "center",
     "overflow": "hidden"
   },
   "tag-border": {
-    "borderBottomLeftRadius": 4.5,
-    "borderBottomRightRadius": 4.5,
-    "borderTopLeftRadius": 4.5,
-    "borderTopRightRadius": 4.5
+    "borderRadius": "4.5"
+  },
+  "tag-huge": {
+    "borderRadius": "100",
+    "height": "72",
+    "paddingTop": "12",
+    "paddingRight": "42",
+    "paddingBottom": "12",
+    "paddingLeft": "42"
   },
   "tag-hollow": {
-    "borderWidth": 3
+    "borderWidth": "3"
   },
   "tag-text": {
     "fontFamily": "\"Source Han Sans CN\", Roboto, sans-serif",
     "fontWeight": "bold"
   },
   "tag-font-small": {
-    "fontSize": 24
+    "fontSize": "24"
   },
   "tag-font-big": {
-    "fontSize": 30
+    "fontSize": "30"
+  },
+  "tag-font-huge": {
+    "fontSize": "42",
+    "fontFamily": "sans-serif-medium",
+    "fontWeight": "500"
   },
   "tag-margin-small": {
-    "marginTop": 3,
-    "marginRight": 3,
-    "marginBottom": 3,
-    "marginLeft": 3
+    "marginRight": "6",
+    "marginBottom": "6"
   },
   "tag-margin-big": {
-    "marginTop": 6,
-    "marginRight": 6,
-    "marginBottom": 6,
-    "marginLeft": 6
+    "marginRight": "12",
+    "marginBottom": "12"
+  },
+  "tag-margin-huge": {
+    "marginRight": "36",
+    "marginBottom": "36"
   }
 }
 
@@ -1051,6 +1062,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
   name: 'FmTag',
@@ -1072,11 +1099,11 @@ exports.default = {
     },
     color: {
       type: String,
-      default: '#198ded'
+      default: '#198DED'
     },
     fontColor: {
       type: String,
-      default: '#fff'
+      default: '#FFFFFF'
     }
   },
   computed: {
@@ -1107,14 +1134,14 @@ exports.default = {
       var clz = ["tag-text"];
       var size = this.size;
 
-      fontSize: size === 'small' ? clz.push("tag-font-small") : clz.push("tag-font-big");
+      clz.push('tag-font-' + size);
       return clz;
     },
     tagClass: function tagClass() {
       var clz = ["fm-tag"];
       var size = this.size;
 
-      fontSize: size === 'small' ? clz.push("tag-margin-small") : clz.push("tag-margin-small");
+      clz.push('tag-margin-' + size);
       return clz;
     }
   },
@@ -9532,7 +9559,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     class: _vm.tagClass
   }, [(_vm.showSolid || _vm.showHollow) ? _c('div', {
-    class: ['tag-item', 'tag-border', _vm.showHollow && 'tag-hollow'],
+    class: ['tag-item', 'tag-border', _vm.size === 'huge' && 'tag-huge', _vm.showHollow && 'tag-hollow'],
     style: _vm.tagTextStyle
   }, [_c('text', {
     ref: "content",
@@ -9605,14 +9632,7 @@ module.exports = {
     "fontWeight": "700"
   },
   "light": {
-    "fontWeight": "400",
-    "lineHeight": 54
-  },
-  "title": {
-    "fontSize": 48,
-    "fontWeight": "500",
-    "lineHeight": 69,
-    "color": "#000000"
+    "fontWeight": "400"
   },
   "small": {
     "fontSize": 36
@@ -9641,21 +9661,8 @@ module.exports = {
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -9698,63 +9705,40 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 
 exports.default = {
-    name: 'FmText',
-    props: {
-        textValue: [String, Number],
-        medium: Boolean,
-        bold: Boolean,
-        light: Boolean,
-        title: Boolean,
-        small: Boolean,
-        large: Boolean,
-        huge: Boolean,
-        textStyle: {
-            type: Object,
-            default: function _default() {
-                return {};
-            }
-        },
-        hasTextMargin: {
-            type: Boolean,
-            default: true
-        },
-        fmClick: Function
+  name: 'FmText',
+  props: {
+    value: String,
+    fontWeight: {
+      type: String,
+      default: 'normal'
     },
-
-    computed: {
-        textClz: function textClz() {
-            var clz = ['text'];
-            if (this.medium) {
-                clz.push('medium');
-            }
-            if (this.light) {
-                clz.push('light');
-            }
-            if (this.title) {
-                clz.push('title');
-            }
-            if (this.bold) {
-                clz.push('bold');
-            }
-            if (this.small) {
-                clz.push('small');
-            }
-            if (this.large) {
-                clz.push('large');
-            }
-            if (this.huge) {
-                clz.push('huge');
-            }
-            if (this.hasTextMargin) {
-                clz.push('margin-text');
-            }
-            return clz;
-        },
-        getStyle: function getStyle() {
-            return _extends({}, this.textStyle);
-        }
+    size: {
+      type: String,
+      default: 'normal'
     },
-    methods: {}
+    hasTextMargin: {
+      type: Boolean,
+      default: true
+    }
+  },
+  computed: {
+    textClz: function textClz() {
+      var clz = ['text'];
+      if (this.hasTextMargin) {
+        clz.push('margin-text');
+      }
+      if (this.size !== 'normal') {
+        clz.push('' + this.size);
+      }
+      if (this.fontWeight !== 'normal') {
+        clz.push('' + this.fontWeight);
+      }
+      return clz;
+    }
+  },
+  created: function created() {
+    this.$slots.default && (this.value = this.$slots.default[0].text);
+  }
 };
 
 /***/ }),
@@ -9763,9 +9747,8 @@ exports.default = {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('text', {
-    class: _vm.textClz,
-    style: _vm.getStyle
-  }, [_vm._t("default"), _vm._v(_vm._s(_vm.textValue))], 2)
+    class: _vm.textClz
+  }, [_vm._t("default"), (!_vm.$slots.default) ? [_vm._v(_vm._s(_vm.value))] : _vm._e()], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 
@@ -11504,13 +11487,11 @@ module.exports = {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-//
-//
 //
 //
 //
@@ -11578,132 +11559,132 @@ var dom = weex.requireModule('dom');
 var animation = weex.requireModule('animation');
 
 exports.default = {
-	name: 'FmTabView',
-	data: function data() {
-		return {
-			width: 0, //单个tab宽度
-			min: 0,
-			transX: 0,
-			startX: 0,
-			moveX: 0,
-			current: 0, //当前tab index
-			lineWidth: 0, //标题下划线宽度
-			lineLeft: 0,
-			line: 0 //标题下划线translate计算比例
-		};
-	},
+  name: 'FmTabView',
+  data: function data() {
+    return {
+      width: 0, // 单个tab宽度
+      min: 0,
+      transX: 0,
+      startX: 0,
+      moveX: 0,
+      current: 0, // 当前tab index
+      lineWidth: 0, // 标题下划线宽度
+      lineLeft: 0,
+      line: 0 // 标题下划线translate计算比例
+    };
+  },
 
-	props: {
-		items: {
-			type: Array,
-			required: true
-		}
-	},
-	computed: {
-		lineStyle: function lineStyle() {
-			return {
-				width: this.lineWidth + 'px',
-				'margin-left': this.lineLeft + 'px',
-				transform: 'translateX(' + -this.transX / this.line + 'px)'
-			};
-		},
-		listStyle: function listStyle() {
-			var sty = {
-				opacity: this.width === 0 ? 0 : 1
-			};
+  props: {
+    items: {
+      type: Array,
+      required: true
+    }
+  },
+  computed: {
+    lineStyle: function lineStyle() {
+      return {
+        width: this.lineWidth + 'px',
+        'margin-left': this.lineLeft + 'px',
+        transform: 'translateX(' + -this.transX / this.line + 'px)'
+      };
+    },
+    listStyle: function listStyle() {
+      var sty = {
+        opacity: this.width === 0 ? 0 : 1
+      };
 
-			if (this.width > 0) {
-				sty.width = this.width * this.items.length + 'px';
-				sty.transform = 'translateX(' + this.transX + 'px)';
-			}
+      if (this.width > 0) {
+        sty.width = this.width * this.items.length + 'px';
+        sty.transform = 'translateX(' + this.transX + 'px)';
+      }
 
-			return sty;
-		},
-		itemStyle: function itemStyle() {
-			return {
-				width: (this.width || 1080) + 'px'
-			};
-		}
-	},
-	mounted: function mounted() {
-		var _this = this;
+      return sty;
+    },
+    itemStyle: function itemStyle() {
+      return {
+        width: (this.width || 1080) + 'px'
+      };
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
 
-		setTimeout(function () {
-			var platform = weex.config.env.platform;
+    setTimeout(function () {
+      var platform = weex.config.env.platform;
 
-			var head = (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object' && platform.toLowerCase() === 'web' ? _this.$refs.header.$children[0].$children[0] : _this.$refs.header.children[0].children[0];
-			dom.getComponentRect(head, function (opt) {
-				_this.lineWidth = opt.size.width + 36;
-				_this.lineLeft = opt.size.left - 66 - 18;
-			});
-			dom.getComponentRect(_this.$refs.slider, function (opt) {
-				_this.width = opt.size.width;
-				_this.line = _this.width / (_this.width - 132) * _this.items.length;
-				_this.min = -_this.width * (_this.items.length - 1);
-			});
-		}, 100);
-	},
+      var head = (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object' && platform.toLowerCase() === 'web' ? _this.$refs.header.$children[0].$children[0] : _this.$refs.header.children[0].children[0];
+      dom.getComponentRect(head, function (opt) {
+        _this.lineWidth = opt.size.width + 36;
+        _this.lineLeft = opt.size.left - 66 - 18;
+      });
+      dom.getComponentRect(_this.$refs.slider, function (opt) {
+        _this.width = opt.size.width;
+        _this.line = _this.width / (_this.width - 132) * _this.items.length;
+        _this.min = -_this.width * (_this.items.length - 1);
+      });
+    }, 100);
+  },
 
-	methods: {
-		titleClick: function titleClick(idx) {
-			this.slide(-idx * this.width, -idx);
-			this.$emit('titleclick', idx);
-		},
-		start: function start(evt) {
-			if (this.sliding) return;
-			this.startX = evt.changedTouches[0].screenX;
-			this.moveX = this.startX;
-		},
-		move: function move(evt) {
-			if (this.sliding) return;
-			var x = evt.changedTouches[0].screenX;
-			var sub = x - this.moveX;
+  methods: {
+    titleClick: function titleClick(idx) {
+      this.slide(-idx * this.width, -idx);
+      this.$emit('titleclick', idx);
+    },
+    start: function start(evt) {
+      if (this.sliding) return;
+      this.startX = evt.changedTouches[0].screenX;
+      this.moveX = this.startX;
+    },
+    move: function move(evt) {
+      if (this.sliding) return;
+      var x = evt.changedTouches[0].screenX;
+      var sub = x - this.moveX;
 
-			this.transX = Math.max(this.min, Math.min(0, this.transX + sub));
-			this.moveX = x;
-		},
-		end: function end(evt) {
-			this.sliding = true;
+      this.transX = Math.max(this.min, Math.min(0, this.transX + sub));
+      this.moveX = x;
+    },
+    end: function end(evt) {
+      this.sliding = true;
 
-			var x = evt.changedTouches[0].screenX;
-			var direct = x - this.startX > 0;
-			var num = Math.floor(Math.abs(this.transX) / this.width);
-			var decimal = this.transX % this.width / this.width;
-			var int = this.transX > 0 ? num : -num;
-			var max = -this.items.length + 1;
+      var x = evt.changedTouches[0].screenX;
+      var direct = x - this.startX > 0;
+      var num = Math.floor(Math.abs(this.transX) / this.width);
+      var decimal = this.transX % this.width / this.width;
+      var int = this.transX > 0 ? num : -num;
+      var max = -this.items.length + 1;
 
-			if (decimal > .2 && direct) {
-				int = Math.min(0, int + 1);
-			} else if (decimal < -.2 && !direct) {
-				int = Math.max(max, int - 1);
-			}
+      if (decimal > 0.2 && direct) {
+        int = Math.min(0, int + 1);
+      } else if (decimal < -0.2 && !direct) {
+        int = Math.max(max, int - 1);
+      }
 
-			this.slide(int * this.width, int);
-		},
-		slide: function slide(trans, idx) {
-			var _this2 = this;
+      this.slide(int * this.width, int);
+    },
+    slide: function slide(trans, idx) {
+      var _this2 = this;
 
-			animation.transition(this.$refs.slider, {
-				styles: {
-					transform: 'translateX(' + trans + 'px)'
-				},
-				duration: 200,
-				timingFunction: 'ease-out'
-			}, function () {
-				_this2.current = -idx;
-				_this2.transX = trans;
-				_this2.sliding = false;
-				_this2.$emit('slidend', { selected: _this2.current });
-			});
-			animation.transition(this.$refs.line, {
-				styles: {
-					transform: 'translateX(' + -trans / this.line + 'px)'
-				},
-				duration: 200,
-				timingFunction: 'ease-out'
-			});
-		}
-	}
+      animation.transition(this.$refs.slider, {
+        styles: {
+          transform: 'translateX(' + trans + 'px)'
+        },
+        duration: 200,
+        timingFunction: 'ease-out'
+      }, function () {
+        _this2.current = -idx;
+        _this2.transX = trans;
+        _this2.sliding = false;
+        _this2.$emit('slidend', { selected: _this2.current });
+      });
+      animation.transition(this.$refs.line, {
+        styles: {
+          transform: 'translateX(' + -trans / this.line + 'px)'
+        },
+        duration: 200,
+        timingFunction: 'ease-out'
+      });
+    }
+  }
 };
 
 /***/ }),
@@ -11745,6 +11726,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, _vm._l((_vm.items), function(item, idx) {
     return _c('div', {
+      key: idx,
       staticClass: ["body"],
       style: _vm.itemStyle
     }, [_vm._t(item.name)], 2)
@@ -13955,27 +13937,27 @@ var _locale = __webpack_require__(1);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var VCDialog = Vue.extend(_fmDialog2.default);
-var vc_dialog = new VCDialog().$mount();
+var VC_DIALOG = new VCDialog().$mount();
 
 function dialog(options) {
-  vc_dialog.show = true;
-  vc_dialog.title = options.title;
-  vc_dialog.content = options.content;
-  vc_dialog.type = options.type;
-  vc_dialog.canAutoClose = options.canAutoClose;
-  options.cancelText && (vc_dialog.cancelText = options.cancelText);
-  options.confirmText && (vc_dialog.confirmText = options.confirmText);
-  vc_dialog.cancelCb = options.cancelCb;
-  vc_dialog.confirmCb = options.confirmCb;
+  VC_DIALOG.show = true;
+  VC_DIALOG.title = options.title;
+  VC_DIALOG.content = options.content;
+  VC_DIALOG.type = options.type;
+  VC_DIALOG.canAutoClose = options.canAutoClose;
+  options.cancelText && (VC_DIALOG.cancelText = options.cancelText);
+  options.confirmText && (VC_DIALOG.confirmText = options.confirmText);
+  VC_DIALOG.cancelCb = options.cancelCb;
+  VC_DIALOG.confirmCb = options.confirmCb;
 }
 
 var added = false;
 function addDialog() {
   if (!added) {
     if (weex.config.env.platform === 'Web') {
-      document.body.appendChild(vc_dialog.$el);
+      document.body.appendChild(VC_DIALOG.$el);
     } else {
-      weex.document.body.appendChild(vc_dialog.$el);
+      weex.document.body.appendChild(VC_DIALOG.$el);
     }
     added = true;
   }
@@ -13983,16 +13965,16 @@ function addDialog() {
 
 var noop = function noop() {};
 function resetDialog() {
-  vc_dialog.show = false;
-  vc_dialog.cancelCb = noop;
-  vc_dialog.confirmCb = noop;
+  VC_DIALOG.show = false;
+  VC_DIALOG.cancelCb = noop;
+  VC_DIALOG.confirmCb = noop;
   setTimeout(function () {
-    vc_dialog.title = '';
-    vc_dialog.content = '';
-    vc_dialog.canAutoClose = true;
-    vc_dialog.type = 'alert';
-    vc_dialog.cancelText = (0, _locale.t)('el.common.cancel');
-    vc_dialog.confirmText = (0, _locale.t)('el.common.confirm');
+    VC_DIALOG.title = '';
+    VC_DIALOG.content = '';
+    VC_DIALOG.canAutoClose = true;
+    VC_DIALOG.type = 'alert';
+    VC_DIALOG.cancelText = (0, _locale.t)('el.common.cancel');
+    VC_DIALOG.confirmText = (0, _locale.t)('el.common.confirm');
   }, 300);
 }
 
@@ -15458,7 +15440,8 @@ module.exports = {
     "fontWeight": "500"
   },
   "rotate": {
-    "fontSize": "42",
+    "fontSize": "54",
+    "fontWeight": "700",
     "transform": "rotate(180deg)"
   }
 }
@@ -15490,6 +15473,7 @@ var _locale3 = __webpack_require__(1);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
 //
 //
 //
@@ -15724,10 +15708,8 @@ module.exports.render._withStripped = true
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _fmSnackBar = __webpack_require__(12);
 
@@ -15740,64 +15722,65 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var VCSnackBar = Vue.extend(_fmSnackBar2.default);
 
 function snackbar(options) {
-	var defaultOptions = {
-		title: '',
-		backgroundColor: '#323232',
-		titleColor: '#FFFFFF',
-		closeText: (0, _locale.t)('el.common.close'),
-		closeColor: '#198DED',
-		autoClose: true,
-		stayTime: 3000,
-		type: 'normal'
-	};
+  var defaultOptions = {
+    title: '',
+    backgroundColor: '#323232',
+    titleColor: '#FFFFFF',
+    closeText: (0, _locale.t)('el.common.close'),
+    closeColor: '#198DED',
+    autoClose: true,
+    stayTime: 3000,
+    type: 'normal'
+  };
 
-	var vc_snackbar = new VCSnackBar().$mount();
-	options = Object.assign(defaultOptions, options);
-	vc_snackbar.show = true;
-	vc_snackbar.title = options.title;
-	vc_snackbar.backgroundColor = options.backgroundColor;
-	vc_snackbar.titleColor = options.titleColor;
-	vc_snackbar.closeText = options.closeText;
-	vc_snackbar.closeColor = options.closeColor;
-	vc_snackbar.autoClose = options.autoClose;
-	vc_snackbar.stayTime = options.stayTime;
-	vc_snackbar.type = options.type;
-	vc_snackbar.clickCb = options.clickCb;
-	vc_snackbar.dismissCb = function () {
-		removeSnackBar();
-		options.dismissCb();
-	};
+  var VC_SNACKBAR = new VCSnackBar().$mount();
+  options = Object.assign(defaultOptions, options);
+  VC_SNACKBAR.show = true;
+  VC_SNACKBAR.title = options.title;
+  VC_SNACKBAR.backgroundColor = options.backgroundColor;
+  VC_SNACKBAR.titleColor = options.titleColor;
+  VC_SNACKBAR.closeText = options.closeText;
+  VC_SNACKBAR.closeColor = options.closeColor;
+  VC_SNACKBAR.autoClose = options.autoClose;
+  VC_SNACKBAR.stayTime = options.stayTime;
+  VC_SNACKBAR.type = options.type;
+  VC_SNACKBAR.clickCb = options.clickCb;
+  VC_SNACKBAR.dismissCb = function () {
+    removeSnackBar();
+    options.dismissCb();
+  };
 
-	addSnackBar();
+  addSnackBar();
 
-	function addSnackBar() {
-		if (weex.config.env.platform === 'Web') {
-			document.body.appendChild(vc_snackbar.$el);
-		} else {
-			weex.document.body.appendChild(vc_snackbar.$el);
-		}
-	}
+  function addSnackBar() {
+    if (weex.config.env.platform === 'Web') {
+      document.body.appendChild(VC_SNACKBAR.$el);
+    } else {
+      weex.document.body.appendChild(VC_SNACKBAR.$el);
+    }
+  }
 
-	function removeSnackBar() {
-		if (weex.config.env.platform === 'Web') {
-			document.body.removeChild(vc_snackbar.$el);
-		} else {
-			weex.document.body.removeChild(vc_snackbar.$el);
-		}
-	}
+  function removeSnackBar() {
+    if (weex.config.env.platform === 'Web') {
+      document.body.removeChild(VC_SNACKBAR.$el);
+    } else {
+      weex.document.body.removeChild(VC_SNACKBAR.$el);
+    }
+  }
 }
 
 function showSnackBar(options) {
-	return new Promise(function (resolve, reject) {
-		snackbar(_extends({}, options, {
-			clickCb: function clickCb() {
-				resolve();
-			},
-			dismissCb: function dismissCb() {
-				reject();
-			}
-		}));
-	});
+  return new Promise(function (resolve, reject) {
+    options = Object.assign(options, {
+      clickCb: function clickCb() {
+        resolve();
+      },
+      dismissCb: function dismissCb() {
+        reject();
+      }
+    });
+    snackbar(options);
+  });
 }
 
 exports.default = showSnackBar;
@@ -16437,7 +16420,6 @@ module.exports = {
     "alignItems": "center",
     "justifyContent": "center",
     "paddingLeft": "35",
-    "marginRight": "48",
     "height": "90",
     "backgroundColor": "rgba(0,0,0,0.05)",
     "outline": "none",
@@ -16484,11 +16466,16 @@ module.exports = {
     "fontWeight": "500",
     "fontSize": "48",
     "lineHeight": "96",
-    "color": "rgba(0,0,0,0.6)",
+    "marginLeft": "48",
+    "color": "rgba(0,0,0,0.4)",
     "textAlign": "center"
   },
   "right-btn": {
-    "marginRight": "24"
+    "position": "absolute",
+    "top": 0,
+    "bottom": 0,
+    "right": "24",
+    "justifyContent": "center"
   }
 }
 
@@ -16516,6 +16503,10 @@ var _locale3 = __webpack_require__(1);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Navigator = weex.requireModule('navigator'); //
+//
+//
+//
+//
 //
 //
 //
@@ -16692,11 +16683,17 @@ exports.default = {
         return (0, _locale3.t)('el.searchbar.search');
       }
     },
-    searchTextStyle: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
+    searchColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, 0.4)'
+    },
+    searchHighlightColor: {
+      type: String,
+      default: '#198DED'
+    },
+    searchTextSize: {
+      type: Number,
+      default: 48
     },
     returnKeyType: {
       type: String,
@@ -16728,7 +16725,7 @@ exports.default = {
   },
   computed: {
     delShow: function delShow() {
-      return this.isFocus && this.value !== '';
+      return this.isFocus && this.value;
     },
     barStyle: function barStyle() {
       var style = {
@@ -16739,6 +16736,17 @@ exports.default = {
       Object.assign(style, this.borderStyle);
       style.backgroundColor = this.backgroundColor;
       return style;
+    },
+    searchTextStyle: function searchTextStyle() {
+      var value = this.value,
+          searchColor = this.searchColor,
+          searchHighlightColor = this.searchHighlightColor,
+          searchTextSize = this.searchTextSize;
+
+      return {
+        color: value ? searchHighlightColor : searchColor,
+        fontSize: searchTextSize
+      };
     }
   },
   methods: {
@@ -16847,8 +16855,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "input": _vm.onInput,
       "return": _vm.onSubmit
     }
-  }), (_vm.delShow) ? _c('fm-icon', {
+  }), _c('fm-icon', {
     staticClass: ["search-bar-delete"],
+    style: {
+      opacity: _vm.delShow ? 1 : 0
+    },
     attrs: {
       "value": "&#xe6c0;",
       "iconStyle": 48,
@@ -16857,15 +16868,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "fmClick": _vm.delClick
     }
-  }) : _c('div', {
-    staticClass: ["right-btn"]
-  }, [_vm._t("input-right")], 2)], 1), _vm._t("right", [_c('text', {
+  }), _c('div', {
+    staticClass: ["right-btn"],
+    style: {
+      opacity: !_vm.delShow ? 1 : 0
+    }
+  }, [_vm._t("input-right")], 2)], 1), _vm._t("right", [(_vm.searchText) ? _c('text', {
     staticClass: ["search-enter"],
     style: _vm.searchTextStyle,
     on: {
       "click": _vm.onSearch
     }
-  }, [_vm._v(_vm._s(_vm.searchText))])])], 2)]) : _vm._e()
+  }, [_vm._v(_vm._s(_vm.searchText))]) : _vm._e()])], 2)]) : _vm._e()
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 
@@ -18796,7 +18810,9 @@ function setTitle(title) {
 /* 302 */,
 /* 303 */,
 /* 304 */,
-/* 305 */
+/* 305 */,
+/* 306 */,
+/* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18806,7 +18822,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(306);
+var _index = __webpack_require__(308);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -18821,21 +18837,21 @@ _index2.default.el = '#root';
 exports.default = new Vue(_index2.default);
 
 /***/ }),
-/* 306 */
+/* 308 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(307)
+__vue_styles__.push(__webpack_require__(309)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(308)
+__vue_exports__ = __webpack_require__(310)
 
 /* template */
-var __vue_template__ = __webpack_require__(309)
+var __vue_template__ = __webpack_require__(311)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -18865,7 +18881,7 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 307 */
+/* 309 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -18900,7 +18916,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 308 */
+/* 310 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19020,7 +19036,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 309 */
+/* 311 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

@@ -1,113 +1,78 @@
 <template>
-    <text :class="textClz" :style="getStyle"><slot></slot>{{textValue}}</text>
+    <text :class="textClz"><slot></slot><template v-if="!$slots.default">{{ value }}</template></text>
 </template>
 
 <style scoped>
-    .text {
-        font-size: 42;
-        line-height: 63;
-        color: #999999;
-        font-family: "Source Han Sans CN", Roboto, sans-serif;
-    }
-
-    .medium {
-        font-family: sans-serif-medium;
-        font-weight: 500;
-    }
-    .bold {
-        font-weight: 700;
-    }
-    .light {
-        font-weight: 400;
-        line-height: 54;
-    }
-
-    .title {
-        font-size: 48;
-        font-weight: 500;
-        line-height: 69;
-        color: #000000;
-    }
-
-    .small {
-        font-size: 36;
-    }
-    .large {
-        font-size: 48;
-        font-weight: 500;
-        line-height: 72;
-        color: #000000;
-    }
-    .huge {
-        font-size: 54;
-        line-height: 81;
-        color: #000000;
-    }
-    .margin-text {
-        margin-right: 9;
-    }
+	.text {
+		font-size: 42;
+		line-height: 63;
+		color: #999999;
+		font-family: "Source Han Sans CN", Roboto, sans-serif;
+	}
+	.medium {
+		font-family: sans-serif-medium;
+		font-weight: 500;
+	}
+	.bold {
+		font-weight: 700;
+	}
+	.light {
+		font-weight: 400;
+	}
+	.small {
+		font-size: 36;
+	}
+	.large {
+		font-size: 48;
+		font-weight: 500;
+		line-height: 72;
+		color: #000000;
+	}
+	.huge {
+		font-size: 54;
+		line-height: 81;
+		color: #000000;
+	}
+	.margin-text {
+		margin-right: 9;
+	}
 </style>
 
 <script>
 export default {
-    name: 'FmText',
-    props: {
-        textValue: [String, Number],
-        medium: Boolean,
-        bold: Boolean,
-        light: Boolean,
-        title: Boolean,
-        small: Boolean,
-        large: Boolean,
-        huge: Boolean,
-        textStyle: {
-            type: Object,
-            default: () => ({})
-        },
-        hasTextMargin: {
-            type: Boolean,
-            default: true
-        },
-        fmClick: Function
+  name: 'FmText',
+  props: {
+    value: String,
+    fontWeight: {
+      type: String,
+      default: 'normal'
     },
-
-    computed: {
-        textClz () {
-            let clz = ['text']
-            if (this.medium) {
-                clz.push('medium')
-            }
-            if (this.light) {
-                clz.push('light')
-            }
-            if (this.title) {
-                clz.push('title')
-            }
-            if (this.bold) {
-                clz.push('bold')
-            }
-            if (this.small) {
-                clz.push('small')
-            }
-            if (this.large) {
-                clz.push('large')
-            }
-            if (this.huge) {
-                clz.push('huge')
-            }
-            if (this.hasTextMargin) {
-                clz.push('margin-text')
-            }
-            return clz
-        },
-        getStyle () {
-            return {
-                ...this.textStyle
-            }
-        }
+    size: {
+      type: String,
+      default: 'normal'
     },
-    methods: {
-        
+    hasTextMargin: {
+      type: Boolean,
+      default: true
     }
-}
+  },
+  computed: {
+    textClz () {
+      const clz = ['text'];
+      if (this.hasTextMargin) {
+        clz.push('margin-text');
+      }
+      if (this.size !== 'normal') {
+        clz.push(`${this.size}`);
+      }
+      if (this.fontWeight !== 'normal') {
+        clz.push(`${this.fontWeight}`);
+      }
+      return clz;
+    }
+  },
+  created () {
+    this.$slots.default && (this.value = this.$slots.default[0].text);
+  }
+};
 </script>
