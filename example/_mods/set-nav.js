@@ -3,22 +3,22 @@
  * demo设置标题和右上角按钮
  */
 const navigationBar = weex.requireModule('navigationBar');
-const navigator = weex.requireModule('navigator')
+const navigator = weex.requireModule('navigator');
 
 export function setTitle (title) {
   if (navigationBar && navigationBar.setTitle) {
     const NOOP = () => {
     };
     navigationBar.setTitle({
-      title,
+      title
     }, NOOP, NOOP);
 
     const CALLBACK = (event) => {
-      if (event.index != undefined) {
+      if (event.index !== undefined) {
         navigator.push({
           url: 'https://h5.m.taobao.com/trip/weex-ui/index.html?_wx_tpl=https%3A%2F%2Fh5.m.taobao.com%2Ftrip%2Fweex-ui%2Fdemo%2Findex.native-min.js',
           animated: true
-        }, NOOP)
+        }, NOOP);
       }
     };
     navigationBar.setRightItem({

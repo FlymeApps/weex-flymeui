@@ -28,21 +28,21 @@
 </style>
 
 <script>
-  import { FmText, FmImage } from '../../index';
-  let intent = weex.requireModule('intent');
-  export default {
-    props: {
-      link: String
-    },
-    components: { FmText, FmImage },
-    methods: {
-      click() {
-        if (weex.config.env.platform === 'Web') {
-          window.location.href = this.link
-        } else {
-          intent.openViewIntent(this.link)
-        }
+import { FmText, FmImage } from '../../index';
+const intent = weex.requireModule('intent');
+export default {
+  props: {
+    link: String
+  },
+  components: { FmText, FmImage },
+  methods: {
+    click () {
+      if (weex.config.env.platform === 'Web') {
+        window.location.href = this.link;
+      } else {
+        intent.openViewIntent(this.link);
       }
     }
   }
+};
 </script>

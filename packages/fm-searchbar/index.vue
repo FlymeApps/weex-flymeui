@@ -122,174 +122,174 @@
 </style>
 
 <script>
-  import FmIcon from '../fm-icon'
-  import Locale from 'weex-flymeui/lib/mixins/locale'
-  import { t } from 'weex-flymeui/lib/locale'
-  const Navigator = weex.requireModule('navigator')
+import FmIcon from '../fm-icon';
+import Locale from 'weex-flymeui/lib/mixins/locale';
+import { t } from 'weex-flymeui/lib/locale';
+const Navigator = weex.requireModule('navigator');
 
-  export default {
-    name: 'FmSearchbar',
-    mixins: [Locale],
-    components: { FmIcon },
-    props: {
-			statusbar: {
-				type: Boolean,
-				default: false,
-			},
-      inputValue: {
-        type: [String, Number],
-        default: ''
-      },
-			useDefaultReturn: {
-				type: Boolean,
-				default: true,
-			},
-			hasPrev: {
-				type: Boolean,
-				default: true
-			},
-			backgroundColor: {
-				type: String,
-				default: '#FFFFFF'
-      },
-      iconColor: {
-        type: String,
-        default: 'rgba(0, 0, 0, 0.4)'
-      },
-			leftColor: {
-				type: String,
-				default: 'rgba(0, 0, 0, 0.6)'
-			},
-      inputBackground: String,
-			borderStyle: {
-				type: Object,
-				default: () => ({
-          borderBottomStyle: 'solid',
-          borderBottomWidth: 2,
-          borderBottomColor: 'rgba(0, 0, 0, 0.1)'
-        })
-			},
-      placeholder: String,
-      autofocus: Boolean,
-      disabled: Boolean,
-      inputType: {
-        type: String,
-        default: 'text'
-      },
-      searchText: {
-        type: String,
-        default() {
-          return t('el.searchbar.search');
-        }
-      },
-      searchColor: {
-        type: String,
-        default: 'rgba(0, 0, 0, 0.4)'
-      },
-      searchHighlightColor: {
-        type: String,
-        default: '#198DED'
-      },
-      searchTextSize: {
-        type: Number,
-        default: 48
-      },
-      returnKeyType: {
-        type: String,
-        default: 'search'
-      },
-      placeholderColor: {
-        type: String,
-        default: 'rgba(0, 0, 0, 0.4)'
-      },
-      inputColor: {
-        type: String,
-        default: '#616161'
-      },
-      show: {
-        type: Boolean,
-        default: true
+export default {
+  name: 'FmSearchbar',
+  mixins: [Locale],
+  components: { FmIcon },
+  props: {
+    statusbar: {
+      type: Boolean,
+      default: false
+    },
+    inputValue: {
+      type: [String, Number],
+      default: ''
+    },
+    useDefaultReturn: {
+      type: Boolean,
+      default: true
+    },
+    hasPrev: {
+      type: Boolean,
+      default: true
+    },
+    backgroundColor: {
+      type: String,
+      default: '#FFFFFF'
+    },
+    iconColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, 0.4)'
+    },
+    leftColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, 0.6)'
+    },
+    inputBackground: String,
+    borderStyle: {
+      type: Object,
+      default: () => ({
+        borderBottomStyle: 'solid',
+        borderBottomWidth: 2,
+        borderBottomColor: 'rgba(0, 0, 0, 0.1)'
+      })
+    },
+    placeholder: String,
+    autofocus: Boolean,
+    disabled: Boolean,
+    inputType: {
+      type: String,
+      default: 'text'
+    },
+    searchText: {
+      type: String,
+      default () {
+        return t('el.searchbar.search');
       }
     },
-    watch: {
-      inputValue(val) {
-        this.value = val
-      }
+    searchColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, 0.4)'
     },
-    data: () => ({
-      isFocus: false,
-      value: ''
-    }),
-    computed: {
-      delShow() {
-        return this.isFocus && this.value
-      },
-			barStyle() {
-				let style = {
-          borderBottomStyle: 'solid',
-          borderBottomWidth: 2,
-					borderBottomColor: 'rgba(0, 0, 0, 0.1)',
-				}
-				Object.assign(style, this.borderStyle)
-				style.backgroundColor = this.backgroundColor
-				return style
-      },
-      searchTextStyle() {
-        const { value, searchColor, searchHighlightColor, searchTextSize } = this
-        return {
-          color: value ? searchHighlightColor : searchColor,
-          fontSize: searchTextSize
-        }
-      }
+    searchHighlightColor: {
+      type: String,
+      default: '#198DED'
     },
-    methods: {
-			onBack(e) {
-        const self = this
-        if (self.useDefaultReturn) {
-          Navigator.pop({}, e => {
-          })
-        }
-        self.$emit('fmSearchbarleftBtnClicked', {})
-			},
-      delClick(e) {
-        this.value = ''
-      },
-      onInput(e) {
-        this.value = e.value
-        this.$emit('input', e)
-      },
-      onFocus(e) {
-        this.isFocus = true
-        this.$emit('focus', e)
-      },
-      onBlur(e) {
-        this.isFocus = false
-        this.$emit('blur', e)
-      },
-      focus() {
-        this.$refs.input.focus()
-      },
-      blur() {
-        this.$refs.input.blur()
-      },
-      onSubmit(e) {
-        this.$emit('fmSearchbarSubmit', { value: this.value })
-      },
-      onSearch(e) {
-        this.$emit('fmSearchbarSubmit', { value: this.value })
-      },
-      setSelectionRange(start, end) {
-        this.$refs.input.setSelectionRange(start, end)
-      },
-      getEditSelectionRange(callback) {
-        this.$refs.input.getEditSelectionRange(callback)
-      },
-      setValue (value) {
-        this.value = value
-      }
+    searchTextSize: {
+      type: Number,
+      default: 48
     },
-    mounted() {
-      this.value = this.inputValue || ''
+    returnKeyType: {
+      type: String,
+      default: 'search'
+    },
+    placeholderColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, 0.4)'
+    },
+    inputColor: {
+      type: String,
+      default: '#616161'
+    },
+    show: {
+      type: Boolean,
+      default: true
     }
+  },
+  watch: {
+    inputValue (val) {
+      this.value = val;
+    }
+  },
+  data: () => ({
+    isFocus: false,
+    value: ''
+  }),
+  computed: {
+    delShow () {
+      return this.isFocus && this.value;
+    },
+    barStyle () {
+      const style = {
+        borderBottomStyle: 'solid',
+        borderBottomWidth: 2,
+        borderBottomColor: 'rgba(0, 0, 0, 0.1)'
+      };
+      Object.assign(style, this.borderStyle);
+      style.backgroundColor = this.backgroundColor;
+      return style;
+    },
+    searchTextStyle () {
+      const { value, searchColor, searchHighlightColor, searchTextSize } = this;
+      return {
+        color: value ? searchHighlightColor : searchColor,
+        fontSize: searchTextSize
+      };
+    }
+  },
+  methods: {
+    onBack (e) {
+      const self = this;
+      if (self.useDefaultReturn) {
+        Navigator.pop({}, e => {
+        });
+      }
+      self.$emit('fmSearchbarleftBtnClicked', {});
+    },
+    delClick (e) {
+      this.value = '';
+    },
+    onInput (e) {
+      this.value = e.value;
+      this.$emit('input', e);
+    },
+    onFocus (e) {
+      this.isFocus = true;
+      this.$emit('focus', e);
+    },
+    onBlur (e) {
+      this.isFocus = false;
+      this.$emit('blur', e);
+    },
+    focus () {
+      this.$refs.input.focus();
+    },
+    blur () {
+      this.$refs.input.blur();
+    },
+    onSubmit (e) {
+      this.$emit('fmSearchbarSubmit', { value: this.value });
+    },
+    onSearch (e) {
+      this.$emit('fmSearchbarSubmit', { value: this.value });
+    },
+    setSelectionRange (start, end) {
+      this.$refs.input.setSelectionRange(start, end);
+    },
+    getEditSelectionRange (callback) {
+      this.$refs.input.getEditSelectionRange(callback);
+    },
+    setValue (value) {
+      this.value = value;
+    }
+  },
+  mounted () {
+    this.value = this.inputValue || '';
   }
+};
 </script>
