@@ -2,8 +2,8 @@
   <div class="detail-cell" @click="click" bubble="true">
 		<div class="content">
 			<div class="desc">
-				<fm-text :text-value="title" medium="" :text-style="{ fontSize: 48, color: '#000', fontWeight: 500, lineHeight: 54}" />
-				<fm-text :text-value="subTitle" :text-style="{ fontSize: 32, color: 'rgba(0,0,0,0.4)', fontWeight: 300, lineHeight: 42, marginTop: 8.6667 }" />
+				<fm-text :value="title" medium="" :style="{ fontSize: 48, color: '#000', fontWeight: 500, lineHeight: 54}" />
+				<fm-text :value="subTitle" :style="{ fontSize: 32, color: 'rgba(0,0,0,0.4)', fontWeight: 300, lineHeight: 42, marginTop: 8.6667 }" />
 			</div>
 			<fm-icon class="cellIcon" value="&#xe6b5;" color="#999" :icon-style="72" />
 		</div>
@@ -25,7 +25,7 @@
 		justify-content: space-between;
 		align-items: center;
 	}
-	
+
 	.border {
 		height: 6px;
 		background-color: #cccccc;
@@ -39,22 +39,21 @@
 </style>
 
 <script>
-
 import { FmText, FmIcon } from '../../../index';
 
 export default {
-	props: {
-		title: String,
-		subTitle: String
-	},
-	components: { FmText, FmIcon },
-	methods: {
-		click(e) {
-			this.$emit('click', e)
-      		e.stopPropagation()
-		}
-	}
-}
+  props: {
+    title: String,
+    subTitle: String
+  },
+  components: { FmText, FmIcon },
+  methods: {
+    click (e) {
+      this.$emit('click', e);
+      		e.stopPropagation();
+    }
+  }
+};
 </script>
 
 

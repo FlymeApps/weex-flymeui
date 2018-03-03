@@ -78,7 +78,7 @@ export default {
   name: 'FmTag',
   mixins: [Locale],
   props: {
-    tagType: {
+    type: {
       type: String,
       default: 'solid'
     },
@@ -103,12 +103,12 @@ export default {
   },
   computed: {
     showSolid () {
-      const { tagType, value } = this;
-      return tagType === 'solid' && value !== '';
+      const { type, value } = this;
+      return type === 'solid' && value !== '';
     },
     showHollow () {
-      const { tagType, value } = this;
-      return tagType === 'hollow' && value !== '';
+      const { type, value } = this;
+      return type === 'hollow' && value !== '';
     },
     tagTextStyle () {
       const { color, showSolid } = this;

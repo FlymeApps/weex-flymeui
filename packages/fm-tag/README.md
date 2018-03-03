@@ -10,7 +10,7 @@
     <fm-tag value="小标签" color="#f12528"></fm-tag>
     <fm-tag value="大标签" size="big" color="#f12528"></fm-tag>
     <fm-tag value="腰圆标签" size="big" color="#f12528"></fm-tag>
-    <fm-tag value="空心标签" tagType="hollow" color="#f12528" fontColor="#3bc06b"></fm-tag>
+    <fm-tag value="空心标签" type="hollow" color="#f12528" fontColor="#3bc06b"></fm-tag>
   </div>
 </template>
 
@@ -31,7 +31,7 @@
 | value | `String` |`N`| `标签` | 标签内容 |
 | color | `String` |`N`| `#198DED` | 标签颜色 |
 | font-color | `String` |`N`| `#FFFFFF` | 字体颜色 |
-| tag-type | `String` |`N`| `solid` | 标签类型，`solid` 为实心标签；`hollow` 为空心标签 |
+| type | `String` |`N`| `solid` | 标签类型，`solid` 为实心标签；`hollow` 为空心标签 |
 
 ## 示例
 ![](http://image.res.meizu.com/image/flyme-icon/fc51d6d66a38485ea33a6504e5858d48z)

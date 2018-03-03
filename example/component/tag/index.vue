@@ -58,9 +58,9 @@
       </div>
       <category title="空心标签"></category>
       <div class="cell">
-          <fm-tag value="HQ" size="big" tagType="hollow" color="#f12528" fontColor="#3bc06b"></fm-tag>
-          <fm-tag value="热映" size="big" tagType="hollow" color="#ffaf00" fontColor="#f12528"></fm-tag>
-          <fm-tag value="票" size="big" tagType="hollow" color="#3bc06b" fontColor="#3bc06b"></fm-tag>
+          <fm-tag value="HQ" size="big" type="hollow" color="#f12528" fontColor="#3bc06b"></fm-tag>
+          <fm-tag value="热映" size="big" type="hollow" color="#ffaf00" fontColor="#f12528"></fm-tag>
+          <fm-tag value="票" size="big" type="hollow" color="#3bc06b" fontColor="#3bc06b"></fm-tag>
       </div>
     </scroller>
   </div>
@@ -82,7 +82,7 @@
     align-items: flex-start;
     flex-wrap: wrap;
   }
-  
+
   .scroller {
     flex: 1;
   }
@@ -97,6 +97,6 @@ import { setTitle } from '../../_mods/set-nav';
 const modal = weex.requireModule('modal');
 
 export default {
-    components: { Title, Category, FmTag },
-}
+  components: { Title, Category, FmTag }
+};
 </script>

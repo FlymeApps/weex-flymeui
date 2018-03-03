@@ -7,15 +7,15 @@
             <div class="header">
                 <fm-image :scale="3/2" :src="'http://design.flyme.cn/weexui/assets/'+ type +'.png'"/>
                 <div style="margin-left: 50px;">
-                    <fm-text class="title" :textValue="category.name" medium
-                                      :text-style="{fontSize: 63, color: '#000', fontWeight: 500, lineHeight: 69}" />
-                    <fm-text class="subTitle" :textValue="category.subname" 
-                                      :text-style="{fontSize: 36, color: '#000', fontWeight: 300, lineHeight: 42, marginTop: 6}" />
+                    <fm-text class="title" :value="category.name" medium
+                                      :style="{fontSize: 63, color: '#000', fontWeight: 500, lineHeight: 69}" />
+                    <fm-text class="subTitle" :value="category.subname"
+                                      :style="{fontSize: 36, color: '#000', fontWeight: 300, lineHeight: 42, marginTop: 6}" />
                 </div>
             </div>
             <div class="list">
-                <template v-for="item in category.componentList" >
-                    <d-cell :title="item.name" :subTitle="item.subname" @click="jump(item.path)"></d-cell>
+                <template v-for="(item, idx) in category.componentList" >
+                    <d-cell :title="item.name" :subTitle="item.subname" @click="jump(item.path)" :key="idx"></d-cell>
                 </template>
             </div>
         </scroller>
@@ -62,41 +62,41 @@
 <script>
 import { FmText, FmImage, FmIcon } from '../../../index';
 import DCell from './cell.vue';
-import category from '../../category.js'
-const navigator = weex.requireModule('navigator')
-let env = weex.config.env
-let url = weex.config.bundleUrl
+import category from '../../category.js';
+const navigator = weex.requireModule('navigator');
+const env = weex.config.env;
+const url = weex.config.bundleUrl;
 
 export default {
-    props: {
-        type: String,
-        category: Object
+  props: {
+    type: String,
+    category: Object
+  },
+  components: { FmText, FmImage, FmIcon, DCell },
+  created () {
+    this.$route.params.type ? this.type = this.$route.params.type : this.$router.go(-1);
+    this.category = category[this.type];
+  },
+  methods: {
+    back () {
+      this.$router.go(-1);
+      var globalEvent = weex.requireModule('globalEvent');
+      globalEvent.removeEventListener('clickbackitem');
     },
-    components: { FmText, FmImage, FmIcon, DCell },
-    created() {
-        this.$route.params.type ? this.type = this.$route.params.type : this.$router.go(-1)
-        this.category = category[this.type]
-    },
-    methods: {
-        back() {
-            this.$router.go(-1)
-            var globalEvent = weex.requireModule('globalEvent')
-            globalEvent.removeEventListener("clickbackitem")
-        },
-        jump(path) {
-            if (env.platform === 'Web') {
-                window.location.href = path
-            } else {
-                let target = url.replace(/index.native.js/, path + '/index.native.js')
-                if (path.startsWith('http')) {
-                    target = path
-                }
-                navigator.push({
-                    url: target,
-                    animated: "true"
-                })
-            }
+    jump (path) {
+      if (env.platform === 'Web') {
+        window.location.href = path;
+      } else {
+        let target = url.replace(/index.native.js/, path + '/index.native.js');
+        if (path.startsWith('http')) {
+          target = path;
         }
+        navigator.push({
+          url: target,
+          animated: 'true'
+        });
+      }
     }
-}
+  }
+};
 </script>
