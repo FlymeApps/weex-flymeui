@@ -8,6 +8,7 @@
   - [fm-text 文本](packages/fm-text/)
   - [fm-icon 图标](packages/fm-icon/)
   - [fm-tag 标签](packages/fm-tag/)
+  - [fm-tag-wall 标签墙](packages/fm-tag-wall/)
   - [fm-rich-text 富文本](packages/fm-rich-text/)
   - [fm-foldable-text 折叠文本](packages/fm-foldable-text/)
   - [fm-image 自缩放图片](packages/fm-image/)

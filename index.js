@@ -1,5 +1,6 @@
 import FmSwitch from './packages/fm-switch';
 import FmTag from './packages/fm-tag';
+import FmTagWall from './packages/fm-tag-wall';
 import FmText from './packages/fm-text';
 import FmIcon from './packages/fm-icon';
 import FmSlider from './packages/fm-slider';
@@ -31,36 +32,37 @@ import FmMultiCheckCell from './packages/fm-multi-check-cell';
 import FmRcyCheck from './packages/fm-rcy-check';
 
 export {
-    FmSwitch,
-    FmTag,
-    FmText,
-    FmIcon,
-    FmSlider,
-    FmButton,
-    FmInput,
-    FmTabView,
-    FmTips,
-    FmRichText,
-    FmSpecialRichText,
-    FmFoldableText,
-    FmImage,
-    FmOverlay,
-    FmDialog,
-    FmSimpleBtn,
-    confirm,
-    alert,
-    FmPopup,
-    FmActionSheet,
-    FmCell,
-    FmRater,
-    FmSnackBar,
-    showSnackBar,
-    FmCheckbox,
-    FmCheckListGroup,
-    FmActionView,
-    FmSearchbar,
-    FmTitlebar,
-    FmMultiCheckGroup,
-    FmMultiCheckCell,
-    FmRcyCheck
-}
+  FmSwitch,
+  FmTag,
+  FmTagWall,
+  FmText,
+  FmIcon,
+  FmSlider,
+  FmButton,
+  FmInput,
+  FmTabView,
+  FmTips,
+  FmRichText,
+  FmSpecialRichText,
+  FmFoldableText,
+  FmImage,
+  FmOverlay,
+  FmDialog,
+  FmSimpleBtn,
+  confirm,
+  alert,
+  FmPopup,
+  FmActionSheet,
+  FmCell,
+  FmRater,
+  FmSnackBar,
+  showSnackBar,
+  FmCheckbox,
+  FmCheckListGroup,
+  FmActionView,
+  FmSearchbar,
+  FmTitlebar,
+  FmMultiCheckGroup,
+  FmMultiCheckCell,
+  FmRcyCheck
+};
