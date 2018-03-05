@@ -445,42 +445,15 @@ function applyToTag (styleElement, obj) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _index = __webpack_require__(40);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 exports.use = exports.t = undefined;
 
 var _zhCN = __webpack_require__(29);
 
 var _zhCN2 = _interopRequireDefault(_zhCN);
 
-var _vue = __webpack_require__(30);
-
-var _vue2 = _interopRequireDefault(_vue);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var lang = _zhCN2.default;
-var merged = false;
 
 var t = exports.t = function t(path, options) {
   var value = void 0;
@@ -505,6 +478,28 @@ var use = exports.use = function use(l) {
 exports.default = { t: t, use: use };
 
 /***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(45);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -515,7 +510,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _locale = __webpack_require__(4);
+var _locale = __webpack_require__(3);
 
 exports.default = {
   methods: {
@@ -540,7 +535,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(35);
+var _index = __webpack_require__(40);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -584,7 +579,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(98);
+var _index = __webpack_require__(103);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -606,7 +601,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(101);
+var _index = __webpack_require__(106);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -628,7 +623,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(110);
+var _index = __webpack_require__(115);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -647,9 +642,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
-exports.FmRcyCheck = exports.FmMultiCheckCell = exports.FmMultiCheckGroup = exports.FmTitlebar = exports.FmSearchbar = exports.FmActionView = exports.FmCheckListGroup = exports.FmCheckbox = exports.showSnackBar = exports.FmSnackBar = exports.FmRater = exports.FmCell = exports.FmActionSheet = exports.FmPopup = exports.alert = exports.confirm = exports.FmSimpleBtn = exports.FmDialog = exports.FmOverlay = exports.FmImage = exports.FmFoldableText = exports.FmSpecialRichText = exports.FmRichText = exports.FmTips = exports.FmTabView = exports.FmInput = exports.FmButton = exports.FmSlider = exports.FmIcon = exports.FmText = exports.FmTag = exports.FmSwitch = undefined;
+exports.FmSimpleList = exports.FmRcyCheck = exports.FmMultiCheckCell = exports.FmMultiCheckGroup = exports.FmTitlebar = exports.FmSearchbar = exports.FmActionView = exports.FmCheckListGroup = exports.FmCheckbox = exports.showSnackBar = exports.FmSnackBar = exports.FmRater = exports.FmCell = exports.FmActionSheet = exports.FmPopup = exports.alert = exports.confirm = exports.FmSimpleBtn = exports.FmDialog = exports.FmOverlay = exports.FmImage = exports.FmFoldableText = exports.FmSpecialRichText = exports.FmRichText = exports.FmTips = exports.FmTabView = exports.FmInput = exports.FmButton = exports.FmSlider = exports.FmIcon = exports.FmText = exports.FmTagWall = exports.FmTag = exports.FmSwitch = undefined;
 
 var _fmSwitch = __webpack_require__(19);
 
@@ -659,43 +654,47 @@ var _fmTag = __webpack_require__(7);
 
 var _fmTag2 = _interopRequireDefault(_fmTag);
 
+var _fmTagWall = __webpack_require__(31);
+
+var _fmTagWall2 = _interopRequireDefault(_fmTagWall);
+
 var _fmText = __webpack_require__(6);
 
 var _fmText2 = _interopRequireDefault(_fmText);
 
-var _fmIcon = __webpack_require__(3);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
-var _fmSlider = __webpack_require__(47);
+var _fmSlider = __webpack_require__(52);
 
 var _fmSlider2 = _interopRequireDefault(_fmSlider);
 
-var _fmButton = __webpack_require__(53);
+var _fmButton = __webpack_require__(58);
 
 var _fmButton2 = _interopRequireDefault(_fmButton);
 
-var _fmInput = __webpack_require__(59);
+var _fmInput = __webpack_require__(64);
 
 var _fmInput2 = _interopRequireDefault(_fmInput);
 
-var _fmTabView = __webpack_require__(65);
+var _fmTabView = __webpack_require__(70);
 
 var _fmTabView2 = _interopRequireDefault(_fmTabView);
 
-var _fmTips = __webpack_require__(71);
+var _fmTips = __webpack_require__(76);
 
 var _fmTips2 = _interopRequireDefault(_fmTips);
 
-var _fmRichText = __webpack_require__(77);
+var _fmRichText = __webpack_require__(82);
 
 var _fmRichText2 = _interopRequireDefault(_fmRichText);
 
-var _fmSpecialRichText = __webpack_require__(86);
+var _fmSpecialRichText = __webpack_require__(91);
 
 var _fmSpecialRichText2 = _interopRequireDefault(_fmSpecialRichText);
 
-var _fmFoldableText = __webpack_require__(92);
+var _fmFoldableText = __webpack_require__(97);
 
 var _fmFoldableText2 = _interopRequireDefault(_fmFoldableText);
 
@@ -715,21 +714,21 @@ var _fmSimpleBtn = __webpack_require__(10);
 
 var _fmSimpleBtn2 = _interopRequireDefault(_fmSimpleBtn);
 
-var _dialog = __webpack_require__(116);
+var _dialog = __webpack_require__(121);
 
 var _fmPopup = __webpack_require__(14);
 
 var _fmPopup2 = _interopRequireDefault(_fmPopup);
 
-var _fmActionSheet = __webpack_require__(122);
+var _fmActionSheet = __webpack_require__(127);
 
 var _fmActionSheet2 = _interopRequireDefault(_fmActionSheet);
 
-var _fmCell = __webpack_require__(128);
+var _fmCell = __webpack_require__(133);
 
 var _fmCell2 = _interopRequireDefault(_fmCell);
 
-var _fmRater = __webpack_require__(134);
+var _fmRater = __webpack_require__(139);
 
 var _fmRater2 = _interopRequireDefault(_fmRater);
 
@@ -737,19 +736,19 @@ var _fmSnackBar = __webpack_require__(15);
 
 var _fmSnackBar2 = _interopRequireDefault(_fmSnackBar);
 
-var _snackbar = __webpack_require__(145);
+var _snackbar = __webpack_require__(150);
 
 var _snackbar2 = _interopRequireDefault(_snackbar);
 
-var _fmCheckbox = __webpack_require__(146);
+var _fmCheckbox = __webpack_require__(151);
 
 var _fmCheckbox2 = _interopRequireDefault(_fmCheckbox);
 
-var _fmCheckListGroup = __webpack_require__(152);
+var _fmCheckListGroup = __webpack_require__(157);
 
 var _fmCheckListGroup2 = _interopRequireDefault(_fmCheckListGroup);
 
-var _fmActionView = __webpack_require__(156);
+var _fmActionView = __webpack_require__(161);
 
 var _fmActionView2 = _interopRequireDefault(_fmActionView);
 
@@ -757,11 +756,11 @@ var _fmSearchbar = __webpack_require__(18);
 
 var _fmSearchbar2 = _interopRequireDefault(_fmSearchbar);
 
-var _fmTitlebar = __webpack_require__(165);
+var _fmTitlebar = __webpack_require__(170);
 
 var _fmTitlebar2 = _interopRequireDefault(_fmTitlebar);
 
-var _fmMultiCheckGroup = __webpack_require__(171);
+var _fmMultiCheckGroup = __webpack_require__(176);
 
 var _fmMultiCheckGroup2 = _interopRequireDefault(_fmMultiCheckGroup);
 
@@ -769,14 +768,19 @@ var _fmMultiCheckCell = __webpack_require__(16);
 
 var _fmMultiCheckCell2 = _interopRequireDefault(_fmMultiCheckCell);
 
-var _fmRcyCheck = __webpack_require__(185);
+var _fmRcyCheck = __webpack_require__(190);
 
 var _fmRcyCheck2 = _interopRequireDefault(_fmRcyCheck);
+
+var _fmSimpleList = __webpack_require__(196);
+
+var _fmSimpleList2 = _interopRequireDefault(_fmSimpleList);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.FmSwitch = _fmSwitch2.default;
 exports.FmTag = _fmTag2.default;
+exports.FmTagWall = _fmTagWall2.default;
 exports.FmText = _fmText2.default;
 exports.FmIcon = _fmIcon2.default;
 exports.FmSlider = _fmSlider2.default;
@@ -807,6 +811,7 @@ exports.FmTitlebar = _fmTitlebar2.default;
 exports.FmMultiCheckGroup = _fmMultiCheckGroup2.default;
 exports.FmMultiCheckCell = _fmMultiCheckCell2.default;
 exports.FmRcyCheck = _fmRcyCheck2.default;
+exports.FmSimpleList = _fmSimpleList2.default;
 
 /***/ }),
 /* 12 */
@@ -894,7 +899,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(106);
+var _index = __webpack_require__(111);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -916,7 +921,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(117);
+var _index = __webpack_require__(122);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -938,7 +943,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(140);
+var _index = __webpack_require__(145);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -960,7 +965,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(174);
+var _index = __webpack_require__(179);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -1015,7 +1020,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(160);
+var _index = __webpack_require__(165);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -1136,9 +1141,6 @@ exports.push([module.i, "\n@charset \"UTF-8\";\n/** 默认主题色 blue **/\n.f
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -1226,14 +1228,14 @@ exports.default = {
       this.$emit('fmSwitchStateChange', this.checked);
     },
     toggleState: function toggleState(bool) {
-      var _ref,
-          _this = this;
+      var _this = this;
 
       this.isAnimate = true;
-      var style = bool ? (_ref = {
+      var style = bool ? {
         backgroundColor: this.focusColor,
-        transform: 'scale(1)'
-      }, _defineProperty(_ref, 'transform', 'translate(72px, 0)'), _defineProperty(_ref, 'transformOrigin', 'center center'), _ref) : {
+        transform: 'scale(1) translate(72px, 0)',
+        transformOrigin: 'center center'
+      } : {
         backgroundColor: this.blurColor,
         transform: 'scale(0.6)',
         transformOrigin: 'center center'
@@ -1252,18 +1254,14 @@ exports.default = {
     }
   },
   mounted: function mounted() {
-    var bgStyle = this.bgStyle,
-        focusColor = this.focusColor,
-        blurColor = this.blurColor;
-
     if (this.common) {
       this.focusColor = '#198DED';
       this.blurColor = '#7E97AC';
     }
-    this.checked ? this.ballStyle = _defineProperty({
+    this.checked ? this.ballStyle = {
       backgroundColor: this.focusColor,
-      transform: 'scale(1.0)'
-    }, 'transform', 'translate(72px, 0)') : this.ballStyle = {
+      transform: 'scale(1.0) translate(72px, 0)'
+    } : this.ballStyle = {
       backgroundColor: this.blurColor,
       transform: 'scale(0.6)'
     };
@@ -1309,7 +1307,7 @@ var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(28),
   /* template */
-  __webpack_require__(34),
+  __webpack_require__(30),
   /* scopeId */
   "data-v-2072c04b",
   /* cssModules */
@@ -1370,7 +1368,7 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-tag[data-v-2072c04b] {\n    align-items: center;\n\t  flex-direction: row;\n}\n.tag-item[data-v-2072c04b] {\n    padding: 9px;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n}\n.tag-border[data-v-2072c04b] {\n    border-radius: 4.5px;\n}\n.tag-huge[data-v-2072c04b] {\n    border-radius: 100px;\n    height: 72px;\n    padding: 12px 42px;\n}\n.tag-hollow[data-v-2072c04b] {\n    border-width: 3px;\n}\n.tag-text[data-v-2072c04b] {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    font-weight: bold;\n}\n.tag-font-small[data-v-2072c04b] {\n    font-size: 24px;\n}\n.tag-font-big[data-v-2072c04b] {\n    font-size: 30px;\n}\n.tag-font-huge[data-v-2072c04b] {\n    font-size: 42px;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n}\n.tag-margin-small[data-v-2072c04b] {\n    margin-right: 6px;\n    margin-bottom: 6px;\n}\n.tag-margin-big[data-v-2072c04b] {\n    margin-right: 12px;\n    margin-bottom: 12px;\n}\n.tag-margin-huge[data-v-2072c04b] {\n    margin-right: 36px;\n    margin-bottom: 36px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag/index.vue?52e98502"],"names":[],"mappings":";AAWA;IACA,oBAAA;GACA,oBAAA;CACA;AAEA;IACA,aAAA;IACA,wBAAA;IACA,oBAAA;IACA,iBAAA;CACA;AAEA;IACA,qBAAA;CACA;AAEA;IACA,qBAAA;IACA,aAAA;IACA,mBAAA;CACA;AAEA;IACA,kBAAA;CACA;AAEA;IACA,sDAAA;IACA,kBAAA;CACA;AAEA;IACA,gBAAA;CACA;AAEA;IACA,gBAAA;CACA;AAEA;IACA,gBAAA;IACA,+BAAA;IACA,iBAAA;CACA;AAEA;IACA,kBAAA;IACA,mBAAA;CACA;AAEA;IACA,mBAAA;IACA,oBAAA;CACA;AAEA;IACA,mBAAA;IACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div :class=\"tagClass\">\n    <div v-if=\"showSolid || showHollow\"\n        :class=\"['tag-item', 'tag-border', size === 'huge' && 'tag-huge', showHollow && 'tag-hollow']\"\n        :style=\"tagTextStyle\">\n      <text :class=\"textClass\" ref='content' :style=\"textStyle\"><slot></slot><template v-if=\"!$slots.default\">{{ value }}</template></text>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-tag {\n    align-items: center;\n\t  flex-direction: row;\n  }\n\n  .tag-item {\n    padding: 9px;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n  }\n\n  .tag-border {\n    border-radius: 4.5px;\n  }\n\n  .tag-huge {\n    border-radius: 100px;\n    height: 72px;\n    padding: 12px 42px;\n  }\n\n  .tag-hollow {\n    border-width: 3px;\n  }\n\n  .tag-text {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    font-weight: bold;\n  }\n\n  .tag-font-small {\n    font-size: 24px;\n  }\n\n  .tag-font-big {\n    font-size: 30px;\n  }\n\n  .tag-font-huge {\n    font-size: 42px;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n  }\n\n  .tag-margin-small {\n    margin-right: 6px;\n    margin-bottom: 6px;\n  }\n\n  .tag-margin-big {\n    margin-right: 12px;\n    margin-bottom: 12px;\n  }\n\n  .tag-margin-huge {\n    margin-right: 36px;\n    margin-bottom: 36px;\n  }\n</style>\n\n<script>\nimport Locale from 'weex-flymeui/lib/mixins/locale'\nimport { t } from 'weex-flymeui/lib/locale'\n\nexport default {\n  name: 'FmTag',\n  mixins: [Locale],\n  props: {\n    tagType: {\n      type: String,\n      default: 'solid'\n    },\n    size: {\n      type: String,\n      default: 'small'\n    },\n    value: {\n      type: [String, Number],\n      default() {\n        return t('el.tag.tagName')\n      }\n    },\n    color: {\n      type: String,\n      default: '#198DED'\n    },\n    fontColor: {\n      type: String,\n      default: '#FFFFFF'\n    }\n  },\n  computed: {\n    showSolid () {\n      const { tagType, value } = this;\n      return tagType === 'solid' && value !== '';\n    },\n    showHollow () {\n      const { tagType, value } = this;\n      return tagType === 'hollow' && value !== '';\n    },\n    tagTextStyle () {\n      const { color, showSolid } = this;\n      return showSolid ? { backgroundColor: color } : { borderColor: color }\n    },\n    textStyle() {\n      const { fontColor } = this;\n      return { color: fontColor }\n    },\n    textClass() {\n      let clz = [\"tag-text\"]\n      const { size } = this;\n      clz.push(`tag-font-${size}`)\n      return clz\n    },\n    tagClass() {\n      let clz = [\"fm-tag\"]\n      const { size } = this;\n      clz.push(`tag-margin-${size}`)\n      return clz\n    }\n  },\n  created() {\n    this.$slots.default && (this.value = this.$slots.default[0].text)\n  }\n}\n</script>"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-tag[data-v-2072c04b] {\n    align-items: center;\n\t  flex-direction: row;\n}\n.tag-item[data-v-2072c04b] {\n    padding: 9px;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n}\n.tag-border[data-v-2072c04b] {\n    border-radius: 4.5px;\n}\n.tag-huge[data-v-2072c04b] {\n    border-radius: 100px;\n    height: 72px;\n    padding: 12px 42px;\n}\n.tag-hollow[data-v-2072c04b] {\n    border-width: 3px;\n}\n.tag-text[data-v-2072c04b] {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    font-weight: bold;\n}\n.tag-font-small[data-v-2072c04b] {\n    font-size: 24px;\n}\n.tag-font-big[data-v-2072c04b] {\n    font-size: 30px;\n}\n.tag-font-huge[data-v-2072c04b] {\n    font-size: 42px;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n}\n.tag-margin-small[data-v-2072c04b] {\n    margin-right: 6px;\n    margin-bottom: 6px;\n}\n.tag-margin-big[data-v-2072c04b] {\n    margin-right: 12px;\n    margin-bottom: 12px;\n}\n.tag-margin-huge[data-v-2072c04b] {\n    margin-right: 36px;\n    margin-bottom: 36px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag/index.vue?e5b149b2"],"names":[],"mappings":";AAWA;IACA,oBAAA;GACA,oBAAA;CACA;AAEA;IACA,aAAA;IACA,wBAAA;IACA,oBAAA;IACA,iBAAA;CACA;AAEA;IACA,qBAAA;CACA;AAEA;IACA,qBAAA;IACA,aAAA;IACA,mBAAA;CACA;AAEA;IACA,kBAAA;CACA;AAEA;IACA,sDAAA;IACA,kBAAA;CACA;AAEA;IACA,gBAAA;CACA;AAEA;IACA,gBAAA;CACA;AAEA;IACA,gBAAA;IACA,+BAAA;IACA,iBAAA;CACA;AAEA;IACA,kBAAA;IACA,mBAAA;CACA;AAEA;IACA,mBAAA;IACA,oBAAA;CACA;AAEA;IACA,mBAAA;IACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div :class=\"tagClass\">\n    <div v-if=\"showSolid || showHollow\"\n        :class=\"['tag-item', 'tag-border', size === 'huge' && 'tag-huge', showHollow && 'tag-hollow']\"\n        :style=\"tagTextStyle\">\n      <text :class=\"textClass\" ref='content' :style=\"textStyle\"><slot></slot><template v-if=\"!$slots.default\">{{ value }}</template></text>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-tag {\n    align-items: center;\n\t  flex-direction: row;\n  }\n\n  .tag-item {\n    padding: 9px;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n  }\n\n  .tag-border {\n    border-radius: 4.5px;\n  }\n\n  .tag-huge {\n    border-radius: 100px;\n    height: 72px;\n    padding: 12px 42px;\n  }\n\n  .tag-hollow {\n    border-width: 3px;\n  }\n\n  .tag-text {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    font-weight: bold;\n  }\n\n  .tag-font-small {\n    font-size: 24px;\n  }\n\n  .tag-font-big {\n    font-size: 30px;\n  }\n\n  .tag-font-huge {\n    font-size: 42px;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n  }\n\n  .tag-margin-small {\n    margin-right: 6px;\n    margin-bottom: 6px;\n  }\n\n  .tag-margin-big {\n    margin-right: 12px;\n    margin-bottom: 12px;\n  }\n\n  .tag-margin-huge {\n    margin-right: 36px;\n    margin-bottom: 36px;\n  }\n</style>\n\n<script>\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmTag',\n  mixins: [Locale],\n  props: {\n    type: {\n      type: String,\n      default: 'solid'\n    },\n    size: {\n      type: String,\n      default: 'small'\n    },\n    value: {\n      type: [String, Number],\n      default () {\n        return t('el.tag.tagName');\n      }\n    },\n    color: {\n      type: String,\n      default: '#198DED'\n    },\n    fontColor: {\n      type: String,\n      default: '#FFFFFF'\n    }\n  },\n  computed: {\n    showSolid () {\n      const { type, value } = this;\n      return type === 'solid' && value !== '';\n    },\n    showHollow () {\n      const { type, value } = this;\n      return type === 'hollow' && value !== '';\n    },\n    tagTextStyle () {\n      const { color, showSolid } = this;\n      return showSolid ? { backgroundColor: color } : { borderColor: color };\n    },\n    textStyle () {\n      const { fontColor } = this;\n      return { color: fontColor };\n    },\n    textClass () {\n      const clz = ['tag-text'];\n      const { size } = this;\n      clz.push(`tag-font-${size}`);\n      return clz;\n    },\n    tagClass () {\n      const clz = ['fm-tag'];\n      const { size } = this;\n      clz.push(`tag-margin-${size}`);\n      return clz;\n    }\n  },\n  created () {\n    this.$slots.default && (this.value = this.$slots.default[0].text);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -1390,7 +1388,7 @@ var _locale = __webpack_require__(5);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(4);
+var _locale3 = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1471,7 +1469,7 @@ exports.default = {
   name: 'FmTag',
   mixins: [_locale2.default],
   props: {
-    tagType: {
+    type: {
       type: String,
       default: 'solid'
     },
@@ -1496,16 +1494,16 @@ exports.default = {
   },
   computed: {
     showSolid: function showSolid() {
-      var tagType = this.tagType,
+      var type = this.type,
           value = this.value;
 
-      return tagType === 'solid' && value !== '';
+      return type === 'solid' && value !== '';
     },
     showHollow: function showHollow() {
-      var tagType = this.tagType,
+      var type = this.type,
           value = this.value;
 
-      return tagType === 'hollow' && value !== '';
+      return type === 'hollow' && value !== '';
     },
     tagTextStyle: function tagTextStyle() {
       var color = this.color,
@@ -1519,14 +1517,14 @@ exports.default = {
       return { color: fontColor };
     },
     textClass: function textClass() {
-      var clz = ["tag-text"];
+      var clz = ['tag-text'];
       var size = this.size;
 
       clz.push('tag-font-' + size);
       return clz;
     },
     tagClass: function tagClass() {
-      var clz = ["fm-tag"];
+      var clz = ['fm-tag'];
       var size = this.size;
 
       clz.push('tag-margin-' + size);
@@ -1554,7 +1552,12 @@ exports.default = {
       delete: '删除',
       cancel: '取消',
       confirm: '确认',
-      close: '关闭'
+      close: '关闭',
+      title: '标题',
+      more: '更多'
+    },
+    titlebar: {
+      title: '标题'
     },
     searchbar: {
       search: '搜索'
@@ -1574,8373 +1577,6 @@ exports.default = {
 
 /***/ }),
 /* 30 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(setImmediate) {/*!
- * Vue.js v2.5.13
- * (c) 2014-2017 Evan You
- * Released under the MIT License.
- */
-/*  */
-
-var emptyObject = Object.freeze({});
-
-// these helpers produces better vm code in JS engines due to their
-// explicitness and function inlining
-function isUndef (v) {
-  return v === undefined || v === null
-}
-
-function isDef (v) {
-  return v !== undefined && v !== null
-}
-
-function isTrue (v) {
-  return v === true
-}
-
-function isFalse (v) {
-  return v === false
-}
-
-/**
- * Check if value is primitive
- */
-function isPrimitive (value) {
-  return (
-    typeof value === 'string' ||
-    typeof value === 'number' ||
-    // $flow-disable-line
-    typeof value === 'symbol' ||
-    typeof value === 'boolean'
-  )
-}
-
-/**
- * Quick object check - this is primarily used to tell
- * Objects from primitive values when we know the value
- * is a JSON-compliant type.
- */
-function isObject (obj) {
-  return obj !== null && typeof obj === 'object'
-}
-
-/**
- * Get the raw type string of a value e.g. [object Object]
- */
-var _toString = Object.prototype.toString;
-
-function toRawType (value) {
-  return _toString.call(value).slice(8, -1)
-}
-
-/**
- * Strict object type check. Only returns true
- * for plain JavaScript objects.
- */
-function isPlainObject (obj) {
-  return _toString.call(obj) === '[object Object]'
-}
-
-function isRegExp (v) {
-  return _toString.call(v) === '[object RegExp]'
-}
-
-/**
- * Check if val is a valid array index.
- */
-function isValidArrayIndex (val) {
-  var n = parseFloat(String(val));
-  return n >= 0 && Math.floor(n) === n && isFinite(val)
-}
-
-/**
- * Convert a value to a string that is actually rendered.
- */
-function toString (val) {
-  return val == null
-    ? ''
-    : typeof val === 'object'
-      ? JSON.stringify(val, null, 2)
-      : String(val)
-}
-
-/**
- * Convert a input value to a number for persistence.
- * If the conversion fails, return original string.
- */
-function toNumber (val) {
-  var n = parseFloat(val);
-  return isNaN(n) ? val : n
-}
-
-/**
- * Make a map and return a function for checking if a key
- * is in that map.
- */
-function makeMap (
-  str,
-  expectsLowerCase
-) {
-  var map = Object.create(null);
-  var list = str.split(',');
-  for (var i = 0; i < list.length; i++) {
-    map[list[i]] = true;
-  }
-  return expectsLowerCase
-    ? function (val) { return map[val.toLowerCase()]; }
-    : function (val) { return map[val]; }
-}
-
-/**
- * Check if a tag is a built-in tag.
- */
-var isBuiltInTag = makeMap('slot,component', true);
-
-/**
- * Check if a attribute is a reserved attribute.
- */
-var isReservedAttribute = makeMap('key,ref,slot,slot-scope,is');
-
-/**
- * Remove an item from an array
- */
-function remove (arr, item) {
-  if (arr.length) {
-    var index = arr.indexOf(item);
-    if (index > -1) {
-      return arr.splice(index, 1)
-    }
-  }
-}
-
-/**
- * Check whether the object has the property.
- */
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-function hasOwn (obj, key) {
-  return hasOwnProperty.call(obj, key)
-}
-
-/**
- * Create a cached version of a pure function.
- */
-function cached (fn) {
-  var cache = Object.create(null);
-  return (function cachedFn (str) {
-    var hit = cache[str];
-    return hit || (cache[str] = fn(str))
-  })
-}
-
-/**
- * Camelize a hyphen-delimited string.
- */
-var camelizeRE = /-(\w)/g;
-var camelize = cached(function (str) {
-  return str.replace(camelizeRE, function (_, c) { return c ? c.toUpperCase() : ''; })
-});
-
-/**
- * Capitalize a string.
- */
-var capitalize = cached(function (str) {
-  return str.charAt(0).toUpperCase() + str.slice(1)
-});
-
-/**
- * Hyphenate a camelCase string.
- */
-var hyphenateRE = /\B([A-Z])/g;
-var hyphenate = cached(function (str) {
-  return str.replace(hyphenateRE, '-$1').toLowerCase()
-});
-
-/**
- * Simple bind, faster than native
- */
-function bind (fn, ctx) {
-  function boundFn (a) {
-    var l = arguments.length;
-    return l
-      ? l > 1
-        ? fn.apply(ctx, arguments)
-        : fn.call(ctx, a)
-      : fn.call(ctx)
-  }
-  // record original fn length
-  boundFn._length = fn.length;
-  return boundFn
-}
-
-/**
- * Convert an Array-like object to a real Array.
- */
-function toArray (list, start) {
-  start = start || 0;
-  var i = list.length - start;
-  var ret = new Array(i);
-  while (i--) {
-    ret[i] = list[i + start];
-  }
-  return ret
-}
-
-/**
- * Mix properties into target object.
- */
-function extend (to, _from) {
-  for (var key in _from) {
-    to[key] = _from[key];
-  }
-  return to
-}
-
-/**
- * Merge an Array of Objects into a single Object.
- */
-function toObject (arr) {
-  var res = {};
-  for (var i = 0; i < arr.length; i++) {
-    if (arr[i]) {
-      extend(res, arr[i]);
-    }
-  }
-  return res
-}
-
-/**
- * Perform no operation.
- * Stubbing args to make Flow happy without leaving useless transpiled code
- * with ...rest (https://flow.org/blog/2017/05/07/Strict-Function-Call-Arity/)
- */
-function noop (a, b, c) {}
-
-/**
- * Always return false.
- */
-var no = function (a, b, c) { return false; };
-
-/**
- * Return same value
- */
-var identity = function (_) { return _; };
-
-/**
- * Generate a static keys string from compiler modules.
- */
-
-
-/**
- * Check if two values are loosely equal - that is,
- * if they are plain objects, do they have the same shape?
- */
-function looseEqual (a, b) {
-  if (a === b) { return true }
-  var isObjectA = isObject(a);
-  var isObjectB = isObject(b);
-  if (isObjectA && isObjectB) {
-    try {
-      var isArrayA = Array.isArray(a);
-      var isArrayB = Array.isArray(b);
-      if (isArrayA && isArrayB) {
-        return a.length === b.length && a.every(function (e, i) {
-          return looseEqual(e, b[i])
-        })
-      } else if (!isArrayA && !isArrayB) {
-        var keysA = Object.keys(a);
-        var keysB = Object.keys(b);
-        return keysA.length === keysB.length && keysA.every(function (key) {
-          return looseEqual(a[key], b[key])
-        })
-      } else {
-        /* istanbul ignore next */
-        return false
-      }
-    } catch (e) {
-      /* istanbul ignore next */
-      return false
-    }
-  } else if (!isObjectA && !isObjectB) {
-    return String(a) === String(b)
-  } else {
-    return false
-  }
-}
-
-function looseIndexOf (arr, val) {
-  for (var i = 0; i < arr.length; i++) {
-    if (looseEqual(arr[i], val)) { return i }
-  }
-  return -1
-}
-
-/**
- * Ensure a function is called only once.
- */
-function once (fn) {
-  var called = false;
-  return function () {
-    if (!called) {
-      called = true;
-      fn.apply(this, arguments);
-    }
-  }
-}
-
-var SSR_ATTR = 'data-server-rendered';
-
-var ASSET_TYPES = [
-  'component',
-  'directive',
-  'filter'
-];
-
-var LIFECYCLE_HOOKS = [
-  'beforeCreate',
-  'created',
-  'beforeMount',
-  'mounted',
-  'beforeUpdate',
-  'updated',
-  'beforeDestroy',
-  'destroyed',
-  'activated',
-  'deactivated',
-  'errorCaptured'
-];
-
-/*  */
-
-var config = ({
-  /**
-   * Option merge strategies (used in core/util/options)
-   */
-  // $flow-disable-line
-  optionMergeStrategies: Object.create(null),
-
-  /**
-   * Whether to suppress warnings.
-   */
-  silent: false,
-
-  /**
-   * Show production mode tip message on boot?
-   */
-  productionTip: "production" !== 'production',
-
-  /**
-   * Whether to enable devtools
-   */
-  devtools: "production" !== 'production',
-
-  /**
-   * Whether to record perf
-   */
-  performance: false,
-
-  /**
-   * Error handler for watcher errors
-   */
-  errorHandler: null,
-
-  /**
-   * Warn handler for watcher warns
-   */
-  warnHandler: null,
-
-  /**
-   * Ignore certain custom elements
-   */
-  ignoredElements: [],
-
-  /**
-   * Custom user key aliases for v-on
-   */
-  // $flow-disable-line
-  keyCodes: Object.create(null),
-
-  /**
-   * Check if a tag is reserved so that it cannot be registered as a
-   * component. This is platform-dependent and may be overwritten.
-   */
-  isReservedTag: no,
-
-  /**
-   * Check if an attribute is reserved so that it cannot be used as a component
-   * prop. This is platform-dependent and may be overwritten.
-   */
-  isReservedAttr: no,
-
-  /**
-   * Check if a tag is an unknown element.
-   * Platform-dependent.
-   */
-  isUnknownElement: no,
-
-  /**
-   * Get the namespace of an element
-   */
-  getTagNamespace: noop,
-
-  /**
-   * Parse the real tag name for the specific platform.
-   */
-  parsePlatformTagName: identity,
-
-  /**
-   * Check if an attribute must be bound using property, e.g. value
-   * Platform-dependent.
-   */
-  mustUseProp: no,
-
-  /**
-   * Exposed for legacy reasons
-   */
-  _lifecycleHooks: LIFECYCLE_HOOKS
-});
-
-/*  */
-
-/**
- * Check if a string starts with $ or _
- */
-function isReserved (str) {
-  var c = (str + '').charCodeAt(0);
-  return c === 0x24 || c === 0x5F
-}
-
-/**
- * Define a property.
- */
-function def (obj, key, val, enumerable) {
-  Object.defineProperty(obj, key, {
-    value: val,
-    enumerable: !!enumerable,
-    writable: true,
-    configurable: true
-  });
-}
-
-/**
- * Parse simple path.
- */
-var bailRE = /[^\w.$]/;
-function parsePath (path) {
-  if (bailRE.test(path)) {
-    return
-  }
-  var segments = path.split('.');
-  return function (obj) {
-    for (var i = 0; i < segments.length; i++) {
-      if (!obj) { return }
-      obj = obj[segments[i]];
-    }
-    return obj
-  }
-}
-
-/*  */
-
-
-// can we use __proto__?
-var hasProto = '__proto__' in {};
-
-// Browser environment sniffing
-var inBrowser = typeof window !== 'undefined';
-var inWeex = typeof WXEnvironment !== 'undefined' && !!WXEnvironment.platform;
-var weexPlatform = inWeex && WXEnvironment.platform.toLowerCase();
-var UA = inBrowser && window.navigator.userAgent.toLowerCase();
-var isIE = UA && /msie|trident/.test(UA);
-var isIE9 = UA && UA.indexOf('msie 9.0') > 0;
-var isEdge = UA && UA.indexOf('edge/') > 0;
-var isAndroid = (UA && UA.indexOf('android') > 0) || (weexPlatform === 'android');
-var isIOS = (UA && /iphone|ipad|ipod|ios/.test(UA)) || (weexPlatform === 'ios');
-var isChrome = UA && /chrome\/\d+/.test(UA) && !isEdge;
-
-// Firefox has a "watch" function on Object.prototype...
-var nativeWatch = ({}).watch;
-
-var supportsPassive = false;
-if (inBrowser) {
-  try {
-    var opts = {};
-    Object.defineProperty(opts, 'passive', ({
-      get: function get () {
-        /* istanbul ignore next */
-        supportsPassive = true;
-      }
-    })); // https://github.com/facebook/flow/issues/285
-    window.addEventListener('test-passive', null, opts);
-  } catch (e) {}
-}
-
-// this needs to be lazy-evaled because vue may be required before
-// vue-server-renderer can set VUE_ENV
-var _isServer;
-var isServerRendering = function () {
-  if (_isServer === undefined) {
-    /* istanbul ignore if */
-    if (!inBrowser && typeof {} !== 'undefined') {
-      // detect presence of vue-server-renderer and avoid
-      // Webpack shimming the process
-      _isServer = {}['process'].env.VUE_ENV === 'server';
-    } else {
-      _isServer = false;
-    }
-  }
-  return _isServer
-};
-
-// detect devtools
-var devtools = inBrowser && window.__VUE_DEVTOOLS_GLOBAL_HOOK__;
-
-/* istanbul ignore next */
-function isNative (Ctor) {
-  return typeof Ctor === 'function' && /native code/.test(Ctor.toString())
-}
-
-var hasSymbol =
-  typeof Symbol !== 'undefined' && isNative(Symbol) &&
-  typeof Reflect !== 'undefined' && isNative(Reflect.ownKeys);
-
-var _Set;
-/* istanbul ignore if */ // $flow-disable-line
-if (typeof Set !== 'undefined' && isNative(Set)) {
-  // use native Set when available.
-  _Set = Set;
-} else {
-  // a non-standard Set polyfill that only works with primitive keys.
-  _Set = (function () {
-    function Set () {
-      this.set = Object.create(null);
-    }
-    Set.prototype.has = function has (key) {
-      return this.set[key] === true
-    };
-    Set.prototype.add = function add (key) {
-      this.set[key] = true;
-    };
-    Set.prototype.clear = function clear () {
-      this.set = Object.create(null);
-    };
-
-    return Set;
-  }());
-}
-
-/*  */
-
-var warn = noop;
-var tip = noop;
-var generateComponentTrace = (noop); // work around flow check
-var formatComponentName = (noop);
-
-if (false) {
-  var hasConsole = typeof console !== 'undefined';
-  var classifyRE = /(?:^|[-_])(\w)/g;
-  var classify = function (str) { return str
-    .replace(classifyRE, function (c) { return c.toUpperCase(); })
-    .replace(/[-_]/g, ''); };
-
-  warn = function (msg, vm) {
-    var trace = vm ? generateComponentTrace(vm) : '';
-
-    if (config.warnHandler) {
-      config.warnHandler.call(null, msg, vm, trace);
-    } else if (hasConsole && (!config.silent)) {
-      console.error(("[Vue warn]: " + msg + trace));
-    }
-  };
-
-  tip = function (msg, vm) {
-    if (hasConsole && (!config.silent)) {
-      console.warn("[Vue tip]: " + msg + (
-        vm ? generateComponentTrace(vm) : ''
-      ));
-    }
-  };
-
-  formatComponentName = function (vm, includeFile) {
-    if (vm.$root === vm) {
-      return '<Root>'
-    }
-    var options = typeof vm === 'function' && vm.cid != null
-      ? vm.options
-      : vm._isVue
-        ? vm.$options || vm.constructor.options
-        : vm || {};
-    var name = options.name || options._componentTag;
-    var file = options.__file;
-    if (!name && file) {
-      var match = file.match(/([^/\\]+)\.vue$/);
-      name = match && match[1];
-    }
-
-    return (
-      (name ? ("<" + (classify(name)) + ">") : "<Anonymous>") +
-      (file && includeFile !== false ? (" at " + file) : '')
-    )
-  };
-
-  var repeat = function (str, n) {
-    var res = '';
-    while (n) {
-      if (n % 2 === 1) { res += str; }
-      if (n > 1) { str += str; }
-      n >>= 1;
-    }
-    return res
-  };
-
-  generateComponentTrace = function (vm) {
-    if (vm._isVue && vm.$parent) {
-      var tree = [];
-      var currentRecursiveSequence = 0;
-      while (vm) {
-        if (tree.length > 0) {
-          var last = tree[tree.length - 1];
-          if (last.constructor === vm.constructor) {
-            currentRecursiveSequence++;
-            vm = vm.$parent;
-            continue
-          } else if (currentRecursiveSequence > 0) {
-            tree[tree.length - 1] = [last, currentRecursiveSequence];
-            currentRecursiveSequence = 0;
-          }
-        }
-        tree.push(vm);
-        vm = vm.$parent;
-      }
-      return '\n\nfound in\n\n' + tree
-        .map(function (vm, i) { return ("" + (i === 0 ? '---> ' : repeat(' ', 5 + i * 2)) + (Array.isArray(vm)
-            ? ((formatComponentName(vm[0])) + "... (" + (vm[1]) + " recursive calls)")
-            : formatComponentName(vm))); })
-        .join('\n')
-    } else {
-      return ("\n\n(found in " + (formatComponentName(vm)) + ")")
-    }
-  };
-}
-
-/*  */
-
-
-var uid$1 = 0;
-
-/**
- * A dep is an observable that can have multiple
- * directives subscribing to it.
- */
-var Dep = function Dep () {
-  this.id = uid$1++;
-  this.subs = [];
-};
-
-Dep.prototype.addSub = function addSub (sub) {
-  this.subs.push(sub);
-};
-
-Dep.prototype.removeSub = function removeSub (sub) {
-  remove(this.subs, sub);
-};
-
-Dep.prototype.depend = function depend () {
-  if (Dep.target) {
-    Dep.target.addDep(this);
-  }
-};
-
-Dep.prototype.notify = function notify () {
-  // stabilize the subscriber list first
-  var subs = this.subs.slice();
-  for (var i = 0, l = subs.length; i < l; i++) {
-    subs[i].update();
-  }
-};
-
-// the current target watcher being evaluated.
-// this is globally unique because there could be only one
-// watcher being evaluated at any time.
-Dep.target = null;
-var targetStack = [];
-
-function pushTarget (_target) {
-  if (Dep.target) { targetStack.push(Dep.target); }
-  Dep.target = _target;
-}
-
-function popTarget () {
-  Dep.target = targetStack.pop();
-}
-
-/*  */
-
-var VNode = function VNode (
-  tag,
-  data,
-  children,
-  text,
-  elm,
-  context,
-  componentOptions,
-  asyncFactory
-) {
-  this.tag = tag;
-  this.data = data;
-  this.children = children;
-  this.text = text;
-  this.elm = elm;
-  this.ns = undefined;
-  this.context = context;
-  this.fnContext = undefined;
-  this.fnOptions = undefined;
-  this.fnScopeId = undefined;
-  this.key = data && data.key;
-  this.componentOptions = componentOptions;
-  this.componentInstance = undefined;
-  this.parent = undefined;
-  this.raw = false;
-  this.isStatic = false;
-  this.isRootInsert = true;
-  this.isComment = false;
-  this.isCloned = false;
-  this.isOnce = false;
-  this.asyncFactory = asyncFactory;
-  this.asyncMeta = undefined;
-  this.isAsyncPlaceholder = false;
-};
-
-var prototypeAccessors = { child: { configurable: true } };
-
-// DEPRECATED: alias for componentInstance for backwards compat.
-/* istanbul ignore next */
-prototypeAccessors.child.get = function () {
-  return this.componentInstance
-};
-
-Object.defineProperties( VNode.prototype, prototypeAccessors );
-
-var createEmptyVNode = function (text) {
-  if ( text === void 0 ) text = '';
-
-  var node = new VNode();
-  node.text = text;
-  node.isComment = true;
-  return node
-};
-
-function createTextVNode (val) {
-  return new VNode(undefined, undefined, undefined, String(val))
-}
-
-// optimized shallow clone
-// used for static nodes and slot nodes because they may be reused across
-// multiple renders, cloning them avoids errors when DOM manipulations rely
-// on their elm reference.
-function cloneVNode (vnode, deep) {
-  var componentOptions = vnode.componentOptions;
-  var cloned = new VNode(
-    vnode.tag,
-    vnode.data,
-    vnode.children,
-    vnode.text,
-    vnode.elm,
-    vnode.context,
-    componentOptions,
-    vnode.asyncFactory
-  );
-  cloned.ns = vnode.ns;
-  cloned.isStatic = vnode.isStatic;
-  cloned.key = vnode.key;
-  cloned.isComment = vnode.isComment;
-  cloned.fnContext = vnode.fnContext;
-  cloned.fnOptions = vnode.fnOptions;
-  cloned.fnScopeId = vnode.fnScopeId;
-  cloned.isCloned = true;
-  if (deep) {
-    if (vnode.children) {
-      cloned.children = cloneVNodes(vnode.children, true);
-    }
-    if (componentOptions && componentOptions.children) {
-      componentOptions.children = cloneVNodes(componentOptions.children, true);
-    }
-  }
-  return cloned
-}
-
-function cloneVNodes (vnodes, deep) {
-  var len = vnodes.length;
-  var res = new Array(len);
-  for (var i = 0; i < len; i++) {
-    res[i] = cloneVNode(vnodes[i], deep);
-  }
-  return res
-}
-
-/*
- * not type checking this file because flow doesn't play well with
- * dynamically accessing methods on Array prototype
- */
-
-var arrayProto = Array.prototype;
-var arrayMethods = Object.create(arrayProto);[
-  'push',
-  'pop',
-  'shift',
-  'unshift',
-  'splice',
-  'sort',
-  'reverse'
-].forEach(function (method) {
-  // cache original method
-  var original = arrayProto[method];
-  def(arrayMethods, method, function mutator () {
-    var args = [], len = arguments.length;
-    while ( len-- ) args[ len ] = arguments[ len ];
-
-    var result = original.apply(this, args);
-    var ob = this.__ob__;
-    var inserted;
-    switch (method) {
-      case 'push':
-      case 'unshift':
-        inserted = args;
-        break
-      case 'splice':
-        inserted = args.slice(2);
-        break
-    }
-    if (inserted) { ob.observeArray(inserted); }
-    // notify change
-    ob.dep.notify();
-    return result
-  });
-});
-
-/*  */
-
-var arrayKeys = Object.getOwnPropertyNames(arrayMethods);
-
-/**
- * By default, when a reactive property is set, the new value is
- * also converted to become reactive. However when passing down props,
- * we don't want to force conversion because the value may be a nested value
- * under a frozen data structure. Converting it would defeat the optimization.
- */
-var observerState = {
-  shouldConvert: true
-};
-
-/**
- * Observer class that are attached to each observed
- * object. Once attached, the observer converts target
- * object's property keys into getter/setters that
- * collect dependencies and dispatches updates.
- */
-var Observer = function Observer (value) {
-  this.value = value;
-  this.dep = new Dep();
-  this.vmCount = 0;
-  def(value, '__ob__', this);
-  if (Array.isArray(value)) {
-    var augment = hasProto
-      ? protoAugment
-      : copyAugment;
-    augment(value, arrayMethods, arrayKeys);
-    this.observeArray(value);
-  } else {
-    this.walk(value);
-  }
-};
-
-/**
- * Walk through each property and convert them into
- * getter/setters. This method should only be called when
- * value type is Object.
- */
-Observer.prototype.walk = function walk (obj) {
-  var keys = Object.keys(obj);
-  for (var i = 0; i < keys.length; i++) {
-    defineReactive(obj, keys[i], obj[keys[i]]);
-  }
-};
-
-/**
- * Observe a list of Array items.
- */
-Observer.prototype.observeArray = function observeArray (items) {
-  for (var i = 0, l = items.length; i < l; i++) {
-    observe(items[i]);
-  }
-};
-
-// helpers
-
-/**
- * Augment an target Object or Array by intercepting
- * the prototype chain using __proto__
- */
-function protoAugment (target, src, keys) {
-  /* eslint-disable no-proto */
-  target.__proto__ = src;
-  /* eslint-enable no-proto */
-}
-
-/**
- * Augment an target Object or Array by defining
- * hidden properties.
- */
-/* istanbul ignore next */
-function copyAugment (target, src, keys) {
-  for (var i = 0, l = keys.length; i < l; i++) {
-    var key = keys[i];
-    def(target, key, src[key]);
-  }
-}
-
-/**
- * Attempt to create an observer instance for a value,
- * returns the new observer if successfully observed,
- * or the existing observer if the value already has one.
- */
-function observe (value, asRootData) {
-  if (!isObject(value) || value instanceof VNode) {
-    return
-  }
-  var ob;
-  if (hasOwn(value, '__ob__') && value.__ob__ instanceof Observer) {
-    ob = value.__ob__;
-  } else if (
-    observerState.shouldConvert &&
-    !isServerRendering() &&
-    (Array.isArray(value) || isPlainObject(value)) &&
-    Object.isExtensible(value) &&
-    !value._isVue
-  ) {
-    ob = new Observer(value);
-  }
-  if (asRootData && ob) {
-    ob.vmCount++;
-  }
-  return ob
-}
-
-/**
- * Define a reactive property on an Object.
- */
-function defineReactive (
-  obj,
-  key,
-  val,
-  customSetter,
-  shallow
-) {
-  var dep = new Dep();
-
-  var property = Object.getOwnPropertyDescriptor(obj, key);
-  if (property && property.configurable === false) {
-    return
-  }
-
-  // cater for pre-defined getter/setters
-  var getter = property && property.get;
-  var setter = property && property.set;
-
-  var childOb = !shallow && observe(val);
-  Object.defineProperty(obj, key, {
-    enumerable: true,
-    configurable: true,
-    get: function reactiveGetter () {
-      var value = getter ? getter.call(obj) : val;
-      if (Dep.target) {
-        dep.depend();
-        if (childOb) {
-          childOb.dep.depend();
-          if (Array.isArray(value)) {
-            dependArray(value);
-          }
-        }
-      }
-      return value
-    },
-    set: function reactiveSetter (newVal) {
-      var value = getter ? getter.call(obj) : val;
-      /* eslint-disable no-self-compare */
-      if (newVal === value || (newVal !== newVal && value !== value)) {
-        return
-      }
-      /* eslint-enable no-self-compare */
-      if (false) {
-        customSetter();
-      }
-      if (setter) {
-        setter.call(obj, newVal);
-      } else {
-        val = newVal;
-      }
-      childOb = !shallow && observe(newVal);
-      dep.notify();
-    }
-  });
-}
-
-/**
- * Set a property on an object. Adds the new property and
- * triggers change notification if the property doesn't
- * already exist.
- */
-function set (target, key, val) {
-  if (Array.isArray(target) && isValidArrayIndex(key)) {
-    target.length = Math.max(target.length, key);
-    target.splice(key, 1, val);
-    return val
-  }
-  if (key in target && !(key in Object.prototype)) {
-    target[key] = val;
-    return val
-  }
-  var ob = (target).__ob__;
-  if (target._isVue || (ob && ob.vmCount)) {
-    "production" !== 'production' && warn(
-      'Avoid adding reactive properties to a Vue instance or its root $data ' +
-      'at runtime - declare it upfront in the data option.'
-    );
-    return val
-  }
-  if (!ob) {
-    target[key] = val;
-    return val
-  }
-  defineReactive(ob.value, key, val);
-  ob.dep.notify();
-  return val
-}
-
-/**
- * Delete a property and trigger change if necessary.
- */
-function del (target, key) {
-  if (Array.isArray(target) && isValidArrayIndex(key)) {
-    target.splice(key, 1);
-    return
-  }
-  var ob = (target).__ob__;
-  if (target._isVue || (ob && ob.vmCount)) {
-    "production" !== 'production' && warn(
-      'Avoid deleting properties on a Vue instance or its root $data ' +
-      '- just set it to null.'
-    );
-    return
-  }
-  if (!hasOwn(target, key)) {
-    return
-  }
-  delete target[key];
-  if (!ob) {
-    return
-  }
-  ob.dep.notify();
-}
-
-/**
- * Collect dependencies on array elements when the array is touched, since
- * we cannot intercept array element access like property getters.
- */
-function dependArray (value) {
-  for (var e = (void 0), i = 0, l = value.length; i < l; i++) {
-    e = value[i];
-    e && e.__ob__ && e.__ob__.dep.depend();
-    if (Array.isArray(e)) {
-      dependArray(e);
-    }
-  }
-}
-
-/*  */
-
-/**
- * Option overwriting strategies are functions that handle
- * how to merge a parent option value and a child option
- * value into the final value.
- */
-var strats = config.optionMergeStrategies;
-
-/**
- * Options with restrictions
- */
-if (false) {
-  strats.el = strats.propsData = function (parent, child, vm, key) {
-    if (!vm) {
-      warn(
-        "option \"" + key + "\" can only be used during instance " +
-        'creation with the `new` keyword.'
-      );
-    }
-    return defaultStrat(parent, child)
-  };
-}
-
-/**
- * Helper that recursively merges two data objects together.
- */
-function mergeData (to, from) {
-  if (!from) { return to }
-  var key, toVal, fromVal;
-  var keys = Object.keys(from);
-  for (var i = 0; i < keys.length; i++) {
-    key = keys[i];
-    toVal = to[key];
-    fromVal = from[key];
-    if (!hasOwn(to, key)) {
-      set(to, key, fromVal);
-    } else if (isPlainObject(toVal) && isPlainObject(fromVal)) {
-      mergeData(toVal, fromVal);
-    }
-  }
-  return to
-}
-
-/**
- * Data
- */
-function mergeDataOrFn (
-  parentVal,
-  childVal,
-  vm
-) {
-  if (!vm) {
-    // in a Vue.extend merge, both should be functions
-    if (!childVal) {
-      return parentVal
-    }
-    if (!parentVal) {
-      return childVal
-    }
-    // when parentVal & childVal are both present,
-    // we need to return a function that returns the
-    // merged result of both functions... no need to
-    // check if parentVal is a function here because
-    // it has to be a function to pass previous merges.
-    return function mergedDataFn () {
-      return mergeData(
-        typeof childVal === 'function' ? childVal.call(this, this) : childVal,
-        typeof parentVal === 'function' ? parentVal.call(this, this) : parentVal
-      )
-    }
-  } else {
-    return function mergedInstanceDataFn () {
-      // instance merge
-      var instanceData = typeof childVal === 'function'
-        ? childVal.call(vm, vm)
-        : childVal;
-      var defaultData = typeof parentVal === 'function'
-        ? parentVal.call(vm, vm)
-        : parentVal;
-      if (instanceData) {
-        return mergeData(instanceData, defaultData)
-      } else {
-        return defaultData
-      }
-    }
-  }
-}
-
-strats.data = function (
-  parentVal,
-  childVal,
-  vm
-) {
-  if (!vm) {
-    if (childVal && typeof childVal !== 'function') {
-      "production" !== 'production' && warn(
-        'The "data" option should be a function ' +
-        'that returns a per-instance value in component ' +
-        'definitions.',
-        vm
-      );
-
-      return parentVal
-    }
-    return mergeDataOrFn(parentVal, childVal)
-  }
-
-  return mergeDataOrFn(parentVal, childVal, vm)
-};
-
-/**
- * Hooks and props are merged as arrays.
- */
-function mergeHook (
-  parentVal,
-  childVal
-) {
-  return childVal
-    ? parentVal
-      ? parentVal.concat(childVal)
-      : Array.isArray(childVal)
-        ? childVal
-        : [childVal]
-    : parentVal
-}
-
-LIFECYCLE_HOOKS.forEach(function (hook) {
-  strats[hook] = mergeHook;
-});
-
-/**
- * Assets
- *
- * When a vm is present (instance creation), we need to do
- * a three-way merge between constructor options, instance
- * options and parent options.
- */
-function mergeAssets (
-  parentVal,
-  childVal,
-  vm,
-  key
-) {
-  var res = Object.create(parentVal || null);
-  if (childVal) {
-    "production" !== 'production' && assertObjectType(key, childVal, vm);
-    return extend(res, childVal)
-  } else {
-    return res
-  }
-}
-
-ASSET_TYPES.forEach(function (type) {
-  strats[type + 's'] = mergeAssets;
-});
-
-/**
- * Watchers.
- *
- * Watchers hashes should not overwrite one
- * another, so we merge them as arrays.
- */
-strats.watch = function (
-  parentVal,
-  childVal,
-  vm,
-  key
-) {
-  // work around Firefox's Object.prototype.watch...
-  if (parentVal === nativeWatch) { parentVal = undefined; }
-  if (childVal === nativeWatch) { childVal = undefined; }
-  /* istanbul ignore if */
-  if (!childVal) { return Object.create(parentVal || null) }
-  if (false) {
-    assertObjectType(key, childVal, vm);
-  }
-  if (!parentVal) { return childVal }
-  var ret = {};
-  extend(ret, parentVal);
-  for (var key$1 in childVal) {
-    var parent = ret[key$1];
-    var child = childVal[key$1];
-    if (parent && !Array.isArray(parent)) {
-      parent = [parent];
-    }
-    ret[key$1] = parent
-      ? parent.concat(child)
-      : Array.isArray(child) ? child : [child];
-  }
-  return ret
-};
-
-/**
- * Other object hashes.
- */
-strats.props =
-strats.methods =
-strats.inject =
-strats.computed = function (
-  parentVal,
-  childVal,
-  vm,
-  key
-) {
-  if (childVal && "production" !== 'production') {
-    assertObjectType(key, childVal, vm);
-  }
-  if (!parentVal) { return childVal }
-  var ret = Object.create(null);
-  extend(ret, parentVal);
-  if (childVal) { extend(ret, childVal); }
-  return ret
-};
-strats.provide = mergeDataOrFn;
-
-/**
- * Default strategy.
- */
-var defaultStrat = function (parentVal, childVal) {
-  return childVal === undefined
-    ? parentVal
-    : childVal
-};
-
-/**
- * Validate component names
- */
-function checkComponents (options) {
-  for (var key in options.components) {
-    validateComponentName(key);
-  }
-}
-
-function validateComponentName (name) {
-  if (!/^[a-zA-Z][\w-]*$/.test(name)) {
-    warn(
-      'Invalid component name: "' + name + '". Component names ' +
-      'can only contain alphanumeric characters and the hyphen, ' +
-      'and must start with a letter.'
-    );
-  }
-  if (isBuiltInTag(name) || config.isReservedTag(name)) {
-    warn(
-      'Do not use built-in or reserved HTML elements as component ' +
-      'id: ' + name
-    );
-  }
-}
-
-/**
- * Ensure all props option syntax are normalized into the
- * Object-based format.
- */
-function normalizeProps (options, vm) {
-  var props = options.props;
-  if (!props) { return }
-  var res = {};
-  var i, val, name;
-  if (Array.isArray(props)) {
-    i = props.length;
-    while (i--) {
-      val = props[i];
-      if (typeof val === 'string') {
-        name = camelize(val);
-        res[name] = { type: null };
-      } else if (false) {
-        warn('props must be strings when using array syntax.');
-      }
-    }
-  } else if (isPlainObject(props)) {
-    for (var key in props) {
-      val = props[key];
-      name = camelize(key);
-      res[name] = isPlainObject(val)
-        ? val
-        : { type: val };
-    }
-  } else if (false) {
-    warn(
-      "Invalid value for option \"props\": expected an Array or an Object, " +
-      "but got " + (toRawType(props)) + ".",
-      vm
-    );
-  }
-  options.props = res;
-}
-
-/**
- * Normalize all injections into Object-based format
- */
-function normalizeInject (options, vm) {
-  var inject = options.inject;
-  if (!inject) { return }
-  var normalized = options.inject = {};
-  if (Array.isArray(inject)) {
-    for (var i = 0; i < inject.length; i++) {
-      normalized[inject[i]] = { from: inject[i] };
-    }
-  } else if (isPlainObject(inject)) {
-    for (var key in inject) {
-      var val = inject[key];
-      normalized[key] = isPlainObject(val)
-        ? extend({ from: key }, val)
-        : { from: val };
-    }
-  } else if (false) {
-    warn(
-      "Invalid value for option \"inject\": expected an Array or an Object, " +
-      "but got " + (toRawType(inject)) + ".",
-      vm
-    );
-  }
-}
-
-/**
- * Normalize raw function directives into object format.
- */
-function normalizeDirectives (options) {
-  var dirs = options.directives;
-  if (dirs) {
-    for (var key in dirs) {
-      var def = dirs[key];
-      if (typeof def === 'function') {
-        dirs[key] = { bind: def, update: def };
-      }
-    }
-  }
-}
-
-function assertObjectType (name, value, vm) {
-  if (!isPlainObject(value)) {
-    warn(
-      "Invalid value for option \"" + name + "\": expected an Object, " +
-      "but got " + (toRawType(value)) + ".",
-      vm
-    );
-  }
-}
-
-/**
- * Merge two option objects into a new one.
- * Core utility used in both instantiation and inheritance.
- */
-function mergeOptions (
-  parent,
-  child,
-  vm
-) {
-  if (false) {
-    checkComponents(child);
-  }
-
-  if (typeof child === 'function') {
-    child = child.options;
-  }
-
-  normalizeProps(child, vm);
-  normalizeInject(child, vm);
-  normalizeDirectives(child);
-  var extendsFrom = child.extends;
-  if (extendsFrom) {
-    parent = mergeOptions(parent, extendsFrom, vm);
-  }
-  if (child.mixins) {
-    for (var i = 0, l = child.mixins.length; i < l; i++) {
-      parent = mergeOptions(parent, child.mixins[i], vm);
-    }
-  }
-  var options = {};
-  var key;
-  for (key in parent) {
-    mergeField(key);
-  }
-  for (key in child) {
-    if (!hasOwn(parent, key)) {
-      mergeField(key);
-    }
-  }
-  function mergeField (key) {
-    var strat = strats[key] || defaultStrat;
-    options[key] = strat(parent[key], child[key], vm, key);
-  }
-  return options
-}
-
-/**
- * Resolve an asset.
- * This function is used because child instances need access
- * to assets defined in its ancestor chain.
- */
-function resolveAsset (
-  options,
-  type,
-  id,
-  warnMissing
-) {
-  /* istanbul ignore if */
-  if (typeof id !== 'string') {
-    return
-  }
-  var assets = options[type];
-  // check local registration variations first
-  if (hasOwn(assets, id)) { return assets[id] }
-  var camelizedId = camelize(id);
-  if (hasOwn(assets, camelizedId)) { return assets[camelizedId] }
-  var PascalCaseId = capitalize(camelizedId);
-  if (hasOwn(assets, PascalCaseId)) { return assets[PascalCaseId] }
-  // fallback to prototype chain
-  var res = assets[id] || assets[camelizedId] || assets[PascalCaseId];
-  if (false) {
-    warn(
-      'Failed to resolve ' + type.slice(0, -1) + ': ' + id,
-      options
-    );
-  }
-  return res
-}
-
-/*  */
-
-function validateProp (
-  key,
-  propOptions,
-  propsData,
-  vm
-) {
-  var prop = propOptions[key];
-  var absent = !hasOwn(propsData, key);
-  var value = propsData[key];
-  // handle boolean props
-  if (isType(Boolean, prop.type)) {
-    if (absent && !hasOwn(prop, 'default')) {
-      value = false;
-    } else if (!isType(String, prop.type) && (value === '' || value === hyphenate(key))) {
-      value = true;
-    }
-  }
-  // check default value
-  if (value === undefined) {
-    value = getPropDefaultValue(vm, prop, key);
-    // since the default value is a fresh copy,
-    // make sure to observe it.
-    var prevShouldConvert = observerState.shouldConvert;
-    observerState.shouldConvert = true;
-    observe(value);
-    observerState.shouldConvert = prevShouldConvert;
-  }
-  if (
-    false
-  ) {
-    assertProp(prop, key, value, vm, absent);
-  }
-  return value
-}
-
-/**
- * Get the default value of a prop.
- */
-function getPropDefaultValue (vm, prop, key) {
-  // no default, return undefined
-  if (!hasOwn(prop, 'default')) {
-    return undefined
-  }
-  var def = prop.default;
-  // warn against non-factory defaults for Object & Array
-  if (false) {
-    warn(
-      'Invalid default value for prop "' + key + '": ' +
-      'Props with type Object/Array must use a factory function ' +
-      'to return the default value.',
-      vm
-    );
-  }
-  // the raw prop value was also undefined from previous render,
-  // return previous default value to avoid unnecessary watcher trigger
-  if (vm && vm.$options.propsData &&
-    vm.$options.propsData[key] === undefined &&
-    vm._props[key] !== undefined
-  ) {
-    return vm._props[key]
-  }
-  // call factory function for non-Function types
-  // a value is Function if its prototype is function even across different execution context
-  return typeof def === 'function' && getType(prop.type) !== 'Function'
-    ? def.call(vm)
-    : def
-}
-
-/**
- * Assert whether a prop is valid.
- */
-function assertProp (
-  prop,
-  name,
-  value,
-  vm,
-  absent
-) {
-  if (prop.required && absent) {
-    warn(
-      'Missing required prop: "' + name + '"',
-      vm
-    );
-    return
-  }
-  if (value == null && !prop.required) {
-    return
-  }
-  var type = prop.type;
-  var valid = !type || type === true;
-  var expectedTypes = [];
-  if (type) {
-    if (!Array.isArray(type)) {
-      type = [type];
-    }
-    for (var i = 0; i < type.length && !valid; i++) {
-      var assertedType = assertType(value, type[i]);
-      expectedTypes.push(assertedType.expectedType || '');
-      valid = assertedType.valid;
-    }
-  }
-  if (!valid) {
-    warn(
-      "Invalid prop: type check failed for prop \"" + name + "\"." +
-      " Expected " + (expectedTypes.map(capitalize).join(', ')) +
-      ", got " + (toRawType(value)) + ".",
-      vm
-    );
-    return
-  }
-  var validator = prop.validator;
-  if (validator) {
-    if (!validator(value)) {
-      warn(
-        'Invalid prop: custom validator check failed for prop "' + name + '".',
-        vm
-      );
-    }
-  }
-}
-
-var simpleCheckRE = /^(String|Number|Boolean|Function|Symbol)$/;
-
-function assertType (value, type) {
-  var valid;
-  var expectedType = getType(type);
-  if (simpleCheckRE.test(expectedType)) {
-    var t = typeof value;
-    valid = t === expectedType.toLowerCase();
-    // for primitive wrapper objects
-    if (!valid && t === 'object') {
-      valid = value instanceof type;
-    }
-  } else if (expectedType === 'Object') {
-    valid = isPlainObject(value);
-  } else if (expectedType === 'Array') {
-    valid = Array.isArray(value);
-  } else {
-    valid = value instanceof type;
-  }
-  return {
-    valid: valid,
-    expectedType: expectedType
-  }
-}
-
-/**
- * Use function string name to check built-in types,
- * because a simple equality check will fail when running
- * across different vms / iframes.
- */
-function getType (fn) {
-  var match = fn && fn.toString().match(/^\s*function (\w+)/);
-  return match ? match[1] : ''
-}
-
-function isType (type, fn) {
-  if (!Array.isArray(fn)) {
-    return getType(fn) === getType(type)
-  }
-  for (var i = 0, len = fn.length; i < len; i++) {
-    if (getType(fn[i]) === getType(type)) {
-      return true
-    }
-  }
-  /* istanbul ignore next */
-  return false
-}
-
-/*  */
-
-function handleError (err, vm, info) {
-  if (vm) {
-    var cur = vm;
-    while ((cur = cur.$parent)) {
-      var hooks = cur.$options.errorCaptured;
-      if (hooks) {
-        for (var i = 0; i < hooks.length; i++) {
-          try {
-            var capture = hooks[i].call(cur, err, vm, info) === false;
-            if (capture) { return }
-          } catch (e) {
-            globalHandleError(e, cur, 'errorCaptured hook');
-          }
-        }
-      }
-    }
-  }
-  globalHandleError(err, vm, info);
-}
-
-function globalHandleError (err, vm, info) {
-  if (config.errorHandler) {
-    try {
-      return config.errorHandler.call(null, err, vm, info)
-    } catch (e) {
-      logError(e, null, 'config.errorHandler');
-    }
-  }
-  logError(err, vm, info);
-}
-
-function logError (err, vm, info) {
-  if (false) {
-    warn(("Error in " + info + ": \"" + (err.toString()) + "\""), vm);
-  }
-  /* istanbul ignore else */
-  if ((inBrowser || inWeex) && typeof console !== 'undefined') {
-    console.error(err);
-  } else {
-    throw err
-  }
-}
-
-/*  */
-/* globals MessageChannel */
-
-var callbacks = [];
-var pending = false;
-
-function flushCallbacks () {
-  pending = false;
-  var copies = callbacks.slice(0);
-  callbacks.length = 0;
-  for (var i = 0; i < copies.length; i++) {
-    copies[i]();
-  }
-}
-
-// Here we have async deferring wrappers using both micro and macro tasks.
-// In < 2.4 we used micro tasks everywhere, but there are some scenarios where
-// micro tasks have too high a priority and fires in between supposedly
-// sequential events (e.g. #4521, #6690) or even between bubbling of the same
-// event (#6566). However, using macro tasks everywhere also has subtle problems
-// when state is changed right before repaint (e.g. #6813, out-in transitions).
-// Here we use micro task by default, but expose a way to force macro task when
-// needed (e.g. in event handlers attached by v-on).
-var microTimerFunc;
-var macroTimerFunc;
-var useMacroTask = false;
-
-// Determine (macro) Task defer implementation.
-// Technically setImmediate should be the ideal choice, but it's only available
-// in IE. The only polyfill that consistently queues the callback after all DOM
-// events triggered in the same loop is by using MessageChannel.
-/* istanbul ignore if */
-if (typeof setImmediate !== 'undefined' && isNative(setImmediate)) {
-  macroTimerFunc = function () {
-    setImmediate(flushCallbacks);
-  };
-} else if (typeof MessageChannel !== 'undefined' && (
-  isNative(MessageChannel) ||
-  // PhantomJS
-  MessageChannel.toString() === '[object MessageChannelConstructor]'
-)) {
-  var channel = new MessageChannel();
-  var port = channel.port2;
-  channel.port1.onmessage = flushCallbacks;
-  macroTimerFunc = function () {
-    port.postMessage(1);
-  };
-} else {
-  /* istanbul ignore next */
-  macroTimerFunc = function () {
-    setTimeout(flushCallbacks, 0);
-  };
-}
-
-// Determine MicroTask defer implementation.
-/* istanbul ignore next, $flow-disable-line */
-if (typeof Promise !== 'undefined' && isNative(Promise)) {
-  var p = Promise.resolve();
-  microTimerFunc = function () {
-    p.then(flushCallbacks);
-    // in problematic UIWebViews, Promise.then doesn't completely break, but
-    // it can get stuck in a weird state where callbacks are pushed into the
-    // microtask queue but the queue isn't being flushed, until the browser
-    // needs to do some other work, e.g. handle a timer. Therefore we can
-    // "force" the microtask queue to be flushed by adding an empty timer.
-    if (isIOS) { setTimeout(noop); }
-  };
-} else {
-  // fallback to macro
-  microTimerFunc = macroTimerFunc;
-}
-
-/**
- * Wrap a function so that if any code inside triggers state change,
- * the changes are queued using a Task instead of a MicroTask.
- */
-function withMacroTask (fn) {
-  return fn._withTask || (fn._withTask = function () {
-    useMacroTask = true;
-    var res = fn.apply(null, arguments);
-    useMacroTask = false;
-    return res
-  })
-}
-
-function nextTick (cb, ctx) {
-  var _resolve;
-  callbacks.push(function () {
-    if (cb) {
-      try {
-        cb.call(ctx);
-      } catch (e) {
-        handleError(e, ctx, 'nextTick');
-      }
-    } else if (_resolve) {
-      _resolve(ctx);
-    }
-  });
-  if (!pending) {
-    pending = true;
-    if (useMacroTask) {
-      macroTimerFunc();
-    } else {
-      microTimerFunc();
-    }
-  }
-  // $flow-disable-line
-  if (!cb && typeof Promise !== 'undefined') {
-    return new Promise(function (resolve) {
-      _resolve = resolve;
-    })
-  }
-}
-
-/*  */
-
-/* not type checking this file because flow doesn't play well with Proxy */
-
-var initProxy;
-
-if (false) {
-  var allowedGlobals = makeMap(
-    'Infinity,undefined,NaN,isFinite,isNaN,' +
-    'parseFloat,parseInt,decodeURI,decodeURIComponent,encodeURI,encodeURIComponent,' +
-    'Math,Number,Date,Array,Object,Boolean,String,RegExp,Map,Set,JSON,Intl,' +
-    'require' // for Webpack/Browserify
-  );
-
-  var warnNonPresent = function (target, key) {
-    warn(
-      "Property or method \"" + key + "\" is not defined on the instance but " +
-      'referenced during render. Make sure that this property is reactive, ' +
-      'either in the data option, or for class-based components, by ' +
-      'initializing the property. ' +
-      'See: https://vuejs.org/v2/guide/reactivity.html#Declaring-Reactive-Properties.',
-      target
-    );
-  };
-
-  var hasProxy =
-    typeof Proxy !== 'undefined' &&
-    Proxy.toString().match(/native code/);
-
-  if (hasProxy) {
-    var isBuiltInModifier = makeMap('stop,prevent,self,ctrl,shift,alt,meta,exact');
-    config.keyCodes = new Proxy(config.keyCodes, {
-      set: function set (target, key, value) {
-        if (isBuiltInModifier(key)) {
-          warn(("Avoid overwriting built-in modifier in config.keyCodes: ." + key));
-          return false
-        } else {
-          target[key] = value;
-          return true
-        }
-      }
-    });
-  }
-
-  var hasHandler = {
-    has: function has (target, key) {
-      var has = key in target;
-      var isAllowed = allowedGlobals(key) || key.charAt(0) === '_';
-      if (!has && !isAllowed) {
-        warnNonPresent(target, key);
-      }
-      return has || !isAllowed
-    }
-  };
-
-  var getHandler = {
-    get: function get (target, key) {
-      if (typeof key === 'string' && !(key in target)) {
-        warnNonPresent(target, key);
-      }
-      return target[key]
-    }
-  };
-
-  initProxy = function initProxy (vm) {
-    if (hasProxy) {
-      // determine which proxy handler to use
-      var options = vm.$options;
-      var handlers = options.render && options.render._withStripped
-        ? getHandler
-        : hasHandler;
-      vm._renderProxy = new Proxy(vm, handlers);
-    } else {
-      vm._renderProxy = vm;
-    }
-  };
-}
-
-/*  */
-
-var seenObjects = new _Set();
-
-/**
- * Recursively traverse an object to evoke all converted
- * getters, so that every nested property inside the object
- * is collected as a "deep" dependency.
- */
-function traverse (val) {
-  _traverse(val, seenObjects);
-  seenObjects.clear();
-}
-
-function _traverse (val, seen) {
-  var i, keys;
-  var isA = Array.isArray(val);
-  if ((!isA && !isObject(val)) || Object.isFrozen(val)) {
-    return
-  }
-  if (val.__ob__) {
-    var depId = val.__ob__.dep.id;
-    if (seen.has(depId)) {
-      return
-    }
-    seen.add(depId);
-  }
-  if (isA) {
-    i = val.length;
-    while (i--) { _traverse(val[i], seen); }
-  } else {
-    keys = Object.keys(val);
-    i = keys.length;
-    while (i--) { _traverse(val[keys[i]], seen); }
-  }
-}
-
-var mark;
-var measure;
-
-if (false) {
-  var perf = inBrowser && window.performance;
-  /* istanbul ignore if */
-  if (
-    perf &&
-    perf.mark &&
-    perf.measure &&
-    perf.clearMarks &&
-    perf.clearMeasures
-  ) {
-    mark = function (tag) { return perf.mark(tag); };
-    measure = function (name, startTag, endTag) {
-      perf.measure(name, startTag, endTag);
-      perf.clearMarks(startTag);
-      perf.clearMarks(endTag);
-      perf.clearMeasures(name);
-    };
-  }
-}
-
-/*  */
-
-var normalizeEvent = cached(function (name) {
-  var passive = name.charAt(0) === '&';
-  name = passive ? name.slice(1) : name;
-  var once$$1 = name.charAt(0) === '~'; // Prefixed last, checked first
-  name = once$$1 ? name.slice(1) : name;
-  var capture = name.charAt(0) === '!';
-  name = capture ? name.slice(1) : name;
-  return {
-    name: name,
-    once: once$$1,
-    capture: capture,
-    passive: passive
-  }
-});
-
-function createFnInvoker (fns) {
-  function invoker () {
-    var arguments$1 = arguments;
-
-    var fns = invoker.fns;
-    if (Array.isArray(fns)) {
-      var cloned = fns.slice();
-      for (var i = 0; i < cloned.length; i++) {
-        cloned[i].apply(null, arguments$1);
-      }
-    } else {
-      // return handler return value for single handlers
-      return fns.apply(null, arguments)
-    }
-  }
-  invoker.fns = fns;
-  return invoker
-}
-
-function updateListeners (
-  on,
-  oldOn,
-  add,
-  remove$$1,
-  vm
-) {
-  var name, def, cur, old, event;
-  for (name in on) {
-    def = cur = on[name];
-    old = oldOn[name];
-    event = normalizeEvent(name);
-    /* istanbul ignore if */
-    if (isUndef(cur)) {
-      "production" !== 'production' && warn(
-        "Invalid handler for event \"" + (event.name) + "\": got " + String(cur),
-        vm
-      );
-    } else if (isUndef(old)) {
-      if (isUndef(cur.fns)) {
-        cur = on[name] = createFnInvoker(cur);
-      }
-      add(event.name, cur, event.once, event.capture, event.passive, event.params);
-    } else if (cur !== old) {
-      old.fns = cur;
-      on[name] = old;
-    }
-  }
-  for (name in oldOn) {
-    if (isUndef(on[name])) {
-      event = normalizeEvent(name);
-      remove$$1(event.name, oldOn[name], event.capture);
-    }
-  }
-}
-
-/*  */
-
-function mergeVNodeHook (def, hookKey, hook) {
-  if (def instanceof VNode) {
-    def = def.data.hook || (def.data.hook = {});
-  }
-  var invoker;
-  var oldHook = def[hookKey];
-
-  function wrappedHook () {
-    hook.apply(this, arguments);
-    // important: remove merged hook to ensure it's called only once
-    // and prevent memory leak
-    remove(invoker.fns, wrappedHook);
-  }
-
-  if (isUndef(oldHook)) {
-    // no existing hook
-    invoker = createFnInvoker([wrappedHook]);
-  } else {
-    /* istanbul ignore if */
-    if (isDef(oldHook.fns) && isTrue(oldHook.merged)) {
-      // already a merged invoker
-      invoker = oldHook;
-      invoker.fns.push(wrappedHook);
-    } else {
-      // existing plain hook
-      invoker = createFnInvoker([oldHook, wrappedHook]);
-    }
-  }
-
-  invoker.merged = true;
-  def[hookKey] = invoker;
-}
-
-/*  */
-
-function extractPropsFromVNodeData (
-  data,
-  Ctor,
-  tag
-) {
-  // we are only extracting raw values here.
-  // validation and default values are handled in the child
-  // component itself.
-  var propOptions = Ctor.options.props;
-  if (isUndef(propOptions)) {
-    return
-  }
-  var res = {};
-  var attrs = data.attrs;
-  var props = data.props;
-  if (isDef(attrs) || isDef(props)) {
-    for (var key in propOptions) {
-      var altKey = hyphenate(key);
-      if (false) {
-        var keyInLowerCase = key.toLowerCase();
-        if (
-          key !== keyInLowerCase &&
-          attrs && hasOwn(attrs, keyInLowerCase)
-        ) {
-          tip(
-            "Prop \"" + keyInLowerCase + "\" is passed to component " +
-            (formatComponentName(tag || Ctor)) + ", but the declared prop name is" +
-            " \"" + key + "\". " +
-            "Note that HTML attributes are case-insensitive and camelCased " +
-            "props need to use their kebab-case equivalents when using in-DOM " +
-            "templates. You should probably use \"" + altKey + "\" instead of \"" + key + "\"."
-          );
-        }
-      }
-      checkProp(res, props, key, altKey, true) ||
-      checkProp(res, attrs, key, altKey, false);
-    }
-  }
-  return res
-}
-
-function checkProp (
-  res,
-  hash,
-  key,
-  altKey,
-  preserve
-) {
-  if (isDef(hash)) {
-    if (hasOwn(hash, key)) {
-      res[key] = hash[key];
-      if (!preserve) {
-        delete hash[key];
-      }
-      return true
-    } else if (hasOwn(hash, altKey)) {
-      res[key] = hash[altKey];
-      if (!preserve) {
-        delete hash[altKey];
-      }
-      return true
-    }
-  }
-  return false
-}
-
-/*  */
-
-// The template compiler attempts to minimize the need for normalization by
-// statically analyzing the template at compile time.
-//
-// For plain HTML markup, normalization can be completely skipped because the
-// generated render function is guaranteed to return Array<VNode>. There are
-// two cases where extra normalization is needed:
-
-// 1. When the children contains components - because a functional component
-// may return an Array instead of a single root. In this case, just a simple
-// normalization is needed - if any child is an Array, we flatten the whole
-// thing with Array.prototype.concat. It is guaranteed to be only 1-level deep
-// because functional components already normalize their own children.
-function simpleNormalizeChildren (children) {
-  for (var i = 0; i < children.length; i++) {
-    if (Array.isArray(children[i])) {
-      return Array.prototype.concat.apply([], children)
-    }
-  }
-  return children
-}
-
-// 2. When the children contains constructs that always generated nested Arrays,
-// e.g. <template>, <slot>, v-for, or when the children is provided by user
-// with hand-written render functions / JSX. In such cases a full normalization
-// is needed to cater to all possible types of children values.
-function normalizeChildren (children) {
-  return isPrimitive(children)
-    ? [createTextVNode(children)]
-    : Array.isArray(children)
-      ? normalizeArrayChildren(children)
-      : undefined
-}
-
-function isTextNode (node) {
-  return isDef(node) && isDef(node.text) && isFalse(node.isComment)
-}
-
-function normalizeArrayChildren (children, nestedIndex) {
-  var res = [];
-  var i, c, lastIndex, last;
-  for (i = 0; i < children.length; i++) {
-    c = children[i];
-    if (isUndef(c) || typeof c === 'boolean') { continue }
-    lastIndex = res.length - 1;
-    last = res[lastIndex];
-    //  nested
-    if (Array.isArray(c)) {
-      if (c.length > 0) {
-        c = normalizeArrayChildren(c, ((nestedIndex || '') + "_" + i));
-        // merge adjacent text nodes
-        if (isTextNode(c[0]) && isTextNode(last)) {
-          res[lastIndex] = createTextVNode(last.text + (c[0]).text);
-          c.shift();
-        }
-        res.push.apply(res, c);
-      }
-    } else if (isPrimitive(c)) {
-      if (isTextNode(last)) {
-        // merge adjacent text nodes
-        // this is necessary for SSR hydration because text nodes are
-        // essentially merged when rendered to HTML strings
-        res[lastIndex] = createTextVNode(last.text + c);
-      } else if (c !== '') {
-        // convert primitive to vnode
-        res.push(createTextVNode(c));
-      }
-    } else {
-      if (isTextNode(c) && isTextNode(last)) {
-        // merge adjacent text nodes
-        res[lastIndex] = createTextVNode(last.text + c.text);
-      } else {
-        // default key for nested array children (likely generated by v-for)
-        if (isTrue(children._isVList) &&
-          isDef(c.tag) &&
-          isUndef(c.key) &&
-          isDef(nestedIndex)) {
-          c.key = "__vlist" + nestedIndex + "_" + i + "__";
-        }
-        res.push(c);
-      }
-    }
-  }
-  return res
-}
-
-/*  */
-
-function ensureCtor (comp, base) {
-  if (
-    comp.__esModule ||
-    (hasSymbol && comp[Symbol.toStringTag] === 'Module')
-  ) {
-    comp = comp.default;
-  }
-  return isObject(comp)
-    ? base.extend(comp)
-    : comp
-}
-
-function createAsyncPlaceholder (
-  factory,
-  data,
-  context,
-  children,
-  tag
-) {
-  var node = createEmptyVNode();
-  node.asyncFactory = factory;
-  node.asyncMeta = { data: data, context: context, children: children, tag: tag };
-  return node
-}
-
-function resolveAsyncComponent (
-  factory,
-  baseCtor,
-  context
-) {
-  if (isTrue(factory.error) && isDef(factory.errorComp)) {
-    return factory.errorComp
-  }
-
-  if (isDef(factory.resolved)) {
-    return factory.resolved
-  }
-
-  if (isTrue(factory.loading) && isDef(factory.loadingComp)) {
-    return factory.loadingComp
-  }
-
-  if (isDef(factory.contexts)) {
-    // already pending
-    factory.contexts.push(context);
-  } else {
-    var contexts = factory.contexts = [context];
-    var sync = true;
-
-    var forceRender = function () {
-      for (var i = 0, l = contexts.length; i < l; i++) {
-        contexts[i].$forceUpdate();
-      }
-    };
-
-    var resolve = once(function (res) {
-      // cache resolved
-      factory.resolved = ensureCtor(res, baseCtor);
-      // invoke callbacks only if this is not a synchronous resolve
-      // (async resolves are shimmed as synchronous during SSR)
-      if (!sync) {
-        forceRender();
-      }
-    });
-
-    var reject = once(function (reason) {
-      "production" !== 'production' && warn(
-        "Failed to resolve async component: " + (String(factory)) +
-        (reason ? ("\nReason: " + reason) : '')
-      );
-      if (isDef(factory.errorComp)) {
-        factory.error = true;
-        forceRender();
-      }
-    });
-
-    var res = factory(resolve, reject);
-
-    if (isObject(res)) {
-      if (typeof res.then === 'function') {
-        // () => Promise
-        if (isUndef(factory.resolved)) {
-          res.then(resolve, reject);
-        }
-      } else if (isDef(res.component) && typeof res.component.then === 'function') {
-        res.component.then(resolve, reject);
-
-        if (isDef(res.error)) {
-          factory.errorComp = ensureCtor(res.error, baseCtor);
-        }
-
-        if (isDef(res.loading)) {
-          factory.loadingComp = ensureCtor(res.loading, baseCtor);
-          if (res.delay === 0) {
-            factory.loading = true;
-          } else {
-            setTimeout(function () {
-              if (isUndef(factory.resolved) && isUndef(factory.error)) {
-                factory.loading = true;
-                forceRender();
-              }
-            }, res.delay || 200);
-          }
-        }
-
-        if (isDef(res.timeout)) {
-          setTimeout(function () {
-            if (isUndef(factory.resolved)) {
-              reject(
-                 false
-                  ? ("timeout (" + (res.timeout) + "ms)")
-                  : null
-              );
-            }
-          }, res.timeout);
-        }
-      }
-    }
-
-    sync = false;
-    // return in case resolved synchronously
-    return factory.loading
-      ? factory.loadingComp
-      : factory.resolved
-  }
-}
-
-/*  */
-
-function isAsyncPlaceholder (node) {
-  return node.isComment && node.asyncFactory
-}
-
-/*  */
-
-function getFirstComponentChild (children) {
-  if (Array.isArray(children)) {
-    for (var i = 0; i < children.length; i++) {
-      var c = children[i];
-      if (isDef(c) && (isDef(c.componentOptions) || isAsyncPlaceholder(c))) {
-        return c
-      }
-    }
-  }
-}
-
-/*  */
-
-/*  */
-
-function initEvents (vm) {
-  vm._events = Object.create(null);
-  vm._hasHookEvent = false;
-  // init parent attached events
-  var listeners = vm.$options._parentListeners;
-  if (listeners) {
-    updateComponentListeners(vm, listeners);
-  }
-}
-
-var target;
-
-function add (event, fn, once) {
-  if (once) {
-    target.$once(event, fn);
-  } else {
-    target.$on(event, fn);
-  }
-}
-
-function remove$1 (event, fn) {
-  target.$off(event, fn);
-}
-
-function updateComponentListeners (
-  vm,
-  listeners,
-  oldListeners
-) {
-  target = vm;
-  updateListeners(listeners, oldListeners || {}, add, remove$1, vm);
-  target = undefined;
-}
-
-function eventsMixin (Vue) {
-  var hookRE = /^hook:/;
-  Vue.prototype.$on = function (event, fn) {
-    var this$1 = this;
-
-    var vm = this;
-    if (Array.isArray(event)) {
-      for (var i = 0, l = event.length; i < l; i++) {
-        this$1.$on(event[i], fn);
-      }
-    } else {
-      (vm._events[event] || (vm._events[event] = [])).push(fn);
-      // optimize hook:event cost by using a boolean flag marked at registration
-      // instead of a hash lookup
-      if (hookRE.test(event)) {
-        vm._hasHookEvent = true;
-      }
-    }
-    return vm
-  };
-
-  Vue.prototype.$once = function (event, fn) {
-    var vm = this;
-    function on () {
-      vm.$off(event, on);
-      fn.apply(vm, arguments);
-    }
-    on.fn = fn;
-    vm.$on(event, on);
-    return vm
-  };
-
-  Vue.prototype.$off = function (event, fn) {
-    var this$1 = this;
-
-    var vm = this;
-    // all
-    if (!arguments.length) {
-      vm._events = Object.create(null);
-      return vm
-    }
-    // array of events
-    if (Array.isArray(event)) {
-      for (var i = 0, l = event.length; i < l; i++) {
-        this$1.$off(event[i], fn);
-      }
-      return vm
-    }
-    // specific event
-    var cbs = vm._events[event];
-    if (!cbs) {
-      return vm
-    }
-    if (!fn) {
-      vm._events[event] = null;
-      return vm
-    }
-    if (fn) {
-      // specific handler
-      var cb;
-      var i$1 = cbs.length;
-      while (i$1--) {
-        cb = cbs[i$1];
-        if (cb === fn || cb.fn === fn) {
-          cbs.splice(i$1, 1);
-          break
-        }
-      }
-    }
-    return vm
-  };
-
-  Vue.prototype.$emit = function (event) {
-    var vm = this;
-    if (false) {
-      var lowerCaseEvent = event.toLowerCase();
-      if (lowerCaseEvent !== event && vm._events[lowerCaseEvent]) {
-        tip(
-          "Event \"" + lowerCaseEvent + "\" is emitted in component " +
-          (formatComponentName(vm)) + " but the handler is registered for \"" + event + "\". " +
-          "Note that HTML attributes are case-insensitive and you cannot use " +
-          "v-on to listen to camelCase events when using in-DOM templates. " +
-          "You should probably use \"" + (hyphenate(event)) + "\" instead of \"" + event + "\"."
-        );
-      }
-    }
-    var cbs = vm._events[event];
-    if (cbs) {
-      cbs = cbs.length > 1 ? toArray(cbs) : cbs;
-      var args = toArray(arguments, 1);
-      for (var i = 0, l = cbs.length; i < l; i++) {
-        try {
-          cbs[i].apply(vm, args);
-        } catch (e) {
-          handleError(e, vm, ("event handler for \"" + event + "\""));
-        }
-      }
-    }
-    return vm
-  };
-}
-
-/*  */
-
-
-
-/**
- * Runtime helper for resolving raw children VNodes into a slot object.
- */
-function resolveSlots (
-  children,
-  context
-) {
-  var slots = {};
-  if (!children) {
-    return slots
-  }
-  for (var i = 0, l = children.length; i < l; i++) {
-    var child = children[i];
-    var data = child.data;
-    // remove slot attribute if the node is resolved as a Vue slot node
-    if (data && data.attrs && data.attrs.slot) {
-      delete data.attrs.slot;
-    }
-    // named slots should only be respected if the vnode was rendered in the
-    // same context.
-    if ((child.context === context || child.fnContext === context) &&
-      data && data.slot != null
-    ) {
-      var name = data.slot;
-      var slot = (slots[name] || (slots[name] = []));
-      if (child.tag === 'template') {
-        slot.push.apply(slot, child.children || []);
-      } else {
-        slot.push(child);
-      }
-    } else {
-      (slots.default || (slots.default = [])).push(child);
-    }
-  }
-  // ignore slots that contains only whitespace
-  for (var name$1 in slots) {
-    if (slots[name$1].every(isWhitespace)) {
-      delete slots[name$1];
-    }
-  }
-  return slots
-}
-
-function isWhitespace (node) {
-  return (node.isComment && !node.asyncFactory) || node.text === ' '
-}
-
-function resolveScopedSlots (
-  fns, // see flow/vnode
-  res
-) {
-  res = res || {};
-  for (var i = 0; i < fns.length; i++) {
-    if (Array.isArray(fns[i])) {
-      resolveScopedSlots(fns[i], res);
-    } else {
-      res[fns[i].key] = fns[i].fn;
-    }
-  }
-  return res
-}
-
-/*  */
-
-var activeInstance = null;
-var isUpdatingChildComponent = false;
-
-function initLifecycle (vm) {
-  var options = vm.$options;
-
-  // locate first non-abstract parent
-  var parent = options.parent;
-  if (parent && !options.abstract) {
-    while (parent.$options.abstract && parent.$parent) {
-      parent = parent.$parent;
-    }
-    parent.$children.push(vm);
-  }
-
-  vm.$parent = parent;
-  vm.$root = parent ? parent.$root : vm;
-
-  vm.$children = [];
-  vm.$refs = {};
-
-  vm._watcher = null;
-  vm._inactive = null;
-  vm._directInactive = false;
-  vm._isMounted = false;
-  vm._isDestroyed = false;
-  vm._isBeingDestroyed = false;
-}
-
-function lifecycleMixin (Vue) {
-  Vue.prototype._update = function (vnode, hydrating) {
-    var vm = this;
-    if (vm._isMounted) {
-      callHook(vm, 'beforeUpdate');
-    }
-    var prevEl = vm.$el;
-    var prevVnode = vm._vnode;
-    var prevActiveInstance = activeInstance;
-    activeInstance = vm;
-    vm._vnode = vnode;
-    // Vue.prototype.__patch__ is injected in entry points
-    // based on the rendering backend used.
-    if (!prevVnode) {
-      // initial render
-      vm.$el = vm.__patch__(
-        vm.$el, vnode, hydrating, false /* removeOnly */,
-        vm.$options._parentElm,
-        vm.$options._refElm
-      );
-      // no need for the ref nodes after initial patch
-      // this prevents keeping a detached DOM tree in memory (#5851)
-      vm.$options._parentElm = vm.$options._refElm = null;
-    } else {
-      // updates
-      vm.$el = vm.__patch__(prevVnode, vnode);
-    }
-    activeInstance = prevActiveInstance;
-    // update __vue__ reference
-    if (prevEl) {
-      prevEl.__vue__ = null;
-    }
-    if (vm.$el) {
-      vm.$el.__vue__ = vm;
-    }
-    // if parent is an HOC, update its $el as well
-    if (vm.$vnode && vm.$parent && vm.$vnode === vm.$parent._vnode) {
-      vm.$parent.$el = vm.$el;
-    }
-    // updated hook is called by the scheduler to ensure that children are
-    // updated in a parent's updated hook.
-  };
-
-  Vue.prototype.$forceUpdate = function () {
-    var vm = this;
-    if (vm._watcher) {
-      vm._watcher.update();
-    }
-  };
-
-  Vue.prototype.$destroy = function () {
-    var vm = this;
-    if (vm._isBeingDestroyed) {
-      return
-    }
-    callHook(vm, 'beforeDestroy');
-    vm._isBeingDestroyed = true;
-    // remove self from parent
-    var parent = vm.$parent;
-    if (parent && !parent._isBeingDestroyed && !vm.$options.abstract) {
-      remove(parent.$children, vm);
-    }
-    // teardown watchers
-    if (vm._watcher) {
-      vm._watcher.teardown();
-    }
-    var i = vm._watchers.length;
-    while (i--) {
-      vm._watchers[i].teardown();
-    }
-    // remove reference from data ob
-    // frozen object may not have observer.
-    if (vm._data.__ob__) {
-      vm._data.__ob__.vmCount--;
-    }
-    // call the last hook...
-    vm._isDestroyed = true;
-    // invoke destroy hooks on current rendered tree
-    vm.__patch__(vm._vnode, null);
-    // fire destroyed hook
-    callHook(vm, 'destroyed');
-    // turn off all instance listeners.
-    vm.$off();
-    // remove __vue__ reference
-    if (vm.$el) {
-      vm.$el.__vue__ = null;
-    }
-    // release circular reference (#6759)
-    if (vm.$vnode) {
-      vm.$vnode.parent = null;
-    }
-  };
-}
-
-function mountComponent (
-  vm,
-  el,
-  hydrating
-) {
-  vm.$el = el;
-  if (!vm.$options.render) {
-    vm.$options.render = createEmptyVNode;
-    if (false) {
-      /* istanbul ignore if */
-      if ((vm.$options.template && vm.$options.template.charAt(0) !== '#') ||
-        vm.$options.el || el) {
-        warn(
-          'You are using the runtime-only build of Vue where the template ' +
-          'compiler is not available. Either pre-compile the templates into ' +
-          'render functions, or use the compiler-included build.',
-          vm
-        );
-      } else {
-        warn(
-          'Failed to mount component: template or render function not defined.',
-          vm
-        );
-      }
-    }
-  }
-  callHook(vm, 'beforeMount');
-
-  var updateComponent;
-  /* istanbul ignore if */
-  if (false) {
-    updateComponent = function () {
-      var name = vm._name;
-      var id = vm._uid;
-      var startTag = "vue-perf-start:" + id;
-      var endTag = "vue-perf-end:" + id;
-
-      mark(startTag);
-      var vnode = vm._render();
-      mark(endTag);
-      measure(("vue " + name + " render"), startTag, endTag);
-
-      mark(startTag);
-      vm._update(vnode, hydrating);
-      mark(endTag);
-      measure(("vue " + name + " patch"), startTag, endTag);
-    };
-  } else {
-    updateComponent = function () {
-      vm._update(vm._render(), hydrating);
-    };
-  }
-
-  // we set this to vm._watcher inside the watcher's constructor
-  // since the watcher's initial patch may call $forceUpdate (e.g. inside child
-  // component's mounted hook), which relies on vm._watcher being already defined
-  new Watcher(vm, updateComponent, noop, null, true /* isRenderWatcher */);
-  hydrating = false;
-
-  // manually mounted instance, call mounted on self
-  // mounted is called for render-created child components in its inserted hook
-  if (vm.$vnode == null) {
-    vm._isMounted = true;
-    callHook(vm, 'mounted');
-  }
-  return vm
-}
-
-function updateChildComponent (
-  vm,
-  propsData,
-  listeners,
-  parentVnode,
-  renderChildren
-) {
-  if (false) {
-    isUpdatingChildComponent = true;
-  }
-
-  // determine whether component has slot children
-  // we need to do this before overwriting $options._renderChildren
-  var hasChildren = !!(
-    renderChildren ||               // has new static slots
-    vm.$options._renderChildren ||  // has old static slots
-    parentVnode.data.scopedSlots || // has new scoped slots
-    vm.$scopedSlots !== emptyObject // has old scoped slots
-  );
-
-  vm.$options._parentVnode = parentVnode;
-  vm.$vnode = parentVnode; // update vm's placeholder node without re-render
-
-  if (vm._vnode) { // update child tree's parent
-    vm._vnode.parent = parentVnode;
-  }
-  vm.$options._renderChildren = renderChildren;
-
-  // update $attrs and $listeners hash
-  // these are also reactive so they may trigger child update if the child
-  // used them during render
-  vm.$attrs = (parentVnode.data && parentVnode.data.attrs) || emptyObject;
-  vm.$listeners = listeners || emptyObject;
-
-  // update props
-  if (propsData && vm.$options.props) {
-    observerState.shouldConvert = false;
-    var props = vm._props;
-    var propKeys = vm.$options._propKeys || [];
-    for (var i = 0; i < propKeys.length; i++) {
-      var key = propKeys[i];
-      props[key] = validateProp(key, vm.$options.props, propsData, vm);
-    }
-    observerState.shouldConvert = true;
-    // keep a copy of raw propsData
-    vm.$options.propsData = propsData;
-  }
-
-  // update listeners
-  if (listeners) {
-    var oldListeners = vm.$options._parentListeners;
-    vm.$options._parentListeners = listeners;
-    updateComponentListeners(vm, listeners, oldListeners);
-  }
-  // resolve slots + force update if has children
-  if (hasChildren) {
-    vm.$slots = resolveSlots(renderChildren, parentVnode.context);
-    vm.$forceUpdate();
-  }
-
-  if (false) {
-    isUpdatingChildComponent = false;
-  }
-}
-
-function isInInactiveTree (vm) {
-  while (vm && (vm = vm.$parent)) {
-    if (vm._inactive) { return true }
-  }
-  return false
-}
-
-function activateChildComponent (vm, direct) {
-  if (direct) {
-    vm._directInactive = false;
-    if (isInInactiveTree(vm)) {
-      return
-    }
-  } else if (vm._directInactive) {
-    return
-  }
-  if (vm._inactive || vm._inactive === null) {
-    vm._inactive = false;
-    for (var i = 0; i < vm.$children.length; i++) {
-      activateChildComponent(vm.$children[i]);
-    }
-    callHook(vm, 'activated');
-  }
-}
-
-function deactivateChildComponent (vm, direct) {
-  if (direct) {
-    vm._directInactive = true;
-    if (isInInactiveTree(vm)) {
-      return
-    }
-  }
-  if (!vm._inactive) {
-    vm._inactive = true;
-    for (var i = 0; i < vm.$children.length; i++) {
-      deactivateChildComponent(vm.$children[i]);
-    }
-    callHook(vm, 'deactivated');
-  }
-}
-
-function callHook (vm, hook) {
-  var handlers = vm.$options[hook];
-  if (handlers) {
-    for (var i = 0, j = handlers.length; i < j; i++) {
-      try {
-        handlers[i].call(vm);
-      } catch (e) {
-        handleError(e, vm, (hook + " hook"));
-      }
-    }
-  }
-  if (vm._hasHookEvent) {
-    vm.$emit('hook:' + hook);
-  }
-}
-
-/*  */
-
-
-var MAX_UPDATE_COUNT = 100;
-
-var queue = [];
-var activatedChildren = [];
-var has = {};
-var circular = {};
-var waiting = false;
-var flushing = false;
-var index = 0;
-
-/**
- * Reset the scheduler's state.
- */
-function resetSchedulerState () {
-  index = queue.length = activatedChildren.length = 0;
-  has = {};
-  if (false) {
-    circular = {};
-  }
-  waiting = flushing = false;
-}
-
-/**
- * Flush both queues and run the watchers.
- */
-function flushSchedulerQueue () {
-  flushing = true;
-  var watcher, id;
-
-  // Sort queue before flush.
-  // This ensures that:
-  // 1. Components are updated from parent to child. (because parent is always
-  //    created before the child)
-  // 2. A component's user watchers are run before its render watcher (because
-  //    user watchers are created before the render watcher)
-  // 3. If a component is destroyed during a parent component's watcher run,
-  //    its watchers can be skipped.
-  queue.sort(function (a, b) { return a.id - b.id; });
-
-  // do not cache length because more watchers might be pushed
-  // as we run existing watchers
-  for (index = 0; index < queue.length; index++) {
-    watcher = queue[index];
-    id = watcher.id;
-    has[id] = null;
-    watcher.run();
-    // in dev build, check and stop circular updates.
-    if (false) {
-      circular[id] = (circular[id] || 0) + 1;
-      if (circular[id] > MAX_UPDATE_COUNT) {
-        warn(
-          'You may have an infinite update loop ' + (
-            watcher.user
-              ? ("in watcher with expression \"" + (watcher.expression) + "\"")
-              : "in a component render function."
-          ),
-          watcher.vm
-        );
-        break
-      }
-    }
-  }
-
-  // keep copies of post queues before resetting state
-  var activatedQueue = activatedChildren.slice();
-  var updatedQueue = queue.slice();
-
-  resetSchedulerState();
-
-  // call component updated and activated hooks
-  callActivatedHooks(activatedQueue);
-  callUpdatedHooks(updatedQueue);
-
-  // devtool hook
-  /* istanbul ignore if */
-  if (devtools && config.devtools) {
-    devtools.emit('flush');
-  }
-}
-
-function callUpdatedHooks (queue) {
-  var i = queue.length;
-  while (i--) {
-    var watcher = queue[i];
-    var vm = watcher.vm;
-    if (vm._watcher === watcher && vm._isMounted) {
-      callHook(vm, 'updated');
-    }
-  }
-}
-
-/**
- * Queue a kept-alive component that was activated during patch.
- * The queue will be processed after the entire tree has been patched.
- */
-function queueActivatedComponent (vm) {
-  // setting _inactive to false here so that a render function can
-  // rely on checking whether it's in an inactive tree (e.g. router-view)
-  vm._inactive = false;
-  activatedChildren.push(vm);
-}
-
-function callActivatedHooks (queue) {
-  for (var i = 0; i < queue.length; i++) {
-    queue[i]._inactive = true;
-    activateChildComponent(queue[i], true /* true */);
-  }
-}
-
-/**
- * Push a watcher into the watcher queue.
- * Jobs with duplicate IDs will be skipped unless it's
- * pushed when the queue is being flushed.
- */
-function queueWatcher (watcher) {
-  var id = watcher.id;
-  if (has[id] == null) {
-    has[id] = true;
-    if (!flushing) {
-      queue.push(watcher);
-    } else {
-      // if already flushing, splice the watcher based on its id
-      // if already past its id, it will be run next immediately.
-      var i = queue.length - 1;
-      while (i > index && queue[i].id > watcher.id) {
-        i--;
-      }
-      queue.splice(i + 1, 0, watcher);
-    }
-    // queue the flush
-    if (!waiting) {
-      waiting = true;
-      nextTick(flushSchedulerQueue);
-    }
-  }
-}
-
-/*  */
-
-var uid$2 = 0;
-
-/**
- * A watcher parses an expression, collects dependencies,
- * and fires callback when the expression value changes.
- * This is used for both the $watch() api and directives.
- */
-var Watcher = function Watcher (
-  vm,
-  expOrFn,
-  cb,
-  options,
-  isRenderWatcher
-) {
-  this.vm = vm;
-  if (isRenderWatcher) {
-    vm._watcher = this;
-  }
-  vm._watchers.push(this);
-  // options
-  if (options) {
-    this.deep = !!options.deep;
-    this.user = !!options.user;
-    this.lazy = !!options.lazy;
-    this.sync = !!options.sync;
-  } else {
-    this.deep = this.user = this.lazy = this.sync = false;
-  }
-  this.cb = cb;
-  this.id = ++uid$2; // uid for batching
-  this.active = true;
-  this.dirty = this.lazy; // for lazy watchers
-  this.deps = [];
-  this.newDeps = [];
-  this.depIds = new _Set();
-  this.newDepIds = new _Set();
-  this.expression =  false
-    ? expOrFn.toString()
-    : '';
-  // parse expression for getter
-  if (typeof expOrFn === 'function') {
-    this.getter = expOrFn;
-  } else {
-    this.getter = parsePath(expOrFn);
-    if (!this.getter) {
-      this.getter = function () {};
-      "production" !== 'production' && warn(
-        "Failed watching path: \"" + expOrFn + "\" " +
-        'Watcher only accepts simple dot-delimited paths. ' +
-        'For full control, use a function instead.',
-        vm
-      );
-    }
-  }
-  this.value = this.lazy
-    ? undefined
-    : this.get();
-};
-
-/**
- * Evaluate the getter, and re-collect dependencies.
- */
-Watcher.prototype.get = function get () {
-  pushTarget(this);
-  var value;
-  var vm = this.vm;
-  try {
-    value = this.getter.call(vm, vm);
-  } catch (e) {
-    if (this.user) {
-      handleError(e, vm, ("getter for watcher \"" + (this.expression) + "\""));
-    } else {
-      throw e
-    }
-  } finally {
-    // "touch" every property so they are all tracked as
-    // dependencies for deep watching
-    if (this.deep) {
-      traverse(value);
-    }
-    popTarget();
-    this.cleanupDeps();
-  }
-  return value
-};
-
-/**
- * Add a dependency to this directive.
- */
-Watcher.prototype.addDep = function addDep (dep) {
-  var id = dep.id;
-  if (!this.newDepIds.has(id)) {
-    this.newDepIds.add(id);
-    this.newDeps.push(dep);
-    if (!this.depIds.has(id)) {
-      dep.addSub(this);
-    }
-  }
-};
-
-/**
- * Clean up for dependency collection.
- */
-Watcher.prototype.cleanupDeps = function cleanupDeps () {
-    var this$1 = this;
-
-  var i = this.deps.length;
-  while (i--) {
-    var dep = this$1.deps[i];
-    if (!this$1.newDepIds.has(dep.id)) {
-      dep.removeSub(this$1);
-    }
-  }
-  var tmp = this.depIds;
-  this.depIds = this.newDepIds;
-  this.newDepIds = tmp;
-  this.newDepIds.clear();
-  tmp = this.deps;
-  this.deps = this.newDeps;
-  this.newDeps = tmp;
-  this.newDeps.length = 0;
-};
-
-/**
- * Subscriber interface.
- * Will be called when a dependency changes.
- */
-Watcher.prototype.update = function update () {
-  /* istanbul ignore else */
-  if (this.lazy) {
-    this.dirty = true;
-  } else if (this.sync) {
-    this.run();
-  } else {
-    queueWatcher(this);
-  }
-};
-
-/**
- * Scheduler job interface.
- * Will be called by the scheduler.
- */
-Watcher.prototype.run = function run () {
-  if (this.active) {
-    var value = this.get();
-    if (
-      value !== this.value ||
-      // Deep watchers and watchers on Object/Arrays should fire even
-      // when the value is the same, because the value may
-      // have mutated.
-      isObject(value) ||
-      this.deep
-    ) {
-      // set new value
-      var oldValue = this.value;
-      this.value = value;
-      if (this.user) {
-        try {
-          this.cb.call(this.vm, value, oldValue);
-        } catch (e) {
-          handleError(e, this.vm, ("callback for watcher \"" + (this.expression) + "\""));
-        }
-      } else {
-        this.cb.call(this.vm, value, oldValue);
-      }
-    }
-  }
-};
-
-/**
- * Evaluate the value of the watcher.
- * This only gets called for lazy watchers.
- */
-Watcher.prototype.evaluate = function evaluate () {
-  this.value = this.get();
-  this.dirty = false;
-};
-
-/**
- * Depend on all deps collected by this watcher.
- */
-Watcher.prototype.depend = function depend () {
-    var this$1 = this;
-
-  var i = this.deps.length;
-  while (i--) {
-    this$1.deps[i].depend();
-  }
-};
-
-/**
- * Remove self from all dependencies' subscriber list.
- */
-Watcher.prototype.teardown = function teardown () {
-    var this$1 = this;
-
-  if (this.active) {
-    // remove self from vm's watcher list
-    // this is a somewhat expensive operation so we skip it
-    // if the vm is being destroyed.
-    if (!this.vm._isBeingDestroyed) {
-      remove(this.vm._watchers, this);
-    }
-    var i = this.deps.length;
-    while (i--) {
-      this$1.deps[i].removeSub(this$1);
-    }
-    this.active = false;
-  }
-};
-
-/*  */
-
-var sharedPropertyDefinition = {
-  enumerable: true,
-  configurable: true,
-  get: noop,
-  set: noop
-};
-
-function proxy (target, sourceKey, key) {
-  sharedPropertyDefinition.get = function proxyGetter () {
-    return this[sourceKey][key]
-  };
-  sharedPropertyDefinition.set = function proxySetter (val) {
-    this[sourceKey][key] = val;
-  };
-  Object.defineProperty(target, key, sharedPropertyDefinition);
-}
-
-function initState (vm) {
-  vm._watchers = [];
-  var opts = vm.$options;
-  if (opts.props) { initProps(vm, opts.props); }
-  if (opts.methods) { initMethods(vm, opts.methods); }
-  if (opts.data) {
-    initData(vm);
-  } else {
-    observe(vm._data = {}, true /* asRootData */);
-  }
-  if (opts.computed) { initComputed(vm, opts.computed); }
-  if (opts.watch && opts.watch !== nativeWatch) {
-    initWatch(vm, opts.watch);
-  }
-}
-
-function initProps (vm, propsOptions) {
-  var propsData = vm.$options.propsData || {};
-  var props = vm._props = {};
-  // cache prop keys so that future props updates can iterate using Array
-  // instead of dynamic object key enumeration.
-  var keys = vm.$options._propKeys = [];
-  var isRoot = !vm.$parent;
-  // root instance props should be converted
-  observerState.shouldConvert = isRoot;
-  var loop = function ( key ) {
-    keys.push(key);
-    var value = validateProp(key, propsOptions, propsData, vm);
-    /* istanbul ignore else */
-    if (false) {
-      var hyphenatedKey = hyphenate(key);
-      if (isReservedAttribute(hyphenatedKey) ||
-          config.isReservedAttr(hyphenatedKey)) {
-        warn(
-          ("\"" + hyphenatedKey + "\" is a reserved attribute and cannot be used as component prop."),
-          vm
-        );
-      }
-      defineReactive(props, key, value, function () {
-        if (vm.$parent && !isUpdatingChildComponent) {
-          warn(
-            "Avoid mutating a prop directly since the value will be " +
-            "overwritten whenever the parent component re-renders. " +
-            "Instead, use a data or computed property based on the prop's " +
-            "value. Prop being mutated: \"" + key + "\"",
-            vm
-          );
-        }
-      });
-    } else {
-      defineReactive(props, key, value);
-    }
-    // static props are already proxied on the component's prototype
-    // during Vue.extend(). We only need to proxy props defined at
-    // instantiation here.
-    if (!(key in vm)) {
-      proxy(vm, "_props", key);
-    }
-  };
-
-  for (var key in propsOptions) loop( key );
-  observerState.shouldConvert = true;
-}
-
-function initData (vm) {
-  var data = vm.$options.data;
-  data = vm._data = typeof data === 'function'
-    ? getData(data, vm)
-    : data || {};
-  if (!isPlainObject(data)) {
-    data = {};
-    "production" !== 'production' && warn(
-      'data functions should return an object:\n' +
-      'https://vuejs.org/v2/guide/components.html#data-Must-Be-a-Function',
-      vm
-    );
-  }
-  // proxy data on instance
-  var keys = Object.keys(data);
-  var props = vm.$options.props;
-  var methods = vm.$options.methods;
-  var i = keys.length;
-  while (i--) {
-    var key = keys[i];
-    if (false) {
-      if (methods && hasOwn(methods, key)) {
-        warn(
-          ("Method \"" + key + "\" has already been defined as a data property."),
-          vm
-        );
-      }
-    }
-    if (props && hasOwn(props, key)) {
-      "production" !== 'production' && warn(
-        "The data property \"" + key + "\" is already declared as a prop. " +
-        "Use prop default value instead.",
-        vm
-      );
-    } else if (!isReserved(key)) {
-      proxy(vm, "_data", key);
-    }
-  }
-  // observe data
-  observe(data, true /* asRootData */);
-}
-
-function getData (data, vm) {
-  try {
-    return data.call(vm, vm)
-  } catch (e) {
-    handleError(e, vm, "data()");
-    return {}
-  }
-}
-
-var computedWatcherOptions = { lazy: true };
-
-function initComputed (vm, computed) {
-  // $flow-disable-line
-  var watchers = vm._computedWatchers = Object.create(null);
-  // computed properties are just getters during SSR
-  var isSSR = isServerRendering();
-
-  for (var key in computed) {
-    var userDef = computed[key];
-    var getter = typeof userDef === 'function' ? userDef : userDef.get;
-    if (false) {
-      warn(
-        ("Getter is missing for computed property \"" + key + "\"."),
-        vm
-      );
-    }
-
-    if (!isSSR) {
-      // create internal watcher for the computed property.
-      watchers[key] = new Watcher(
-        vm,
-        getter || noop,
-        noop,
-        computedWatcherOptions
-      );
-    }
-
-    // component-defined computed properties are already defined on the
-    // component prototype. We only need to define computed properties defined
-    // at instantiation here.
-    if (!(key in vm)) {
-      defineComputed(vm, key, userDef);
-    } else if (false) {
-      if (key in vm.$data) {
-        warn(("The computed property \"" + key + "\" is already defined in data."), vm);
-      } else if (vm.$options.props && key in vm.$options.props) {
-        warn(("The computed property \"" + key + "\" is already defined as a prop."), vm);
-      }
-    }
-  }
-}
-
-function defineComputed (
-  target,
-  key,
-  userDef
-) {
-  var shouldCache = !isServerRendering();
-  if (typeof userDef === 'function') {
-    sharedPropertyDefinition.get = shouldCache
-      ? createComputedGetter(key)
-      : userDef;
-    sharedPropertyDefinition.set = noop;
-  } else {
-    sharedPropertyDefinition.get = userDef.get
-      ? shouldCache && userDef.cache !== false
-        ? createComputedGetter(key)
-        : userDef.get
-      : noop;
-    sharedPropertyDefinition.set = userDef.set
-      ? userDef.set
-      : noop;
-  }
-  if (false) {
-    sharedPropertyDefinition.set = function () {
-      warn(
-        ("Computed property \"" + key + "\" was assigned to but it has no setter."),
-        this
-      );
-    };
-  }
-  Object.defineProperty(target, key, sharedPropertyDefinition);
-}
-
-function createComputedGetter (key) {
-  return function computedGetter () {
-    var watcher = this._computedWatchers && this._computedWatchers[key];
-    if (watcher) {
-      if (watcher.dirty) {
-        watcher.evaluate();
-      }
-      if (Dep.target) {
-        watcher.depend();
-      }
-      return watcher.value
-    }
-  }
-}
-
-function initMethods (vm, methods) {
-  var props = vm.$options.props;
-  for (var key in methods) {
-    if (false) {
-      if (methods[key] == null) {
-        warn(
-          "Method \"" + key + "\" has an undefined value in the component definition. " +
-          "Did you reference the function correctly?",
-          vm
-        );
-      }
-      if (props && hasOwn(props, key)) {
-        warn(
-          ("Method \"" + key + "\" has already been defined as a prop."),
-          vm
-        );
-      }
-      if ((key in vm) && isReserved(key)) {
-        warn(
-          "Method \"" + key + "\" conflicts with an existing Vue instance method. " +
-          "Avoid defining component methods that start with _ or $."
-        );
-      }
-    }
-    vm[key] = methods[key] == null ? noop : bind(methods[key], vm);
-  }
-}
-
-function initWatch (vm, watch) {
-  for (var key in watch) {
-    var handler = watch[key];
-    if (Array.isArray(handler)) {
-      for (var i = 0; i < handler.length; i++) {
-        createWatcher(vm, key, handler[i]);
-      }
-    } else {
-      createWatcher(vm, key, handler);
-    }
-  }
-}
-
-function createWatcher (
-  vm,
-  keyOrFn,
-  handler,
-  options
-) {
-  if (isPlainObject(handler)) {
-    options = handler;
-    handler = handler.handler;
-  }
-  if (typeof handler === 'string') {
-    handler = vm[handler];
-  }
-  return vm.$watch(keyOrFn, handler, options)
-}
-
-function stateMixin (Vue) {
-  // flow somehow has problems with directly declared definition object
-  // when using Object.defineProperty, so we have to procedurally build up
-  // the object here.
-  var dataDef = {};
-  dataDef.get = function () { return this._data };
-  var propsDef = {};
-  propsDef.get = function () { return this._props };
-  if (false) {
-    dataDef.set = function (newData) {
-      warn(
-        'Avoid replacing instance root $data. ' +
-        'Use nested data properties instead.',
-        this
-      );
-    };
-    propsDef.set = function () {
-      warn("$props is readonly.", this);
-    };
-  }
-  Object.defineProperty(Vue.prototype, '$data', dataDef);
-  Object.defineProperty(Vue.prototype, '$props', propsDef);
-
-  Vue.prototype.$set = set;
-  Vue.prototype.$delete = del;
-
-  Vue.prototype.$watch = function (
-    expOrFn,
-    cb,
-    options
-  ) {
-    var vm = this;
-    if (isPlainObject(cb)) {
-      return createWatcher(vm, expOrFn, cb, options)
-    }
-    options = options || {};
-    options.user = true;
-    var watcher = new Watcher(vm, expOrFn, cb, options);
-    if (options.immediate) {
-      cb.call(vm, watcher.value);
-    }
-    return function unwatchFn () {
-      watcher.teardown();
-    }
-  };
-}
-
-/*  */
-
-function initProvide (vm) {
-  var provide = vm.$options.provide;
-  if (provide) {
-    vm._provided = typeof provide === 'function'
-      ? provide.call(vm)
-      : provide;
-  }
-}
-
-function initInjections (vm) {
-  var result = resolveInject(vm.$options.inject, vm);
-  if (result) {
-    observerState.shouldConvert = false;
-    Object.keys(result).forEach(function (key) {
-      /* istanbul ignore else */
-      if (false) {
-        defineReactive(vm, key, result[key], function () {
-          warn(
-            "Avoid mutating an injected value directly since the changes will be " +
-            "overwritten whenever the provided component re-renders. " +
-            "injection being mutated: \"" + key + "\"",
-            vm
-          );
-        });
-      } else {
-        defineReactive(vm, key, result[key]);
-      }
-    });
-    observerState.shouldConvert = true;
-  }
-}
-
-function resolveInject (inject, vm) {
-  if (inject) {
-    // inject is :any because flow is not smart enough to figure out cached
-    var result = Object.create(null);
-    var keys = hasSymbol
-      ? Reflect.ownKeys(inject).filter(function (key) {
-        /* istanbul ignore next */
-        return Object.getOwnPropertyDescriptor(inject, key).enumerable
-      })
-      : Object.keys(inject);
-
-    for (var i = 0; i < keys.length; i++) {
-      var key = keys[i];
-      var provideKey = inject[key].from;
-      var source = vm;
-      while (source) {
-        if (source._provided && provideKey in source._provided) {
-          result[key] = source._provided[provideKey];
-          break
-        }
-        source = source.$parent;
-      }
-      if (!source) {
-        if ('default' in inject[key]) {
-          var provideDefault = inject[key].default;
-          result[key] = typeof provideDefault === 'function'
-            ? provideDefault.call(vm)
-            : provideDefault;
-        } else if (false) {
-          warn(("Injection \"" + key + "\" not found"), vm);
-        }
-      }
-    }
-    return result
-  }
-}
-
-/*  */
-
-/**
- * Runtime helper for rendering v-for lists.
- */
-function renderList (
-  val,
-  render
-) {
-  var ret, i, l, keys, key;
-  if (Array.isArray(val) || typeof val === 'string') {
-    ret = new Array(val.length);
-    for (i = 0, l = val.length; i < l; i++) {
-      ret[i] = render(val[i], i);
-    }
-  } else if (typeof val === 'number') {
-    ret = new Array(val);
-    for (i = 0; i < val; i++) {
-      ret[i] = render(i + 1, i);
-    }
-  } else if (isObject(val)) {
-    keys = Object.keys(val);
-    ret = new Array(keys.length);
-    for (i = 0, l = keys.length; i < l; i++) {
-      key = keys[i];
-      ret[i] = render(val[key], key, i);
-    }
-  }
-  if (isDef(ret)) {
-    (ret)._isVList = true;
-  }
-  return ret
-}
-
-/*  */
-
-/**
- * Runtime helper for rendering <slot>
- */
-function renderSlot (
-  name,
-  fallback,
-  props,
-  bindObject
-) {
-  var scopedSlotFn = this.$scopedSlots[name];
-  var nodes;
-  if (scopedSlotFn) { // scoped slot
-    props = props || {};
-    if (bindObject) {
-      if (false) {
-        warn(
-          'slot v-bind without argument expects an Object',
-          this
-        );
-      }
-      props = extend(extend({}, bindObject), props);
-    }
-    nodes = scopedSlotFn(props) || fallback;
-  } else {
-    var slotNodes = this.$slots[name];
-    // warn duplicate slot usage
-    if (slotNodes) {
-      if (false) {
-        warn(
-          "Duplicate presence of slot \"" + name + "\" found in the same render tree " +
-          "- this will likely cause render errors.",
-          this
-        );
-      }
-      slotNodes._rendered = true;
-    }
-    nodes = slotNodes || fallback;
-  }
-
-  var target = props && props.slot;
-  if (target) {
-    return this.$createElement('template', { slot: target }, nodes)
-  } else {
-    return nodes
-  }
-}
-
-/*  */
-
-/**
- * Runtime helper for resolving filters
- */
-function resolveFilter (id) {
-  return resolveAsset(this.$options, 'filters', id, true) || identity
-}
-
-/*  */
-
-/**
- * Runtime helper for checking keyCodes from config.
- * exposed as Vue.prototype._k
- * passing in eventKeyName as last argument separately for backwards compat
- */
-function checkKeyCodes (
-  eventKeyCode,
-  key,
-  builtInAlias,
-  eventKeyName
-) {
-  var keyCodes = config.keyCodes[key] || builtInAlias;
-  if (keyCodes) {
-    if (Array.isArray(keyCodes)) {
-      return keyCodes.indexOf(eventKeyCode) === -1
-    } else {
-      return keyCodes !== eventKeyCode
-    }
-  } else if (eventKeyName) {
-    return hyphenate(eventKeyName) !== key
-  }
-}
-
-/*  */
-
-/**
- * Runtime helper for merging v-bind="object" into a VNode's data.
- */
-function bindObjectProps (
-  data,
-  tag,
-  value,
-  asProp,
-  isSync
-) {
-  if (value) {
-    if (!isObject(value)) {
-      "production" !== 'production' && warn(
-        'v-bind without argument expects an Object or Array value',
-        this
-      );
-    } else {
-      if (Array.isArray(value)) {
-        value = toObject(value);
-      }
-      var hash;
-      var loop = function ( key ) {
-        if (
-          key === 'class' ||
-          key === 'style' ||
-          isReservedAttribute(key)
-        ) {
-          hash = data;
-        } else {
-          var type = data.attrs && data.attrs.type;
-          hash = asProp || config.mustUseProp(tag, type, key)
-            ? data.domProps || (data.domProps = {})
-            : data.attrs || (data.attrs = {});
-        }
-        if (!(key in hash)) {
-          hash[key] = value[key];
-
-          if (isSync) {
-            var on = data.on || (data.on = {});
-            on[("update:" + key)] = function ($event) {
-              value[key] = $event;
-            };
-          }
-        }
-      };
-
-      for (var key in value) loop( key );
-    }
-  }
-  return data
-}
-
-/*  */
-
-/**
- * Runtime helper for rendering static trees.
- */
-function renderStatic (
-  index,
-  isInFor
-) {
-  var cached = this._staticTrees || (this._staticTrees = []);
-  var tree = cached[index];
-  // if has already-rendered static tree and not inside v-for,
-  // we can reuse the same tree by doing a shallow clone.
-  if (tree && !isInFor) {
-    return Array.isArray(tree)
-      ? cloneVNodes(tree)
-      : cloneVNode(tree)
-  }
-  // otherwise, render a fresh tree.
-  tree = cached[index] = this.$options.staticRenderFns[index].call(
-    this._renderProxy,
-    null,
-    this // for render fns generated for functional component templates
-  );
-  markStatic(tree, ("__static__" + index), false);
-  return tree
-}
-
-/**
- * Runtime helper for v-once.
- * Effectively it means marking the node as static with a unique key.
- */
-function markOnce (
-  tree,
-  index,
-  key
-) {
-  markStatic(tree, ("__once__" + index + (key ? ("_" + key) : "")), true);
-  return tree
-}
-
-function markStatic (
-  tree,
-  key,
-  isOnce
-) {
-  if (Array.isArray(tree)) {
-    for (var i = 0; i < tree.length; i++) {
-      if (tree[i] && typeof tree[i] !== 'string') {
-        markStaticNode(tree[i], (key + "_" + i), isOnce);
-      }
-    }
-  } else {
-    markStaticNode(tree, key, isOnce);
-  }
-}
-
-function markStaticNode (node, key, isOnce) {
-  node.isStatic = true;
-  node.key = key;
-  node.isOnce = isOnce;
-}
-
-/*  */
-
-function bindObjectListeners (data, value) {
-  if (value) {
-    if (!isPlainObject(value)) {
-      "production" !== 'production' && warn(
-        'v-on without argument expects an Object value',
-        this
-      );
-    } else {
-      var on = data.on = data.on ? extend({}, data.on) : {};
-      for (var key in value) {
-        var existing = on[key];
-        var ours = value[key];
-        on[key] = existing ? [].concat(existing, ours) : ours;
-      }
-    }
-  }
-  return data
-}
-
-/*  */
-
-function installRenderHelpers (target) {
-  target._o = markOnce;
-  target._n = toNumber;
-  target._s = toString;
-  target._l = renderList;
-  target._t = renderSlot;
-  target._q = looseEqual;
-  target._i = looseIndexOf;
-  target._m = renderStatic;
-  target._f = resolveFilter;
-  target._k = checkKeyCodes;
-  target._b = bindObjectProps;
-  target._v = createTextVNode;
-  target._e = createEmptyVNode;
-  target._u = resolveScopedSlots;
-  target._g = bindObjectListeners;
-}
-
-/*  */
-
-function FunctionalRenderContext (
-  data,
-  props,
-  children,
-  parent,
-  Ctor
-) {
-  var options = Ctor.options;
-  this.data = data;
-  this.props = props;
-  this.children = children;
-  this.parent = parent;
-  this.listeners = data.on || emptyObject;
-  this.injections = resolveInject(options.inject, parent);
-  this.slots = function () { return resolveSlots(children, parent); };
-
-  // ensure the createElement function in functional components
-  // gets a unique context - this is necessary for correct named slot check
-  var contextVm = Object.create(parent);
-  var isCompiled = isTrue(options._compiled);
-  var needNormalization = !isCompiled;
-
-  // support for compiled functional template
-  if (isCompiled) {
-    // exposing $options for renderStatic()
-    this.$options = options;
-    // pre-resolve slots for renderSlot()
-    this.$slots = this.slots();
-    this.$scopedSlots = data.scopedSlots || emptyObject;
-  }
-
-  if (options._scopeId) {
-    this._c = function (a, b, c, d) {
-      var vnode = createElement(contextVm, a, b, c, d, needNormalization);
-      if (vnode) {
-        vnode.fnScopeId = options._scopeId;
-        vnode.fnContext = parent;
-      }
-      return vnode
-    };
-  } else {
-    this._c = function (a, b, c, d) { return createElement(contextVm, a, b, c, d, needNormalization); };
-  }
-}
-
-installRenderHelpers(FunctionalRenderContext.prototype);
-
-function createFunctionalComponent (
-  Ctor,
-  propsData,
-  data,
-  contextVm,
-  children
-) {
-  var options = Ctor.options;
-  var props = {};
-  var propOptions = options.props;
-  if (isDef(propOptions)) {
-    for (var key in propOptions) {
-      props[key] = validateProp(key, propOptions, propsData || emptyObject);
-    }
-  } else {
-    if (isDef(data.attrs)) { mergeProps(props, data.attrs); }
-    if (isDef(data.props)) { mergeProps(props, data.props); }
-  }
-
-  var renderContext = new FunctionalRenderContext(
-    data,
-    props,
-    children,
-    contextVm,
-    Ctor
-  );
-
-  var vnode = options.render.call(null, renderContext._c, renderContext);
-
-  if (vnode instanceof VNode) {
-    vnode.fnContext = contextVm;
-    vnode.fnOptions = options;
-    if (data.slot) {
-      (vnode.data || (vnode.data = {})).slot = data.slot;
-    }
-  }
-
-  return vnode
-}
-
-function mergeProps (to, from) {
-  for (var key in from) {
-    to[camelize(key)] = from[key];
-  }
-}
-
-/*  */
-
-
-
-
-// Register the component hook to weex native render engine.
-// The hook will be triggered by native, not javascript.
-
-
-// Updates the state of the component to weex native render engine.
-
-/*  */
-
-// https://github.com/Hanks10100/weex-native-directive/tree/master/component
-
-// listening on native callback
-
-/*  */
-
-/*  */
-
-// hooks to be invoked on component VNodes during patch
-var componentVNodeHooks = {
-  init: function init (
-    vnode,
-    hydrating,
-    parentElm,
-    refElm
-  ) {
-    if (!vnode.componentInstance || vnode.componentInstance._isDestroyed) {
-      var child = vnode.componentInstance = createComponentInstanceForVnode(
-        vnode,
-        activeInstance,
-        parentElm,
-        refElm
-      );
-      child.$mount(hydrating ? vnode.elm : undefined, hydrating);
-    } else if (vnode.data.keepAlive) {
-      // kept-alive components, treat as a patch
-      var mountedNode = vnode; // work around flow
-      componentVNodeHooks.prepatch(mountedNode, mountedNode);
-    }
-  },
-
-  prepatch: function prepatch (oldVnode, vnode) {
-    var options = vnode.componentOptions;
-    var child = vnode.componentInstance = oldVnode.componentInstance;
-    updateChildComponent(
-      child,
-      options.propsData, // updated props
-      options.listeners, // updated listeners
-      vnode, // new parent vnode
-      options.children // new children
-    );
-  },
-
-  insert: function insert (vnode) {
-    var context = vnode.context;
-    var componentInstance = vnode.componentInstance;
-    if (!componentInstance._isMounted) {
-      componentInstance._isMounted = true;
-      callHook(componentInstance, 'mounted');
-    }
-    if (vnode.data.keepAlive) {
-      if (context._isMounted) {
-        // vue-router#1212
-        // During updates, a kept-alive component's child components may
-        // change, so directly walking the tree here may call activated hooks
-        // on incorrect children. Instead we push them into a queue which will
-        // be processed after the whole patch process ended.
-        queueActivatedComponent(componentInstance);
-      } else {
-        activateChildComponent(componentInstance, true /* direct */);
-      }
-    }
-  },
-
-  destroy: function destroy (vnode) {
-    var componentInstance = vnode.componentInstance;
-    if (!componentInstance._isDestroyed) {
-      if (!vnode.data.keepAlive) {
-        componentInstance.$destroy();
-      } else {
-        deactivateChildComponent(componentInstance, true /* direct */);
-      }
-    }
-  }
-};
-
-var hooksToMerge = Object.keys(componentVNodeHooks);
-
-function createComponent (
-  Ctor,
-  data,
-  context,
-  children,
-  tag
-) {
-  if (isUndef(Ctor)) {
-    return
-  }
-
-  var baseCtor = context.$options._base;
-
-  // plain options object: turn it into a constructor
-  if (isObject(Ctor)) {
-    Ctor = baseCtor.extend(Ctor);
-  }
-
-  // if at this stage it's not a constructor or an async component factory,
-  // reject.
-  if (typeof Ctor !== 'function') {
-    if (false) {
-      warn(("Invalid Component definition: " + (String(Ctor))), context);
-    }
-    return
-  }
-
-  // async component
-  var asyncFactory;
-  if (isUndef(Ctor.cid)) {
-    asyncFactory = Ctor;
-    Ctor = resolveAsyncComponent(asyncFactory, baseCtor, context);
-    if (Ctor === undefined) {
-      // return a placeholder node for async component, which is rendered
-      // as a comment node but preserves all the raw information for the node.
-      // the information will be used for async server-rendering and hydration.
-      return createAsyncPlaceholder(
-        asyncFactory,
-        data,
-        context,
-        children,
-        tag
-      )
-    }
-  }
-
-  data = data || {};
-
-  // resolve constructor options in case global mixins are applied after
-  // component constructor creation
-  resolveConstructorOptions(Ctor);
-
-  // transform component v-model data into props & events
-  if (isDef(data.model)) {
-    transformModel(Ctor.options, data);
-  }
-
-  // extract props
-  var propsData = extractPropsFromVNodeData(data, Ctor, tag);
-
-  // functional component
-  if (isTrue(Ctor.options.functional)) {
-    return createFunctionalComponent(Ctor, propsData, data, context, children)
-  }
-
-  // extract listeners, since these needs to be treated as
-  // child component listeners instead of DOM listeners
-  var listeners = data.on;
-  // replace with listeners with .native modifier
-  // so it gets processed during parent component patch.
-  data.on = data.nativeOn;
-
-  if (isTrue(Ctor.options.abstract)) {
-    // abstract components do not keep anything
-    // other than props & listeners & slot
-
-    // work around flow
-    var slot = data.slot;
-    data = {};
-    if (slot) {
-      data.slot = slot;
-    }
-  }
-
-  // merge component management hooks onto the placeholder node
-  mergeHooks(data);
-
-  // return a placeholder vnode
-  var name = Ctor.options.name || tag;
-  var vnode = new VNode(
-    ("vue-component-" + (Ctor.cid) + (name ? ("-" + name) : '')),
-    data, undefined, undefined, undefined, context,
-    { Ctor: Ctor, propsData: propsData, listeners: listeners, tag: tag, children: children },
-    asyncFactory
-  );
-
-  // Weex specific: invoke recycle-list optimized @render function for
-  // extracting cell-slot template.
-  // https://github.com/Hanks10100/weex-native-directive/tree/master/component
-  /* istanbul ignore if */
-  return vnode
-}
-
-function createComponentInstanceForVnode (
-  vnode, // we know it's MountedComponentVNode but flow doesn't
-  parent, // activeInstance in lifecycle state
-  parentElm,
-  refElm
-) {
-  var options = {
-    _isComponent: true,
-    parent: parent,
-    _parentVnode: vnode,
-    _parentElm: parentElm || null,
-    _refElm: refElm || null
-  };
-  // check inline-template render functions
-  var inlineTemplate = vnode.data.inlineTemplate;
-  if (isDef(inlineTemplate)) {
-    options.render = inlineTemplate.render;
-    options.staticRenderFns = inlineTemplate.staticRenderFns;
-  }
-  return new vnode.componentOptions.Ctor(options)
-}
-
-function mergeHooks (data) {
-  if (!data.hook) {
-    data.hook = {};
-  }
-  for (var i = 0; i < hooksToMerge.length; i++) {
-    var key = hooksToMerge[i];
-    var fromParent = data.hook[key];
-    var ours = componentVNodeHooks[key];
-    data.hook[key] = fromParent ? mergeHook$1(ours, fromParent) : ours;
-  }
-}
-
-function mergeHook$1 (one, two) {
-  return function (a, b, c, d) {
-    one(a, b, c, d);
-    two(a, b, c, d);
-  }
-}
-
-// transform component v-model info (value and callback) into
-// prop and event handler respectively.
-function transformModel (options, data) {
-  var prop = (options.model && options.model.prop) || 'value';
-  var event = (options.model && options.model.event) || 'input';(data.props || (data.props = {}))[prop] = data.model.value;
-  var on = data.on || (data.on = {});
-  if (isDef(on[event])) {
-    on[event] = [data.model.callback].concat(on[event]);
-  } else {
-    on[event] = data.model.callback;
-  }
-}
-
-/*  */
-
-var SIMPLE_NORMALIZE = 1;
-var ALWAYS_NORMALIZE = 2;
-
-// wrapper function for providing a more flexible interface
-// without getting yelled at by flow
-function createElement (
-  context,
-  tag,
-  data,
-  children,
-  normalizationType,
-  alwaysNormalize
-) {
-  if (Array.isArray(data) || isPrimitive(data)) {
-    normalizationType = children;
-    children = data;
-    data = undefined;
-  }
-  if (isTrue(alwaysNormalize)) {
-    normalizationType = ALWAYS_NORMALIZE;
-  }
-  return _createElement(context, tag, data, children, normalizationType)
-}
-
-function _createElement (
-  context,
-  tag,
-  data,
-  children,
-  normalizationType
-) {
-  if (isDef(data) && isDef((data).__ob__)) {
-    "production" !== 'production' && warn(
-      "Avoid using observed data object as vnode data: " + (JSON.stringify(data)) + "\n" +
-      'Always create fresh vnode data objects in each render!',
-      context
-    );
-    return createEmptyVNode()
-  }
-  // object syntax in v-bind
-  if (isDef(data) && isDef(data.is)) {
-    tag = data.is;
-  }
-  if (!tag) {
-    // in case of component :is set to falsy value
-    return createEmptyVNode()
-  }
-  // warn against non-primitive key
-  if (false
-  ) {
-    {
-      warn(
-        'Avoid using non-primitive value as key, ' +
-        'use string/number value instead.',
-        context
-      );
-    }
-  }
-  // support single function children as default scoped slot
-  if (Array.isArray(children) &&
-    typeof children[0] === 'function'
-  ) {
-    data = data || {};
-    data.scopedSlots = { default: children[0] };
-    children.length = 0;
-  }
-  if (normalizationType === ALWAYS_NORMALIZE) {
-    children = normalizeChildren(children);
-  } else if (normalizationType === SIMPLE_NORMALIZE) {
-    children = simpleNormalizeChildren(children);
-  }
-  var vnode, ns;
-  if (typeof tag === 'string') {
-    var Ctor;
-    ns = (context.$vnode && context.$vnode.ns) || config.getTagNamespace(tag);
-    if (config.isReservedTag(tag)) {
-      // platform built-in elements
-      vnode = new VNode(
-        config.parsePlatformTagName(tag), data, children,
-        undefined, undefined, context
-      );
-    } else if (isDef(Ctor = resolveAsset(context.$options, 'components', tag))) {
-      // component
-      vnode = createComponent(Ctor, data, context, children, tag);
-    } else {
-      // unknown or unlisted namespaced elements
-      // check at runtime because it may get assigned a namespace when its
-      // parent normalizes children
-      vnode = new VNode(
-        tag, data, children,
-        undefined, undefined, context
-      );
-    }
-  } else {
-    // direct component options / constructor
-    vnode = createComponent(tag, data, context, children);
-  }
-  if (isDef(vnode)) {
-    if (ns) { applyNS(vnode, ns); }
-    return vnode
-  } else {
-    return createEmptyVNode()
-  }
-}
-
-function applyNS (vnode, ns, force) {
-  vnode.ns = ns;
-  if (vnode.tag === 'foreignObject') {
-    // use default namespace inside foreignObject
-    ns = undefined;
-    force = true;
-  }
-  if (isDef(vnode.children)) {
-    for (var i = 0, l = vnode.children.length; i < l; i++) {
-      var child = vnode.children[i];
-      if (isDef(child.tag) && (isUndef(child.ns) || isTrue(force))) {
-        applyNS(child, ns, force);
-      }
-    }
-  }
-}
-
-/*  */
-
-function initRender (vm) {
-  vm._vnode = null; // the root of the child tree
-  vm._staticTrees = null; // v-once cached trees
-  var options = vm.$options;
-  var parentVnode = vm.$vnode = options._parentVnode; // the placeholder node in parent tree
-  var renderContext = parentVnode && parentVnode.context;
-  vm.$slots = resolveSlots(options._renderChildren, renderContext);
-  vm.$scopedSlots = emptyObject;
-  // bind the createElement fn to this instance
-  // so that we get proper render context inside it.
-  // args order: tag, data, children, normalizationType, alwaysNormalize
-  // internal version is used by render functions compiled from templates
-  vm._c = function (a, b, c, d) { return createElement(vm, a, b, c, d, false); };
-  // normalization is always applied for the public version, used in
-  // user-written render functions.
-  vm.$createElement = function (a, b, c, d) { return createElement(vm, a, b, c, d, true); };
-
-  // $attrs & $listeners are exposed for easier HOC creation.
-  // they need to be reactive so that HOCs using them are always updated
-  var parentData = parentVnode && parentVnode.data;
-
-  /* istanbul ignore else */
-  if (false) {
-    defineReactive(vm, '$attrs', parentData && parentData.attrs || emptyObject, function () {
-      !isUpdatingChildComponent && warn("$attrs is readonly.", vm);
-    }, true);
-    defineReactive(vm, '$listeners', options._parentListeners || emptyObject, function () {
-      !isUpdatingChildComponent && warn("$listeners is readonly.", vm);
-    }, true);
-  } else {
-    defineReactive(vm, '$attrs', parentData && parentData.attrs || emptyObject, null, true);
-    defineReactive(vm, '$listeners', options._parentListeners || emptyObject, null, true);
-  }
-}
-
-function renderMixin (Vue) {
-  // install runtime convenience helpers
-  installRenderHelpers(Vue.prototype);
-
-  Vue.prototype.$nextTick = function (fn) {
-    return nextTick(fn, this)
-  };
-
-  Vue.prototype._render = function () {
-    var vm = this;
-    var ref = vm.$options;
-    var render = ref.render;
-    var _parentVnode = ref._parentVnode;
-
-    if (vm._isMounted) {
-      // if the parent didn't update, the slot nodes will be the ones from
-      // last render. They need to be cloned to ensure "freshness" for this render.
-      for (var key in vm.$slots) {
-        var slot = vm.$slots[key];
-        // _rendered is a flag added by renderSlot, but may not be present
-        // if the slot is passed from manually written render functions
-        if (slot._rendered || (slot[0] && slot[0].elm)) {
-          vm.$slots[key] = cloneVNodes(slot, true /* deep */);
-        }
-      }
-    }
-
-    vm.$scopedSlots = (_parentVnode && _parentVnode.data.scopedSlots) || emptyObject;
-
-    // set parent vnode. this allows render functions to have access
-    // to the data on the placeholder node.
-    vm.$vnode = _parentVnode;
-    // render self
-    var vnode;
-    try {
-      vnode = render.call(vm._renderProxy, vm.$createElement);
-    } catch (e) {
-      handleError(e, vm, "render");
-      // return error render result,
-      // or previous vnode to prevent render error causing blank component
-      /* istanbul ignore else */
-      if (false) {
-        if (vm.$options.renderError) {
-          try {
-            vnode = vm.$options.renderError.call(vm._renderProxy, vm.$createElement, e);
-          } catch (e) {
-            handleError(e, vm, "renderError");
-            vnode = vm._vnode;
-          }
-        } else {
-          vnode = vm._vnode;
-        }
-      } else {
-        vnode = vm._vnode;
-      }
-    }
-    // return empty vnode in case the render function errored out
-    if (!(vnode instanceof VNode)) {
-      if (false) {
-        warn(
-          'Multiple root nodes returned from render function. Render function ' +
-          'should return a single root node.',
-          vm
-        );
-      }
-      vnode = createEmptyVNode();
-    }
-    // set parent
-    vnode.parent = _parentVnode;
-    return vnode
-  };
-}
-
-/*  */
-
-var uid = 0;
-
-function initMixin (Vue) {
-  Vue.prototype._init = function (options) {
-    var vm = this;
-    // a uid
-    vm._uid = uid++;
-
-    var startTag, endTag;
-    /* istanbul ignore if */
-    if (false) {
-      startTag = "vue-perf-start:" + (vm._uid);
-      endTag = "vue-perf-end:" + (vm._uid);
-      mark(startTag);
-    }
-
-    // a flag to avoid this being observed
-    vm._isVue = true;
-    // merge options
-    if (options && options._isComponent) {
-      // optimize internal component instantiation
-      // since dynamic options merging is pretty slow, and none of the
-      // internal component options needs special treatment.
-      initInternalComponent(vm, options);
-    } else {
-      vm.$options = mergeOptions(
-        resolveConstructorOptions(vm.constructor),
-        options || {},
-        vm
-      );
-    }
-    /* istanbul ignore else */
-    if (false) {
-      initProxy(vm);
-    } else {
-      vm._renderProxy = vm;
-    }
-    // expose real self
-    vm._self = vm;
-    initLifecycle(vm);
-    initEvents(vm);
-    initRender(vm);
-    callHook(vm, 'beforeCreate');
-    initInjections(vm); // resolve injections before data/props
-    initState(vm);
-    initProvide(vm); // resolve provide after data/props
-    callHook(vm, 'created');
-
-    /* istanbul ignore if */
-    if (false) {
-      vm._name = formatComponentName(vm, false);
-      mark(endTag);
-      measure(("vue " + (vm._name) + " init"), startTag, endTag);
-    }
-
-    if (vm.$options.el) {
-      vm.$mount(vm.$options.el);
-    }
-  };
-}
-
-function initInternalComponent (vm, options) {
-  var opts = vm.$options = Object.create(vm.constructor.options);
-  // doing this because it's faster than dynamic enumeration.
-  var parentVnode = options._parentVnode;
-  opts.parent = options.parent;
-  opts._parentVnode = parentVnode;
-  opts._parentElm = options._parentElm;
-  opts._refElm = options._refElm;
-
-  var vnodeComponentOptions = parentVnode.componentOptions;
-  opts.propsData = vnodeComponentOptions.propsData;
-  opts._parentListeners = vnodeComponentOptions.listeners;
-  opts._renderChildren = vnodeComponentOptions.children;
-  opts._componentTag = vnodeComponentOptions.tag;
-
-  if (options.render) {
-    opts.render = options.render;
-    opts.staticRenderFns = options.staticRenderFns;
-  }
-}
-
-function resolveConstructorOptions (Ctor) {
-  var options = Ctor.options;
-  if (Ctor.super) {
-    var superOptions = resolveConstructorOptions(Ctor.super);
-    var cachedSuperOptions = Ctor.superOptions;
-    if (superOptions !== cachedSuperOptions) {
-      // super option changed,
-      // need to resolve new options.
-      Ctor.superOptions = superOptions;
-      // check if there are any late-modified/attached options (#4976)
-      var modifiedOptions = resolveModifiedOptions(Ctor);
-      // update base extend options
-      if (modifiedOptions) {
-        extend(Ctor.extendOptions, modifiedOptions);
-      }
-      options = Ctor.options = mergeOptions(superOptions, Ctor.extendOptions);
-      if (options.name) {
-        options.components[options.name] = Ctor;
-      }
-    }
-  }
-  return options
-}
-
-function resolveModifiedOptions (Ctor) {
-  var modified;
-  var latest = Ctor.options;
-  var extended = Ctor.extendOptions;
-  var sealed = Ctor.sealedOptions;
-  for (var key in latest) {
-    if (latest[key] !== sealed[key]) {
-      if (!modified) { modified = {}; }
-      modified[key] = dedupe(latest[key], extended[key], sealed[key]);
-    }
-  }
-  return modified
-}
-
-function dedupe (latest, extended, sealed) {
-  // compare latest and sealed to ensure lifecycle hooks won't be duplicated
-  // between merges
-  if (Array.isArray(latest)) {
-    var res = [];
-    sealed = Array.isArray(sealed) ? sealed : [sealed];
-    extended = Array.isArray(extended) ? extended : [extended];
-    for (var i = 0; i < latest.length; i++) {
-      // push original options and not sealed options to exclude duplicated options
-      if (extended.indexOf(latest[i]) >= 0 || sealed.indexOf(latest[i]) < 0) {
-        res.push(latest[i]);
-      }
-    }
-    return res
-  } else {
-    return latest
-  }
-}
-
-function Vue$3 (options) {
-  if (false
-  ) {
-    warn('Vue is a constructor and should be called with the `new` keyword');
-  }
-  this._init(options);
-}
-
-initMixin(Vue$3);
-stateMixin(Vue$3);
-eventsMixin(Vue$3);
-lifecycleMixin(Vue$3);
-renderMixin(Vue$3);
-
-/*  */
-
-function initUse (Vue) {
-  Vue.use = function (plugin) {
-    var installedPlugins = (this._installedPlugins || (this._installedPlugins = []));
-    if (installedPlugins.indexOf(plugin) > -1) {
-      return this
-    }
-
-    // additional parameters
-    var args = toArray(arguments, 1);
-    args.unshift(this);
-    if (typeof plugin.install === 'function') {
-      plugin.install.apply(plugin, args);
-    } else if (typeof plugin === 'function') {
-      plugin.apply(null, args);
-    }
-    installedPlugins.push(plugin);
-    return this
-  };
-}
-
-/*  */
-
-function initMixin$1 (Vue) {
-  Vue.mixin = function (mixin) {
-    this.options = mergeOptions(this.options, mixin);
-    return this
-  };
-}
-
-/*  */
-
-function initExtend (Vue) {
-  /**
-   * Each instance constructor, including Vue, has a unique
-   * cid. This enables us to create wrapped "child
-   * constructors" for prototypal inheritance and cache them.
-   */
-  Vue.cid = 0;
-  var cid = 1;
-
-  /**
-   * Class inheritance
-   */
-  Vue.extend = function (extendOptions) {
-    extendOptions = extendOptions || {};
-    var Super = this;
-    var SuperId = Super.cid;
-    var cachedCtors = extendOptions._Ctor || (extendOptions._Ctor = {});
-    if (cachedCtors[SuperId]) {
-      return cachedCtors[SuperId]
-    }
-
-    var name = extendOptions.name || Super.options.name;
-    if (false) {
-      validateComponentName(name);
-    }
-
-    var Sub = function VueComponent (options) {
-      this._init(options);
-    };
-    Sub.prototype = Object.create(Super.prototype);
-    Sub.prototype.constructor = Sub;
-    Sub.cid = cid++;
-    Sub.options = mergeOptions(
-      Super.options,
-      extendOptions
-    );
-    Sub['super'] = Super;
-
-    // For props and computed properties, we define the proxy getters on
-    // the Vue instances at extension time, on the extended prototype. This
-    // avoids Object.defineProperty calls for each instance created.
-    if (Sub.options.props) {
-      initProps$1(Sub);
-    }
-    if (Sub.options.computed) {
-      initComputed$1(Sub);
-    }
-
-    // allow further extension/mixin/plugin usage
-    Sub.extend = Super.extend;
-    Sub.mixin = Super.mixin;
-    Sub.use = Super.use;
-
-    // create asset registers, so extended classes
-    // can have their private assets too.
-    ASSET_TYPES.forEach(function (type) {
-      Sub[type] = Super[type];
-    });
-    // enable recursive self-lookup
-    if (name) {
-      Sub.options.components[name] = Sub;
-    }
-
-    // keep a reference to the super options at extension time.
-    // later at instantiation we can check if Super's options have
-    // been updated.
-    Sub.superOptions = Super.options;
-    Sub.extendOptions = extendOptions;
-    Sub.sealedOptions = extend({}, Sub.options);
-
-    // cache constructor
-    cachedCtors[SuperId] = Sub;
-    return Sub
-  };
-}
-
-function initProps$1 (Comp) {
-  var props = Comp.options.props;
-  for (var key in props) {
-    proxy(Comp.prototype, "_props", key);
-  }
-}
-
-function initComputed$1 (Comp) {
-  var computed = Comp.options.computed;
-  for (var key in computed) {
-    defineComputed(Comp.prototype, key, computed[key]);
-  }
-}
-
-/*  */
-
-function initAssetRegisters (Vue) {
-  /**
-   * Create asset registration methods.
-   */
-  ASSET_TYPES.forEach(function (type) {
-    Vue[type] = function (
-      id,
-      definition
-    ) {
-      if (!definition) {
-        return this.options[type + 's'][id]
-      } else {
-        /* istanbul ignore if */
-        if (false) {
-          validateComponentName(id);
-        }
-        if (type === 'component' && isPlainObject(definition)) {
-          definition.name = definition.name || id;
-          definition = this.options._base.extend(definition);
-        }
-        if (type === 'directive' && typeof definition === 'function') {
-          definition = { bind: definition, update: definition };
-        }
-        this.options[type + 's'][id] = definition;
-        return definition
-      }
-    };
-  });
-}
-
-/*  */
-
-function getComponentName (opts) {
-  return opts && (opts.Ctor.options.name || opts.tag)
-}
-
-function matches (pattern, name) {
-  if (Array.isArray(pattern)) {
-    return pattern.indexOf(name) > -1
-  } else if (typeof pattern === 'string') {
-    return pattern.split(',').indexOf(name) > -1
-  } else if (isRegExp(pattern)) {
-    return pattern.test(name)
-  }
-  /* istanbul ignore next */
-  return false
-}
-
-function pruneCache (keepAliveInstance, filter) {
-  var cache = keepAliveInstance.cache;
-  var keys = keepAliveInstance.keys;
-  var _vnode = keepAliveInstance._vnode;
-  for (var key in cache) {
-    var cachedNode = cache[key];
-    if (cachedNode) {
-      var name = getComponentName(cachedNode.componentOptions);
-      if (name && !filter(name)) {
-        pruneCacheEntry(cache, key, keys, _vnode);
-      }
-    }
-  }
-}
-
-function pruneCacheEntry (
-  cache,
-  key,
-  keys,
-  current
-) {
-  var cached$$1 = cache[key];
-  if (cached$$1 && (!current || cached$$1.tag !== current.tag)) {
-    cached$$1.componentInstance.$destroy();
-  }
-  cache[key] = null;
-  remove(keys, key);
-}
-
-var patternTypes = [String, RegExp, Array];
-
-var KeepAlive = {
-  name: 'keep-alive',
-  abstract: true,
-
-  props: {
-    include: patternTypes,
-    exclude: patternTypes,
-    max: [String, Number]
-  },
-
-  created: function created () {
-    this.cache = Object.create(null);
-    this.keys = [];
-  },
-
-  destroyed: function destroyed () {
-    var this$1 = this;
-
-    for (var key in this$1.cache) {
-      pruneCacheEntry(this$1.cache, key, this$1.keys);
-    }
-  },
-
-  watch: {
-    include: function include (val) {
-      pruneCache(this, function (name) { return matches(val, name); });
-    },
-    exclude: function exclude (val) {
-      pruneCache(this, function (name) { return !matches(val, name); });
-    }
-  },
-
-  render: function render () {
-    var slot = this.$slots.default;
-    var vnode = getFirstComponentChild(slot);
-    var componentOptions = vnode && vnode.componentOptions;
-    if (componentOptions) {
-      // check pattern
-      var name = getComponentName(componentOptions);
-      var ref = this;
-      var include = ref.include;
-      var exclude = ref.exclude;
-      if (
-        // not included
-        (include && (!name || !matches(include, name))) ||
-        // excluded
-        (exclude && name && matches(exclude, name))
-      ) {
-        return vnode
-      }
-
-      var ref$1 = this;
-      var cache = ref$1.cache;
-      var keys = ref$1.keys;
-      var key = vnode.key == null
-        // same constructor may get registered as different local components
-        // so cid alone is not enough (#3269)
-        ? componentOptions.Ctor.cid + (componentOptions.tag ? ("::" + (componentOptions.tag)) : '')
-        : vnode.key;
-      if (cache[key]) {
-        vnode.componentInstance = cache[key].componentInstance;
-        // make current key freshest
-        remove(keys, key);
-        keys.push(key);
-      } else {
-        cache[key] = vnode;
-        keys.push(key);
-        // prune oldest entry
-        if (this.max && keys.length > parseInt(this.max)) {
-          pruneCacheEntry(cache, keys[0], keys, this._vnode);
-        }
-      }
-
-      vnode.data.keepAlive = true;
-    }
-    return vnode || (slot && slot[0])
-  }
-};
-
-var builtInComponents = {
-  KeepAlive: KeepAlive
-};
-
-/*  */
-
-function initGlobalAPI (Vue) {
-  // config
-  var configDef = {};
-  configDef.get = function () { return config; };
-  if (false) {
-    configDef.set = function () {
-      warn(
-        'Do not replace the Vue.config object, set individual fields instead.'
-      );
-    };
-  }
-  Object.defineProperty(Vue, 'config', configDef);
-
-  // exposed util methods.
-  // NOTE: these are not considered part of the public API - avoid relying on
-  // them unless you are aware of the risk.
-  Vue.util = {
-    warn: warn,
-    extend: extend,
-    mergeOptions: mergeOptions,
-    defineReactive: defineReactive
-  };
-
-  Vue.set = set;
-  Vue.delete = del;
-  Vue.nextTick = nextTick;
-
-  Vue.options = Object.create(null);
-  ASSET_TYPES.forEach(function (type) {
-    Vue.options[type + 's'] = Object.create(null);
-  });
-
-  // this is used to identify the "base" constructor to extend all plain-object
-  // components with in Weex's multi-instance scenarios.
-  Vue.options._base = Vue;
-
-  extend(Vue.options.components, builtInComponents);
-
-  initUse(Vue);
-  initMixin$1(Vue);
-  initExtend(Vue);
-  initAssetRegisters(Vue);
-}
-
-initGlobalAPI(Vue$3);
-
-Object.defineProperty(Vue$3.prototype, '$isServer', {
-  get: isServerRendering
-});
-
-Object.defineProperty(Vue$3.prototype, '$ssrContext', {
-  get: function get () {
-    /* istanbul ignore next */
-    return this.$vnode && this.$vnode.ssrContext
-  }
-});
-
-Vue$3.version = '2.5.13';
-
-/*  */
-
-// these are reserved for web because they are directly compiled away
-// during template compilation
-var isReservedAttr = makeMap('style,class');
-
-// attributes that should be using props for binding
-var acceptValue = makeMap('input,textarea,option,select,progress');
-var mustUseProp = function (tag, type, attr) {
-  return (
-    (attr === 'value' && acceptValue(tag)) && type !== 'button' ||
-    (attr === 'selected' && tag === 'option') ||
-    (attr === 'checked' && tag === 'input') ||
-    (attr === 'muted' && tag === 'video')
-  )
-};
-
-var isEnumeratedAttr = makeMap('contenteditable,draggable,spellcheck');
-
-var isBooleanAttr = makeMap(
-  'allowfullscreen,async,autofocus,autoplay,checked,compact,controls,declare,' +
-  'default,defaultchecked,defaultmuted,defaultselected,defer,disabled,' +
-  'enabled,formnovalidate,hidden,indeterminate,inert,ismap,itemscope,loop,multiple,' +
-  'muted,nohref,noresize,noshade,novalidate,nowrap,open,pauseonexit,readonly,' +
-  'required,reversed,scoped,seamless,selected,sortable,translate,' +
-  'truespeed,typemustmatch,visible'
-);
-
-var xlinkNS = 'http://www.w3.org/1999/xlink';
-
-var isXlink = function (name) {
-  return name.charAt(5) === ':' && name.slice(0, 5) === 'xlink'
-};
-
-var getXlinkProp = function (name) {
-  return isXlink(name) ? name.slice(6, name.length) : ''
-};
-
-var isFalsyAttrValue = function (val) {
-  return val == null || val === false
-};
-
-/*  */
-
-function genClassForVnode (vnode) {
-  var data = vnode.data;
-  var parentNode = vnode;
-  var childNode = vnode;
-  while (isDef(childNode.componentInstance)) {
-    childNode = childNode.componentInstance._vnode;
-    if (childNode && childNode.data) {
-      data = mergeClassData(childNode.data, data);
-    }
-  }
-  while (isDef(parentNode = parentNode.parent)) {
-    if (parentNode && parentNode.data) {
-      data = mergeClassData(data, parentNode.data);
-    }
-  }
-  return renderClass(data.staticClass, data.class)
-}
-
-function mergeClassData (child, parent) {
-  return {
-    staticClass: concat(child.staticClass, parent.staticClass),
-    class: isDef(child.class)
-      ? [child.class, parent.class]
-      : parent.class
-  }
-}
-
-function renderClass (
-  staticClass,
-  dynamicClass
-) {
-  if (isDef(staticClass) || isDef(dynamicClass)) {
-    return concat(staticClass, stringifyClass(dynamicClass))
-  }
-  /* istanbul ignore next */
-  return ''
-}
-
-function concat (a, b) {
-  return a ? b ? (a + ' ' + b) : a : (b || '')
-}
-
-function stringifyClass (value) {
-  if (Array.isArray(value)) {
-    return stringifyArray(value)
-  }
-  if (isObject(value)) {
-    return stringifyObject(value)
-  }
-  if (typeof value === 'string') {
-    return value
-  }
-  /* istanbul ignore next */
-  return ''
-}
-
-function stringifyArray (value) {
-  var res = '';
-  var stringified;
-  for (var i = 0, l = value.length; i < l; i++) {
-    if (isDef(stringified = stringifyClass(value[i])) && stringified !== '') {
-      if (res) { res += ' '; }
-      res += stringified;
-    }
-  }
-  return res
-}
-
-function stringifyObject (value) {
-  var res = '';
-  for (var key in value) {
-    if (value[key]) {
-      if (res) { res += ' '; }
-      res += key;
-    }
-  }
-  return res
-}
-
-/*  */
-
-var namespaceMap = {
-  svg: 'http://www.w3.org/2000/svg',
-  math: 'http://www.w3.org/1998/Math/MathML'
-};
-
-var isHTMLTag = makeMap(
-  'html,body,base,head,link,meta,style,title,' +
-  'address,article,aside,footer,header,h1,h2,h3,h4,h5,h6,hgroup,nav,section,' +
-  'div,dd,dl,dt,figcaption,figure,picture,hr,img,li,main,ol,p,pre,ul,' +
-  'a,b,abbr,bdi,bdo,br,cite,code,data,dfn,em,i,kbd,mark,q,rp,rt,rtc,ruby,' +
-  's,samp,small,span,strong,sub,sup,time,u,var,wbr,area,audio,map,track,video,' +
-  'embed,object,param,source,canvas,script,noscript,del,ins,' +
-  'caption,col,colgroup,table,thead,tbody,td,th,tr,' +
-  'button,datalist,fieldset,form,input,label,legend,meter,optgroup,option,' +
-  'output,progress,select,textarea,' +
-  'details,dialog,menu,menuitem,summary,' +
-  'content,element,shadow,template,blockquote,iframe,tfoot'
-);
-
-// this map is intentionally selective, only covering SVG elements that may
-// contain child elements.
-var isSVG = makeMap(
-  'svg,animate,circle,clippath,cursor,defs,desc,ellipse,filter,font-face,' +
-  'foreignObject,g,glyph,image,line,marker,mask,missing-glyph,path,pattern,' +
-  'polygon,polyline,rect,switch,symbol,text,textpath,tspan,use,view',
-  true
-);
-
-
-
-var isReservedTag = function (tag) {
-  return isHTMLTag(tag) || isSVG(tag)
-};
-
-function getTagNamespace (tag) {
-  if (isSVG(tag)) {
-    return 'svg'
-  }
-  // basic support for MathML
-  // note it doesn't support other MathML elements being component roots
-  if (tag === 'math') {
-    return 'math'
-  }
-}
-
-var unknownElementCache = Object.create(null);
-function isUnknownElement (tag) {
-  /* istanbul ignore if */
-  if (!inBrowser) {
-    return true
-  }
-  if (isReservedTag(tag)) {
-    return false
-  }
-  tag = tag.toLowerCase();
-  /* istanbul ignore if */
-  if (unknownElementCache[tag] != null) {
-    return unknownElementCache[tag]
-  }
-  var el = document.createElement(tag);
-  if (tag.indexOf('-') > -1) {
-    // http://stackoverflow.com/a/28210364/1070244
-    return (unknownElementCache[tag] = (
-      el.constructor === window.HTMLUnknownElement ||
-      el.constructor === window.HTMLElement
-    ))
-  } else {
-    return (unknownElementCache[tag] = /HTMLUnknownElement/.test(el.toString()))
-  }
-}
-
-var isTextInputType = makeMap('text,number,password,search,email,tel,url');
-
-/*  */
-
-/**
- * Query an element selector if it's not an element already.
- */
-function query (el) {
-  if (typeof el === 'string') {
-    var selected = document.querySelector(el);
-    if (!selected) {
-      "production" !== 'production' && warn(
-        'Cannot find element: ' + el
-      );
-      return document.createElement('div')
-    }
-    return selected
-  } else {
-    return el
-  }
-}
-
-/*  */
-
-function createElement$1 (tagName, vnode) {
-  var elm = document.createElement(tagName);
-  if (tagName !== 'select') {
-    return elm
-  }
-  // false or null will remove the attribute but undefined will not
-  if (vnode.data && vnode.data.attrs && vnode.data.attrs.multiple !== undefined) {
-    elm.setAttribute('multiple', 'multiple');
-  }
-  return elm
-}
-
-function createElementNS (namespace, tagName) {
-  return document.createElementNS(namespaceMap[namespace], tagName)
-}
-
-function createTextNode (text) {
-  return document.createTextNode(text)
-}
-
-function createComment (text) {
-  return document.createComment(text)
-}
-
-function insertBefore (parentNode, newNode, referenceNode) {
-  parentNode.insertBefore(newNode, referenceNode);
-}
-
-function removeChild (node, child) {
-  node.removeChild(child);
-}
-
-function appendChild (node, child) {
-  node.appendChild(child);
-}
-
-function parentNode (node) {
-  return node.parentNode
-}
-
-function nextSibling (node) {
-  return node.nextSibling
-}
-
-function tagName (node) {
-  return node.tagName
-}
-
-function setTextContent (node, text) {
-  node.textContent = text;
-}
-
-function setAttribute (node, key, val) {
-  node.setAttribute(key, val);
-}
-
-
-var nodeOps = Object.freeze({
-	createElement: createElement$1,
-	createElementNS: createElementNS,
-	createTextNode: createTextNode,
-	createComment: createComment,
-	insertBefore: insertBefore,
-	removeChild: removeChild,
-	appendChild: appendChild,
-	parentNode: parentNode,
-	nextSibling: nextSibling,
-	tagName: tagName,
-	setTextContent: setTextContent,
-	setAttribute: setAttribute
-});
-
-/*  */
-
-var ref = {
-  create: function create (_, vnode) {
-    registerRef(vnode);
-  },
-  update: function update (oldVnode, vnode) {
-    if (oldVnode.data.ref !== vnode.data.ref) {
-      registerRef(oldVnode, true);
-      registerRef(vnode);
-    }
-  },
-  destroy: function destroy (vnode) {
-    registerRef(vnode, true);
-  }
-};
-
-function registerRef (vnode, isRemoval) {
-  var key = vnode.data.ref;
-  if (!key) { return }
-
-  var vm = vnode.context;
-  var ref = vnode.componentInstance || vnode.elm;
-  var refs = vm.$refs;
-  if (isRemoval) {
-    if (Array.isArray(refs[key])) {
-      remove(refs[key], ref);
-    } else if (refs[key] === ref) {
-      refs[key] = undefined;
-    }
-  } else {
-    if (vnode.data.refInFor) {
-      if (!Array.isArray(refs[key])) {
-        refs[key] = [ref];
-      } else if (refs[key].indexOf(ref) < 0) {
-        // $flow-disable-line
-        refs[key].push(ref);
-      }
-    } else {
-      refs[key] = ref;
-    }
-  }
-}
-
-/**
- * Virtual DOM patching algorithm based on Snabbdom by
- * Simon Friis Vindum (@paldepind)
- * Licensed under the MIT License
- * https://github.com/paldepind/snabbdom/blob/master/LICENSE
- *
- * modified by Evan You (@yyx990803)
- *
- * Not type-checking this because this file is perf-critical and the cost
- * of making flow understand it is not worth it.
- */
-
-var emptyNode = new VNode('', {}, []);
-
-var hooks = ['create', 'activate', 'update', 'remove', 'destroy'];
-
-function sameVnode (a, b) {
-  return (
-    a.key === b.key && (
-      (
-        a.tag === b.tag &&
-        a.isComment === b.isComment &&
-        isDef(a.data) === isDef(b.data) &&
-        sameInputType(a, b)
-      ) || (
-        isTrue(a.isAsyncPlaceholder) &&
-        a.asyncFactory === b.asyncFactory &&
-        isUndef(b.asyncFactory.error)
-      )
-    )
-  )
-}
-
-function sameInputType (a, b) {
-  if (a.tag !== 'input') { return true }
-  var i;
-  var typeA = isDef(i = a.data) && isDef(i = i.attrs) && i.type;
-  var typeB = isDef(i = b.data) && isDef(i = i.attrs) && i.type;
-  return typeA === typeB || isTextInputType(typeA) && isTextInputType(typeB)
-}
-
-function createKeyToOldIdx (children, beginIdx, endIdx) {
-  var i, key;
-  var map = {};
-  for (i = beginIdx; i <= endIdx; ++i) {
-    key = children[i].key;
-    if (isDef(key)) { map[key] = i; }
-  }
-  return map
-}
-
-function createPatchFunction (backend) {
-  var i, j;
-  var cbs = {};
-
-  var modules = backend.modules;
-  var nodeOps = backend.nodeOps;
-
-  for (i = 0; i < hooks.length; ++i) {
-    cbs[hooks[i]] = [];
-    for (j = 0; j < modules.length; ++j) {
-      if (isDef(modules[j][hooks[i]])) {
-        cbs[hooks[i]].push(modules[j][hooks[i]]);
-      }
-    }
-  }
-
-  function emptyNodeAt (elm) {
-    return new VNode(nodeOps.tagName(elm).toLowerCase(), {}, [], undefined, elm)
-  }
-
-  function createRmCb (childElm, listeners) {
-    function remove () {
-      if (--remove.listeners === 0) {
-        removeNode(childElm);
-      }
-    }
-    remove.listeners = listeners;
-    return remove
-  }
-
-  function removeNode (el) {
-    var parent = nodeOps.parentNode(el);
-    // element may have already been removed due to v-html / v-text
-    if (isDef(parent)) {
-      nodeOps.removeChild(parent, el);
-    }
-  }
-
-  function isUnknownElement$$1 (vnode, inVPre) {
-    return (
-      !inVPre &&
-      !vnode.ns &&
-      !(
-        config.ignoredElements.length &&
-        config.ignoredElements.some(function (ignore) {
-          return isRegExp(ignore)
-            ? ignore.test(vnode.tag)
-            : ignore === vnode.tag
-        })
-      ) &&
-      config.isUnknownElement(vnode.tag)
-    )
-  }
-
-  var creatingElmInVPre = 0;
-  function createElm (vnode, insertedVnodeQueue, parentElm, refElm, nested) {
-    vnode.isRootInsert = !nested; // for transition enter check
-    if (createComponent(vnode, insertedVnodeQueue, parentElm, refElm)) {
-      return
-    }
-
-    var data = vnode.data;
-    var children = vnode.children;
-    var tag = vnode.tag;
-    if (isDef(tag)) {
-      if (false) {
-        if (data && data.pre) {
-          creatingElmInVPre++;
-        }
-        if (isUnknownElement$$1(vnode, creatingElmInVPre)) {
-          warn(
-            'Unknown custom element: <' + tag + '> - did you ' +
-            'register the component correctly? For recursive components, ' +
-            'make sure to provide the "name" option.',
-            vnode.context
-          );
-        }
-      }
-      vnode.elm = vnode.ns
-        ? nodeOps.createElementNS(vnode.ns, tag)
-        : nodeOps.createElement(tag, vnode);
-      setScope(vnode);
-
-      /* istanbul ignore if */
-      {
-        createChildren(vnode, children, insertedVnodeQueue);
-        if (isDef(data)) {
-          invokeCreateHooks(vnode, insertedVnodeQueue);
-        }
-        insert(parentElm, vnode.elm, refElm);
-      }
-
-      if (false) {
-        creatingElmInVPre--;
-      }
-    } else if (isTrue(vnode.isComment)) {
-      vnode.elm = nodeOps.createComment(vnode.text);
-      insert(parentElm, vnode.elm, refElm);
-    } else {
-      vnode.elm = nodeOps.createTextNode(vnode.text);
-      insert(parentElm, vnode.elm, refElm);
-    }
-  }
-
-  function createComponent (vnode, insertedVnodeQueue, parentElm, refElm) {
-    var i = vnode.data;
-    if (isDef(i)) {
-      var isReactivated = isDef(vnode.componentInstance) && i.keepAlive;
-      if (isDef(i = i.hook) && isDef(i = i.init)) {
-        i(vnode, false /* hydrating */, parentElm, refElm);
-      }
-      // after calling the init hook, if the vnode is a child component
-      // it should've created a child instance and mounted it. the child
-      // component also has set the placeholder vnode's elm.
-      // in that case we can just return the element and be done.
-      if (isDef(vnode.componentInstance)) {
-        initComponent(vnode, insertedVnodeQueue);
-        if (isTrue(isReactivated)) {
-          reactivateComponent(vnode, insertedVnodeQueue, parentElm, refElm);
-        }
-        return true
-      }
-    }
-  }
-
-  function initComponent (vnode, insertedVnodeQueue) {
-    if (isDef(vnode.data.pendingInsert)) {
-      insertedVnodeQueue.push.apply(insertedVnodeQueue, vnode.data.pendingInsert);
-      vnode.data.pendingInsert = null;
-    }
-    vnode.elm = vnode.componentInstance.$el;
-    if (isPatchable(vnode)) {
-      invokeCreateHooks(vnode, insertedVnodeQueue);
-      setScope(vnode);
-    } else {
-      // empty component root.
-      // skip all element-related modules except for ref (#3455)
-      registerRef(vnode);
-      // make sure to invoke the insert hook
-      insertedVnodeQueue.push(vnode);
-    }
-  }
-
-  function reactivateComponent (vnode, insertedVnodeQueue, parentElm, refElm) {
-    var i;
-    // hack for #4339: a reactivated component with inner transition
-    // does not trigger because the inner node's created hooks are not called
-    // again. It's not ideal to involve module-specific logic in here but
-    // there doesn't seem to be a better way to do it.
-    var innerNode = vnode;
-    while (innerNode.componentInstance) {
-      innerNode = innerNode.componentInstance._vnode;
-      if (isDef(i = innerNode.data) && isDef(i = i.transition)) {
-        for (i = 0; i < cbs.activate.length; ++i) {
-          cbs.activate[i](emptyNode, innerNode);
-        }
-        insertedVnodeQueue.push(innerNode);
-        break
-      }
-    }
-    // unlike a newly created component,
-    // a reactivated keep-alive component doesn't insert itself
-    insert(parentElm, vnode.elm, refElm);
-  }
-
-  function insert (parent, elm, ref$$1) {
-    if (isDef(parent)) {
-      if (isDef(ref$$1)) {
-        if (ref$$1.parentNode === parent) {
-          nodeOps.insertBefore(parent, elm, ref$$1);
-        }
-      } else {
-        nodeOps.appendChild(parent, elm);
-      }
-    }
-  }
-
-  function createChildren (vnode, children, insertedVnodeQueue) {
-    if (Array.isArray(children)) {
-      if (false) {
-        checkDuplicateKeys(children);
-      }
-      for (var i = 0; i < children.length; ++i) {
-        createElm(children[i], insertedVnodeQueue, vnode.elm, null, true);
-      }
-    } else if (isPrimitive(vnode.text)) {
-      nodeOps.appendChild(vnode.elm, nodeOps.createTextNode(String(vnode.text)));
-    }
-  }
-
-  function isPatchable (vnode) {
-    while (vnode.componentInstance) {
-      vnode = vnode.componentInstance._vnode;
-    }
-    return isDef(vnode.tag)
-  }
-
-  function invokeCreateHooks (vnode, insertedVnodeQueue) {
-    for (var i$1 = 0; i$1 < cbs.create.length; ++i$1) {
-      cbs.create[i$1](emptyNode, vnode);
-    }
-    i = vnode.data.hook; // Reuse variable
-    if (isDef(i)) {
-      if (isDef(i.create)) { i.create(emptyNode, vnode); }
-      if (isDef(i.insert)) { insertedVnodeQueue.push(vnode); }
-    }
-  }
-
-  // set scope id attribute for scoped CSS.
-  // this is implemented as a special case to avoid the overhead
-  // of going through the normal attribute patching process.
-  function setScope (vnode) {
-    var i;
-    if (isDef(i = vnode.fnScopeId)) {
-      nodeOps.setAttribute(vnode.elm, i, '');
-    } else {
-      var ancestor = vnode;
-      while (ancestor) {
-        if (isDef(i = ancestor.context) && isDef(i = i.$options._scopeId)) {
-          nodeOps.setAttribute(vnode.elm, i, '');
-        }
-        ancestor = ancestor.parent;
-      }
-    }
-    // for slot content they should also get the scopeId from the host instance.
-    if (isDef(i = activeInstance) &&
-      i !== vnode.context &&
-      i !== vnode.fnContext &&
-      isDef(i = i.$options._scopeId)
-    ) {
-      nodeOps.setAttribute(vnode.elm, i, '');
-    }
-  }
-
-  function addVnodes (parentElm, refElm, vnodes, startIdx, endIdx, insertedVnodeQueue) {
-    for (; startIdx <= endIdx; ++startIdx) {
-      createElm(vnodes[startIdx], insertedVnodeQueue, parentElm, refElm);
-    }
-  }
-
-  function invokeDestroyHook (vnode) {
-    var i, j;
-    var data = vnode.data;
-    if (isDef(data)) {
-      if (isDef(i = data.hook) && isDef(i = i.destroy)) { i(vnode); }
-      for (i = 0; i < cbs.destroy.length; ++i) { cbs.destroy[i](vnode); }
-    }
-    if (isDef(i = vnode.children)) {
-      for (j = 0; j < vnode.children.length; ++j) {
-        invokeDestroyHook(vnode.children[j]);
-      }
-    }
-  }
-
-  function removeVnodes (parentElm, vnodes, startIdx, endIdx) {
-    for (; startIdx <= endIdx; ++startIdx) {
-      var ch = vnodes[startIdx];
-      if (isDef(ch)) {
-        if (isDef(ch.tag)) {
-          removeAndInvokeRemoveHook(ch);
-          invokeDestroyHook(ch);
-        } else { // Text node
-          removeNode(ch.elm);
-        }
-      }
-    }
-  }
-
-  function removeAndInvokeRemoveHook (vnode, rm) {
-    if (isDef(rm) || isDef(vnode.data)) {
-      var i;
-      var listeners = cbs.remove.length + 1;
-      if (isDef(rm)) {
-        // we have a recursively passed down rm callback
-        // increase the listeners count
-        rm.listeners += listeners;
-      } else {
-        // directly removing
-        rm = createRmCb(vnode.elm, listeners);
-      }
-      // recursively invoke hooks on child component root node
-      if (isDef(i = vnode.componentInstance) && isDef(i = i._vnode) && isDef(i.data)) {
-        removeAndInvokeRemoveHook(i, rm);
-      }
-      for (i = 0; i < cbs.remove.length; ++i) {
-        cbs.remove[i](vnode, rm);
-      }
-      if (isDef(i = vnode.data.hook) && isDef(i = i.remove)) {
-        i(vnode, rm);
-      } else {
-        rm();
-      }
-    } else {
-      removeNode(vnode.elm);
-    }
-  }
-
-  function updateChildren (parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly) {
-    var oldStartIdx = 0;
-    var newStartIdx = 0;
-    var oldEndIdx = oldCh.length - 1;
-    var oldStartVnode = oldCh[0];
-    var oldEndVnode = oldCh[oldEndIdx];
-    var newEndIdx = newCh.length - 1;
-    var newStartVnode = newCh[0];
-    var newEndVnode = newCh[newEndIdx];
-    var oldKeyToIdx, idxInOld, vnodeToMove, refElm;
-
-    // removeOnly is a special flag used only by <transition-group>
-    // to ensure removed elements stay in correct relative positions
-    // during leaving transitions
-    var canMove = !removeOnly;
-
-    if (false) {
-      checkDuplicateKeys(newCh);
-    }
-
-    while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
-      if (isUndef(oldStartVnode)) {
-        oldStartVnode = oldCh[++oldStartIdx]; // Vnode has been moved left
-      } else if (isUndef(oldEndVnode)) {
-        oldEndVnode = oldCh[--oldEndIdx];
-      } else if (sameVnode(oldStartVnode, newStartVnode)) {
-        patchVnode(oldStartVnode, newStartVnode, insertedVnodeQueue);
-        oldStartVnode = oldCh[++oldStartIdx];
-        newStartVnode = newCh[++newStartIdx];
-      } else if (sameVnode(oldEndVnode, newEndVnode)) {
-        patchVnode(oldEndVnode, newEndVnode, insertedVnodeQueue);
-        oldEndVnode = oldCh[--oldEndIdx];
-        newEndVnode = newCh[--newEndIdx];
-      } else if (sameVnode(oldStartVnode, newEndVnode)) { // Vnode moved right
-        patchVnode(oldStartVnode, newEndVnode, insertedVnodeQueue);
-        canMove && nodeOps.insertBefore(parentElm, oldStartVnode.elm, nodeOps.nextSibling(oldEndVnode.elm));
-        oldStartVnode = oldCh[++oldStartIdx];
-        newEndVnode = newCh[--newEndIdx];
-      } else if (sameVnode(oldEndVnode, newStartVnode)) { // Vnode moved left
-        patchVnode(oldEndVnode, newStartVnode, insertedVnodeQueue);
-        canMove && nodeOps.insertBefore(parentElm, oldEndVnode.elm, oldStartVnode.elm);
-        oldEndVnode = oldCh[--oldEndIdx];
-        newStartVnode = newCh[++newStartIdx];
-      } else {
-        if (isUndef(oldKeyToIdx)) { oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx); }
-        idxInOld = isDef(newStartVnode.key)
-          ? oldKeyToIdx[newStartVnode.key]
-          : findIdxInOld(newStartVnode, oldCh, oldStartIdx, oldEndIdx);
-        if (isUndef(idxInOld)) { // New element
-          createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm);
-        } else {
-          vnodeToMove = oldCh[idxInOld];
-          if (sameVnode(vnodeToMove, newStartVnode)) {
-            patchVnode(vnodeToMove, newStartVnode, insertedVnodeQueue);
-            oldCh[idxInOld] = undefined;
-            canMove && nodeOps.insertBefore(parentElm, vnodeToMove.elm, oldStartVnode.elm);
-          } else {
-            // same key but different element. treat as new element
-            createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm);
-          }
-        }
-        newStartVnode = newCh[++newStartIdx];
-      }
-    }
-    if (oldStartIdx > oldEndIdx) {
-      refElm = isUndef(newCh[newEndIdx + 1]) ? null : newCh[newEndIdx + 1].elm;
-      addVnodes(parentElm, refElm, newCh, newStartIdx, newEndIdx, insertedVnodeQueue);
-    } else if (newStartIdx > newEndIdx) {
-      removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx);
-    }
-  }
-
-  function checkDuplicateKeys (children) {
-    var seenKeys = {};
-    for (var i = 0; i < children.length; i++) {
-      var vnode = children[i];
-      var key = vnode.key;
-      if (isDef(key)) {
-        if (seenKeys[key]) {
-          warn(
-            ("Duplicate keys detected: '" + key + "'. This may cause an update error."),
-            vnode.context
-          );
-        } else {
-          seenKeys[key] = true;
-        }
-      }
-    }
-  }
-
-  function findIdxInOld (node, oldCh, start, end) {
-    for (var i = start; i < end; i++) {
-      var c = oldCh[i];
-      if (isDef(c) && sameVnode(node, c)) { return i }
-    }
-  }
-
-  function patchVnode (oldVnode, vnode, insertedVnodeQueue, removeOnly) {
-    if (oldVnode === vnode) {
-      return
-    }
-
-    var elm = vnode.elm = oldVnode.elm;
-
-    if (isTrue(oldVnode.isAsyncPlaceholder)) {
-      if (isDef(vnode.asyncFactory.resolved)) {
-        hydrate(oldVnode.elm, vnode, insertedVnodeQueue);
-      } else {
-        vnode.isAsyncPlaceholder = true;
-      }
-      return
-    }
-
-    // reuse element for static trees.
-    // note we only do this if the vnode is cloned -
-    // if the new node is not cloned it means the render functions have been
-    // reset by the hot-reload-api and we need to do a proper re-render.
-    if (isTrue(vnode.isStatic) &&
-      isTrue(oldVnode.isStatic) &&
-      vnode.key === oldVnode.key &&
-      (isTrue(vnode.isCloned) || isTrue(vnode.isOnce))
-    ) {
-      vnode.componentInstance = oldVnode.componentInstance;
-      return
-    }
-
-    var i;
-    var data = vnode.data;
-    if (isDef(data) && isDef(i = data.hook) && isDef(i = i.prepatch)) {
-      i(oldVnode, vnode);
-    }
-
-    var oldCh = oldVnode.children;
-    var ch = vnode.children;
-    if (isDef(data) && isPatchable(vnode)) {
-      for (i = 0; i < cbs.update.length; ++i) { cbs.update[i](oldVnode, vnode); }
-      if (isDef(i = data.hook) && isDef(i = i.update)) { i(oldVnode, vnode); }
-    }
-    if (isUndef(vnode.text)) {
-      if (isDef(oldCh) && isDef(ch)) {
-        if (oldCh !== ch) { updateChildren(elm, oldCh, ch, insertedVnodeQueue, removeOnly); }
-      } else if (isDef(ch)) {
-        if (isDef(oldVnode.text)) { nodeOps.setTextContent(elm, ''); }
-        addVnodes(elm, null, ch, 0, ch.length - 1, insertedVnodeQueue);
-      } else if (isDef(oldCh)) {
-        removeVnodes(elm, oldCh, 0, oldCh.length - 1);
-      } else if (isDef(oldVnode.text)) {
-        nodeOps.setTextContent(elm, '');
-      }
-    } else if (oldVnode.text !== vnode.text) {
-      nodeOps.setTextContent(elm, vnode.text);
-    }
-    if (isDef(data)) {
-      if (isDef(i = data.hook) && isDef(i = i.postpatch)) { i(oldVnode, vnode); }
-    }
-  }
-
-  function invokeInsertHook (vnode, queue, initial) {
-    // delay insert hooks for component root nodes, invoke them after the
-    // element is really inserted
-    if (isTrue(initial) && isDef(vnode.parent)) {
-      vnode.parent.data.pendingInsert = queue;
-    } else {
-      for (var i = 0; i < queue.length; ++i) {
-        queue[i].data.hook.insert(queue[i]);
-      }
-    }
-  }
-
-  var hydrationBailed = false;
-  // list of modules that can skip create hook during hydration because they
-  // are already rendered on the client or has no need for initialization
-  // Note: style is excluded because it relies on initial clone for future
-  // deep updates (#7063).
-  var isRenderedModule = makeMap('attrs,class,staticClass,staticStyle,key');
-
-  // Note: this is a browser-only function so we can assume elms are DOM nodes.
-  function hydrate (elm, vnode, insertedVnodeQueue, inVPre) {
-    var i;
-    var tag = vnode.tag;
-    var data = vnode.data;
-    var children = vnode.children;
-    inVPre = inVPre || (data && data.pre);
-    vnode.elm = elm;
-
-    if (isTrue(vnode.isComment) && isDef(vnode.asyncFactory)) {
-      vnode.isAsyncPlaceholder = true;
-      return true
-    }
-    // assert node match
-    if (false) {
-      if (!assertNodeMatch(elm, vnode, inVPre)) {
-        return false
-      }
-    }
-    if (isDef(data)) {
-      if (isDef(i = data.hook) && isDef(i = i.init)) { i(vnode, true /* hydrating */); }
-      if (isDef(i = vnode.componentInstance)) {
-        // child component. it should have hydrated its own tree.
-        initComponent(vnode, insertedVnodeQueue);
-        return true
-      }
-    }
-    if (isDef(tag)) {
-      if (isDef(children)) {
-        // empty element, allow client to pick up and populate children
-        if (!elm.hasChildNodes()) {
-          createChildren(vnode, children, insertedVnodeQueue);
-        } else {
-          // v-html and domProps: innerHTML
-          if (isDef(i = data) && isDef(i = i.domProps) && isDef(i = i.innerHTML)) {
-            if (i !== elm.innerHTML) {
-              /* istanbul ignore if */
-              if (false
-              ) {
-                hydrationBailed = true;
-                console.warn('Parent: ', elm);
-                console.warn('server innerHTML: ', i);
-                console.warn('client innerHTML: ', elm.innerHTML);
-              }
-              return false
-            }
-          } else {
-            // iterate and compare children lists
-            var childrenMatch = true;
-            var childNode = elm.firstChild;
-            for (var i$1 = 0; i$1 < children.length; i$1++) {
-              if (!childNode || !hydrate(childNode, children[i$1], insertedVnodeQueue, inVPre)) {
-                childrenMatch = false;
-                break
-              }
-              childNode = childNode.nextSibling;
-            }
-            // if childNode is not null, it means the actual childNodes list is
-            // longer than the virtual children list.
-            if (!childrenMatch || childNode) {
-              /* istanbul ignore if */
-              if (false
-              ) {
-                hydrationBailed = true;
-                console.warn('Parent: ', elm);
-                console.warn('Mismatching childNodes vs. VNodes: ', elm.childNodes, children);
-              }
-              return false
-            }
-          }
-        }
-      }
-      if (isDef(data)) {
-        var fullInvoke = false;
-        for (var key in data) {
-          if (!isRenderedModule(key)) {
-            fullInvoke = true;
-            invokeCreateHooks(vnode, insertedVnodeQueue);
-            break
-          }
-        }
-        if (!fullInvoke && data['class']) {
-          // ensure collecting deps for deep class bindings for future updates
-          traverse(data['class']);
-        }
-      }
-    } else if (elm.data !== vnode.text) {
-      elm.data = vnode.text;
-    }
-    return true
-  }
-
-  function assertNodeMatch (node, vnode, inVPre) {
-    if (isDef(vnode.tag)) {
-      return vnode.tag.indexOf('vue-component') === 0 || (
-        !isUnknownElement$$1(vnode, inVPre) &&
-        vnode.tag.toLowerCase() === (node.tagName && node.tagName.toLowerCase())
-      )
-    } else {
-      return node.nodeType === (vnode.isComment ? 8 : 3)
-    }
-  }
-
-  return function patch (oldVnode, vnode, hydrating, removeOnly, parentElm, refElm) {
-    if (isUndef(vnode)) {
-      if (isDef(oldVnode)) { invokeDestroyHook(oldVnode); }
-      return
-    }
-
-    var isInitialPatch = false;
-    var insertedVnodeQueue = [];
-
-    if (isUndef(oldVnode)) {
-      // empty mount (likely as component), create new root element
-      isInitialPatch = true;
-      createElm(vnode, insertedVnodeQueue, parentElm, refElm);
-    } else {
-      var isRealElement = isDef(oldVnode.nodeType);
-      if (!isRealElement && sameVnode(oldVnode, vnode)) {
-        // patch existing root node
-        patchVnode(oldVnode, vnode, insertedVnodeQueue, removeOnly);
-      } else {
-        if (isRealElement) {
-          // mounting to a real element
-          // check if this is server-rendered content and if we can perform
-          // a successful hydration.
-          if (oldVnode.nodeType === 1 && oldVnode.hasAttribute(SSR_ATTR)) {
-            oldVnode.removeAttribute(SSR_ATTR);
-            hydrating = true;
-          }
-          if (isTrue(hydrating)) {
-            if (hydrate(oldVnode, vnode, insertedVnodeQueue)) {
-              invokeInsertHook(vnode, insertedVnodeQueue, true);
-              return oldVnode
-            } else if (false) {
-              warn(
-                'The client-side rendered virtual DOM tree is not matching ' +
-                'server-rendered content. This is likely caused by incorrect ' +
-                'HTML markup, for example nesting block-level elements inside ' +
-                '<p>, or missing <tbody>. Bailing hydration and performing ' +
-                'full client-side render.'
-              );
-            }
-          }
-          // either not server-rendered, or hydration failed.
-          // create an empty node and replace it
-          oldVnode = emptyNodeAt(oldVnode);
-        }
-
-        // replacing existing element
-        var oldElm = oldVnode.elm;
-        var parentElm$1 = nodeOps.parentNode(oldElm);
-
-        // create new node
-        createElm(
-          vnode,
-          insertedVnodeQueue,
-          // extremely rare edge case: do not insert if old element is in a
-          // leaving transition. Only happens when combining transition +
-          // keep-alive + HOCs. (#4590)
-          oldElm._leaveCb ? null : parentElm$1,
-          nodeOps.nextSibling(oldElm)
-        );
-
-        // update parent placeholder node element, recursively
-        if (isDef(vnode.parent)) {
-          var ancestor = vnode.parent;
-          var patchable = isPatchable(vnode);
-          while (ancestor) {
-            for (var i = 0; i < cbs.destroy.length; ++i) {
-              cbs.destroy[i](ancestor);
-            }
-            ancestor.elm = vnode.elm;
-            if (patchable) {
-              for (var i$1 = 0; i$1 < cbs.create.length; ++i$1) {
-                cbs.create[i$1](emptyNode, ancestor);
-              }
-              // #6513
-              // invoke insert hooks that may have been merged by create hooks.
-              // e.g. for directives that uses the "inserted" hook.
-              var insert = ancestor.data.hook.insert;
-              if (insert.merged) {
-                // start at index 1 to avoid re-invoking component mounted hook
-                for (var i$2 = 1; i$2 < insert.fns.length; i$2++) {
-                  insert.fns[i$2]();
-                }
-              }
-            } else {
-              registerRef(ancestor);
-            }
-            ancestor = ancestor.parent;
-          }
-        }
-
-        // destroy old node
-        if (isDef(parentElm$1)) {
-          removeVnodes(parentElm$1, [oldVnode], 0, 0);
-        } else if (isDef(oldVnode.tag)) {
-          invokeDestroyHook(oldVnode);
-        }
-      }
-    }
-
-    invokeInsertHook(vnode, insertedVnodeQueue, isInitialPatch);
-    return vnode.elm
-  }
-}
-
-/*  */
-
-var directives = {
-  create: updateDirectives,
-  update: updateDirectives,
-  destroy: function unbindDirectives (vnode) {
-    updateDirectives(vnode, emptyNode);
-  }
-};
-
-function updateDirectives (oldVnode, vnode) {
-  if (oldVnode.data.directives || vnode.data.directives) {
-    _update(oldVnode, vnode);
-  }
-}
-
-function _update (oldVnode, vnode) {
-  var isCreate = oldVnode === emptyNode;
-  var isDestroy = vnode === emptyNode;
-  var oldDirs = normalizeDirectives$1(oldVnode.data.directives, oldVnode.context);
-  var newDirs = normalizeDirectives$1(vnode.data.directives, vnode.context);
-
-  var dirsWithInsert = [];
-  var dirsWithPostpatch = [];
-
-  var key, oldDir, dir;
-  for (key in newDirs) {
-    oldDir = oldDirs[key];
-    dir = newDirs[key];
-    if (!oldDir) {
-      // new directive, bind
-      callHook$1(dir, 'bind', vnode, oldVnode);
-      if (dir.def && dir.def.inserted) {
-        dirsWithInsert.push(dir);
-      }
-    } else {
-      // existing directive, update
-      dir.oldValue = oldDir.value;
-      callHook$1(dir, 'update', vnode, oldVnode);
-      if (dir.def && dir.def.componentUpdated) {
-        dirsWithPostpatch.push(dir);
-      }
-    }
-  }
-
-  if (dirsWithInsert.length) {
-    var callInsert = function () {
-      for (var i = 0; i < dirsWithInsert.length; i++) {
-        callHook$1(dirsWithInsert[i], 'inserted', vnode, oldVnode);
-      }
-    };
-    if (isCreate) {
-      mergeVNodeHook(vnode, 'insert', callInsert);
-    } else {
-      callInsert();
-    }
-  }
-
-  if (dirsWithPostpatch.length) {
-    mergeVNodeHook(vnode, 'postpatch', function () {
-      for (var i = 0; i < dirsWithPostpatch.length; i++) {
-        callHook$1(dirsWithPostpatch[i], 'componentUpdated', vnode, oldVnode);
-      }
-    });
-  }
-
-  if (!isCreate) {
-    for (key in oldDirs) {
-      if (!newDirs[key]) {
-        // no longer present, unbind
-        callHook$1(oldDirs[key], 'unbind', oldVnode, oldVnode, isDestroy);
-      }
-    }
-  }
-}
-
-var emptyModifiers = Object.create(null);
-
-function normalizeDirectives$1 (
-  dirs,
-  vm
-) {
-  var res = Object.create(null);
-  if (!dirs) {
-    // $flow-disable-line
-    return res
-  }
-  var i, dir;
-  for (i = 0; i < dirs.length; i++) {
-    dir = dirs[i];
-    if (!dir.modifiers) {
-      // $flow-disable-line
-      dir.modifiers = emptyModifiers;
-    }
-    res[getRawDirName(dir)] = dir;
-    dir.def = resolveAsset(vm.$options, 'directives', dir.name, true);
-  }
-  // $flow-disable-line
-  return res
-}
-
-function getRawDirName (dir) {
-  return dir.rawName || ((dir.name) + "." + (Object.keys(dir.modifiers || {}).join('.')))
-}
-
-function callHook$1 (dir, hook, vnode, oldVnode, isDestroy) {
-  var fn = dir.def && dir.def[hook];
-  if (fn) {
-    try {
-      fn(vnode.elm, dir, vnode, oldVnode, isDestroy);
-    } catch (e) {
-      handleError(e, vnode.context, ("directive " + (dir.name) + " " + hook + " hook"));
-    }
-  }
-}
-
-var baseModules = [
-  ref,
-  directives
-];
-
-/*  */
-
-function updateAttrs (oldVnode, vnode) {
-  var opts = vnode.componentOptions;
-  if (isDef(opts) && opts.Ctor.options.inheritAttrs === false) {
-    return
-  }
-  if (isUndef(oldVnode.data.attrs) && isUndef(vnode.data.attrs)) {
-    return
-  }
-  var key, cur, old;
-  var elm = vnode.elm;
-  var oldAttrs = oldVnode.data.attrs || {};
-  var attrs = vnode.data.attrs || {};
-  // clone observed objects, as the user probably wants to mutate it
-  if (isDef(attrs.__ob__)) {
-    attrs = vnode.data.attrs = extend({}, attrs);
-  }
-
-  for (key in attrs) {
-    cur = attrs[key];
-    old = oldAttrs[key];
-    if (old !== cur) {
-      setAttr(elm, key, cur);
-    }
-  }
-  // #4391: in IE9, setting type can reset value for input[type=radio]
-  // #6666: IE/Edge forces progress value down to 1 before setting a max
-  /* istanbul ignore if */
-  if ((isIE || isEdge) && attrs.value !== oldAttrs.value) {
-    setAttr(elm, 'value', attrs.value);
-  }
-  for (key in oldAttrs) {
-    if (isUndef(attrs[key])) {
-      if (isXlink(key)) {
-        elm.removeAttributeNS(xlinkNS, getXlinkProp(key));
-      } else if (!isEnumeratedAttr(key)) {
-        elm.removeAttribute(key);
-      }
-    }
-  }
-}
-
-function setAttr (el, key, value) {
-  if (isBooleanAttr(key)) {
-    // set attribute for blank value
-    // e.g. <option disabled>Select one</option>
-    if (isFalsyAttrValue(value)) {
-      el.removeAttribute(key);
-    } else {
-      // technically allowfullscreen is a boolean attribute for <iframe>,
-      // but Flash expects a value of "true" when used on <embed> tag
-      value = key === 'allowfullscreen' && el.tagName === 'EMBED'
-        ? 'true'
-        : key;
-      el.setAttribute(key, value);
-    }
-  } else if (isEnumeratedAttr(key)) {
-    el.setAttribute(key, isFalsyAttrValue(value) || value === 'false' ? 'false' : 'true');
-  } else if (isXlink(key)) {
-    if (isFalsyAttrValue(value)) {
-      el.removeAttributeNS(xlinkNS, getXlinkProp(key));
-    } else {
-      el.setAttributeNS(xlinkNS, key, value);
-    }
-  } else {
-    if (isFalsyAttrValue(value)) {
-      el.removeAttribute(key);
-    } else {
-      // #7138: IE10 & 11 fires input event when setting placeholder on
-      // <textarea>... block the first input event and remove the blocker
-      // immediately.
-      /* istanbul ignore if */
-      if (
-        isIE && !isIE9 &&
-        el.tagName === 'TEXTAREA' &&
-        key === 'placeholder' && !el.__ieph
-      ) {
-        var blocker = function (e) {
-          e.stopImmediatePropagation();
-          el.removeEventListener('input', blocker);
-        };
-        el.addEventListener('input', blocker);
-        // $flow-disable-line
-        el.__ieph = true; /* IE placeholder patched */
-      }
-      el.setAttribute(key, value);
-    }
-  }
-}
-
-var attrs = {
-  create: updateAttrs,
-  update: updateAttrs
-};
-
-/*  */
-
-function updateClass (oldVnode, vnode) {
-  var el = vnode.elm;
-  var data = vnode.data;
-  var oldData = oldVnode.data;
-  if (
-    isUndef(data.staticClass) &&
-    isUndef(data.class) && (
-      isUndef(oldData) || (
-        isUndef(oldData.staticClass) &&
-        isUndef(oldData.class)
-      )
-    )
-  ) {
-    return
-  }
-
-  var cls = genClassForVnode(vnode);
-
-  // handle transition classes
-  var transitionClass = el._transitionClasses;
-  if (isDef(transitionClass)) {
-    cls = concat(cls, stringifyClass(transitionClass));
-  }
-
-  // set the class
-  if (cls !== el._prevClass) {
-    el.setAttribute('class', cls);
-    el._prevClass = cls;
-  }
-}
-
-var klass = {
-  create: updateClass,
-  update: updateClass
-};
-
-/*  */
-
-/*  */
-
-
-
-
-
-
-
-
-
-// add a raw attr (use this in preTransforms)
-
-
-
-
-
-
-
-
-// note: this only removes the attr from the Array (attrsList) so that it
-// doesn't get processed by processAttrs.
-// By default it does NOT remove it from the map (attrsMap) because the map is
-// needed during codegen.
-
-/*  */
-
-/**
- * Cross-platform code generation for component v-model
- */
-
-
-/**
- * Cross-platform codegen helper for generating v-model value assignment code.
- */
-
-/*  */
-
-// in some cases, the event used has to be determined at runtime
-// so we used some reserved tokens during compile.
-var RANGE_TOKEN = '__r';
-var CHECKBOX_RADIO_TOKEN = '__c';
-
-/*  */
-
-// normalize v-model event tokens that can only be determined at runtime.
-// it's important to place the event as the first in the array because
-// the whole point is ensuring the v-model callback gets called before
-// user-attached handlers.
-function normalizeEvents (on) {
-  /* istanbul ignore if */
-  if (isDef(on[RANGE_TOKEN])) {
-    // IE input[type=range] only supports `change` event
-    var event = isIE ? 'change' : 'input';
-    on[event] = [].concat(on[RANGE_TOKEN], on[event] || []);
-    delete on[RANGE_TOKEN];
-  }
-  // This was originally intended to fix #4521 but no longer necessary
-  // after 2.5. Keeping it for backwards compat with generated code from < 2.4
-  /* istanbul ignore if */
-  if (isDef(on[CHECKBOX_RADIO_TOKEN])) {
-    on.change = [].concat(on[CHECKBOX_RADIO_TOKEN], on.change || []);
-    delete on[CHECKBOX_RADIO_TOKEN];
-  }
-}
-
-var target$1;
-
-function createOnceHandler (handler, event, capture) {
-  var _target = target$1; // save current target element in closure
-  return function onceHandler () {
-    var res = handler.apply(null, arguments);
-    if (res !== null) {
-      remove$2(event, onceHandler, capture, _target);
-    }
-  }
-}
-
-function add$1 (
-  event,
-  handler,
-  once$$1,
-  capture,
-  passive
-) {
-  handler = withMacroTask(handler);
-  if (once$$1) { handler = createOnceHandler(handler, event, capture); }
-  target$1.addEventListener(
-    event,
-    handler,
-    supportsPassive
-      ? { capture: capture, passive: passive }
-      : capture
-  );
-}
-
-function remove$2 (
-  event,
-  handler,
-  capture,
-  _target
-) {
-  (_target || target$1).removeEventListener(
-    event,
-    handler._withTask || handler,
-    capture
-  );
-}
-
-function updateDOMListeners (oldVnode, vnode) {
-  if (isUndef(oldVnode.data.on) && isUndef(vnode.data.on)) {
-    return
-  }
-  var on = vnode.data.on || {};
-  var oldOn = oldVnode.data.on || {};
-  target$1 = vnode.elm;
-  normalizeEvents(on);
-  updateListeners(on, oldOn, add$1, remove$2, vnode.context);
-  target$1 = undefined;
-}
-
-var events = {
-  create: updateDOMListeners,
-  update: updateDOMListeners
-};
-
-/*  */
-
-function updateDOMProps (oldVnode, vnode) {
-  if (isUndef(oldVnode.data.domProps) && isUndef(vnode.data.domProps)) {
-    return
-  }
-  var key, cur;
-  var elm = vnode.elm;
-  var oldProps = oldVnode.data.domProps || {};
-  var props = vnode.data.domProps || {};
-  // clone observed objects, as the user probably wants to mutate it
-  if (isDef(props.__ob__)) {
-    props = vnode.data.domProps = extend({}, props);
-  }
-
-  for (key in oldProps) {
-    if (isUndef(props[key])) {
-      elm[key] = '';
-    }
-  }
-  for (key in props) {
-    cur = props[key];
-    // ignore children if the node has textContent or innerHTML,
-    // as these will throw away existing DOM nodes and cause removal errors
-    // on subsequent patches (#3360)
-    if (key === 'textContent' || key === 'innerHTML') {
-      if (vnode.children) { vnode.children.length = 0; }
-      if (cur === oldProps[key]) { continue }
-      // #6601 work around Chrome version <= 55 bug where single textNode
-      // replaced by innerHTML/textContent retains its parentNode property
-      if (elm.childNodes.length === 1) {
-        elm.removeChild(elm.childNodes[0]);
-      }
-    }
-
-    if (key === 'value') {
-      // store value as _value as well since
-      // non-string values will be stringified
-      elm._value = cur;
-      // avoid resetting cursor position when value is the same
-      var strCur = isUndef(cur) ? '' : String(cur);
-      if (shouldUpdateValue(elm, strCur)) {
-        elm.value = strCur;
-      }
-    } else {
-      elm[key] = cur;
-    }
-  }
-}
-
-// check platforms/web/util/attrs.js acceptValue
-
-
-function shouldUpdateValue (elm, checkVal) {
-  return (!elm.composing && (
-    elm.tagName === 'OPTION' ||
-    isNotInFocusAndDirty(elm, checkVal) ||
-    isDirtyWithModifiers(elm, checkVal)
-  ))
-}
-
-function isNotInFocusAndDirty (elm, checkVal) {
-  // return true when textbox (.number and .trim) loses focus and its value is
-  // not equal to the updated value
-  var notInFocus = true;
-  // #6157
-  // work around IE bug when accessing document.activeElement in an iframe
-  try { notInFocus = document.activeElement !== elm; } catch (e) {}
-  return notInFocus && elm.value !== checkVal
-}
-
-function isDirtyWithModifiers (elm, newVal) {
-  var value = elm.value;
-  var modifiers = elm._vModifiers; // injected by v-model runtime
-  if (isDef(modifiers)) {
-    if (modifiers.lazy) {
-      // inputs with lazy should only be updated when not in focus
-      return false
-    }
-    if (modifiers.number) {
-      return toNumber(value) !== toNumber(newVal)
-    }
-    if (modifiers.trim) {
-      return value.trim() !== newVal.trim()
-    }
-  }
-  return value !== newVal
-}
-
-var domProps = {
-  create: updateDOMProps,
-  update: updateDOMProps
-};
-
-/*  */
-
-var parseStyleText = cached(function (cssText) {
-  var res = {};
-  var listDelimiter = /;(?![^(]*\))/g;
-  var propertyDelimiter = /:(.+)/;
-  cssText.split(listDelimiter).forEach(function (item) {
-    if (item) {
-      var tmp = item.split(propertyDelimiter);
-      tmp.length > 1 && (res[tmp[0].trim()] = tmp[1].trim());
-    }
-  });
-  return res
-});
-
-// merge static and dynamic style data on the same vnode
-function normalizeStyleData (data) {
-  var style = normalizeStyleBinding(data.style);
-  // static style is pre-processed into an object during compilation
-  // and is always a fresh object, so it's safe to merge into it
-  return data.staticStyle
-    ? extend(data.staticStyle, style)
-    : style
-}
-
-// normalize possible array / string values into Object
-function normalizeStyleBinding (bindingStyle) {
-  if (Array.isArray(bindingStyle)) {
-    return toObject(bindingStyle)
-  }
-  if (typeof bindingStyle === 'string') {
-    return parseStyleText(bindingStyle)
-  }
-  return bindingStyle
-}
-
-/**
- * parent component style should be after child's
- * so that parent component's style could override it
- */
-function getStyle (vnode, checkChild) {
-  var res = {};
-  var styleData;
-
-  if (checkChild) {
-    var childNode = vnode;
-    while (childNode.componentInstance) {
-      childNode = childNode.componentInstance._vnode;
-      if (
-        childNode && childNode.data &&
-        (styleData = normalizeStyleData(childNode.data))
-      ) {
-        extend(res, styleData);
-      }
-    }
-  }
-
-  if ((styleData = normalizeStyleData(vnode.data))) {
-    extend(res, styleData);
-  }
-
-  var parentNode = vnode;
-  while ((parentNode = parentNode.parent)) {
-    if (parentNode.data && (styleData = normalizeStyleData(parentNode.data))) {
-      extend(res, styleData);
-    }
-  }
-  return res
-}
-
-/*  */
-
-var cssVarRE = /^--/;
-var importantRE = /\s*!important$/;
-var setProp = function (el, name, val) {
-  /* istanbul ignore if */
-  if (cssVarRE.test(name)) {
-    el.style.setProperty(name, val);
-  } else if (importantRE.test(val)) {
-    el.style.setProperty(name, val.replace(importantRE, ''), 'important');
-  } else {
-    var normalizedName = normalize(name);
-    if (Array.isArray(val)) {
-      // Support values array created by autoprefixer, e.g.
-      // {display: ["-webkit-box", "-ms-flexbox", "flex"]}
-      // Set them one by one, and the browser will only set those it can recognize
-      for (var i = 0, len = val.length; i < len; i++) {
-        el.style[normalizedName] = val[i];
-      }
-    } else {
-      el.style[normalizedName] = val;
-    }
-  }
-};
-
-var vendorNames = ['Webkit', 'Moz', 'ms'];
-
-var emptyStyle;
-var normalize = cached(function (prop) {
-  emptyStyle = emptyStyle || document.createElement('div').style;
-  prop = camelize(prop);
-  if (prop !== 'filter' && (prop in emptyStyle)) {
-    return prop
-  }
-  var capName = prop.charAt(0).toUpperCase() + prop.slice(1);
-  for (var i = 0; i < vendorNames.length; i++) {
-    var name = vendorNames[i] + capName;
-    if (name in emptyStyle) {
-      return name
-    }
-  }
-});
-
-function updateStyle (oldVnode, vnode) {
-  var data = vnode.data;
-  var oldData = oldVnode.data;
-
-  if (isUndef(data.staticStyle) && isUndef(data.style) &&
-    isUndef(oldData.staticStyle) && isUndef(oldData.style)
-  ) {
-    return
-  }
-
-  var cur, name;
-  var el = vnode.elm;
-  var oldStaticStyle = oldData.staticStyle;
-  var oldStyleBinding = oldData.normalizedStyle || oldData.style || {};
-
-  // if static style exists, stylebinding already merged into it when doing normalizeStyleData
-  var oldStyle = oldStaticStyle || oldStyleBinding;
-
-  var style = normalizeStyleBinding(vnode.data.style) || {};
-
-  // store normalized style under a different key for next diff
-  // make sure to clone it if it's reactive, since the user likely wants
-  // to mutate it.
-  vnode.data.normalizedStyle = isDef(style.__ob__)
-    ? extend({}, style)
-    : style;
-
-  var newStyle = getStyle(vnode, true);
-
-  for (name in oldStyle) {
-    if (isUndef(newStyle[name])) {
-      setProp(el, name, '');
-    }
-  }
-  for (name in newStyle) {
-    cur = newStyle[name];
-    if (cur !== oldStyle[name]) {
-      // ie9 setting to null has no effect, must use empty string
-      setProp(el, name, cur == null ? '' : cur);
-    }
-  }
-}
-
-var style = {
-  create: updateStyle,
-  update: updateStyle
-};
-
-/*  */
-
-/**
- * Add class with compatibility for SVG since classList is not supported on
- * SVG elements in IE
- */
-function addClass (el, cls) {
-  /* istanbul ignore if */
-  if (!cls || !(cls = cls.trim())) {
-    return
-  }
-
-  /* istanbul ignore else */
-  if (el.classList) {
-    if (cls.indexOf(' ') > -1) {
-      cls.split(/\s+/).forEach(function (c) { return el.classList.add(c); });
-    } else {
-      el.classList.add(cls);
-    }
-  } else {
-    var cur = " " + (el.getAttribute('class') || '') + " ";
-    if (cur.indexOf(' ' + cls + ' ') < 0) {
-      el.setAttribute('class', (cur + cls).trim());
-    }
-  }
-}
-
-/**
- * Remove class with compatibility for SVG since classList is not supported on
- * SVG elements in IE
- */
-function removeClass (el, cls) {
-  /* istanbul ignore if */
-  if (!cls || !(cls = cls.trim())) {
-    return
-  }
-
-  /* istanbul ignore else */
-  if (el.classList) {
-    if (cls.indexOf(' ') > -1) {
-      cls.split(/\s+/).forEach(function (c) { return el.classList.remove(c); });
-    } else {
-      el.classList.remove(cls);
-    }
-    if (!el.classList.length) {
-      el.removeAttribute('class');
-    }
-  } else {
-    var cur = " " + (el.getAttribute('class') || '') + " ";
-    var tar = ' ' + cls + ' ';
-    while (cur.indexOf(tar) >= 0) {
-      cur = cur.replace(tar, ' ');
-    }
-    cur = cur.trim();
-    if (cur) {
-      el.setAttribute('class', cur);
-    } else {
-      el.removeAttribute('class');
-    }
-  }
-}
-
-/*  */
-
-function resolveTransition (def) {
-  if (!def) {
-    return
-  }
-  /* istanbul ignore else */
-  if (typeof def === 'object') {
-    var res = {};
-    if (def.css !== false) {
-      extend(res, autoCssTransition(def.name || 'v'));
-    }
-    extend(res, def);
-    return res
-  } else if (typeof def === 'string') {
-    return autoCssTransition(def)
-  }
-}
-
-var autoCssTransition = cached(function (name) {
-  return {
-    enterClass: (name + "-enter"),
-    enterToClass: (name + "-enter-to"),
-    enterActiveClass: (name + "-enter-active"),
-    leaveClass: (name + "-leave"),
-    leaveToClass: (name + "-leave-to"),
-    leaveActiveClass: (name + "-leave-active")
-  }
-});
-
-var hasTransition = inBrowser && !isIE9;
-var TRANSITION = 'transition';
-var ANIMATION = 'animation';
-
-// Transition property/event sniffing
-var transitionProp = 'transition';
-var transitionEndEvent = 'transitionend';
-var animationProp = 'animation';
-var animationEndEvent = 'animationend';
-if (hasTransition) {
-  /* istanbul ignore if */
-  if (window.ontransitionend === undefined &&
-    window.onwebkittransitionend !== undefined
-  ) {
-    transitionProp = 'WebkitTransition';
-    transitionEndEvent = 'webkitTransitionEnd';
-  }
-  if (window.onanimationend === undefined &&
-    window.onwebkitanimationend !== undefined
-  ) {
-    animationProp = 'WebkitAnimation';
-    animationEndEvent = 'webkitAnimationEnd';
-  }
-}
-
-// binding to window is necessary to make hot reload work in IE in strict mode
-var raf = inBrowser
-  ? window.requestAnimationFrame
-    ? window.requestAnimationFrame.bind(window)
-    : setTimeout
-  : /* istanbul ignore next */ function (fn) { return fn(); };
-
-function nextFrame (fn) {
-  raf(function () {
-    raf(fn);
-  });
-}
-
-function addTransitionClass (el, cls) {
-  var transitionClasses = el._transitionClasses || (el._transitionClasses = []);
-  if (transitionClasses.indexOf(cls) < 0) {
-    transitionClasses.push(cls);
-    addClass(el, cls);
-  }
-}
-
-function removeTransitionClass (el, cls) {
-  if (el._transitionClasses) {
-    remove(el._transitionClasses, cls);
-  }
-  removeClass(el, cls);
-}
-
-function whenTransitionEnds (
-  el,
-  expectedType,
-  cb
-) {
-  var ref = getTransitionInfo(el, expectedType);
-  var type = ref.type;
-  var timeout = ref.timeout;
-  var propCount = ref.propCount;
-  if (!type) { return cb() }
-  var event = type === TRANSITION ? transitionEndEvent : animationEndEvent;
-  var ended = 0;
-  var end = function () {
-    el.removeEventListener(event, onEnd);
-    cb();
-  };
-  var onEnd = function (e) {
-    if (e.target === el) {
-      if (++ended >= propCount) {
-        end();
-      }
-    }
-  };
-  setTimeout(function () {
-    if (ended < propCount) {
-      end();
-    }
-  }, timeout + 1);
-  el.addEventListener(event, onEnd);
-}
-
-var transformRE = /\b(transform|all)(,|$)/;
-
-function getTransitionInfo (el, expectedType) {
-  var styles = window.getComputedStyle(el);
-  var transitionDelays = styles[transitionProp + 'Delay'].split(', ');
-  var transitionDurations = styles[transitionProp + 'Duration'].split(', ');
-  var transitionTimeout = getTimeout(transitionDelays, transitionDurations);
-  var animationDelays = styles[animationProp + 'Delay'].split(', ');
-  var animationDurations = styles[animationProp + 'Duration'].split(', ');
-  var animationTimeout = getTimeout(animationDelays, animationDurations);
-
-  var type;
-  var timeout = 0;
-  var propCount = 0;
-  /* istanbul ignore if */
-  if (expectedType === TRANSITION) {
-    if (transitionTimeout > 0) {
-      type = TRANSITION;
-      timeout = transitionTimeout;
-      propCount = transitionDurations.length;
-    }
-  } else if (expectedType === ANIMATION) {
-    if (animationTimeout > 0) {
-      type = ANIMATION;
-      timeout = animationTimeout;
-      propCount = animationDurations.length;
-    }
-  } else {
-    timeout = Math.max(transitionTimeout, animationTimeout);
-    type = timeout > 0
-      ? transitionTimeout > animationTimeout
-        ? TRANSITION
-        : ANIMATION
-      : null;
-    propCount = type
-      ? type === TRANSITION
-        ? transitionDurations.length
-        : animationDurations.length
-      : 0;
-  }
-  var hasTransform =
-    type === TRANSITION &&
-    transformRE.test(styles[transitionProp + 'Property']);
-  return {
-    type: type,
-    timeout: timeout,
-    propCount: propCount,
-    hasTransform: hasTransform
-  }
-}
-
-function getTimeout (delays, durations) {
-  /* istanbul ignore next */
-  while (delays.length < durations.length) {
-    delays = delays.concat(delays);
-  }
-
-  return Math.max.apply(null, durations.map(function (d, i) {
-    return toMs(d) + toMs(delays[i])
-  }))
-}
-
-function toMs (s) {
-  return Number(s.slice(0, -1)) * 1000
-}
-
-/*  */
-
-function enter (vnode, toggleDisplay) {
-  var el = vnode.elm;
-
-  // call leave callback now
-  if (isDef(el._leaveCb)) {
-    el._leaveCb.cancelled = true;
-    el._leaveCb();
-  }
-
-  var data = resolveTransition(vnode.data.transition);
-  if (isUndef(data)) {
-    return
-  }
-
-  /* istanbul ignore if */
-  if (isDef(el._enterCb) || el.nodeType !== 1) {
-    return
-  }
-
-  var css = data.css;
-  var type = data.type;
-  var enterClass = data.enterClass;
-  var enterToClass = data.enterToClass;
-  var enterActiveClass = data.enterActiveClass;
-  var appearClass = data.appearClass;
-  var appearToClass = data.appearToClass;
-  var appearActiveClass = data.appearActiveClass;
-  var beforeEnter = data.beforeEnter;
-  var enter = data.enter;
-  var afterEnter = data.afterEnter;
-  var enterCancelled = data.enterCancelled;
-  var beforeAppear = data.beforeAppear;
-  var appear = data.appear;
-  var afterAppear = data.afterAppear;
-  var appearCancelled = data.appearCancelled;
-  var duration = data.duration;
-
-  // activeInstance will always be the <transition> component managing this
-  // transition. One edge case to check is when the <transition> is placed
-  // as the root node of a child component. In that case we need to check
-  // <transition>'s parent for appear check.
-  var context = activeInstance;
-  var transitionNode = activeInstance.$vnode;
-  while (transitionNode && transitionNode.parent) {
-    transitionNode = transitionNode.parent;
-    context = transitionNode.context;
-  }
-
-  var isAppear = !context._isMounted || !vnode.isRootInsert;
-
-  if (isAppear && !appear && appear !== '') {
-    return
-  }
-
-  var startClass = isAppear && appearClass
-    ? appearClass
-    : enterClass;
-  var activeClass = isAppear && appearActiveClass
-    ? appearActiveClass
-    : enterActiveClass;
-  var toClass = isAppear && appearToClass
-    ? appearToClass
-    : enterToClass;
-
-  var beforeEnterHook = isAppear
-    ? (beforeAppear || beforeEnter)
-    : beforeEnter;
-  var enterHook = isAppear
-    ? (typeof appear === 'function' ? appear : enter)
-    : enter;
-  var afterEnterHook = isAppear
-    ? (afterAppear || afterEnter)
-    : afterEnter;
-  var enterCancelledHook = isAppear
-    ? (appearCancelled || enterCancelled)
-    : enterCancelled;
-
-  var explicitEnterDuration = toNumber(
-    isObject(duration)
-      ? duration.enter
-      : duration
-  );
-
-  if (false) {
-    checkDuration(explicitEnterDuration, 'enter', vnode);
-  }
-
-  var expectsCSS = css !== false && !isIE9;
-  var userWantsControl = getHookArgumentsLength(enterHook);
-
-  var cb = el._enterCb = once(function () {
-    if (expectsCSS) {
-      removeTransitionClass(el, toClass);
-      removeTransitionClass(el, activeClass);
-    }
-    if (cb.cancelled) {
-      if (expectsCSS) {
-        removeTransitionClass(el, startClass);
-      }
-      enterCancelledHook && enterCancelledHook(el);
-    } else {
-      afterEnterHook && afterEnterHook(el);
-    }
-    el._enterCb = null;
-  });
-
-  if (!vnode.data.show) {
-    // remove pending leave element on enter by injecting an insert hook
-    mergeVNodeHook(vnode, 'insert', function () {
-      var parent = el.parentNode;
-      var pendingNode = parent && parent._pending && parent._pending[vnode.key];
-      if (pendingNode &&
-        pendingNode.tag === vnode.tag &&
-        pendingNode.elm._leaveCb
-      ) {
-        pendingNode.elm._leaveCb();
-      }
-      enterHook && enterHook(el, cb);
-    });
-  }
-
-  // start enter transition
-  beforeEnterHook && beforeEnterHook(el);
-  if (expectsCSS) {
-    addTransitionClass(el, startClass);
-    addTransitionClass(el, activeClass);
-    nextFrame(function () {
-      addTransitionClass(el, toClass);
-      removeTransitionClass(el, startClass);
-      if (!cb.cancelled && !userWantsControl) {
-        if (isValidDuration(explicitEnterDuration)) {
-          setTimeout(cb, explicitEnterDuration);
-        } else {
-          whenTransitionEnds(el, type, cb);
-        }
-      }
-    });
-  }
-
-  if (vnode.data.show) {
-    toggleDisplay && toggleDisplay();
-    enterHook && enterHook(el, cb);
-  }
-
-  if (!expectsCSS && !userWantsControl) {
-    cb();
-  }
-}
-
-function leave (vnode, rm) {
-  var el = vnode.elm;
-
-  // call enter callback now
-  if (isDef(el._enterCb)) {
-    el._enterCb.cancelled = true;
-    el._enterCb();
-  }
-
-  var data = resolveTransition(vnode.data.transition);
-  if (isUndef(data) || el.nodeType !== 1) {
-    return rm()
-  }
-
-  /* istanbul ignore if */
-  if (isDef(el._leaveCb)) {
-    return
-  }
-
-  var css = data.css;
-  var type = data.type;
-  var leaveClass = data.leaveClass;
-  var leaveToClass = data.leaveToClass;
-  var leaveActiveClass = data.leaveActiveClass;
-  var beforeLeave = data.beforeLeave;
-  var leave = data.leave;
-  var afterLeave = data.afterLeave;
-  var leaveCancelled = data.leaveCancelled;
-  var delayLeave = data.delayLeave;
-  var duration = data.duration;
-
-  var expectsCSS = css !== false && !isIE9;
-  var userWantsControl = getHookArgumentsLength(leave);
-
-  var explicitLeaveDuration = toNumber(
-    isObject(duration)
-      ? duration.leave
-      : duration
-  );
-
-  if (false) {
-    checkDuration(explicitLeaveDuration, 'leave', vnode);
-  }
-
-  var cb = el._leaveCb = once(function () {
-    if (el.parentNode && el.parentNode._pending) {
-      el.parentNode._pending[vnode.key] = null;
-    }
-    if (expectsCSS) {
-      removeTransitionClass(el, leaveToClass);
-      removeTransitionClass(el, leaveActiveClass);
-    }
-    if (cb.cancelled) {
-      if (expectsCSS) {
-        removeTransitionClass(el, leaveClass);
-      }
-      leaveCancelled && leaveCancelled(el);
-    } else {
-      rm();
-      afterLeave && afterLeave(el);
-    }
-    el._leaveCb = null;
-  });
-
-  if (delayLeave) {
-    delayLeave(performLeave);
-  } else {
-    performLeave();
-  }
-
-  function performLeave () {
-    // the delayed leave may have already been cancelled
-    if (cb.cancelled) {
-      return
-    }
-    // record leaving element
-    if (!vnode.data.show) {
-      (el.parentNode._pending || (el.parentNode._pending = {}))[(vnode.key)] = vnode;
-    }
-    beforeLeave && beforeLeave(el);
-    if (expectsCSS) {
-      addTransitionClass(el, leaveClass);
-      addTransitionClass(el, leaveActiveClass);
-      nextFrame(function () {
-        addTransitionClass(el, leaveToClass);
-        removeTransitionClass(el, leaveClass);
-        if (!cb.cancelled && !userWantsControl) {
-          if (isValidDuration(explicitLeaveDuration)) {
-            setTimeout(cb, explicitLeaveDuration);
-          } else {
-            whenTransitionEnds(el, type, cb);
-          }
-        }
-      });
-    }
-    leave && leave(el, cb);
-    if (!expectsCSS && !userWantsControl) {
-      cb();
-    }
-  }
-}
-
-// only used in dev mode
-function checkDuration (val, name, vnode) {
-  if (typeof val !== 'number') {
-    warn(
-      "<transition> explicit " + name + " duration is not a valid number - " +
-      "got " + (JSON.stringify(val)) + ".",
-      vnode.context
-    );
-  } else if (isNaN(val)) {
-    warn(
-      "<transition> explicit " + name + " duration is NaN - " +
-      'the duration expression might be incorrect.',
-      vnode.context
-    );
-  }
-}
-
-function isValidDuration (val) {
-  return typeof val === 'number' && !isNaN(val)
-}
-
-/**
- * Normalize a transition hook's argument length. The hook may be:
- * - a merged hook (invoker) with the original in .fns
- * - a wrapped component method (check ._length)
- * - a plain function (.length)
- */
-function getHookArgumentsLength (fn) {
-  if (isUndef(fn)) {
-    return false
-  }
-  var invokerFns = fn.fns;
-  if (isDef(invokerFns)) {
-    // invoker
-    return getHookArgumentsLength(
-      Array.isArray(invokerFns)
-        ? invokerFns[0]
-        : invokerFns
-    )
-  } else {
-    return (fn._length || fn.length) > 1
-  }
-}
-
-function _enter (_, vnode) {
-  if (vnode.data.show !== true) {
-    enter(vnode);
-  }
-}
-
-var transition = inBrowser ? {
-  create: _enter,
-  activate: _enter,
-  remove: function remove$$1 (vnode, rm) {
-    /* istanbul ignore else */
-    if (vnode.data.show !== true) {
-      leave(vnode, rm);
-    } else {
-      rm();
-    }
-  }
-} : {};
-
-var platformModules = [
-  attrs,
-  klass,
-  events,
-  domProps,
-  style,
-  transition
-];
-
-/*  */
-
-// the directive module should be applied last, after all
-// built-in modules have been applied.
-var modules = platformModules.concat(baseModules);
-
-var patch = createPatchFunction({ nodeOps: nodeOps, modules: modules });
-
-/**
- * Not type checking this file because flow doesn't like attaching
- * properties to Elements.
- */
-
-/* istanbul ignore if */
-if (isIE9) {
-  // http://www.matts411.com/post/internet-explorer-9-oninput/
-  document.addEventListener('selectionchange', function () {
-    var el = document.activeElement;
-    if (el && el.vmodel) {
-      trigger(el, 'input');
-    }
-  });
-}
-
-var directive = {
-  inserted: function inserted (el, binding, vnode, oldVnode) {
-    if (vnode.tag === 'select') {
-      // #6903
-      if (oldVnode.elm && !oldVnode.elm._vOptions) {
-        mergeVNodeHook(vnode, 'postpatch', function () {
-          directive.componentUpdated(el, binding, vnode);
-        });
-      } else {
-        setSelected(el, binding, vnode.context);
-      }
-      el._vOptions = [].map.call(el.options, getValue);
-    } else if (vnode.tag === 'textarea' || isTextInputType(el.type)) {
-      el._vModifiers = binding.modifiers;
-      if (!binding.modifiers.lazy) {
-        // Safari < 10.2 & UIWebView doesn't fire compositionend when
-        // switching focus before confirming composition choice
-        // this also fixes the issue where some browsers e.g. iOS Chrome
-        // fires "change" instead of "input" on autocomplete.
-        el.addEventListener('change', onCompositionEnd);
-        if (!isAndroid) {
-          el.addEventListener('compositionstart', onCompositionStart);
-          el.addEventListener('compositionend', onCompositionEnd);
-        }
-        /* istanbul ignore if */
-        if (isIE9) {
-          el.vmodel = true;
-        }
-      }
-    }
-  },
-
-  componentUpdated: function componentUpdated (el, binding, vnode) {
-    if (vnode.tag === 'select') {
-      setSelected(el, binding, vnode.context);
-      // in case the options rendered by v-for have changed,
-      // it's possible that the value is out-of-sync with the rendered options.
-      // detect such cases and filter out values that no longer has a matching
-      // option in the DOM.
-      var prevOptions = el._vOptions;
-      var curOptions = el._vOptions = [].map.call(el.options, getValue);
-      if (curOptions.some(function (o, i) { return !looseEqual(o, prevOptions[i]); })) {
-        // trigger change event if
-        // no matching option found for at least one value
-        var needReset = el.multiple
-          ? binding.value.some(function (v) { return hasNoMatchingOption(v, curOptions); })
-          : binding.value !== binding.oldValue && hasNoMatchingOption(binding.value, curOptions);
-        if (needReset) {
-          trigger(el, 'change');
-        }
-      }
-    }
-  }
-};
-
-function setSelected (el, binding, vm) {
-  actuallySetSelected(el, binding, vm);
-  /* istanbul ignore if */
-  if (isIE || isEdge) {
-    setTimeout(function () {
-      actuallySetSelected(el, binding, vm);
-    }, 0);
-  }
-}
-
-function actuallySetSelected (el, binding, vm) {
-  var value = binding.value;
-  var isMultiple = el.multiple;
-  if (isMultiple && !Array.isArray(value)) {
-    "production" !== 'production' && warn(
-      "<select multiple v-model=\"" + (binding.expression) + "\"> " +
-      "expects an Array value for its binding, but got " + (Object.prototype.toString.call(value).slice(8, -1)),
-      vm
-    );
-    return
-  }
-  var selected, option;
-  for (var i = 0, l = el.options.length; i < l; i++) {
-    option = el.options[i];
-    if (isMultiple) {
-      selected = looseIndexOf(value, getValue(option)) > -1;
-      if (option.selected !== selected) {
-        option.selected = selected;
-      }
-    } else {
-      if (looseEqual(getValue(option), value)) {
-        if (el.selectedIndex !== i) {
-          el.selectedIndex = i;
-        }
-        return
-      }
-    }
-  }
-  if (!isMultiple) {
-    el.selectedIndex = -1;
-  }
-}
-
-function hasNoMatchingOption (value, options) {
-  return options.every(function (o) { return !looseEqual(o, value); })
-}
-
-function getValue (option) {
-  return '_value' in option
-    ? option._value
-    : option.value
-}
-
-function onCompositionStart (e) {
-  e.target.composing = true;
-}
-
-function onCompositionEnd (e) {
-  // prevent triggering an input event for no reason
-  if (!e.target.composing) { return }
-  e.target.composing = false;
-  trigger(e.target, 'input');
-}
-
-function trigger (el, type) {
-  var e = document.createEvent('HTMLEvents');
-  e.initEvent(type, true, true);
-  el.dispatchEvent(e);
-}
-
-/*  */
-
-// recursively search for possible transition defined inside the component root
-function locateNode (vnode) {
-  return vnode.componentInstance && (!vnode.data || !vnode.data.transition)
-    ? locateNode(vnode.componentInstance._vnode)
-    : vnode
-}
-
-var show = {
-  bind: function bind (el, ref, vnode) {
-    var value = ref.value;
-
-    vnode = locateNode(vnode);
-    var transition$$1 = vnode.data && vnode.data.transition;
-    var originalDisplay = el.__vOriginalDisplay =
-      el.style.display === 'none' ? '' : el.style.display;
-    if (value && transition$$1) {
-      vnode.data.show = true;
-      enter(vnode, function () {
-        el.style.display = originalDisplay;
-      });
-    } else {
-      el.style.display = value ? originalDisplay : 'none';
-    }
-  },
-
-  update: function update (el, ref, vnode) {
-    var value = ref.value;
-    var oldValue = ref.oldValue;
-
-    /* istanbul ignore if */
-    if (value === oldValue) { return }
-    vnode = locateNode(vnode);
-    var transition$$1 = vnode.data && vnode.data.transition;
-    if (transition$$1) {
-      vnode.data.show = true;
-      if (value) {
-        enter(vnode, function () {
-          el.style.display = el.__vOriginalDisplay;
-        });
-      } else {
-        leave(vnode, function () {
-          el.style.display = 'none';
-        });
-      }
-    } else {
-      el.style.display = value ? el.__vOriginalDisplay : 'none';
-    }
-  },
-
-  unbind: function unbind (
-    el,
-    binding,
-    vnode,
-    oldVnode,
-    isDestroy
-  ) {
-    if (!isDestroy) {
-      el.style.display = el.__vOriginalDisplay;
-    }
-  }
-};
-
-var platformDirectives = {
-  model: directive,
-  show: show
-};
-
-/*  */
-
-// Provides transition support for a single element/component.
-// supports transition mode (out-in / in-out)
-
-var transitionProps = {
-  name: String,
-  appear: Boolean,
-  css: Boolean,
-  mode: String,
-  type: String,
-  enterClass: String,
-  leaveClass: String,
-  enterToClass: String,
-  leaveToClass: String,
-  enterActiveClass: String,
-  leaveActiveClass: String,
-  appearClass: String,
-  appearActiveClass: String,
-  appearToClass: String,
-  duration: [Number, String, Object]
-};
-
-// in case the child is also an abstract component, e.g. <keep-alive>
-// we want to recursively retrieve the real component to be rendered
-function getRealChild (vnode) {
-  var compOptions = vnode && vnode.componentOptions;
-  if (compOptions && compOptions.Ctor.options.abstract) {
-    return getRealChild(getFirstComponentChild(compOptions.children))
-  } else {
-    return vnode
-  }
-}
-
-function extractTransitionData (comp) {
-  var data = {};
-  var options = comp.$options;
-  // props
-  for (var key in options.propsData) {
-    data[key] = comp[key];
-  }
-  // events.
-  // extract listeners and pass them directly to the transition methods
-  var listeners = options._parentListeners;
-  for (var key$1 in listeners) {
-    data[camelize(key$1)] = listeners[key$1];
-  }
-  return data
-}
-
-function placeholder (h, rawChild) {
-  if (/\d-keep-alive$/.test(rawChild.tag)) {
-    return h('keep-alive', {
-      props: rawChild.componentOptions.propsData
-    })
-  }
-}
-
-function hasParentTransition (vnode) {
-  while ((vnode = vnode.parent)) {
-    if (vnode.data.transition) {
-      return true
-    }
-  }
-}
-
-function isSameChild (child, oldChild) {
-  return oldChild.key === child.key && oldChild.tag === child.tag
-}
-
-var Transition = {
-  name: 'transition',
-  props: transitionProps,
-  abstract: true,
-
-  render: function render (h) {
-    var this$1 = this;
-
-    var children = this.$slots.default;
-    if (!children) {
-      return
-    }
-
-    // filter out text nodes (possible whitespaces)
-    children = children.filter(function (c) { return c.tag || isAsyncPlaceholder(c); });
-    /* istanbul ignore if */
-    if (!children.length) {
-      return
-    }
-
-    // warn multiple elements
-    if (false) {
-      warn(
-        '<transition> can only be used on a single element. Use ' +
-        '<transition-group> for lists.',
-        this.$parent
-      );
-    }
-
-    var mode = this.mode;
-
-    // warn invalid mode
-    if (false
-    ) {
-      warn(
-        'invalid <transition> mode: ' + mode,
-        this.$parent
-      );
-    }
-
-    var rawChild = children[0];
-
-    // if this is a component root node and the component's
-    // parent container node also has transition, skip.
-    if (hasParentTransition(this.$vnode)) {
-      return rawChild
-    }
-
-    // apply transition data to child
-    // use getRealChild() to ignore abstract components e.g. keep-alive
-    var child = getRealChild(rawChild);
-    /* istanbul ignore if */
-    if (!child) {
-      return rawChild
-    }
-
-    if (this._leaving) {
-      return placeholder(h, rawChild)
-    }
-
-    // ensure a key that is unique to the vnode type and to this transition
-    // component instance. This key will be used to remove pending leaving nodes
-    // during entering.
-    var id = "__transition-" + (this._uid) + "-";
-    child.key = child.key == null
-      ? child.isComment
-        ? id + 'comment'
-        : id + child.tag
-      : isPrimitive(child.key)
-        ? (String(child.key).indexOf(id) === 0 ? child.key : id + child.key)
-        : child.key;
-
-    var data = (child.data || (child.data = {})).transition = extractTransitionData(this);
-    var oldRawChild = this._vnode;
-    var oldChild = getRealChild(oldRawChild);
-
-    // mark v-show
-    // so that the transition module can hand over the control to the directive
-    if (child.data.directives && child.data.directives.some(function (d) { return d.name === 'show'; })) {
-      child.data.show = true;
-    }
-
-    if (
-      oldChild &&
-      oldChild.data &&
-      !isSameChild(child, oldChild) &&
-      !isAsyncPlaceholder(oldChild) &&
-      // #6687 component root is a comment node
-      !(oldChild.componentInstance && oldChild.componentInstance._vnode.isComment)
-    ) {
-      // replace old child transition data with fresh one
-      // important for dynamic transitions!
-      var oldData = oldChild.data.transition = extend({}, data);
-      // handle transition mode
-      if (mode === 'out-in') {
-        // return placeholder node and queue update when leave finishes
-        this._leaving = true;
-        mergeVNodeHook(oldData, 'afterLeave', function () {
-          this$1._leaving = false;
-          this$1.$forceUpdate();
-        });
-        return placeholder(h, rawChild)
-      } else if (mode === 'in-out') {
-        if (isAsyncPlaceholder(child)) {
-          return oldRawChild
-        }
-        var delayedLeave;
-        var performLeave = function () { delayedLeave(); };
-        mergeVNodeHook(data, 'afterEnter', performLeave);
-        mergeVNodeHook(data, 'enterCancelled', performLeave);
-        mergeVNodeHook(oldData, 'delayLeave', function (leave) { delayedLeave = leave; });
-      }
-    }
-
-    return rawChild
-  }
-};
-
-/*  */
-
-// Provides transition support for list items.
-// supports move transitions using the FLIP technique.
-
-// Because the vdom's children update algorithm is "unstable" - i.e.
-// it doesn't guarantee the relative positioning of removed elements,
-// we force transition-group to update its children into two passes:
-// in the first pass, we remove all nodes that need to be removed,
-// triggering their leaving transition; in the second pass, we insert/move
-// into the final desired state. This way in the second pass removed
-// nodes will remain where they should be.
-
-var props = extend({
-  tag: String,
-  moveClass: String
-}, transitionProps);
-
-delete props.mode;
-
-var TransitionGroup = {
-  props: props,
-
-  render: function render (h) {
-    var tag = this.tag || this.$vnode.data.tag || 'span';
-    var map = Object.create(null);
-    var prevChildren = this.prevChildren = this.children;
-    var rawChildren = this.$slots.default || [];
-    var children = this.children = [];
-    var transitionData = extractTransitionData(this);
-
-    for (var i = 0; i < rawChildren.length; i++) {
-      var c = rawChildren[i];
-      if (c.tag) {
-        if (c.key != null && String(c.key).indexOf('__vlist') !== 0) {
-          children.push(c);
-          map[c.key] = c
-          ;(c.data || (c.data = {})).transition = transitionData;
-        } else if (false) {
-          var opts = c.componentOptions;
-          var name = opts ? (opts.Ctor.options.name || opts.tag || '') : c.tag;
-          warn(("<transition-group> children must be keyed: <" + name + ">"));
-        }
-      }
-    }
-
-    if (prevChildren) {
-      var kept = [];
-      var removed = [];
-      for (var i$1 = 0; i$1 < prevChildren.length; i$1++) {
-        var c$1 = prevChildren[i$1];
-        c$1.data.transition = transitionData;
-        c$1.data.pos = c$1.elm.getBoundingClientRect();
-        if (map[c$1.key]) {
-          kept.push(c$1);
-        } else {
-          removed.push(c$1);
-        }
-      }
-      this.kept = h(tag, null, kept);
-      this.removed = removed;
-    }
-
-    return h(tag, null, children)
-  },
-
-  beforeUpdate: function beforeUpdate () {
-    // force removing pass
-    this.__patch__(
-      this._vnode,
-      this.kept,
-      false, // hydrating
-      true // removeOnly (!important avoids unnecessary moves)
-    );
-    this._vnode = this.kept;
-  },
-
-  updated: function updated () {
-    var children = this.prevChildren;
-    var moveClass = this.moveClass || ((this.name || 'v') + '-move');
-    if (!children.length || !this.hasMove(children[0].elm, moveClass)) {
-      return
-    }
-
-    // we divide the work into three loops to avoid mixing DOM reads and writes
-    // in each iteration - which helps prevent layout thrashing.
-    children.forEach(callPendingCbs);
-    children.forEach(recordPosition);
-    children.forEach(applyTranslation);
-
-    // force reflow to put everything in position
-    // assign to this to avoid being removed in tree-shaking
-    // $flow-disable-line
-    this._reflow = document.body.offsetHeight;
-
-    children.forEach(function (c) {
-      if (c.data.moved) {
-        var el = c.elm;
-        var s = el.style;
-        addTransitionClass(el, moveClass);
-        s.transform = s.WebkitTransform = s.transitionDuration = '';
-        el.addEventListener(transitionEndEvent, el._moveCb = function cb (e) {
-          if (!e || /transform$/.test(e.propertyName)) {
-            el.removeEventListener(transitionEndEvent, cb);
-            el._moveCb = null;
-            removeTransitionClass(el, moveClass);
-          }
-        });
-      }
-    });
-  },
-
-  methods: {
-    hasMove: function hasMove (el, moveClass) {
-      /* istanbul ignore if */
-      if (!hasTransition) {
-        return false
-      }
-      /* istanbul ignore if */
-      if (this._hasMove) {
-        return this._hasMove
-      }
-      // Detect whether an element with the move class applied has
-      // CSS transitions. Since the element may be inside an entering
-      // transition at this very moment, we make a clone of it and remove
-      // all other transition classes applied to ensure only the move class
-      // is applied.
-      var clone = el.cloneNode();
-      if (el._transitionClasses) {
-        el._transitionClasses.forEach(function (cls) { removeClass(clone, cls); });
-      }
-      addClass(clone, moveClass);
-      clone.style.display = 'none';
-      this.$el.appendChild(clone);
-      var info = getTransitionInfo(clone);
-      this.$el.removeChild(clone);
-      return (this._hasMove = info.hasTransform)
-    }
-  }
-};
-
-function callPendingCbs (c) {
-  /* istanbul ignore if */
-  if (c.elm._moveCb) {
-    c.elm._moveCb();
-  }
-  /* istanbul ignore if */
-  if (c.elm._enterCb) {
-    c.elm._enterCb();
-  }
-}
-
-function recordPosition (c) {
-  c.data.newPos = c.elm.getBoundingClientRect();
-}
-
-function applyTranslation (c) {
-  var oldPos = c.data.pos;
-  var newPos = c.data.newPos;
-  var dx = oldPos.left - newPos.left;
-  var dy = oldPos.top - newPos.top;
-  if (dx || dy) {
-    c.data.moved = true;
-    var s = c.elm.style;
-    s.transform = s.WebkitTransform = "translate(" + dx + "px," + dy + "px)";
-    s.transitionDuration = '0s';
-  }
-}
-
-var platformComponents = {
-  Transition: Transition,
-  TransitionGroup: TransitionGroup
-};
-
-/*  */
-
-// install platform specific utils
-Vue$3.config.mustUseProp = mustUseProp;
-Vue$3.config.isReservedTag = isReservedTag;
-Vue$3.config.isReservedAttr = isReservedAttr;
-Vue$3.config.getTagNamespace = getTagNamespace;
-Vue$3.config.isUnknownElement = isUnknownElement;
-
-// install platform runtime directives & components
-extend(Vue$3.options.directives, platformDirectives);
-extend(Vue$3.options.components, platformComponents);
-
-// install platform patch function
-Vue$3.prototype.__patch__ = inBrowser ? patch : noop;
-
-// public mount method
-Vue$3.prototype.$mount = function (
-  el,
-  hydrating
-) {
-  el = el && inBrowser ? query(el) : undefined;
-  return mountComponent(this, el, hydrating)
-};
-
-// devtools global hook
-/* istanbul ignore next */
-Vue$3.nextTick(function () {
-  if (config.devtools) {
-    if (devtools) {
-      devtools.emit('init', Vue$3);
-    } else if (false) {
-      console[console.info ? 'info' : 'log'](
-        'Download the Vue Devtools extension for a better development experience:\n' +
-        'https://github.com/vuejs/vue-devtools'
-      );
-    }
-  }
-  if (false
-  ) {
-    console[console.info ? 'info' : 'log'](
-      "You are running Vue in development mode.\n" +
-      "Make sure to turn on production mode when deploying for production.\n" +
-      "See more tips at https://vuejs.org/guide/deployment.html"
-    );
-  }
-}, 0);
-
-/*  */
-
-/* harmony default export */ __webpack_exports__["default"] = (Vue$3);
-
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(31).setImmediate))
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var apply = Function.prototype.apply;
-
-// DOM APIs, for completeness
-
-exports.setTimeout = function() {
-  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
-};
-exports.setInterval = function() {
-  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
-};
-exports.clearTimeout =
-exports.clearInterval = function(timeout) {
-  if (timeout) {
-    timeout.close();
-  }
-};
-
-function Timeout(id, clearFn) {
-  this._id = id;
-  this._clearFn = clearFn;
-}
-Timeout.prototype.unref = Timeout.prototype.ref = function() {};
-Timeout.prototype.close = function() {
-  this._clearFn.call(window, this._id);
-};
-
-// Does not start the time, just sets up the members needed.
-exports.enroll = function(item, msecs) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = msecs;
-};
-
-exports.unenroll = function(item) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = -1;
-};
-
-exports._unrefActive = exports.active = function(item) {
-  clearTimeout(item._idleTimeoutId);
-
-  var msecs = item._idleTimeout;
-  if (msecs >= 0) {
-    item._idleTimeoutId = setTimeout(function onTimeout() {
-      if (item._onTimeout)
-        item._onTimeout();
-    }, msecs);
-  }
-};
-
-// setimmediate attaches itself to the global object
-__webpack_require__(32);
-// On some exotic environments, it's not clear which object `setimmeidate` was
-// able to install onto.  Search each possibility in the same order as the
-// `setimmediate` library.
-exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
-                       (typeof {} !== "undefined" && {}.setImmediate) ||
-                       (this && this.setImmediate);
-exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
-                         (typeof {} !== "undefined" && {}.clearImmediate) ||
-                         (this && this.clearImmediate);
-
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(process) {(function (global, undefined) {
-    "use strict";
-
-    if (global.setImmediate) {
-        return;
-    }
-
-    var nextHandle = 1; // Spec says greater than zero
-    var tasksByHandle = {};
-    var currentlyRunningATask = false;
-    var doc = global.document;
-    var registerImmediate;
-
-    function setImmediate(callback) {
-      // Callback can either be a function or a string
-      if (typeof callback !== "function") {
-        callback = new Function("" + callback);
-      }
-      // Copy function arguments
-      var args = new Array(arguments.length - 1);
-      for (var i = 0; i < args.length; i++) {
-          args[i] = arguments[i + 1];
-      }
-      // Store and register the task
-      var task = { callback: callback, args: args };
-      tasksByHandle[nextHandle] = task;
-      registerImmediate(nextHandle);
-      return nextHandle++;
-    }
-
-    function clearImmediate(handle) {
-        delete tasksByHandle[handle];
-    }
-
-    function run(task) {
-        var callback = task.callback;
-        var args = task.args;
-        switch (args.length) {
-        case 0:
-            callback();
-            break;
-        case 1:
-            callback(args[0]);
-            break;
-        case 2:
-            callback(args[0], args[1]);
-            break;
-        case 3:
-            callback(args[0], args[1], args[2]);
-            break;
-        default:
-            callback.apply(undefined, args);
-            break;
-        }
-    }
-
-    function runIfPresent(handle) {
-        // From the spec: "Wait until any invocations of this algorithm started before this one have completed."
-        // So if we're currently running a task, we'll need to delay this invocation.
-        if (currentlyRunningATask) {
-            // Delay by doing a setTimeout. setImmediate was tried instead, but in Firefox 7 it generated a
-            // "too much recursion" error.
-            setTimeout(runIfPresent, 0, handle);
-        } else {
-            var task = tasksByHandle[handle];
-            if (task) {
-                currentlyRunningATask = true;
-                try {
-                    run(task);
-                } finally {
-                    clearImmediate(handle);
-                    currentlyRunningATask = false;
-                }
-            }
-        }
-    }
-
-    function installNextTickImplementation() {
-        registerImmediate = function(handle) {
-            process.nextTick(function () { runIfPresent(handle); });
-        };
-    }
-
-    function canUsePostMessage() {
-        // The test against `importScripts` prevents this implementation from being installed inside a web worker,
-        // where `global.postMessage` means something completely different and can't be used for this purpose.
-        if (global.postMessage && !global.importScripts) {
-            var postMessageIsAsynchronous = true;
-            var oldOnMessage = global.onmessage;
-            global.onmessage = function() {
-                postMessageIsAsynchronous = false;
-            };
-            global.postMessage("", "*");
-            global.onmessage = oldOnMessage;
-            return postMessageIsAsynchronous;
-        }
-    }
-
-    function installPostMessageImplementation() {
-        // Installs an event handler on `global` for the `message` event: see
-        // * https://developer.mozilla.org/en/DOM/window.postMessage
-        // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages
-
-        var messagePrefix = "setImmediate$" + Math.random() + "$";
-        var onGlobalMessage = function(event) {
-            if (event.source === global &&
-                typeof event.data === "string" &&
-                event.data.indexOf(messagePrefix) === 0) {
-                runIfPresent(+event.data.slice(messagePrefix.length));
-            }
-        };
-
-        if (global.addEventListener) {
-            global.addEventListener("message", onGlobalMessage, false);
-        } else {
-            global.attachEvent("onmessage", onGlobalMessage);
-        }
-
-        registerImmediate = function(handle) {
-            global.postMessage(messagePrefix + handle, "*");
-        };
-    }
-
-    function installMessageChannelImplementation() {
-        var channel = new MessageChannel();
-        channel.port1.onmessage = function(event) {
-            var handle = event.data;
-            runIfPresent(handle);
-        };
-
-        registerImmediate = function(handle) {
-            channel.port2.postMessage(handle);
-        };
-    }
-
-    function installReadyStateChangeImplementation() {
-        var html = doc.documentElement;
-        registerImmediate = function(handle) {
-            // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
-            // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
-            var script = doc.createElement("script");
-            script.onreadystatechange = function () {
-                runIfPresent(handle);
-                script.onreadystatechange = null;
-                html.removeChild(script);
-                script = null;
-            };
-            html.appendChild(script);
-        };
-    }
-
-    function installSetTimeoutImplementation() {
-        registerImmediate = function(handle) {
-            setTimeout(runIfPresent, 0, handle);
-        };
-    }
-
-    // If supported, we should attach to the prototype of global, since that is where setTimeout et al. live.
-    var attachTo = Object.getPrototypeOf && Object.getPrototypeOf(global);
-    attachTo = attachTo && attachTo.setTimeout ? attachTo : global;
-
-    // Don't get fooled by e.g. browserify environments.
-    if ({}.toString.call(global.process) === "[object process]") {
-        // For Node.js before 0.9
-        installNextTickImplementation();
-
-    } else if (canUsePostMessage()) {
-        // For non-IE10 modern browsers
-        installPostMessageImplementation();
-
-    } else if (global.MessageChannel) {
-        // For web workers, where supported
-        installMessageChannelImplementation();
-
-    } else if (doc && "onreadystatechange" in doc.createElement("script")) {
-        // For IE 6–8
-        installReadyStateChangeImplementation();
-
-    } else {
-        // For older browsers
-        installSetTimeoutImplementation();
-    }
-
-    attachTo.setImmediate = setImmediate;
-    attachTo.clearImmediate = clearImmediate;
-}(typeof self === "undefined" ? typeof {} === "undefined" ? this : {} : self));
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -9968,18 +1604,481 @@ if (false) {
 }
 
 /***/ }),
-/* 35 */
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(32);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(36)
+__webpack_require__(33)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(38),
+  __webpack_require__(35),
   /* template */
   __webpack_require__(39),
+  /* scopeId */
+  "data-v-1a0456a2",
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag-wall/index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1a0456a2", Component.options)
+  } else {
+    hotAPI.reload("data-v-1a0456a2", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(34);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("3c0e67b4", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-1a0456a2\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-1a0456a2\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.wall-wrap[data-v-1a0456a2] {\n  width: 1080px;\n}\n.title-wrap[data-v-1a0456a2] {\n  flex-direction: row;\n  padding: 27px 49px;\n  justify-content: space-between;\n}\n.title-text[data-v-1a0456a2] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 36px;\n  line-height: 54px;\n}\n.title-rightBtn[data-v-1a0456a2] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 36px;\n  line-height: 54px;\n}\n.tags-wrap[data-v-1a0456a2] {\n  flex-direction: row;\n  flex-wrap: wrap;\n  padding: 0 24px 0 48px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag-wall/index.vue?aaa8f3b6"],"names":[],"mappings":";AAsBA;EACA,cAAA;CACA;AAEA;EACA,oBAAA;EACA,mBAAA;EACA,+BAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,oBAAA;EACA,gBAAA;EACA,uBAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 2018/3/2. -->\n<template>\n  <div class=\"wall-wrap\">\n    <div class=\"title-wrap\">\n      <slot name=\"left\">\n        <text class=\"title-text\" :style=\"{ color: titleColor }\">{{ title }}</text>\n      </slot>\n      <slot name=\"right\">\n        <text class=\"title-rightBtn\" :style=\"{ color: rightColor }\" @click=\"btnClicked\">{{ rightText }}</text>\n      </slot>\n    </div>\n    <div class=\"tags-wrap\">\n      <item v-for=\"(item, index) in list\"\n            v-bind=\"Object.assign({}, customStyles, item)\"\n            :key=\"index\"\n            :index=\"index\"\n            @select=\"onSelect(index)\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .wall-wrap {\n    width: 1080px;\n  }\n\n  .title-wrap {\n    flex-direction: row;\n    padding: 27px 49px;\n    justify-content: space-between;\n  }\n\n  .title-text {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 36px;\n    line-height: 54px;\n  }\n\n  .title-rightBtn {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 36px;\n    line-height: 54px;\n  }\n\n  .tags-wrap {\n    flex-direction: row;\n    flex-wrap: wrap;\n    padding: 0 24px 0 48px;\n  }\n</style>\n\n<script>\nimport Item from './item.vue';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmTagWall',\n  mixins: [Locale],\n  components: { Item },\n  props: {\n    list: {\n      type: Array,\n      default: () => ([])\n    },\n    title: {\n      type: String,\n      default () {\n        return t('el.common.title');\n      }\n    },\n    titleColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    rightText: {\n      type: String,\n      default: ''\n    },\n    rightColor: {\n      type: String,\n      default: '#198DED'\n    },\n    customStyles: {\n      type: Object,\n      default: () => ({})\n    }\n  },\n  methods: {\n    onSelect (index) {\n      this.$emit('fmTagWallSelected', { title: this.list[index].title, index });\n    },\n    btnClicked () {\n      this.$emit('fmTagWallRightBtnClicked');\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _item = __webpack_require__(36);
+
+var _item2 = _interopRequireDefault(_item);
+
+var _locale = __webpack_require__(5);
+
+var _locale2 = _interopRequireDefault(_locale);
+
+var _locale3 = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  name: 'FmTagWall',
+  mixins: [_locale2.default],
+  components: { Item: _item2.default },
+  props: {
+    list: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    title: {
+      type: String,
+      default: function _default() {
+        return (0, _locale3.t)('el.common.title');
+      }
+    },
+    titleColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, 0.4)'
+    },
+    rightText: {
+      type: String,
+      default: ''
+    },
+    rightColor: {
+      type: String,
+      default: '#198DED'
+    },
+    customStyles: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    }
+  },
+  methods: {
+    onSelect: function onSelect(index) {
+      this.$emit('fmTagWallSelected', { title: this.list[index].title, index: index });
+    },
+    btnClicked: function btnClicked() {
+      this.$emit('fmTagWallRightBtnClicked');
+    }
+  }
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(37),
+  /* template */
+  __webpack_require__(38),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag-wall/item.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] item.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-ead85e1a", Component.options)
+  } else {
+    hotAPI.reload("data-v-ead85e1a", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+  props: {
+    index: {
+      type: Number,
+      default: -1
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    height: {
+      type: Number,
+      default: 72
+    },
+    padding: {
+      type: Number,
+      default: 30
+    },
+    borderRadius: {
+      type: Number,
+      default: 6
+    },
+    borderWidth: {
+      type: Number,
+      default: 2
+    },
+    fontSize: {
+      type: Number,
+      default: 42
+    },
+    originBorderColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, 0.08)'
+    },
+    originTitleColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, 0.6)'
+    },
+    originBackgroundColor: {
+      type: String,
+      default: '#FFFFFF'
+    },
+    color: {
+      type: String,
+      default: ''
+    },
+    backgroundColor: {
+      type: String,
+      default: ''
+    },
+    borderColor: {
+      type: String,
+      default: ''
+    },
+    lineSpacing: {
+      type: Number,
+      default: 24
+    },
+    itemSpacing: {
+      type: Number,
+      default: 24
+    }
+  },
+  computed: {
+    wrapStyle: function wrapStyle() {
+      var borderRadius = this.borderRadius,
+          height = this.height,
+          padding = this.padding,
+          borderWidth = this.borderWidth,
+          originBorderColor = this.originBorderColor,
+          originBackgroundColor = this.originBackgroundColor,
+          backgroundColor = this.backgroundColor,
+          borderColor = this.borderColor,
+          color = this.color,
+          itemSpacing = this.itemSpacing,
+          lineSpacing = this.lineSpacing;
+
+      return {
+        justifyContent: 'center',
+        borderRadius: borderRadius,
+        height: height,
+        paddingLeft: padding,
+        paddingRight: padding,
+        borderWidth: borderWidth,
+        backgroundColor: backgroundColor || originBackgroundColor,
+        borderColor: borderColor || color || originBorderColor,
+        marginRight: itemSpacing,
+        marginBottom: lineSpacing
+      };
+    },
+    titleStyle: function titleStyle() {
+      var fontSize = this.fontSize,
+          color = this.color,
+          originTitleColor = this.originTitleColor;
+
+      return {
+        fontSize: fontSize,
+        color: color || originTitleColor
+      };
+    }
+  },
+  methods: {
+    onClick: function onClick() {
+      this.$emit('select', this.index);
+    }
+  }
+};
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "wall-item",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(_vm.wrapStyle)),
+    on: {
+      "click": _vm.onClick
+    }
+  }, [_c('text', {
+    staticClass: "text-title",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(_vm.titleStyle))
+  }, [_vm._v(_vm._s(_vm.title))])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-ead85e1a", module.exports)
+  }
+}
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "wall-wrap",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_c('div', {
+    staticClass: "title-wrap",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_vm._t("left", [_c('text', {
+    staticClass: "title-text",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      color: _vm.titleColor
+    }))
+  }, [_vm._v(_vm._s(_vm.title))])]), _vm._v(" "), _vm._t("right", [_c('text', {
+    staticClass: "title-rightBtn",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      color: _vm.rightColor
+    })),
+    on: {
+      "click": _vm.btnClicked
+    }
+  }, [_vm._v(_vm._s(_vm.rightText))])])], 2), _vm._v(" "), _c('div', {
+    staticClass: "tags-wrap",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, _vm._l((_vm.list), function(item, index) {
+    return _c('item', _vm._b({
+      key: index,
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(undefined)),
+      attrs: {
+        "index": index
+      },
+      on: {
+        "select": function($event) {
+          _vm.onSelect(index)
+        }
+      }
+    }, 'item', Object.assign({}, _vm.customStyles, item), false))
+  }))])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-1a0456a2", module.exports)
+  }
+}
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(41)
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(43),
+  /* template */
+  __webpack_require__(44),
   /* scopeId */
   "data-v-68596e9c",
   /* cssModules */
@@ -10006,13 +2105,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 36 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(37);
+var content = __webpack_require__(42);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -10032,7 +2131,7 @@ if(false) {
 }
 
 /***/ }),
-/* 37 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -10040,13 +2139,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.text[data-v-68596e9c] {\n\tfont-size: 42;\n\tline-height: 63;\n\tcolor: #999999;\n\tfont-family: \"Source Han Sans CN\", Roboto, sans-serif;\n}\n.medium[data-v-68596e9c] {\n\tfont-family: sans-serif-medium;\n\tfont-weight: 500;\n}\n.bold[data-v-68596e9c] {\n\tfont-weight: 700;\n}\n.light[data-v-68596e9c] {\n\tfont-weight: 400;\n}\n.small[data-v-68596e9c] {\n\tfont-size: 36;\n}\n.large[data-v-68596e9c] {\n\tfont-size: 48;\n\tfont-weight: 500;\n\tline-height: 72;\n\tcolor: #000000;\n}\n.huge[data-v-68596e9c] {\n\tfont-size: 54;\n\tline-height: 81;\n\tcolor: #000000;\n}\n.margin-text[data-v-68596e9c] {\n\tmargin-right: 9;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-text/index.vue?6b0b27aa"],"names":[],"mappings":";AAKA;CACA,cAAA;CACA,gBAAA;CACA,eAAA;CACA,sDAAA;CACA;AACA;CACA,+BAAA;CACA,iBAAA;CACA;AACA;CACA,iBAAA;CACA;AACA;CACA,iBAAA;CACA;AACA;CACA,cAAA;CACA;AACA;CACA,cAAA;CACA,iBAAA;CACA,gBAAA;CACA,eAAA;CACA;AACA;CACA,cAAA;CACA,gBAAA;CACA,eAAA;CACA;AACA;CACA,gBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n    <text :class=\"textClz\"><slot></slot><template v-if=\"!$slots.default\">{{ value }}</template></text>\n</template>\n\n<style scoped>\n\t.text {\n\t\tfont-size: 42;\n\t\tline-height: 63;\n\t\tcolor: #999999;\n\t\tfont-family: \"Source Han Sans CN\", Roboto, sans-serif;\n\t}\n\t.medium {\n\t\tfont-family: sans-serif-medium;\n\t\tfont-weight: 500;\n\t}\n\t.bold {\n\t\tfont-weight: 700;\n\t}\n\t.light {\n\t\tfont-weight: 400;\n\t}\n\t.small {\n\t\tfont-size: 36;\n\t}\n\t.large {\n\t\tfont-size: 48;\n\t\tfont-weight: 500;\n\t\tline-height: 72;\n\t\tcolor: #000000;\n\t}\n\t.huge {\n\t\tfont-size: 54;\n\t\tline-height: 81;\n\t\tcolor: #000000;\n\t}\n\t.margin-text {\n\t\tmargin-right: 9;\n\t}\n</style>\n\n<script>\nexport default {\n  name: 'FmText',\n  props: {\n    value: String,\n    fontWeight: {\n      type: String,\n      default: 'normal'\n    },\n    size: {\n      type: String,\n      default: 'normal'\n    },\n    hasTextMargin: {\n      type: Boolean,\n      default: true\n    }\n  },\n  computed: {\n    textClz () {\n      const clz = ['text'];\n      if (this.hasTextMargin) {\n        clz.push('margin-text');\n      }\n      if (this.size !== 'normal') {\n        clz.push(`${this.size}`);\n      }\n      if (this.fontWeight !== 'normal') {\n        clz.push(`${this.fontWeight}`);\n      }\n      return clz;\n    }\n  },\n  created () {\n    this.$slots.default && (this.value = this.$slots.default[0].text);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.text[data-v-68596e9c] {\n\tfont-size: 42;\n\tline-height: 63;\n\tcolor: #999999;\n\tfont-family: \"Source Han Sans CN\", Roboto, sans-serif;\n}\n.medium[data-v-68596e9c] {\n\tfont-family: sans-serif-medium;\n\tfont-weight: 500;\n}\n.bold[data-v-68596e9c] {\n\tfont-weight: 700;\n}\n.light[data-v-68596e9c] {\n\tfont-weight: 400;\n}\n.small[data-v-68596e9c] {\n\tfont-size: 36;\n}\n.large[data-v-68596e9c] {\n\tfont-size: 48;\n\tfont-weight: 500;\n\tline-height: 72;\n\tcolor: #000000;\n}\n.huge[data-v-68596e9c] {\n\tfont-size: 54;\n\tline-height: 81;\n\tcolor: #000000;\n}\n.margin-text[data-v-68596e9c] {\n\tmargin-right: 9;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-text/index.vue?d3bc9fac"],"names":[],"mappings":";AAKA;CACA,cAAA;CACA,gBAAA;CACA,eAAA;CACA,sDAAA;CACA;AACA;CACA,+BAAA;CACA,iBAAA;CACA;AACA;CACA,iBAAA;CACA;AACA;CACA,iBAAA;CACA;AACA;CACA,cAAA;CACA;AACA;CACA,cAAA;CACA,iBAAA;CACA,gBAAA;CACA,eAAA;CACA;AACA;CACA,cAAA;CACA,gBAAA;CACA,eAAA;CACA;AACA;CACA,gBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <text :class=\"textClz\"><slot></slot><template v-if=\"!$slots.default\">{{ value }}</template></text>\n</template>\n\n<style scoped>\n\t.text {\n\t\tfont-size: 42;\n\t\tline-height: 63;\n\t\tcolor: #999999;\n\t\tfont-family: \"Source Han Sans CN\", Roboto, sans-serif;\n\t}\n\t.medium {\n\t\tfont-family: sans-serif-medium;\n\t\tfont-weight: 500;\n\t}\n\t.bold {\n\t\tfont-weight: 700;\n\t}\n\t.light {\n\t\tfont-weight: 400;\n\t}\n\t.small {\n\t\tfont-size: 36;\n\t}\n\t.large {\n\t\tfont-size: 48;\n\t\tfont-weight: 500;\n\t\tline-height: 72;\n\t\tcolor: #000000;\n\t}\n\t.huge {\n\t\tfont-size: 54;\n\t\tline-height: 81;\n\t\tcolor: #000000;\n\t}\n\t.margin-text {\n\t\tmargin-right: 9;\n\t}\n</style>\n\n<script>\nexport default {\n  name: 'FmText',\n  props: {\n    value: String,\n    fontWeight: {\n      type: String,\n      default: 'normal'\n    },\n    size: {\n      type: String,\n      default: 'normal'\n    },\n    hasTextMargin: {\n      type: Boolean,\n      default: true\n    }\n  },\n  computed: {\n    textClz () {\n      const clz = ['text'];\n      if (this.hasTextMargin) {\n        clz.push('margin-text');\n      }\n      if (this.size !== 'normal') {\n        clz.push(`${this.size}`);\n      }\n      if (this.fontWeight !== 'normal') {\n        clz.push(`${this.fontWeight}`);\n      }\n      return clz;\n    }\n  },\n  created () {\n    this.$slots.default && (this.value = this.$slots.default[0].text);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 38 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10134,7 +2233,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 39 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10153,18 +2252,18 @@ if (false) {
 }
 
 /***/ }),
-/* 40 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(41)
+__webpack_require__(46)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(43),
+  __webpack_require__(48),
   /* template */
-  __webpack_require__(46),
+  __webpack_require__(51),
   /* scopeId */
   "data-v-77aa90fe",
   /* cssModules */
@@ -10191,13 +2290,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 41 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(42);
+var content = __webpack_require__(47);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -10217,7 +2316,7 @@ if(false) {
 }
 
 /***/ }),
-/* 42 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -10225,13 +2324,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-image[data-v-77aa90fe] {\n  width: 129;\n  height: 36;\n  margin-right: 18;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-icon/index.vue?6462ec8e"],"names":[],"mappings":";AAeA;EACA,WAAA;EACA,WAAA;EACA,iBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n    <image v-if=\"isImg\" class=\"fm-image\"\n          :src=\"value\"\n          @load=\"onLoad\"\n          @click=\"click\"\n          @longpress=\"longpress\"\n          :style=\"{ width: computedStyle.width, height: computedStyle.height }\" />\n    <text v-else :style=\"getStyle\"\n          @click=\"click\"\n          @longpress=\"longpress\"\n          >{{ getFontName }}\n    </text>\n</template>\n\n<style scoped>\n  .fm-image {\n    width: 129;\n    height: 36;\n    margin-right: 18;\n  }\n</style>\n\n<script>\n  // 引入he模块，使用它解决weex-template-compiler在编译阶段进行decode\n  const he = require(\"he\");\n  export default {\n    name: 'FmIcon',\n    props: {\n      value: {\n        type: String,\n        default: ''\n      },\n      iconStyle: {\n        type: [Number, Object, String],\n        default: 42\n      },\n      color: {\n        type: String,\n        default: '#000000'\n      }\n    },\n    data: () => ({\n      width: 129\n    }),\n    computed: {\n      computedStyle () {\n        if (Object.prototype.toString.call(this.iconStyle).slice(8, -1).toLowerCase() !== 'object') {\n          this.iconStyle = { width: 36, height: 36 }\n        }\n        const { width, iconStyle } = this\n        if (iconStyle && iconStyle.width && iconStyle.height) {\n          return {\n            width: `${iconStyle.width}px`,\n            height: `${iconStyle.height}px`\n          }\n        } else {\n          return {\n            width: `${width}px`,\n            height: `${iconStyle.height}px`\n          }\n        }\n      },\n      isImg() {\n        let { value } = this\n        if (value.indexOf(\"http\") === 0 || value.indexOf(\"//\") === 0) {\n          return true\n        }\n        return false\n      },\n      getStyle () {\n        const { iconStyle } = this\n        let style = { fontFamily: 'flymeicon', color: this.color }\n        if (Object.prototype.toString.call(this.iconStyle).slice(8, -1).toLowerCase() === 'object') {\n          iconStyle.size && (style.fontSize = `${iconStyle.size}px`)\n          iconStyle.lineHeight && (style.lineHeight = `${iconStyle.lineHeight}px`)\n        } else {\n          style.fontSize = `${iconStyle}px`\n          style.height = `${iconStyle}px`\n          style.lineHeight = `${iconStyle}px`\n        }\n        return style\n      },\n      // 匹配对应的字体图标的unicode\n      getFontName: function() {\n        return he.decode(this.value)\n      }\n    },\n    beforeCreate () {\n      const dom = weex.requireModule('dom')\n      dom.addRule('fontFace', {\n        'fontFamily': 'flymeicon',\n        'src': \"url('http://design.flyme.cn/weexui/assets/iconfont.ttf')\"\n      })\n    },\n    methods: {\n      onLoad (e) {\n        if (e.success && e.size && e.size.naturalWidth > 0) {\n          const width = e.size.naturalWidth\n          const height = e.size.naturalHeight\n          this.width = width * (this.iconStyle.height / height)\n        }\n      },\n      click(e) {\n        this.$emit('fmClick', e)\n      },\n      longpress(e) {\n        this.$emit('fmLongpress', e)\n      }\n    }\n  }\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-image[data-v-77aa90fe] {\n  width: 129;\n  height: 36;\n  margin-right: 18;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-icon/index.vue?23e4558c"],"names":[],"mappings":";AAeA;EACA,WAAA;EACA,WAAA;EACA,iBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <image v-if=\"isImg\" class=\"fm-image\"\n        :src=\"value\"\n        @load=\"onLoad\"\n        @click=\"click\"\n        @longpress=\"longpress\"\n        :style=\"{ width: computedStyle.width, height: computedStyle.height }\" />\n  <text v-else :style=\"getStyle\"\n        @click=\"click\"\n        @longpress=\"longpress\"\n        >{{ getFontName }}\n  </text>\n</template>\n\n<style scoped>\n  .fm-image {\n    width: 129;\n    height: 36;\n    margin-right: 18;\n  }\n</style>\n\n<script>\n// 引入he模块，使用它解决weex-template-compiler在编译阶段进行decode\nconst he = require('he');\nexport default {\n  name: 'FmIcon',\n  props: {\n    value: {\n      type: String,\n      default: ''\n    },\n    iconStyle: {\n      type: [Number, Object, String],\n      default: 42\n    },\n    color: {\n      type: String,\n      default: '#000000'\n    }\n  },\n  data: () => ({\n    width: 129\n  }),\n  computed: {\n    computedStyle () {\n      if (Object.prototype.toString.call(this.iconStyle).slice(8, -1).toLowerCase() !== 'object') {\n        this.iconStyle = { width: 36, height: 36 };\n      }\n      const { width, iconStyle } = this;\n      if (iconStyle && iconStyle.width && iconStyle.height) {\n        return {\n          width: `${iconStyle.width}px`,\n          height: `${iconStyle.height}px`\n        };\n      } else {\n        return {\n          width: `${width}px`,\n          height: `${iconStyle.height}px`\n        };\n      }\n    },\n    isImg () {\n      const { value } = this;\n      if (value.indexOf('http') === 0 || value.indexOf('//') === 0) {\n        return true;\n      }\n      return false;\n    },\n    getStyle () {\n      const { iconStyle } = this;\n      const style = { fontFamily: 'flymeicon', color: this.color };\n      if (Object.prototype.toString.call(this.iconStyle).slice(8, -1).toLowerCase() === 'object') {\n        iconStyle.size && (style.fontSize = `${iconStyle.size}px`);\n        iconStyle.lineHeight && (style.lineHeight = `${iconStyle.lineHeight}px`);\n      } else {\n        style.fontSize = `${iconStyle}px`;\n        style.height = `${iconStyle}px`;\n        style.lineHeight = `${iconStyle}px`;\n      }\n      return style;\n    },\n    // 匹配对应的字体图标的unicode\n    getFontName: function () {\n      return he.decode(this.value);\n    }\n  },\n  beforeCreate () {\n    const dom = weex.requireModule('dom');\n    dom.addRule('fontFace', {\n      'fontFamily': 'flymeicon',\n      'src': \"url('http://design.flyme.cn/weexui/assets/iconfont.ttf')\"\n    });\n  },\n  methods: {\n    onLoad (e) {\n      if (e.success && e.size && e.size.naturalWidth > 0) {\n        const width = e.size.naturalWidth;\n        const height = e.size.naturalHeight;\n        this.width = width * (this.iconStyle.height / height);\n      }\n    },\n    click (e) {\n      this.$emit('fmClick', e);\n    },\n    longpress (e) {\n      this.$emit('fmLongpress', e);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 43 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10264,7 +2363,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 // 引入he模块，使用它解决weex-template-compiler在编译阶段进行decode
-var he = __webpack_require__(44);
+var he = __webpack_require__(49);
 exports.default = {
   name: 'FmIcon',
   props: {
@@ -10309,7 +2408,7 @@ exports.default = {
     isImg: function isImg() {
       var value = this.value;
 
-      if (value.indexOf("http") === 0 || value.indexOf("//") === 0) {
+      if (value.indexOf('http') === 0 || value.indexOf('//') === 0) {
         return true;
       }
       return false;
@@ -10360,7 +2459,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 44 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {var __WEBPACK_AMD_DEFINE_RESULT__;/*! https://mths.be/he v1.1.1 by @mathias | MIT license */
@@ -10705,10 +2804,10 @@ exports.default = {
 
 }(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(45)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(50)(module)))
 
 /***/ }),
-/* 45 */
+/* 50 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -10736,7 +2835,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 46 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10773,7 +2872,7 @@ if (false) {
 }
 
 /***/ }),
-/* 47 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10783,7 +2882,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(48);
+var _index = __webpack_require__(53);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -10795,18 +2894,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 48 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(49)
+__webpack_require__(54)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(51),
+  __webpack_require__(56),
   /* template */
-  __webpack_require__(52),
+  __webpack_require__(57),
   /* scopeId */
   "data-v-18ede8e6",
   /* cssModules */
@@ -10833,13 +2932,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 49 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(50);
+var content = __webpack_require__(55);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -10859,7 +2958,7 @@ if(false) {
 }
 
 /***/ }),
-/* 50 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -10867,20 +2966,20 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.slider-wrap[data-v-18ede8e6] {\n\tpadding-right: 22.5px;\n\tpadding-left: 22.5px;\n}\n.level-text-wrap[data-v-18ede8e6] {\n\tflex-direction: row;\n\talign-items: center;\n\tjustify-content: center;\n\tmargin-bottom: -21.6px;\n}\n.level-text[data-v-18ede8e6] {\n\tflex: 1;\n\tfont-size: 42px;\n\tpadding-top: 7.2px;\n\tpadding-bottom: 7.2px;\n\ttext-align: center;\n}\n.all[data-v-18ede8e6] {\n\theight: 9px;\n\tmargin-top: 43.2px;\n\tbackground-color: #e6e6e6;\n}\n.selected[data-v-18ede8e6] {\n\tmargin-top: -9px;\n\theight: 9px;\n\tbackground-color: #198ded;\n}\n.dot-wrap[data-v-18ede8e6] {\n\theight: 86.4px;\n\twidth: 116.4px;\n\tmargin-top: -47.52px;\n\tmargin-left: -57.6px;\n\talign-items: center;\n\tjustify-content: center;\n}\n.dot[data-v-18ede8e6] {\n\theight: 45px;\n\twidth: 45px;\n\tbackground-color: #198ded;\n\tborder-radius: 43.2px;\n}\n.num[data-v-18ede8e6] {\n\twidth: 78px;\n\theight: 78px;\n\tmargin-left: -39px;\n\tborder-radius: 79.2px;\n\tbackground-color: #198ded;\n\tcolor: #ffffff;\n\tfont-size: 42px;\n\tfont-weight: 700;\n\ttext-align: center;\n\tline-height: 78px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-slider/index.vue?14722517"],"names":[],"mappings":";AAeA;CACA,sBAAA;CACA,qBAAA;CACA;AACA;CACA,oBAAA;CACA,oBAAA;CACA,wBAAA;CACA,uBAAA;CACA;AACA;CACA,QAAA;CACA,gBAAA;CACA,mBAAA;CACA,sBAAA;CACA,mBAAA;CACA;AACA;CACA,YAAA;CACA,mBAAA;CACA,0BAAA;CACA;AACA;CACA,iBAAA;CACA,YAAA;CACA,0BAAA;CACA;AACA;CACA,eAAA;CACA,eAAA;CACA,qBAAA;CACA,qBAAA;CACA,oBAAA;CACA,wBAAA;CACA;AACA;CACA,aAAA;CACA,YAAA;CACA,0BAAA;CACA,sBAAA;CACA;AACA;CACA,YAAA;CACA,aAAA;CACA,mBAAA;CACA,sBAAA;CACA,0BAAA;CACA,eAAA;CACA,gBAAA;CACA,iBAAA;CACA,mBAAA;CACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n<div class=\"slider-wrap\">\n\t<div v-if=\"!!levelTexts && this.per\" class=\"level-text-wrap\" :style=\"textStyle\">\n\t\t<text class=\"level-text\" v-for=\"(text, idx) in levelTexts\" @click=\"levelClick(idx)\">{{text}}</text>\n\t</div>\n\t<text v-else-if=\"showProgress\" class=\"num\" :style=\"progressStyle\">{{progressText}}</text>\n\t<div class=\"all\" ref=\"bg\"></div>\n\t<div class=\"selected\" :style=\"selStyle\"></div>\n\t<div class=\"dot-wrap\" :style=\"dotStyle\" @touchmove=\"move\" @touchstart=\"start\" @touchend=\"end\">\n\t\t<div class=\"dot\"></div>\n\t</div>\n</div>\n</template>\n\n<style scoped>\n.slider-wrap {\n\tpadding-right: 22.5px;\n\tpadding-left: 22.5px;\n}\n.level-text-wrap {\n\tflex-direction: row;\n\talign-items: center;\n\tjustify-content: center;\n\tmargin-bottom: -21.6px;\n}\n.level-text {\n\tflex: 1;\n\tfont-size: 42px;\n\tpadding-top: 7.2px;\n\tpadding-bottom: 7.2px;\n\ttext-align: center;\n}\n.all {\n\theight: 9px;\n\tmargin-top: 43.2px;\n\tbackground-color: #e6e6e6;\n}\n.selected {\n\tmargin-top: -9px;\n\theight: 9px;\n\tbackground-color: #198ded;\n}\n.dot-wrap {\n\theight: 86.4px;\n\twidth: 116.4px;\n\tmargin-top: -47.52px;\n\tmargin-left: -57.6px;\n\talign-items: center;\n\tjustify-content: center;\n}\n.dot {\n\theight: 45px;\n\twidth: 45px;\n\tbackground-color: #198ded;\n\tborder-radius: 43.2px;\n}\n.num {\n\twidth: 78px;\n\theight: 78px;\n\tmargin-left: -39px;\n\tborder-radius: 79.2px;\n\tbackground-color: #198ded;\n\tcolor: #ffffff;\n\tfont-size: 42px;\n\tfont-weight: 700;\n\ttext-align: center;\n\tline-height: 78px;\n}\n</style>\n\n<script>\nconst dom = weex.requireModule('dom')\n\nexport default {\n  name: 'FmSlider',\n\tdata () {\n\t\treturn {\n\t\t\ttransX: 0,\n\t\t\tstartX: 0,\n\t\t\tmax: 0,\n\t\t\tper: 0,\n\t\t\tcomparePer: 0,\n\t\t\tprogressOpacity: 0,\n\t\t\tprogressText: null,\n\t\t\tlevelAlias: 0\n\t\t}\n\t},\n\n\tprops: {\n\t\tlevel: [String, Number],\n\t\tlevelTexts: Array,\n\t\tshowProgress: Boolean,\n\t\tvertical: Boolean,\n\t\tvalue: {\n\t\t\ttype: [String, Number],\n\t\t\tdefault: 0\n\t\t}\n\t},\n\n\tcomputed: {\n\t\ttextStyle () {\n\t\t\treturn {\n\t\t\t\twidth: `${this.max + this.per}px`,\n\t\t\t\t'margin-left': `${-this.per/2}px`\n\t\t\t}\n\t\t},\n\t\tdotStyle () {\n\t\t\treturn {\n\t\t\t\ttransform: `translateX(${this.transX}px)`\n\t\t\t}\n\t\t},\n\t\tselStyle () {\n\t\t\treturn {\n\t\t\t\twidth: `${this.transX}px`\n\t\t\t}\n\t\t},\n\t\tprogressStyle () {\n\t\t\treturn {\n\t\t\t\ttransform: `translateX(${this.transX}px)`,\n\t\t\t\topacity: this.progressOpacity\n\t\t\t}\n\t\t}\n\t},\n\n\tcreated () {\n\t\tthis.screen = 'screenY'//this.vertical ? 'screenY' : 'screenX'\n\t},\n\n\tmounted () {\n\t\tsetTimeout(() => {\n\t\t\tdom.getComponentRect(this.$refs.bg, opt => {\n\n\t\t\t\tthis.max = opt.size.width\n\n\t\t\t\tif (this.levelTexts) {\n\t\t\t\t\tthis.levelAlias = Math.max(this.levelTexts.length - 1, 0)\n\t\t\t\t} else {\n\t\t\t\t\tthis.levelAlias = this.level\n\t\t\t\t}\n\n\t\t\t\tif (this.levelAlias && this.levelAlias > 0) {\n\t\t\t\t\tthis.per = this.max / this.levelAlias\n\t\t\t\t\tthis.comparePer = this.per / 2\n\t\t\t\t}\n\n\t\t\t\tthis.transX = this.per ? (this.per * this.value) : (this.max * this.value / 100)\n\t\t\t})\n\t\t}, 100)\n\t},\n\n\tmethods: {\n\t\tlevelClick (idx) {\n\t\t\tthis.transX = Math.min(this.per * idx, this.max)\n\t\t\tthis.end()\n\t\t},\n\t\tstart (event) {\n\t\t\tthis.startX = event.changedTouches[0].screenX\n\t\t\tthis.progressOpacity = 1\n\t\t},\n\t\tmove (event) {\n\t\t\tlet x = +event.changedTouches[0].screenX\n\t\t\tlet sub = x - this.startX\n\t\t\tlet target\n\n\t\t\tif (this.per) {\n\t\t\t\tif (Math.abs(sub) >= this.comparePer) {\n\t\t\t\t\ttarget = this.transX + (sub > 0 ? this.per : -this.per)\n\t\t\t\t\tthis.startX = target\n\t\t\t\t}\n\t\t\t} else {\n\t\t\t\ttarget = this.transX + sub\n\t\t\t\tthis.startX = x\n\t\t\t}\n\t\t\t\n\t\t\tif (target !== undefined) {\n\t\t\t\tthis.transX = Math.min(Math.max(target, 0), this.max)\n\t\t\t}\n\t\t\t\n\t\t\tthis.progressText = this.per \n\t\t\t\t? Math.round(this.transX / this.per)\n\t\t\t\t: Math.floor(this.transX / this.max * 100)\n\t\t},\n\t\tend (event) {\n\t\t\tthis.progressOpacity = 0\n\t\t\tthis.$emit('selected', {\n\t\t\t\trate: this.transX / this.max,\n\t\t\t\tlevel: this.per ? Math.round(this.transX / this.per) : 0\n\t\t\t})\n\t\t}\n\t}\n}\n</script>"],"sourceRoot":""}]);
+exports.push([module.i, "\n.slider-wrap[data-v-18ede8e6] {\n  padding-right: 22.5px;\n  padding-left: 22.5px;\n}\n.level-text-wrap[data-v-18ede8e6] {\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  margin-bottom: -21.6px;\n}\n.level-text[data-v-18ede8e6] {\n  flex: 1;\n  font-size: 42px;\n  padding-top: 7.2px;\n  padding-bottom: 7.2px;\n  text-align: center;\n}\n.all[data-v-18ede8e6] {\n  height: 9px;\n  margin-top: 43.2px;\n  background-color: #e6e6e6;\n}\n.selected[data-v-18ede8e6] {\n  margin-top: -9px;\n  height: 9px;\n  background-color: #198ded;\n}\n.dot-wrap[data-v-18ede8e6] {\n  height: 86.4px;\n  width: 116.4px;\n  margin-top: -47.52px;\n  margin-left: -57.6px;\n  align-items: center;\n  justify-content: center;\n}\n.dot[data-v-18ede8e6] {\n  height: 45px;\n  width: 45px;\n  background-color: #198ded;\n  border-radius: 43.2px;\n}\n.num[data-v-18ede8e6] {\n  width: 78px;\n  height: 78px;\n  margin-left: -39px;\n  border-radius: 79.2px;\n  background-color: #198ded;\n  color: #ffffff;\n  font-size: 42px;\n  font-weight: 700;\n  text-align: center;\n  line-height: 78px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-slider/index.vue?05ecf7de"],"names":[],"mappings":";AAeA;EACA,sBAAA;EACA,qBAAA;CACA;AACA;EACA,oBAAA;EACA,oBAAA;EACA,wBAAA;EACA,uBAAA;CACA;AACA;EACA,QAAA;EACA,gBAAA;EACA,mBAAA;EACA,sBAAA;EACA,mBAAA;CACA;AACA;EACA,YAAA;EACA,mBAAA;EACA,0BAAA;CACA;AACA;EACA,iBAAA;EACA,YAAA;EACA,0BAAA;CACA;AACA;EACA,eAAA;EACA,eAAA;EACA,qBAAA;EACA,qBAAA;EACA,oBAAA;EACA,wBAAA;CACA;AACA;EACA,aAAA;EACA,YAAA;EACA,0BAAA;EACA,sBAAA;CACA;AACA;EACA,YAAA;EACA,aAAA;EACA,mBAAA;EACA,sBAAA;EACA,0BAAA;EACA,eAAA;EACA,gBAAA;EACA,iBAAA;EACA,mBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"slider-wrap\">\n    <div v-if=\"!!levelTexts && this.per\" class=\"level-text-wrap\" :style=\"textStyle\">\n      <text class=\"level-text\" v-for=\"(text, idx) in levelTexts\" @click=\"levelClick(idx)\" :key=\"idx\">{{text}}</text>\n    </div>\n    <text v-else-if=\"showProgress\" class=\"num\" :style=\"progressStyle\">{{progressText}}</text>\n    <div class=\"all\" ref=\"bg\"></div>\n    <div class=\"selected\" :style=\"selStyle\"></div>\n    <div class=\"dot-wrap\" :style=\"dotStyle\" @touchmove=\"move\" @touchstart=\"start\" @touchend=\"end\">\n      <div class=\"dot\"></div>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .slider-wrap {\n    padding-right: 22.5px;\n    padding-left: 22.5px;\n  }\n  .level-text-wrap {\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    margin-bottom: -21.6px;\n  }\n  .level-text {\n    flex: 1;\n    font-size: 42px;\n    padding-top: 7.2px;\n    padding-bottom: 7.2px;\n    text-align: center;\n  }\n  .all {\n    height: 9px;\n    margin-top: 43.2px;\n    background-color: #e6e6e6;\n  }\n  .selected {\n    margin-top: -9px;\n    height: 9px;\n    background-color: #198ded;\n  }\n  .dot-wrap {\n    height: 86.4px;\n    width: 116.4px;\n    margin-top: -47.52px;\n    margin-left: -57.6px;\n    align-items: center;\n    justify-content: center;\n  }\n  .dot {\n    height: 45px;\n    width: 45px;\n    background-color: #198ded;\n    border-radius: 43.2px;\n  }\n  .num {\n    width: 78px;\n    height: 78px;\n    margin-left: -39px;\n    border-radius: 79.2px;\n    background-color: #198ded;\n    color: #ffffff;\n    font-size: 42px;\n    font-weight: 700;\n    text-align: center;\n    line-height: 78px;\n  }\n</style>\n\n<script>\nconst dom = weex.requireModule('dom');\n\nexport default {\n  name: 'FmSlider',\n  data () {\n    return {\n      transX: 0,\n      startX: 0,\n      max: 0,\n      per: 0,\n      comparePer: 0,\n      progressOpacity: 0,\n      progressText: null,\n      levelAlias: 0\n    };\n  },\n\n  props: {\n    level: [String, Number],\n    levelTexts: Array,\n    showProgress: Boolean,\n    vertical: Boolean,\n    value: {\n      type: [String, Number],\n      default: 0\n    }\n  },\n\n  computed: {\n    textStyle () {\n      return {\n        width: `${this.max + this.per}px`,\n        'margin-left': `${-this.per / 2}px`\n      };\n    },\n    dotStyle () {\n      return {\n        transform: `translateX(${this.transX}px)`\n      };\n    },\n    selStyle () {\n      return {\n        width: `${this.transX}px`\n      };\n    },\n    progressStyle () {\n      return {\n        transform: `translateX(${this.transX}px)`,\n        opacity: this.progressOpacity\n      };\n    }\n  },\n\n  created () {\n    this.screen = 'screenY';// this.vertical ? 'screenY' : 'screenX'\n  },\n\n  mounted () {\n    setTimeout(() => {\n      dom.getComponentRect(this.$refs.bg, opt => {\n        this.max = opt.size.width;\n\n        if (this.levelTexts) {\n          this.levelAlias = Math.max(this.levelTexts.length - 1, 0);\n        } else {\n          this.levelAlias = this.level;\n        }\n\n        if (this.levelAlias && this.levelAlias > 0) {\n          this.per = this.max / this.levelAlias;\n          this.comparePer = this.per / 2;\n        }\n\n        this.transX = this.per ? (this.per * this.value) : (this.max * this.value / 100);\n      });\n    }, 100);\n  },\n\n  methods: {\n    levelClick (idx) {\n      this.transX = Math.min(this.per * idx, this.max);\n      this.end();\n    },\n    start (event) {\n      this.startX = event.changedTouches[0].screenX;\n      this.progressOpacity = 1;\n    },\n    move (event) {\n      const x = +event.changedTouches[0].screenX;\n      const sub = x - this.startX;\n      let target;\n\n      if (this.per) {\n        if (Math.abs(sub) >= this.comparePer) {\n          target = this.transX + (sub > 0 ? this.per : -this.per);\n          this.startX = target;\n        }\n      } else {\n        target = this.transX + sub;\n        this.startX = x;\n      }\n\n      if (target !== undefined) {\n        this.transX = Math.min(Math.max(target, 0), this.max);\n      }\n\n      this.progressText = this.per\n        ? Math.round(this.transX / this.per)\n        : Math.floor(this.transX / this.max * 100);\n    },\n    end (event) {\n      this.progressOpacity = 0;\n      this.$emit('selected', {\n        rate: this.transX / this.max,\n        level: this.per ? Math.round(this.transX / this.per) : 0\n      });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 51 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 //
 //
@@ -10956,127 +3055,126 @@ Object.defineProperty(exports, "__esModule", {
 var dom = weex.requireModule('dom');
 
 exports.default = {
-	name: 'FmSlider',
-	data: function data() {
-		return {
-			transX: 0,
-			startX: 0,
-			max: 0,
-			per: 0,
-			comparePer: 0,
-			progressOpacity: 0,
-			progressText: null,
-			levelAlias: 0
-		};
-	},
+  name: 'FmSlider',
+  data: function data() {
+    return {
+      transX: 0,
+      startX: 0,
+      max: 0,
+      per: 0,
+      comparePer: 0,
+      progressOpacity: 0,
+      progressText: null,
+      levelAlias: 0
+    };
+  },
 
 
-	props: {
-		level: [String, Number],
-		levelTexts: Array,
-		showProgress: Boolean,
-		vertical: Boolean,
-		value: {
-			type: [String, Number],
-			default: 0
-		}
-	},
+  props: {
+    level: [String, Number],
+    levelTexts: Array,
+    showProgress: Boolean,
+    vertical: Boolean,
+    value: {
+      type: [String, Number],
+      default: 0
+    }
+  },
 
-	computed: {
-		textStyle: function textStyle() {
-			return {
-				width: this.max + this.per + 'px',
-				'margin-left': -this.per / 2 + 'px'
-			};
-		},
-		dotStyle: function dotStyle() {
-			return {
-				transform: 'translateX(' + this.transX + 'px)'
-			};
-		},
-		selStyle: function selStyle() {
-			return {
-				width: this.transX + 'px'
-			};
-		},
-		progressStyle: function progressStyle() {
-			return {
-				transform: 'translateX(' + this.transX + 'px)',
-				opacity: this.progressOpacity
-			};
-		}
-	},
+  computed: {
+    textStyle: function textStyle() {
+      return {
+        width: this.max + this.per + 'px',
+        'margin-left': -this.per / 2 + 'px'
+      };
+    },
+    dotStyle: function dotStyle() {
+      return {
+        transform: 'translateX(' + this.transX + 'px)'
+      };
+    },
+    selStyle: function selStyle() {
+      return {
+        width: this.transX + 'px'
+      };
+    },
+    progressStyle: function progressStyle() {
+      return {
+        transform: 'translateX(' + this.transX + 'px)',
+        opacity: this.progressOpacity
+      };
+    }
+  },
 
-	created: function created() {
-		this.screen = 'screenY'; //this.vertical ? 'screenY' : 'screenX'
-	},
-	mounted: function mounted() {
-		var _this = this;
+  created: function created() {
+    this.screen = 'screenY'; // this.vertical ? 'screenY' : 'screenX'
+  },
+  mounted: function mounted() {
+    var _this = this;
 
-		setTimeout(function () {
-			dom.getComponentRect(_this.$refs.bg, function (opt) {
+    setTimeout(function () {
+      dom.getComponentRect(_this.$refs.bg, function (opt) {
+        _this.max = opt.size.width;
 
-				_this.max = opt.size.width;
+        if (_this.levelTexts) {
+          _this.levelAlias = Math.max(_this.levelTexts.length - 1, 0);
+        } else {
+          _this.levelAlias = _this.level;
+        }
 
-				if (_this.levelTexts) {
-					_this.levelAlias = Math.max(_this.levelTexts.length - 1, 0);
-				} else {
-					_this.levelAlias = _this.level;
-				}
+        if (_this.levelAlias && _this.levelAlias > 0) {
+          _this.per = _this.max / _this.levelAlias;
+          _this.comparePer = _this.per / 2;
+        }
 
-				if (_this.levelAlias && _this.levelAlias > 0) {
-					_this.per = _this.max / _this.levelAlias;
-					_this.comparePer = _this.per / 2;
-				}
-
-				_this.transX = _this.per ? _this.per * _this.value : _this.max * _this.value / 100;
-			});
-		}, 100);
-	},
+        _this.transX = _this.per ? _this.per * _this.value : _this.max * _this.value / 100;
+      });
+    }, 100);
+  },
 
 
-	methods: {
-		levelClick: function levelClick(idx) {
-			this.transX = Math.min(this.per * idx, this.max);
-			this.end();
-		},
-		start: function start(event) {
-			this.startX = event.changedTouches[0].screenX;
-			this.progressOpacity = 1;
-		},
-		move: function move(event) {
-			var x = +event.changedTouches[0].screenX;
-			var sub = x - this.startX;
-			var target = void 0;
+  methods: {
+    levelClick: function levelClick(idx) {
+      this.transX = Math.min(this.per * idx, this.max);
+      this.end();
+    },
+    start: function start(event) {
+      this.startX = event.changedTouches[0].screenX;
+      this.progressOpacity = 1;
+    },
+    move: function move(event) {
+      var x = +event.changedTouches[0].screenX;
+      var sub = x - this.startX;
+      var target = void 0;
 
-			if (this.per) {
-				if (Math.abs(sub) >= this.comparePer) {
-					target = this.transX + (sub > 0 ? this.per : -this.per);
-					this.startX = target;
-				}
-			} else {
-				target = this.transX + sub;
-				this.startX = x;
-			}
+      if (this.per) {
+        if (Math.abs(sub) >= this.comparePer) {
+          target = this.transX + (sub > 0 ? this.per : -this.per);
+          this.startX = target;
+        }
+      } else {
+        target = this.transX + sub;
+        this.startX = x;
+      }
 
-			if (target !== undefined) {
-				this.transX = Math.min(Math.max(target, 0), this.max);
-			}
+      if (target !== undefined) {
+        this.transX = Math.min(Math.max(target, 0), this.max);
+      }
 
-			this.progressText = this.per ? Math.round(this.transX / this.per) : Math.floor(this.transX / this.max * 100);
-		},
-		end: function end(event) {
-			this.progressOpacity = 0;
-			this.$emit('selected', {
-				rate: this.transX / this.max,
-				level: this.per ? Math.round(this.transX / this.per) : 0
-			});
-		}
-	}
+      this.progressText = this.per ? Math.round(this.transX / this.per) : Math.floor(this.transX / this.max * 100);
+    },
+    end: function end(event) {
+      this.progressOpacity = 0;
+      this.$emit('selected', {
+        rate: this.transX / this.max,
+        level: this.per ? Math.round(this.transX / this.per) : 0
+      });
+    }
+  }
 };
 
 /***/ }),
-/* 52 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11090,6 +3188,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     style: (_vm.$processStyle(_vm.textStyle))
   }, _vm._l((_vm.levelTexts), function(text, idx) {
     return _c('text', {
+      key: idx,
       staticClass: "level-text",
       staticStyle: _vm.$processStyle(undefined),
       style: (_vm.$processStyle(undefined)),
@@ -11136,7 +3235,7 @@ if (false) {
 }
 
 /***/ }),
-/* 53 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11146,7 +3245,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(54);
+var _index = __webpack_require__(59);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -11158,18 +3257,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 54 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(55)
+__webpack_require__(60)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(57),
+  __webpack_require__(62),
   /* template */
-  __webpack_require__(58),
+  __webpack_require__(63),
   /* scopeId */
   "data-v-45eab412",
   /* cssModules */
@@ -11196,13 +3295,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 55 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(56);
+var content = __webpack_require__(61);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -11222,7 +3321,7 @@ if(false) {
 }
 
 /***/ }),
-/* 56 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -11230,20 +3329,20 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-btn-wrap[data-v-45eab412] {\n\theight: 72;\n\talign-items: center;\n\tflex-direction: row;\n\tborder-radius: 72;\n}\n.fm-btn[data-v-45eab412] {\n\tpadding-left: 36;\n\tpadding-right: 36;\n\tline-height: 72;\n\tfont-size: 36;\n\tfont-weight: 700;\n\ttext-align: center;\n\tmin-width: 144;\n\tmax-width: 300;\n\tfont-family: sans-serif-medium;\n\tfont-weight: 500;\n}\n.fm-btn-max-padding[data-v-45eab412] {\n\tpadding-left: 24;\n\tpadding-right: 24;\n}\n.fm-btn-freeSize[data-v-45eab412] {\n\tmax-width: 1080;\n}\n.fm-btn-show[data-v-45eab412] {\n}\n.fm-btn-hollow[data-v-45eab412] {\n\tborder-width: 4;\n\tline-height: 64;\n\tborder-stye: solid;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-button/index.vue?9d564352"],"names":[],"mappings":";AAOA;CACA,WAAA;CACA,oBAAA;CACA,oBAAA;CACA,kBAAA;CACA;AACA;CACA,iBAAA;CACA,kBAAA;CACA,gBAAA;CACA,cAAA;CACA,iBAAA;CACA,mBAAA;CACA,eAAA;CACA,eAAA;CACA,+BAAA;CACA,iBAAA;CACA;AACA;CACA,iBAAA;CACA,kBAAA;CACA;AACA;CACA,gBAAA;CACA;AACA;CAEA;AACA;CACA,gBAAA;CACA,gBAAA;CACA,mBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n<div class=\"fm-btn-wrap\" :style=\"btnStyle\" @click=\"btnClick\">\n\t<text ref=\"text\" class=\"fm-btn\" :class=\"btnClz\" :style=\"textStyle\">{{text}}</text>\n</div>\n</template>\n\n<style scoped>\n.fm-btn-wrap {\n\theight: 72;\n\talign-items: center;\n\tflex-direction: row;\n\tborder-radius: 72;\n}\n.fm-btn {\n\tpadding-left: 36;\n\tpadding-right: 36;\n\tline-height: 72;\n\tfont-size: 36;\n\tfont-weight: 700;\n\ttext-align: center;\n\tmin-width: 144;\n\tmax-width: 300;\n\tfont-family: sans-serif-medium;\n\tfont-weight: 500;\n}\n.fm-btn-max-padding {\n\tpadding-left: 24;\n\tpadding-right: 24;\n}\n.fm-btn-freeSize {\n\tmax-width: 1080;\n}\n.fm-btn-show {\n\t\n}\n.fm-btn-hollow {\n\tborder-width: 4;\n\tline-height: 64;\n\tborder-stye: solid;\n}\n</style>\n\n<script>\n\nconst small_size = 48      //48dp\nconst large_size = 80 //80dp\nconst max_size = 100   //100dp\nconst dis_color = '#cccccc'\nconst transparent = 'transparent'\nconst dom = weex.requireModule('dom')\n\nexport default {\n  name: 'FmButton',\n\tdata() {\n\t\treturn {\n\t\t\tmax: false\n\t\t}\n\t},\n\n\tprops: {\n\t\ttext: String,\n\t\tbgColor: {\n\t\t\ttype: String,\n\t\t\tdefault: '#198ded'\n\t\t},\n\t\tcolor: {\n\t\t\ttype: String,\n\t\t\tdefault: '#ffffff'\n\t\t},\n\t\tdisabled: Boolean,\n\t\tfreeSize: {\n\t\t\ttype: Boolean,\n\t\t\tdefault: true\n\t\t}\n\t},\n\n\tcomputed: {\n\t\tbtnClz() {\n\t\t\tlet clz = []\n\n\t\t\tif (this.max) {\n\t\t\t\tclz.push('fm-btn-max-padding')\n\t\t\t}\n\n\t\t\tif (this.bgColor == transparent) {\n\t\t\t\tclz.push('fm-btn-hollow')\n\t\t\t}\n\n\t\t\tif (this.freeSize) {\n\t\t\t\tclz.push('fm-btn-freeSize')\n\t\t\t}\n\n\t\t\treturn clz\n\t\t},\n\t\tbtnStyle() {\n\t\t\tlet sty = {}\n\n\t\t\tif (this.bgColor != transparent) {\n\t\t\t\tsty.backgroundColor = this.bgColor\n\t\t\t}\n\t\t\tif (this.disabled) {\n\t\t\t\tsty.backgroundColor = dis_color\n\t\t\t}\n\n\t\t\treturn sty\n\t\t},\n\t\ttextStyle() {\n\t\t\tlet sty = {}\n\n\t\t\tif (this.color) {\n\t\t\t\tsty.color = this.color\n\t\t\t\tif (this.bgColor == transparent) {\n\t\t\t\t\tsty.borderColor = this.color\n\t\t\t\t}\n\t\t\t}\n\n\t\t\treturn sty\n\t\t}\n\t},\n\n\tmethods: {\n\t\tbtnClick(evt) {\n\t\t\tif (!this.disabled) {\n\t\t\t\tthis.$emit('buttonClicked', evt)\n\t\t\t}\n\t\t}\n\t},\n\n\tmounted() {\n\t\tsetTimeout(() => {\n\t\t\tdom.getComponentRect(this.$refs.text, option => {\n\t\t\t\tif (option.size.width >= 240) {\n\t\t\t\t\tthis.max = true\n\t\t\t\t}\n\t\t\t})\n\t\t}, 50)\n\t}\n}\n</script>"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-btn-wrap[data-v-45eab412] {\n  height: 72;\n  align-items: center;\n  flex-direction: row;\n  border-radius: 72;\n}\n.fm-btn[data-v-45eab412] {\n  padding-left: 36;\n  padding-right: 36;\n  line-height: 72;\n  font-size: 36;\n  font-weight: 700;\n  text-align: center;\n  min-width: 144;\n  max-width: 300;\n  font-family: sans-serif-medium;\n  font-weight: 500;\n}\n.fm-btn-max-padding[data-v-45eab412] {\n  padding-left: 24;\n  padding-right: 24;\n}\n.fm-btn-freeSize[data-v-45eab412] {\n  max-width: 1080;\n}\n.fm-btn-show[data-v-45eab412] {\n}\n.fm-btn-hollow[data-v-45eab412] {\n  border-width: 4;\n  line-height: 64;\n  border-style: solid;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-button/index.vue?ea0e1e36"],"names":[],"mappings":";AAOA;EACA,WAAA;EACA,oBAAA;EACA,oBAAA;EACA,kBAAA;CACA;AACA;EACA,iBAAA;EACA,kBAAA;EACA,gBAAA;EACA,cAAA;EACA,iBAAA;EACA,mBAAA;EACA,eAAA;EACA,eAAA;EACA,+BAAA;EACA,iBAAA;CACA;AACA;EACA,iBAAA;EACA,kBAAA;CACA;AACA;EACA,gBAAA;CACA;AACA;CAEA;AACA;EACA,gBAAA;EACA,gBAAA;EACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"fm-btn-wrap\" :style=\"btnStyle\" @click=\"btnClick\">\n    <text ref=\"text\" class=\"fm-btn\" :class=\"btnClz\" :style=\"textStyle\">{{text}}</text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-btn-wrap {\n    height: 72;\n    align-items: center;\n    flex-direction: row;\n    border-radius: 72;\n  }\n  .fm-btn {\n    padding-left: 36;\n    padding-right: 36;\n    line-height: 72;\n    font-size: 36;\n    font-weight: 700;\n    text-align: center;\n    min-width: 144;\n    max-width: 300;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n  }\n  .fm-btn-max-padding {\n    padding-left: 24;\n    padding-right: 24;\n  }\n  .fm-btn-freeSize {\n    max-width: 1080;\n  }\n  .fm-btn-show {\n\n  }\n  .fm-btn-hollow {\n    border-width: 4;\n    line-height: 64;\n    border-style: solid;\n  }\n</style>\n\n<script>\nconst dis_color = '#cccccc';\nconst transparent = 'transparent';\nconst dom = weex.requireModule('dom');\n\nexport default {\n  name: 'FmButton',\n  data () {\n    return {\n      max: false\n    };\n  },\n  props: {\n    text: String,\n    bgColor: {\n      type: String,\n      default: '#198ded'\n    },\n    color: {\n      type: String,\n      default: '#ffffff'\n    },\n    disabled: Boolean,\n    freeSize: {\n      type: Boolean,\n      default: true\n    }\n  },\n  computed: {\n    btnClz () {\n      const clz = [];\n      if (this.max) {\n        clz.push('fm-btn-max-padding');\n      }\n      if (this.bgColor === transparent) {\n        clz.push('fm-btn-hollow');\n      }\n      if (this.freeSize) {\n        clz.push('fm-btn-freeSize');\n      }\n      return clz;\n    },\n    btnStyle () {\n      const sty = {};\n      if (this.bgColor !== transparent) {\n        sty.backgroundColor = this.bgColor;\n      }\n      if (this.disabled) {\n        sty.backgroundColor = dis_color;\n      }\n      return sty;\n    },\n    textStyle () {\n      const sty = {};\n      if (this.color) {\n        sty.color = this.color;\n        if (this.bgColor === transparent) {\n          sty.borderColor = this.color;\n        }\n      }\n      return sty;\n    }\n  },\n  methods: {\n    btnClick (evt) {\n      if (!this.disabled) {\n        this.$emit('buttonClicked', evt);\n      }\n    }\n  },\n  mounted () {\n    setTimeout(() => {\n      dom.getComponentRect(this.$refs.text, option => {\n        if (option.size.width >= 240) {\n          this.max = true;\n        }\n      });\n    }, 50);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 57 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 //
 //
@@ -11288,107 +3387,91 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 
-
-var small_size = 48; //48dp
-var large_size = 80; //80dp
-var max_size = 100; //100dp
 var dis_color = '#cccccc';
 var transparent = 'transparent';
 var dom = weex.requireModule('dom');
 
 exports.default = {
-	name: 'FmButton',
-	data: function data() {
-		return {
-			max: false
-		};
-	},
+  name: 'FmButton',
+  data: function data() {
+    return {
+      max: false
+    };
+  },
 
+  props: {
+    text: String,
+    bgColor: {
+      type: String,
+      default: '#198ded'
+    },
+    color: {
+      type: String,
+      default: '#ffffff'
+    },
+    disabled: Boolean,
+    freeSize: {
+      type: Boolean,
+      default: true
+    }
+  },
+  computed: {
+    btnClz: function btnClz() {
+      var clz = [];
+      if (this.max) {
+        clz.push('fm-btn-max-padding');
+      }
+      if (this.bgColor === transparent) {
+        clz.push('fm-btn-hollow');
+      }
+      if (this.freeSize) {
+        clz.push('fm-btn-freeSize');
+      }
+      return clz;
+    },
+    btnStyle: function btnStyle() {
+      var sty = {};
+      if (this.bgColor !== transparent) {
+        sty.backgroundColor = this.bgColor;
+      }
+      if (this.disabled) {
+        sty.backgroundColor = dis_color;
+      }
+      return sty;
+    },
+    textStyle: function textStyle() {
+      var sty = {};
+      if (this.color) {
+        sty.color = this.color;
+        if (this.bgColor === transparent) {
+          sty.borderColor = this.color;
+        }
+      }
+      return sty;
+    }
+  },
+  methods: {
+    btnClick: function btnClick(evt) {
+      if (!this.disabled) {
+        this.$emit('buttonClicked', evt);
+      }
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
 
-	props: {
-		text: String,
-		bgColor: {
-			type: String,
-			default: '#198ded'
-		},
-		color: {
-			type: String,
-			default: '#ffffff'
-		},
-		disabled: Boolean,
-		freeSize: {
-			type: Boolean,
-			default: true
-		}
-	},
-
-	computed: {
-		btnClz: function btnClz() {
-			var clz = [];
-
-			if (this.max) {
-				clz.push('fm-btn-max-padding');
-			}
-
-			if (this.bgColor == transparent) {
-				clz.push('fm-btn-hollow');
-			}
-
-			if (this.freeSize) {
-				clz.push('fm-btn-freeSize');
-			}
-
-			return clz;
-		},
-		btnStyle: function btnStyle() {
-			var sty = {};
-
-			if (this.bgColor != transparent) {
-				sty.backgroundColor = this.bgColor;
-			}
-			if (this.disabled) {
-				sty.backgroundColor = dis_color;
-			}
-
-			return sty;
-		},
-		textStyle: function textStyle() {
-			var sty = {};
-
-			if (this.color) {
-				sty.color = this.color;
-				if (this.bgColor == transparent) {
-					sty.borderColor = this.color;
-				}
-			}
-
-			return sty;
-		}
-	},
-
-	methods: {
-		btnClick: function btnClick(evt) {
-			if (!this.disabled) {
-				this.$emit('buttonClicked', evt);
-			}
-		}
-	},
-
-	mounted: function mounted() {
-		var _this = this;
-
-		setTimeout(function () {
-			dom.getComponentRect(_this.$refs.text, function (option) {
-				if (option.size.width >= 240) {
-					_this.max = true;
-				}
-			});
-		}, 50);
-	}
+    setTimeout(function () {
+      dom.getComponentRect(_this.$refs.text, function (option) {
+        if (option.size.width >= 240) {
+          _this.max = true;
+        }
+      });
+    }, 50);
+  }
 };
 
 /***/ }),
-/* 58 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11416,7 +3499,7 @@ if (false) {
 }
 
 /***/ }),
-/* 59 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11426,7 +3509,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(60);
+var _index = __webpack_require__(65);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -11438,18 +3521,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 60 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(61)
+__webpack_require__(66)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(63),
+  __webpack_require__(68),
   /* template */
-  __webpack_require__(64),
+  __webpack_require__(69),
   /* scopeId */
   "data-v-10b8a20a",
   /* cssModules */
@@ -11476,13 +3559,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 61 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(62);
+var content = __webpack_require__(67);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -11502,7 +3585,7 @@ if(false) {
 }
 
 /***/ }),
-/* 62 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -11516,7 +3599,7 @@ exports.push([module.i, "\n@charset \"UTF-8\";\n/** 默认主题色 blue **/\n.f
 
 
 /***/ }),
-/* 63 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11526,7 +3609,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmIcon = __webpack_require__(3);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
@@ -11534,7 +3617,7 @@ var _locale = __webpack_require__(5);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(4);
+var _locale3 = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11713,7 +3796,7 @@ exports.default = {
 //
 
 /***/ }),
-/* 64 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11802,7 +3885,7 @@ if (false) {
 }
 
 /***/ }),
-/* 65 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11812,7 +3895,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(66);
+var _index = __webpack_require__(71);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -11824,18 +3907,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 66 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(67)
+__webpack_require__(72)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(69),
+  __webpack_require__(74),
   /* template */
-  __webpack_require__(70),
+  __webpack_require__(75),
   /* scopeId */
   "data-v-745d9462",
   /* cssModules */
@@ -11862,13 +3945,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 67 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(68);
+var content = __webpack_require__(73);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -11888,7 +3971,7 @@ if(false) {
 }
 
 /***/ }),
-/* 68 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -11896,13 +3979,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.header-wrap[data-v-745d9462] {\n\tmargin-top: 27px;\n\tmargin-right: 66px;\n\tmargin-left: 66px;\n}\n.header[data-v-745d9462] {\n\tflex-direction: row;\n\tjustify-content: center;\n}\n.title[data-v-745d9462] {\n\tflex: 1;\n\tflex-direction: row;\n\tjustify-content: center;\n}\n.text-selected[data-v-745d9462] {\n\tcolor: #f34949;\n}\n.text[data-v-745d9462] {\n\tfont-size: 42px;\n\tfont-weight: 700;\n\ttext-align: center;\n\tcolor: #666666;\n}\n.bottom-line[data-v-745d9462] {\n\theight: 7.2px;\n\tmargin-top: 27px;\n\tbackground-color: #f34949;\n}\n.slider-wrap[data-v-745d9462] {\n\tflex-direction: row;\n\tborder-top-width: 3px;\n\tborder-color: #dddddd;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tab-view/index.vue?aaa7609e"],"names":[],"mappings":";AA2BA;CACA,iBAAA;CACA,mBAAA;CACA,kBAAA;CACA;AACA;CACA,oBAAA;CACA,wBAAA;CACA;AACA;CACA,QAAA;CACA,oBAAA;CACA,wBAAA;CACA;AACA;CACA,eAAA;CACA;AACA;CACA,gBAAA;CACA,iBAAA;CACA,mBAAA;CACA,eAAA;CACA;AACA;CACA,cAAA;CACA,iBAAA;CACA,0BAAA;CACA;AACA;CACA,oBAAA;CACA,sBAAA;CACA,sBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n<div class=\"tab-wrap\">\n\t<div class=\"header-wrap\">\n\t\t<div class=\"header\" ref=\"header\">\n\t\t\t<div v-for=\"(item, idx) in items\"\n\t\t\t\t:key=\"item.name\"\n\t\t\t\tclass=\"title\"\n\t\t\t\t@click=\"titleClick(idx)\">\n\t\t\t\t<text :class=\"['text', idx == current ? 'text-selected' : '']\" >{{item.text}}</text>\n\t\t\t</div>\n\t\t</div>\n\t\t<text class=\"bottom-line\" :style=\"lineStyle\" ref=\"line\"></text>\n\t</div>\n\t<div class=\"slider-wrap\"\n\t\tref=\"slider\"\n\t\t:style=\"listStyle\"\n\t\t@touchmove=\"move\"\n\t\t@touchstart=\"start\"\n\t\t@touchend=\"end\">\n\t\t<div v-for=\"(item, idx) in items\" class=\"body\" :style=\"itemStyle\" :key=\"idx\">\n\t\t\t<slot :name=\"item.name\"></slot>\n\t\t</div>\n\t</div>\n</div>\n</template>\n\n<style scoped>\n.header-wrap {\n\tmargin-top: 27px;\n\tmargin-right: 66px;\n\tmargin-left: 66px;\n}\n.header {\n\tflex-direction: row;\n\tjustify-content: center;\n}\n.title {\n\tflex: 1;\n\tflex-direction: row;\n\tjustify-content: center;\n}\n.text-selected {\n\tcolor: #f34949;\n}\n.text {\n\tfont-size: 42px;\n\tfont-weight: 700;\n\ttext-align: center;\n\tcolor: #666666;\n}\n.bottom-line {\n\theight: 7.2px;\n\tmargin-top: 27px;\n\tbackground-color: #f34949;\n}\n.slider-wrap {\n\tflex-direction: row;\n\tborder-top-width: 3px;\n\tborder-color: #dddddd;\n}\n</style>\n\n<script>\nconst dom = weex.requireModule('dom');\nconst animation = weex.requireModule('animation');\n\nexport default {\n  name: 'FmTabView',\n  data () {\n    return {\n      width: 0, // 单个tab宽度\n      min: 0,\n      transX: 0,\n      startX: 0,\n      moveX: 0,\n      current: 0, // 当前tab index\n      lineWidth: 0, // 标题下划线宽度\n      lineLeft: 0,\n      line: 0// 标题下划线translate计算比例\n    };\n  },\n  props: {\n    items: {\n      type: Array,\n      required: true\n    }\n  },\n  computed: {\n    lineStyle () {\n      return {\n        width: `${this.lineWidth}px`,\n        'margin-left': `${this.lineLeft}px`,\n        transform: `translateX(${-this.transX / this.line}px)`\n      };\n    },\n    listStyle () {\n      const sty = {\n        opacity: this.width === 0 ? 0 : 1\n      };\n\n      if (this.width > 0) {\n        sty.width = `${this.width * this.items.length}px`;\n        sty.transform = `translateX(${this.transX}px)`;\n      }\n\n      return sty;\n    },\n    itemStyle () {\n      return {\n        width: `${this.width || 1080}px`\n      };\n    }\n  },\n  mounted () {\n    setTimeout(() => {\n      const { platform } = weex.config.env;\n      const head = (typeof (window) === 'object' && platform.toLowerCase() === 'web') ? this.$refs.header.$children[0].$children[0] : this.$refs.header.children[0].children[0];\n      dom.getComponentRect(head, opt => {\n        this.lineWidth = opt.size.width + 36;\n        this.lineLeft = opt.size.left - 66 - 18;\n      });\n      dom.getComponentRect(this.$refs.slider, opt => {\n        this.width = opt.size.width;\n        this.line = this.width / (this.width - 132) * this.items.length;\n        this.min = -this.width * (this.items.length - 1);\n      });\n    }, 100);\n  },\n  methods: {\n    titleClick (idx) {\n      this.slide(-idx * this.width, -idx);\n      this.$emit('titleclick', idx);\n    },\n    start (evt) {\n      if (this.sliding) return;\n      this.startX = evt.changedTouches[0].screenX;\n      this.moveX = this.startX;\n    },\n    move (evt) {\n      if (this.sliding) return;\n      const x = evt.changedTouches[0].screenX;\n      const sub = x - this.moveX;\n\n      this.transX = Math.max(this.min, Math.min(0, this.transX + sub));\n      this.moveX = x;\n    },\n    end (evt) {\n      this.sliding = true;\n\n      const x = evt.changedTouches[0].screenX;\n      const direct = x - this.startX > 0;\n      const num = Math.floor(Math.abs(this.transX) / this.width);\n      const decimal = this.transX % this.width / this.width;\n      let int = this.transX > 0 ? num : -num;\n      const max = -this.items.length + 1;\n\n      if (decimal > 0.2 && direct) {\n        int = Math.min(0, int + 1);\n      } else if (decimal < -0.2 && !direct) {\n        int = Math.max(max, int - 1);\n      }\n\n      this.slide(int * this.width, int);\n    },\n    slide (trans, idx) {\n      animation.transition(this.$refs.slider, {\n        styles: {\n          transform: `translateX(${trans}px)`\n        },\n        duration: 200,\n        timingFunction: 'ease-out'\n      }, () => {\n        this.current = -idx;\n        this.transX = trans;\n        this.sliding = false;\n        this.$emit('slidend', { selected: this.current });\n      });\n      animation.transition(this.$refs.line, {\n        styles: {\n          transform: `translateX(${-trans / this.line}px)`\n        },\n        duration: 200,\n        timingFunction: 'ease-out'\n      });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.header-wrap[data-v-745d9462] {\n  margin-top: 27px;\n  margin-right: 66px;\n  margin-left: 66px;\n}\n.header[data-v-745d9462] {\n  flex-direction: row;\n  justify-content: center;\n}\n.title[data-v-745d9462] {\n  flex: 1;\n  flex-direction: row;\n  justify-content: center;\n}\n.text-selected[data-v-745d9462] {\n  color: #f34949;\n}\n.text[data-v-745d9462] {\n  font-size: 42px;\n  font-weight: 700;\n  text-align: center;\n  color: #666666;\n}\n.bottom-line[data-v-745d9462] {\n  height: 7.2px;\n  margin-top: 27px;\n  background-color: #f34949;\n}\n.slider-wrap[data-v-745d9462] {\n  flex-direction: row;\n  border-top-width: 3px;\n  border-color: #dddddd;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tab-view/index.vue?762cc8a9"],"names":[],"mappings":";AA2BA;EACA,iBAAA;EACA,mBAAA;EACA,kBAAA;CACA;AACA;EACA,oBAAA;EACA,wBAAA;CACA;AACA;EACA,QAAA;EACA,oBAAA;EACA,wBAAA;CACA;AACA;EACA,eAAA;CACA;AACA;EACA,gBAAA;EACA,iBAAA;EACA,mBAAA;EACA,eAAA;CACA;AACA;EACA,cAAA;EACA,iBAAA;EACA,0BAAA;CACA;AACA;EACA,oBAAA;EACA,sBAAA;EACA,sBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"tab-wrap\">\n    <div class=\"header-wrap\">\n      <div class=\"header\" ref=\"header\">\n        <div v-for=\"(item, idx) in items\"\n          :key=\"item.name\"\n          class=\"title\"\n          @click=\"titleClick(idx)\">\n          <text :class=\"['text', idx == current ? 'text-selected' : '']\" >{{item.text}}</text>\n        </div>\n      </div>\n      <text class=\"bottom-line\" :style=\"lineStyle\" ref=\"line\"></text>\n    </div>\n    <div class=\"slider-wrap\"\n      ref=\"slider\"\n      :style=\"listStyle\"\n      @touchmove=\"move\"\n      @touchstart=\"start\"\n      @touchend=\"end\">\n      <div v-for=\"(item, idx) in items\" class=\"body\" :style=\"itemStyle\" :key=\"idx\">\n        <slot :name=\"item.name\"></slot>\n      </div>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .header-wrap {\n    margin-top: 27px;\n    margin-right: 66px;\n    margin-left: 66px;\n  }\n  .header {\n    flex-direction: row;\n    justify-content: center;\n  }\n  .title {\n    flex: 1;\n    flex-direction: row;\n    justify-content: center;\n  }\n  .text-selected {\n    color: #f34949;\n  }\n  .text {\n    font-size: 42px;\n    font-weight: 700;\n    text-align: center;\n    color: #666666;\n  }\n  .bottom-line {\n    height: 7.2px;\n    margin-top: 27px;\n    background-color: #f34949;\n  }\n  .slider-wrap {\n    flex-direction: row;\n    border-top-width: 3px;\n    border-color: #dddddd;\n  }\n</style>\n\n<script>\nconst dom = weex.requireModule('dom');\nconst animation = weex.requireModule('animation');\n\nexport default {\n  name: 'FmTabView',\n  data () {\n    return {\n      width: 0, // 单个tab宽度\n      min: 0,\n      transX: 0,\n      startX: 0,\n      moveX: 0,\n      current: 0, // 当前tab index\n      lineWidth: 0, // 标题下划线宽度\n      lineLeft: 0,\n      line: 0// 标题下划线translate计算比例\n    };\n  },\n  props: {\n    items: {\n      type: Array,\n      required: true\n    }\n  },\n  computed: {\n    lineStyle () {\n      return {\n        width: `${this.lineWidth}px`,\n        'margin-left': `${this.lineLeft}px`,\n        transform: `translateX(${-this.transX / this.line}px)`\n      };\n    },\n    listStyle () {\n      const sty = {\n        opacity: this.width === 0 ? 0 : 1\n      };\n\n      if (this.width > 0) {\n        sty.width = `${this.width * this.items.length}px`;\n        sty.transform = `translateX(${this.transX}px)`;\n      }\n\n      return sty;\n    },\n    itemStyle () {\n      return {\n        width: `${this.width || 1080}px`\n      };\n    }\n  },\n  mounted () {\n    setTimeout(() => {\n      const { platform } = weex.config.env;\n      const head = (typeof (window) === 'object' && platform.toLowerCase() === 'web') ? this.$refs.header.$children[0].$children[0] : this.$refs.header.children[0].children[0];\n      dom.getComponentRect(head, opt => {\n        this.lineWidth = opt.size.width + 36;\n        this.lineLeft = opt.size.left - 66 - 18;\n      });\n      dom.getComponentRect(this.$refs.slider, opt => {\n        this.width = opt.size.width;\n        this.line = this.width / (this.width - 132) * this.items.length;\n        this.min = -this.width * (this.items.length - 1);\n      });\n    }, 100);\n  },\n  methods: {\n    titleClick (idx) {\n      this.slide(-idx * this.width, -idx);\n      this.$emit('titleclick', idx);\n    },\n    start (evt) {\n      if (this.sliding) return;\n      this.startX = evt.changedTouches[0].screenX;\n      this.moveX = this.startX;\n    },\n    move (evt) {\n      if (this.sliding) return;\n      const x = evt.changedTouches[0].screenX;\n      const sub = x - this.moveX;\n\n      this.transX = Math.max(this.min, Math.min(0, this.transX + sub));\n      this.moveX = x;\n    },\n    end (evt) {\n      this.sliding = true;\n\n      const x = evt.changedTouches[0].screenX;\n      const direct = x - this.startX > 0;\n      const num = Math.floor(Math.abs(this.transX) / this.width);\n      const decimal = this.transX % this.width / this.width;\n      let int = this.transX > 0 ? num : -num;\n      const max = -this.items.length + 1;\n\n      if (decimal > 0.2 && direct) {\n        int = Math.min(0, int + 1);\n      } else if (decimal < -0.2 && !direct) {\n        int = Math.max(max, int - 1);\n      }\n\n      this.slide(int * this.width, int);\n    },\n    slide (trans, idx) {\n      animation.transition(this.$refs.slider, {\n        styles: {\n          transform: `translateX(${trans}px)`\n        },\n        duration: 200,\n        timingFunction: 'ease-out'\n      }, () => {\n        this.current = -idx;\n        this.transX = trans;\n        this.sliding = false;\n        this.$emit('slidend', { selected: this.current });\n      });\n      animation.transition(this.$refs.line, {\n        styles: {\n          transform: `translateX(${-trans / this.line}px)`\n        },\n        duration: 200,\n        timingFunction: 'ease-out'\n      });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 69 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12110,7 +4193,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 70 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12176,7 +4259,7 @@ if (false) {
 }
 
 /***/ }),
-/* 71 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12186,7 +4269,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(72);
+var _index = __webpack_require__(77);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -12198,18 +4281,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 72 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(73)
+__webpack_require__(78)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(75),
+  __webpack_require__(80),
   /* template */
-  __webpack_require__(76),
+  __webpack_require__(81),
   /* scopeId */
   "data-v-9924f606",
   /* cssModules */
@@ -12236,13 +4319,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 73 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(74);
+var content = __webpack_require__(79);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -12262,7 +4345,7 @@ if(false) {
 }
 
 /***/ }),
-/* 74 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -12270,77 +4353,77 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.tip-wrap[data-v-9924f606] {\n\tflex-direction: row;\n\theight: 120px;\n\tpadding-top: 21.6px;\n}\n.arrow[data-v-9924f606] {\n\tposition: absolute;\n\ttop: 10.8px;\n\twidth: 21.6px;\n\theight: 21.6px;\n\ttransform: rotate(45deg);\n}\n.content-wrap[data-v-9924f606] {\n\tflex-direction: row;\n\talign-items: center;\n\tpadding-top: 27px;\n\tpadding-bottom: 27px;\n\tpadding-left: 30px;\n\tborder-radius: 6px;\n}\n.content[data-v-9924f606] {\n\theight: 51px;\n\tmax-width: 678px;\n\tfont-size: 42px;\n\tcolor: #ffffff;\n}\n.split[data-v-9924f606] {\n\twidth: 3px;\n\theight: 42px;\n\tmargin-left: 27px;\n\tbackground-color: #ffffff;\n\topacity: .4;\n}\n.close[data-v-9924f606] {\n\tcolor: #ffffff;\n\tfont-size: 54px;\n\tmargin-top: 9px;\n\tmargin-left: 30px;\n\tmargin-right: 30px;\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tips/index.vue?3c19afd8"],"names":[],"mappings":";AAaA;CACA,oBAAA;CACA,cAAA;CACA,oBAAA;CACA;AACA;CACA,mBAAA;CACA,YAAA;CACA,cAAA;CACA,eAAA;CACA,yBAAA;CACA;AACA;CACA,oBAAA;CACA,oBAAA;CACA,kBAAA;CACA,qBAAA;CACA,mBAAA;CACA,mBAAA;CACA;AACA;CACA,aAAA;CACA,iBAAA;CACA,gBAAA;CACA,eAAA;CACA;AACA;CACA,WAAA;CACA,aAAA;CACA,kBAAA;CACA,0BAAA;CACA,YAAA;CACA;AACA;CACA,eAAA;CACA,gBAAA;CACA,gBAAA;CACA,kBAAA;CACA,mBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n<div v-if=\"show\" class=\"tip-wrap\" :style=\"wrapStyle\">\n\t<div class=\"content-wrap\" :style=\"background\">\n\t\t<slot></slot>\n\t\t<text class=\"content\">{{message}}</text>\n\t\t<text class=\"split\"></text>\n\t\t<fm-icon class=\"close\" @fmClick=\"close\" value=\"&#xe6c0;\" />\n\t</div>\n\t<text class=\"arrow\" :style=\"arrowStyle\"></text>\n</div>\n</template>\n\n<style scoped>\n.tip-wrap {\n\tflex-direction: row;\n\theight: 120px;\n\tpadding-top: 21.6px;\n}\n.arrow {\n\tposition: absolute;\n\ttop: 10.8px;\n\twidth: 21.6px;\n\theight: 21.6px;\n\ttransform: rotate(45deg);\n}\n.content-wrap {\n\tflex-direction: row;\n\talign-items: center;\n\tpadding-top: 27px;\n\tpadding-bottom: 27px;\n\tpadding-left: 30px;\n\tborder-radius: 6px;\n}\n.content {\n\theight: 51px;\n\tmax-width: 678px;\n\tfont-size: 42px;\n\tcolor: #ffffff;\n}\n.split {\n\twidth: 3px;\n\theight: 42px;\n\tmargin-left: 27px;\n\tbackground-color: #ffffff;\n\topacity: .4;\n}\n.close {\n\tcolor: #ffffff;\n\tfont-size: 54px;\n\tmargin-top: 9px;\n\tmargin-left: 30px;\n\tmargin-right: 30px;\n}\n\n</style>\n\n<script>\nimport FmIcon from '../fm-icon'\nexport default {\n  name: 'FmTips',\n\tdata () {\n\t\treturn {\n\t\t\tshow: true\n\t\t}\n\t},\n\tcomponents: { FmIcon },\n\tcomputed: {\n\t\tbackground () {\n\t\t\treturn {\n\t\t\t\tbackgroundColor: this.bgColor\n\t\t\t}\n\t\t},\n\t\twrapStyle () {\n\t\t\treturn {\n\t\t\t\t'justify-content': this.right ? 'flex-end' : 'flex-start'\n\t\t\t}\n\t\t},\n\t\tarrowStyle () {\n\t\t\tlet sty = {\n\t\t\t\tbackgroundColor: this.bgColor\n\t\t\t}\n\t\t\tif (this.right) {\n\t\t\t\tsty.right = '18px'\n\t\t\t} else {\n\t\t\t\tsty.left = '18px'\n\t\t\t}\n\n\t\t\treturn sty\n\t\t}\n\t},\n\n\tprops: {\n\t\tmessage: String,\n\t\tbgColor: {\n\t\t\ttype: String,\n\t\t\tdefault: '#198ded'\n\t\t},\n\t\tright: Boolean\n\t},\n\n\tmethods: {\n\t\tclose () {\n\t\t\tthis.show = false\n\t\t\tthis.$emit('close')\n\t\t}\n\t}\n}\n</script>"],"sourceRoot":""}]);
+exports.push([module.i, "\n.tip-wrap[data-v-9924f606] {\n  flex-direction: row;\n  height: 120px;\n  padding-top: 21.6px;\n}\n.arrow[data-v-9924f606] {\n  position: absolute;\n  top: 10.8px;\n  width: 21.6px;\n  height: 21.6px;\n  transform: rotate(45deg);\n}\n.content-wrap[data-v-9924f606] {\n  flex-direction: row;\n  align-items: center;\n  padding-top: 27px;\n  padding-bottom: 27px;\n  padding-left: 30px;\n  border-radius: 6px;\n}\n.content[data-v-9924f606] {\n  height: 51px;\n  max-width: 678px;\n  font-size: 42px;\n  color: #ffffff;\n}\n.split[data-v-9924f606] {\n  width: 3px;\n  height: 42px;\n  margin-left: 27px;\n  background-color: #ffffff;\n  opacity: .4;\n}\n.close[data-v-9924f606] {\n  color: #ffffff;\n  font-size: 54px;\n  margin-top: 9px;\n  margin-left: 30px;\n  margin-right: 30px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tips/index.vue?60a05264"],"names":[],"mappings":";AAaA;EACA,oBAAA;EACA,cAAA;EACA,oBAAA;CACA;AACA;EACA,mBAAA;EACA,YAAA;EACA,cAAA;EACA,eAAA;EACA,yBAAA;CACA;AACA;EACA,oBAAA;EACA,oBAAA;EACA,kBAAA;EACA,qBAAA;EACA,mBAAA;EACA,mBAAA;CACA;AACA;EACA,aAAA;EACA,iBAAA;EACA,gBAAA;EACA,eAAA;CACA;AACA;EACA,WAAA;EACA,aAAA;EACA,kBAAA;EACA,0BAAA;EACA,YAAA;CACA;AACA;EACA,eAAA;EACA,gBAAA;EACA,gBAAA;EACA,kBAAA;EACA,mBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div v-if=\"show\" class=\"tip-wrap\" :style=\"wrapStyle\">\n    <div class=\"content-wrap\" :style=\"background\">\n      <slot></slot>\n      <text class=\"content\">{{message}}</text>\n      <text class=\"split\"></text>\n      <fm-icon class=\"close\" @fmClick=\"close\" value=\"&#xe6c0;\" />\n    </div>\n    <text class=\"arrow\" :style=\"arrowStyle\"></text>\n  </div>\n</template>\n\n<style scoped>\n  .tip-wrap {\n    flex-direction: row;\n    height: 120px;\n    padding-top: 21.6px;\n  }\n  .arrow {\n    position: absolute;\n    top: 10.8px;\n    width: 21.6px;\n    height: 21.6px;\n    transform: rotate(45deg);\n  }\n  .content-wrap {\n    flex-direction: row;\n    align-items: center;\n    padding-top: 27px;\n    padding-bottom: 27px;\n    padding-left: 30px;\n    border-radius: 6px;\n  }\n  .content {\n    height: 51px;\n    max-width: 678px;\n    font-size: 42px;\n    color: #ffffff;\n  }\n  .split {\n    width: 3px;\n    height: 42px;\n    margin-left: 27px;\n    background-color: #ffffff;\n    opacity: .4;\n  }\n  .close {\n    color: #ffffff;\n    font-size: 54px;\n    margin-top: 9px;\n    margin-left: 30px;\n    margin-right: 30px;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nexport default {\n  name: 'FmTips',\n  data () {\n    return {\n      show: true\n    };\n  },\n  components: { FmIcon },\n  computed: {\n    background () {\n      return {\n        backgroundColor: this.bgColor\n      };\n    },\n    wrapStyle () {\n      return {\n        'justify-content': this.right ? 'flex-end' : 'flex-start'\n      };\n    },\n    arrowStyle () {\n      const sty = {\n        backgroundColor: this.bgColor\n      };\n      if (this.right) {\n        sty.right = '18px';\n      } else {\n        sty.left = '18px';\n      }\n\n      return sty;\n    }\n  },\n\n  props: {\n    message: String,\n    bgColor: {\n      type: String,\n      default: '#198ded'\n    },\n    right: Boolean\n  },\n\n  methods: {\n    close () {\n      this.show = false;\n      this.$emit('close');\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 75 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
-var _fmIcon = __webpack_require__(3);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-	name: 'FmTips',
-	data: function data() {
-		return {
-			show: true
-		};
-	},
+  name: 'FmTips',
+  data: function data() {
+    return {
+      show: true
+    };
+  },
 
-	components: { FmIcon: _fmIcon2.default },
-	computed: {
-		background: function background() {
-			return {
-				backgroundColor: this.bgColor
-			};
-		},
-		wrapStyle: function wrapStyle() {
-			return {
-				'justify-content': this.right ? 'flex-end' : 'flex-start'
-			};
-		},
-		arrowStyle: function arrowStyle() {
-			var sty = {
-				backgroundColor: this.bgColor
-			};
-			if (this.right) {
-				sty.right = '18px';
-			} else {
-				sty.left = '18px';
-			}
+  components: { FmIcon: _fmIcon2.default },
+  computed: {
+    background: function background() {
+      return {
+        backgroundColor: this.bgColor
+      };
+    },
+    wrapStyle: function wrapStyle() {
+      return {
+        'justify-content': this.right ? 'flex-end' : 'flex-start'
+      };
+    },
+    arrowStyle: function arrowStyle() {
+      var sty = {
+        backgroundColor: this.bgColor
+      };
+      if (this.right) {
+        sty.right = '18px';
+      } else {
+        sty.left = '18px';
+      }
 
-			return sty;
-		}
-	},
+      return sty;
+    }
+  },
 
-	props: {
-		message: String,
-		bgColor: {
-			type: String,
-			default: '#198ded'
-		},
-		right: Boolean
-	},
+  props: {
+    message: String,
+    bgColor: {
+      type: String,
+      default: '#198ded'
+    },
+    right: Boolean
+  },
 
-	methods: {
-		close: function close() {
-			this.show = false;
-			this.$emit('close');
-		}
-	}
+  methods: {
+    close: function close() {
+      this.show = false;
+      this.$emit('close');
+    }
+  }
 }; //
 //
 //
@@ -12396,10 +4479,9 @@ exports.default = {
 //
 //
 //
-//
 
 /***/ }),
-/* 76 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12444,7 +4526,7 @@ if (false) {
 }
 
 /***/ }),
-/* 77 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12454,7 +4536,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(78);
+var _index = __webpack_require__(83);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -12466,18 +4548,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 78 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(79)
+__webpack_require__(84)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(81),
+  __webpack_require__(86),
   /* template */
-  __webpack_require__(85),
+  __webpack_require__(90),
   /* scopeId */
   "data-v-a8d59aa2",
   /* cssModules */
@@ -12504,13 +4586,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 79 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(80);
+var content = __webpack_require__(85);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -12530,7 +4612,7 @@ if(false) {
 }
 
 /***/ }),
-/* 80 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -12538,13 +4620,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-rich-text[data-v-a8d59aa2] {\n  justify-content: flex-start;\n  align-items: center;\n  flex-wrap: wrap;\n  flex-direction: row;\n  flex-shrink: 1;\n}\n.default-text[data-v-a8d59aa2] {\n  color: #A5A5A5;\n  font-size: 36px;\n  line-height: 48px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rich-text/index.vue?a71394a4"],"names":[],"mappings":";AAkCA;EACA,4BAAA;EACA,oBAAA;EACA,gBAAA;EACA,oBAAA;EACA,eAAA;CACA;AAEA;EACA,eAAA;EACA,gBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div>\n    <div class=\"fm-rich-text\" v-if=\"isNotEmptyArray\">\n      <div v-for=\"v in configList\">\n        <fm-text v-if=\"v.type=='text' && v.text\"\n                            :text-value=\"v.text\"\n                            :text-style=\"v.style\"\n                            :has-text-margin=\"hasTextMargin\"></fm-text>\n\n        <fm-rich-text-link v-if=\"v.type=='link' && v.href && v.text\"\n                            :link-value=\"v.text\"\n                            :link-style=\"v.style\"\n                            :link-href=\"v.href\"\n                            :has-text-margin=\"hasTextMargin\"\n                            @fmRichTextLinkClick=\"linkBeClick\"></fm-rich-text-link>\n\n        <fm-icon v-if=\"v.type=='icon'\"\n                            :color=\"v.color\"\n                            :value=\"v.value\"\n                            :iconStyle=\"v.style\"></fm-icon>\n\n        <fm-tag v-if=\"v.type=='tag'\"\n                           :tagType=\"v.tagType\"\n                           :size=\"v.size\"\n                           :value=\"v.value\"\n                           :color=\"v.color\"\n                           :fontColor=\"v.fontColor\"></fm-tag>\n      </div>\n    </div>\n    <fm-text :text-value=\"configList\" v-if=\"isString\"></fm-text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-rich-text {\n    justify-content: flex-start;\n    align-items: center;\n    flex-wrap: wrap;\n    flex-direction: row;\n    flex-shrink: 1;\n  }\n\n  .default-text {\n    color: #A5A5A5;\n    font-size: 36px;\n    line-height: 48px;\n  }\n</style>\n\n<script>\n  import Utils from'./utils'\n  import FmText from '../fm-text'\n  import FmIcon from '../fm-icon'\n  import FmTag from '../fm-tag'\n  import FmRichTextLink from './fm-rich-text-link.vue'\n  export default {\n    name: 'FmRichText',\n    components: {\n      FmText, FmIcon, FmTag, FmRichTextLink\n    },\n    props: {\n      configList: {\n        type: [Array, String],\n        default: function () {\n          return []\n        }\n      },\n      hasTextMargin: {\n        type: Boolean,\n        default: true\n      }\n    },\n    data: () => ({}),\n    computed: {\n      isNotEmptyArray () {\n        return Utils.isNonEmptyArray(this.configList);\n      },\n      isString () {\n        return Utils.isString(this.configList);\n      }\n    },\n    methods: {\n        linkBeClick(obj) {\n            this.$emit('linkBeClick', obj)\n        }\n    }\n  };\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-rich-text[data-v-a8d59aa2] {\n  justify-content: flex-start;\n  align-items: center;\n  flex-wrap: wrap;\n  flex-direction: row;\n  flex-shrink: 1;\n}\n.default-text[data-v-a8d59aa2] {\n  color: #A5A5A5;\n  font-size: 36px;\n  line-height: 48px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rich-text/index.vue?bf752194"],"names":[],"mappings":";AAkCA;EACA,4BAAA;EACA,oBAAA;EACA,gBAAA;EACA,oBAAA;EACA,eAAA;CACA;AAEA;EACA,eAAA;EACA,gBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div>\n    <div class=\"fm-rich-text\" v-if=\"isNotEmptyArray\">\n      <div v-for=\"(v, idx) in configList\" :key=\"idx\">\n        <fm-text v-if=\"v.type=='text' && v.text\"\n                            :text-value=\"v.text\"\n                            :text-style=\"v.style\"\n                            :has-text-margin=\"hasTextMargin\"></fm-text>\n\n        <fm-rich-text-link v-if=\"v.type=='link' && v.href && v.text\"\n                            :link-value=\"v.text\"\n                            :link-style=\"v.style\"\n                            :link-href=\"v.href\"\n                            :has-text-margin=\"hasTextMargin\"\n                            @fmRichTextLinkClick=\"linkBeClick\"></fm-rich-text-link>\n\n        <fm-icon v-if=\"v.type=='icon'\"\n                            :color=\"v.color\"\n                            :value=\"v.value\"\n                            :iconStyle=\"v.style\"></fm-icon>\n\n        <fm-tag v-if=\"v.type=='tag'\"\n                           :tagType=\"v.tagType\"\n                           :size=\"v.size\"\n                           :value=\"v.value\"\n                           :color=\"v.color\"\n                           :fontColor=\"v.fontColor\"></fm-tag>\n      </div>\n    </div>\n    <fm-text :text-value=\"configList\" v-if=\"isString\"></fm-text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-rich-text {\n    justify-content: flex-start;\n    align-items: center;\n    flex-wrap: wrap;\n    flex-direction: row;\n    flex-shrink: 1;\n  }\n\n  .default-text {\n    color: #A5A5A5;\n    font-size: 36px;\n    line-height: 48px;\n  }\n</style>\n\n<script>\nimport Utils from './utils';\nimport FmText from '../fm-text';\nimport FmIcon from '../fm-icon';\nimport FmTag from '../fm-tag';\nimport FmRichTextLink from './fm-rich-text-link.vue';\nexport default {\n  name: 'FmRichText',\n  components: {\n    FmText, FmIcon, FmTag, FmRichTextLink\n  },\n  props: {\n    configList: {\n      type: [Array, String],\n      default: function () {\n        return [];\n      }\n    },\n    hasTextMargin: {\n      type: Boolean,\n      default: true\n    }\n  },\n  data: () => ({}),\n  computed: {\n    isNotEmptyArray () {\n      return Utils.isNonEmptyArray(this.configList);\n    },\n    isString () {\n      return Utils.isString(this.configList);\n    }\n  },\n  methods: {\n    linkBeClick (obj) {\n      this.$emit('linkBeClick', obj);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 81 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12562,7 +4644,7 @@ var _fmText = __webpack_require__(6);
 
 var _fmText2 = _interopRequireDefault(_fmText);
 
-var _fmIcon = __webpack_require__(3);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
@@ -12570,7 +4652,7 @@ var _fmTag = __webpack_require__(7);
 
 var _fmTag2 = _interopRequireDefault(_fmTag);
 
-var _fmRichTextLink = __webpack_require__(82);
+var _fmRichTextLink = __webpack_require__(87);
 
 var _fmRichTextLink2 = _interopRequireDefault(_fmRichTextLink);
 
@@ -12660,14 +4742,14 @@ exports.default = {
 //
 
 /***/ }),
-/* 82 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(83),
+  __webpack_require__(88),
   /* template */
-  __webpack_require__(84),
+  __webpack_require__(89),
   /* scopeId */
   null,
   /* cssModules */
@@ -12694,7 +4776,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 83 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12755,7 +4837,7 @@ exports.default = {
 //
 
 /***/ }),
-/* 84 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12784,7 +4866,7 @@ if (false) {
 }
 
 /***/ }),
-/* 85 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12792,8 +4874,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "fm-rich-text",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))
-  }, _vm._l((_vm.configList), function(v) {
-    return _c('div', [(v.type == 'text' && v.text) ? _c('fm-text', {
+  }, _vm._l((_vm.configList), function(v, idx) {
+    return _c('div', {
+      key: idx,
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(undefined))
+    }, [(v.type == 'text' && v.text) ? _c('fm-text', {
       staticStyle: _vm.$processStyle(undefined),
       style: (_vm.$processStyle(undefined)),
       attrs: {
@@ -12849,7 +4935,7 @@ if (false) {
 }
 
 /***/ }),
-/* 86 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12859,7 +4945,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(87);
+var _index = __webpack_require__(92);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -12871,18 +4957,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 87 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(88)
+__webpack_require__(93)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(90),
+  __webpack_require__(95),
   /* template */
-  __webpack_require__(91),
+  __webpack_require__(96),
   /* scopeId */
   "data-v-584ad4ca",
   /* cssModules */
@@ -12909,13 +4995,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 88 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(89);
+var content = __webpack_require__(94);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -12935,7 +5021,7 @@ if(false) {
 }
 
 /***/ }),
-/* 89 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -12943,13 +5029,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-special-rich-text[data-v-584ad4ca] {\n  position: relative;\n}\n.tag-div[data-v-584ad4ca] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  color: #A5A5A5;\n  font-size: 36px;\n  line-height: 48px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-special-rich-text/index.vue?bcfd5038"],"names":[],"mappings":";AAmBA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;EACA,OAAA;EACA,QAAA;EACA,eAAA;EACA,gBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"fm-special-rich-text\">\n    <div class=\"tag-div\"\n         :style=\"{top:top+'px'}\">\n      <fm-icon v-if=\"newList[0].type == 'icon' && newList[0].value\"\n                          :value=\"newList[0].value\"\n                          :iconStyle=\"newList[0].style\"></fm-icon>\n      <fm-tag v-if=\"newList[0].type=='tag'\"\n                          :tagType=\"newList[0].tagType\"\n                          :size=\"newList[0].size\"\n                          :value=\"newList[0].value\"\n                          :color=\"newList[0].color\"\n                          :fontColor=\"newList[0].fontColor\"></fm-tag>\n    </div>\n    <fm-text :text-value=\"newList[1].value\" :textStyle=\"newList[1].style\" v-if=\"newList[1].value\"></fm-text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-special-rich-text {\n    position: relative;\n  }\n\n  .tag-div {\n    position: absolute;\n    top: 0;\n    left: 0;\n    color: #A5A5A5;\n    font-size: 36px;\n    line-height: 48px;\n  }\n</style>\n\n<script>\n  import Utils from'../fm-rich-text/utils'\n  import FmText from '../fm-text'\n  import FmIcon from '../fm-icon'\n  import FmTag from '../fm-tag'\n  export default {\n    name: 'FmSpecialRichText',\n    components: {\n      FmText, FmIcon, FmTag\n    },\n    props: {\n      configList: {\n        type: [Array, String],\n        default: () => ({})\n      }\n    },\n    computed: {\n      newList () {\n        const { configList } = this\n        if (Utils.isNonEmptyArray(configList) && configList.length === 2) {\n          let r1 = configList[0]\n          let r2 = configList[1]\n          const iconStyle = r1.style\n          const textStyle = r2.style\n          let style = {}\n          let fontSize = 36\n          const tagWidth = iconStyle && iconStyle.width ? iconStyle.width : 36\n\n          if (textStyle && textStyle.fontSize) {\n            fontSize = textStyle.fontSize\n            style = {\n              fontSize: textStyle.fontSize,\n              lineHeight: textStyle.fontSize * 1.4\n            }\n          }\n\n          if (textStyle && textStyle.color) {\n            style = {\n              ...style,\n              color: textStyle.color\n            }\n          }\n\n          if (r1.type === 'tag' && iconStyle && iconStyle.width) {\n            r1 = {\n              ...r1,\n              style: { ...iconStyle, width: null }\n            }\n          }\n          const newValue = r2.value ? new Array(Math.ceil(tagWidth / fontSize) + 1).join('   ') + `  ${r2.value}` : ''\n          r2 = {\n            ...r2,\n            style,\n            value: newValue\n          }\n          return [r1, r2]\n        } else {\n          return []\n        }\n      },\n      top () {\n        const { configList } = this\n        if (configList[0].type === 'tag') return 0\n        if (Utils.isNonEmptyArray(configList) && configList.length === 2) {\n          const iconStyle = configList[0].style\n          const textStyle = configList[1].style\n          let fontSize = 36\n          const tagHeight = iconStyle && iconStyle.height ? iconStyle.height : 39\n          if (textStyle && textStyle.fontSize) {\n            fontSize = textStyle.fontSize\n          }\n          return Math.ceil((fontSize * 1.3 - tagHeight) / 2)\n        } else {\n          return 0\n        }\n      }\n    }\n  }\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-special-rich-text[data-v-584ad4ca] {\n  position: relative;\n}\n.tag-div[data-v-584ad4ca] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  color: #A5A5A5;\n  font-size: 36px;\n  line-height: 48px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-special-rich-text/index.vue?5c78b018"],"names":[],"mappings":";AAmBA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;EACA,OAAA;EACA,QAAA;EACA,eAAA;EACA,gBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"fm-special-rich-text\">\n    <div class=\"tag-div\"\n         :style=\"{top:top+'px'}\">\n      <fm-icon v-if=\"newList[0].type == 'icon' && newList[0].value\"\n                          :value=\"newList[0].value\"\n                          :iconStyle=\"newList[0].style\"></fm-icon>\n      <fm-tag v-if=\"newList[0].type=='tag'\"\n                          :tagType=\"newList[0].tagType\"\n                          :size=\"newList[0].size\"\n                          :value=\"newList[0].value\"\n                          :color=\"newList[0].color\"\n                          :fontColor=\"newList[0].fontColor\"></fm-tag>\n    </div>\n    <fm-text :text-value=\"newList[1].value\" :textStyle=\"newList[1].style\" v-if=\"newList[1].value\"></fm-text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-special-rich-text {\n    position: relative;\n  }\n\n  .tag-div {\n    position: absolute;\n    top: 0;\n    left: 0;\n    color: #A5A5A5;\n    font-size: 36px;\n    line-height: 48px;\n  }\n</style>\n\n<script>\nimport Utils from '../fm-rich-text/utils';\nimport FmText from '../fm-text';\nimport FmIcon from '../fm-icon';\nimport FmTag from '../fm-tag';\nexport default {\n  name: 'FmSpecialRichText',\n  components: {\n    FmText, FmIcon, FmTag\n  },\n  props: {\n    configList: {\n      type: [Array, String],\n      default: () => ({})\n    }\n  },\n  computed: {\n    newList () {\n      const { configList } = this;\n      if (Utils.isNonEmptyArray(configList) && configList.length === 2) {\n        let r1 = configList[0];\n        let r2 = configList[1];\n        const iconStyle = r1.style;\n        const textStyle = r2.style;\n        let style = {};\n        let fontSize = 36;\n        const tagWidth = iconStyle && iconStyle.width ? iconStyle.width : 36;\n\n        if (textStyle && textStyle.fontSize) {\n          fontSize = textStyle.fontSize;\n          style = {\n            fontSize: textStyle.fontSize,\n            lineHeight: textStyle.fontSize * 1.4\n          };\n        }\n\n        if (textStyle && textStyle.color) {\n          style = {\n            ...style,\n            color: textStyle.color\n          };\n        }\n\n        if (r1.type === 'tag' && iconStyle && iconStyle.width) {\n          r1 = {\n            ...r1,\n            style: { ...iconStyle, width: null }\n          };\n        }\n        const newValue = r2.value ? new Array(Math.ceil(tagWidth / fontSize) + 1).join('   ') + `  ${r2.value}` : '';\n        r2 = {\n          ...r2,\n          style,\n          value: newValue\n        };\n        return [r1, r2];\n      } else {\n        return [];\n      }\n    },\n    top () {\n      const { configList } = this;\n      if (configList[0].type === 'tag') return 0;\n      if (Utils.isNonEmptyArray(configList) && configList.length === 2) {\n        const iconStyle = configList[0].style;\n        const textStyle = configList[1].style;\n        let fontSize = 36;\n        const tagHeight = iconStyle && iconStyle.height ? iconStyle.height : 39;\n        if (textStyle && textStyle.fontSize) {\n          fontSize = textStyle.fontSize;\n        }\n        return Math.ceil((fontSize * 1.3 - tagHeight) / 2);\n      } else {\n        return 0;\n      }\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 90 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13001,7 +5087,7 @@ var _fmText = __webpack_require__(6);
 
 var _fmText2 = _interopRequireDefault(_fmText);
 
-var _fmIcon = __webpack_require__(3);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
@@ -13087,7 +5173,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 91 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13136,7 +5222,7 @@ if (false) {
 }
 
 /***/ }),
-/* 92 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13146,7 +5232,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(93);
+var _index = __webpack_require__(98);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -13158,18 +5244,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 93 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(94)
+__webpack_require__(99)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(96),
+  __webpack_require__(101),
   /* template */
-  __webpack_require__(97),
+  __webpack_require__(102),
   /* scopeId */
   "data-v-52ae49d0",
   /* cssModules */
@@ -13196,13 +5282,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 94 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(95);
+var content = __webpack_require__(100);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -13222,7 +5308,7 @@ if(false) {
 }
 
 /***/ }),
-/* 95 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -13230,20 +5316,20 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.container[data-v-52ae49d0] {\n    position: relative;\n}\n.text[data-v-52ae49d0] {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    color: #999999;\n}\n.text_small[data-v-52ae49d0] {\n    font-size: 36px;\n    line-height: 42px;\n}\n.text_large[data-v-52ae49d0] {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    font-weight: 500;\n    line-height: 72px;\n}\n.text_huge[data-v-52ae49d0] {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 54px;\n    line-height: 78px;\n}\n.more[data-v-52ae49d0] {\n    position: absolute;\n    right: 18px;\n    bottom: 0;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n}\n.test[data-v-52ae49d0] {\n    flex-direction: row;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-foldable-text/index.vue?09251734"],"names":[],"mappings":";AAUA;IACA,mBAAA;CACA;AACA;IACA,sDAAA;IACA,eAAA;CACA;AACA;IACA,gBAAA;IACA,kBAAA;CACA;AACA;IACA,+BAAA;IACA,iBAAA;IACA,gBAAA;IACA,iBAAA;IACA,kBAAA;CACA;AACA;IACA,+BAAA;IACA,iBAAA;IACA,gBAAA;IACA,kBAAA;CACA;AACA;IACA,mBAAA;IACA,YAAA;IACA,UAAA;IACA,+BAAA;IACA,iBAAA;CACA;AACA;IACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n    <div class=\"wrapper\" @click=\"fold\">\n        <div class=\"container\" ref=\"plane\" :style=\"planeStyle\">\n            <text :class=\"textClz\" ref=\"text\" :style=\"textStyle\">{{ getText }}</text>\n            <text class=\"more\" v-if=\"foldable && folded\" ref=\"more\" :style=\"moreStyle\">{{ tipValue }}</text>\n        </div>\n    </div>\n</template>\n\n<style scoped>\n.container {\n    position: relative;\n}\n.text {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    color: #999999;\n}\n.text_small {\n    font-size: 36px;\n    line-height: 42px;\n}\n.text_large {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    font-weight: 500;\n    line-height: 72px;\n}\n.text_huge {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 54px;\n    line-height: 78px;\n}\n.more {\n    position: absolute;\n    right: 18px;\n    bottom: 0;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n}\n.test {\n    flex-direction: row;\n}\n</style>\n\n<script>\nimport Locale from 'weex-flymeui/lib/mixins/locale'\nimport { t } from 'weex-flymeui/lib/locale'\n\nexport default {\n    name: 'FmFoldableText',\n    mixins: [Locale],\n    data() {\n        return {\n            expandHeight: '',\n            unexpandHeight: '',\n            animationHeight: '',\n            foldText: '',\n            foldable: true\n        }\n    },\n    props: {\n        width: {\n            type: Number,\n            default: 1020\n        },\n        text: {\n            type: String,\n            default: ''\n        },\n        lines: {\n            type: Number,\n            default: 2\n        },\n        folded: {\n            type: Boolean,\n            default: true\n        },\n        small: {\n            type: Boolean,\n            default: true\n        },\n        large: Boolean,\n        huge: Boolean,\n        textStyle: Object,\n        tipStyle: Object,\n        tipValue: {\n            type: String,\n            default() {\n                return t('el.foldabletext.more')\n            }\n        }\n    },\n    mounted() {\n        if (this.foldText === '') {\n            const { textStyle } = this\n            let fontSize = (textStyle && textStyle.fontSize) ? textStyle.fontSize : this.large ? 48 : this.huge ? 54 : 36\n            // 计算折叠后的文本\n            let size1 = fontSize + 36 * 0.04 // 汉字\n            let size2 = fontSize * 0.56 // 英文\n            let size3 = fontSize * 0.556 // 数字\n            let size4 = fontSize * 0.80 // 全角\n            let size5 = fontSize * 0.2 // 半角\n            let tSize = 0, tmpStr = ''\n            let hideWidth = this.width * this.lines + fontSize // 不显示“更多”情况下所能容纳最大的字体宽度\n            let maxWith = this.width * this.lines - size1 * this.tipValue.length // 显示“更多”情况下所能容纳最大的字体宽度\n            for (let c of this.text) {\n                if (/^[\\u4e00-\\u9fa5]/.test(c)) {\n                    // 汉字\n                    tSize += size1\n                } else if (/^[a-zA-Z]/.test(c)){\n                    // 英文\n                    tSize += size2\n                } else if (/^[0-9]/.test(c)){\n                    // 数字\n                    tSize += size3\n                } else if (/^[·《》，。？、：；“”‘’——【】]/.test(c)) {\n                    // 全角\n                    tSize += size4\n                } else if (/^[`~!@#\\$%\\^&\\*\\(\\)_\\-\\+=\\{\\}\\[\\]|\\\\:;\"'<>,.\\?\\/\\s]/.test(c)) {\n                    // 半角\n                    tSize += size5\n                } else {\n                    // 其他\n                    tSize += size1\n                }\n                if (tSize >= maxWith) {\n                    if (tSize >= hideWidth) {\n                        tmpStr += '..'\n                        break\n                    }\n                } else {\n                    tmpStr += c\n                }\n            }\n            // 文字不超过范围 不折叠\n            (tSize < hideWidth) && (this.foldable = false) && (this.folded = false)\n            this.foldText = tmpStr\n        }\n    },\n    computed: {\n        getText() {\n            return this.folded && this.foldable ? this.foldText : this.text\n        },\n        planeStyle() {\n            return {\n                width: this.width\n            }\n        },\n        moreStyle() {\n            return {\n                fontSize: this.large ? 48 : this.huge ? 54 : 36,\n                lineHeight: this.large ? 72 : this.huge ? 78 : 42,\n                color: '#198ded',\n                fontWeight: '600',\n                ...this.tipStyle\n            }\n        },\n        textClz() {\n            let clz = ['text', 'text_small']\n            if (this.large) {\n                clz.push('text_large')\n            } else if (this.huge) {\n                clz.push('text_huge')\n            }\n            return clz\n        }\n    },\n    methods: {\n        fold() {\n            this.foldable && (this.folded = !this.folded)\n        }\n    }\n}\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.container[data-v-52ae49d0] {\n  position: relative;\n}\n.text[data-v-52ae49d0] {\n  font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n  color: #999999;\n}\n.text_small[data-v-52ae49d0] {\n  font-size: 36px;\n  line-height: 42px;\n}\n.text_large[data-v-52ae49d0] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 48px;\n  font-weight: 500;\n  line-height: 72px;\n}\n.text_huge[data-v-52ae49d0] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 54px;\n  line-height: 78px;\n}\n.more[data-v-52ae49d0] {\n  position: absolute;\n  right: 18px;\n  bottom: 0;\n  font-family: sans-serif-medium;\n  font-weight: 500;\n}\n.test[data-v-52ae49d0] {\n  flex-direction: row;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-foldable-text/index.vue?30e80c3a"],"names":[],"mappings":";AAUA;EACA,mBAAA;CACA;AACA;EACA,sDAAA;EACA,eAAA;CACA;AACA;EACA,gBAAA;EACA,kBAAA;CACA;AACA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,iBAAA;EACA,kBAAA;CACA;AACA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AACA;EACA,mBAAA;EACA,YAAA;EACA,UAAA;EACA,+BAAA;EACA,iBAAA;CACA;AACA;EACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"wrapper\" @click=\"fold\">\n    <div class=\"container\" ref=\"plane\" :style=\"planeStyle\">\n      <text :class=\"textClz\" ref=\"text\" :style=\"textStyle\">{{ getText }}</text>\n      <text class=\"more\" v-if=\"foldable && folded\" ref=\"more\" :style=\"moreStyle\">{{ tipValue }}</text>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .container {\n    position: relative;\n  }\n  .text {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    color: #999999;\n  }\n  .text_small {\n    font-size: 36px;\n    line-height: 42px;\n  }\n  .text_large {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    font-weight: 500;\n    line-height: 72px;\n  }\n  .text_huge {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 54px;\n    line-height: 78px;\n  }\n  .more {\n    position: absolute;\n    right: 18px;\n    bottom: 0;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n  }\n  .test {\n    flex-direction: row;\n  }\n</style>\n\n<script>\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmFoldableText',\n  mixins: [Locale],\n  data () {\n    return {\n      expandHeight: '',\n      unexpandHeight: '',\n      animationHeight: '',\n      foldText: '',\n      foldable: true\n    };\n  },\n  props: {\n    width: {\n      type: Number,\n      default: 1020\n    },\n    text: {\n      type: String,\n      default: ''\n    },\n    lines: {\n      type: Number,\n      default: 2\n    },\n    folded: {\n      type: Boolean,\n      default: true\n    },\n    small: {\n      type: Boolean,\n      default: true\n    },\n    large: Boolean,\n    huge: Boolean,\n    textStyle: Object,\n    tipStyle: Object,\n    tipValue: {\n      type: String,\n      default () {\n        return t('el.foldabletext.more');\n      }\n    }\n  },\n  mounted () {\n    if (this.foldText === '') {\n      const { textStyle } = this;\n      const fontSize = (textStyle && textStyle.fontSize) ? textStyle.fontSize : this.large ? 48 : this.huge ? 54 : 36;\n      // 计算折叠后的文本\n      const size1 = fontSize + 36 * 0.04; // 汉字\n      const size2 = fontSize * 0.56; // 英文\n      const size3 = fontSize * 0.556; // 数字\n      const size4 = fontSize * 0.80; // 全角\n      const size5 = fontSize * 0.2; // 半角\n      let tSize = 0;\n      let tmpStr = '';\n      const hideWidth = this.width * this.lines + fontSize; // 不显示“更多”情况下所能容纳最大的字体宽度\n      const maxWith = this.width * this.lines - size1 * this.tipValue.length; // 显示“更多”情况下所能容纳最大的字体宽度\n      for (const c of this.text) {\n        if (/^[\\u4e00-\\u9fa5]/.test(c)) {\n          // 汉字\n          tSize += size1;\n        } else if (/^[a-zA-Z]/.test(c)) {\n          // 英文\n          tSize += size2;\n        } else if (/^[0-9]/.test(c)) {\n          // 数字\n          tSize += size3;\n        } else if (/^[·《》，。？、：；“”‘’——【】]/.test(c)) {\n          // 全角\n          tSize += size4;\n        } else if (/^[`~!@#\\$%\\^&\\*\\(\\)_\\-\\+=\\{\\}\\[\\]|\\\\:;\"'<>,.\\?\\/\\s]/.test(c)) {\n          // 半角\n          tSize += size5;\n        } else {\n          // 其他\n          tSize += size1;\n        }\n        if (tSize >= maxWith) {\n          if (tSize >= hideWidth) {\n            tmpStr += '..';\n            break;\n          }\n        } else {\n          tmpStr += c;\n        }\n      }\n      // 文字不超过范围 不折叠\n      (tSize < hideWidth) && (this.foldable = false) && (this.folded = false);\n      this.foldText = tmpStr;\n    }\n  },\n  computed: {\n    getText () {\n      return this.folded && this.foldable ? this.foldText : this.text;\n    },\n    planeStyle () {\n      return {\n        width: this.width\n      };\n    },\n    moreStyle () {\n      return {\n        fontSize: this.large ? 48 : this.huge ? 54 : 36,\n        lineHeight: this.large ? 72 : this.huge ? 78 : 42,\n        color: '#198ded',\n        fontWeight: '600',\n        ...this.tipStyle\n      };\n    },\n    textClz () {\n      const clz = ['text', 'text_small'];\n      if (this.large) {\n        clz.push('text_large');\n      } else if (this.huge) {\n        clz.push('text_huge');\n      }\n      return clz;\n    }\n  },\n  methods: {\n    fold () {\n      this.foldable && (this.folded = !this.folded);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 96 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; //
@@ -13297,163 +5383,163 @@ var _locale = __webpack_require__(5);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(4);
+var _locale3 = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-    name: 'FmFoldableText',
-    mixins: [_locale2.default],
-    data: function data() {
-        return {
-            expandHeight: '',
-            unexpandHeight: '',
-            animationHeight: '',
-            foldText: '',
-            foldable: true
-        };
+  name: 'FmFoldableText',
+  mixins: [_locale2.default],
+  data: function data() {
+    return {
+      expandHeight: '',
+      unexpandHeight: '',
+      animationHeight: '',
+      foldText: '',
+      foldable: true
+    };
+  },
+
+  props: {
+    width: {
+      type: Number,
+      default: 1020
     },
-
-    props: {
-        width: {
-            type: Number,
-            default: 1020
-        },
-        text: {
-            type: String,
-            default: ''
-        },
-        lines: {
-            type: Number,
-            default: 2
-        },
-        folded: {
-            type: Boolean,
-            default: true
-        },
-        small: {
-            type: Boolean,
-            default: true
-        },
-        large: Boolean,
-        huge: Boolean,
-        textStyle: Object,
-        tipStyle: Object,
-        tipValue: {
-            type: String,
-            default: function _default() {
-                return (0, _locale3.t)('el.foldabletext.more');
-            }
-        }
+    text: {
+      type: String,
+      default: ''
     },
-    mounted: function mounted() {
-        if (this.foldText === '') {
-            var textStyle = this.textStyle;
-
-            var fontSize = textStyle && textStyle.fontSize ? textStyle.fontSize : this.large ? 48 : this.huge ? 54 : 36;
-            // 计算折叠后的文本
-            var size1 = fontSize + 36 * 0.04; // 汉字
-            var size2 = fontSize * 0.56; // 英文
-            var size3 = fontSize * 0.556; // 数字
-            var size4 = fontSize * 0.80; // 全角
-            var size5 = fontSize * 0.2; // 半角
-            var tSize = 0,
-                tmpStr = '';
-            var hideWidth = this.width * this.lines + fontSize; // 不显示“更多”情况下所能容纳最大的字体宽度
-            var maxWith = this.width * this.lines - size1 * this.tipValue.length; // 显示“更多”情况下所能容纳最大的字体宽度
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = this.text[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var c = _step.value;
-
-                    if (/^[\u4e00-\u9fa5]/.test(c)) {
-                        // 汉字
-                        tSize += size1;
-                    } else if (/^[a-zA-Z]/.test(c)) {
-                        // 英文
-                        tSize += size2;
-                    } else if (/^[0-9]/.test(c)) {
-                        // 数字
-                        tSize += size3;
-                    } else if (/^[·《》，。？、：；“”‘’——【】]/.test(c)) {
-                        // 全角
-                        tSize += size4;
-                    } else if (/^[`~!@#\$%\^&\*\(\)_\-\+=\{\}\[\]|\\:;"'<>,.\?\/\s]/.test(c)) {
-                        // 半角
-                        tSize += size5;
-                    } else {
-                        // 其他
-                        tSize += size1;
-                    }
-                    if (tSize >= maxWith) {
-                        if (tSize >= hideWidth) {
-                            tmpStr += '..';
-                            break;
-                        }
-                    } else {
-                        tmpStr += c;
-                    }
-                }
-                // 文字不超过范围 不折叠
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-
-            tSize < hideWidth && (this.foldable = false) && (this.folded = false);
-            this.foldText = tmpStr;
-        }
+    lines: {
+      type: Number,
+      default: 2
     },
-
-    computed: {
-        getText: function getText() {
-            return this.folded && this.foldable ? this.foldText : this.text;
-        },
-        planeStyle: function planeStyle() {
-            return {
-                width: this.width
-            };
-        },
-        moreStyle: function moreStyle() {
-            return _extends({
-                fontSize: this.large ? 48 : this.huge ? 54 : 36,
-                lineHeight: this.large ? 72 : this.huge ? 78 : 42,
-                color: '#198ded',
-                fontWeight: '600'
-            }, this.tipStyle);
-        },
-        textClz: function textClz() {
-            var clz = ['text', 'text_small'];
-            if (this.large) {
-                clz.push('text_large');
-            } else if (this.huge) {
-                clz.push('text_huge');
-            }
-            return clz;
-        }
+    folded: {
+      type: Boolean,
+      default: true
     },
-    methods: {
-        fold: function fold() {
-            this.foldable && (this.folded = !this.folded);
-        }
+    small: {
+      type: Boolean,
+      default: true
+    },
+    large: Boolean,
+    huge: Boolean,
+    textStyle: Object,
+    tipStyle: Object,
+    tipValue: {
+      type: String,
+      default: function _default() {
+        return (0, _locale3.t)('el.foldabletext.more');
+      }
     }
+  },
+  mounted: function mounted() {
+    if (this.foldText === '') {
+      var textStyle = this.textStyle;
+
+      var fontSize = textStyle && textStyle.fontSize ? textStyle.fontSize : this.large ? 48 : this.huge ? 54 : 36;
+      // 计算折叠后的文本
+      var size1 = fontSize + 36 * 0.04; // 汉字
+      var size2 = fontSize * 0.56; // 英文
+      var size3 = fontSize * 0.556; // 数字
+      var size4 = fontSize * 0.80; // 全角
+      var size5 = fontSize * 0.2; // 半角
+      var tSize = 0;
+      var tmpStr = '';
+      var hideWidth = this.width * this.lines + fontSize; // 不显示“更多”情况下所能容纳最大的字体宽度
+      var maxWith = this.width * this.lines - size1 * this.tipValue.length; // 显示“更多”情况下所能容纳最大的字体宽度
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = this.text[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var c = _step.value;
+
+          if (/^[\u4e00-\u9fa5]/.test(c)) {
+            // 汉字
+            tSize += size1;
+          } else if (/^[a-zA-Z]/.test(c)) {
+            // 英文
+            tSize += size2;
+          } else if (/^[0-9]/.test(c)) {
+            // 数字
+            tSize += size3;
+          } else if (/^[·《》，。？、：；“”‘’——【】]/.test(c)) {
+            // 全角
+            tSize += size4;
+          } else if (/^[`~!@#\$%\^&\*\(\)_\-\+=\{\}\[\]|\\:;"'<>,.\?\/\s]/.test(c)) {
+            // 半角
+            tSize += size5;
+          } else {
+            // 其他
+            tSize += size1;
+          }
+          if (tSize >= maxWith) {
+            if (tSize >= hideWidth) {
+              tmpStr += '..';
+              break;
+            }
+          } else {
+            tmpStr += c;
+          }
+        }
+        // 文字不超过范围 不折叠
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      tSize < hideWidth && (this.foldable = false) && (this.folded = false);
+      this.foldText = tmpStr;
+    }
+  },
+
+  computed: {
+    getText: function getText() {
+      return this.folded && this.foldable ? this.foldText : this.text;
+    },
+    planeStyle: function planeStyle() {
+      return {
+        width: this.width
+      };
+    },
+    moreStyle: function moreStyle() {
+      return _extends({
+        fontSize: this.large ? 48 : this.huge ? 54 : 36,
+        lineHeight: this.large ? 72 : this.huge ? 78 : 42,
+        color: '#198ded',
+        fontWeight: '600'
+      }, this.tipStyle);
+    },
+    textClz: function textClz() {
+      var clz = ['text', 'text_small'];
+      if (this.large) {
+        clz.push('text_large');
+      } else if (this.huge) {
+        clz.push('text_huge');
+      }
+      return clz;
+    }
+  },
+  methods: {
+    fold: function fold() {
+      this.foldable && (this.folded = !this.folded);
+    }
+  }
 };
 
 /***/ }),
-/* 97 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13490,14 +5576,14 @@ if (false) {
 }
 
 /***/ }),
-/* 98 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(99),
+  __webpack_require__(104),
   /* template */
-  __webpack_require__(100),
+  __webpack_require__(105),
   /* scopeId */
   null,
   /* cssModules */
@@ -13524,14 +5610,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 99 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -13542,59 +5628,59 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 
 exports.default = {
-    name: 'FmImage',
-    data: function data() {
-        return {
-            loaded: false
-        };
+  name: 'FmImage',
+  data: function data() {
+    return {
+      loaded: false
+    };
+  },
+  props: {
+    src: {
+      type: String,
+      default: ''
     },
-    props: {
-        src: {
-            type: String,
-            default: ''
-        },
-        scale: {
-            type: Number,
-            default: 0
-        },
-        width: {
-            type: Number,
-            default: 1
-        },
-        height: {
-            type: Number,
-            default: 1
-        },
-        occupyingColor: {
-            type: Number,
-            default: 'transparent'
-        },
-        imgStyle: {
-            type: Object
-        }
+    scale: {
+      type: Number,
+      default: 0
     },
-    computed: {
-        getStyle: function getStyle() {
-            return _extends({
-                width: this.width,
-                height: this.height,
-                backgroundColor: this.loaded ? 'transparent' : this.occupyingColor
-            }, this.imgStyle);
-        }
+    width: {
+      type: Number,
+      default: 1
     },
-    methods: {
-        onLoad: function onLoad(e) {
-            e.success && (this.loaded = true);
-            if (e.success && e.size && e.size.naturalWidth > 0 && this.scale) {
-                this.width = e.size.naturalWidth * this.scale;
-                this.height = e.size.naturalHeight * this.scale;
-            }
-        }
+    height: {
+      type: Number,
+      default: 1
+    },
+    occupyingColor: {
+      type: Number,
+      default: 'transparent'
+    },
+    imgStyle: {
+      type: Object
     }
+  },
+  computed: {
+    getStyle: function getStyle() {
+      return _extends({
+        width: this.width,
+        height: this.height,
+        backgroundColor: this.loaded ? 'transparent' : this.occupyingColor
+      }, this.imgStyle);
+    }
+  },
+  methods: {
+    onLoad: function onLoad(e) {
+      e.success && (this.loaded = true);
+      if (e.success && e.size && e.size.naturalWidth > 0 && this.scale) {
+        this.width = e.size.naturalWidth * this.scale;
+        this.height = e.size.naturalHeight * this.scale;
+      }
+    }
+  }
 };
 
 /***/ }),
-/* 100 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13619,18 +5705,18 @@ if (false) {
 }
 
 /***/ }),
-/* 101 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(102)
+__webpack_require__(107)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(104),
+  __webpack_require__(109),
   /* template */
-  __webpack_require__(105),
+  __webpack_require__(110),
   /* scopeId */
   "data-v-10e45e81",
   /* cssModules */
@@ -13657,13 +5743,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 102 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(103);
+var content = __webpack_require__(108);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -13683,7 +5769,7 @@ if(false) {
 }
 
 /***/ }),
-/* 103 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -13691,13 +5777,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-overlay[data-v-10e45e81] {\n  width: 1080;\n  position: fixed;\n  left: 0;\n  top: 0;\n  bottom: 0;\n  right: 0;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-overlay/index.vue?77de8028"],"names":[],"mappings":";AAaA;EACA,YAAA;EACA,gBAAA;EACA,QAAA;EACA,OAAA;EACA,UAAA;EACA,SAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div>\n    <div class=\"fm-overlay\"\n         ref=\"fm-overlay\"\n         v-if=\"show\"\n         :watch=\"shouldShow\"\n         @click=\"overlayClicked\"\n         :style=\"overlayStyle\">\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-overlay {\n    width: 1080;\n    position: fixed;\n    left: 0;\n    top: 0;\n    bottom: 0;\n    right: 0;\n  }\n</style>\n\n<script>\n  const animation = weex.requireModule('animation')\n  export default {\n    name: 'FmOverlay',\n    props: {\n      show: {\n        type: Boolean,\n        default: true\n      },\n      hasAnimation: {\n        type: Boolean,\n        default: true\n      },\n      duration: {\n        type: [Number, String],\n        default: 300\n      },\n      timingFunction: {\n        type: Array,\n        default: () => (['ease-in', 'ease-out'])\n      },\n      opacity: {\n        type: [Number, String],\n        default: 0.5\n      },\n      canAutoClose: {\n        type: Boolean,\n        default: true\n      }\n    },\n    computed: {\n      overlayStyle () {\n        return {\n          opacity: this.hasAnimation ? 0 : 1,\n          backgroundColor: `rgba(0, 0, 0,${this.opacity})`\n        }\n      },\n      shouldShow () {\n        const { show, hasAnimation } = this\n        hasAnimation && setTimeout(() => {\n          this.appearOverlay(show)\n        }, 50)\n        return show\n      }\n    },\n    methods: {\n      overlayClicked (e) {\n        this.canAutoClose ? this.appearOverlay(false) : this.$emit('fmOverlayBodyClicked', {})\n      },\n      appearOverlay (bool, duration = this.duration) {\n        const { hasAnimation, timingFunction, canAutoClose } = this\n        const needEmit = !bool && canAutoClose;\n        needEmit && (this.$emit('fmOverlayBodyClicking', {}))\n        const overlayEl = this.$refs['fm-overlay']\n        if (hasAnimation && overlayEl) {\n          animation.transition(overlayEl, {\n            styles: {\n              opacity: bool ? 1 : 0\n            },\n            duration,\n            timingFunction: timingFunction[bool ? 0 : 1],\n            delay: 0\n          }, () => {\n            needEmit && (this.$emit('fmOverlayBodyClicked', {}))\n          });\n        } else {\n          needEmit && (this.$emit('fmOverlayBodyClicked', {}))\n        }\n      },\n      hide() {\n        this.appearOverlay(false)\n      }\n    }\n  }\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-overlay[data-v-10e45e81] {\n  width: 1080;\n  position: fixed;\n  left: 0;\n  top: 0;\n  bottom: 0;\n  right: 0;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-overlay/index.vue?5977a40c"],"names":[],"mappings":";AAaA;EACA,YAAA;EACA,gBAAA;EACA,QAAA;EACA,OAAA;EACA,UAAA;EACA,SAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div>\n    <div class=\"fm-overlay\"\n         ref=\"fm-overlay\"\n         v-if=\"show\"\n         :watch=\"shouldShow\"\n         @click=\"overlayClicked\"\n         :style=\"overlayStyle\">\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-overlay {\n    width: 1080;\n    position: fixed;\n    left: 0;\n    top: 0;\n    bottom: 0;\n    right: 0;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nexport default {\n  name: 'FmOverlay',\n  props: {\n    show: {\n      type: Boolean,\n      default: true\n    },\n    hasAnimation: {\n      type: Boolean,\n      default: true\n    },\n    duration: {\n      type: [Number, String],\n      default: 300\n    },\n    timingFunction: {\n      type: Array,\n      default: () => (['ease-in', 'ease-out'])\n    },\n    opacity: {\n      type: [Number, String],\n      default: 0.5\n    },\n    canAutoClose: {\n      type: Boolean,\n      default: true\n    }\n  },\n  computed: {\n    overlayStyle () {\n      return {\n        opacity: this.hasAnimation ? 0 : 1,\n        backgroundColor: `rgba(0, 0, 0,${this.opacity})`\n      };\n    },\n    shouldShow () {\n      const { show, hasAnimation } = this;\n      hasAnimation && setTimeout(() => {\n        this.appearOverlay(show);\n      }, 50);\n      return show;\n    }\n  },\n  methods: {\n    overlayClicked (e) {\n      this.canAutoClose ? this.appearOverlay(false) : this.$emit('fmOverlayBodyClicked', {});\n    },\n    appearOverlay (bool, duration = this.duration) {\n      const { hasAnimation, timingFunction, canAutoClose } = this;\n      const needEmit = !bool && canAutoClose;\n      needEmit && (this.$emit('fmOverlayBodyClicking', {}));\n      const overlayEl = this.$refs['fm-overlay'];\n      if (hasAnimation && overlayEl) {\n        animation.transition(overlayEl, {\n          styles: {\n            opacity: bool ? 1 : 0\n          },\n          duration,\n          timingFunction: timingFunction[bool ? 0 : 1],\n          delay: 0\n        }, () => {\n          needEmit && (this.$emit('fmOverlayBodyClicked', {}));\n        });\n      } else {\n        needEmit && (this.$emit('fmOverlayBodyClicked', {}));\n      }\n    },\n    hide () {\n      this.appearOverlay(false);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 104 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13817,7 +5903,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 105 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13843,18 +5929,18 @@ if (false) {
 }
 
 /***/ }),
-/* 106 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(107)
+__webpack_require__(112)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(109),
+  __webpack_require__(114),
   /* template */
-  __webpack_require__(115),
+  __webpack_require__(120),
   /* scopeId */
   "data-v-2016588d",
   /* cssModules */
@@ -13881,13 +5967,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 107 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(108);
+var content = __webpack_require__(113);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -13907,7 +5993,7 @@ if(false) {
 }
 
 /***/ }),
-/* 108 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -13915,13 +6001,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.container[data-v-2016588d] {\n  position: fixed;\n  width: 1080px;\n  /*兼容H5异常*/\n  z-index: 99999;\n}\n.dialog-box[data-v-2016588d] {\n  position: fixed;\n  left: 72px;\n  width: 936px;\n  background-color: #FFFFFF;\n  border-radius: 10px;\n  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);\n}\n.content-title[data-v-2016588d] {\n  margin-top: 63px;\n  padding-left: 72px;\n  padding-right: 72px;\n  margin-bottom: 18px;\n}\n.content-subtext[data-v-2016588d] {\n  padding-left: 72px;\n  padding-right: 72px;\n}\n.dialog-footer[data-v-2016588d] {\n  justify-content: center;\n  align-items: center;\n  flex-wrap: wrap;\n  padding: 36px 0;\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-dialog/index.vue?0377d138"],"names":[],"mappings":";AA+BA;EACA,gBAAA;EACA,cAAA;EACA,UAAA;EACA,eAAA;CACA;AAEA;EACA,gBAAA;EACA,WAAA;EACA,aAAA;EACA,0BAAA;EACA,oBAAA;EACA,0CAAA;CACA;AAEA;EACA,iBAAA;EACA,mBAAA;EACA,oBAAA;EACA,oBAAA;CACA;AAEA;EACA,mBAAA;EACA,oBAAA;CACA;AAEA;EACA,wBAAA;EACA,oBAAA;EACA,gBAAA;EACA,gBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"container\">\n      <fm-overlay v-if=\"self_show\"\n                  :hasAnimation=\"true\"\n                  :canAutoClose=\"false\"\n                  :opacity=\"overlayOpacity\"\n                  @fmOverlayBodyClicked=\"overlayClicked\"\n                  ref=\"fm-overlay\"></fm-overlay>\n      <div class=\"dialog-box\"\n           ref=\"dialog-box\"\n           v-if=\"self_show\"\n           :style=\"dialogStyle\"\n           @touchend=\"handleTouchEnd\">\n        <div class=\"dialog-content\">\n          <slot name=\"title\">\n            <fm-text class=\"content-title\" medium title>{{ title }}</fm-text>\n          </slot>\n          <slot name=\"content\">\n            <fm-text class=\"content-subtext\">{{ content }}</fm-text>\n          </slot>\n        </div>\n        <div class=\"dialog-footer\" :style=\"btnStyle\">\n          <slot name=\"btn-group\">\n            <fm-simple-btn v-for=\"(btn, index) in dialogBtns\" scene=\"dialog\" v-bind=\"btn\" @click=\"btnClick\" :key=\"index\"></fm-simple-btn>\n          </slot>\n        </div>\n      </div>\n  </div>\n</template>\n\n<style scoped>\n  .container {\n    position: fixed;\n    width: 1080px;\n    /*兼容H5异常*/\n    z-index: 99999;\n  }\n  \n  .dialog-box {\n    position: fixed;\n    left: 72px;\n    width: 936px;\n    background-color: #FFFFFF;\n    border-radius: 10px;\n    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);\n  }\n\n  .content-title {\n    margin-top: 63px;\n    padding-left: 72px;\n    padding-right: 72px;\n    margin-bottom: 18px;\n  }\n\n  .content-subtext {\n    padding-left: 72px;\n    padding-right: 72px;\n  }\n\n  .dialog-footer {\n    justify-content: center;\n    align-items: center;\n    flex-wrap: wrap;\n    padding: 36px 0;\n  }\n\n</style>\n\n<script>\nconst animation = weex.requireModule('animation')\nconst type_alert = 'alert'\nconst type_confirm = 'confirm'\nimport FmOverlay from '../fm-overlay'\nimport FmText from '../fm-text'\nimport FmSimpleBtn from '../fm-simple-btn'\nimport Locale from 'weex-flymeui/lib/mixins/locale'\nimport { t } from 'weex-flymeui/lib/locale'\n\nexport default {\n  name: 'FmDialog',\n  mixins: [Locale],\n  components: { FmOverlay, FmText, FmSimpleBtn },\n  props: {\n    show: {\n      type: Boolean,\n      default: false\n    },\n    title: {\n      type: String,\n      default: ''\n    },\n    content: {\n      type: String,\n      default: ''\n    },\n    top: {\n      type: Number,\n      default: 400\n    },\n    cancelText: {\n      type: String,\n      default() {\n        return t('el.common.cancel')\n      }\n    },\n    confirmText: {\n      type: String,\n      default() {\n        return t('el.common.confirm')\n      }\n    },\n    confirmColor: {\n      type: String,\n      default: '#198DED'\n    },\n    cancelColor: {\n      type: String,\n      default: '#198DED'\n    },\n    hasAnimation: {\n      type: Boolean,\n      default: true\n    },\n    duration: {\n      type: [Number, String],\n      default: 300\n    },\n    timingFunction: {\n      type: Array,\n      default: () => (['ease-out', 'ease-out'])\n    },\n    canAutoClose: {\n      type: Boolean,\n      default: true\n    },\n    btns: {\n      type: Array,\n      default: () => ([])\n    },\n    btnDirection: {\n      type: String,\n      default: 'row'\n    },\n    cancelCb: Function,\n    confirmCb: Function,\n    type: {\n      type: String,\n      default: type_confirm\n    },\n    overlayOpacity: {\n      type: Number,\n      default: 0.5\n    }\n  },\n  data: () => ({\n    pageHeight: 1334,\n    self_show: false,\n    dialogOpacity: 0\n  }),\n  created () {\n    const { env: { deviceHeight, deviceWidth } } = weex.config\n    this.pageHeight = deviceHeight / deviceWidth * 1080\n    this.self_show = this.show\n  },\n  watch: {\n    show: function(val, oldVal) {\n      if (val) {\n        this.self_show = true\n        setTimeout(() => {\n          this.appearDialog(true)\n        }, 50);\n      } else {\n        this.$refs['fm-overlay'].hide()\n        this.appearDialog(false)\n      }\n    }\n  },\n  computed: {\n    dialogBtns() {\n      let btns = []\n      if (!this.btns || !this.btns.length) {\n        if (this.type === type_alert) {\n          btns =   [{\n            text: this.confirmText,\n            color: this.confirmColor,\n            type: 'confirm'\n          }]\n        } else if (this.type === type_confirm) {\n          btns =   [{\n            text: this.cancelText,\n            color: this.cancelColor,\n            type: 'cancel'\n          }, {\n            text: this.confirmText,\n            color: this.confirmColor,\n            type: 'confirm'\n          }]\n        }\n      } else {\n        btns = btns.concat(this.btns)\n      }\n      return btns\n    },\n    dialogStyle() {\n      return {\n        opacity: this.dialogOpacity,\n        top: this.top\n      }\n    },\n    btnStyle() {\n      const { btnDirection, btns } = this\n      return {\n        flexDirection: btns.length > 2 ? 'column' : btnDirection\n      }\n    }\n  },\n  methods: {\n    handleTouchEnd (e) {\n      // 原生上有点击穿透问题\n      e.preventDefault && e.preventDefault()\n    },\n    overlayClicked() {\n      this.canAutoClose && (this.appearDialog(false) || this.$emit('fmDialogOverlayClicked', {}))\n      this.cancelCb && this.cancelCb()\n    },\n    btnClick(btn) {\n      if (btn.type && btn.type === 'cancel') {\n        this.$emit('fmDialogBtnClicked', { type: 'cancel' })\n        this.cancelCb && this.cancelCb()\n      } else if (btn.type && btn.type === 'confirm') {\n        this.$emit('fmDialogBtnClicked', { type: 'confirm' })\n        this.confirmCb && this.confirmCb()\n      } else {\n        this.$emit('fmDialogBtnClicked', btn)\n      }\n    },\n    appearDialog (bool, duration = this.duration) {\n      const { hasAnimation, timingFunction } = this;\n      const dialogEl = this.$refs['dialog-box']\n      this.dialogOpacity = bool ? 0 : 1\n      if (hasAnimation && dialogEl) {\n        animation.transition(dialogEl, {\n          styles: {\n            opacity: bool ? 1 : 0\n          },\n          duration,\n          timingFunction: timingFunction[bool ? 0 : 1],\n          delay: 0\n        }, () => {\n          this.self_show = bool\n          this.dialogOpacity = bool ? 1 : 0\n        });\n      } else {\n        this.self_show = bool\n        this.dialogOpacity = bool ? 1 : 0\n      }\n    }\n  }\n}\n</script>"],"sourceRoot":""}]);
+exports.push([module.i, "\n.container[data-v-2016588d] {\n  position: fixed;\n  width: 1080px;\n  /*兼容H5异常*/\n  z-index: 99999;\n}\n.dialog-box[data-v-2016588d] {\n  position: fixed;\n  left: 72px;\n  width: 936px;\n  background-color: #FFFFFF;\n  border-radius: 10px;\n  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);\n}\n.content-title[data-v-2016588d] {\n  margin-top: 63px;\n  padding-left: 72px;\n  padding-right: 72px;\n  margin-bottom: 18px;\n}\n.content-subtext[data-v-2016588d] {\n  padding-left: 72px;\n  padding-right: 72px;\n}\n.dialog-footer[data-v-2016588d] {\n  justify-content: center;\n  align-items: center;\n  flex-wrap: wrap;\n  padding: 36px 0;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-dialog/index.vue?7d9dafc6"],"names":[],"mappings":";AA+BA;EACA,gBAAA;EACA,cAAA;EACA,UAAA;EACA,eAAA;CACA;AAEA;EACA,gBAAA;EACA,WAAA;EACA,aAAA;EACA,0BAAA;EACA,oBAAA;EACA,0CAAA;CACA;AAEA;EACA,iBAAA;EACA,mBAAA;EACA,oBAAA;EACA,oBAAA;CACA;AAEA;EACA,mBAAA;EACA,oBAAA;CACA;AAEA;EACA,wBAAA;EACA,oBAAA;EACA,gBAAA;EACA,gBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"container\">\n      <fm-overlay v-if=\"self_show\"\n                  :hasAnimation=\"true\"\n                  :canAutoClose=\"false\"\n                  :opacity=\"overlayOpacity\"\n                  @fmOverlayBodyClicked=\"overlayClicked\"\n                  ref=\"fm-overlay\"></fm-overlay>\n      <div class=\"dialog-box\"\n           ref=\"dialog-box\"\n           v-if=\"self_show\"\n           :style=\"dialogStyle\"\n           @touchend=\"handleTouchEnd\">\n        <div class=\"dialog-content\">\n          <slot name=\"title\">\n            <fm-text class=\"content-title\" medium title>{{ title }}</fm-text>\n          </slot>\n          <slot name=\"content\">\n            <fm-text class=\"content-subtext\">{{ content }}</fm-text>\n          </slot>\n        </div>\n        <div class=\"dialog-footer\" :style=\"btnStyle\">\n          <slot name=\"btn-group\">\n            <fm-simple-btn v-for=\"(btn, index) in dialogBtns\" scene=\"dialog\" v-bind=\"btn\" @click=\"btnClick\" :key=\"index\"></fm-simple-btn>\n          </slot>\n        </div>\n      </div>\n  </div>\n</template>\n\n<style scoped>\n  .container {\n    position: fixed;\n    width: 1080px;\n    /*兼容H5异常*/\n    z-index: 99999;\n  }\n\n  .dialog-box {\n    position: fixed;\n    left: 72px;\n    width: 936px;\n    background-color: #FFFFFF;\n    border-radius: 10px;\n    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);\n  }\n\n  .content-title {\n    margin-top: 63px;\n    padding-left: 72px;\n    padding-right: 72px;\n    margin-bottom: 18px;\n  }\n\n  .content-subtext {\n    padding-left: 72px;\n    padding-right: 72px;\n  }\n\n  .dialog-footer {\n    justify-content: center;\n    align-items: center;\n    flex-wrap: wrap;\n    padding: 36px 0;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nconst type_alert = 'alert';\nconst type_confirm = 'confirm';\nimport FmOverlay from '../fm-overlay';\nimport FmText from '../fm-text';\nimport FmSimpleBtn from '../fm-simple-btn';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmDialog',\n  mixins: [Locale],\n  components: { FmOverlay, FmText, FmSimpleBtn },\n  props: {\n    show: {\n      type: Boolean,\n      default: false\n    },\n    title: {\n      type: String,\n      default: ''\n    },\n    content: {\n      type: String,\n      default: ''\n    },\n    top: {\n      type: Number,\n      default: 400\n    },\n    cancelText: {\n      type: String,\n      default () {\n        return t('el.common.cancel');\n      }\n    },\n    confirmText: {\n      type: String,\n      default () {\n        return t('el.common.confirm');\n      }\n    },\n    confirmColor: {\n      type: String,\n      default: '#198DED'\n    },\n    cancelColor: {\n      type: String,\n      default: '#198DED'\n    },\n    hasAnimation: {\n      type: Boolean,\n      default: true\n    },\n    duration: {\n      type: [Number, String],\n      default: 300\n    },\n    timingFunction: {\n      type: Array,\n      default: () => (['ease-out', 'ease-out'])\n    },\n    canAutoClose: {\n      type: Boolean,\n      default: true\n    },\n    btns: {\n      type: Array,\n      default: () => ([])\n    },\n    btnDirection: {\n      type: String,\n      default: 'row'\n    },\n    cancelCb: Function,\n    confirmCb: Function,\n    type: {\n      type: String,\n      default: type_confirm\n    },\n    overlayOpacity: {\n      type: Number,\n      default: 0.5\n    }\n  },\n  data: () => ({\n    pageHeight: 1334,\n    self_show: false,\n    dialogOpacity: 0\n  }),\n  created () {\n    const { env: { deviceHeight, deviceWidth }} = weex.config;\n    this.pageHeight = deviceHeight / deviceWidth * 1080;\n    this.self_show = this.show;\n  },\n  watch: {\n    show: function (val, oldVal) {\n      if (val) {\n        this.self_show = true;\n        setTimeout(() => {\n          this.appearDialog(true);\n        }, 50);\n      } else {\n        this.$refs['fm-overlay'].hide();\n        this.appearDialog(false);\n      }\n    }\n  },\n  computed: {\n    dialogBtns () {\n      let btns = [];\n      if (!this.btns || !this.btns.length) {\n        if (this.type === type_alert) {\n          btns = [{\n            text: this.confirmText,\n            color: this.confirmColor,\n            type: 'confirm'\n          }];\n        } else if (this.type === type_confirm) {\n          btns = [{\n            text: this.cancelText,\n            color: this.cancelColor,\n            type: 'cancel'\n          }, {\n            text: this.confirmText,\n            color: this.confirmColor,\n            type: 'confirm'\n          }];\n        }\n      } else {\n        btns = btns.concat(this.btns);\n      }\n      return btns;\n    },\n    dialogStyle () {\n      return {\n        opacity: this.dialogOpacity,\n        top: this.top\n      };\n    },\n    btnStyle () {\n      const { btnDirection, btns } = this;\n      return {\n        flexDirection: btns.length > 2 ? 'column' : btnDirection\n      };\n    }\n  },\n  methods: {\n    handleTouchEnd (e) {\n      // 原生上有点击穿透问题\n      e.preventDefault && e.preventDefault();\n    },\n    overlayClicked () {\n      this.canAutoClose && (this.appearDialog(false) || this.$emit('fmDialogOverlayClicked', {}));\n      this.cancelCb && this.cancelCb();\n    },\n    btnClick (btn) {\n      if (btn.type && btn.type === 'cancel') {\n        this.$emit('fmDialogBtnClicked', { type: 'cancel' });\n        this.cancelCb && this.cancelCb();\n      } else if (btn.type && btn.type === 'confirm') {\n        this.$emit('fmDialogBtnClicked', { type: 'confirm' });\n        this.confirmCb && this.confirmCb();\n      } else {\n        this.$emit('fmDialogBtnClicked', btn);\n      }\n    },\n    appearDialog (bool, duration = this.duration) {\n      const { hasAnimation, timingFunction } = this;\n      const dialogEl = this.$refs['dialog-box'];\n      this.dialogOpacity = bool ? 0 : 1;\n      if (hasAnimation && dialogEl) {\n        animation.transition(dialogEl, {\n          styles: {\n            opacity: bool ? 1 : 0\n          },\n          duration,\n          timingFunction: timingFunction[bool ? 0 : 1],\n          delay: 0\n        }, () => {\n          this.self_show = bool;\n          this.dialogOpacity = bool ? 1 : 0;\n        });\n      } else {\n        this.self_show = bool;\n        this.dialogOpacity = bool ? 1 : 0;\n      }\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 109 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13947,11 +6033,10 @@ var _locale = __webpack_require__(5);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(4);
+var _locale3 = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
 //
 //
 //
@@ -14225,18 +6310,18 @@ exports.default = {
 };
 
 /***/ }),
-/* 110 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(111)
+__webpack_require__(116)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(113),
+  __webpack_require__(118),
   /* template */
-  __webpack_require__(114),
+  __webpack_require__(119),
   /* scopeId */
   "data-v-5cb22ec6",
   /* cssModules */
@@ -14263,13 +6348,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 111 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(112);
+var content = __webpack_require__(117);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -14289,7 +6374,7 @@ if(false) {
 }
 
 /***/ }),
-/* 112 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -14297,20 +6382,20 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.dialog-btn[data-v-5cb22ec6] {\n    flex: 1;\n\t\tpadding-left: 48px;\n\t\tpadding-right: 48px;\n}\n.btnText[data-v-5cb22ec6] {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    color: #198ded;\n    text-align: center;\n}\n.dialog-btnText[data-v-5cb22ec6] {\n    padding: 36px;\n}\n.actionSheet-btnText[data-v-5cb22ec6] {\n\t\tline-height: 192px;\n\t\tborder-bottom-style: solid;\n\t\tborder-bottom-width: 1px;\n\t\tborder-bottom-color: #E6E6E6;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-simple-btn/index.vue?2e733893"],"names":[],"mappings":";AAOA;IACA,QAAA;EACA,mBAAA;EACA,oBAAA;CACA;AAEA;IACA,+BAAA;IACA,iBAAA;IACA,gBAAA;IACA,eAAA;IACA,mBAAA;CACA;AAEA;IACA,cAAA;CACA;AAEA;EACA,mBAAA;EACA,2BAAA;EACA,yBAAA;EACA,6BAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"dialog-btn\">\n\t\t\t<text :class=\"btnClz\" :style=\"btnStyle\" @click=\"click()\">{{ text }}</text>\n\t</div>\n</template>\n\n<style scoped>\n  .dialog-btn {\n    flex: 1;\n\t\tpadding-left: 48px;\n\t\tpadding-right: 48px;\n  }\n\n\t.btnText {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    color: #198ded;\n    text-align: center;\n\t}\n\n  .dialog-btnText {\n    padding: 36px;\n  }\n\n\t.actionSheet-btnText {\n\t\tline-height: 192px;\n\t\tborder-bottom-style: solid;\n\t\tborder-bottom-width: 1px;\n\t\tborder-bottom-color: #E6E6E6;\n\t}\n</style>\n\n<script>\nexport default {\n  name: 'FmSimpleBtn',\n\tprops: {\n\t\ttext: String,\n\t\ttype: String,\n\t\tcolor: String,\n\t\tmsg: [String, Number, Array, Object],\n\t\tscene: {\n\t\t\ttype: String,\n\t\t\tdefalut: 'dialog'\n\t\t}\n\t},\n\tcomputed: {\n\t\tbtnClz() {\n\t\t\tlet clz = ['btnText']\n\t\t\tif (this.scene === 'dialog') {\n\t\t\t\tclz.push('dialog-btnText')\n\t\t\t} else if (this.scene === 'actionSheet') {\n\t\t\t\tclz.push('actionSheet-btnText')\n\t\t\t}\n\t\t\treturn clz\n\t\t},\n\t\tbtnStyle() {\n\t\t\tconst { color } = this\n\t\t\tif (color) {\n\t\t\t\treturn {\n\t\t\t\t\tcolor: color\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t},\n\tmethods: {\n\t\tclick() {\n\t\t\tconst { text, msg, type } = this\n\t\t\tthis.$emit('click', { text: text, type: type, msg: msg })\n\t\t}\n\t}\n}\n</script>"],"sourceRoot":""}]);
+exports.push([module.i, "\n.dialog-btn[data-v-5cb22ec6] {\n    flex: 1;\n\t\tpadding-left: 48px;\n\t\tpadding-right: 48px;\n}\n.btnText[data-v-5cb22ec6] {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    color: #198ded;\n    text-align: center;\n}\n.dialog-btnText[data-v-5cb22ec6] {\n    padding: 36px;\n}\n.actionSheet-btnText[data-v-5cb22ec6] {\n\t\tline-height: 192px;\n\t\tborder-bottom-style: solid;\n\t\tborder-bottom-width: 1px;\n\t\tborder-bottom-color: #E6E6E6;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-simple-btn/index.vue?010236d4"],"names":[],"mappings":";AAOA;IACA,QAAA;EACA,mBAAA;EACA,oBAAA;CACA;AAEA;IACA,+BAAA;IACA,iBAAA;IACA,gBAAA;IACA,eAAA;IACA,mBAAA;CACA;AAEA;IACA,cAAA;CACA;AAEA;EACA,mBAAA;EACA,2BAAA;EACA,yBAAA;EACA,6BAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"dialog-btn\">\n    <text :class=\"btnClz\" :style=\"btnStyle\" @click=\"click()\">{{ text }}</text>\n\t</div>\n</template>\n\n<style scoped>\n  .dialog-btn {\n    flex: 1;\n\t\tpadding-left: 48px;\n\t\tpadding-right: 48px;\n  }\n\n\t.btnText {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    color: #198ded;\n    text-align: center;\n\t}\n\n  .dialog-btnText {\n    padding: 36px;\n  }\n\n\t.actionSheet-btnText {\n\t\tline-height: 192px;\n\t\tborder-bottom-style: solid;\n\t\tborder-bottom-width: 1px;\n\t\tborder-bottom-color: #E6E6E6;\n\t}\n</style>\n\n<script>\nexport default {\n  name: 'FmSimpleBtn',\n  props: {\n    text: String,\n    type: String,\n    color: String,\n    msg: [String, Number, Array, Object],\n    scene: {\n      type: String,\n      defalut: 'dialog'\n    }\n  },\n  computed: {\n    btnClz () {\n      const clz = ['btnText'];\n      if (this.scene === 'dialog') {\n        clz.push('dialog-btnText');\n      } else if (this.scene === 'actionSheet') {\n        clz.push('actionSheet-btnText');\n      }\n      return clz;\n    },\n    btnStyle () {\n      const { color } = this;\n      if (color) {\n        return {\n          color: color\n        };\n      }\n    }\n  },\n  methods: {\n    click () {\n      const { text, msg, type } = this;\n      this.$emit('click', { text: text, type: type, msg: msg });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 113 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 //
 //
@@ -14347,50 +6432,50 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 exports.default = {
-	name: 'FmSimpleBtn',
-	props: {
-		text: String,
-		type: String,
-		color: String,
-		msg: [String, Number, Array, Object],
-		scene: {
-			type: String,
-			defalut: 'dialog'
-		}
-	},
-	computed: {
-		btnClz: function btnClz() {
-			var clz = ['btnText'];
-			if (this.scene === 'dialog') {
-				clz.push('dialog-btnText');
-			} else if (this.scene === 'actionSheet') {
-				clz.push('actionSheet-btnText');
-			}
-			return clz;
-		},
-		btnStyle: function btnStyle() {
-			var color = this.color;
+  name: 'FmSimpleBtn',
+  props: {
+    text: String,
+    type: String,
+    color: String,
+    msg: [String, Number, Array, Object],
+    scene: {
+      type: String,
+      defalut: 'dialog'
+    }
+  },
+  computed: {
+    btnClz: function btnClz() {
+      var clz = ['btnText'];
+      if (this.scene === 'dialog') {
+        clz.push('dialog-btnText');
+      } else if (this.scene === 'actionSheet') {
+        clz.push('actionSheet-btnText');
+      }
+      return clz;
+    },
+    btnStyle: function btnStyle() {
+      var color = this.color;
 
-			if (color) {
-				return {
-					color: color
-				};
-			}
-		}
-	},
-	methods: {
-		click: function click() {
-			var text = this.text,
-			    msg = this.msg,
-			    type = this.type;
+      if (color) {
+        return {
+          color: color
+        };
+      }
+    }
+  },
+  methods: {
+    click: function click() {
+      var text = this.text,
+          msg = this.msg,
+          type = this.type;
 
-			this.$emit('click', { text: text, type: type, msg: msg });
-		}
-	}
+      this.$emit('click', { text: text, type: type, msg: msg });
+    }
+  }
 };
 
 /***/ }),
-/* 114 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -14418,7 +6503,7 @@ if (false) {
 }
 
 /***/ }),
-/* 115 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -14489,7 +6574,7 @@ if (false) {
 }
 
 /***/ }),
-/* 116 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14504,7 +6589,7 @@ var _fmDialog = __webpack_require__(13);
 
 var _fmDialog2 = _interopRequireDefault(_fmDialog);
 
-var _locale = __webpack_require__(4);
+var _locale = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14595,18 +6680,18 @@ exports.confirm = confirm;
 exports.alert = alert;
 
 /***/ }),
-/* 117 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(118)
+__webpack_require__(123)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(120),
+  __webpack_require__(125),
   /* template */
-  __webpack_require__(121),
+  __webpack_require__(126),
   /* scopeId */
   "data-v-0a22d546",
   /* cssModules */
@@ -14633,13 +6718,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 118 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(119);
+var content = __webpack_require__(124);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -14659,7 +6744,7 @@ if(false) {
 }
 
 /***/ }),
-/* 119 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -14667,13 +6752,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-popup[data-v-0a22d546] {\n\t\tposition: fixed;\n\t\twidth: 1080px;\n}\n.top[data-v-0a22d546] {\n    left: 0;\n    right: 0;\n}\n.bottom[data-v-0a22d546] {\n    left: 0;\n    right: 0;\n}\n.left[data-v-0a22d546] {\n    bottom: 0;\n    top: 0;\n}\n.right[data-v-0a22d546] {\n    bottom: 0;\n    top: 0;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-popup/index.vue?079cc96e"],"names":[],"mappings":";AAsBA;EACA,gBAAA;EACA,cAAA;CACA;AAEA;IACA,QAAA;IACA,SAAA;CACA;AAEA;IACA,QAAA;IACA,SAAA;CACA;AAEA;IACA,UAAA;IACA,OAAA;CACA;AAEA;IACA,UAAA;IACA,OAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div>\n    <div @touchend=\"handleTouchEnd\">\n      <fm-overlay :show=\"haveOverlay && isOverShow\"\n                   v-if=\"show\"\n                   ref=\"overlay\"\n                   v-bind=\"overlayCfg\"\n                   @fmOverlayBodyClicking=\"fmOverlayBodyClicking\"></fm-overlay>\n    </div>\n    <div ref=\"fm-popup\"\n         v-if=\"show\"\n         :height=\"_height\"\n         :hack=\"isNeedShow\"\n         @click=\"()=>{}\"\n         :class=\"['fm-popup', pos]\"\n         :style=\"padStyle\">\n      <slot></slot>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n\t.fm-popup {\n\t\tposition: fixed;\n\t\twidth: 1080px;\n\t}\n\n  .top {\n    left: 0;\n    right: 0;\n  }\n\n  .bottom {\n    left: 0;\n    right: 0;\n  }\n\n  .left {\n    bottom: 0;\n    top: 0;\n  }\n\n  .right {\n    bottom: 0;\n    top: 0;\n  }\n</style>\n\n<script>\n\tconst animation = weex.requireModule('animation')\n\tconst { platform } = weex.config.env\n\tconst isWeb = typeof (window) === 'object' && platform.toLowerCase() === 'web'\n\timport FmOverlay from '../fm-overlay'\n\n\texport default {\n    name: 'FmPopup',\n\t\tcomponents: { FmOverlay },\n\t\tprops: {\n\t\t\tshow: {\n\t\t\t\ttype: Boolean,\n\t\t\t\tdefault: false\n\t\t\t},\n\t\t\tpos: {\n\t\t\t\ttype: String,\n\t\t\t\tdefault: 'bottom'\n\t\t\t},\n      popupColor: {\n        type: String,\n        default: '#FFFFFF'\n      },\n      overlayCfg: {\n        type: Object,\n        default: () => ({\n          hasAnimation: true,\n          timingFunction: ['ease-in', 'ease-out'],\n          duration: 300,\n          opacity: 0.5\n        })\n      },\n      height: {\n        type: [Number, String],\n        default: 840\n      },\n      standOut: {\n        type: [Number, String],\n        default: 0\n      },\n      width: {\n        type: [Number, String],\n        default: 1080\n      },\n      animation: {\n        type: Object,\n        default: () => ({\n          timingFunction: 'ease-out'\n        })\n      }\n\t\t},\n\t\tdata: () => ({\n\t\t\thaveOverlay: true,\n\t\t\tisOverShow: true\n\t\t}),\n\t\tcomputed: {\n      isNeedShow() {\n        setTimeout(() => {\n          this.appearPopup(this.show)\n        }, 50)\n        return this.show\n      },\n      _height() {\n        this.appearPopup(this.show, 150)\n        return this.height\n      },\n      transformValue() {\n        return this.getTransform(this.pos, this.width, this.height, true)\n      },\n      padStyle() {\n        const { pos, width, height, popupColor } = this\n        let style = {\n          width: `${width}px`,\n          backgroundColor: popupColor\n        }\n        pos === 'top' && (style = {\n          ...style,\n          top: `${-height}px`,\n          height: `${height}px`\n        })\n        pos === 'bottom' && (style = {\n          ...style,\n          bottom: `${-height}px`,\n          height: `${height}px`\n        })\n        pos === 'left' && (style = {\n          ...style,\n          left: `${-width}px`\n        })\n        pos === 'right' && (style = {\n          ...style,\n          right: `${-width}px`\n        })\n        return style\n      }\n\t\t},\n\t\tmethods: {\n      handleTouchEnd(e) {\n        const { platform } = weex.config.env\n        platform === 'Web' && e.preventDefault && e.preventDefault()\n      },\n      hide() {\n        this.appearPopup(false)\n        this.$refs.overlay.appearOverlay(false)\n      },\n      fmOverlayBodyClicking() {\n        this.isShow && this.appearPopup(false)\n      },\n      appearPopup(bool, duration = 300) {\n        this.isShow = bool\n        const popupEl = this.$refs['fm-popup']\n        if (!popupEl) {\n          return\n        }\n        animation.transition(popupEl, {\n          styles: {\n            transform: this.getTransform(this.pos, this.width, this.height, !bool)\n          },\n          duration,\n          delay: 0,\n          ...this.animation\n        }, () => {\n          if (!bool) {\n            this.$emit('fmPopupOverlayClicked', { pos: this.pos })\n          }\n        })\n      },\n      getTransform(pos, width, height, bool) {\n        let _size = pos === 'top' || pos === 'bottom' ? height : width\n        let _transform\n        if (isWeb) {\n          _size -= this.standOut\n        }\n        bool && (_size = 0)\n        switch (pos) {\n          case 'top':\n            _transform = `translateY(${_size}px)`\n            break\n          case 'bottom':\n            _transform = `translateY(-${_size}px)`\n            break\n          case 'left':\n            _transform = `translateX(${_size}px)`\n            break\n          case 'right':\n            _transform = `translateX(-${_size}px)`\n            break\n        }\n        return _transform\n      }\n\t\t}\n\t}\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-popup[data-v-0a22d546] {\n\t\tposition: fixed;\n\t\twidth: 1080px;\n}\n.top[data-v-0a22d546] {\n    left: 0;\n    right: 0;\n}\n.bottom[data-v-0a22d546] {\n    left: 0;\n    right: 0;\n}\n.left[data-v-0a22d546] {\n    bottom: 0;\n    top: 0;\n}\n.right[data-v-0a22d546] {\n    bottom: 0;\n    top: 0;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-popup/index.vue?76594ed0"],"names":[],"mappings":";AAsBA;EACA,gBAAA;EACA,cAAA;CACA;AAEA;IACA,QAAA;IACA,SAAA;CACA;AAEA;IACA,QAAA;IACA,SAAA;CACA;AAEA;IACA,UAAA;IACA,OAAA;CACA;AAEA;IACA,UAAA;IACA,OAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div>\n    <div @touchend=\"handleTouchEnd\">\n      <fm-overlay :show=\"haveOverlay && isOverShow\"\n                   v-if=\"show\"\n                   ref=\"overlay\"\n                   v-bind=\"overlayCfg\"\n                   @fmOverlayBodyClicking=\"fmOverlayBodyClicking\"></fm-overlay>\n    </div>\n    <div ref=\"fm-popup\"\n         v-if=\"show\"\n         :height=\"_height\"\n         :hack=\"isNeedShow\"\n         @click=\"()=>{}\"\n         :class=\"['fm-popup', pos]\"\n         :style=\"padStyle\">\n      <slot></slot>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n\t.fm-popup {\n\t\tposition: fixed;\n\t\twidth: 1080px;\n\t}\n\n  .top {\n    left: 0;\n    right: 0;\n  }\n\n  .bottom {\n    left: 0;\n    right: 0;\n  }\n\n  .left {\n    bottom: 0;\n    top: 0;\n  }\n\n  .right {\n    bottom: 0;\n    top: 0;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nconst { platform } = weex.config.env;\nconst isWeb = typeof (window) === 'object' && platform.toLowerCase() === 'web';\nimport FmOverlay from '../fm-overlay';\n\nexport default {\n  name: 'FmPopup',\n  components: { FmOverlay },\n  props: {\n    show: {\n      type: Boolean,\n      default: false\n    },\n    pos: {\n      type: String,\n      default: 'bottom'\n    },\n    popupColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    overlayCfg: {\n      type: Object,\n      default: () => ({\n        hasAnimation: true,\n        timingFunction: ['ease-in', 'ease-out'],\n        duration: 300,\n        opacity: 0.5\n      })\n    },\n    height: {\n      type: [Number, String],\n      default: 840\n    },\n    standOut: {\n      type: [Number, String],\n      default: 0\n    },\n    width: {\n      type: [Number, String],\n      default: 1080\n    },\n    animation: {\n      type: Object,\n      default: () => ({\n        timingFunction: 'ease-out'\n      })\n    }\n  },\n  data: () => ({\n    haveOverlay: true,\n    isOverShow: true\n  }),\n  computed: {\n    isNeedShow () {\n      setTimeout(() => {\n        this.appearPopup(this.show);\n      }, 50);\n      return this.show;\n    },\n    _height () {\n      this.appearPopup(this.show, 150);\n      return this.height;\n    },\n    transformValue () {\n      return this.getTransform(this.pos, this.width, this.height, true);\n    },\n    padStyle () {\n      const { pos, width, height, popupColor } = this;\n      let style = {\n        width: `${width}px`,\n        backgroundColor: popupColor\n      };\n      pos === 'top' && (style = {\n        ...style,\n        top: `${-height}px`,\n        height: `${height}px`\n      });\n      pos === 'bottom' && (style = {\n        ...style,\n        bottom: `${-height}px`,\n        height: `${height}px`\n      });\n      pos === 'left' && (style = {\n        ...style,\n        left: `${-width}px`\n      });\n      pos === 'right' && (style = {\n        ...style,\n        right: `${-width}px`\n      });\n      return style;\n    }\n  },\n  methods: {\n    handleTouchEnd (e) {\n      const { platform } = weex.config.env;\n      platform === 'Web' && e.preventDefault && e.preventDefault();\n    },\n    hide () {\n      this.appearPopup(false);\n      this.$refs.overlay.appearOverlay(false);\n    },\n    fmOverlayBodyClicking () {\n      this.isShow && this.appearPopup(false);\n    },\n    appearPopup (bool, duration = 300) {\n      this.isShow = bool;\n      const popupEl = this.$refs['fm-popup'];\n      if (!popupEl) {\n        return;\n      }\n      animation.transition(popupEl, {\n        styles: {\n          transform: this.getTransform(this.pos, this.width, this.height, !bool)\n        },\n        duration,\n        delay: 0,\n        ...this.animation\n      }, () => {\n        if (!bool) {\n          this.$emit('fmPopupOverlayClicked', { pos: this.pos });\n        }\n      });\n    },\n    getTransform (pos, width, height, bool) {\n      let _size = pos === 'top' || pos === 'bottom' ? height : width;\n      let _transform;\n      if (isWeb) {\n        _size -= this.standOut;\n      }\n      bool && (_size = 0);\n      switch (pos) {\n        case 'top':\n          _transform = `translateY(${_size}px)`;\n          break;\n        case 'bottom':\n          _transform = `translateY(-${_size}px)`;\n          break;\n        case 'left':\n          _transform = `translateX(${_size}px)`;\n          break;\n        case 'right':\n          _transform = `translateX(-${_size}px)`;\n          break;\n      }\n      return _transform;\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 120 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14905,7 +6990,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 121 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -14948,7 +7033,7 @@ if (false) {
 }
 
 /***/ }),
-/* 122 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14958,7 +7043,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(123);
+var _index = __webpack_require__(128);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -14970,18 +7055,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 123 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(124)
+__webpack_require__(129)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(126),
+  __webpack_require__(131),
   /* template */
-  __webpack_require__(127),
+  __webpack_require__(132),
   /* scopeId */
   "data-v-81855a66",
   /* cssModules */
@@ -15008,13 +7093,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 124 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(125);
+var content = __webpack_require__(130);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -15034,7 +7119,7 @@ if(false) {
 }
 
 /***/ }),
-/* 125 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -15048,7 +7133,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"ve
 
 
 /***/ }),
-/* 126 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15070,7 +7155,7 @@ var _locale = __webpack_require__(5);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(4);
+var _locale3 = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15185,7 +7270,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 127 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -15231,7 +7316,7 @@ if (false) {
 }
 
 /***/ }),
-/* 128 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15241,7 +7326,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(129);
+var _index = __webpack_require__(134);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -15253,18 +7338,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 129 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(130)
+__webpack_require__(135)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(132),
+  __webpack_require__(137),
   /* template */
-  __webpack_require__(133),
+  __webpack_require__(138),
   /* scopeId */
   "data-v-6ec0e2b2",
   /* cssModules */
@@ -15291,13 +7376,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 130 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(131);
+var content = __webpack_require__(136);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -15317,7 +7402,7 @@ if(false) {
 }
 
 /***/ }),
-/* 131 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -15325,13 +7410,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.cell-wrapper[data-v-6ec0e2b2] {\n    flex-direction: row;\n    min-height: 192px;\n    padding: 0 48px;\n}\n.cell-wrapper-center[data-v-6ec0e2b2] {\n    align-items: center;\n}\n.content[data-v-6ec0e2b2] {\n    flex: 1;\n    flex-direction: row;\n    padding: 51px 0;\n\t\tborder-bottom-style: solid;\n\t\tborder-bottom-width: 1px;\n\t\tborder-bottom-color: #E6E6E6;\n}\n.text[data-v-6ec0e2b2] {\n    justify-content: center;\n}\n.content-min[data-v-6ec0e2b2] {\n    height: 192px;\n}\n.subTitle[data-v-6ec0e2b2] {\n    line-height: 34px;\n    margin-top: 18px;\n}\n.description[data-v-6ec0e2b2] {\n    line-height: 48px;\n    margin-top: 12px;\n}\n.cell-image[data-v-6ec0e2b2] {\n    margin-top: 48px;\n    margin-right: 48px;\n}\n.cell-image-center[data-v-6ec0e2b2] {\n    margin-top: 0;\n}\n.img-avatar[data-v-6ec0e2b2] {\n    border-radius: 60px;\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-cell/index.vue?24db0558"],"names":[],"mappings":";AAyCA;IACA,oBAAA;IACA,kBAAA;IACA,gBAAA;CACA;AAEA;IACA,oBAAA;CACA;AAEA;IACA,QAAA;IACA,oBAAA;IACA,gBAAA;EACA,2BAAA;EACA,yBAAA;EACA,6BAAA;CACA;AAEA;IACA,wBAAA;CACA;AAEA;IACA,cAAA;CACA;AAEA;IACA,kBAAA;IACA,iBAAA;CACA;AAEA;IACA,kBAAA;IACA,iBAAA;CACA;AAEA;IACA,iBAAA;IACA,mBAAA;CACA;AAEA;IACA,cAAA;CACA;AAEA;IACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div :class=\"wrapperClz\">\n    <div v-if=\"imgSrc\" :class=\"imgClz\">\n      <fm-image v-if=\"scene === 'avatar'\" class=\"img-avatar\"\n                :src=\"imgSrc\"\n                width=\"120\"\n                height=\"120\"\n                :occupyingColor=\"occupyingColor\"></fm-image>\n      <fm-image v-else-if=\"scene === 'icon'\" class=\"img-icon\"\n                :src=\"imgSrc\"\n                width=\"96\"\n                height=\"96\"\n                :occupyingColor=\"occupyingColor\"></fm-image>\n      <fm-image v-else-if=\"scene === 'app-small'\" class=\"img-app-small\"\n                :src=\"imgSrc\"\n                width=\"135\"\n                height=\"135\"\n                :occupyingColor=\"occupyingColor\"></fm-image>\n      <fm-image v-else-if=\"scene === 'app-big'\" class=\"img-app-big\"\n                :src=\"imgSrc\"\n                width=\"192\"\n                height=\"192\"\n                :occupyingColor=\"occupyingColor\"></fm-image>\n    </div>\n    <div :class=\"contentClz\">\n      <slot name=\"left\">\n      </slot>\n      <div class=\"text\">\n        <slot name=\"title\">\n          <fm-text v-if=\"title\" class=\"title\" medium title :text-style=\"{lineHeight: 50}\">{{ title }}</fm-text>\n        </slot>\n        <fm-text v-if=\"subTitle\" class=\"subTitle\" small>{{ subTitle }}</fm-text>\n        <fm-text v-if=\"description\" class=\"description\">{{ description }}</fm-text>\n      </div>\n      <slot name=\"right\">\n      </slot>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .cell-wrapper {\n    flex-direction: row;\n    min-height: 192px;\n    padding: 0 48px;\n  }\n\n  .cell-wrapper-center {\n    align-items: center;\n  }\n\n  .content {\n    flex: 1;\n    flex-direction: row;\n    padding: 51px 0;\n\t\tborder-bottom-style: solid;\n\t\tborder-bottom-width: 1px;\n\t\tborder-bottom-color: #E6E6E6;\n  }\n\n  .text {\n    justify-content: center;\n  }\n\n  .content-min {\n    height: 192px;\n  }\n\n  .subTitle {\n    line-height: 34px;\n    margin-top: 18px;\n  }\n\n  .description {\n    line-height: 48px;\n    margin-top: 12px;\n  }\n\n  .cell-image {\n    margin-top: 48px;\n    margin-right: 48px;\n  }\n\n  .cell-image-center {\n    margin-top: 0;\n  }\n  \n  .img-avatar {\n    border-radius: 60px;\n  }\n\n</style>\n\n<script>\nimport FmText from '../fm-text'\nimport FmImage from '../fm-image'\n\nconst SCENE_AVATAR = 'avatar'\nconst SCENE_ICON = 'icon'\nconst SCENE_SMALL = 'app-small'\nconst SCENE_BIG = 'app-big'\n\nexport default {\n  name: 'FmCell',\n  components: { FmText, FmImage },\n  props: {\n    title: String,\n    subTitle: String,\n    description: String,\n    scene: {\n      type: String,\n      default: SCENE_AVATAR\n    },\n    imgSrc: String,\n    occupyingColor: {\n      type: String,\n      default: '#EEEEEE'\n    }\n  },\n  computed: {\n    wrapperClz() {\n      let clz = ['cell-wrapper']\n      const { subTitle, description, scene } = this\n      if ((scene === SCENE_AVATAR && !subTitle && !description) || scene === SCENE_ICON || scene === SCENE_SMALL || scene === SCENE_BIG) {\n        clz.push('cell-wrapper-center')\n      }\n      return clz\n    },\n    imgClz() {\n      let clz = ['cell-image']\n      const { subTitle, description, scene } = this\n      if ((!subTitle && !description) || scene === SCENE_ICON || scene === SCENE_SMALL || scene === SCENE_BIG) {\n        clz.push('cell-image-center')\n      }\n      return clz\n    },\n    contentClz() {\n      let clz = ['content']\n      const { subTitle, description } = this\n      if (!subTitle && !description) {\n        clz.push('content-min')\n      }\n      return clz\n    }\n  }\n}\n</script>\n\n\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.cell-wrapper[data-v-6ec0e2b2] {\n    flex-direction: row;\n    min-height: 192px;\n    padding: 0 48px;\n}\n.cell-wrapper-center[data-v-6ec0e2b2] {\n    align-items: center;\n}\n.content[data-v-6ec0e2b2] {\n    flex: 1;\n    flex-direction: row;\n    padding: 51px 0;\n\t\tborder-bottom-style: solid;\n\t\tborder-bottom-width: 1px;\n\t\tborder-bottom-color: #E6E6E6;\n}\n.text[data-v-6ec0e2b2] {\n    justify-content: center;\n}\n.content-min[data-v-6ec0e2b2] {\n    height: 192px;\n}\n.subTitle[data-v-6ec0e2b2] {\n    line-height: 34px;\n    margin-top: 18px;\n}\n.description[data-v-6ec0e2b2] {\n    line-height: 48px;\n    margin-top: 12px;\n}\n.cell-image[data-v-6ec0e2b2] {\n    margin-top: 48px;\n    margin-right: 48px;\n}\n.cell-image-center[data-v-6ec0e2b2] {\n    margin-top: 0;\n}\n.img-avatar[data-v-6ec0e2b2] {\n    border-radius: 60px;\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-cell/index.vue?76b68d3e"],"names":[],"mappings":";AAyCA;IACA,oBAAA;IACA,kBAAA;IACA,gBAAA;CACA;AAEA;IACA,oBAAA;CACA;AAEA;IACA,QAAA;IACA,oBAAA;IACA,gBAAA;EACA,2BAAA;EACA,yBAAA;EACA,6BAAA;CACA;AAEA;IACA,wBAAA;CACA;AAEA;IACA,cAAA;CACA;AAEA;IACA,kBAAA;IACA,iBAAA;CACA;AAEA;IACA,kBAAA;IACA,iBAAA;CACA;AAEA;IACA,iBAAA;IACA,mBAAA;CACA;AAEA;IACA,cAAA;CACA;AAEA;IACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div :class=\"wrapperClz\">\n    <div v-if=\"imgSrc\" :class=\"imgClz\">\n      <fm-image v-if=\"scene === 'avatar'\" class=\"img-avatar\"\n                :src=\"imgSrc\"\n                width=\"120\"\n                height=\"120\"\n                :occupyingColor=\"occupyingColor\"></fm-image>\n      <fm-image v-else-if=\"scene === 'icon'\" class=\"img-icon\"\n                :src=\"imgSrc\"\n                width=\"96\"\n                height=\"96\"\n                :occupyingColor=\"occupyingColor\"></fm-image>\n      <fm-image v-else-if=\"scene === 'app-small'\" class=\"img-app-small\"\n                :src=\"imgSrc\"\n                width=\"135\"\n                height=\"135\"\n                :occupyingColor=\"occupyingColor\"></fm-image>\n      <fm-image v-else-if=\"scene === 'app-big'\" class=\"img-app-big\"\n                :src=\"imgSrc\"\n                width=\"192\"\n                height=\"192\"\n                :occupyingColor=\"occupyingColor\"></fm-image>\n    </div>\n    <div :class=\"contentClz\">\n      <slot name=\"left\">\n      </slot>\n      <div class=\"text\">\n        <slot name=\"title\">\n          <fm-text v-if=\"title\" class=\"title\" medium title :text-style=\"{lineHeight: 50}\">{{ title }}</fm-text>\n        </slot>\n        <fm-text v-if=\"subTitle\" class=\"subTitle\" small>{{ subTitle }}</fm-text>\n        <fm-text v-if=\"description\" class=\"description\">{{ description }}</fm-text>\n      </div>\n      <slot name=\"right\">\n      </slot>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .cell-wrapper {\n    flex-direction: row;\n    min-height: 192px;\n    padding: 0 48px;\n  }\n\n  .cell-wrapper-center {\n    align-items: center;\n  }\n\n  .content {\n    flex: 1;\n    flex-direction: row;\n    padding: 51px 0;\n\t\tborder-bottom-style: solid;\n\t\tborder-bottom-width: 1px;\n\t\tborder-bottom-color: #E6E6E6;\n  }\n\n  .text {\n    justify-content: center;\n  }\n\n  .content-min {\n    height: 192px;\n  }\n\n  .subTitle {\n    line-height: 34px;\n    margin-top: 18px;\n  }\n\n  .description {\n    line-height: 48px;\n    margin-top: 12px;\n  }\n\n  .cell-image {\n    margin-top: 48px;\n    margin-right: 48px;\n  }\n\n  .cell-image-center {\n    margin-top: 0;\n  }\n  \n  .img-avatar {\n    border-radius: 60px;\n  }\n\n</style>\n\n<script>\nimport FmText from '../fm-text';\nimport FmImage from '../fm-image';\n\nconst SCENE_AVATAR = 'avatar';\nconst SCENE_ICON = 'icon';\nconst SCENE_SMALL = 'app-small';\nconst SCENE_BIG = 'app-big';\n\nexport default {\n  name: 'FmCell',\n  components: { FmText, FmImage },\n  props: {\n    title: String,\n    subTitle: String,\n    description: String,\n    scene: {\n      type: String,\n      default: SCENE_AVATAR\n    },\n    imgSrc: String,\n    occupyingColor: {\n      type: String,\n      default: '#EEEEEE'\n    }\n  },\n  computed: {\n    wrapperClz () {\n      const clz = ['cell-wrapper'];\n      const { subTitle, description, scene } = this;\n      if ((scene === SCENE_AVATAR && !subTitle && !description) || scene === SCENE_ICON || scene === SCENE_SMALL || scene === SCENE_BIG) {\n        clz.push('cell-wrapper-center');\n      }\n      return clz;\n    },\n    imgClz () {\n      const clz = ['cell-image'];\n      const { subTitle, description, scene } = this;\n      if ((!subTitle && !description) || scene === SCENE_ICON || scene === SCENE_SMALL || scene === SCENE_BIG) {\n        clz.push('cell-image-center');\n      }\n      return clz;\n    },\n    contentClz () {\n      const clz = ['content'];\n      const { subTitle, description } = this;\n      if (!subTitle && !description) {\n        clz.push('content-min');\n      }\n      return clz;\n    }\n  }\n};\n</script>\n\n\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 132 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15504,7 +7589,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 133 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -15597,7 +7682,7 @@ if (false) {
 }
 
 /***/ }),
-/* 134 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15607,7 +7692,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(135);
+var _index = __webpack_require__(140);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -15619,18 +7704,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 135 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(136)
+__webpack_require__(141)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(138),
+  __webpack_require__(143),
   /* template */
-  __webpack_require__(139),
+  __webpack_require__(144),
   /* scopeId */
   "data-v-8580e67a",
   /* cssModules */
@@ -15657,13 +7742,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 136 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(137);
+var content = __webpack_require__(142);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -15683,7 +7768,7 @@ if(false) {
 }
 
 /***/ }),
-/* 137 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -15691,13 +7776,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.rater-wrap[data-v-8580e67a] {\n  position: relative;\n  flex-direction: row;\n}\n.rater-star[data-v-8580e67a] {\n  flex-direction: row;\n  position: absolute;\n  overflow: hidden;\n  left: 0;\n  top: 0;\n}\n.rater-star-bg[data-v-8580e67a] {\n  flex-direction: row;\n}\n.rater-star-cover[data-v-8580e67a] {\n  position: absolute;\n  overflow: hidden;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n}\n.star[data-v-8580e67a] {\n}\n.star_small[data-v-8580e67a] {\n  width: 30px;\n  height: 30px;\n  margin: 0 3px;\n}\n.star_big[data-v-8580e67a] {\n  width: 60px;\n  height: 60px;\n  margin: 0 13px;\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rater/index.vue?270d8948"],"names":[],"mappings":";AAgBA;EACA,mBAAA;EACA,oBAAA;CACA;AAEA;EACA,oBAAA;EACA,mBAAA;EACA,iBAAA;EACA,QAAA;EACA,OAAA;CACA;AAEA;EACA,oBAAA;CACA;AAEA;EACA,mBAAA;EACA,iBAAA;EACA,OAAA;EACA,UAAA;EACA,QAAA;EACA,SAAA;CACA;AAEA;CAEA;AAEA;EACA,YAAA;EACA,aAAA;EACA,cAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;EACA,eAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"rater-wrap\" ref=\"rater\" @touchstart=\"raterTouchStart\" @touchmove=\"raterTouchmove\" @touchend=\"raterTouchend\">\n    <div class=\"rater-star-bg\">\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n    </div>\n    <div class=\"rater-star\" :style=\"wraperWidth\">\n      <image :class=\"starClz\" v-for=\"(item, index) in getImgs\" :key=\"index\" :src=\"item\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .rater-wrap {\n    position: relative;\n    flex-direction: row;\n  }\n\n  .rater-star {\n    flex-direction: row;\n    position: absolute;\n    overflow: hidden;\n    left: 0;\n    top: 0;\n  }\n\n  .rater-star-bg {\n    flex-direction: row;\n  }\n\n  .rater-star-cover {\n    position: absolute;\n    overflow: hidden;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n  }\n\n  .star {\n    \n  }\n\n  .star_small {\n    width: 30px;\n    height: 30px;\n    margin: 0 3px;\n  }\n\n  .star_big {\n    width: 60px;\n    height: 60px;\n    margin: 0 13px;\n  }\n\n</style>\n\n<script>\nimport FmIcon from '../fm-icon'\nimport FmImage from '../fm-image'\nconst dom = weex.requireModule('dom')\nexport default {\n  name: 'FmRater',\n  components: { FmIcon, FmImage },\n  props: {\n    score: {\n      type: Number,\n      default: 5\n    },\n    fullScore: {\n      type: Number,\n      default: 10\n    },\n    size: {\n      type: String,\n      default: 'big'\n    },\n    theme: {\n      type: String,\n      default: 'normal'\n    },\n    canChange: {\n      type: Boolean,\n      default: true\n    },\n    canSlide: {\n      type: Boolean,\n      default: true\n    },\n    starImgs: {\n      type: Array,\n      default: [\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star1.png',\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star2.png',\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star3.png',\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star4.png',\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star5.png'\n      ]\n    },\n    starSpecialImg: {\n      type: String,\n      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_special.png'\n    },\n    starDarkImg: {\n      type: String,\n      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_dark.png'\n    },\n    starBgImg: {\n      type: String,\n      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_bg.png'\n    },\n    starDarkBgImg: {\n      type: String,\n      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_dark_bg.png'\n    }\n  },\n  data: () => ({\n    offset_left: 0,\n    starCount: 5\n  }),\n  computed: {\n    starClz() {\n      let clz = ['star']\n      this.size === 'big' ? clz.push('star_big') : clz.push('star_small')\n      return clz\n    },\n    wraperWidth() {\n      let { score, fullScore, size } = this\n      let half_star_width = size === 'big' ? 43 : 18\n      let percent = score / fullScore\n      let length = score <= 0 ? 0 : percent >= 1 ? 10 : percent.toFixed(1) * 10\n      length = (length === NaN) ? 0 : length\n      return !length ? {\n        width: 1,\n        opacity: 0\n      } : {\n        width: length * half_star_width,\n        opacity: 1\n      }\n    },\n    getImgs() {\n      let { theme } = this\n      if (theme === 'normal') {\n        return this.starImgs\n      } else if (theme === 'special') {\n        let arr = []\n        for (let i = 0; i < 5; i++) {\n          arr.push(this.starSpecialImg)\n        }\n        return arr\n      } else if (theme === 'dark') {\n        let arr = []\n        for (let i = 0; i < 5; i++) {\n          arr.push(this.starDarkImg)\n        }\n        return arr\n      }\n    },\n    getBgImgs() {\n      let { theme } = this\n      if (theme === 'normal' || theme === 'special') {\n        return this.starBgImg\n      } else if (theme === 'dark') {\n        return this.starDarkBgImg\n      }\n    }\n  },\n  methods: {\n    raterTouchStart(e) {\n      let { canChange, canSlide } = this\n      if (!canChange || !canSlide) return\n      this.calculateScore(e.changedTouches[0].pageX, true)\n    },\n    raterTouchmove(e) {\n      let { canChange, canSlide } = this\n      if (!canChange || !canSlide) return\n      this.calculateScore(e.changedTouches[0].pageX, true)\n    },\n    raterTouchend(e) {\n      let { canChange } = this\n      if (!canChange) return\n      this.calculateScore(e.changedTouches[0].pageX, true)\n    },\n    calculateScore(pageX, needEmit) {\n      let { size, fullScore } = this\n      if (weex.config.env.platform === 'Web') {\n        pageX = pageX * 2 / 750 * 1080 - this.offset_left\n      } else if (weex.config.env.platform === 'iOS') {\n        pageX = pageX - this.offset_left\n      }\n      let half_star_width = size === 'big' ? 43 : 18\n      let half_star_score = fullScore / 10\n      let star_num = (pageX / half_star_width).toFixed(0)\n      let score_percent = star_num <= 0 ? 0 : star_num >= 10 ? 10 : star_num\n      this.score = score_percent * half_star_score\n      needEmit && this.$emit('fmRaterScoreChanged', { score: this.score })\n    }\n  },\n  mounted() {\n      if (weex.config.env.platform !== 'Android') {\n        setTimeout(() => {\n          dom.getComponentRect(this.$refs.rater, option => {\n            this.offset_left = option.size.left\n          })\n        }, 50)\n      }\n  }\n}\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.rater-wrap[data-v-8580e67a] {\n  position: relative;\n  flex-direction: row;\n}\n.rater-star[data-v-8580e67a] {\n  flex-direction: row;\n  position: absolute;\n  overflow: hidden;\n  left: 0;\n  top: 0;\n}\n.rater-star-bg[data-v-8580e67a] {\n  flex-direction: row;\n}\n.rater-star-cover[data-v-8580e67a] {\n  position: absolute;\n  overflow: hidden;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n}\n.star[data-v-8580e67a] {\n}\n.star_small[data-v-8580e67a] {\n  width: 30px;\n  height: 30px;\n  margin: 0 3px;\n}\n.star_big[data-v-8580e67a] {\n  width: 60px;\n  height: 60px;\n  margin: 0 13px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rater/index.vue?42367a60"],"names":[],"mappings":";AAgBA;EACA,mBAAA;EACA,oBAAA;CACA;AAEA;EACA,oBAAA;EACA,mBAAA;EACA,iBAAA;EACA,QAAA;EACA,OAAA;CACA;AAEA;EACA,oBAAA;CACA;AAEA;EACA,mBAAA;EACA,iBAAA;EACA,OAAA;EACA,UAAA;EACA,QAAA;EACA,SAAA;CACA;AAEA;CAEA;AAEA;EACA,YAAA;EACA,aAAA;EACA,cAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;EACA,eAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"rater-wrap\" ref=\"rater\" @touchstart=\"raterTouchStart\" @touchmove=\"raterTouchmove\" @touchend=\"raterTouchend\">\n    <div class=\"rater-star-bg\">\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n    </div>\n    <div class=\"rater-star\" :style=\"wraperWidth\">\n      <image :class=\"starClz\" v-for=\"(item, index) in getImgs\" :key=\"index\" :src=\"item\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .rater-wrap {\n    position: relative;\n    flex-direction: row;\n  }\n\n  .rater-star {\n    flex-direction: row;\n    position: absolute;\n    overflow: hidden;\n    left: 0;\n    top: 0;\n  }\n\n  .rater-star-bg {\n    flex-direction: row;\n  }\n\n  .rater-star-cover {\n    position: absolute;\n    overflow: hidden;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n  }\n\n  .star {\n\n  }\n\n  .star_small {\n    width: 30px;\n    height: 30px;\n    margin: 0 3px;\n  }\n\n  .star_big {\n    width: 60px;\n    height: 60px;\n    margin: 0 13px;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nimport FmImage from '../fm-image';\nconst dom = weex.requireModule('dom');\nexport default {\n  name: 'FmRater',\n  components: { FmIcon, FmImage },\n  props: {\n    score: {\n      type: Number,\n      default: 5\n    },\n    fullScore: {\n      type: Number,\n      default: 10\n    },\n    size: {\n      type: String,\n      default: 'big'\n    },\n    theme: {\n      type: String,\n      default: 'normal'\n    },\n    canChange: {\n      type: Boolean,\n      default: true\n    },\n    canSlide: {\n      type: Boolean,\n      default: true\n    },\n    starImgs: {\n      type: Array,\n      default: [\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star1.png',\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star2.png',\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star3.png',\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star4.png',\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star5.png'\n      ]\n    },\n    starSpecialImg: {\n      type: String,\n      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_special.png'\n    },\n    starDarkImg: {\n      type: String,\n      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_dark.png'\n    },\n    starBgImg: {\n      type: String,\n      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_bg.png'\n    },\n    starDarkBgImg: {\n      type: String,\n      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_dark_bg.png'\n    }\n  },\n  data: () => ({\n    offset_left: 0,\n    starCount: 5\n  }),\n  computed: {\n    starClz () {\n      const clz = ['star'];\n      this.size === 'big' ? clz.push('star_big') : clz.push('star_small');\n      return clz;\n    },\n    wraperWidth () {\n      const { score, fullScore, size } = this;\n      const half_star_width = size === 'big' ? 43 : 18;\n      const percent = score / fullScore;\n      let length = score <= 0 ? 0 : percent >= 1 ? 10 : percent.toFixed(1) * 10;\n      length = isNaN(length) ? 0 : length;\n      return !length ? {\n        width: 1,\n        opacity: 0\n      } : {\n        width: length * half_star_width,\n        opacity: 1\n      };\n    },\n    getImgs () {\n      const { theme } = this;\n      if (theme === 'normal') {\n        return this.starImgs;\n      } else if (theme === 'special') {\n        const arr = [];\n        for (let i = 0; i < 5; i++) {\n          arr.push(this.starSpecialImg);\n        }\n        return arr;\n      } else if (theme === 'dark') {\n        const arr = [];\n        for (let i = 0; i < 5; i++) {\n          arr.push(this.starDarkImg);\n        }\n        return arr;\n      }\n    },\n    getBgImgs () {\n      const { theme } = this;\n      if (theme === 'normal' || theme === 'special') {\n        return this.starBgImg;\n      } else if (theme === 'dark') {\n        return this.starDarkBgImg;\n      }\n    }\n  },\n  methods: {\n    raterTouchStart (e) {\n      const { canChange, canSlide } = this;\n      if (!canChange || !canSlide) return;\n      this.calculateScore(e.changedTouches[0].pageX, true);\n    },\n    raterTouchmove (e) {\n      const { canChange, canSlide } = this;\n      if (!canChange || !canSlide) return;\n      this.calculateScore(e.changedTouches[0].pageX, true);\n    },\n    raterTouchend (e) {\n      const { canChange } = this;\n      if (!canChange) return;\n      this.calculateScore(e.changedTouches[0].pageX, true);\n    },\n    calculateScore (pageX, needEmit) {\n      const { size, fullScore } = this;\n      if (weex.config.env.platform === 'Web') {\n        pageX = pageX * 2 / 750 * 1080 - this.offset_left;\n      } else if (weex.config.env.platform === 'iOS') {\n        pageX = pageX - this.offset_left;\n      }\n      const half_star_width = size === 'big' ? 43 : 18;\n      const half_star_score = fullScore / 10;\n      const star_num = (pageX / half_star_width).toFixed(0);\n      const score_percent = star_num <= 0 ? 0 : star_num >= 10 ? 10 : star_num;\n      this.score = score_percent * half_star_score;\n      needEmit && this.$emit('fmRaterScoreChanged', { score: this.score });\n    }\n  },\n  mounted () {\n    if (weex.config.env.platform !== 'Android') {\n      setTimeout(() => {\n        dom.getComponentRect(this.$refs.rater, option => {\n          this.offset_left = option.size.left;\n        });\n      }, 50);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 138 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15707,7 +7792,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmIcon = __webpack_require__(3);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
@@ -15717,7 +7802,6 @@ var _fmImage2 = _interopRequireDefault(_fmImage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
 //
 //
 //
@@ -15848,7 +7932,7 @@ exports.default = {
       var half_star_width = size === 'big' ? 43 : 18;
       var percent = score / fullScore;
       var length = score <= 0 ? 0 : percent >= 1 ? 10 : percent.toFixed(1) * 10;
-      length = length === NaN ? 0 : length;
+      length = isNaN(length) ? 0 : length;
       return !length ? {
         width: 1,
         opacity: 0
@@ -15938,7 +8022,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 139 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -16016,18 +8100,18 @@ if (false) {
 }
 
 /***/ }),
-/* 140 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(141)
+__webpack_require__(146)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(143),
+  __webpack_require__(148),
   /* template */
-  __webpack_require__(144),
+  __webpack_require__(149),
   /* scopeId */
   "data-v-81772c76",
   /* cssModules */
@@ -16054,13 +8138,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 141 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(142);
+var content = __webpack_require__(147);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -16080,7 +8164,7 @@ if(false) {
 }
 
 /***/ }),
-/* 142 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -16088,27 +8172,25 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-snack-bar[data-v-81772c76] {\n\tposition: fixed;\n\tleft: 0;\n\tright: 0;\n\tbackground-color: #FFFFFF;\n\tflex-direction: row;\n\tpadding: 0 72px;\n\tjustify-content: space-between;\n\talign-items: center;\n\tmin-height: 0;\n}\n.title[data-v-81772c76], .closeText[data-v-81772c76] {\n\tfont-size: 42px;\n\tfont-family: sans-serif-medium;\n\tfont-weight: 500;\n}\n.rotate[data-v-81772c76] {\n\tfont-size: 54px;\n\tfont-weight: 700;\n\ttransform: rotate(180deg);\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-snack-bar/index.vue?2b30b2f0"],"names":[],"mappings":";AAkBA;CACA,gBAAA;CACA,QAAA;CACA,SAAA;CACA,0BAAA;CACA,oBAAA;CACA,gBAAA;CACA,+BAAA;CACA,oBAAA;CACA,cAAA;CACA;AAEA;CACA,gBAAA;CACA,+BAAA;CACA,iBAAA;CACA;AAEA;CACA,gBAAA;CACA,iBAAA;CACA,0BAAA;CACA","file":"index.vue","sourcesContent":["<template>\n\t<div ref=\"fm-snack-bar\"\n\t\tv-if=\"show\"\n\t\t:hack=\"isNeedShow\"\n\t\tclass=\"fm-snack-bar\"\n\t\t:style=\"barStyle\"\n\t\t@click=\"snackClick\">\n\t\t<slot name=\"title\">\n\t\t\t<text class=\"title\" :style=\"{ color: titleColor }\">{{ title }}</text>\n\t\t</slot>\n\t\t<slot name=\"right\">\n\t\t\t<fm-icon v-if=\"type === 'jump'\" value=\"&#xe6b5;\" class=\"rotate\" :style=\"{ color: titleColor }\" />\n\t\t\t<text v-else-if=\"type === 'normal'\" class=\"closeText\" :style=\"{ color: closeColor }\" @click=\"ctrClick\">{{ closeText }}</text>\n\t\t</slot>\n\t</div>\n</template>\n\n<style scoped>\n\t.fm-snack-bar {\n\t\tposition: fixed;\n\t\tleft: 0;\n\t\tright: 0;\n\t\tbackground-color: #FFFFFF;\n\t\tflex-direction: row;\n\t\tpadding: 0 72px;\n\t\tjustify-content: space-between;\n\t\talign-items: center;\n\t\tmin-height: 0;\n\t}\n\n\t.title, .closeText {\n\t\tfont-size: 42px;\n\t\tfont-family: sans-serif-medium;\n\t\tfont-weight: 500;\n\t}\n\n\t.rotate {\n\t\tfont-size: 54px;\n\t\tfont-weight: 700;\n\t\ttransform: rotate(180deg);\n\t}\n\n</style>\n\n<script>\nconst animation = weex.requireModule('animation')\nconst { platform } = weex.config.env\nconst isWeb = typeof (window) === 'object' && platform.toLowerCase() === 'web'\nimport FmIcon from '../fm-icon'\nimport Locale from 'weex-flymeui/lib/mixins/locale'\nimport { t } from 'weex-flymeui/lib/locale'\nexport default {\n  name: 'FmSnackBar',\n\tmixins: [Locale],\n\tcomponents: { FmIcon },\n  props: {\n\t\tshow: {\n\t\t\ttype: Boolean,\n\t\t\tdefault: false\n\t\t},\n\t\tbackgroundColor: {\n\t\t\ttype: String,\n\t\t\tdefault: '#323232'\n\t\t},\n\t\ttitle: String,\n\t\ttitleColor: {\n\t\t\ttype: String,\n\t\t\tdefault: '#FFFFFF'\n\t\t},\n\t\tcloseText: {\n\t\t\ttype: String,\n\t\t\tdefault() {\n\t\t\t\treturn t('el.common.close')\n\t\t\t}\n\t\t},\n\t\tcloseColor: {\n\t\t\ttype: String,\n\t\t\tdefault: '#198DED'\n\t\t},\n\t\theight: {\n\t\t\ttype: Number,\n\t\t\tdefault: 144\n\t\t},\n\t\tanimation: {\n\t\t\ttype: Object,\n\t\t\tdefault: () => ({\n\t\t\t\ttimingFunction: 'ease-out'\n\t\t\t})\n\t\t},\n\t\tautoClose: {\n\t\t\ttype: Boolean,\n\t\t\tdefault: true\n\t\t},\n\t\tstayTime: {\n\t\t\ttype: Number,\n\t\t\tdefault: 3000\n\t\t},\n\t\ttype: {\n\t\t\ttype: String,\n\t\t\tdefault: 'normal'\n\t\t},\n\t\tclickCb: Function,\n\t\tdismissCb: Function\n\t},\n\tcomputed: {\n\t\tbarStyle() {\n\t\t\tconst { height, backgroundColor } = this\n\t\t\treturn {\n\t\t\t\tbackgroundColor: backgroundColor,\n\t\t\t\tbottom: `${-height}px`,\n\t\t\t\theight: `${height}px`\n\t\t\t}\n\t\t},\n\t\tisNeedShow () {\n\t\t\tsetTimeout(() => {\n\t\t\t\tthis.appearBar(this.show)\n\t\t\t}, 50)\n\t\t\treturn this.show\n\t\t}\n\t},\n\tdata: () => ({\n\t\ttimer: null\n\t}),\n\tmethods: {\n\t\tappearBar(bool, duration = 150) {\n\t\t\tthis.isShow = bool\n\t\t\tconst popupEl = this.$refs['fm-snack-bar']\n\t\t\tif (!popupEl) {\n\t\t\t\treturn\n\t\t\t}\n\t\t\tanimation.transition(popupEl, {\n\t\t\t\tstyles: {\n\t\t\t\t\ttransform: this.getTransform(this.height, bool)\n\t\t\t\t},\n\t\t\t\tduration,\n\t\t\t\tdelay: 0,\n\t\t\t\t...this.animation\n\t\t\t}, () => {\n\t\t\t\tlet { autoClose, stayTime } = this\n\t\t\t\tif (bool && autoClose) {\n\t\t\t\t\tthis.timer = setTimeout(() => {\n\t\t\t\t\t\tthis.appearBar(false)\n\t\t\t\t\t}, stayTime)\n\t\t\t\t} else if (!bool) {\n\t\t\t\t\tthis.dismissCb && this.dismissCb()\n\t\t\t\t\tthis.$emit('fmSnackBarDismissed', { pos: this.pos })\n\t\t\t\t}\n\t\t\t})\n\t\t},\n\t\tgetTransform(height, bool) {\n\t\t\tbool || (height = 0)\n\t\t\treturn `translateY(-${height}px)`\n\t\t},\n\t\thide() {\n\t\t\tif (this.timer) {\n\t\t\t\tclearTimeout(this.timer)\n\t\t\t\tthis.timer = null\n\t\t\t}\n\t\t\tthis.appearBar(false)\n\t\t},\n\t\tctrClick() {\n\t\t\tthis.clickCb && this.clickCb()\n\t\t\tthis.hide()\n\t\t},\n\t\tsnackClick() {\n\t\t\tlet { type } = this\n\t\t\tif (type === 'jump') {\n\t\t\t\tthis.clickCb && this.clickCb()\n\t\t\t\tthis.hide()\n\t\t\t}\n\t\t\tthis.$emit('fmSnackBarBeClicked', {})\n\t\t}\n\t}\n}\n</script>\n\n\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-snack-bar[data-v-81772c76] {\n\tposition: fixed;\n\tleft: 0;\n\tright: 0;\n\tbackground-color: #FFFFFF;\n\tflex-direction: row;\n\tpadding: 0 72px;\n\tjustify-content: space-between;\n\talign-items: center;\n\tmin-height: 0;\n}\n.title[data-v-81772c76], .closeText[data-v-81772c76] {\n\tfont-size: 42px;\n\tfont-family: sans-serif-medium;\n\tfont-weight: 500;\n}\n.rotate[data-v-81772c76] {\n\tfont-size: 54px;\n\tfont-weight: 700;\n\ttransform: rotate(180deg);\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-snack-bar/index.vue?26f89813"],"names":[],"mappings":";AAkBA;CACA,gBAAA;CACA,QAAA;CACA,SAAA;CACA,0BAAA;CACA,oBAAA;CACA,gBAAA;CACA,+BAAA;CACA,oBAAA;CACA,cAAA;CACA;AAEA;CACA,gBAAA;CACA,+BAAA;CACA,iBAAA;CACA;AAEA;CACA,gBAAA;CACA,iBAAA;CACA,0BAAA;CACA","file":"index.vue","sourcesContent":["<template>\n\t<div ref=\"fm-snack-bar\"\n\t\tv-if=\"show\"\n\t\t:hack=\"isNeedShow\"\n\t\tclass=\"fm-snack-bar\"\n\t\t:style=\"barStyle\"\n\t\t@click=\"snackClick\">\n\t\t<slot name=\"title\">\n\t\t\t<text class=\"title\" :style=\"{ color: titleColor }\">{{ title }}</text>\n\t\t</slot>\n\t\t<slot name=\"right\">\n\t\t\t<fm-icon v-if=\"type === 'jump'\" value=\"&#xe6b5;\" class=\"rotate\" :style=\"{ color: titleColor }\" />\n\t\t\t<text v-else-if=\"type === 'normal'\" class=\"closeText\" :style=\"{ color: closeColor }\" @click=\"ctrClick\">{{ closeText }}</text>\n\t\t</slot>\n\t</div>\n</template>\n\n<style scoped>\n\t.fm-snack-bar {\n\t\tposition: fixed;\n\t\tleft: 0;\n\t\tright: 0;\n\t\tbackground-color: #FFFFFF;\n\t\tflex-direction: row;\n\t\tpadding: 0 72px;\n\t\tjustify-content: space-between;\n\t\talign-items: center;\n\t\tmin-height: 0;\n\t}\n\n\t.title, .closeText {\n\t\tfont-size: 42px;\n\t\tfont-family: sans-serif-medium;\n\t\tfont-weight: 500;\n\t}\n\n\t.rotate {\n\t\tfont-size: 54px;\n\t\tfont-weight: 700;\n\t\ttransform: rotate(180deg);\n\t}\n\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\n// const { platform } = weex.config.env;\n// const isWeb = typeof (window) === 'object' && platform.toLowerCase() === 'web';\nimport FmIcon from '../fm-icon';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\nexport default {\n  name: 'FmSnackBar',\n  mixins: [Locale],\n  components: { FmIcon },\n  props: {\n    show: {\n      type: Boolean,\n      default: false\n    },\n    backgroundColor: {\n      type: String,\n      default: '#323232'\n    },\n    title: String,\n    titleColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    closeText: {\n      type: String,\n      default () {\n        return t('el.common.close');\n      }\n    },\n    closeColor: {\n      type: String,\n      default: '#198DED'\n    },\n    height: {\n      type: Number,\n      default: 144\n    },\n    animation: {\n      type: Object,\n      default: () => ({\n        timingFunction: 'ease-out'\n      })\n    },\n    autoClose: {\n      type: Boolean,\n      default: true\n    },\n    stayTime: {\n      type: Number,\n      default: 3000\n    },\n    type: {\n      type: String,\n      default: 'normal'\n    },\n    clickCb: Function,\n    dismissCb: Function\n  },\n  computed: {\n    barStyle () {\n      const { height, backgroundColor } = this;\n      return {\n        backgroundColor: backgroundColor,\n        bottom: `${-height}px`,\n        height: `${height}px`\n      };\n    },\n    isNeedShow () {\n      setTimeout(() => {\n        this.appearBar(this.show);\n      }, 50);\n      return this.show;\n    }\n  },\n  data: () => ({\n    timer: null\n  }),\n  methods: {\n    appearBar (bool, duration = 150) {\n      this.isShow = bool;\n      const popupEl = this.$refs['fm-snack-bar'];\n      if (!popupEl) {\n        return;\n      }\n      animation.transition(popupEl, {\n        styles: {\n          transform: this.getTransform(this.height, bool)\n        },\n        duration,\n        delay: 0,\n        ...this.animation\n      }, () => {\n        const { autoClose, stayTime } = this;\n        if (bool && autoClose) {\n          this.timer = setTimeout(() => {\n            this.appearBar(false);\n          }, stayTime);\n        } else if (!bool) {\n          this.dismissCb && this.dismissCb();\n          this.$emit('fmSnackBarDismissed', { pos: this.pos });\n        }\n      });\n    },\n    getTransform (height, bool) {\n      bool || (height = 0);\n      return `translateY(-${height}px)`;\n    },\n    hide () {\n      if (this.timer) {\n        clearTimeout(this.timer);\n        this.timer = null;\n      }\n      this.appearBar(false);\n    },\n    ctrClick () {\n      this.clickCb && this.clickCb();\n      this.hide();\n    },\n    snackClick () {\n      const { type } = this;\n      if (type === 'jump') {\n        this.clickCb && this.clickCb();\n        this.hide();\n      }\n      this.$emit('fmSnackBarBeClicked', {});\n    }\n  }\n};\n</script>\n\n\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 143 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _fmIcon = __webpack_require__(3);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
@@ -16116,7 +8198,7 @@ var _locale = __webpack_require__(5);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(4);
+var _locale3 = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16166,149 +8248,148 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 
 var animation = weex.requireModule('animation');
-var platform = weex.config.env.platform;
-
-var isWeb = (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object' && platform.toLowerCase() === 'web';
+// const { platform } = weex.config.env;
+// const isWeb = typeof (window) === 'object' && platform.toLowerCase() === 'web';
 exports.default = {
-	name: 'FmSnackBar',
-	mixins: [_locale2.default],
-	components: { FmIcon: _fmIcon2.default },
-	props: {
-		show: {
-			type: Boolean,
-			default: false
-		},
-		backgroundColor: {
-			type: String,
-			default: '#323232'
-		},
-		title: String,
-		titleColor: {
-			type: String,
-			default: '#FFFFFF'
-		},
-		closeText: {
-			type: String,
-			default: function _default() {
-				return (0, _locale3.t)('el.common.close');
-			}
-		},
-		closeColor: {
-			type: String,
-			default: '#198DED'
-		},
-		height: {
-			type: Number,
-			default: 144
-		},
-		animation: {
-			type: Object,
-			default: function _default() {
-				return {
-					timingFunction: 'ease-out'
-				};
-			}
-		},
-		autoClose: {
-			type: Boolean,
-			default: true
-		},
-		stayTime: {
-			type: Number,
-			default: 3000
-		},
-		type: {
-			type: String,
-			default: 'normal'
-		},
-		clickCb: Function,
-		dismissCb: Function
-	},
-	computed: {
-		barStyle: function barStyle() {
-			var height = this.height,
-			    backgroundColor = this.backgroundColor;
+  name: 'FmSnackBar',
+  mixins: [_locale2.default],
+  components: { FmIcon: _fmIcon2.default },
+  props: {
+    show: {
+      type: Boolean,
+      default: false
+    },
+    backgroundColor: {
+      type: String,
+      default: '#323232'
+    },
+    title: String,
+    titleColor: {
+      type: String,
+      default: '#FFFFFF'
+    },
+    closeText: {
+      type: String,
+      default: function _default() {
+        return (0, _locale3.t)('el.common.close');
+      }
+    },
+    closeColor: {
+      type: String,
+      default: '#198DED'
+    },
+    height: {
+      type: Number,
+      default: 144
+    },
+    animation: {
+      type: Object,
+      default: function _default() {
+        return {
+          timingFunction: 'ease-out'
+        };
+      }
+    },
+    autoClose: {
+      type: Boolean,
+      default: true
+    },
+    stayTime: {
+      type: Number,
+      default: 3000
+    },
+    type: {
+      type: String,
+      default: 'normal'
+    },
+    clickCb: Function,
+    dismissCb: Function
+  },
+  computed: {
+    barStyle: function barStyle() {
+      var height = this.height,
+          backgroundColor = this.backgroundColor;
 
-			return {
-				backgroundColor: backgroundColor,
-				bottom: -height + 'px',
-				height: height + 'px'
-			};
-		},
-		isNeedShow: function isNeedShow() {
-			var _this = this;
+      return {
+        backgroundColor: backgroundColor,
+        bottom: -height + 'px',
+        height: height + 'px'
+      };
+    },
+    isNeedShow: function isNeedShow() {
+      var _this = this;
 
-			setTimeout(function () {
-				_this.appearBar(_this.show);
-			}, 50);
-			return this.show;
-		}
-	},
-	data: function data() {
-		return {
-			timer: null
-		};
-	},
-	methods: {
-		appearBar: function appearBar(bool) {
-			var _this2 = this;
+      setTimeout(function () {
+        _this.appearBar(_this.show);
+      }, 50);
+      return this.show;
+    }
+  },
+  data: function data() {
+    return {
+      timer: null
+    };
+  },
+  methods: {
+    appearBar: function appearBar(bool) {
+      var _this2 = this;
 
-			var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 150;
+      var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 150;
 
-			this.isShow = bool;
-			var popupEl = this.$refs['fm-snack-bar'];
-			if (!popupEl) {
-				return;
-			}
-			animation.transition(popupEl, _extends({
-				styles: {
-					transform: this.getTransform(this.height, bool)
-				},
-				duration: duration,
-				delay: 0
-			}, this.animation), function () {
-				var autoClose = _this2.autoClose,
-				    stayTime = _this2.stayTime;
+      this.isShow = bool;
+      var popupEl = this.$refs['fm-snack-bar'];
+      if (!popupEl) {
+        return;
+      }
+      animation.transition(popupEl, _extends({
+        styles: {
+          transform: this.getTransform(this.height, bool)
+        },
+        duration: duration,
+        delay: 0
+      }, this.animation), function () {
+        var autoClose = _this2.autoClose,
+            stayTime = _this2.stayTime;
 
-				if (bool && autoClose) {
-					_this2.timer = setTimeout(function () {
-						_this2.appearBar(false);
-					}, stayTime);
-				} else if (!bool) {
-					_this2.dismissCb && _this2.dismissCb();
-					_this2.$emit('fmSnackBarDismissed', { pos: _this2.pos });
-				}
-			});
-		},
-		getTransform: function getTransform(height, bool) {
-			bool || (height = 0);
-			return 'translateY(-' + height + 'px)';
-		},
-		hide: function hide() {
-			if (this.timer) {
-				clearTimeout(this.timer);
-				this.timer = null;
-			}
-			this.appearBar(false);
-		},
-		ctrClick: function ctrClick() {
-			this.clickCb && this.clickCb();
-			this.hide();
-		},
-		snackClick: function snackClick() {
-			var type = this.type;
+        if (bool && autoClose) {
+          _this2.timer = setTimeout(function () {
+            _this2.appearBar(false);
+          }, stayTime);
+        } else if (!bool) {
+          _this2.dismissCb && _this2.dismissCb();
+          _this2.$emit('fmSnackBarDismissed', { pos: _this2.pos });
+        }
+      });
+    },
+    getTransform: function getTransform(height, bool) {
+      bool || (height = 0);
+      return 'translateY(-' + height + 'px)';
+    },
+    hide: function hide() {
+      if (this.timer) {
+        clearTimeout(this.timer);
+        this.timer = null;
+      }
+      this.appearBar(false);
+    },
+    ctrClick: function ctrClick() {
+      this.clickCb && this.clickCb();
+      this.hide();
+    },
+    snackClick: function snackClick() {
+      var type = this.type;
 
-			if (type === 'jump') {
-				this.clickCb && this.clickCb();
-				this.hide();
-			}
-			this.$emit('fmSnackBarBeClicked', {});
-		}
-	}
+      if (type === 'jump') {
+        this.clickCb && this.clickCb();
+        this.hide();
+      }
+      this.$emit('fmSnackBarBeClicked', {});
+    }
+  }
 };
 
 /***/ }),
-/* 144 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -16358,7 +8439,7 @@ if (false) {
 }
 
 /***/ }),
-/* 145 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16372,7 +8453,7 @@ var _fmSnackBar = __webpack_require__(15);
 
 var _fmSnackBar2 = _interopRequireDefault(_fmSnackBar);
 
-var _locale = __webpack_require__(4);
+var _locale = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16443,7 +8524,7 @@ function showSnackBar(options) {
 exports.default = showSnackBar;
 
 /***/ }),
-/* 146 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16453,7 +8534,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(147);
+var _index = __webpack_require__(152);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -16465,18 +8546,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 147 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(148)
+__webpack_require__(153)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(150),
+  __webpack_require__(155),
   /* template */
-  __webpack_require__(151),
+  __webpack_require__(156),
   /* scopeId */
   "data-v-47ee1270",
   /* cssModules */
@@ -16503,13 +8584,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 148 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(149);
+var content = __webpack_require__(154);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -16529,7 +8610,7 @@ if(false) {
 }
 
 /***/ }),
-/* 149 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -16537,13 +8618,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-checkbox[data-v-47ee1270] {\n}\n.border[data-v-47ee1270] {\n  margin: 0 48px;\n  background-color: #e6e6e6;\n  height: 1px;\n}\n.checkbox-content[data-v-47ee1270] {\n  position: relative;\n  flex: 1;\n  flex-direction: row;\n  padding: 51px 96px;\n  align-items: center;\n  justify-content: space-between;\n}\n.checkbox-content[data-v-47ee1270]:active {\n  background-color: #eeeeee;\n}\n.label[data-v-47ee1270] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 48px;\n  line-height: 54px;\n  justify-content: center;\n}\n.checked[data-v-47ee1270] {\n  color: #198ded;\n}\n.icon-wrap[data-v-47ee1270] {\n  position: absolute;\n  right: 102px;\n  top: 0px;\n  bottom: 0px;\n  opacity: 1;\n  overflow: hidden;\n  padding: 40px 0;\n  width: 72px;\n}\n.icon[data-v-47ee1270] {\n  font-size: 72px;\n  color: #198ded;\n  font-weight: bold;\n  width: 72px;\n  height: 64px;\n  justify-content: center;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-checkbox/index.vue?0b0ea942"],"names":[],"mappings":";AAgBA;CACA;AAEA;EACA,eAAA;EACA,0BAAA;EACA,YAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,oBAAA;EACA,mBAAA;EACA,oBAAA;EACA,+BAAA;CACA;AAEA;EACA,0BAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;EACA,wBAAA;CACA;AAEA;EACA,eAAA;CACA;AAEA;EACA,mBAAA;EACA,aAAA;EACA,SAAA;EACA,YAAA;EACA,WAAA;EACA,iBAAA;EACA,gBAAA;EACA,YAAA;CACA;AAEA;EACA,gBAAA;EACA,eAAA;EACA,kBAAA;EACA,YAAA;EACA,aAAA;EACA,wBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"fm-checkbox\">\n    <div class=\"checkbox-content\" @click=\"toggleChecked\">\n      <text class=\"label\"  v-if=\"$slots.default || value\" :style=\"{ color: _checked ? '#198DED': '#000000' }\">\n        <slot></slot>\n      <template v-if=\"!$slots.default\">{{ value }}</template>\n      </text>\n      <div class=\"icon-wrap\">\n        <fm-icon class=\"icon\" ref=\"fm-icon\" :style=\"{ width: isChecked ? 72 : 1 }\" value=\"&#xe6de;\" :icon-style=\"48\" color=\"#0A73C9\" />\n      </div>\n    </div>\n    <div class=\"border\"></div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-checkbox {\n  }\n\n  .border {\n    margin: 0 48px;\n    background-color: #e6e6e6;\n    height: 1px;\n  }\n\n  .checkbox-content {\n    position: relative;\n    flex: 1;\n    flex-direction: row;\n    padding: 51px 96px;\n    align-items: center;\n    justify-content: space-between;\n  }\n\n  .checkbox-content:active {\n    background-color: #eeeeee;\n  }\n\n  .label {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 54px;\n    justify-content: center;\n  }\n\n  .checked {\n    color: #198ded;\n  }\n\n  .icon-wrap {\n    position: absolute;\n    right: 102px;\n    top: 0px;\n    bottom: 0px;\n    opacity: 1;\n    overflow: hidden;\n    padding: 40px 0;\n    width: 72px;\n  }\n\n  .icon {\n    font-size: 72px;\n    color: #198ded;\n    font-weight: bold;\n    width: 72px;\n    height: 64px;\n    justify-content: center;\n  }\n</style>\n\n<script>\n  const animation = weex.requireModule('animation')\n  import FmIcon from '../fm-icon'\n  export default {\n    name: 'FmCheckbox',\n    components: { FmIcon },\n    props: {\n      value: {\n        type: String,\n        default: ''\n      },\n      checked: Boolean,\n      disabled: Boolean\n    },\n    data: () => ({\n      isChecked: false,\n      selfChecked: false\n    }),\n    computed: {\n      _checked: {\n        get() {\n          return this.isGroup\n            ? this.store.indexOf(this.value) !== -1 ? true : false\n            : this.selfChecked\n        },\n        set(val) {\n          if (this.isGroup) {\n            if (val) {\n              this.isLimitExceeded = false\n              this._checkboxGroup.max !== undefined &&\n                this.store.length >= this._checkboxGroup.max &&\n                (this.isLimitExceeded = true)\n\n              this.isLimitExceeded === false &&\n                (this.addToStore() || this.appearIcon(val))\n            } else {\n              this.isLimitExceeded = false\n              this._checkboxGroup.min !== undefined &&\n                this.store.length <= this._checkboxGroup.min &&\n                (this.isLimitExceeded = true)\n\n              this.isLimitExceeded === false &&\n                (this.deleteFromStore() || this.appearIcon(val))\n            }\n          } else {\n            this.selfChecked = val\n            this.appearIcon(val)\n          }\n          this.$emit('fmCheckboxChecked', { value: this.value, checked: val })\n        }\n      },\n      isGroup() {\n        let parent = this.$parent\n        while (parent) {\n          if (parent.$options.componentName !== 'FmCheckListGroup') {\n            parent = parent.$parent\n          } else {\n            this._checkboxGroup = parent\n            return true\n          }\n        }\n        return false\n      },\n      store() {\n        return this._checkboxGroup ? this._checkboxGroup.value : this.value\n      }\n    },\n    methods: {\n      toggleChecked() {\n        !this.disabled && (this._checked = !this._checked)\n      },\n      appearIcon(bool, duration = 150) {\n        const iconEl = this.$refs['fm-icon']\n        if (!iconEl) {\n          return\n        }\n        let style = bool\n          ? {\n              opacity: 1,\n              width: 72\n            }\n          : {\n              opacity: 0\n            }\n        animation.transition(\n          iconEl,\n          {\n            styles: style,\n            duration,\n            delay: 0,\n            timingFunction: 'ease-out'\n          },\n          () => {\n            this.isChecked = bool\n          }\n        )\n      },\n      addToStore() {\n        if (Array.isArray(this.store) && this.store.indexOf(this.value) === -1) {\n          this.store.push(this.value)\n        }\n      },\n      deleteFromStore() {\n        if (Array.isArray(this.store) && this.store.indexOf(this.value) !== -1) {\n          this.store.splice(this.store.indexOf(this.value), 1)\n        }\n      }\n    },\n    created() {\n      this.isGroup\n      this.$slots.default && (this.value = this.$slots.default[0].text)\n      this.checked &&\n        (this.addToStore() ||\n          ((this.selfChecked = true) && (this.isChecked = true)))\n      this._checked && ((this.selfChecked = true) && (this.isChecked = true))\n    }\n  }\n</script>"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-checkbox[data-v-47ee1270] {\n}\n.border[data-v-47ee1270] {\n  margin: 0 48px;\n  background-color: #e6e6e6;\n  height: 1px;\n}\n.checkbox-content[data-v-47ee1270] {\n  position: relative;\n  flex: 1;\n  flex-direction: row;\n  padding: 51px 96px;\n  align-items: center;\n  justify-content: space-between;\n}\n.checkbox-content[data-v-47ee1270]:active {\n  background-color: #eeeeee;\n}\n.label[data-v-47ee1270] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 48px;\n  line-height: 54px;\n  justify-content: center;\n}\n.checked[data-v-47ee1270] {\n  color: #198ded;\n}\n.icon-wrap[data-v-47ee1270] {\n  position: absolute;\n  right: 102px;\n  top: 0px;\n  bottom: 0px;\n  opacity: 1;\n  overflow: hidden;\n  padding: 40px 0;\n  width: 72px;\n}\n.icon[data-v-47ee1270] {\n  font-size: 72px;\n  color: #198ded;\n  font-weight: bold;\n  width: 72px;\n  height: 64px;\n  justify-content: center;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-checkbox/index.vue?f8556120"],"names":[],"mappings":";AAgBA;CACA;AAEA;EACA,eAAA;EACA,0BAAA;EACA,YAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,oBAAA;EACA,mBAAA;EACA,oBAAA;EACA,+BAAA;CACA;AAEA;EACA,0BAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;EACA,wBAAA;CACA;AAEA;EACA,eAAA;CACA;AAEA;EACA,mBAAA;EACA,aAAA;EACA,SAAA;EACA,YAAA;EACA,WAAA;EACA,iBAAA;EACA,gBAAA;EACA,YAAA;CACA;AAEA;EACA,gBAAA;EACA,eAAA;EACA,kBAAA;EACA,YAAA;EACA,aAAA;EACA,wBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"fm-checkbox\">\n    <div class=\"checkbox-content\" @click=\"toggleChecked\">\n      <text class=\"label\"  v-if=\"$slots.default || value\" :style=\"{ color: _checked ? '#198DED': '#000000' }\">\n        <slot></slot>\n      <template v-if=\"!$slots.default\">{{ value }}</template>\n      </text>\n      <div class=\"icon-wrap\">\n        <fm-icon class=\"icon\" ref=\"fm-icon\" :style=\"{ width: isChecked ? 72 : 1 }\" value=\"&#xe6de;\" :icon-style=\"48\" color=\"#0A73C9\" />\n      </div>\n    </div>\n    <div class=\"border\"></div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-checkbox {\n  }\n\n  .border {\n    margin: 0 48px;\n    background-color: #e6e6e6;\n    height: 1px;\n  }\n\n  .checkbox-content {\n    position: relative;\n    flex: 1;\n    flex-direction: row;\n    padding: 51px 96px;\n    align-items: center;\n    justify-content: space-between;\n  }\n\n  .checkbox-content:active {\n    background-color: #eeeeee;\n  }\n\n  .label {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 54px;\n    justify-content: center;\n  }\n\n  .checked {\n    color: #198ded;\n  }\n\n  .icon-wrap {\n    position: absolute;\n    right: 102px;\n    top: 0px;\n    bottom: 0px;\n    opacity: 1;\n    overflow: hidden;\n    padding: 40px 0;\n    width: 72px;\n  }\n\n  .icon {\n    font-size: 72px;\n    color: #198ded;\n    font-weight: bold;\n    width: 72px;\n    height: 64px;\n    justify-content: center;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nimport FmIcon from '../fm-icon';\nexport default {\n  name: 'FmCheckbox',\n  components: { FmIcon },\n  props: {\n    value: {\n      type: String,\n      default: ''\n    },\n    checked: Boolean,\n    disabled: Boolean\n  },\n  data: () => ({\n    isChecked: false,\n    selfChecked: false\n  }),\n  computed: {\n    _checked: {\n      get () {\n        return this.isGroup\n          ? this.store.indexOf(this.value) !== -1\n          : this.selfChecked;\n      },\n      set (val) {\n        if (this.isGroup) {\n          if (val) {\n            this.isLimitExceeded = false;\n            this._checkboxGroup.max !== undefined &&\n                this.store.length >= this._checkboxGroup.max &&\n                (this.isLimitExceeded = true);\n\n            this.isLimitExceeded === false &&\n                (this.addToStore() || this.appearIcon(val));\n          } else {\n            this.isLimitExceeded = false;\n            this._checkboxGroup.min !== undefined &&\n                this.store.length <= this._checkboxGroup.min &&\n                (this.isLimitExceeded = true);\n\n            this.isLimitExceeded === false &&\n                (this.deleteFromStore() || this.appearIcon(val));\n          }\n        } else {\n          this.selfChecked = val;\n          this.appearIcon(val);\n        }\n        this.$emit('fmCheckboxChecked', { value: this.value, checked: val });\n      }\n    },\n    isGroup () {\n      let parent = this.$parent;\n      while (parent) {\n        if (parent.$options.componentName !== 'FmCheckListGroup') {\n          parent = parent.$parent;\n        } else {\n          this._checkboxGroup = parent;\n          return true;\n        }\n      }\n      return false;\n    },\n    store () {\n      return this._checkboxGroup ? this._checkboxGroup.value : this.value;\n    }\n  },\n  methods: {\n    toggleChecked () {\n      !this.disabled && (this._checked = !this._checked);\n    },\n    appearIcon (bool, duration = 150) {\n      const iconEl = this.$refs['fm-icon'];\n      if (!iconEl) {\n        return;\n      }\n      const style = bool\n        ? {\n          opacity: 1,\n          width: 72\n        }\n        : {\n          opacity: 0\n        };\n      animation.transition(\n        iconEl,\n        {\n          styles: style,\n          duration,\n          delay: 0,\n          timingFunction: 'ease-out'\n        },\n        () => {\n          this.isChecked = bool;\n        }\n      );\n    },\n    addToStore () {\n      if (Array.isArray(this.store) && this.store.indexOf(this.value) === -1) {\n        this.store.push(this.value);\n      }\n    },\n    deleteFromStore () {\n      if (Array.isArray(this.store) && this.store.indexOf(this.value) !== -1) {\n        this.store.splice(this.store.indexOf(this.value), 1);\n      }\n    }\n  },\n  created () {\n    this.isGroup;\n    this.$slots.default && (this.value = this.$slots.default[0].text);\n    this.checked &&\n        (this.addToStore() ||\n          ((this.selfChecked = true) && (this.isChecked = true)));\n    this._checked && ((this.selfChecked = true) && (this.isChecked = true));\n  }\n};\n</script>"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 150 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16553,7 +8634,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmIcon = __webpack_require__(3);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
@@ -16652,7 +8733,7 @@ exports.default = {
   computed: {
     _checked: {
       get: function get() {
-        return this.isGroup ? this.store.indexOf(this.value) !== -1 ? true : false : this.selfChecked;
+        return this.isGroup ? this.store.indexOf(this.value) !== -1 : this.selfChecked;
       },
       set: function set(val) {
         if (this.isGroup) {
@@ -16738,7 +8819,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 151 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -16790,7 +8871,7 @@ if (false) {
 }
 
 /***/ }),
-/* 152 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16800,7 +8881,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(153);
+var _index = __webpack_require__(158);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -16812,14 +8893,14 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 153 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(154),
+  __webpack_require__(159),
   /* template */
-  __webpack_require__(155),
+  __webpack_require__(160),
   /* scopeId */
   null,
   /* cssModules */
@@ -16846,14 +8927,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 154 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 //
 //
@@ -16863,28 +8944,28 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 exports.default = {
-	componentName: 'FmCheckListGroup',
-	props: {
-		value: {
-			type: Array,
-			default: function _default() {
-				return [];
-			}
-		},
-		disabled: Boolean,
-		min: Number,
-		max: Number,
-		textColor: String
-	},
-	watch: {
-		value: function value(_value) {
-			this.$emit('fmCheckListGroupChecked', _value);
-		}
-	}
+  componentName: 'FmCheckListGroup',
+  props: {
+    value: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    disabled: Boolean,
+    min: Number,
+    max: Number,
+    textColor: String
+  },
+  watch: {
+    value: function value(_value) {
+      this.$emit('fmCheckListGroupChecked', _value);
+    }
+  }
 };
 
 /***/ }),
-/* 155 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -16903,7 +8984,7 @@ if (false) {
 }
 
 /***/ }),
-/* 156 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16913,7 +8994,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(157);
+var _index = __webpack_require__(162);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -16925,14 +9006,14 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 157 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(158),
+  __webpack_require__(163),
   /* template */
-  __webpack_require__(159),
+  __webpack_require__(164),
   /* scopeId */
   null,
   /* cssModules */
@@ -16959,7 +9040,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 158 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16980,7 +9061,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 159 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -17001,18 +9082,18 @@ if (false) {
 }
 
 /***/ }),
-/* 160 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(161)
+__webpack_require__(166)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(163),
+  __webpack_require__(168),
   /* template */
-  __webpack_require__(164),
+  __webpack_require__(169),
   /* scopeId */
   "data-v-4cf19c5c",
   /* cssModules */
@@ -17039,13 +9120,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 161 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(162);
+var content = __webpack_require__(167);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -17065,7 +9146,7 @@ if(false) {
 }
 
 /***/ }),
-/* 162 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -17073,13 +9154,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-status-bar[data-v-4cf19c5c] {\n    height: 66px;\n    width: 1080px;\n    background-color: #ffffff;\n}\n.fm-search-bar[data-v-4cf19c5c] {\n    padding: 0 48px;\n    background-color: #ffffff;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom-style: solid;\n    border-bottom-width: 2px;\n    border-bottom-color: rgba(0, 0, 0, 0.1);\n}\n.search-input-wrap[data-v-4cf19c5c] {\n    flex: 1;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    padding-left: 35px;\n    height: 90px;\n    background-color: rgba(0, 0, 0, 0.05);\n    outline: none;\n    border-radius: 45px;\n}\n.search-bar-input[data-v-4cf19c5c] {\n    flex: 1;\n    height: 90px;\n    margin-left: 24px;\n    margin-right: 9px;\n    line-height: 90px;\n    font-size: 42px;\n    background-color: transparent;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    color: #616161;\n}\n.search-bar-icon[data-v-4cf19c5c] {\n    line-height: 42px;\n    height: 42px;\n    font-weight: 700;\n}\n.search-bar-back[data-v-4cf19c5c] {\n\t\tmargin-left: -18px;\n\t\tmargin-right: 30px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n}\n.search-bar-delete[data-v-4cf19c5c] {\n    width: 60px;\n    height: 60px;\n    margin-right: 15px;\n    font-weight: 700;\n    padding: 6px 5px;\n    background-color: rgba(77, 77, 77, 0.5);\n    border-radius: 30px;\n}\n.search-enter[data-v-4cf19c5c] {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 96px;\n    margin-left: 48px;\n    color: rgba(0, 0, 0, 0.4);\n    text-align: center;\n}\n.right-btn[data-v-4cf19c5c] {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    right: 24px;\n    justify-content: center;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-searchbar/index.vue?d33a5652"],"names":[],"mappings":";AAoCA;IACA,aAAA;IACA,cAAA;IACA,0BAAA;CACA;AAEA;IACA,gBAAA;IACA,0BAAA;IACA,cAAA;IACA,cAAA;IACA,oBAAA;IACA,oBAAA;IACA,+BAAA;IACA,2BAAA;IACA,yBAAA;IACA,wCAAA;CACA;AAEA;IACA,QAAA;IACA,oBAAA;IACA,oBAAA;IACA,wBAAA;IACA,mBAAA;IACA,aAAA;IACA,sCAAA;IACA,cAAA;IACA,oBAAA;CACA;AAEA;IACA,QAAA;IACA,aAAA;IACA,kBAAA;IACA,kBAAA;IACA,kBAAA;IACA,gBAAA;IACA,8BAAA;IACA,+BAAA;IACA,iBAAA;IACA,eAAA;CACA;AAEA;IACA,kBAAA;IACA,aAAA;IACA,iBAAA;CACA;AAEA;EACA,mBAAA;EACA,mBAAA;IACA,kBAAA;IACA,aAAA;IACA,iBAAA;CACA;AAEA;IACA,YAAA;IACA,aAAA;IACA,mBAAA;IACA,iBAAA;IACA,iBAAA;IACA,wCAAA;IACA,oBAAA;CACA;AAEA;IACA,+BAAA;IACA,iBAAA;IACA,gBAAA;IACA,kBAAA;IACA,kBAAA;IACA,0BAAA;IACA,mBAAA;CACA;AAEA;IACA,mBAAA;IACA,OAAA;IACA,UAAA;IACA,YAAA;IACA,wBAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 18/02/26-->\n<template>\n  <div v-if=\"show\">\n    <div class=\"fm-status-bar\" v-if=\"statusbar\" :style=\"{ backgroundColor: backgroundColor }\"></div>\n    <div class=\"fm-search-bar\" :style=\"barStyle\">\n      <slot name=\"left\" v-if=\"hasPrev\">\n        <fm-icon @fmClick=\"onBack\" class=\"search-bar-back\" value=\"&#xe6b5;\" :icon-style=\"72\" :color=\"leftColor\"/>\n      </slot>\n        <div class=\"search-input-wrap\" :style=\"inputBackground ? { backgroundColor: inputBackground} : {}\">\n          <fm-icon class=\"search-bar-icon\" value=\"&#xe6d4;\" :icon-style=\"42\" :color=\"iconColor\" />\n          <input @blur=\"onBlur\"\n                @focus=\"onFocus\"\n                @input=\"onInput\"\n                @return=\"onSubmit\"\n                :autofocus=\"autofocus\"\n                :disabled=\"disabled\"\n                :value=\"value\"\n                ref=\"input\"\n                :type=\"inputType\"\n                :return-key-type=\"returnKeyType\"\n                :placeholder=\"placeholder\"\n                :style=\"{color: inputColor, 'placeholder-color': placeholderColor}\"\n                class=\"search-bar-input\"/>\n          <fm-icon :style=\"{ opacity: delShow ? 1 : 0 }\" class=\"search-bar-delete\" value=\"&#xe6c0;\" :icon-style=\"48\" color=\"#FFFFFF\" @fmClick=\"delClick\" />\n          <div :style=\"{ opacity: !delShow ? 1 : 0 }\" class=\"right-btn\">\n            <slot name=\"input-right\"></slot>\n          </div>\n        </div>\n      <slot name=\"right\">\n        <text v-if=\"searchText\" class=\"search-enter\" @click=\"onSearch\" :style=\"searchTextStyle\">{{ searchText }}</text>\n      </slot>\n    </div> \n  </div> \n</template>\n\n<style scoped>\n  .fm-status-bar {\n    height: 66px;\n    width: 1080px;\n    background-color: #ffffff;\n  }\n\n  .fm-search-bar {\n    padding: 0 48px;\n    background-color: #ffffff;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom-style: solid;\n    border-bottom-width: 2px;\n    border-bottom-color: rgba(0, 0, 0, 0.1);\n  }\n\n  .search-input-wrap {\n    flex: 1;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    padding-left: 35px;\n    height: 90px;\n    background-color: rgba(0, 0, 0, 0.05);\n    outline: none;\n    border-radius: 45px;\n  }\n\n  .search-bar-input {\n    flex: 1;\n    height: 90px;\n    margin-left: 24px;\n    margin-right: 9px;\n    line-height: 90px;\n    font-size: 42px;\n    background-color: transparent;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    color: #616161;\n  }\n\n  .search-bar-icon {\n    line-height: 42px;\n    height: 42px;\n    font-weight: 700;\n  }\n\n  .search-bar-back {\n\t\tmargin-left: -18px;\n\t\tmargin-right: 30px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n  }\n\n  .search-bar-delete {\n    width: 60px;\n    height: 60px;\n    margin-right: 15px;\n    font-weight: 700;\n    padding: 6px 5px;\n    background-color: rgba(77, 77, 77, 0.5);\n    border-radius: 30px;\n  }\n\n  .search-enter {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 96px;\n    margin-left: 48px;\n    color: rgba(0, 0, 0, 0.4);\n    text-align: center;\n  }\n\n  .right-btn {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    right: 24px;\n    justify-content: center;\n  }\n</style>\n\n<script>\n  import FmIcon from '../fm-icon'\n  import Locale from 'weex-flymeui/lib/mixins/locale'\n  import { t } from 'weex-flymeui/lib/locale'\n  const Navigator = weex.requireModule('navigator')\n\n  export default {\n    name: 'FmSearchbar',\n    mixins: [Locale],\n    components: { FmIcon },\n    props: {\n\t\t\tstatusbar: {\n\t\t\t\ttype: Boolean,\n\t\t\t\tdefault: false,\n\t\t\t},\n      inputValue: {\n        type: [String, Number],\n        default: ''\n      },\n\t\t\tuseDefaultReturn: {\n\t\t\t\ttype: Boolean,\n\t\t\t\tdefault: true,\n\t\t\t},\n\t\t\thasPrev: {\n\t\t\t\ttype: Boolean,\n\t\t\t\tdefault: true\n\t\t\t},\n\t\t\tbackgroundColor: {\n\t\t\t\ttype: String,\n\t\t\t\tdefault: '#FFFFFF'\n      },\n      iconColor: {\n        type: String,\n        default: 'rgba(0, 0, 0, 0.4)'\n      },\n\t\t\tleftColor: {\n\t\t\t\ttype: String,\n\t\t\t\tdefault: 'rgba(0, 0, 0, 0.6)'\n\t\t\t},\n      inputBackground: String,\n\t\t\tborderStyle: {\n\t\t\t\ttype: Object,\n\t\t\t\tdefault: () => ({\n          borderBottomStyle: 'solid',\n          borderBottomWidth: 2,\n          borderBottomColor: 'rgba(0, 0, 0, 0.1)'\n        })\n\t\t\t},\n      placeholder: String,\n      autofocus: Boolean,\n      disabled: Boolean,\n      inputType: {\n        type: String,\n        default: 'text'\n      },\n      searchText: {\n        type: String,\n        default() {\n          return t('el.searchbar.search');\n        }\n      },\n      searchColor: {\n        type: String,\n        default: 'rgba(0, 0, 0, 0.4)'\n      },\n      searchHighlightColor: {\n        type: String,\n        default: '#198DED'\n      },\n      searchTextSize: {\n        type: Number,\n        default: 48\n      },\n      returnKeyType: {\n        type: String,\n        default: 'search'\n      },\n      placeholderColor: {\n        type: String,\n        default: 'rgba(0, 0, 0, 0.4)'\n      },\n      inputColor: {\n        type: String,\n        default: '#616161'\n      },\n      show: {\n        type: Boolean,\n        default: true\n      }\n    },\n    watch: {\n      inputValue(val) {\n        this.value = val\n      }\n    },\n    data: () => ({\n      isFocus: false,\n      value: ''\n    }),\n    computed: {\n      delShow() {\n        return this.isFocus && this.value\n      },\n\t\t\tbarStyle() {\n\t\t\t\tlet style = {\n          borderBottomStyle: 'solid',\n          borderBottomWidth: 2,\n\t\t\t\t\tborderBottomColor: 'rgba(0, 0, 0, 0.1)',\n\t\t\t\t}\n\t\t\t\tObject.assign(style, this.borderStyle)\n\t\t\t\tstyle.backgroundColor = this.backgroundColor\n\t\t\t\treturn style\n      },\n      searchTextStyle() {\n        const { value, searchColor, searchHighlightColor, searchTextSize } = this\n        return {\n          color: value ? searchHighlightColor : searchColor,\n          fontSize: searchTextSize\n        }\n      }\n    },\n    methods: {\n\t\t\tonBack(e) {\n        const self = this\n        if (self.useDefaultReturn) {\n          Navigator.pop({}, e => {\n          })\n        }\n        self.$emit('fmSearchbarleftBtnClicked', {})\n\t\t\t},\n      delClick(e) {\n        this.value = ''\n      },\n      onInput(e) {\n        this.value = e.value\n        this.$emit('input', e)\n      },\n      onFocus(e) {\n        this.isFocus = true\n        this.$emit('focus', e)\n      },\n      onBlur(e) {\n        this.isFocus = false\n        this.$emit('blur', e)\n      },\n      focus() {\n        this.$refs.input.focus()\n      },\n      blur() {\n        this.$refs.input.blur()\n      },\n      onSubmit(e) {\n        this.$emit('fmSearchbarSubmit', { value: this.value })\n      },\n      onSearch(e) {\n        this.$emit('fmSearchbarSubmit', { value: this.value })\n      },\n      setSelectionRange(start, end) {\n        this.$refs.input.setSelectionRange(start, end)\n      },\n      getEditSelectionRange(callback) {\n        this.$refs.input.getEditSelectionRange(callback)\n      },\n      setValue (value) {\n        this.value = value\n      }\n    },\n    mounted() {\n      this.value = this.inputValue || ''\n    }\n  }\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-status-bar[data-v-4cf19c5c] {\n    height: 66px;\n    width: 1080px;\n    background-color: #ffffff;\n}\n.fm-search-bar[data-v-4cf19c5c] {\n    padding: 0 48px;\n    background-color: #ffffff;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom-style: solid;\n    border-bottom-width: 2px;\n    border-bottom-color: rgba(0, 0, 0, 0.1);\n}\n.search-input-wrap[data-v-4cf19c5c] {\n    flex: 1;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    padding-left: 35px;\n    height: 90px;\n    background-color: rgba(0, 0, 0, 0.05);\n    outline: none;\n    border-radius: 45px;\n}\n.search-bar-input[data-v-4cf19c5c] {\n    flex: 1;\n    height: 90px;\n    margin-left: 24px;\n    margin-right: 9px;\n    line-height: 90px;\n    font-size: 42px;\n    background-color: transparent;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    color: #616161;\n}\n.search-bar-icon[data-v-4cf19c5c] {\n    line-height: 42px;\n    height: 42px;\n    font-weight: 700;\n}\n.search-bar-back[data-v-4cf19c5c] {\n\t\tmargin-left: -18px;\n\t\tmargin-right: 30px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n}\n.search-bar-delete[data-v-4cf19c5c] {\n    width: 60px;\n    height: 60px;\n    margin-right: 15px;\n    font-weight: 700;\n    padding: 6px 5px;\n    background-color: rgba(77, 77, 77, 0.5);\n    border-radius: 30px;\n}\n.search-enter[data-v-4cf19c5c] {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 96px;\n    margin-left: 48px;\n    color: rgba(0, 0, 0, 0.4);\n    text-align: center;\n}\n.right-btn[data-v-4cf19c5c] {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    right: 24px;\n    justify-content: center;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-searchbar/index.vue?0c3eaa9a"],"names":[],"mappings":";AAoCA;IACA,aAAA;IACA,cAAA;IACA,0BAAA;CACA;AAEA;IACA,gBAAA;IACA,0BAAA;IACA,cAAA;IACA,cAAA;IACA,oBAAA;IACA,oBAAA;IACA,+BAAA;IACA,2BAAA;IACA,yBAAA;IACA,wCAAA;CACA;AAEA;IACA,QAAA;IACA,oBAAA;IACA,oBAAA;IACA,wBAAA;IACA,mBAAA;IACA,aAAA;IACA,sCAAA;IACA,cAAA;IACA,oBAAA;CACA;AAEA;IACA,QAAA;IACA,aAAA;IACA,kBAAA;IACA,kBAAA;IACA,kBAAA;IACA,gBAAA;IACA,8BAAA;IACA,+BAAA;IACA,iBAAA;IACA,eAAA;CACA;AAEA;IACA,kBAAA;IACA,aAAA;IACA,iBAAA;CACA;AAEA;EACA,mBAAA;EACA,mBAAA;IACA,kBAAA;IACA,aAAA;IACA,iBAAA;CACA;AAEA;IACA,YAAA;IACA,aAAA;IACA,mBAAA;IACA,iBAAA;IACA,iBAAA;IACA,wCAAA;IACA,oBAAA;CACA;AAEA;IACA,+BAAA;IACA,iBAAA;IACA,gBAAA;IACA,kBAAA;IACA,kBAAA;IACA,0BAAA;IACA,mBAAA;CACA;AAEA;IACA,mBAAA;IACA,OAAA;IACA,UAAA;IACA,YAAA;IACA,wBAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 18/02/26-->\n<template>\n  <div v-if=\"show\">\n    <div class=\"fm-status-bar\" v-if=\"statusbar\" :style=\"{ backgroundColor: backgroundColor }\"></div>\n    <div class=\"fm-search-bar\" :style=\"barStyle\">\n      <slot name=\"left\" v-if=\"hasPrev\">\n        <fm-icon @fmClick=\"onBack\" class=\"search-bar-back\" value=\"&#xe6b5;\" :icon-style=\"72\" :color=\"leftColor\"/>\n      </slot>\n        <div class=\"search-input-wrap\" :style=\"inputBackground ? { backgroundColor: inputBackground} : {}\">\n          <fm-icon class=\"search-bar-icon\" value=\"&#xe6d4;\" :icon-style=\"42\" :color=\"iconColor\" />\n          <input @blur=\"onBlur\"\n                @focus=\"onFocus\"\n                @input=\"onInput\"\n                @return=\"onSubmit\"\n                :autofocus=\"autofocus\"\n                :disabled=\"disabled\"\n                :value=\"value\"\n                ref=\"input\"\n                :type=\"inputType\"\n                :return-key-type=\"returnKeyType\"\n                :placeholder=\"placeholder\"\n                :style=\"{color: inputColor, 'placeholder-color': placeholderColor}\"\n                class=\"search-bar-input\"/>\n          <fm-icon :style=\"{ opacity: delShow ? 1 : 0 }\" class=\"search-bar-delete\" value=\"&#xe6c0;\" :icon-style=\"48\" color=\"#FFFFFF\" @fmClick=\"delClick\" />\n          <div :style=\"{ opacity: !delShow ? 1 : 0 }\" class=\"right-btn\">\n            <slot name=\"input-right\"></slot>\n          </div>\n        </div>\n      <slot name=\"right\">\n        <text v-if=\"searchText\" class=\"search-enter\" @click=\"onSearch\" :style=\"searchTextStyle\">{{ searchText }}</text>\n      </slot>\n    </div> \n  </div> \n</template>\n\n<style scoped>\n  .fm-status-bar {\n    height: 66px;\n    width: 1080px;\n    background-color: #ffffff;\n  }\n\n  .fm-search-bar {\n    padding: 0 48px;\n    background-color: #ffffff;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom-style: solid;\n    border-bottom-width: 2px;\n    border-bottom-color: rgba(0, 0, 0, 0.1);\n  }\n\n  .search-input-wrap {\n    flex: 1;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    padding-left: 35px;\n    height: 90px;\n    background-color: rgba(0, 0, 0, 0.05);\n    outline: none;\n    border-radius: 45px;\n  }\n\n  .search-bar-input {\n    flex: 1;\n    height: 90px;\n    margin-left: 24px;\n    margin-right: 9px;\n    line-height: 90px;\n    font-size: 42px;\n    background-color: transparent;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    color: #616161;\n  }\n\n  .search-bar-icon {\n    line-height: 42px;\n    height: 42px;\n    font-weight: 700;\n  }\n\n  .search-bar-back {\n\t\tmargin-left: -18px;\n\t\tmargin-right: 30px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n  }\n\n  .search-bar-delete {\n    width: 60px;\n    height: 60px;\n    margin-right: 15px;\n    font-weight: 700;\n    padding: 6px 5px;\n    background-color: rgba(77, 77, 77, 0.5);\n    border-radius: 30px;\n  }\n\n  .search-enter {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 96px;\n    margin-left: 48px;\n    color: rgba(0, 0, 0, 0.4);\n    text-align: center;\n  }\n\n  .right-btn {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    right: 24px;\n    justify-content: center;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\nconst Navigator = weex.requireModule('navigator');\n\nexport default {\n  name: 'FmSearchbar',\n  mixins: [Locale],\n  components: { FmIcon },\n  props: {\n    statusbar: {\n      type: Boolean,\n      default: false\n    },\n    inputValue: {\n      type: [String, Number],\n      default: ''\n    },\n    useDefaultReturn: {\n      type: Boolean,\n      default: true\n    },\n    hasPrev: {\n      type: Boolean,\n      default: true\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    iconColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    leftColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.6)'\n    },\n    inputBackground: String,\n    borderStyle: {\n      type: Object,\n      default: () => ({\n        borderBottomStyle: 'solid',\n        borderBottomWidth: 2,\n        borderBottomColor: 'rgba(0, 0, 0, 0.1)'\n      })\n    },\n    placeholder: String,\n    autofocus: Boolean,\n    disabled: Boolean,\n    inputType: {\n      type: String,\n      default: 'text'\n    },\n    searchText: {\n      type: String,\n      default () {\n        return t('el.searchbar.search');\n      }\n    },\n    searchColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    searchHighlightColor: {\n      type: String,\n      default: '#198DED'\n    },\n    searchTextSize: {\n      type: Number,\n      default: 48\n    },\n    returnKeyType: {\n      type: String,\n      default: 'search'\n    },\n    placeholderColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    inputColor: {\n      type: String,\n      default: '#616161'\n    },\n    show: {\n      type: Boolean,\n      default: true\n    }\n  },\n  watch: {\n    inputValue (val) {\n      this.value = val;\n    }\n  },\n  data: () => ({\n    isFocus: false,\n    value: ''\n  }),\n  computed: {\n    delShow () {\n      return this.isFocus && this.value;\n    },\n    barStyle () {\n      const style = {\n        borderBottomStyle: 'solid',\n        borderBottomWidth: 2,\n        borderBottomColor: 'rgba(0, 0, 0, 0.1)'\n      };\n      Object.assign(style, this.borderStyle);\n      style.backgroundColor = this.backgroundColor;\n      return style;\n    },\n    searchTextStyle () {\n      const { value, searchColor, searchHighlightColor, searchTextSize } = this;\n      return {\n        color: value ? searchHighlightColor : searchColor,\n        fontSize: searchTextSize\n      };\n    }\n  },\n  methods: {\n    onBack (e) {\n      const self = this;\n      if (self.useDefaultReturn) {\n        Navigator.pop({}, e => {\n        });\n      }\n      self.$emit('fmSearchbarleftBtnClicked', {});\n    },\n    delClick (e) {\n      this.value = '';\n    },\n    onInput (e) {\n      this.value = e.value;\n      this.$emit('input', e);\n    },\n    onFocus (e) {\n      this.isFocus = true;\n      this.$emit('focus', e);\n    },\n    onBlur (e) {\n      this.isFocus = false;\n      this.$emit('blur', e);\n    },\n    focus () {\n      this.$refs.input.focus();\n    },\n    blur () {\n      this.$refs.input.blur();\n    },\n    onSubmit (e) {\n      this.$emit('fmSearchbarSubmit', { value: this.value });\n    },\n    onSearch (e) {\n      this.$emit('fmSearchbarSubmit', { value: this.value });\n    },\n    setSelectionRange (start, end) {\n      this.$refs.input.setSelectionRange(start, end);\n    },\n    getEditSelectionRange (callback) {\n      this.$refs.input.getEditSelectionRange(callback);\n    },\n    setValue (value) {\n      this.value = value;\n    }\n  },\n  mounted () {\n    this.value = this.inputValue || '';\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 163 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17089,7 +9170,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmIcon = __webpack_require__(3);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
@@ -17097,7 +9178,7 @@ var _locale = __webpack_require__(5);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(4);
+var _locale3 = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17399,7 +9480,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 164 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -17502,7 +9583,7 @@ if (false) {
 }
 
 /***/ }),
-/* 165 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17512,7 +9593,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(166);
+var _index = __webpack_require__(171);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -17524,18 +9605,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 166 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(167)
+__webpack_require__(172)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(169),
+  __webpack_require__(174),
   /* template */
-  __webpack_require__(170),
+  __webpack_require__(175),
   /* scopeId */
   "data-v-665f9fc0",
   /* cssModules */
@@ -17562,13 +9643,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 167 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(168);
+var content = __webpack_require__(173);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -17588,7 +9669,7 @@ if(false) {
 }
 
 /***/ }),
-/* 168 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -17596,23 +9677,23 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-status-bar[data-v-665f9fc0] {\n    height: 66px;\n    width: 1080px;\n}\n.fm-title-bar[data-v-665f9fc0] {\n\t\tpadding-left: 48px;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n}\n.title-bar-back[data-v-665f9fc0] {\n\t\tmargin-left: -18px;\n\t\tmargin-right: 45px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n}\n.title-wrap[data-v-665f9fc0] {\n\t\tflex: 1;\n}\n.title-text[data-v-665f9fc0] {\n\t\tflex: 1;\n\t\ttext-overflow: ellipsis;\n\t\tlines: 1;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 57px;\n    color: rgba(0, 0, 0, 0.6);\n}\n.btn-icon[data-v-665f9fc0] {\n\t\tmargin-right: 48px;\n    color: #198DED;\n    line-height: 72px;\n    height: 72px;\n}\n.btn-text[data-v-665f9fc0] {\n\t\tmargin-right: 48px;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 57px;\n    color: #198DED;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-titlebar/index.vue?09a99ccf"],"names":[],"mappings":";AAuBA;IACA,aAAA;IACA,cAAA;CACA;AAEA;EACA,mBAAA;IACA,cAAA;IACA,cAAA;IACA,oBAAA;IACA,oBAAA;IACA,+BAAA;CACA;AAEA;EACA,mBAAA;EACA,mBAAA;IACA,kBAAA;IACA,aAAA;IACA,iBAAA;CACA;AAEA;EACA,QAAA;CACA;AAEA;EACA,QAAA;EACA,wBAAA;EACA,SAAA;IACA,+BAAA;IACA,iBAAA;IACA,gBAAA;IACA,kBAAA;IACA,0BAAA;CACA;AAEA;EACA,mBAAA;IACA,eAAA;IACA,kBAAA;IACA,aAAA;CACA;AAEA;EACA,mBAAA;IACA,+BAAA;IACA,iBAAA;IACA,gBAAA;IACA,kBAAA;IACA,eAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div v-if=\"show\">\n    <div class=\"fm-status-bar\" v-if=\"statusbar\" :style=\"{ backgroundColor: backgroundColor }\"></div>\n    <div class=\"fm-title-bar\" :style=\"barStyle\">\n      <slot name=\"left\" v-if=\"hasPrev\">\n        <fm-icon @fmClick=\"onBack\" class=\"title-bar-back\" value=\"&#xe6b5;\" :icon-style=\"72\" :color=\"leftColor\" />\n      </slot>\n\t\t\t<div class=\"title-wrap\">\n\t\t\t\t<slot name=\"middle\">\n\t\t\t\t\t<text class=\"title-text\" :style=\"{ color: titleColor }\">{{ title }}</text>\n\t\t\t\t</slot>\n\t\t\t</div>\n\t\t\t<slot name=\"right\">\n\t\t\t\t<div v-for=\"(item, idx) in btns\" :key=\"idx\">\n\t\t\t\t\t<fm-icon class=\"btn-icon\" v-if=\"item.type === 'icon'\" :value=\"item.value\" :style=\"item.color ? { color:item.color } : {}\" :icon-style=\"72\" @fmClick=\"rightBtnClick(idx, item)\"/>\n\t\t\t\t\t<text class=\"btn-text\" v-else :style=\"item.color ? { color:item.color } : {}\" @click=\"rightBtnClick(idx, item)\">{{ item.value }}</text>\n\t\t\t\t</div>\n\t\t\t</slot>\n    </div>\n  </div> \n</template>\n\n<style scoped>\n  .fm-status-bar {\n    height: 66px;\n    width: 1080px;\n  }\n\n  .fm-title-bar {\n\t\tpadding-left: 48px;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n  }\n\n  .title-bar-back {\n\t\tmargin-left: -18px;\n\t\tmargin-right: 45px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n  }\n\n\t.title-wrap {\n\t\tflex: 1;\n\t}\n\n\t.title-text {\n\t\tflex: 1;\n\t\ttext-overflow: ellipsis;\n\t\tlines: 1;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 57px;\n    color: rgba(0, 0, 0, 0.6);\n\t}\n\n\t.btn-icon {\n\t\tmargin-right: 48px;\n    color: #198DED;\n    line-height: 72px;\n    height: 72px;\n\t}\n\n\t.btn-text {\n\t\tmargin-right: 48px;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 57px;\n    color: #198DED;\n\t}\n</style>\n\n<script>\n  import FmIcon from '../fm-icon'\n  import Locale from 'weex-flymeui/lib/mixins/locale'\n\timport { t } from 'weex-flymeui/lib/locale'\n  const Navigator = weex.requireModule('navigator')\n\n  export default {\n  \tname: 'FmTitlebar',\n    mixins: [Locale],\n    components: { FmIcon },\n    props: {\n\t\t\ttitle: {\n\t\t\t\ttype: String,\n\t\t\t\tdefault: '标题'\n\t\t\t},\n\t\t\ttitleColor: {\n\t\t\t\ttype: String,\n\t\t\t\tdefault: 'rgba(0, 0, 0, 0.6)'\n\t\t\t},\n\t\t\tstatusbar: {\n\t\t\t\ttype: Boolean,\n\t\t\t\tdefault: false,\n\t\t\t},\n\t\t\tuseDefaultReturn: {\n\t\t\t\ttype: Boolean,\n\t\t\t\tdefault: true,\n\t\t\t},\n\t\t\thasPrev: {\n\t\t\t\ttype: Boolean,\n\t\t\t\tdefault: true\n\t\t\t},\n\t\t\tborderStyle: {\n\t\t\t\ttype: Object,\n\t\t\t\tdefault: () => ({\n          borderBottomStyle: 'solid',\n          borderBottomWidth: 2,\n          borderBottomColor: 'rgba(0, 0, 0, 0.1)'\n        })\n\t\t\t},\n\t\t\tbackgroundColor: {\n\t\t\t\ttype: String,\n\t\t\t\tdefault: '#FFFFFF'\n\t\t\t},\n\t\t\tleftColor: {\n\t\t\t\ttype: String,\n\t\t\t\tdefault: 'rgba(0, 0, 0, 0.6)'\n\t\t\t},\n\t\t\trightBtns: [Object, Array],\n\t\t\trightText: String,\n      show: {\n        type: Boolean,\n        default: true\n      }\n    },\n    computed: {\n\t\t\tbtns() {\n\t\t\t\tconst { rightBtns, rightText } = this\n\t\t\t\tlet btns = []\n\t\t\t\tif (Array.isArray(rightBtns)) {\n\t\t\t\t\tbtns = btns.concat(rightBtns.slice(0, 3))\n\t\t\t\t} else if (Object.prototype.toString.call(rightBtns).slice(8, -1).toLowerCase() === 'object') {\n\t\t\t\t\tbtns.push(rightBtns)\n\t\t\t\t} else if (rightText) {\n\t\t\t\t\tbtns.push({ type: 'text', value: rightText })\n\t\t\t\t}\n\t\t\t\treturn btns\n\t\t\t},\n\t\t\tbarStyle() {\n\t\t\t\tlet style = {\n          borderBottomStyle: 'solid',\n          borderBottomWidth: 2,\n\t\t\t\t\tborderBottomColor: 'rgba(0, 0, 0, 0.1)',\n\t\t\t\t\tpaddingRight: this.rightBtns ? 0 : 48\n\t\t\t\t}\n\t\t\t\tObject.assign(style, this.borderStyle)\n\t\t\t\tstyle.backgroundColor = this.backgroundColor\n\t\t\t\treturn style\n\t\t\t}\n    },\n    methods: {\n\t\t\tonBack(e) {\n        const self = this\n        if (self.useDefaultReturn) {\n          Navigator.pop({}, e => {\n          })\n        }\n        self.$emit('fmTitlebarLeftBtnClicked', {})\n\t\t\t},\n\t\t\trightBtnClick(idx, item) {\n\t\t\t\tthis.$emit('fmTitlebarRightBtnClicked', { idx: idx, value: item })\n\t\t\t}\n    }\n  }\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-status-bar[data-v-665f9fc0] {\n  height: 66px;\n  width: 1080px;\n}\n.fm-title-bar[data-v-665f9fc0] {\n  padding-left: 48px;\n  width: 1080px;\n  height: 144px;\n  flex-direction: row;\n  align-items: center;\n  justify-content: space-between;\n}\n.title-bar-back[data-v-665f9fc0] {\n  margin-left: -18px;\n  margin-right: 45px;\n  line-height: 72px;\n  height: 72px;\n  font-weight: 700;\n}\n.title-wrap[data-v-665f9fc0] {\n  flex: 1;\n}\n.title-text[data-v-665f9fc0] {\n  flex: 1;\n  text-overflow: ellipsis;\n  lines: 1;\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 48px;\n  line-height: 57px;\n  color: rgba(0, 0, 0, 0.6);\n}\n.btn-icon[data-v-665f9fc0] {\n  margin-right: 48px;\n  color: #198DED;\n  line-height: 72px;\n  height: 72px;\n}\n.btn-text[data-v-665f9fc0] {\n  margin-right: 48px;\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 48px;\n  line-height: 57px;\n  color: #198DED;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-titlebar/index.vue?9d50c36c"],"names":[],"mappings":";AAuBA;EACA,aAAA;EACA,cAAA;CACA;AAEA;EACA,mBAAA;EACA,cAAA;EACA,cAAA;EACA,oBAAA;EACA,oBAAA;EACA,+BAAA;CACA;AAEA;EACA,mBAAA;EACA,mBAAA;EACA,kBAAA;EACA,aAAA;EACA,iBAAA;CACA;AAEA;EACA,QAAA;CACA;AAEA;EACA,QAAA;EACA,wBAAA;EACA,SAAA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;EACA,0BAAA;CACA;AAEA;EACA,mBAAA;EACA,eAAA;EACA,kBAAA;EACA,aAAA;CACA;AAEA;EACA,mBAAA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;EACA,eAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div v-if=\"show\">\n    <div class=\"fm-status-bar\" v-if=\"statusbar\" :style=\"{ backgroundColor: backgroundColor }\"></div>\n    <div class=\"fm-title-bar\" :style=\"barStyle\">\n      <slot name=\"left\" v-if=\"hasPrev\">\n        <fm-icon @fmClick=\"onBack\" class=\"title-bar-back\" value=\"&#xe6b5;\" :icon-style=\"72\" :color=\"leftColor\" />\n      </slot>\n      <div class=\"title-wrap\">\n        <slot name=\"middle\">\n          <text class=\"title-text\" :style=\"{ color: titleColor }\">{{ title }}</text>\n        </slot>\n      </div>\n      <slot name=\"right\">\n        <div v-for=\"(item, idx) in btns\" :key=\"idx\">\n          <fm-icon class=\"btn-icon\" v-if=\"item.type === 'icon'\" :value=\"item.value\" :style=\"item.color ? { color:item.color } : {}\" :icon-style=\"72\" @fmClick=\"rightBtnClick(idx, item)\"/>\n          <text class=\"btn-text\" v-else :style=\"item.color ? { color:item.color } : {}\" @click=\"rightBtnClick(idx, item)\">{{ item.value }}</text>\n        </div>\n      </slot>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-status-bar {\n    height: 66px;\n    width: 1080px;\n  }\n\n  .fm-title-bar {\n    padding-left: 48px;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n  }\n\n  .title-bar-back {\n    margin-left: -18px;\n    margin-right: 45px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n  }\n\n  .title-wrap {\n    flex: 1;\n  }\n\n  .title-text {\n    flex: 1;\n    text-overflow: ellipsis;\n    lines: 1;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 57px;\n    color: rgba(0, 0, 0, 0.6);\n  }\n\n  .btn-icon {\n    margin-right: 48px;\n    color: #198DED;\n    line-height: 72px;\n    height: 72px;\n  }\n\n  .btn-text {\n    margin-right: 48px;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 57px;\n    color: #198DED;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\nconst Navigator = weex.requireModule('navigator');\n\nexport default {\n  name: 'FmTitlebar',\n  mixins: [Locale],\n  components: { FmIcon },\n  props: {\n    title: {\n      type: String,\n      default () {\n        return t('el.titlebar.title');\n      }\n    },\n    titleColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.6)'\n    },\n    statusbar: {\n      type: Boolean,\n      default: false\n    },\n    useDefaultReturn: {\n      type: Boolean,\n      default: true\n    },\n    hasPrev: {\n      type: Boolean,\n      default: true\n    },\n    borderStyle: {\n      type: Object,\n      default: () => ({\n        borderBottomStyle: 'solid',\n        borderBottomWidth: 2,\n        borderBottomColor: 'rgba(0, 0, 0, 0.1)'\n      })\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    leftColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.6)'\n    },\n    rightBtns: [Object, Array],\n    rightText: String,\n    show: {\n      type: Boolean,\n      default: true\n    }\n  },\n  computed: {\n    btns () {\n      const { rightBtns, rightText } = this;\n      let btns = [];\n      if (Array.isArray(rightBtns)) {\n        btns = btns.concat(rightBtns.slice(0, 3));\n      } else if (Object.prototype.toString.call(rightBtns).slice(8, -1).toLowerCase() === 'object') {\n        btns.push(rightBtns);\n      } else if (rightText) {\n        btns.push({ type: 'text', value: rightText });\n      }\n      return btns;\n    },\n    barStyle () {\n      const style = {\n        borderBottomStyle: 'solid',\n        borderBottomWidth: 2,\n        borderBottomColor: 'rgba(0, 0, 0, 0.1)',\n        paddingRight: this.rightBtns ? 0 : 48\n      };\n      Object.assign(style, this.borderStyle);\n      style.backgroundColor = this.backgroundColor;\n      return style;\n    }\n  },\n  methods: {\n    onBack (e) {\n      const self = this;\n      if (self.useDefaultReturn) {\n        Navigator.pop({}, e => {\n        });\n      }\n      self.$emit('fmTitlebarLeftBtnClicked', {});\n    },\n    rightBtnClick (idx, item) {\n      this.$emit('fmTitlebarRightBtnClicked', { idx: idx, value: item });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 169 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
-var _fmIcon = __webpack_require__(3);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
@@ -17620,7 +9701,7 @@ var _locale = __webpack_require__(5);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(4);
+var _locale3 = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17703,98 +9784,100 @@ var Navigator = weex.requireModule('navigator'); //
 //
 
 exports.default = {
-	name: 'FmTitlebar',
-	mixins: [_locale2.default],
-	components: { FmIcon: _fmIcon2.default },
-	props: {
-		title: {
-			type: String,
-			default: '标题'
-		},
-		titleColor: {
-			type: String,
-			default: 'rgba(0, 0, 0, 0.6)'
-		},
-		statusbar: {
-			type: Boolean,
-			default: false
-		},
-		useDefaultReturn: {
-			type: Boolean,
-			default: true
-		},
-		hasPrev: {
-			type: Boolean,
-			default: true
-		},
-		borderStyle: {
-			type: Object,
-			default: function _default() {
-				return {
-					borderBottomStyle: 'solid',
-					borderBottomWidth: 2,
-					borderBottomColor: 'rgba(0, 0, 0, 0.1)'
-				};
-			}
-		},
-		backgroundColor: {
-			type: String,
-			default: '#FFFFFF'
-		},
-		leftColor: {
-			type: String,
-			default: 'rgba(0, 0, 0, 0.6)'
-		},
-		rightBtns: [Object, Array],
-		rightText: String,
-		show: {
-			type: Boolean,
-			default: true
-		}
-	},
-	computed: {
-		btns: function btns() {
-			var rightBtns = this.rightBtns,
-			    rightText = this.rightText;
+  name: 'FmTitlebar',
+  mixins: [_locale2.default],
+  components: { FmIcon: _fmIcon2.default },
+  props: {
+    title: {
+      type: String,
+      default: function _default() {
+        return (0, _locale3.t)('el.titlebar.title');
+      }
+    },
+    titleColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, 0.6)'
+    },
+    statusbar: {
+      type: Boolean,
+      default: false
+    },
+    useDefaultReturn: {
+      type: Boolean,
+      default: true
+    },
+    hasPrev: {
+      type: Boolean,
+      default: true
+    },
+    borderStyle: {
+      type: Object,
+      default: function _default() {
+        return {
+          borderBottomStyle: 'solid',
+          borderBottomWidth: 2,
+          borderBottomColor: 'rgba(0, 0, 0, 0.1)'
+        };
+      }
+    },
+    backgroundColor: {
+      type: String,
+      default: '#FFFFFF'
+    },
+    leftColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, 0.6)'
+    },
+    rightBtns: [Object, Array],
+    rightText: String,
+    show: {
+      type: Boolean,
+      default: true
+    }
+  },
+  computed: {
+    btns: function btns() {
+      var rightBtns = this.rightBtns,
+          rightText = this.rightText;
 
-			var btns = [];
-			if (Array.isArray(rightBtns)) {
-				btns = btns.concat(rightBtns.slice(0, 3));
-			} else if (Object.prototype.toString.call(rightBtns).slice(8, -1).toLowerCase() === 'object') {
-				btns.push(rightBtns);
-			} else if (rightText) {
-				btns.push({ type: 'text', value: rightText });
-			}
-			return btns;
-		},
-		barStyle: function barStyle() {
-			var style = {
-				borderBottomStyle: 'solid',
-				borderBottomWidth: 2,
-				borderBottomColor: 'rgba(0, 0, 0, 0.1)',
-				paddingRight: this.rightBtns ? 0 : 48
-			};
-			Object.assign(style, this.borderStyle);
-			style.backgroundColor = this.backgroundColor;
-			return style;
-		}
-	},
-	methods: {
-		onBack: function onBack(e) {
-			var self = this;
-			if (self.useDefaultReturn) {
-				Navigator.pop({}, function (e) {});
-			}
-			self.$emit('fmTitlebarLeftBtnClicked', {});
-		},
-		rightBtnClick: function rightBtnClick(idx, item) {
-			this.$emit('fmTitlebarRightBtnClicked', { idx: idx, value: item });
-		}
-	}
+      var btns = [];
+      if (Array.isArray(rightBtns)) {
+        btns = btns.concat(rightBtns.slice(0, 3));
+      } else if (Object.prototype.toString.call(rightBtns).slice(8, -1).toLowerCase() === 'object') {
+        btns.push(rightBtns);
+      } else if (rightText) {
+        btns.push({ type: 'text', value: rightText });
+      }
+      return btns;
+    },
+    barStyle: function barStyle() {
+      var style = {
+        borderBottomStyle: 'solid',
+        borderBottomWidth: 2,
+        borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+        paddingRight: this.rightBtns ? 0 : 48
+      };
+      Object.assign(style, this.borderStyle);
+      style.backgroundColor = this.backgroundColor;
+      return style;
+    }
+  },
+  methods: {
+    onBack: function onBack(e) {
+      var self = this;
+      if (self.useDefaultReturn) {
+        Navigator.pop({}, function (e) {});
+      }
+      self.$emit('fmTitlebarLeftBtnClicked', {});
+    },
+    rightBtnClick: function rightBtnClick(idx, item) {
+      this.$emit('fmTitlebarRightBtnClicked', { idx: idx, value: item });
+    }
+  }
 };
 
 /***/ }),
-/* 170 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -17873,7 +9956,7 @@ if (false) {
 }
 
 /***/ }),
-/* 171 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17883,7 +9966,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(172);
+var _index = __webpack_require__(177);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -17895,14 +9978,14 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 172 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(173),
+  __webpack_require__(178),
   /* template */
-  __webpack_require__(184),
+  __webpack_require__(189),
   /* scopeId */
   null,
   /* cssModules */
@@ -17929,7 +10012,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 173 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17984,18 +10067,18 @@ exports.default = {
 //
 
 /***/ }),
-/* 174 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(175)
+__webpack_require__(180)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(177),
+  __webpack_require__(182),
   /* template */
-  __webpack_require__(183),
+  __webpack_require__(188),
   /* scopeId */
   "data-v-3e6c11c0",
   /* cssModules */
@@ -18022,13 +10105,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 175 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(176);
+var content = __webpack_require__(181);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -18048,7 +10131,7 @@ if(false) {
 }
 
 /***/ }),
-/* 176 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -18056,13 +10139,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.check-cell-wrap[data-v-3e6c11c0] {\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 20px;\n}\n.check-cell-wrap[data-v-3e6c11c0]:active {\n  background-color: #eeeeee;\n}\n.right[data-v-3e6c11c0] {\n  width: 24px;\n  height: 24px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-multi-check-cell/index.vue?635c461d"],"names":[],"mappings":";AAYA;EACA,oBAAA;EACA,+BAAA;EACA,oBAAA;EACA,gBAAA;CACA;AAEA;EACA,0BAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <cell class=\"check-cell-wrap\" @longpress=\"onLongpress\" @click=\"onClick\" ripple=\"normal\">\n    <div class=\"wrapper\" ref=\"wrapper\">\n      <slot></slot>\n    </div>\n    <div class=\"right\">\n      <check-icon :show=\"checking\" :checked=\"_selected\" :disabled=\"disabled\"></check-icon>\n    </div>\n  </cell>\n</template>\n\n<style scoped>\n  .check-cell-wrap {\n    flex-direction: row;\n    justify-content: space-between;\n    align-items: center;\n    padding: 0 20px;\n  }\n\n  .check-cell-wrap:active {\n    background-color: #eeeeee;\n  }\n\n  .right {\n    width: 24px;\n    height: 24px;\n  }\n</style>\n\n<script>\n  const dom = weex.requireModule('dom')\n  import CheckIcon from './check-icon.vue'\n\n  export default {\n    name: 'FmMultiCheckCell',\n    components: { CheckIcon },\n    props: {\n      identity: {\n        type: [String, Object, Number, Array],\n        required: true\n      },\n      disabled: {\n        type: Boolean,\n        default: false\n      }\n    },\n    computed: {\n      _selected: {\n        get() {\n          return this.store.indexOf(this.identity) !== -1 ? true : false\n        },\n        set(val) {\n          if (val) {\n            this.addToStore()\n          } else {\n            this.deleteFromStore()\n          }\n        }\n      },\n      isGroup() {\n        let parent = this.$parent\n        while (parent) {\n          if (parent.$options.componentName !== 'FmM\bultiCheckGroup') {\n            parent = parent.$parent\n          } else {\n            this._group = parent\n            return true\n          }\n        }\n        return false\n      },\n      checking() {\n        return this._group.checking\n      },\n      store() {\n        return this._group.value\n      }\n    },\n    methods: {\n      onClick(e) {\n        if (this._group.checking && !this.disabled) {\n          this.toggleSelected()\n        }\n      },\n      toggleSelected() {\n        !this.disabled && (this._selected = !this._selected)\n      },\n      onLongpress(e) {\n        !this._group.checking &&\n          (this._group.checking = true) &&\n          !this.disabled &&\n          (this._selected = true)\n      },\n      addToStore() {\n        const { identity } = this\n        if (Array.isArray(this.store) && this.store.indexOf(identity) === -1) {\n          this.store.push(identity)\n        }\n      },\n      deleteFromStore() {\n        const { identity } = this\n        if (Array.isArray(this.store) && this.store.indexOf(identity) !== -1) {\n          this.store.splice(this.store.indexOf(identity), 1)\n        }\n      }\n    },\n    created() {\n      if (!this.isGroup) {\n        throw Error('fm-multi-check-cell must be used in fm-multi-check-group !')\n      }\n    }\n  }\n</script>\n\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.check-cell-wrap[data-v-3e6c11c0] {\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 20px;\n}\n.check-cell-wrap[data-v-3e6c11c0]:active {\n  background-color: #eeeeee;\n}\n.right[data-v-3e6c11c0] {\n  width: 24px;\n  height: 24px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-multi-check-cell/index.vue?2192434a"],"names":[],"mappings":";AAYA;EACA,oBAAA;EACA,+BAAA;EACA,oBAAA;EACA,gBAAA;CACA;AAEA;EACA,0BAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <cell class=\"check-cell-wrap\" @longpress=\"onLongpress\" @click=\"onClick\" ripple=\"normal\">\n    <div class=\"wrapper\" ref=\"wrapper\">\n      <slot></slot>\n    </div>\n    <div class=\"right\">\n      <check-icon :show=\"checking\" :checked=\"_selected\" :disabled=\"disabled\"></check-icon>\n    </div>\n  </cell>\n</template>\n\n<style scoped>\n  .check-cell-wrap {\n    flex-direction: row;\n    justify-content: space-between;\n    align-items: center;\n    padding: 0 20px;\n  }\n\n  .check-cell-wrap:active {\n    background-color: #eeeeee;\n  }\n\n  .right {\n    width: 24px;\n    height: 24px;\n  }\n</style>\n\n<script>\nconst dom = weex.requireModule('dom');\nimport CheckIcon from './check-icon.vue';\n\nexport default {\n  name: 'FmMultiCheckCell',\n  components: { CheckIcon },\n  props: {\n    identity: {\n      type: [String, Object, Number, Array],\n      required: true\n    },\n    disabled: {\n      type: Boolean,\n      default: false\n    }\n  },\n  computed: {\n    _selected: {\n      get () {\n        return this.store.indexOf(this.identity) !== -1;\n      },\n      set (val) {\n        if (val) {\n          this.addToStore();\n        } else {\n          this.deleteFromStore();\n        }\n      }\n    },\n    isGroup () {\n      let parent = this.$parent;\n      while (parent) {\n        if (parent.$options.componentName !== 'FmM\bultiCheckGroup') {\n          parent = parent.$parent;\n        } else {\n          this._group = parent;\n          return true;\n        }\n      }\n      return false;\n    },\n    checking () {\n      return this._group.checking;\n    },\n    store () {\n      return this._group.value;\n    }\n  },\n  methods: {\n    onClick (e) {\n      if (this._group.checking && !this.disabled) {\n        this.toggleSelected();\n      }\n    },\n    toggleSelected () {\n      !this.disabled && (this._selected = !this._selected);\n    },\n    onLongpress (e) {\n      !this._group.checking &&\n          (this._group.checking = true) &&\n          !this.disabled &&\n          (this._selected = true);\n    },\n    addToStore () {\n      const { identity } = this;\n      if (Array.isArray(this.store) && this.store.indexOf(identity) === -1) {\n        this.store.push(identity);\n      }\n    },\n    deleteFromStore () {\n      const { identity } = this;\n      if (Array.isArray(this.store) && this.store.indexOf(identity) !== -1) {\n        this.store.splice(this.store.indexOf(identity), 1);\n      }\n    }\n  },\n  created () {\n    if (!this.isGroup) {\n      throw Error('fm-multi-check-cell must be used in fm-multi-check-group !');\n    }\n  }\n};\n</script>\n\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 177 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18072,7 +10155,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _checkIcon = __webpack_require__(178);
+var _checkIcon = __webpack_require__(183);
 
 var _checkIcon2 = _interopRequireDefault(_checkIcon);
 
@@ -18125,7 +10208,7 @@ exports.default = {
   computed: {
     _selected: {
       get: function get() {
-        return this.store.indexOf(this.identity) !== -1 ? true : false;
+        return this.store.indexOf(this.identity) !== -1;
       },
       set: function set(val) {
         if (val) {
@@ -18189,18 +10272,18 @@ exports.default = {
 };
 
 /***/ }),
-/* 178 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(179)
+__webpack_require__(184)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(181),
+  __webpack_require__(186),
   /* template */
-  __webpack_require__(182),
+  __webpack_require__(187),
   /* scopeId */
   "data-v-00ad7ec0",
   /* cssModules */
@@ -18227,13 +10310,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 179 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(180);
+var content = __webpack_require__(185);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -18253,7 +10336,7 @@ if(false) {
 }
 
 /***/ }),
-/* 180 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -18261,13 +10344,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.animate-wrap[data-v-00ad7ec0] {\n  width: 24px;\n  height: 24px;\n}\n.unchecked[data-v-00ad7ec0] {\n  width: 24px;\n  height: 24px;\n}\n.checked[data-v-00ad7ec0] {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 24px;\n  height: 24px;\n  transform: scale(0);\n  background-color: #ffffff;\n  border-radius: 12px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-multi-check-cell/check-icon.vue?75d11dee"],"names":[],"mappings":";AAgBA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,OAAA;EACA,YAAA;EACA,aAAA;EACA,oBAAA;EACA,0BAAA;EACA,oBAAA;CACA","file":"check-icon.vue","sourcesContent":["<template>\n  <div class=\"check-icon\">\n    <div class=\"animate-wrap\" :hack=\"isNeedShow\" ref=\"animate-wrap\" :style=\"wrapStyle\">\n      <image\n        class=\"unchecked\"\n        :src=\"bgImg\" />\n      <image \n        class=\"checked\"\n        :src=\"getCheckedImg\" \n        ref=\"check-icon\"\n        :watch=\"isNeedChecked\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .animate-wrap {\n    width: 24px;\n    height: 24px;\n  }\n\n  .unchecked {\n    width: 24px;\n    height: 24px;\n  }\n\n  .checked {\n    position: absolute;\n    left: 0;\n    top: 0;\n    width: 24px;\n    height: 24px;\n    transform: scale(0);\n    background-color: #ffffff;\n    border-radius: 12px;\n  }\n</style>\n\n<script>\n  import FmIcon from '../fm-icon'\n  const animation = weex.requireModule('animation')\n  export default {\n    components: { FmIcon },\n    props: {\n      show: {\n        type: Boolean,\n        default: false\n      },\n      checked: {\n        type: Boolean,\n        default: false\n      },\n      bgImg: {\n        type: String,\n        default:\n          'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_off.png'\n      },\n      checkedImg: {\n        type: String,\n        default:\n          'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on.png'\n      },\n      checkedDisableImg: {\n        type: String,\n        default:\n          'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on_disable.png'\n      },\n      disabled: {\n        type: Boolean,\n        default: false\n      }\n    },\n    watch: {\n      checked(bool) {\n        this.appearChecked(bool)\n      }\n    },\n    data: () => ({}),\n    computed: {\n      getCheckedImg() {\n        const { disabled, checkedImg, checkedDisableImg } = this\n        return disabled ? checkedDisableImg : checkedImg\n      },\n      wrapStyle() {\n        return this.show\n          ? {\n              opacity: 1\n            }\n          : {\n              opacity: 0,\n              transform: 'rotateX(90deg)'\n            }\n      },\n      checkedStyle() {\n        return this.checked\n          ? {\n              opacity: 1\n            }\n          : {\n              opacity: 0\n            }\n      },\n      isNeedShow() {\n        this.appear(this.show)\n      },\n      isNeedChecked() {\n        setTimeout(() => {\n          this.appearChecked(this.checked)\n        }, 50)\n      }\n    },\n    methods: {\n      appear(bool, duration = 200) {\n        const animateEl = this.$refs['animate-wrap']\n        if (!animateEl || !bool) {\n          return\n        }\n        let style = {\n          transform: 'rotateX(0deg)'\n        }\n        animation.transition(\n          animateEl,\n          {\n            styles: style,\n            duration,\n            delay: 0,\n            timingFunction: 'ease-out'\n          },\n          () => {}\n        )\n      },\n      appearChecked(bool, duration = 30) {\n        const animateEl = this.$refs['check-icon']\n        if (!animateEl) {\n          return\n        }\n        let style = bool\n          ? {\n              transform: 'scale(1)'\n            }\n          : {\n              transform: 'scale(0)'\n            }\n        animation.transition(\n          animateEl,\n          {\n            styles: style,\n            duration,\n            delay: 0,\n            timingFunction: 'ease-out'\n          },\n          () => {}\n        )\n      }\n    }\n  }\n</script>\n\n\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.animate-wrap[data-v-00ad7ec0] {\n  width: 24px;\n  height: 24px;\n}\n.unchecked[data-v-00ad7ec0] {\n  width: 24px;\n  height: 24px;\n}\n.checked[data-v-00ad7ec0] {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 24px;\n  height: 24px;\n  transform: scale(0);\n  background-color: #ffffff;\n  border-radius: 12px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-multi-check-cell/check-icon.vue?7ced5edf"],"names":[],"mappings":";AAgBA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,OAAA;EACA,YAAA;EACA,aAAA;EACA,oBAAA;EACA,0BAAA;EACA,oBAAA;CACA","file":"check-icon.vue","sourcesContent":["<template>\n  <div class=\"check-icon\">\n    <div class=\"animate-wrap\" :hack=\"isNeedShow\" ref=\"animate-wrap\" :style=\"wrapStyle\">\n      <image\n        class=\"unchecked\"\n        :src=\"bgImg\" />\n      <image \n        class=\"checked\"\n        :src=\"getCheckedImg\" \n        ref=\"check-icon\"\n        :watch=\"isNeedChecked\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .animate-wrap {\n    width: 24px;\n    height: 24px;\n  }\n\n  .unchecked {\n    width: 24px;\n    height: 24px;\n  }\n\n  .checked {\n    position: absolute;\n    left: 0;\n    top: 0;\n    width: 24px;\n    height: 24px;\n    transform: scale(0);\n    background-color: #ffffff;\n    border-radius: 12px;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nconst animation = weex.requireModule('animation');\nexport default {\n  components: { FmIcon },\n  props: {\n    show: {\n      type: Boolean,\n      default: false\n    },\n    checked: {\n      type: Boolean,\n      default: false\n    },\n    bgImg: {\n      type: String,\n      default:\n          'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_off.png'\n    },\n    checkedImg: {\n      type: String,\n      default:\n          'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on.png'\n    },\n    checkedDisableImg: {\n      type: String,\n      default:\n          'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on_disable.png'\n    },\n    disabled: {\n      type: Boolean,\n      default: false\n    }\n  },\n  watch: {\n    checked (bool) {\n      this.appearChecked(bool);\n    }\n  },\n  data: () => ({}),\n  computed: {\n    getCheckedImg () {\n      const { disabled, checkedImg, checkedDisableImg } = this;\n      return disabled ? checkedDisableImg : checkedImg;\n    },\n    wrapStyle () {\n      return this.show\n        ? {\n          opacity: 1\n        }\n        : {\n          opacity: 0,\n          transform: 'rotateX(90deg)'\n        };\n    },\n    checkedStyle () {\n      return this.checked\n        ? {\n          opacity: 1\n        }\n        : {\n          opacity: 0\n        };\n    },\n    isNeedShow () {\n      this.appear(this.show);\n    },\n    isNeedChecked () {\n      setTimeout(() => {\n        this.appearChecked(this.checked);\n      }, 50);\n    }\n  },\n  methods: {\n    appear (bool, duration = 200) {\n      const animateEl = this.$refs['animate-wrap'];\n      if (!animateEl || !bool) {\n        return;\n      }\n      const style = {\n        transform: 'rotateX(0deg)'\n      };\n      animation.transition(\n        animateEl,\n        {\n          styles: style,\n          duration,\n          delay: 0,\n          timingFunction: 'ease-out'\n        },\n        () => {}\n      );\n    },\n    appearChecked (bool, duration = 30) {\n      const animateEl = this.$refs['check-icon'];\n      if (!animateEl) {\n        return;\n      }\n      const style = bool\n        ? {\n          transform: 'scale(1)'\n        }\n        : {\n          transform: 'scale(0)'\n        };\n      animation.transition(\n        animateEl,\n        {\n          styles: style,\n          duration,\n          delay: 0,\n          timingFunction: 'ease-out'\n        },\n        () => {}\n      );\n    }\n  }\n};\n</script>\n\n\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 181 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18277,7 +10360,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmIcon = __webpack_require__(3);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
@@ -18433,7 +10516,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 182 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -18476,7 +10559,7 @@ if (false) {
 }
 
 /***/ }),
-/* 183 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -18519,7 +10602,7 @@ if (false) {
 }
 
 /***/ }),
-/* 184 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -18538,7 +10621,7 @@ if (false) {
 }
 
 /***/ }),
-/* 185 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18548,7 +10631,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(186);
+var _index = __webpack_require__(191);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -18560,18 +10643,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 186 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(187)
+__webpack_require__(192)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(189),
+  __webpack_require__(194),
   /* template */
-  __webpack_require__(190),
+  __webpack_require__(195),
   /* scopeId */
   "data-v-fb2a1758",
   /* cssModules */
@@ -18598,13 +10681,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 187 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(188);
+var content = __webpack_require__(193);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -18624,7 +10707,7 @@ if(false) {
 }
 
 /***/ }),
-/* 188 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -18632,13 +10715,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.cell[data-v-fb2a1758] {\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 20px;\n  width: 360px;\n  height: 92px;\n}\n.check-wrap[data-v-fb2a1758] {\n  width: 24px;\n  height: 24px;\n}\n.unchecked[data-v-fb2a1758] {\n  width: 24px;\n  height: 24px;\n}\n.checked[data-v-fb2a1758] {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 24px;\n  height: 24px;\n  transform: scale(0);\n  border-radius: 12px;\n}\n.loading[data-v-fb2a1758] {\n  justify-content: center;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rcy-check/index.vue?08f47b52"],"names":[],"mappings":";AA8CA;EACA,oBAAA;EACA,+BAAA;EACA,oBAAA;EACA,gBAAA;EACA,aAAA;EACA,aAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,OAAA;EACA,YAAA;EACA,aAAA;EACA,oBAAA;EACA,oBAAA;CACA;AAEA;EACA,wBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <recycle-list \n    ref=\"rcy\"\n    template-key=\"type\" \n    alias=\"item\" \n    index=\"i\" \n    append='tree'\n    @loadmore=\"$onLoadMore()\" \n    showScrollbar=\"true\" style='width:360px'\n    @mlongclick=\"$onCellLongpress\"\n    for=\"(item, i) in dataSource\">\n\n    <cell-slot template-type=\"check-cell\" :itemId=\"item.itemId\" @click=\"$onCellCheck(item, i)\" ripple=\"normal\">\n      <div>\n        <div class=\"cell\">\n          <!-- Content start -->\n          <div class=\"content\">\n            <text>{{ item.itemId }}</text>\n            <text v-once :a=\"i\">{{ i }}</text>\n          </div>\n          <!-- Content end -->\n\n          <!-- Right circle start -->\n          <div class=\"check-wrap\" v-if=\"item.checking\">\n            <image\n              class=\"unchecked\"\n              src=\"http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_off.png\" />\n            <image \n              class=\"checked\"\n              v-if=\"item.checked\"\n              :src=\"item.disabled ? 'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on_disable.png' : 'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on.png'\" \n            />\n          </div>\n          <!-- Right circle end -->\n        </div>\n      </div>\n    </cell-slot>\n\n    <loading class=\"loading\" @loading=\"onloading\" display=\"hide\">\n      <text class=\"indicator\" ref=\"loadText\">正在加载中 ..</text>\n    </loading>\n\n  </recycle-list>\n</template>\n\n<style scoped>\n  .cell {\n    flex-direction: row;\n    justify-content: space-between;\n    align-items: center;\n    padding: 0 20px;\n    width: 360px;\n    height: 92px;\n  }\n\n  .check-wrap {\n    width: 24px;\n    height: 24px;\n  }\n\n  .unchecked {\n    width: 24px;\n    height: 24px;\n  }\n\n  .checked {\n    position: absolute;\n    left: 0;\n    top: 0;\n    width: 24px;\n    height: 24px;\n    transform: scale(0);\n    border-radius: 12px;\n  }\n\n  .loading {\n    justify-content: center;\n  }\n</style>\n\n<script>\n  const modal = weex.requireModule('modal')\n  export default {\n    props: {\n      // List dataSource\n      dataSource: {\n        type: Array,\n        default: () => []\n      },\n      // Custom load data function\n      loadData: Function\n    },\n    data () {\n      return {\n        // Is checkind state\n        checking: false,\n        // Is load end\n        end: false,\n      }\n    },\n    computed: {\n      recycleList() {\n        return this.$refs.rcy;\n      }\n    },\n    methods: {\n      /*\n       * InSide Function \n       */\n      // Handle cell be longpress\n      $onCellLongpress(e) {\n        if (!this.checking) {\n          const index = e.index\n          let tmp = []\n          this.recycleList.getListDataSize(res => {\n            this.checking = true\n            this.recycleList.resetLoadmore()\n            this.recycleList.setPullLoadEnable(false)\n            for(let i = 0; i < res; i++) {\n              this.dataSource[i].checking = this.checking;\n              tmp.push(this.dataSource[i])\n            }\n            tmp[index].checked = true\n            this.dataSource = tmp\n            this.recycleList.setListData(this.dataSource)\n            this.$emit('fmRcyCheckStateChange', true)\n          })\n        }\n      },\n      // Handle cell be click\n      $onCellCheck(item, i) {\n        if (item.checking) {\n          item.checked = !item.checked\n          this.dataSource[i] = item\n          this.recycleList.updateData(this.dataSource[i], i)\n          this.$emit('fmRcyCheckValueChange', this.dataSource)\n        } else {\n          this.$emit('fmRcyCheckCellBeClick', { value: item, index: i })\n        }\n      },\n      // Handle list loadmore, is a js hook\n      $onLoadMore() {\n        if (!this.checking && !this.end) {\n          if (this.loadData && typeof this.loadData === 'function') { this.loadData() }\n        } \n        if (!this.checked) {\n          this.recycleList.setLoadingDisplay('hide')\n          this.recycleList.setPullLoadEnable(false)\n        } else if (!this.end) {\n          setTimeout(() => {\n            this.recycleList.setLoadingDisplay('hide')\n            this.recycleList.setPullLoadEnable(true)\n            this.recycleList.resetLoadmore()\n          }, 400);\n        }\n      },\n\n      /*\n       * OutSide Function \n       */\n      // Quit checking model if this.checking is true, will emit @fmRcyCheckFinish Event.\n      finish() {\n        if (this.checking) {\n          this.recycleList.getListDataSize(res => {\n            let tmp = []\n            let checkList = []\n            let checkIndex = []\n            this.checking = false\n            this.recycleList.setPullLoadEnable(true)\n            this.recycleList.resetLoadmore()\n            for(let i = 0; i < res; i++) {\n              this.dataSource[i].checking = this.checking;\n              this.dataSource[i].checked && (checkList.push(this.dataSource[i])) && (checkIndex.push(i))\n              tmp.push(this.dataSource[i])\n            }\n            this.dataSource = tmp\n            this.recycleList.setListData(this.dataSource)\n            this.$emit('fmRcyCheckFinish', { indexs: checkIndex, values: checkList })\n            this.$emit('fmRcyCheckStateChange', false)\n          })\n        }\n      },\n      // Toggle all item's checked state when in checking Model, will emit @fmRcyCheckValueChange Event.\n      toggleAll(bool) {\n        if (this.checking) {\n          let tmp = []\n          this.recycleList.getListDataSize(res => {\n            for(let i = 0; i < res; i++) {\n              this.dataSource[i].checked = bool;\n              tmp.push(this.dataSource[i])\n            }\n            this.dataSource = tmp\n            this.recycleList.setListData(this.dataSource)\n            this.$emit('fmRcyCheckValueChange', this.dataSource)\n          })\n        }\n      },\n      // Append data at this.dataSource and append item at recycle-list.\n      appendData(data) {\n        this.dataSource = this.dataSource.concat(data)\n        this.recycleList.appendData(data)\n      },\n      // Remove data from this.dataSource and remove item from recycle-list.\n      removeData(array) {\n        this.dataSource = this.dataSource.filter((value, index) => {\n          return array.indexOf(index) < 0\n        })\n        this.recycleList.removeData(array)\n        this.$emit('fmRcyCheckValueChange', this.dataSource)\n      },\n      // When this.loadData function complete, call this function to reset loading state.\n      resetLoading() {\n        this.recycleList.setLoadingDisplay('hide')\n      },\n      // Set loading no more data Tip and change loading state.\n      loadingEnd(tipStr) {\n        this.end = true\n        this.$refs.loadText.setAttr('value', tipStr, false)\n        setTimeout(() => {\n          this.recycleList.setLoadingDisplay('hide')\n          this.recycleList.setPullLoadEnable(true)\n          this.recycleList.resetLoadmore()\n        }, 400);\n      },\n      // Reset loding, make it can load more again.\n      resetLoadMore() {\n        this.end = true\n        this.recycleList.setPullLoadEnable(true)\n        this.recycleList.resetLoadmore()\n      }\n    }\n  }\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.cell[data-v-fb2a1758] {\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 20px;\n  width: 360px;\n  height: 92px;\n}\n.check-wrap[data-v-fb2a1758] {\n  width: 24px;\n  height: 24px;\n}\n.unchecked[data-v-fb2a1758] {\n  width: 24px;\n  height: 24px;\n}\n.checked[data-v-fb2a1758] {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 24px;\n  height: 24px;\n  transform: scale(0);\n  border-radius: 12px;\n}\n.loading[data-v-fb2a1758] {\n  justify-content: center;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rcy-check/index.vue?40005bbf"],"names":[],"mappings":";AA8CA;EACA,oBAAA;EACA,+BAAA;EACA,oBAAA;EACA,gBAAA;EACA,aAAA;EACA,aAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,OAAA;EACA,YAAA;EACA,aAAA;EACA,oBAAA;EACA,oBAAA;CACA;AAEA;EACA,wBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <recycle-list\n    ref=\"rcy\"\n    template-key=\"type\"\n    alias=\"item\"\n    index=\"i\"\n    append='tree'\n    @loadmore=\"$onLoadMore()\"\n    showScrollbar=\"true\" style='width:360px'\n    @mlongclick=\"$onCellLongpress\"\n    for=\"(item, i) in dataSource\">\n\n    <cell-slot template-type=\"check-cell\" :itemId=\"item.itemId\" @click=\"$onCellCheck(item, i)\" ripple=\"normal\">\n      <div>\n        <div class=\"cell\">\n          <!-- Content start -->\n          <div class=\"content\">\n            <text>{{ item.itemId }}</text>\n            <text v-once :a=\"i\">{{ i }}</text>\n          </div>\n          <!-- Content end -->\n\n          <!-- Right circle start -->\n          <div class=\"check-wrap\" v-if=\"item.checking\">\n            <image\n              class=\"unchecked\"\n              src=\"http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_off.png\" />\n            <image\n              class=\"checked\"\n              v-if=\"item.checked\"\n              :src=\"item.disabled ? 'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on_disable.png' : 'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on.png'\"\n            />\n          </div>\n          <!-- Right circle end -->\n        </div>\n      </div>\n    </cell-slot>\n\n    <loading class=\"loading\" @loading=\"onloading\" display=\"hide\">\n      <text class=\"indicator\" ref=\"loadText\">正在加载中 ..</text>\n    </loading>\n\n  </recycle-list>\n</template>\n\n<style scoped>\n  .cell {\n    flex-direction: row;\n    justify-content: space-between;\n    align-items: center;\n    padding: 0 20px;\n    width: 360px;\n    height: 92px;\n  }\n\n  .check-wrap {\n    width: 24px;\n    height: 24px;\n  }\n\n  .unchecked {\n    width: 24px;\n    height: 24px;\n  }\n\n  .checked {\n    position: absolute;\n    left: 0;\n    top: 0;\n    width: 24px;\n    height: 24px;\n    transform: scale(0);\n    border-radius: 12px;\n  }\n\n  .loading {\n    justify-content: center;\n  }\n</style>\n\n<script>\nexport default {\n  props: {\n    // List dataSource\n    dataSource: {\n      type: Array,\n      default: () => []\n    },\n    // Custom load data function\n    loadData: Function\n  },\n  data () {\n    return {\n      // Is checkind state\n      checking: false,\n      // Is load end\n      end: false\n    };\n  },\n  computed: {\n    recycleList () {\n      return this.$refs.rcy;\n    }\n  },\n  methods: {\n    /*\n       * InSide Function\n       */\n    // Handle cell be longpress\n    $onCellLongpress (e) {\n      if (!this.checking) {\n        const index = e.index;\n        const tmp = [];\n        this.recycleList.getListDataSize(res => {\n          this.checking = true;\n          this.recycleList.resetLoadmore();\n          this.recycleList.setPullLoadEnable(false);\n          for (let i = 0; i < res; i++) {\n            this.dataSource[i].checking = this.checking;\n            tmp.push(this.dataSource[i]);\n          }\n          tmp[index].checked = true;\n          this.dataSource = tmp;\n          this.recycleList.setListData(this.dataSource);\n          this.$emit('fmRcyCheckStateChange', true);\n        });\n      }\n    },\n    // Handle cell be click\n    $onCellCheck (item, i) {\n      if (item.checking) {\n        item.checked = !item.checked;\n        this.dataSource[i] = item;\n        this.recycleList.updateData(this.dataSource[i], i);\n        this.$emit('fmRcyCheckValueChange', this.dataSource);\n      } else {\n        this.$emit('fmRcyCheckCellBeClick', { value: item, index: i });\n      }\n    },\n    // Handle list loadmore, is a js hook\n    $onLoadMore () {\n      if (!this.checking && !this.end) {\n        if (this.loadData && typeof this.loadData === 'function') { this.loadData(); }\n      }\n      if (!this.checked) {\n        this.recycleList.setLoadingDisplay('hide');\n        this.recycleList.setPullLoadEnable(false);\n      } else if (!this.end) {\n        setTimeout(() => {\n          this.recycleList.setLoadingDisplay('hide');\n          this.recycleList.setPullLoadEnable(true);\n          this.recycleList.resetLoadmore();\n        }, 400);\n      }\n    },\n\n    /*\n       * OutSide Function\n       */\n    // Quit checking model if this.checking is true, will emit @fmRcyCheckFinish Event.\n    finish () {\n      if (this.checking) {\n        this.recycleList.getListDataSize(res => {\n          const tmp = [];\n          const checkList = [];\n          const checkIndex = [];\n          this.checking = false;\n          this.recycleList.setPullLoadEnable(true);\n          this.recycleList.resetLoadmore();\n          for (let i = 0; i < res; i++) {\n            this.dataSource[i].checking = this.checking;\n            this.dataSource[i].checked && (checkList.push(this.dataSource[i])) && (checkIndex.push(i));\n            tmp.push(this.dataSource[i]);\n          }\n          this.dataSource = tmp;\n          this.recycleList.setListData(this.dataSource);\n          this.$emit('fmRcyCheckFinish', { indexs: checkIndex, values: checkList });\n          this.$emit('fmRcyCheckStateChange', false);\n        });\n      }\n    },\n    // Toggle all item's checked state when in checking Model, will emit @fmRcyCheckValueChange Event.\n    toggleAll (bool) {\n      if (this.checking) {\n        const tmp = [];\n        this.recycleList.getListDataSize(res => {\n          for (let i = 0; i < res; i++) {\n            this.dataSource[i].checked = bool;\n            tmp.push(this.dataSource[i]);\n          }\n          this.dataSource = tmp;\n          this.recycleList.setListData(this.dataSource);\n          this.$emit('fmRcyCheckValueChange', this.dataSource);\n        });\n      }\n    },\n    // Append data at this.dataSource and append item at recycle-list.\n    appendData (data) {\n      this.dataSource = this.dataSource.concat(data);\n      this.recycleList.appendData(data);\n    },\n    // Remove data from this.dataSource and remove item from recycle-list.\n    removeData (array) {\n      this.dataSource = this.dataSource.filter((value, index) => {\n        return array.indexOf(index) < 0;\n      });\n      this.recycleList.removeData(array);\n      this.$emit('fmRcyCheckValueChange', this.dataSource);\n    },\n    // When this.loadData function complete, call this function to reset loading state.\n    resetLoading () {\n      this.recycleList.setLoadingDisplay('hide');\n    },\n    // Set loading no more data Tip and change loading state.\n    loadingEnd (tipStr) {\n      this.end = true;\n      this.$refs.loadText.setAttr('value', tipStr, false);\n      setTimeout(() => {\n        this.recycleList.setLoadingDisplay('hide');\n        this.recycleList.setPullLoadEnable(true);\n        this.recycleList.resetLoadmore();\n      }, 400);\n    },\n    // Reset loding, make it can load more again.\n    resetLoadMore () {\n      this.end = true;\n      this.recycleList.setPullLoadEnable(true);\n      this.recycleList.resetLoadmore();\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 189 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18728,7 +10811,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 
-var modal = weex.requireModule('modal');
 exports.default = {
   props: {
     // List dataSource
@@ -18757,8 +10839,8 @@ exports.default = {
   },
   methods: {
     /*
-     * InSide Function 
-     */
+       * InSide Function
+       */
     // Handle cell be longpress
     $onCellLongpress: function $onCellLongpress(e) {
       var _this = this;
@@ -18817,8 +10899,8 @@ exports.default = {
 
 
     /*
-     * OutSide Function 
-     */
+       * OutSide Function
+       */
     // Quit checking model if this.checking is true, will emit @fmRcyCheckFinish Event.
     finish: function finish() {
       var _this3 = this;
@@ -18905,7 +10987,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 190 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -18998,6 +11080,582 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-fb2a1758", module.exports)
+  }
+}
+
+/***/ }),
+/* 196 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(197);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 197 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(198)
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(200),
+  /* template */
+  __webpack_require__(206),
+  /* scopeId */
+  "data-v-d7ab306c",
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-simple-list/index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-d7ab306c", Component.options)
+  } else {
+    hotAPI.reload("data-v-d7ab306c", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 198 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(199);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("1ac5d268", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-d7ab306c\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-d7ab306c\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 199 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.list-wrap[data-v-d7ab306c] {\n  width: 1080px;\n}\n.title-wrap[data-v-d7ab306c] {\n  flex-direction: row;\n  padding: 27px 49px;\n  justify-content: space-between;\n}\n.title-text[data-v-d7ab306c] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 36px;\n  line-height: 54px;\n}\n.title-rightBtn[data-v-d7ab306c] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 36px;\n  line-height: 54px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-simple-list/index.vue?50baeb08"],"names":[],"mappings":";AAwBA;EACA,cAAA;CACA;AAEA;EACA,oBAAA;EACA,mBAAA;EACA,+BAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 2018/3/5. -->\n<template>\n  <div class=\"list-wrap\">\n    <div class=\"title-wrap\">\n      <slot name=\"left\">\n        <text class=\"title-text\" :style=\"{ color: titleColor }\">{{ title }}</text>\n      </slot>\n      <slot name=\"right\">\n        <text class=\"title-rightBtn\" :style=\"{ color: rightColor }\" @click=\"btnClicked\">{{ rightText }}</text>\n      </slot>\n    </div>\n    <div class=\"item-wrap\">\n      <item v-for=\"(item, index) in list\"\n            v-bind=\"Object.assign({}, customStyles, item)\"\n            :key=\"index\"\n            :index=\"index\"\n            @select=\"onSelect(index)\"\n            @leftClicked=\"leftIconClicked(index)\"\n            @rightClicked=\"rightIconClicked(index)\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .list-wrap {\n    width: 1080px;\n  }\n\n  .title-wrap {\n    flex-direction: row;\n    padding: 27px 49px;\n    justify-content: space-between;\n  }\n\n  .title-text {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 36px;\n    line-height: 54px;\n  }\n\n  .title-rightBtn {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 36px;\n    line-height: 54px;\n  }\n</style>\n\n<script>\nimport Item from './item.vue';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmSimpleList',\n  mixins: [Locale],\n  components: { Item },\n  props: {\n    list: {\n      type: Array,\n      default: () => ([])\n    },\n    title: {\n      type: String,\n      default () {\n        return t('el.common.title');\n      }\n    },\n    titleColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    rightText: {\n      type: String,\n      default: ''\n    },\n    rightColor: {\n      type: String,\n      default: '#198DED'\n    },\n    customStyles: {\n      type: Object,\n      default: () => ({})\n    }\n  },\n  methods: {\n    onSelect (index) {\n      this.$emit('fmSimpleListSelected', { model: this.list[index], index });\n    },\n    btnClicked () {\n      this.$emit('fmSimpleListRightBtnClicked');\n    },\n    leftIconClicked (index) {\n      this.$emit('fmSimpleListLeftIconClicked', { model: this.list[index], index });\n    },\n    rightIconClicked (index) {\n      this.$emit('fmSimpleListRightIconClicked', { model: this.list[index], index });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+/* 200 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _item = __webpack_require__(201);
+
+var _item2 = _interopRequireDefault(_item);
+
+var _locale = __webpack_require__(5);
+
+var _locale2 = _interopRequireDefault(_locale);
+
+var _locale3 = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  name: 'FmSimpleList',
+  mixins: [_locale2.default],
+  components: { Item: _item2.default },
+  props: {
+    list: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    title: {
+      type: String,
+      default: function _default() {
+        return (0, _locale3.t)('el.common.title');
+      }
+    },
+    titleColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, 0.4)'
+    },
+    rightText: {
+      type: String,
+      default: ''
+    },
+    rightColor: {
+      type: String,
+      default: '#198DED'
+    },
+    customStyles: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    }
+  },
+  methods: {
+    onSelect: function onSelect(index) {
+      this.$emit('fmSimpleListSelected', { model: this.list[index], index: index });
+    },
+    btnClicked: function btnClicked() {
+      this.$emit('fmSimpleListRightBtnClicked');
+    },
+    leftIconClicked: function leftIconClicked(index) {
+      this.$emit('fmSimpleListLeftIconClicked', { model: this.list[index], index: index });
+    },
+    rightIconClicked: function rightIconClicked(index) {
+      this.$emit('fmSimpleListRightIconClicked', { model: this.list[index], index: index });
+    }
+  }
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/***/ }),
+/* 201 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(202)
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(204),
+  /* template */
+  __webpack_require__(205),
+  /* scopeId */
+  "data-v-6f5a0a6a",
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-simple-list/item.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] item.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6f5a0a6a", Component.options)
+  } else {
+    hotAPI.reload("data-v-6f5a0a6a", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 202 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(203);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("2d9189e9", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-6f5a0a6a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./item.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-6f5a0a6a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./item.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 203 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.list-item[data-v-6f5a0a6a] {\n  padding: 0 48px;\n}\n.list-item[data-v-6f5a0a6a]:active {\n  background-color: rgba(0, 0, 0, 0.05);\n}\n.item-wrap[data-v-6f5a0a6a] {\n  height: 144px;\n  flex-direction: row;\n  align-items: center;\n  justify-content: space-between;\n}\n.text-title[data-v-6f5a0a6a] {\n  flex: 1;\n  text-overflow: ellipsis;\n  font-size: 42px;\n  margin-right: 26px;\n  lines: 1;\n}\n.icon[data-v-6f5a0a6a] {\n  margin: 12px;\n  font-size: 48px;\n  font-weight: 700;\n}\n.icon-left[data-v-6f5a0a6a] {\n  margin-right: 38px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-simple-list/item.vue?425f3d43"],"names":[],"mappings":";AAiBA;EACA,gBAAA;CACA;AAEA;EACA,sCAAA;CACA;AAEA;EACA,cAAA;EACA,oBAAA;EACA,oBAAA;EACA,+BAAA;CACA;AAEA;EACA,QAAA;EACA,wBAAA;EACA,gBAAA;EACA,mBAAA;EACA,SAAA;CACA;AAEA;EACA,aAAA;EACA,gBAAA;EACA,iBAAA;CACA;AAEA;EACA,mBAAA;CACA","file":"item.vue","sourcesContent":["<!-- Created by Yanjiie on 2018/3/5. -->\n<template>\n  <div class=\"list-item\" @click=\"onClick\">\n    <div class=\"item-wrap\" :style=\"wrapStyle\">\n      <fm-icon class=\"icon icon-left\" v-if=\"leftIcon || originLeftIcon\"\n                                      :value=\"leftIcon || originLeftIcon\"\n                                      :color='leftColor || originIconColor'\n                                      @fmClick=\"onLeftClick\" />\n      <text class=\"text-title\" :style=\"titleStyle\">{{ title }}</text>\n      <fm-icon class=\"icon\" :value=\"rightIcon || originRightIcon\"\n                            :color='rightColor || originIconColor'\n                            @fmClick=\"onRightClick\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .list-item {\n    padding: 0 48px;\n  }\n\n  .list-item:active {\n    background-color: rgba(0, 0, 0, 0.05);\n  }\n\n  .item-wrap {\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n  }\n\n  .text-title {\n    flex: 1;\n    text-overflow: ellipsis;\n    font-size: 42px;\n    margin-right: 26px;\n    lines: 1;\n  }\n\n  .icon {\n    margin: 12px;\n    font-size: 48px;\n    font-weight: 700;\n  }\n\n  .icon-left {\n    margin-right: 38px;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nexport default {\n  components: { FmIcon },\n  props: {\n    index: {\n      type: Number,\n      default: -1\n    },\n    title: {\n      type: String,\n      default: ''\n    },\n    color: {\n      type: String,\n      default: ''\n    },\n    fontSize: {\n      type: Number,\n      default: 42\n    },\n    borderWidth: {\n      type: Number,\n      default: 2\n    },\n    borderColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.1)'\n    },\n    leftIcon: {\n      type: String,\n      default: ''\n    },\n    leftColor: {\n      type: String,\n      default: ''\n    },\n    rightIcon: {\n      type: String,\n      default: ''\n    },\n    rightColor: {\n      type: String,\n      default: ''\n    },\n    originTitleColor: {\n      type: String,\n      default: '#000000'\n    },\n    originLeftIcon: {\n      type: String,\n      default: '&#xe6d2;'\n    },\n    originRightIcon: {\n      type: String,\n      default: '&#xe6c0;'\n    },\n    originIconColor: {\n      type: String,\n      default: '#999999'\n    }\n  },\n  computed: {\n    wrapStyle () {\n      const { borderWidth, borderColor } = this;\n      return {\n        borderBottomWidth: borderWidth,\n        borderColor\n      };\n    },\n    titleStyle () {\n      const { color, originTitleColor, fontSize } = this;\n      return {\n        fontSize,\n        color: color || originTitleColor\n      };\n    }\n  },\n  methods: {\n    onClick () {\n      this.$emit('select', this.index);\n    },\n    onLeftClick () {\n      this.$emit('leftClicked', this.index);\n    },\n    onRightClick () {\n      this.$emit('rightClicked', this.index);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+/* 204 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _fmIcon = __webpack_require__(4);
+
+var _fmIcon2 = _interopRequireDefault(_fmIcon);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  components: { FmIcon: _fmIcon2.default },
+  props: {
+    index: {
+      type: Number,
+      default: -1
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    color: {
+      type: String,
+      default: ''
+    },
+    fontSize: {
+      type: Number,
+      default: 42
+    },
+    borderWidth: {
+      type: Number,
+      default: 2
+    },
+    borderColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, 0.1)'
+    },
+    leftIcon: {
+      type: String,
+      default: ''
+    },
+    leftColor: {
+      type: String,
+      default: ''
+    },
+    rightIcon: {
+      type: String,
+      default: ''
+    },
+    rightColor: {
+      type: String,
+      default: ''
+    },
+    originTitleColor: {
+      type: String,
+      default: '#000000'
+    },
+    originLeftIcon: {
+      type: String,
+      default: '&#xe6d2;'
+    },
+    originRightIcon: {
+      type: String,
+      default: '&#xe6c0;'
+    },
+    originIconColor: {
+      type: String,
+      default: '#999999'
+    }
+  },
+  computed: {
+    wrapStyle: function wrapStyle() {
+      var borderWidth = this.borderWidth,
+          borderColor = this.borderColor;
+
+      return {
+        borderBottomWidth: borderWidth,
+        borderColor: borderColor
+      };
+    },
+    titleStyle: function titleStyle() {
+      var color = this.color,
+          originTitleColor = this.originTitleColor,
+          fontSize = this.fontSize;
+
+      return {
+        fontSize: fontSize,
+        color: color || originTitleColor
+      };
+    }
+  },
+  methods: {
+    onClick: function onClick() {
+      this.$emit('select', this.index);
+    },
+    onLeftClick: function onLeftClick() {
+      this.$emit('leftClicked', this.index);
+    },
+    onRightClick: function onRightClick() {
+      this.$emit('rightClicked', this.index);
+    }
+  }
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/***/ }),
+/* 205 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "list-item",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    on: {
+      "click": _vm.onClick
+    }
+  }, [_c('div', {
+    staticClass: "item-wrap",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(_vm.wrapStyle))
+  }, [(_vm.leftIcon || _vm.originLeftIcon) ? _c('fm-icon', {
+    staticClass: "icon icon-left",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "value": _vm.leftIcon || _vm.originLeftIcon,
+      "color": _vm.leftColor || _vm.originIconColor
+    },
+    on: {
+      "fmClick": _vm.onLeftClick
+    }
+  }) : _vm._e(), _vm._v(" "), _c('text', {
+    staticClass: "text-title",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(_vm.titleStyle))
+  }, [_vm._v(_vm._s(_vm.title))]), _vm._v(" "), _c('fm-icon', {
+    staticClass: "icon",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "value": _vm.rightIcon || _vm.originRightIcon,
+      "color": _vm.rightColor || _vm.originIconColor
+    },
+    on: {
+      "fmClick": _vm.onRightClick
+    }
+  })], 1)])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-6f5a0a6a", module.exports)
+  }
+}
+
+/***/ }),
+/* 206 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "list-wrap",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_c('div', {
+    staticClass: "title-wrap",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_vm._t("left", [_c('text', {
+    staticClass: "title-text",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      color: _vm.titleColor
+    }))
+  }, [_vm._v(_vm._s(_vm.title))])]), _vm._v(" "), _vm._t("right", [_c('text', {
+    staticClass: "title-rightBtn",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      color: _vm.rightColor
+    })),
+    on: {
+      "click": _vm.btnClicked
+    }
+  }, [_vm._v(_vm._s(_vm.rightText))])])], 2), _vm._v(" "), _c('div', {
+    staticClass: "item-wrap",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, _vm._l((_vm.list), function(item, index) {
+    return _c('item', _vm._b({
+      key: index,
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(undefined)),
+      attrs: {
+        "index": index
+      },
+      on: {
+        "select": function($event) {
+          _vm.onSelect(index)
+        },
+        "leftClicked": function($event) {
+          _vm.leftIconClicked(index)
+        },
+        "rightClicked": function($event) {
+          _vm.rightIconClicked(index)
+        }
+      }
+    }, 'item', Object.assign({}, _vm.customStyles, item), false))
+  }))])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-d7ab306c", module.exports)
   }
 }
 

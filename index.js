@@ -30,6 +30,7 @@ import FmTitlebar from './packages/fm-titlebar';
 import FmMultiCheckGroup from './packages/fm-multi-check-group';
 import FmMultiCheckCell from './packages/fm-multi-check-cell';
 import FmRcyCheck from './packages/fm-rcy-check';
+import FmSimpleList from './packages/fm-simple-list';
 
 export {
   FmSwitch,
@@ -64,5 +65,6 @@ export {
   FmTitlebar,
   FmMultiCheckGroup,
   FmMultiCheckCell,
-  FmRcyCheck
+  FmRcyCheck,
+  FmSimpleList
 };
