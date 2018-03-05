@@ -8,6 +8,10 @@
 <script>
 export default {
   props: {
+    index: {
+      type: Number,
+      default: -1
+    },
     title: {
       type: String,
       default: ''

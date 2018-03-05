@@ -13,6 +13,7 @@
       <item v-for="(item, index) in list"
             v-bind="Object.assign({}, customStyles, item)"
             :key="index"
+            :index="index"
             @select="onSelect(index)" />
     </div>
   </div>
@@ -76,9 +77,7 @@ export default {
     },
     rightText: {
       type: String,
-      default () {
-        return t('el.common.more');
-      }
+      default: ''
     },
     rightColor: {
       type: String,
@@ -91,7 +90,7 @@ export default {
   },
   methods: {
     onSelect (index) {
-      this.$emit('fmTagWallSelected', { title: this.dataSource[index].title, index });
+      this.$emit('fmTagWallSelected', { title: this.list[index].title, index });
     },
     btnClicked () {
       this.$emit('fmTagWallRightBtnClicked');
