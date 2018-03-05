@@ -115,9 +115,9 @@ export default {
 | customStyles{`borderRadius`} | `Number` |`N`| `6px` | 边框半径 |
 | customStyles{`borderWidth`} | `Number` |`N`| `2px` | 边框宽度 |
 | customStyles{`fontSize`} | `Number` |`N`| `42px` | 字体大小 |
-| customStyles{`originTitleColor`} | `String` |`N`| `rgba(0, 0, 0, 0.6)` | 默认的字体颜色，会被 `list item` 中的 color 覆盖 |
-| customStyles{`originBorderColor`} | `String` |`N`| `rgba(0, 0, 0, 0.08)` | 默认的边框颜色，会被 `list item` 中的 BorderColor 覆盖 |
-| customStyles{`originBackgroundColor`} | `String` |`N`| `#FFFFFF` | 默认的边框颜色，会被 `list item` 中的 backgroundColor 覆盖 |
+| customStyles{`originTitleColor`} | `String` |`N`| `rgba(0, 0, 0, 0.6)` | 默认的字体颜色，会被 `list item` 中的 `color` 覆盖 |
+| customStyles{`originBorderColor`} | `String` |`N`| `rgba(0, 0, 0, 0.08)` | 默认的边框颜色，会被 `list item` 中的 `borderColor` 覆盖 |
+| customStyles{`originBackgroundColor`} | `String` |`N`| `#FFFFFF` | 默认的边框颜色，会被 `list item` 中的 `backgroundColor` 覆盖 |
 | customStyles{`itemSpacing`} | `Number` |`N`| `24px` | 标签间距 |
 | customStyles{`lineSpacing`} | `Number` |`N`| `24px` | 标签的行间距 |
 

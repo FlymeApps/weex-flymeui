@@ -27,6 +27,14 @@ export default {
       subname: 'FmTag',
       path: 'component/tag'
     }, {
+      name: '标签墙',
+      subname: 'FmTagWall',
+      path: 'component/tagWall'
+    }, {
+      name: '简单列表',
+      subname: 'FmSimpleList',
+      path: 'component/simpleList'
+    }, {
       name: '通用列表项',
       subname: 'FmCell',
       path: 'component/list'
