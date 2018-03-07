@@ -85,20 +85,20 @@
 </style>
 
 <script>
-	const modal = weex.requireModule('modal')
-  export default {
-    data () {
-      return {
-				offsetXRatio: 0
-      }
-		},
-		methods: {
-			_onIndexChange(e) {
-				modal.toast({message: e.index})
-			},
-			_onScroll(e) {
-				this.offsetXRatio = e.offsetXRatio
-			}
-		}
+const modal = weex.requireModule('modal');
+export default {
+  data () {
+    return {
+      offsetXRatio: 0
+    };
+  },
+  methods: {
+    _onIndexChange (e) {
+      modal.toast({ message: e.index });
+    },
+    _onScroll (e) {
+      this.offsetXRatio = e.offsetXRatio;
+    }
   }
+};
 </script>

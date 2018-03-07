@@ -1,73 +1,57 @@
 <template>
-  	<div class="mzui-demo">
-		<title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59f007ab67e2274f086396b8"></title>
-		<category title="TabView"></category>
-		<fm-tab-view :items="items" @slidend="end">
-			<text class="item item1" slot="item1">我是tab1</text>
-			<text class="item item2" slot="item3">我是333</text>
-			<text class="item item3" slot="item2">我是222</text>
-		</fm-tab-view>
-	</div>
+  <fm-tab-page :tab-titles="tabTitles">
+    <div class="tab1"></div>
+    <div class="tab2"></div>
+    <div class="tab3"></div>
+    <div class="tab4"></div>
+    <div class="tab3"></div>
+    <div class="tab2"></div>
+    <div class="tab1"></div>
+  </fm-tab-page>
 </template>
 
 <style scoped>
+  .tab1 {
+    width: 1080px;
+    height: 1080px;
+    background-color: red;
+    margin-top: 20px;
+  }
 
-.mzui-demo {
-	position: absolute;
-	top: 0;
-	right: 0;
-	left: 0;
-	bottom: 0;
-	background-color: #ffffff;
-}
+  .tab2 {
+    width: 1080px;
+    height: 1080px;
+    background-color: blue;
+    margin-top: 20px;
+  }
 
-.item {
-	font-size: 54px;
-	text-align: center;
-	color: #ffffff;
-	height: 1080px;
-	margin-top: 6px;
-	padding-top: 150px;
-}
-.item1 {
-	background-color: #54ae56;
-}
-.item2 {
-	background-color: #f34949;
-}
-.item3 {
-	background-color: #508aeb;
-}
+  .tab3 {
+    width: 1080px;
+    height: 1080px;
+    background-color: green;
+    margin-top: 20px;
+  }
+
+  .tab4 {
+    width: 1080px;
+    height: 1080px;
+    background-color: gray;
+    margin-top: 20px;
+  }
 </style>
 
 <script>
-import { FmTabView } from '../../../index';
-import Title from '../../_mods/title.vue';
-import Category from '../../_mods/category.vue';
-import { setTitle } from '../../_mods/set-nav';
-
-const modal = weex.requireModule('modal');
+import { FmTabPage } from '../../../index';
 
 export default {
-    components: { Title, Category, FmTabView },
-	data () {
-		return {
-			items: [{
-				name: 'item1',
-				text: 'Tab1'
-			}, {
-				name: 'item2',
-				text: 'Tab2'
-			}, {
-				name: 'item3',
-				text: 'Tab3'
-			}]
-		}
-	},
-	methods: {
-		end (data) {
-			modal.toast({message: data})
-		}
-	}
-}
+  components: { FmTabPage },
+  data () {
+    return {
+      tabTitles: ['选项', '选项选项', '选项', '选项', '选项选项选项', '选项选项选项选项', '选项选项选项']
+    };
+  },
+  methods: {
+
+  }
+};
 </script>

@@ -31,6 +31,7 @@ import FmMultiCheckGroup from './packages/fm-multi-check-group';
 import FmMultiCheckCell from './packages/fm-multi-check-cell';
 import FmRcyCheck from './packages/fm-rcy-check';
 import FmSimpleList from './packages/fm-simple-list';
+import FmTabPage from './packages/fm-tab-page';
 
 export {
   FmSwitch,
@@ -66,5 +67,6 @@ export {
   FmMultiCheckGroup,
   FmMultiCheckCell,
   FmRcyCheck,
-  FmSimpleList
+  FmSimpleList,
+  FmTabPage
 };
