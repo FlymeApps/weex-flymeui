@@ -11,12 +11,12 @@
       <div class="tab-title-wrap"
            ref="tab-title-wrap">
         <div class="title-item"
-             v-for="(item, idx) in tabTitles"
+             v-for="(v, idx) in tabTitles"
              :key="idx"
              @click="setPage(idx)"
              :ref="'fm-tab-title-'+idx">
           <text class="item-title"
-                :style="{ fontSize: cTabStyles.fontSize, color: currentPage === idx ? cTabStyles.activeTitleColor : cTabStyles.titleColor, paddingLeft: cTabStyles.padding, paddingRight: cTabStyles.padding}">{{ item }}</text>
+                :style="{ fontSize: cTabStyles.fontSize, color: currentPage === idx ? cTabStyles.activeTitleColor : cTabStyles.titleColor, paddingLeft: cTabStyles.padding, paddingRight: cTabStyles.padding}">{{ v.title }}</text>
         </div>
         <div class="border-bottom"
               ref="tab-border"
@@ -132,7 +132,6 @@ export default {
         height: 102,
         padding: 18,
         fontSize: 42,
-        hasActiveBottom: true,
         activeBottomColor: '#198DED'
       };
       return Object.assign({}, defaultStyle, this.tabStyles);
@@ -319,6 +318,7 @@ export default {
       this.currentPage = page;
       this._animateTransformX(page);
       this._animateBorder(page);
+      this.$emit('fmTabPageTabSelected', { page });
     },
     _animateTransformX (page) {
       const { duration, timingFunction } = this;

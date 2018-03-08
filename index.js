@@ -7,7 +7,6 @@ import FmIcon from './packages/fm-icon';
 import FmSlider from './packages/fm-slider';
 import FmButton from './packages/fm-button';
 import FmInput from './packages/fm-input';
-import FmTabView from './packages/fm-tab-view';
 import FmTips from './packages/fm-tips';
 import FmRichText from './packages/fm-rich-text';
 import FmSpecialRichText from './packages/fm-special-rich-text';
@@ -44,7 +43,6 @@ export {
   FmSlider,
   FmButton,
   FmInput,
-  FmTabView,
   FmTips,
   FmRichText,
   FmSpecialRichText,

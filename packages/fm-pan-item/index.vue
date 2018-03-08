@@ -23,7 +23,6 @@
 <script>
 import Binding from 'weex-bindingx';
 import Utils from '../utils';
-const modal = weex.requireModule('modal');
 
 export default {
   props: {
