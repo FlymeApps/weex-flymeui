@@ -6,7 +6,7 @@
               ref="tab-title-list"
               :show-scrollbar="false"
               scroll-direction="horizontal"
-              :style="{ height: (tabStyles.height)+'px'}">
+              :style="{ height: (cTabStyles.height)+'px'}">
 
       <div class="tab-title-wrap"
            ref="tab-title-wrap">
@@ -16,11 +16,11 @@
              @click="setPage(idx)"
              :ref="'fm-tab-title-'+idx">
           <text class="item-title"
-                :style="{color: currentPage === idx ? tabStyles.activeTitleColor : tabStyles.titleColor}">{{ item }}</text>
+                :style="{ fontSize: cTabStyles.fontSize, color: currentPage === idx ? cTabStyles.activeTitleColor : cTabStyles.titleColor, paddingLeft: cTabStyles.padding, paddingRight: cTabStyles.padding}">{{ item }}</text>
         </div>
         <div class="border-bottom"
-             ref="tab-border"
-             :style="{ transform: `translateX(${offsetLeft}px)`, backgroundColor: tabStyles.activeBottomColor}"></div>
+              ref="tab-border"
+              :style="{ width: bottomInitWidth, transform: `translateX(${bottomInitOffset}px)`, backgroundColor: cTabStyles.activeBottomColor}"></div>
       </div>
     </scroller>
     <div class="tab-page-wrap"
@@ -28,7 +28,7 @@
          @panstart="_onTouchStart"
          @panmove="_onTouchMove"
          @panend="_onTouchEnd"
-         :style="{ height: (tabPageHeight-tabStyles.height)+'px' }">
+         :style="{ height: (tabPageHeight-cTabStyles.height)+'px' }">
       <div class="tab-container"
            ref="tab-container">
         <slot></slot>
@@ -51,6 +51,8 @@
     flex-direction: row;
     justify-content: space-around;
     padding: 0 48px;
+    border-bottom-width: 2px;
+    border-color: rgba(0,0,0,0.10);
   }
 
   .title-item {
@@ -60,6 +62,7 @@
 
   .item-title {
     font-family: sans-serif-medium;
+    font-weight: 500;
     font-size: 42px;
     line-height: 57px;
   }
@@ -82,32 +85,11 @@
     flex-direction: row;
     position: absolute;
   }
-
-  .tab1 {
-    width: 1080px;
-    height: 1080px;
-    background-color: red;
-    margin-top: 20px;
-  }
-
-  .tab2 {
-    width: 1080px;
-    height: 1080px;
-    background-color: blue;
-    margin-top: 20px;
-  }
-
-  .tab3 {
-    width: 1080px;
-    height: 1080px;
-    background-color: green;
-    margin-top: 20px;
-  }
 </style>
 
 <script>
 import { isWeex } from 'universal-env';
-import BindingX from 'weex-bindingx';
+import Binding from 'weex-bindingx';
 const animation = weex.requireModule('animation');
 const dom = weex.requireModule('dom');
 const isH5 = weex.config.env.platform === 'Web';
@@ -132,15 +114,7 @@ export default {
     },
     tabStyles: {
       type: Object,
-      default: () => ({
-        titleColor: 'rgba(0, 0, 0, 0.6)',
-        activeTitleColor: '#198DED',
-        height: 102,
-        padding: 18,
-        fontSize: 42,
-        hasActiveBottom: true,
-        activeBottomColor: '#198DED'
-      })
+      default: () => ({})
     },
     timingFunction: {
       type: String,
@@ -150,11 +124,22 @@ export default {
   computed: {
     maxPage () {
       return this.tabTitles.length - 1;
+    },
+    cTabStyles () {
+      const defaultStyle = {
+        titleColor: 'rgba(0, 0, 0, 0.6)',
+        activeTitleColor: '#198DED',
+        height: 102,
+        padding: 18,
+        fontSize: 42,
+        hasActiveBottom: true,
+        activeBottomColor: '#198DED'
+      };
+      return Object.assign({}, defaultStyle, this.tabStyles);
     }
   },
   data: () => ({
     currentPage: 0,
-    x: 0,
     gesToken: null,
     isMoving: false,
     startTime: 0,
@@ -163,7 +148,8 @@ export default {
     startPosX: 0,
     startPosY: 0,
     judge: 'INITIAL',
-    offsetLeft: 48,
+    bottomInitWidth: 0,
+    bottomInitOffset: 48,
     tabPositions: []
   }),
   methods: {
@@ -255,7 +241,7 @@ export default {
         let borderWidthExp = `${currWidth} + (x > 0 ? ${prevInterpolator} : ${nextInterpolator})`;
 
         // tab scroller 滑动动画插值表达式
-        const tabScrollExp = `${(currOffset - 540 + currWidth / 2)} - x / 1080 * ${(nextOffset - 540 + nextWidth / 2) - (currOffset - 540 + currWidth / 2)}`;
+        const tabScrollExp = `${(currOffset - 540 + currWidth / 2)} - x / 1080 * ${(nextOffset - 540 + nextWidth / 2) - (currOffset - 540 + currWidth / 2)} - ${(currOffset - 540) < 0 ? 48 : 0}`;
 
         // 当页数为 0 或 max 时去除尽头动画
         if (currentPage === 0) {
@@ -287,10 +273,10 @@ export default {
         }];
 
         if (this.gesToken) {
-          BindingX.unbind(this.gesToken);
+          Binding.unbind(this.gesToken);
         }
 
-        this.gesToken = BindingX.bind({
+        this.gesToken = Binding.bind({
           anchor: this.getEl(element),
           eventType: 'pan',
           props
@@ -375,26 +361,27 @@ export default {
       return isWeex ? el.ref : el instanceof HTMLElement ? el : el.$el;
     },
     _calculatePositions () {
-      const { tabTitles, tabStyles } = this;
-      let currPosition = 48;
+      const { tabTitles } = this;
       tabTitles.map((item, i) => {
-        const tabWidth = tabStyles.padding * 2 + tabStyles.fontSize * item.length;
-        this.tabPositions[i] = {
-          width: tabWidth,
-          offset: currPosition
-        };
-        currPosition += (tabWidth + 42);
+        dom.getComponentRect(this.$refs['fm-tab-title-' + i][0], rect => {
+          this.tabPositions[i] = {
+            width: rect.size.width,
+            offset: rect.size.left
+          };
+          i === 0 && (this.bottomInitWidth = rect.size.width);
+        });
       });
     }
   },
   mounted () {
     const tabPageEl = this.getEl(this.$refs['tab-page-wrap']);
-    BindingX.prepare && BindingX.prepare({
+    Binding.prepare && Binding.prepare({
       anchor: tabPageEl,
       eventType: 'pan'
     });
-    this._calculatePositions();
-    console.log(this.tabTitles);
+    setTimeout(() => {
+      this._calculatePositions();
+    }, 50);
   }
 };
 </script>

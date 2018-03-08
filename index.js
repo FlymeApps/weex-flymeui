@@ -1,3 +1,4 @@
+import Utils from './packages/utils';
 import FmSwitch from './packages/fm-switch';
 import FmTag from './packages/fm-tag';
 import FmTagWall from './packages/fm-tag-wall';
@@ -32,6 +33,7 @@ import FmMultiCheckCell from './packages/fm-multi-check-cell';
 import FmRcyCheck from './packages/fm-rcy-check';
 import FmSimpleList from './packages/fm-simple-list';
 import FmTabPage from './packages/fm-tab-page';
+import FmPanItem from './packages/fm-pan-item';
 
 export {
   FmSwitch,
@@ -68,5 +70,7 @@ export {
   FmMultiCheckCell,
   FmRcyCheck,
   FmSimpleList,
-  FmTabPage
+  FmTabPage,
+  FmPanItem,
+  Utils
 };
