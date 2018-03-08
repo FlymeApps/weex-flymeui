@@ -7,6 +7,38 @@ export default {
     list: {
       type: VALUE.ARRAY,
       desc: '数据源',
+      props: {
+        inner: {
+          title: {
+            type: VALUE.STRING,
+            desc: '标题'
+          },
+          color: {
+            type: VALUE.COLOR,
+            desc: '标题颜色'
+          },
+          leftIcon: {
+            type: VALUE.STRING,
+            desc: '左 Icon'
+          },
+          leftColor: {
+            type: VALUE.COLOR,
+            desc: '左 Icon 颜色'
+          },
+          rightIcon: {
+            type: VALUE.STRING,
+            desc: '右 Icon'
+          },
+          rightColor: {
+            type: VALUE.COLOR,
+            desc: '右 Icon 颜色'
+          },
+          backgroundColor: {
+            type: VALUE.COLOR,
+            desc: '背景颜色'
+          }
+        }
+      },
       default: [{ title: '标签1', color: '#FC5B23', leftIcon: '&#xe6a3;', leftColor: '#DC2A2A' }, { title: '标签2' }]
     },
     title: {

@@ -95,6 +95,7 @@ const dom = weex.requireModule('dom');
 const isH5 = weex.config.env.platform === 'Web';
 
 export default {
+  name: 'FmTabPage',
   props: {
     tabTitles: {
       type: Array,

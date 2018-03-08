@@ -7,6 +7,18 @@ export default {
     list: {
       type: VALUE.ARRAY,
       desc: '数据源',
+      props: {
+        inner: {
+          title: {
+            type: VALUE.STRING,
+            desc: '标题'
+          },
+          color: {
+            type: VALUE.COLOR,
+            desc: '标题颜色'
+          }
+        }
+      },
       default: [{ title: '标签1', color: '#FC5B23' }, { title: '标签2' }]
     },
     title: {

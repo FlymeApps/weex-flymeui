@@ -16,7 +16,7 @@
   - [fm-cell 列表项](packages/fm-cell/)
 
 - 容器组件
-  - [fm-tab-view 标签页](packages/fm-tab-view/)
+  - [fm-tab-page 标签页](packages/fm-tab-page/)
   - [fm-overlay 蒙层](packages/fm-overlay/)
   - [fm-popup 侧弹窗口](packages/fm-popup/)
   - [fm-action-sheet 底部删除弹框](packages/fm-action-sheet/)
