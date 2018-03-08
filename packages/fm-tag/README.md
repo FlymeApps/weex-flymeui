@@ -3,7 +3,7 @@
 > Flyme 标签组件
 
 ## 使用方法
-```html
+```vue
 <template>
   <div class="container">
     <text class="text">标签</text>

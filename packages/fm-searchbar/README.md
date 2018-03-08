@@ -5,7 +5,7 @@
 !> fm-searchbar 中的搜索组件与 [Weex 内置 input 组件](https://weex.incubator.apache.org/cn/references/components/input.html#yue-shu) 具有相同的特性约束。
 
 ## 使用方法
-```html
+```vue
 <template>
   <div class="container">
     <text class="text">顶部导航栏搜索组件</text>
@@ -69,19 +69,19 @@
 2. `<slot name"input-right"></slot>` : 输入框右侧插槽
 3. `<slot name"right"></slot>` : 右边搜索按钮插槽
 
-```html
+```vue
 <category title="插槽"></category>
 <fm-searchbar
   @fmSearchbarSubmit="submit">
-  <fm-icon slot="input-right" iconStyle='66' value="&#xe6e9;" color='rgba(0, 0, 0, 0.6)' />
+  <fm-icon slot="input-right" iconStyle='66' name="yuyin" color='rgba(0, 0, 0, 0.6)' />
 </fm-searchbar>
 <fm-searchbar
   @fmSearchbarSubmit="submit">
-  <fm-icon slot="left" iconStyle='66' value="&#xe6e9;" color='rgba(0, 0, 0, 0.6)' />
+  <fm-icon slot="left" iconStyle='66' name="yuyin" color='rgba(0, 0, 0, 0.6)' />
 </fm-searchbar>
 <fm-searchbar
   @fmSearchbarSubmit="submit">
-  <fm-icon slot="right" iconStyle='66' value="&#xe6e9;" color='rgba(0, 0, 0, 0.6)' />
+  <fm-icon slot="right" iconStyle='66' name="yuyin" color='rgba(0, 0, 0, 0.6)' />
 </fm-searchbar>
 ```
 

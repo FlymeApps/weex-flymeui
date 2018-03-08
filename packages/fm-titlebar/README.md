@@ -3,7 +3,7 @@
 > Flyme 顶部导航栏组件
 
 ## 使用方法
-```html
+```vue
 <template>
   <div class="container">
     <text class="text">基本态</text>
@@ -27,7 +27,7 @@
     data: ()=> ({
       btns: [{
         type: 'icon',
-        value: '&#xe6cb;',
+        value: 'paizhao',
         color: '#3BC06B'
       }, {
         type: 'text',
@@ -68,7 +68,7 @@
 2. `<slot name"middle"></slot>` : 中间标题插槽
 3. `<slot name"right"></slot>` : 右边插槽
 
-```html
+```vue
 <fm-titlebar>
   <div class="slot-wrap" slot="middle">
     <fm-tag color="#F12528" size="big">精选</fm-tag><text class="title">电影合集</text>

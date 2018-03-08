@@ -4,10 +4,10 @@
     <div class="fm-status-bar" v-if="statusbar" :style="{ backgroundColor: backgroundColor }"></div>
     <div class="fm-search-bar" :style="barStyle">
       <slot name="left" v-if="hasPrev">
-        <fm-icon @fmClick="onBack" class="search-bar-back" value="&#xe6b5;" :icon-style="72" :color="leftColor"/>
+        <fm-icon @fmIconClicked="onBack" class="search-bar-back" name="fanhui" :icon-style="72" :color="leftColor"/>
       </slot>
         <div class="search-input-wrap" :style="inputBackground ? { backgroundColor: inputBackground} : {}">
-          <fm-icon class="search-bar-icon" value="&#xe6d4;" :icon-style="42" :color="iconColor" />
+          <fm-icon class="search-bar-icon" name="sousuo" :icon-style="42" :color="iconColor" />
           <input @blur="onBlur"
                 @focus="onFocus"
                 @input="onInput"
@@ -21,7 +21,7 @@
                 :placeholder="placeholder"
                 :style="{color: inputColor, 'placeholder-color': placeholderColor}"
                 class="search-bar-input"/>
-          <fm-icon :style="{ opacity: delShow ? 1 : 0 }" class="search-bar-delete" value="&#xe6c0;" :icon-style="48" color="#FFFFFF" @fmClick="delClick" />
+          <fm-icon :style="{ opacity: delShow ? 1 : 0 }" class="search-bar-delete" name="guanbi" :icon-style="48" color="#FFFFFF" @fmIconClicked="delClick" />
           <div :style="{ opacity: !delShow ? 1 : 0 }" class="right-btn">
             <slot name="input-right"></slot>
           </div>
@@ -29,8 +29,8 @@
       <slot name="right">
         <text v-if="searchText" class="search-enter" @click="onSearch" :style="searchTextStyle">{{ searchText }}</text>
       </slot>
-    </div> 
-  </div> 
+    </div>
+  </div>
 </template>
 
 <style scoped>

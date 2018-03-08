@@ -16,7 +16,7 @@ import { FmRichText, FmSpecialRichText } from 'weex-flymeui'
 **注意：FmSpecialRichText 仅支持 text , icon, tag 类型，在 configList 中传入其他类型将会出错**
 
 ## 示例
-```html
+```vue
 <template>
     <div class="mzui-demo">
         <scroller class="scroller">
@@ -58,7 +58,7 @@ export default {
                 }
             }, {
                 type: 'icon',
-                value: '&#xe6ad;',
+                value: 'dianzan',
                 color: 'red',
                 style: {
                     size: 12,
@@ -102,7 +102,7 @@ export default {
             specialConfigList1: [
                 {
                     type: 'icon',
-                    value: '&#xe6e4;',
+                    value: 'xinxi2',
                     style: {
                         size: 14
                     }

@@ -3,7 +3,7 @@
 > 通用文本
 
 ## 使用方法
-```html
+```vue
 <template>
   <div class="container">
     <fm-text class="text" value="nomal基本样式" />

@@ -3,8 +3,7 @@
     <div class="fm-rich-text" v-if="isNotEmptyArray">
       <div v-for="(v, idx) in configList" :key="idx">
         <fm-text v-if="v.type=='text' && v.text"
-                            :text-value="v.text"
-                            :text-style="v.style"
+                            :value="v.text"
                             :has-text-margin="hasTextMargin"></fm-text>
 
         <fm-rich-text-link v-if="v.type=='link' && v.href && v.text"
@@ -16,18 +15,18 @@
 
         <fm-icon v-if="v.type=='icon'"
                             :color="v.color"
-                            :value="v.value"
+                            :name="v.value"
                             :iconStyle="v.style"></fm-icon>
 
         <fm-tag v-if="v.type=='tag'"
-                           :tagType="v.tagType"
+                           :type="v.tagType"
                            :size="v.size"
                            :value="v.value"
                            :color="v.color"
                            :fontColor="v.fontColor"></fm-tag>
       </div>
     </div>
-    <fm-text :text-value="configList" v-if="isString"></fm-text>
+    <fm-text :value="configList" v-if="isString"></fm-text>
   </div>
 </template>
 

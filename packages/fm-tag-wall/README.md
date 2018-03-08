@@ -3,7 +3,7 @@
 > Flyme 可自定义样式标签墙组件，可用于搜索热词
 
 ## 使用方法
-```html
+```vue
 <template>
   <scroller class="scroller">
     <category title="基本态"></category>

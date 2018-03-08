@@ -4,7 +4,7 @@
       <slot></slot>
       <text class="content">{{message}}</text>
       <text class="split"></text>
-      <fm-icon class="close" @fmClick="close" value="&#xe6c0;" />
+      <fm-icon class="close" @fmIconClicked="close" name="guanbi" />
     </div>
     <text class="arrow" :style="arrowStyle"></text>
   </div>

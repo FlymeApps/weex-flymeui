@@ -40,88 +40,79 @@
 import { FmRichText, FmSpecialRichText } from '../../../index';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
-import { setTitle } from '../../_mods/set-nav';
-
-const modal = weex.requireModule('modal');
 
 export default {
-    components: { Title, Category, FmRichText, FmSpecialRichText },
-    data() {
-        return {
-            configList: [{
-                type: 'icon',
-                value: '//gw.alicdn.com/tfs/TB1qygJRXXXXXX2XFXXXXXXXXXX-117-37.png'
-            }, {
-                type: 'text',
-                text: '新品上市',
-                style: {
-                    color: '#FF5000'
-                }
-            }, {
-                type: 'icon',
-                value: '&#xe6ad;',
-                color: 'red',
-                style: {
-                    size: 36,
-                    lineHeight: 63
-                }
-            }, {
-                type: 'link',
-                text: ' =>点击查看',
-                href: '//www.baidu.com',
-                style: {
-                    color: '#546E7A'
-                }
-            }, {
-                type: 'tag',
-                tagType: 'hollow',
-                size: 'small',
-                value: '满100减20',
-                color: '#FF5000',
-                fontColor: '#FF5000'
-            }],
-            configString: '不小心传入了字符串不小心传入了字符串不小心传入了字符串不小心传入了字符串不小心传入了字符串',
-            specialConfigList: [
-                {
-                    type: 'tag',
-                    tagType: 'hollow',
-                    value: '作者',
-                    color: '#7e97ac',
-                    fontColor: '#7e97ac',
-                    style: {
-                        width: 81
-                    }
-                },
-                {
-                    type: 'text',
-                    value: '蓝小胖：Weex-FlymeUI 是基于 Weex 和 Flyme 6 控件标准开发而成的跨平台组件…',
-                    style: {
-                        fontSize: 48
-                    }
-                }
-            ],
-            specialConfigList1: [
-                {
-                    type: 'icon',
-                    value: '&#xe6e4;',
-                    style: {
-                        size: 42
-                    }
-                },
-                {
-                    type: 'text',
-                    value: '蓝小胖：Weex-FlymeUI 是基于 Weex 和 Flyme 6 控件标准开发而成的跨平台组件…',
-                    style: {
-                        fontSize: 42
-                    }
-                }
-            ],
+  components: { Title, Category, FmRichText, FmSpecialRichText },
+  data () {
+    return {
+      configList: [{
+        type: 'text',
+        text: '新品上市'
+      }, {
+        type: 'icon',
+        value: 'dianzan',
+        color: 'red',
+        style: {
+          size: 36,
+          lineHeight: 63
         }
-    },
-    methods: {
-        linkBeClick(obj) {
-            console.log(obj)
+      }, {
+        type: 'link',
+        text: ' =>点击查看',
+        href: '//www.baidu.com',
+        style: {
+          color: '#546E7A'
         }
+      }, {
+        type: 'tag',
+        tagType: 'hollow',
+        size: 'small',
+        value: '满100减20',
+        color: '#FF5000',
+        fontColor: '#FF5000'
+      }],
+      configString: '不小心传入了字符串不小心传入了字符串不小心传入了字符串不小心传入了字符串不小心传入了字符串',
+      specialConfigList: [
+        {
+          type: 'tag',
+          tagType: 'hollow',
+          value: '作者',
+          color: '#7e97ac',
+          fontColor: '#7e97ac',
+          style: {
+            width: 81
+          }
+        },
+        {
+          type: 'text',
+          value: '蓝小胖：Weex-FlymeUI 是基于 Weex 和 Flyme 6 控件标准开发而成的跨平台组件…',
+          style: {
+            fontSize: 48
+          }
+        }
+      ],
+      specialConfigList1: [
+        {
+          type: 'icon',
+          value: 'xinxi2',
+          style: {
+            size: 42
+          }
+        },
+        {
+          type: 'text',
+          value: '蓝小胖：Weex-FlymeUI 是基于 Weex 和 Flyme 6 控件标准开发而成的跨平台组件…',
+          style: {
+            fontSize: 42
+          }
+        }
+      ]
+    };
+  },
+  methods: {
+    linkBeClick (obj) {
+      console.log(obj);
     }
-}
+  }
+};
 </script>

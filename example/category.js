@@ -56,6 +56,10 @@ export default {
     name: '容器组件',
     subname: 'Container conponent',
     componentList: [{
+      name: '标签页',
+      subname: 'FmTabPage',
+      path: 'component/tabPage'
+    }, {
       name: '蒙层',
       subname: 'FmOverlay',
       path: 'component/overlay'
@@ -63,10 +67,6 @@ export default {
       name: '侧边弹出窗口',
       subname: 'FmPopup',
       path: 'component/popup'
-    }, {
-      name: '标签页',
-      subname: 'FmTabView',
-      path: 'component/tabView'
     }]
   },
   interaction: {

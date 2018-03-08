@@ -3,16 +3,16 @@
     <div class="tag-div"
          :style="{top:top+'px'}">
       <fm-icon v-if="newList[0].type == 'icon' && newList[0].value"
-                          :value="newList[0].value"
+                          :name="newList[0].value"
                           :iconStyle="newList[0].style"></fm-icon>
       <fm-tag v-if="newList[0].type=='tag'"
-                          :tagType="newList[0].tagType"
+                          :type="newList[0].tagType"
                           :size="newList[0].size"
                           :value="newList[0].value"
                           :color="newList[0].color"
                           :fontColor="newList[0].fontColor"></fm-tag>
     </div>
-    <fm-text :text-value="newList[1].value" :textStyle="newList[1].style" v-if="newList[1].value"></fm-text>
+    <fm-text :value="newList[1].value" v-if="newList[1].value"></fm-text>
   </div>
 </template>
 

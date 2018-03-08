@@ -39,7 +39,7 @@ export default {
           }
         }
       },
-      default: [{ title: '标签1', color: '#FC5B23', leftIcon: '&#xe6a3;', leftColor: '#DC2A2A' }, { title: '标签2' }]
+      default: [{ title: '标签1', color: '#FC5B23', leftIcon: 'biaoqing', leftColor: '#DC2A2A' }, { title: '标签2' }]
     },
     title: {
       type: VALUE.STRING,

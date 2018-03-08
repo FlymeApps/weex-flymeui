@@ -88,16 +88,16 @@ export default {
     listData3: [{
       title: '王者荣耀',
       color: '#198DED',
-      leftIcon: '&#xe6a3;',
+      leftIcon: 'biaoqing',
       leftColor: '#DC2A2A'
     }, {
       title: '这是一段文字超长的描述这是一段文字超长的描述这是一段文字超长的描述这是一段文字超长的描述',
       color: '#3BC06B',
-      leftIcon: '&#xe6be;'
+      leftIcon: 'gongjuxiang'
     }, {
       title: '震惊！Flyme 竟然还有这个功能！',
       color: '#DC2A2A',
-      leftIcon: '&#xe6c2;'
+      leftIcon: 'hongxin'
     }],
     customStyles: {
       borderWidth: 0,

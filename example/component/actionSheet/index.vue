@@ -59,15 +59,15 @@ export default {
     actionSheetShow: false
   }),
   methods: {
-    click() {
-      this.actionSheetShow = true
+    click () {
+      this.actionSheetShow = true;
     },
-    fmActionSheetBtnClicked(msg) {
-      modal.toast({ message: msg })
+    fmActionSheetBtnClicked (msg) {
+      modal.toast({ message: msg });
     },
-    fmActionSheetOverlayClick() {
-      this.actionSheetShow = false
+    fmActionSheetOverlayClick () {
+      this.actionSheetShow = false;
     }
   }
-}
+};
 </script>

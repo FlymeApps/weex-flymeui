@@ -1,7 +1,7 @@
 # fm-foldable-text
 
 ## 使用
-```html
+```vue
 <category title="可折叠文本"></category>
 <fm-foldable-text :text="text" width="340"></fm-foldable-text>
 <category title="不同大小"></category>

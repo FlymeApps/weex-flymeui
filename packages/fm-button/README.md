@@ -1,7 +1,7 @@
 # fm-button
 
 ## 使用
-```html
+```vue
 <fm-button text="可用按钮" @click="btnBeClick"/>
 <fm-button text="不可用" disabled />
 <fm-button text="空心按钮" bgColor="transparent" color="#198ded" />

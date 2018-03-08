@@ -9,7 +9,7 @@
       <category title="功能按钮"></category>
       <fm-titlebar title="icon 按钮" :rightBtns="{
                                       type: 'icon',
-                                      value: '&#xe6d7;',
+                                      value: 'shuaxin',
                                       color: '#04C0CF'
                                     }" @fmTitlebarRightBtnClicked="rightBtnClick" />
       <fm-titlebar title="文字按钮" :rightBtns="{
@@ -25,7 +25,7 @@
       <category title="隐藏左边按钮"></category>
       <fm-titlebar title="首页" :hasPrev="false" :rightBtns="{
                                                   type: 'icon',
-                                                  value: '&#xe6d7;',
+                                                  value: 'shuaxin',
                                                   color: '#04C0CF'
                                                 }" @fmTitlebarRightBtnClick="rightBtnClick" />
       <category title="插槽 slot"></category>
@@ -47,7 +47,7 @@
     bottom: 0;
     background-color: #ffffff;
   }
-  
+
   .container {
     padding-top: 60px;
     padding-left: 60px;
@@ -58,7 +58,7 @@
     flex-direction: row;
     flex-wrap: wrap;
   }
-  
+
   .scroller {
     flex: 1;
   }
@@ -86,25 +86,25 @@ import Category from '../../_mods/category.vue';
 import { setTitle } from '../../_mods/set-nav';
 
 const modal = weex.requireModule('modal');
-const Navigator = weex.requireModule('navigator')
+const Navigator = weex.requireModule('navigator');
 
 export default {
-	components: { Title, Category, FmTitlebar, FmTag },
-	data: ()=> ({
+  components: { Title, Category, FmTitlebar, FmTag },
+  data: () => ({
     btns1: [{
       type: 'icon',
-      value: '&#xe6cb;',
+      value: 'paizhao',
       color: '#3BC06B'
     }, {
       type: 'text',
       value: '更多',
       color: '#FC5B23'
     }]
-	}),
-	methods: {
-    rightBtnClick(e) {
-      modal.toast({message: e})
+  }),
+  methods: {
+    rightBtnClick (e) {
+      modal.toast({ message: e });
     }
-	}
-}
+  }
+};
 </script>

@@ -3,7 +3,7 @@
     <div class="fm-status-bar" v-if="statusbar" :style="{ backgroundColor: backgroundColor }"></div>
     <div class="fm-title-bar" :style="barStyle">
       <slot name="left" v-if="hasPrev">
-        <fm-icon @fmClick="onBack" class="title-bar-back" value="&#xe6b5;" :icon-style="72" :color="leftColor" />
+        <fm-icon @fmIconClicked="onBack" class="title-bar-back" name="fanhui" :icon-style="72" :color="leftColor" />
       </slot>
       <div class="title-wrap">
         <slot name="middle">
@@ -12,7 +12,7 @@
       </div>
       <slot name="right">
         <div v-for="(item, idx) in btns" :key="idx">
-          <fm-icon class="btn-icon" v-if="item.type === 'icon'" :value="item.value" :style="item.color ? { color:item.color } : {}" :icon-style="72" @fmClick="rightBtnClick(idx, item)"/>
+          <fm-icon class="btn-icon" v-if="item.type === 'icon'" :name="item.value" :style="item.color ? { color:item.color } : {}" :icon-style="72" @fmIconClicked="rightBtnClick(idx, item)"/>
           <text class="btn-text" v-else :style="item.color ? { color:item.color } : {}" @click="rightBtnClick(idx, item)">{{ item.value }}</text>
         </div>
       </slot>

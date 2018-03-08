@@ -1,9 +1,8 @@
 <template>
   <div @click="onLinkClick">
     <fm-text
-      :text-value="linkValue"
-      :has-text-margin="hasTextMargin"
-      :text-style="linkStyle?linkStyle:defObj"></fm-text>
+      :value="linkValue"
+      :has-text-margin="hasTextMargin"></fm-text>
   </div>
 </template>
 
@@ -29,9 +28,6 @@ export default {
       default: () => ({})
     }
   },
-  data: () => ({
-    defObj: {}
-  }),
   methods: {
     onLinkClick (e) {
       const self = this;

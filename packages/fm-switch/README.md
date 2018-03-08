@@ -4,7 +4,7 @@
 
 ![](http://image.res.meizu.com/image/flyme-icon/b4d8e65d3c8c4c7aa1ea341f037267f9z)
 ## 使用方法
-```html
+```vue
 <template>
   <div class="container">
     <text class="text">基本态</text>

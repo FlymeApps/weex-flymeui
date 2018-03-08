@@ -8,7 +8,7 @@
 
 ## 单双多行的列表项
 #### 使用
-```html
+```vue
 <!-- 单行 -->
 <fm-cell title="列表标题"></fm-cell>
 <!-- 双行 -->
@@ -23,7 +23,7 @@
 
 ## 头像列表项
 #### 使用
-```html
+```vue
 <!-- 单行 -->
 <fm-cell title="列表标题"
          imgSrc="https://avatars1.githubusercontent.com/u/29728294?s=400&u=9b580990065d9e9e80fb2c7d736f866bf4f3319e&v=4"></fm-cell>
@@ -40,7 +40,7 @@
 ![](http://image.res.meizu.com/image/flyme-icon/befaaf3291b343f0aa753c89ee943deez)
 
 ## 应用列表项
-```html
+```vue
 <!-- 标识图标 -->
 <fm-cell title="列表标题"
          scene="icon"
@@ -60,7 +60,7 @@
 ![](http://image.res.meizu.com/image/flyme-icon/5265ee24140048979aedf001f7e4b269z)
 
 ## 插槽自定义部件
-```html
+```vue
 <!-- 插槽( 内容右侧 ) -->
 <fm-cell title="微信"
          scene="app-big"

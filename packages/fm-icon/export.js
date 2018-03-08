@@ -4,10 +4,10 @@ export default {
   desc: '图标组件',
   slots: null,
   props: {
-    value: {
+    name: {
       type: VALUE.STRING,
       desc: '类型',
-      default: '&#xe6ef;'
+      default: 'zhuye'
     },
     iconStyle: {
       type: VALUE.STRING,
@@ -21,10 +21,10 @@ export default {
     }
   },
   events: {
-    fmClick: {
+    fmIconClicked: {
       desc: '点击'
     },
-    fmLongpress: {
+    fmIconLongpress: {
       desc: '长按'
     }
   }

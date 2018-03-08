@@ -3,13 +3,13 @@
   <div class="list-item" @click="onClick">
     <div class="item-wrap" :style="wrapStyle">
       <fm-icon class="icon icon-left" v-if="leftIcon || originLeftIcon"
-                                      :value="leftIcon || originLeftIcon"
+                                      :name="leftIcon || originLeftIcon"
                                       :color='leftColor || originIconColor'
-                                      @fmClick="onLeftClick" />
+                                      @fmIconClicked="onLeftClick" />
       <text class="text-title" :style="titleStyle">{{ title }}</text>
-      <fm-icon class="icon" :value="rightIcon || originRightIcon"
+      <fm-icon class="icon" :name="rightIcon || originRightIcon"
                             :color='rightColor || originIconColor'
-                            @fmClick="onRightClick" />
+                            @fmIconClicked="onRightClick" />
     </div>
   </div>
 </template>
@@ -41,6 +41,7 @@
   .icon {
     margin: 12px;
     font-size: 48px;
+    height: 48px;
     font-weight: 700;
   }
 
@@ -100,11 +101,11 @@ export default {
     },
     originLeftIcon: {
       type: String,
-      default: '&#xe6d2;'
+      default: 'shizhong'
     },
     originRightIcon: {
       type: String,
-      default: '&#xe6c0;'
+      default: 'guanbi'
     },
     originIconColor: {
       type: String,

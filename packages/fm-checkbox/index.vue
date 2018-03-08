@@ -6,7 +6,7 @@
       <template v-if="!$slots.default">{{ value }}</template>
       </text>
       <div class="icon-wrap">
-        <fm-icon class="icon" ref="fm-icon" :style="{ width: isChecked ? 72 : 1 }" value="&#xe6de;" :icon-style="48" color="#0A73C9" />
+        <fm-icon class="icon" ref="fm-icon" :style="{ width: isChecked ? 72 : 1 }" name="wancheng" :icon-style="48" color="#0A73C9" />
       </div>
     </div>
     <div class="border"></div>

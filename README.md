@@ -20,7 +20,7 @@ npm i weex-flymeui -S
 ```
 
 ## 使用
-```html
+```vue
 <template>
   <div>
     <fm-button text="安装" @click="buttonClicked" bgColor="transparent" color="#198ded" />
@@ -34,7 +34,7 @@ npm i weex-flymeui -S
     components: { FmButton },
     methods: {
       buttonClicked () {
-				// enter your code
+        // enter your code
       }
     }
   };

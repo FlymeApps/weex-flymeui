@@ -3,7 +3,7 @@
 > Flyme 简单列表组件，可自定义样式
 
 ## 使用方法
-```html
+```vue
 <template>
   <scroller class="scroller">
       <category title="基本态"></category>
@@ -65,16 +65,16 @@ export default {
     listData3: [{
       title: '王者荣耀',
       color: '#198DED',
-      leftIcon: '&#xe6a3;',
+      leftIcon: 'biaoqing',
       leftColor: '#DC2A2A'
     }, {
       title: '这是一段文字超长的描述这是一段文字超长的描述这是一段文字超长的描述这是一段文字超长的描述',
       color: '#3BC06B',
-      leftIcon: '&#xe6be;'
+      leftIcon: 'gongjuxiang'
     }, {
       title: '震惊！Flyme 竟然还有这个功能！',
       color: '#DC2A2A',
-      leftIcon: '&#xe6c2;'
+      leftIcon: 'hongxin'
     }],
     customStyles: {
       borderWidth: 0,
@@ -120,8 +120,8 @@ export default {
 | customStyles{`borderWidth`} | `Number` |`N`| `2px` | 边框宽度 |
 | customStyles{`fontSize`} | `Number` |`N`| `42px` | 字体大小 |
 | customStyles{`originTitleColor`} | `String` |`N`| `#000000` | 默认的字体颜色，会被 `list item` 中的 `color` 覆盖 |
-| customStyles{`originLeftIcon`} | `String` |`N`| `&#xe6d2;` | 默认的左 Icon，会被 `list item` 中的 `leftIcon` 覆盖 |
-| customStyles{`originRightIcon`} | `String` |`N`| `&#xe6c0;` | 默认的右 Icon，会被 `list item` 中的 `leftIcon` 覆盖 |
+| customStyles{`originLeftIcon`} | `String` |`N`| `shizhong` | 默认的左 Icon，会被 `list item` 中的 `leftIcon` 覆盖 |
+| customStyles{`originRightIcon`} | `String` |`N`| `guanbi` | 默认的右 Icon，会被 `list item` 中的 `leftIcon` 覆盖 |
 | customStyles{`originIconColor`} | `String` |`N`| `#999999` | 默认的 Icon 颜色，会被 `list item` 中的 `leftColor` 或 `rightColor` 覆盖 |
 
 ## Slot

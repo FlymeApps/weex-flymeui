@@ -13,10 +13,10 @@
       ref="input" />
     <input v-else
       :type="type"
-      :class="inputClz" 
+      :class="inputClz"
       :style="inputStyle"
       :value="value"
-      :maxlength="maxlength" 
+      :maxlength="maxlength"
       :placeholder="placeholder"
       :autofocus="autofocus"
       :disabled="disabled"
@@ -27,8 +27,8 @@
       @focus="beFocus"
       @blur="beBlur"
       ref="input" />
-    <fm-icon v-if="delShow" class="delete" value="&#xe6c0;" :icon-style="48" color="#fff" @fmClick="delClick" />
-    <fm-icon v-if="visibleShow" class="visible" :value="visibleValue" :icon-style="72" color="#666" @fmClick="toggleVisible" />
+    <fm-icon v-if="delShow" class="delete" name="guanbi" :icon-style="48" color="#fff" @fmIconClicked="delClick" />
+    <fm-icon v-if="visibleShow" class="visible" :name="visibleValue" :icon-style="72" color="#666" @fmIconClicked="toggleVisible" />
     <text v-if="hasError" class="error-msg">{{inputErrorMessage}}</text>
   </div>
 </template>
@@ -96,7 +96,7 @@ export default {
   },
   computed: {
     visibleValue() {
-      return this.type === 'password' ? '&#xe6a9;' : '&#xe6e8;'
+      return this.type === 'password' ? 'chakan;' : 'yinbi'
     },
     inputClz() {
       let clz = ['fm-textarea']

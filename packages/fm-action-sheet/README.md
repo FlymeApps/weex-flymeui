@@ -5,7 +5,7 @@ FmActionSheet 是一款基于 FmPopup 的从底部向上弹出的控制按钮列
 
 
 ## 简单使用
-```html
+```vue
 <fm-action-sheet :show="actionSheetShow"
                  confirmText="删除"
                  confirmColor="#DE3938"
@@ -16,7 +16,7 @@ FmActionSheet 是一款基于 FmPopup 的从底部向上弹出的控制按钮列
 ```
 
 ## 自定义使用
-```html
+```vue
 <!-- 自定义按钮文字、颜色 -->
 <fm-action-sheet :show="actionSheetShow"
                  confirmText="删除"

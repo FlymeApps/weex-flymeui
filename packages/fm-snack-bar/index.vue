@@ -9,7 +9,7 @@
 			<text class="title" :style="{ color: titleColor }">{{ title }}</text>
 		</slot>
 		<slot name="right">
-			<fm-icon v-if="type === 'jump'" value="&#xe6b5;" class="rotate" :style="{ color: titleColor }" />
+			<fm-icon v-if="type === 'jump'" name="fanhui" class="rotate" :style="{ color: titleColor }" />
 			<text v-else-if="type === 'normal'" class="closeText" :style="{ color: closeColor }" @click="ctrClick">{{ closeText }}</text>
 		</slot>
 	</div>
@@ -36,6 +36,7 @@
 
 	.rotate {
 		font-size: 54px;
+    height: 54px;
 		font-weight: 700;
 		transform: rotate(180deg);
 	}
@@ -44,8 +45,6 @@
 
 <script>
 const animation = weex.requireModule('animation');
-// const { platform } = weex.config.env;
-// const isWeb = typeof (window) === 'object' && platform.toLowerCase() === 'web';
 import FmIcon from '../fm-icon';
 import Locale from 'weex-flymeui/lib/mixins/locale';
 import { t } from 'weex-flymeui/lib/locale';
