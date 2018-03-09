@@ -7,6 +7,7 @@ import FmIcon from './fm-icon/export';
 import FmTagWall from './fm-tag-wall/export';
 import FmSimpleList from './fm-simple-list/export';
 import FmTabPage from './fm-tab-page/export';
+import FmItem from './fm-item/export';
 
 export default {
   FmSwitch,
@@ -17,5 +18,6 @@ export default {
   FmIcon,
   FmTagWall,
   FmSimpleList,
-  FmTabPage
+  FmTabPage,
+  FmItem
 };

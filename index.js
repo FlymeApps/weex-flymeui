@@ -18,7 +18,7 @@ import FmSimpleBtn from './packages/fm-simple-btn';
 import { confirm, alert } from './packages/module/dialog.js';
 import FmPopup from './packages/fm-popup';
 import FmActionSheet from './packages/fm-action-sheet';
-import FmCell from './packages/fm-cell';
+import FmItem from './packages/fm-item';
 import FmRater from './packages/fm-rater';
 import FmSnackBar from './packages/fm-snack-bar';
 import showSnackBar from './packages/module/snackbar.js';
@@ -55,7 +55,7 @@ export {
   alert,
   FmPopup,
   FmActionSheet,
-  FmCell,
+  FmItem,
   FmRater,
   FmSnackBar,
   showSnackBar,
