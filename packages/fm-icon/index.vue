@@ -1,17 +1,9 @@
 <template>
-  <text :style="mergeStyle"
-        @click="itemClicked(name)"
-        @longpress="itemLongpress(name)"
-        >{{ getIcon }}
+  <text :style="mergeStyle">{{ getIcon }}
   </text>
 </template>
 
 <style scoped>
-  .fm-image {
-    width: 129;
-    height: 36;
-    margin-right: 18;
-  }
 </style>
 
 <script>
@@ -52,6 +44,7 @@ export default {
       let style = { fontFamily: 'flymeicon', color: this.color };
       if (Object.prototype.toString.call(this.iconStyle).slice(8, -1).toLowerCase() !== 'object') {
         style.fontSize = `${iconStyle}px`;
+        style.height = `${iconStyle}px`;
       } else {
         style = Object.assign({}, style, { ...iconStyle });
       }
@@ -63,18 +56,6 @@ export default {
       'fontFamily': 'flymeicon',
       'src': "url('http://design.flyme.cn/weexui/assets/iconfont.ttf')"
     });
-  },
-  methods: {
-    itemClicked (name) {
-      this.$emit('fmIconClicked', {
-        name
-      });
-    },
-    itemLongpress (name) {
-      this.$emit('fmIconLongpress', {
-        name
-      });
-    }
   }
 };
 </script>

@@ -5,11 +5,11 @@
       <fm-icon class="icon icon-left" v-if="leftIcon || originLeftIcon"
                                       :name="leftIcon || originLeftIcon"
                                       :color='leftColor || originIconColor'
-                                      @fmIconClicked="onLeftClick" />
+                                      @click="onLeftClick" />
       <text class="text-title" :style="titleStyle">{{ title }}</text>
       <fm-icon class="icon" :name="rightIcon || originRightIcon"
                             :color='rightColor || originIconColor'
-                            @fmIconClicked="onRightClick" />
+                            @click="onRightClick" />
     </div>
   </div>
 </template>

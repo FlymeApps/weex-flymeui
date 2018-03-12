@@ -30,7 +30,3 @@ export default {
 | name | `String` |`Y`| `wancheng` | icon 名称 |
 | color | `String` |`N`| `#666666` | icon 颜色 |
 | iconStyle | `Number` `Object` |`N`| `42px` | icon 样式，传入数字则为大小，可传样式对象 |
-
-## 事件回调
-- `fmIconClicked` 被点击时触发（将会返回 name）
-- `fmIconLongpress` 被长按时触发（将会返回 name）

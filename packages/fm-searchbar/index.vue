@@ -4,7 +4,7 @@
     <div class="fm-status-bar" v-if="statusbar" :style="{ backgroundColor: backgroundColor }"></div>
     <div class="fm-search-bar" :style="barStyle">
       <slot name="left" v-if="hasPrev">
-        <fm-icon @fmIconClicked="onBack" class="search-bar-back" name="fanhui" :icon-style="72" :color="leftColor"/>
+        <fm-icon @click="onBack" class="search-bar-back" name="fanhui" :icon-style="72" :color="leftColor"/>
       </slot>
         <div class="search-input-wrap" :style="inputBackground ? { backgroundColor: inputBackground} : {}">
           <fm-icon class="search-bar-icon" name="sousuo" :icon-style="42" :color="iconColor" />
@@ -21,7 +21,7 @@
                 :placeholder="placeholder"
                 :style="{color: inputColor, 'placeholder-color': placeholderColor}"
                 class="search-bar-input"/>
-          <fm-icon :style="{ opacity: delShow ? 1 : 0 }" class="search-bar-delete" name="guanbi" :icon-style="48" color="#FFFFFF" @fmIconClicked="delClick" />
+          <fm-icon :style="{ opacity: delShow ? 1 : 0 }" class="search-bar-delete" name="guanbi" :icon-style="48" color="#FFFFFF" @click="delClick" />
           <div :style="{ opacity: !delShow ? 1 : 0 }" class="right-btn">
             <slot name="input-right"></slot>
           </div>
