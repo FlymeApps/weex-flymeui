@@ -1,0 +1,75 @@
+<!-- Created by Yanjiie on 2018/03/12. -->
+<template>
+  <div class="fm-tabbar" :style="{ backgroundColor: backgroundColor }">
+    <fm-tabbar-item class="tabbar-item"
+                    v-if="!$slots.default"
+                    v-for="(item, index) in items"
+                    :key="index"
+                    v-bind="Object.assign({}, customStyles, item)"></fm-tabbar-item>
+    <slot />
+  </div>
+</template>
+
+<style scoped>
+  .fm-tabbar {
+    flex-direction: row;
+    width: 1080px;
+    height: 144px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 90px;
+    border-top-width: 2px;
+    border-top-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .tabbar-item {
+    flex: 1;
+  }
+</style>
+
+<script>
+import FmTabbarItem from '../fm-tabbar-item';
+export default {
+  name: 'FmTabbar',
+  components: { FmTabbarItem },
+  props: {
+    activeIndex: {
+      type: Number,
+      default: -1
+    },
+    items: {
+      type: Array,
+      default: () => ([])
+    },
+    backgroundColor: {
+      type: String,
+      default: '#FFFFFF'
+    },
+    customStyles: {
+      type: Object,
+      default: () => ({})
+    }
+  },
+  data: () => ({
+    renderItems: []
+  }),
+  watch: {
+    renderItems () {
+      this.setActiveItem();
+    },
+    activeIndex () {
+      this.setActiveItem();
+    }
+  },
+  methods: {
+    setActiveItem () {
+      this.renderItems.forEach((item, index) => {
+        item.active = index === this.activeIndex;
+      });
+    },
+    onChange (index) {
+      this.$emit('fmTabbarSelected', { index });
+    }
+  }
+};
+</script>

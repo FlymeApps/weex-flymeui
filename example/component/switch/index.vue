@@ -95,28 +95,28 @@
 </style>
 
 <script>
-  import { FmSwitch } from '../../../index'
-  import Title from '../../_mods/title.vue'
-  import Category from '../../_mods/category.vue'
-  import { setTitle } from '../../_mods/set-nav'
+import { FmSwitch } from '../../../index';
+import Title from '../../_mods/title.vue';
+import Category from '../../_mods/category.vue';
+import { setTitle } from '../../_mods/set-nav';
 
-  const modal = weex.requireModule('modal')
+const modal = weex.requireModule('modal');
 
-  export default {
-    components: { Title, Category, FmSwitch },
-    data: () => ({
-      isChecked: true
-    }),
-    methods: {
-      change(bool) {
-        this.isChecked = bool
-        console.log(this.isChecked)
-      }
-    },
-    mounted() {
-      // setTimeout(() => {
-      //   this.isChecked = true
-      // }, 3000)
+export default {
+  components: { Title, Category, FmSwitch },
+  data: () => ({
+    isChecked: true
+  }),
+  methods: {
+    change (bool) {
+      this.isChecked = bool;
+      console.log(this.isChecked);
     }
+  },
+  mounted () {
+    // setTimeout(() => {
+    //   this.isChecked = true
+    // }, 3000)
   }
+};
 </script>
