@@ -15,6 +15,44 @@ const HappyPack = require('happypack');
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 HappyPack.SERIALIZABLE_OPTIONS = HappyPack.SERIALIZABLE_OPTIONS.concat(['postcss']);
 
+console.log('Building..., Please wait a moment.');
+
+const getEntry = dir => {
+  const foundScripts = glob.sync(`${dir}/*/index.js`, {});
+  // 生成 entry 映射表
+  let ret = {};
+  foundScripts.forEach(function (scriptPath) {
+    if (!/\.entry\.js$/.test(scriptPath)) {
+      ret[scriptPath.replace(/^(.*)\.js$/, '$1')] = './' + scriptPath;
+    }
+  });
+  return ret;
+};
+
+const getCopyConfig = () => {
+  const foundScripts = glob.sync('example/', {});
+  const CfoundScripts = glob.sync('example/component/*/', {});
+  const MfoundScripts = glob.sync('example/module/*/', {});
+  const config = [...foundScripts, ...CfoundScripts, ...MfoundScripts];
+  const ret = [];
+  config.forEach(scriptPath => {
+    if (!/(_mods|_public)/.test(scriptPath)) {
+      ret.push({
+        from: 'example/_public/index.html',
+        to: scriptPath + 'index.html'
+      });
+    }
+  });
+  return ret;
+};
+
+const component = getEntry('example/component');
+const moduleEntry = getEntry('example/module/');
+const entry = Object.assign({
+  'index': './index.js'
+}, component, moduleEntry);
+entry['example/index'] = './example/index.js';
+
 const plugins = [
   new CleanWebpackPlugin(['dist'], {
     verbose: true
@@ -47,37 +85,8 @@ const plugins = [
     banner: '// { "framework": "Vue" }\n',
     raw: true
   }),
-  new CopyWebpackPlugin([
-    { from: 'example/component/*/index.html' }
-  ]),
-  new CopyWebpackPlugin([
-    { from: 'example/module/*/index.html' }
-  ]),
-  new CopyWebpackPlugin([
-    { from: 'example/index.html', to: 'example' }
-  ])
+  new CopyWebpackPlugin(getCopyConfig(), { copyUnmodified: true })
 ];
-
-console.log('Building..., Please wait a moment.');
-
-const getEntry = dir => {
-  const foundScripts = glob.sync(`${dir}/*/index.js`, {});
-  // 生成 entry 映射表
-  let ret = {};
-  foundScripts.forEach(function (scriptPath) {
-    if (!/\.entry\.js$/.test(scriptPath)) {
-      ret[scriptPath.replace(/^(.*)\.js$/, '$1')] = './' + scriptPath;
-    }
-  });
-  return ret;
-};
-
-const component = getEntry('example/component');
-const moduleEntry = getEntry('example/module/');
-const entry = Object.assign({
-  'index': './index.js'
-}, component, moduleEntry);
-entry['example/index'] = './example/index.js';
 
 const getBaseConfig = () => ({
   devtool: '#source-map',
