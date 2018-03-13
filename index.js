@@ -33,8 +33,13 @@ import FmRcyCheck from './packages/fm-rcy-check';
 import FmSimpleList from './packages/fm-simple-list';
 import FmTabPage from './packages/fm-tab-page';
 import FmPanItem from './packages/fm-pan-item';
+import FmTabbar from './packages/fm-tabbar';
+import FmTabbarItem from './packages/fm-tabbar-item';
+import FmBtnbar from './packages/fm-btnbar';
+import FmBtnbarItem from './packages/fm-btnbar-item';
 
 export {
+  Utils,
   FmSwitch,
   FmTag,
   FmTagWall,
@@ -70,5 +75,8 @@ export {
   FmSimpleList,
   FmTabPage,
   FmPanItem,
-  Utils
+  FmTabbar,
+  FmTabbarItem,
+  FmBtnbar,
+  FmBtnbarItem
 };

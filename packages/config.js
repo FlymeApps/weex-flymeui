@@ -9,6 +9,7 @@ import FmSimpleList from './fm-simple-list/export';
 import FmTabPage from './fm-tab-page/export';
 import FmItem from './fm-item/export';
 import FmTabbar from './fm-tabbar/export';
+import FmBtnbar from './fm-btnbar/export';
 
 export default {
   FmSwitch,
@@ -21,5 +22,6 @@ export default {
   FmSimpleList,
   FmTabPage,
   FmItem,
-  FmTabbar
+  FmTabbar,
+  FmBtnbar
 };

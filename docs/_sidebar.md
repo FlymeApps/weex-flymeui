@@ -6,6 +6,7 @@
   - [fm-titlebar 导航栏](packages/fm-titlebar/)
   - [fm-searchbar 搜索栏](packages/fm-searchbar/)
   - [fm-tabbar 底部操作栏](packages/fm-tabbar/)
+  - [fm-btnbar 底部腰圆按钮](packages/fm-btnbar/)
   - [fm-text 文本](packages/fm-text/)
   - [fm-icon 图标](packages/fm-icon/)
   - [fm-image 自缩放图片](packages/fm-image/)
