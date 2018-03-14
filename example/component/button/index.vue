@@ -2,26 +2,45 @@
   <div class="mzui-demo">
     <scroller class="scroller">
       <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59efee69a5a0a6738061aeff"></title>
-      <category title="默认按钮"></category>
         <div class="container row">
-          <fm-button class="btn" text="安装" @click="click" />
-          <fm-button class="btn" text="不可用" @click="click" disabled />
+          <fm-text>小按钮</fm-text>
+          <fm-button size="small">按钮</fm-button>
         </div>
-      <category title="不同尺寸"></category>
         <div class="container row">
-          <fm-button class="btn" text="小" @click="click" />
-          <fm-button class="btn" text="大按钮" @click="click" />
-          <fm-button class="btn" text="最大的按钮" @click="click" />
+          <fm-text>自适应按钮</fm-text>
+          <fm-button size="small">自适应宽度的按钮</fm-button>
         </div>
-      <category title="空心按钮"></category>
-        <div class="container">
-          <fm-button text="安装" @click="click" bgColor="transparent" color="#198ded" />
-        </div>
-      <category title="自定义属性"></category>
         <div class="container row">
-          <fm-button class="btn" text="安装" @click="click" bgColor="transparent" color="#dc2a2a" />
-          <fm-button class="btn" text="立即订阅" @click="click" color="#ffffff" bgColor="#3bc06b" />
-          <fm-button class="btn" text="立即订阅" @click="click" color="#ffffff" bgColor="#ffaf00" />
+          <fm-text>中等大小按钮</fm-text>
+          <fm-button size="middle" theme="firebrick">提交订单</fm-button>
+        </div>
+        <div class="container row">
+          <fm-text>大按钮</fm-text>
+          <fm-button size="large" theme="tomato">查看详情</fm-button>
+        </div>
+        <div class="container row">
+          <fm-text>超大按钮</fm-text>
+          <fm-button size="huge" theme="limegreen">开始</fm-button>
+        </div>
+        <div class="container row">
+          <fm-text>自定义大小</fm-text>
+          <fm-button width="300" height="150" theme="coral">自定义</fm-button>
+        </div>
+        <div class="container row">
+          <fm-text>空心按钮</fm-text>
+          <fm-button size="huge" type="hollow">按钮</fm-button>
+        </div>
+        <div class="container row">
+          <fm-text>圆形按钮</fm-text>
+          <fm-button type="circle" icon="bianji"></fm-button>
+        </div>
+        <div class="container row">
+          <fm-text>active 动画</fm-text>
+          <fm-button size="huge" theme="seagreen" animated>开始</fm-button>
+        </div>
+        <div class="container row" :style="{ paddingBottom: 60 }">
+          <fm-text>禁用状态</fm-text>
+          <fm-button size="huge" disabled>按钮</fm-button>
         </div>
     </scroller>
   </div>
@@ -36,7 +55,7 @@
     bottom: 0;
     background-color: #ffffff;
   }
-  
+
   .container {
     padding-top: 60px;
     padding-left: 60px;
@@ -45,12 +64,10 @@
 
   .row {
     flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
-  .btn {
-    margin-right: 60px;
-  }
-  
   .scroller {
     flex: 1;
   }
@@ -65,11 +82,6 @@ import { setTitle } from '../../_mods/set-nav';
 const modal = weex.requireModule('modal');
 
 export default {
-    components: { Title, Category, FmButton, FmText },
-    methods: {
-      click() {
-        
-      }
-    }
-}
+  components: { Title, Category, FmButton, FmText }
+};
 </script>

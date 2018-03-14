@@ -1,13 +1,16 @@
 <!-- Created by Yanjiie on 2018/03/13. -->
 <template>
-  <div class="fm-btnbar" :style="{ backgroundColor: backgroundColor }">
-    <fm-btnbar-item class="tabbar-item"
-                    v-if="!$slots.default"
-                    v-for="(item, index) in items"
-                    :key="index"
-                    v-bind="Object.assign({}, item)"></fm-btnbar-item>
+  <fm-footer :padding-size="paddingSize" :backgroundColor="backgroundColor">
+    <fm-button class="tabbar-item"
+               @buttonClicked="btnClicked(index)"
+               v-if="!$slots.default"
+               v-for="(item, index) in items"
+               v-bind="Object.assign({}, item)"
+               :animated="true"
+               :key="index"
+               :size="buttonSize">{{ item.title }}</fm-button>
     <slot />
-  </div>
+  </fm-footer>
 </template>
 
 <style scoped>
@@ -24,10 +27,11 @@
 </style>
 
 <script>
-import FmBtnbarItem from '../fm-btnbar-item';
+import FmFooter from '../fm-footer';
+import FmButton from '../fm-button';
 export default {
   name: 'FmBtnbar',
-  components: { FmBtnbarItem },
+  components: { FmButton, FmFooter },
   props: {
     items: {
       type: Array,
@@ -39,16 +43,27 @@ export default {
     }
   },
   data: () => ({
-    renderItems: []
+    paddingSize: '',
+    buttonSize: ''
   }),
   watch: {
-    renderItems (val) {
-      val.forEach((item, index) => {
-        item.width = val.length > 1 ? 396 : 720;
-      });
+    items () {
+      this.checkPadding();
     }
   },
+  created () {
+    this.checkPadding();
+  },
   methods: {
+    checkPadding () {
+      if (this.items.length >= 2 || (this.$slots.default && this.$slots.default.length >= 2)) {
+        this.paddingSize = 'large';
+        this.buttonSize = 'large';
+      } else {
+        this.paddingSize = '';
+        this.buttonSize = 'huge';
+      }
+    },
     btnClicked (index) {
       this.$emit('fmBtnbarBtnClicked', { index });
     }

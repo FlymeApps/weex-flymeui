@@ -2,21 +2,38 @@
   <div class="mzui-demo">
     <scroller class="scroller">
       <title link=""></title>
-      <category title="基本使用" class="title"></category>
+
+      <div class="btn-wrap">
+        <fm-button size="huge" @buttonClicked="onChange('demo1')">基本使用</fm-button>
+        <fm-button size="huge" @buttonClicked="onChange('demo2')" theme="limegreen">active 状态</fm-button>
+        <fm-button size="huge" @buttonClicked="onChange('demo3')" theme="seagreen">徽章与新消息提醒</fm-button>
+        <fm-button size="huge" @buttonClicked="onChange('demo4')" theme="crimson">自定义样式</fm-button>
+        <fm-button size="huge" @buttonClicked="onChange('demo5')" theme="firebrick">高级使用"</fm-button>
+      </div>
+
+      <template v-if="type === 'demo1'">
         <fm-tabbar :items="items1"></fm-tabbar>
-      <category title="active 状态" class="title"></category>
+      </template>
+
+      <template v-if="type === 'demo2'">
         <fm-tabbar :items="items2"
                    :active-index="activeIndex"
                    @fmTabbarSelected="fmTabbarSelected"></fm-tabbar>
-      <category title="徽章与新消息提醒" class="title"></category>
+      </template>
+
+      <template v-if="type === 'demo3'">
         <fm-tabbar :items="items4"></fm-tabbar>
-      <category title="自定义样式" class="title"></category>
+      </template>
+
+      <template v-if="type === 'demo4'">
         <fm-tabbar :items="items2"
                    :active-index="activeIndex"
                    @fmTabbarSelected="fmTabbarSelected"
                    background-color="#2F2E34"
                    :custom-styles="customStyles"></fm-tabbar>
-      <category title="高级使用" class="title"></category>
+      </template>
+
+      <template v-if="type === 'demo5'">
         <fm-tabbar :active-index="activeIndex"
                    @fmTabbarSelected="fmTabbarSelected">
           <fm-tabbar-item class="item" icon="zhuye">
@@ -27,6 +44,8 @@
           <fm-tabbar-item class="item" icon="shezhi1">设置</fm-tabbar-item>
           <fm-tabbar-item class="item" icon="yonghu">用户</fm-tabbar-item>
         </fm-tabbar>
+      </template>
+
     </scroller>
   </div>
 </template>
@@ -39,6 +58,13 @@
     left: 0;
     bottom: 0;
     background-color: #ffffff;
+  }
+
+  .btn-wrap {
+    margin-top: 30px;
+    height: 800px;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .scroller {
@@ -65,14 +91,14 @@
 </style>
 
 <script>
-import { FmTabbar, FmTabbarItem } from '../../../index';
+import { FmTabbar, FmTabbarItem, FmButton } from '../../../index';
 import Title from '../../_mods/title.vue';
-import Category from '../../_mods/category.vue';
 
 export default {
-  components: { FmTabbar, FmTabbarItem, Title, Category },
+  components: { FmTabbar, FmTabbarItem, FmButton, Title },
   data () {
     return {
+      type: 'demo1',
       items1: [{
         title: '信息',
         icon: 'xinxi1'
@@ -127,6 +153,9 @@ export default {
   methods: {
     fmTabbarSelected ({ index }) {
       this.activeIndex = index;
+    },
+    onChange (type) {
+      this.type = type;
     }
   }
 };

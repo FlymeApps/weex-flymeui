@@ -1,13 +1,13 @@
 <!-- Created by Yanjiie on 2018/03/12. -->
 <template>
-  <div class="fm-tabbar" :style="{ backgroundColor: backgroundColor }">
+  <fm-footer class="fm-tabbar" :background-color="backgroundColor">
     <fm-tabbar-item class="tabbar-item"
                     v-if="!$slots.default"
                     v-for="(item, index) in items"
                     :key="index"
                     v-bind="Object.assign({}, customStyles, item)"></fm-tabbar-item>
     <slot />
-  </div>
+  </fm-footer>
 </template>
 
 <style scoped>
@@ -28,10 +28,11 @@
 </style>
 
 <script>
+import FmFooter from '../fm-footer';
 import FmTabbarItem from '../fm-tabbar-item';
 export default {
   name: 'FmTabbar',
-  components: { FmTabbarItem },
+  components: { FmFooter, FmTabbarItem },
   props: {
     activeIndex: {
       type: Number,

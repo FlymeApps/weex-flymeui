@@ -3,9 +3,9 @@
         <scroller class="scroller">
             <title link="http://apps.flyme.cn/docs/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=5a33908567e2277e77dcf93d"></title>
             <category title="动画蒙版"></category>
-            <fm-button class="btn" text="有动画" @click="openOverlay" />
+            <fm-button class="btn" @buttonClicked="openOverlay">有动画</fm-button>
             <category title="无动画蒙版"></category>
-            <fm-button class="btn" text="无动画" @click="openNoAniOverlay" />
+            <fm-button class="btn" @buttonClicked="openNoAniOverlay">无动画</fm-button>
             <fm-overlay :show="show"
                         duration="300"
                         :hasAnimation="hasAnimation"
@@ -44,30 +44,30 @@ import { setTitle } from '../../_mods/set-nav';
 const modal = weex.requireModule('modal');
 
 export default {
-    components: { Title, Category, FmButton, FmOverlay },
+  components: { Title, Category, FmButton, FmOverlay },
 
-    data: () => ({
-      show: false,
-      hasAnimation: true,
-      timingFunction: ['ease-in', 'ease-out']
-    }),
+  data: () => ({
+    show: false,
+    hasAnimation: true,
+    timingFunction: ['ease-in', 'ease-out']
+  }),
 
-    methods: {
-      openOverlay () {
-        this.hasAnimation = true;
-        this.show = true;
-      },
-      openNoAniOverlay () {
-        this.hasAnimation = false;
-        this.show = true;
-      },
-      fmOverlayBodyClicked (e) {
-        modal.toast({
-          'message': '蒙版关闭回调',
-          'duration': 1
-        });
-        this.show = false;
-      }
+  methods: {
+    openOverlay () {
+      this.hasAnimation = true;
+      this.show = true;
+    },
+    openNoAniOverlay () {
+      this.hasAnimation = false;
+      this.show = true;
+    },
+    fmOverlayBodyClicked (e) {
+      modal.toast({
+        'message': '蒙版关闭回调',
+        'duration': 1
+      });
+      this.show = false;
     }
-}
+  }
+};
 </script>

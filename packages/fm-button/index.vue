@@ -1,120 +1,191 @@
+<!-- Created by Yanjiie on one day. -->
+<!-- Update by Yanjiie on 2018/03/14. -->
 <template>
-  <div class="fm-btn-wrap" :style="btnStyle" @click="btnClick">
-    <text ref="text" class="fm-btn" :class="btnClz" :style="textStyle">{{text}}</text>
+  <div ref="fm-button"
+       class="fm-button"
+       :class="buttonClass"
+       @click="btnClick"
+       @touchstart="_startHandle"
+       @touchend="_endHandle"
+       :style="computedStyle">
+    <div v-if="!disabled" class="overlay" @click="btnClick"></div>
+    <fm-icon v-if="type === 'circle'"
+             :color="(type !== 'hollow') ? titleColor : color"
+             :name="icon"
+             icon-style="72"></fm-icon>
+    <slot v-else name="title">
+      <text :class="['button-text-' + size]"
+            :style="{color: (type !== 'hollow') ? titleColor : computedColor}"
+            class="button-text" ><slot></slot></text>
+    </slot>
   </div>
 </template>
 
 <style scoped>
-  .fm-btn-wrap {
-    height: 72;
-    align-items: center;
+  .fm-button {
     flex-direction: row;
-    border-radius: 72;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transform: scale(1);
+    transition-property: transform,backgroundColor;
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
   }
-  .fm-btn {
-    padding-left: 36;
-    padding-right: 36;
-    line-height: 72;
-    font-size: 36;
-    font-weight: 700;
-    text-align: center;
-    min-width: 144;
-    max-width: 300;
-    font-family: sans-serif-medium;
-    font-weight: 500;
-  }
-  .fm-btn-max-padding {
-    padding-left: 24;
-    padding-right: 24;
-  }
-  .fm-btn-freeSize {
-    max-width: 1080;
-  }
-  .fm-btn-show {
 
+  .fm-button-hollow {
+    border-width: 4px;
   }
-  .fm-btn-hollow {
-    border-width: 4;
-    line-height: 64;
-    border-style: solid;
+
+  .button-text {
+    flex: 1;
+    text-align: center;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-family: sans-serif-medium;
+  }
+
+  .fm-button-small {
+    height: 72px;
+    border-radius: 36px;
+  }
+
+  .fm-button-middle {
+    width: 312px;
+    height: 114px;
+    border-radius: 57px;
+  }
+
+  .fm-button-large {
+    width: 396px;
+    height: 114px;
+    border-radius: 57px;
+  }
+
+  .fm-button-circle {
+    width: 168px;
+    height: 168px;
+    border-radius: 84px;
+  }
+
+  .fm-button-huge {
+    width: 720px;
+    height: 114px;
+    border-radius: 57px;
+  }
+
+  .button-text-small {
+    font-size: 36px;
+  }
+
+  .button-text-middle,
+  .button-text-large,
+  .button-text-huge {
+    font-size: 48px;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 30;
+  }
+
+  .overlay:active {
+    background-color: rgba(0, 0, 0, 0.1);
   }
 </style>
 
 <script>
-const dis_color = '#cccccc';
-const transparent = 'transparent';
+import FmIcon from '../fm-icon';
+import THEME from './theme';
 const dom = weex.requireModule('dom');
 
 export default {
   name: 'FmButton',
-  data () {
-    return {
-      max: false
-    };
-  },
+  components: { FmIcon },
   props: {
-    text: String,
-    bgColor: {
+    size: {
       type: String,
-      default: '#198ded'
+      default: 'small'
+    },
+    type: String,
+    theme: {
+      type: String,
+      default: 'blue'
     },
     color: {
       type: String,
-      default: '#ffffff'
+      default: ''
     },
-    disabled: Boolean,
-    freeSize: {
-      type: Boolean,
-      default: true
-    }
+    titleColor: {
+      type: String,
+      default: '#FFFFFF'
+    },
+    disabledColor: {
+      type: String,
+      default: '#B2B2B2'
+    },
+    icon: {
+      type: String,
+      default: 'wancheng'
+    },
+    width: Number,
+    height: Number,
+    animated: Boolean,
+    disabled: Boolean
   },
+  data: () => ({
+    active: false,
+    padding: 36
+  }),
   computed: {
-    btnClz () {
+    buttonClass () {
       const clz = [];
-      if (this.max) {
-        clz.push('fm-btn-max-padding');
-      }
-      if (this.bgColor === transparent) {
-        clz.push('fm-btn-hollow');
-      }
-      if (this.freeSize) {
-        clz.push('fm-btn-freeSize');
-      }
+      this.size && clz.push(`fm-button-${this.size}`);
+      this.type && clz.push(`fm-button-${this.type}`);
       return clz;
     },
-    btnStyle () {
-      const sty = {};
-      if (this.bgColor !== transparent) {
-        sty.backgroundColor = this.bgColor;
-      }
-      if (this.disabled) {
-        sty.backgroundColor = dis_color;
-      }
-      return sty;
+    computedColor () {
+      return this.color || THEME[this.theme].normal;
     },
-    textStyle () {
-      const sty = {};
-      if (this.color) {
-        sty.color = this.color;
-        if (this.bgColor === transparent) {
-          sty.borderColor = this.color;
-        }
+    computedStyle () {
+      const { computedColor, active, disabled, disabledColor, padding, animated, type, width, height } = this;
+      const wrapColor = disabled ? disabledColor : computedColor;
+      const transform = !animated || disabled ? 'scale(1)' : `scale(${active ? 0.95 : 1})`;
+      const style = {
+        borderColor: (type === 'hollow') ? wrapColor : '',
+        backgroundColor: (type !== 'hollow') ? wrapColor : '',
+        transform,
+        paddingLeft: padding,
+        paddingRight: padding
+      };
+      if (type !== 'circle') {
+        width && (style.width = `${width}px`);
+        height && (style.height = `${height}px`) && (style.borderRadius = `${Math.ceil(height * 1000 / 2000)}px`);
       }
-      return sty;
+      return style;
     }
   },
   methods: {
-    btnClick (evt) {
-      if (!this.disabled) {
-        this.$emit('buttonClicked', evt);
-      }
+    btnClick (e) {
+      console.log('被点击了');
+      !this.disabled && this.$emit('buttonClicked', e);
+    },
+    _startHandle (e) {
+      this.active = true;
+    },
+    _endHandle (e) {
+      this.active = false;
     }
   },
   mounted () {
     setTimeout(() => {
-      dom.getComponentRect(this.$refs.text, option => {
+      dom.getComponentRect(this.$refs['fm-button'], option => {
         if (option.size.width >= 240) {
-          this.max = true;
+          this.padding = 24;
         }
       });
     }, 50);

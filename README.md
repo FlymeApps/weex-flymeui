@@ -23,7 +23,7 @@ npm i weex-flymeui -S
 ```vue
 <template>
   <div>
-    <fm-button text="安装" @click="buttonClicked" bgColor="transparent" color="#198ded" />
+    <fm-button @buttonClick="buttonClicked" theme="blue">安装</fm-button>
   </div>
 </template>
 

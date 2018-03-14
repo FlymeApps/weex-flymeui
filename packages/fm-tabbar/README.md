@@ -2,6 +2,18 @@
 
 > Flyme 底部操作栏组件，支持自定义样式。
 
+!> 底部栏将会定位在父元素的底部
+
+<img src="http://baas.dfs.flyme.cn/group5/M07/86/8B/CgOUcVqoyLGAXu4tAAAuY-FQHbg401.png" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+
+<img src="http://baas.dfs.flyme.cn/group6/M03/78/35/CgOUoVqoyLmAEddxAAA1_SjUSyQ129.png" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+
+<img src="http://baas.dfs.flyme.cn/group1/M0A/30/D2/CgOUeFqoykiAEib1AABFd-qBU7k523.png" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+
+<img src="http://baas.dfs.flyme.cn/group2/M06/F8/92/CgOUdFqoyOqAbAxsAABJuOwHL6o133.png" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+
+<img src="http://baas.dfs.flyme.cn/group7/M02/B3/DC/CgOUolqoyPSAZtpwAABY6Ym_xsY280.png" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+
 ## 使用方法
 
 ```vue
@@ -60,12 +72,12 @@ export default {
 |-------------|------------|--------|-----|-----|
 | active-index | `Number` |`N`| `-1` | 当前选中的按钮索引值，不设置时不启用选中模式 |
 | backgroundColor | `String` |`N`| `#FFFFFF` | tabbar 的背景颜色 |
-| custom-styles | `Object` |`N`| `{}` | 自定义样式 |
 | items | `Array` |`Y`| `-` | 按钮列表，可配置参数如下 |
 | items[{`title`}] | `String` |`N`| `''` | 按钮标题 |
 | items[{`icon`}] | `String` |`Y`| `''` | 按钮 icon 名称，请参照 [fm-icon](/packages/fm-icon/) |
 | items[{`dot`}] | `Boolean` |`N`| `false` | 是否显示小红点 |
 | items[{`badge`}] | `String` `Number` |`N`| `''` | 在图标右上角显示徽章信息 |
+| custom-styles | `Object` |`N`| `{}` | 自定义样式 |
 | customStyles{`titleColor`} | `String` |`N`| `rgba(0, 0, 0, 0.75)` | 未选中的文字颜色 |
 | customStyles{`iconColor`} | `String` |`N`| `rgba(0, 0, 0, 0.6)` | 未选中的 icon 颜色 |
 | customStyles{`activeColor`} | `String` |`N`| `#198DED` | active 状态下的颜色 |
