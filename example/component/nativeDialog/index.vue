@@ -4,7 +4,7 @@
       <title link="http://apps.flyme.cn/docs/book.html?bookId=59df3445a5a0a611eee9f119&doc=59e41a2967e2271c7fc46b4e"></title>
       <category title="展示两个按钮弹框"></category>
         <div class="container row">
-          <fm-button class="btn" @buttonClicked="click('two_btn')"><点击/fm-button>
+          <fm-button class="btn" @buttonClicked="click('two_btn')">点击</fm-button>
         </div>
       <category title="展示列表弹框"></category>
         <div class="container row">

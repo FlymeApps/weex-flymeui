@@ -72,7 +72,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -234,7 +234,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(21)
+var listToStyles = __webpack_require__(22)
 
 /*
 type StyleObject = {
@@ -446,7 +446,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(49);
+var _index = __webpack_require__(50);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -469,7 +469,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.use = exports.t = undefined;
 
-var _zhCN = __webpack_require__(33);
+var _zhCN = __webpack_require__(34);
 
 var _zhCN2 = _interopRequireDefault(_zhCN);
 
@@ -535,7 +535,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(44);
+var _index = __webpack_require__(45);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -4818,7 +4818,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(29);
+var _index = __webpack_require__(30);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -4840,7 +4840,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(102);
+var _index = __webpack_require__(103);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -4862,7 +4862,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(105);
+var _index = __webpack_require__(106);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -4884,7 +4884,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(114);
+var _index = __webpack_require__(115);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -4905,13 +4905,35 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.FmBtnbarItem = exports.FmBtnbar = exports.FmTabbarItem = exports.FmTabbar = exports.FmPanItem = exports.FmTabPage = exports.FmSimpleList = exports.FmRcyCheck = exports.FmMultiCheckCell = exports.FmMultiCheckGroup = exports.FmTitlebar = exports.FmSearchbar = exports.FmActionView = exports.FmCheckListGroup = exports.FmCheckbox = exports.showSnackBar = exports.FmSnackBar = exports.FmRater = exports.FmItem = exports.FmActionSheet = exports.FmPopup = exports.alert = exports.confirm = exports.FmSimpleBtn = exports.FmDialog = exports.FmOverlay = exports.FmImage = exports.FmFoldableText = exports.FmSpecialRichText = exports.FmRichText = exports.FmTips = exports.FmInput = exports.FmButton = exports.FmSlider = exports.FmIcon = exports.FmText = exports.FmTagWall = exports.FmTag = exports.FmSwitch = exports.Utils = undefined;
 
-var _utils = __webpack_require__(13);
+var _index = __webpack_require__(225);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.FmFooter = exports.FmBtnbar = exports.FmTabbarItem = exports.FmTabbar = exports.FmPanItem = exports.FmTabPage = exports.FmSimpleList = exports.FmRcyCheck = exports.FmMultiCheckCell = exports.FmMultiCheckGroup = exports.FmTitlebar = exports.FmSearchbar = exports.FmActionView = exports.FmCheckListGroup = exports.FmCheckbox = exports.showSnackBar = exports.FmSnackBar = exports.FmRater = exports.FmItem = exports.FmActionSheet = exports.FmPopup = exports.alert = exports.confirm = exports.FmSimpleBtn = exports.FmDialog = exports.FmOverlay = exports.FmImage = exports.FmFoldableText = exports.FmSpecialRichText = exports.FmRichText = exports.FmTips = exports.FmInput = exports.FmButton = exports.FmSlider = exports.FmIcon = exports.FmText = exports.FmTagWall = exports.FmTag = exports.FmSwitch = exports.Utils = undefined;
+
+var _utils = __webpack_require__(14);
 
 var _utils2 = _interopRequireDefault(_utils);
 
-var _fmSwitch = __webpack_require__(23);
+var _fmSwitch = __webpack_require__(24);
 
 var _fmSwitch2 = _interopRequireDefault(_fmSwitch);
 
@@ -4919,7 +4941,7 @@ var _fmTag = __webpack_require__(8);
 
 var _fmTag2 = _interopRequireDefault(_fmTag);
 
-var _fmTagWall = __webpack_require__(35);
+var _fmTagWall = __webpack_require__(36);
 
 var _fmTagWall2 = _interopRequireDefault(_fmTagWall);
 
@@ -4931,31 +4953,31 @@ var _fmIcon = __webpack_require__(3);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
-var _fmSlider = __webpack_require__(57);
+var _fmSlider = __webpack_require__(58);
 
 var _fmSlider2 = _interopRequireDefault(_fmSlider);
 
-var _fmButton = __webpack_require__(63);
+var _fmButton = __webpack_require__(15);
 
 var _fmButton2 = _interopRequireDefault(_fmButton);
 
-var _fmInput = __webpack_require__(69);
+var _fmInput = __webpack_require__(70);
 
 var _fmInput2 = _interopRequireDefault(_fmInput);
 
-var _fmTips = __webpack_require__(75);
+var _fmTips = __webpack_require__(76);
 
 var _fmTips2 = _interopRequireDefault(_fmTips);
 
-var _fmRichText = __webpack_require__(81);
+var _fmRichText = __webpack_require__(82);
 
 var _fmRichText2 = _interopRequireDefault(_fmRichText);
 
-var _fmSpecialRichText = __webpack_require__(90);
+var _fmSpecialRichText = __webpack_require__(91);
 
 var _fmSpecialRichText2 = _interopRequireDefault(_fmSpecialRichText);
 
-var _fmFoldableText = __webpack_require__(96);
+var _fmFoldableText = __webpack_require__(97);
 
 var _fmFoldableText2 = _interopRequireDefault(_fmFoldableText);
 
@@ -4967,7 +4989,7 @@ var _fmOverlay = __webpack_require__(10);
 
 var _fmOverlay2 = _interopRequireDefault(_fmOverlay);
 
-var _fmDialog = __webpack_require__(15);
+var _fmDialog = __webpack_require__(17);
 
 var _fmDialog2 = _interopRequireDefault(_fmDialog);
 
@@ -4975,91 +4997,91 @@ var _fmSimpleBtn = __webpack_require__(11);
 
 var _fmSimpleBtn2 = _interopRequireDefault(_fmSimpleBtn);
 
-var _dialog = __webpack_require__(120);
+var _dialog = __webpack_require__(121);
 
-var _fmPopup = __webpack_require__(16);
+var _fmPopup = __webpack_require__(18);
 
 var _fmPopup2 = _interopRequireDefault(_fmPopup);
 
-var _fmActionSheet = __webpack_require__(126);
+var _fmActionSheet = __webpack_require__(127);
 
 var _fmActionSheet2 = _interopRequireDefault(_fmActionSheet);
 
-var _fmItem = __webpack_require__(132);
+var _fmItem = __webpack_require__(133);
 
 var _fmItem2 = _interopRequireDefault(_fmItem);
 
-var _fmRater = __webpack_require__(139);
+var _fmRater = __webpack_require__(140);
 
 var _fmRater2 = _interopRequireDefault(_fmRater);
 
-var _fmSnackBar = __webpack_require__(17);
+var _fmSnackBar = __webpack_require__(19);
 
 var _fmSnackBar2 = _interopRequireDefault(_fmSnackBar);
 
-var _snackbar = __webpack_require__(150);
+var _snackbar = __webpack_require__(151);
 
 var _snackbar2 = _interopRequireDefault(_snackbar);
 
-var _fmCheckbox = __webpack_require__(151);
+var _fmCheckbox = __webpack_require__(152);
 
 var _fmCheckbox2 = _interopRequireDefault(_fmCheckbox);
 
-var _fmCheckListGroup = __webpack_require__(157);
+var _fmCheckListGroup = __webpack_require__(158);
 
 var _fmCheckListGroup2 = _interopRequireDefault(_fmCheckListGroup);
 
-var _fmActionView = __webpack_require__(161);
+var _fmActionView = __webpack_require__(162);
 
 var _fmActionView2 = _interopRequireDefault(_fmActionView);
 
-var _fmSearchbar = __webpack_require__(22);
+var _fmSearchbar = __webpack_require__(23);
 
 var _fmSearchbar2 = _interopRequireDefault(_fmSearchbar);
 
-var _fmTitlebar = __webpack_require__(170);
+var _fmTitlebar = __webpack_require__(171);
 
 var _fmTitlebar2 = _interopRequireDefault(_fmTitlebar);
 
-var _fmMultiCheckGroup = __webpack_require__(176);
+var _fmMultiCheckGroup = __webpack_require__(177);
 
 var _fmMultiCheckGroup2 = _interopRequireDefault(_fmMultiCheckGroup);
 
-var _fmMultiCheckCell = __webpack_require__(18);
+var _fmMultiCheckCell = __webpack_require__(20);
 
 var _fmMultiCheckCell2 = _interopRequireDefault(_fmMultiCheckCell);
 
-var _fmRcyCheck = __webpack_require__(190);
+var _fmRcyCheck = __webpack_require__(191);
 
 var _fmRcyCheck2 = _interopRequireDefault(_fmRcyCheck);
 
-var _fmSimpleList = __webpack_require__(196);
+var _fmSimpleList = __webpack_require__(197);
 
 var _fmSimpleList2 = _interopRequireDefault(_fmSimpleList);
 
-var _fmTabPage = __webpack_require__(207);
+var _fmTabPage = __webpack_require__(208);
 
 var _fmTabPage2 = _interopRequireDefault(_fmTabPage);
 
-var _fmPanItem = __webpack_require__(215);
+var _fmPanItem = __webpack_require__(216);
 
 var _fmPanItem2 = _interopRequireDefault(_fmPanItem);
 
-var _fmTabbar = __webpack_require__(219);
+var _fmTabbar = __webpack_require__(220);
 
 var _fmTabbar2 = _interopRequireDefault(_fmTabbar);
 
-var _fmTabbarItem = __webpack_require__(19);
+var _fmTabbarItem = __webpack_require__(21);
 
 var _fmTabbarItem2 = _interopRequireDefault(_fmTabbarItem);
 
-var _fmBtnbar = __webpack_require__(230);
+var _fmBtnbar = __webpack_require__(236);
 
 var _fmBtnbar2 = _interopRequireDefault(_fmBtnbar);
 
-var _fmBtnbarItem = __webpack_require__(20);
+var _fmFooter = __webpack_require__(12);
 
-var _fmBtnbarItem2 = _interopRequireDefault(_fmBtnbarItem);
+var _fmFooter2 = _interopRequireDefault(_fmFooter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5102,10 +5124,10 @@ exports.FmPanItem = _fmPanItem2.default;
 exports.FmTabbar = _fmTabbar2.default;
 exports.FmTabbarItem = _fmTabbarItem2.default;
 exports.FmBtnbar = _fmBtnbar2.default;
-exports.FmBtnbarItem = _fmBtnbarItem2.default;
+exports.FmFooter = _fmFooter2.default;
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5410,7 +5432,29 @@ var Utils = {
 exports.default = Utils;
 
 /***/ }),
-/* 14 */
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(64);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5485,50 +5529,6 @@ var Utils = {
 exports.default = Utils;
 
 /***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(110);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(121);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5539,7 +5539,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(145);
+var _index = __webpack_require__(111);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -5561,7 +5561,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(179);
+var _index = __webpack_require__(122);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -5583,7 +5583,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(224);
+var _index = __webpack_require__(146);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -5605,7 +5605,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(235);
+var _index = __webpack_require__(180);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -5618,6 +5618,28 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ }),
 /* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(230);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 22 */
 /***/ (function(module, exports) {
 
 /**
@@ -5650,28 +5672,6 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(165);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
 /* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5682,7 +5682,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(24);
+var _index = __webpack_require__(166);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -5697,15 +5697,37 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(25);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
 
 /* styles */
-__webpack_require__(25)
+__webpack_require__(26)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(27),
-  /* template */
   __webpack_require__(28),
+  /* template */
+  __webpack_require__(29),
   /* scopeId */
   "data-v-058cc90e",
   /* cssModules */
@@ -5732,13 +5754,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(26);
+var content = __webpack_require__(27);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -5758,7 +5780,7 @@ if(false) {
 }
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -5772,7 +5794,7 @@ exports.push([module.i, "\n@charset \"UTF-8\";\n/** 默认主题色 blue **/\n.f
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5909,7 +5931,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -5936,18 +5958,18 @@ if (false) {
 }
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(30)
+__webpack_require__(31)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(32),
+  __webpack_require__(33),
   /* template */
-  __webpack_require__(34),
+  __webpack_require__(35),
   /* scopeId */
   "data-v-2072c04b",
   /* cssModules */
@@ -5974,13 +5996,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(31);
+var content = __webpack_require__(32);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -6000,7 +6022,7 @@ if(false) {
 }
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -6014,7 +6036,7 @@ exports.push([module.i, "\n.fm-tag[data-v-2072c04b] {\n    align-items: center;\
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6177,7 +6199,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6216,7 +6238,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -6244,7 +6266,7 @@ if (false) {
 }
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6254,7 +6276,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(36);
+var _index = __webpack_require__(37);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -6266,18 +6288,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(37)
+__webpack_require__(38)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(39),
+  __webpack_require__(40),
   /* template */
-  __webpack_require__(43),
+  __webpack_require__(44),
   /* scopeId */
   "data-v-1a0456a2",
   /* cssModules */
@@ -6304,13 +6326,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(38);
+var content = __webpack_require__(39);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -6330,7 +6352,7 @@ if(false) {
 }
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -6344,7 +6366,7 @@ exports.push([module.i, "\n.wall-wrap[data-v-1a0456a2] {\n  width: 1080px;\n}\n.
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6354,7 +6376,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _item = __webpack_require__(40);
+var _item = __webpack_require__(41);
 
 var _item2 = _interopRequireDefault(_item);
 
@@ -6465,14 +6487,14 @@ exports.default = {
 //
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(41),
-  /* template */
   __webpack_require__(42),
+  /* template */
+  __webpack_require__(43),
   /* scopeId */
   null,
   /* cssModules */
@@ -6499,7 +6521,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6625,7 +6647,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -6651,7 +6673,7 @@ if (false) {
 }
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -6707,18 +6729,18 @@ if (false) {
 }
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(45)
+__webpack_require__(46)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(47),
-  /* template */
   __webpack_require__(48),
+  /* template */
+  __webpack_require__(49),
   /* scopeId */
   "data-v-68596e9c",
   /* cssModules */
@@ -6745,13 +6767,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(46);
+var content = __webpack_require__(47);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -6771,7 +6793,7 @@ if(false) {
 }
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -6785,7 +6807,7 @@ exports.push([module.i, "\n.text[data-v-68596e9c] {\n\tfont-size: 42;\n\tline-he
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6873,7 +6895,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -6892,18 +6914,18 @@ if (false) {
 }
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(50)
+__webpack_require__(51)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(52),
+  __webpack_require__(53),
   /* template */
-  __webpack_require__(56),
+  __webpack_require__(57),
   /* scopeId */
   "data-v-77aa90fe",
   /* cssModules */
@@ -6930,13 +6952,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(51);
+var content = __webpack_require__(52);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -6956,7 +6978,7 @@ if(false) {
 }
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -6970,7 +6992,7 @@ exports.push([module.i, "\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[]
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6982,7 +7004,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _map = __webpack_require__(53);
+var _map = __webpack_require__(54);
 
 var _map2 = _interopRequireDefault(_map);
 
@@ -6998,7 +7020,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 
 // 引入he模块，使用它解决weex-template-compiler在编译阶段进行decode
-var he = __webpack_require__(54);
+var he = __webpack_require__(55);
 var dom = weex.requireModule('dom');
 exports.default = {
   name: 'FmIcon',
@@ -7055,7 +7077,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7154,7 +7176,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {var __WEBPACK_AMD_DEFINE_RESULT__;/*! https://mths.be/he v1.1.1 by @mathias | MIT license */
@@ -7499,10 +7521,10 @@ exports.default = {
 
 }(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(55)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(56)(module)))
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -7530,7 +7552,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -7548,7 +7570,7 @@ if (false) {
 }
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7558,7 +7580,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(58);
+var _index = __webpack_require__(59);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -7570,18 +7592,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(59)
+__webpack_require__(60)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(61),
-  /* template */
   __webpack_require__(62),
+  /* template */
+  __webpack_require__(63),
   /* scopeId */
   "data-v-18ede8e6",
   /* cssModules */
@@ -7608,13 +7630,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(60);
+var content = __webpack_require__(61);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -7634,7 +7656,7 @@ if(false) {
 }
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -7648,7 +7670,7 @@ exports.push([module.i, "\n.slider-wrap[data-v-18ede8e6] {\n  padding-right: 22.
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7850,7 +7872,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -7911,28 +7933,6 @@ if (false) {
 }
 
 /***/ }),
-/* 63 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(64);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
 /* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7944,7 +7944,7 @@ var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(67),
   /* template */
-  __webpack_require__(68),
+  __webpack_require__(69),
   /* scopeId */
   "data-v-45eab412",
   /* cssModules */
@@ -8005,7 +8005,7 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-btn-wrap[data-v-45eab412] {\n  height: 72;\n  align-items: center;\n  flex-direction: row;\n  border-radius: 72;\n}\n.fm-btn[data-v-45eab412] {\n  padding-left: 36;\n  padding-right: 36;\n  line-height: 72;\n  font-size: 36;\n  font-weight: 700;\n  text-align: center;\n  min-width: 144;\n  max-width: 300;\n  font-family: sans-serif-medium;\n  font-weight: 500;\n}\n.fm-btn-max-padding[data-v-45eab412] {\n  padding-left: 24;\n  padding-right: 24;\n}\n.fm-btn-freeSize[data-v-45eab412] {\n  max-width: 1080;\n}\n.fm-btn-show[data-v-45eab412] {\n}\n.fm-btn-hollow[data-v-45eab412] {\n  border-width: 4;\n  line-height: 64;\n  border-style: solid;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-button/index.vue?ea0e1e36"],"names":[],"mappings":";AAOA;EACA,WAAA;EACA,oBAAA;EACA,oBAAA;EACA,kBAAA;CACA;AACA;EACA,iBAAA;EACA,kBAAA;EACA,gBAAA;EACA,cAAA;EACA,iBAAA;EACA,mBAAA;EACA,eAAA;EACA,eAAA;EACA,+BAAA;EACA,iBAAA;CACA;AACA;EACA,iBAAA;EACA,kBAAA;CACA;AACA;EACA,gBAAA;CACA;AACA;CAEA;AACA;EACA,gBAAA;EACA,gBAAA;EACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"fm-btn-wrap\" :style=\"btnStyle\" @click=\"btnClick\">\n    <text ref=\"text\" class=\"fm-btn\" :class=\"btnClz\" :style=\"textStyle\">{{text}}</text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-btn-wrap {\n    height: 72;\n    align-items: center;\n    flex-direction: row;\n    border-radius: 72;\n  }\n  .fm-btn {\n    padding-left: 36;\n    padding-right: 36;\n    line-height: 72;\n    font-size: 36;\n    font-weight: 700;\n    text-align: center;\n    min-width: 144;\n    max-width: 300;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n  }\n  .fm-btn-max-padding {\n    padding-left: 24;\n    padding-right: 24;\n  }\n  .fm-btn-freeSize {\n    max-width: 1080;\n  }\n  .fm-btn-show {\n\n  }\n  .fm-btn-hollow {\n    border-width: 4;\n    line-height: 64;\n    border-style: solid;\n  }\n</style>\n\n<script>\nconst dis_color = '#cccccc';\nconst transparent = 'transparent';\nconst dom = weex.requireModule('dom');\n\nexport default {\n  name: 'FmButton',\n  data () {\n    return {\n      max: false\n    };\n  },\n  props: {\n    text: String,\n    bgColor: {\n      type: String,\n      default: '#198ded'\n    },\n    color: {\n      type: String,\n      default: '#ffffff'\n    },\n    disabled: Boolean,\n    freeSize: {\n      type: Boolean,\n      default: true\n    }\n  },\n  computed: {\n    btnClz () {\n      const clz = [];\n      if (this.max) {\n        clz.push('fm-btn-max-padding');\n      }\n      if (this.bgColor === transparent) {\n        clz.push('fm-btn-hollow');\n      }\n      if (this.freeSize) {\n        clz.push('fm-btn-freeSize');\n      }\n      return clz;\n    },\n    btnStyle () {\n      const sty = {};\n      if (this.bgColor !== transparent) {\n        sty.backgroundColor = this.bgColor;\n      }\n      if (this.disabled) {\n        sty.backgroundColor = dis_color;\n      }\n      return sty;\n    },\n    textStyle () {\n      const sty = {};\n      if (this.color) {\n        sty.color = this.color;\n        if (this.bgColor === transparent) {\n          sty.borderColor = this.color;\n        }\n      }\n      return sty;\n    }\n  },\n  methods: {\n    btnClick (evt) {\n      if (!this.disabled) {\n        this.$emit('buttonClicked', evt);\n      }\n    }\n  },\n  mounted () {\n    setTimeout(() => {\n      dom.getComponentRect(this.$refs.text, option => {\n        if (option.size.width >= 240) {\n          this.max = true;\n        }\n      });\n    }, 50);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-button[data-v-45eab412] {\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  overflow: hidden;\n  transform: scale(1);\n  transition-property: transform,backgroundColor;\n  transition-duration: 0.2s;\n  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n}\n.fm-button-hollow[data-v-45eab412] {\n  border-width: 4px;\n}\n.button-text[data-v-45eab412] {\n  flex: 1;\n  text-align: center;\n  color: #FFFFFF;\n  font-weight: 500;\n  font-family: sans-serif-medium;\n}\n.fm-button-small[data-v-45eab412] {\n  height: 72px;\n  border-radius: 36px;\n}\n.fm-button-middle[data-v-45eab412] {\n  width: 312px;\n  height: 114px;\n  border-radius: 57px;\n}\n.fm-button-large[data-v-45eab412] {\n  width: 396px;\n  height: 114px;\n  border-radius: 57px;\n}\n.fm-button-circle[data-v-45eab412] {\n  width: 168px;\n  height: 168px;\n  border-radius: 84px;\n}\n.fm-button-huge[data-v-45eab412] {\n  width: 720px;\n  height: 114px;\n  border-radius: 57px;\n}\n.button-text-small[data-v-45eab412] {\n  font-size: 36px;\n}\n.button-text-middle[data-v-45eab412],\n.button-text-large[data-v-45eab412],\n.button-text-huge[data-v-45eab412] {\n  font-size: 48px;\n}\n.overlay[data-v-45eab412] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  z-index: 30;\n}\n.overlay[data-v-45eab412]:active {\n  background-color: rgba(0, 0, 0, 0.1);\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-button/index.vue?8b38c350"],"names":[],"mappings":";AAwBA;EACA,oBAAA;EACA,oBAAA;EACA,wBAAA;EACA,iBAAA;EACA,oBAAA;EACA,+CAAA;EACA,0BAAA;EACA,gEAAA;CACA;AAEA;EACA,kBAAA;CACA;AAEA;EACA,QAAA;EACA,mBAAA;EACA,eAAA;EACA,iBAAA;EACA,+BAAA;CACA;AAEA;EACA,aAAA;EACA,oBAAA;CACA;AAEA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;CACA;AAEA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;CACA;AAEA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;CACA;AAEA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;CACA;AAEA;EACA,gBAAA;CACA;AAEA;;;EAGA,gBAAA;CACA;AAEA;EACA,mBAAA;EACA,OAAA;EACA,QAAA;EACA,SAAA;EACA,UAAA;EACA,YAAA;CACA;AAEA;EACA,qCAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on one day. -->\n<!-- Update by Yanjiie on 2018/03/14. -->\n<template>\n  <div ref=\"fm-button\"\n       class=\"fm-button\"\n       :class=\"buttonClass\"\n       @click=\"btnClick\"\n       @touchstart=\"_startHandle\"\n       @touchend=\"_endHandle\"\n       :style=\"computedStyle\">\n    <div v-if=\"!disabled\" class=\"overlay\" @click=\"btnClick\"></div>\n    <fm-icon v-if=\"type === 'circle'\"\n             :color=\"(type !== 'hollow') ? titleColor : color\"\n             :name=\"icon\"\n             icon-style=\"72\"></fm-icon>\n    <slot v-else name=\"title\">\n      <text :class=\"['button-text-' + size]\"\n            :style=\"{color: (type !== 'hollow') ? titleColor : computedColor}\"\n            class=\"button-text\" ><slot></slot></text>\n    </slot>\n  </div>\n</template>\n\n<style scoped>\n  .fm-button {\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    overflow: hidden;\n    transform: scale(1);\n    transition-property: transform,backgroundColor;\n    transition-duration: 0.2s;\n    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  .fm-button-hollow {\n    border-width: 4px;\n  }\n\n  .button-text {\n    flex: 1;\n    text-align: center;\n    color: #FFFFFF;\n    font-weight: 500;\n    font-family: sans-serif-medium;\n  }\n\n  .fm-button-small {\n    height: 72px;\n    border-radius: 36px;\n  }\n\n  .fm-button-middle {\n    width: 312px;\n    height: 114px;\n    border-radius: 57px;\n  }\n\n  .fm-button-large {\n    width: 396px;\n    height: 114px;\n    border-radius: 57px;\n  }\n\n  .fm-button-circle {\n    width: 168px;\n    height: 168px;\n    border-radius: 84px;\n  }\n\n  .fm-button-huge {\n    width: 720px;\n    height: 114px;\n    border-radius: 57px;\n  }\n\n  .button-text-small {\n    font-size: 36px;\n  }\n\n  .button-text-middle,\n  .button-text-large,\n  .button-text-huge {\n    font-size: 48px;\n  }\n\n  .overlay {\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    z-index: 30;\n  }\n\n  .overlay:active {\n    background-color: rgba(0, 0, 0, 0.1);\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nimport THEME from './theme';\nconst dom = weex.requireModule('dom');\n\nexport default {\n  name: 'FmButton',\n  components: { FmIcon },\n  props: {\n    size: {\n      type: String,\n      default: 'small'\n    },\n    type: String,\n    theme: {\n      type: String,\n      default: 'blue'\n    },\n    color: {\n      type: String,\n      default: ''\n    },\n    titleColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    disabledColor: {\n      type: String,\n      default: '#B2B2B2'\n    },\n    icon: {\n      type: String,\n      default: 'wancheng'\n    },\n    width: Number,\n    height: Number,\n    animated: Boolean,\n    disabled: Boolean\n  },\n  data: () => ({\n    active: false,\n    padding: 36\n  }),\n  computed: {\n    buttonClass () {\n      const clz = [];\n      this.size && clz.push(`fm-button-${this.size}`);\n      this.type && clz.push(`fm-button-${this.type}`);\n      return clz;\n    },\n    computedColor () {\n      return this.color || THEME[this.theme].normal;\n    },\n    computedStyle () {\n      const { computedColor, active, disabled, disabledColor, padding, animated, type, width, height } = this;\n      const wrapColor = disabled ? disabledColor : computedColor;\n      const transform = !animated || disabled ? 'scale(1)' : `scale(${active ? 0.95 : 1})`;\n      const style = {\n        borderColor: (type === 'hollow') ? wrapColor : '',\n        backgroundColor: (type !== 'hollow') ? wrapColor : '',\n        transform,\n        paddingLeft: padding,\n        paddingRight: padding\n      };\n      if (type !== 'circle') {\n        width && (style.width = `${width}px`);\n        height && (style.height = `${height}px`) && (style.borderRadius = `${Math.ceil(height * 1000 / 2000)}px`);\n      }\n      return style;\n    }\n  },\n  methods: {\n    btnClick (e) {\n      console.log('被点击了');\n      !this.disabled && this.$emit('buttonClicked', e);\n    },\n    _startHandle (e) {\n      this.active = true;\n    },\n    _endHandle (e) {\n      this.active = false;\n    }\n  },\n  mounted () {\n    setTimeout(() => {\n      dom.getComponentRect(this.$refs['fm-button'], option => {\n        if (option.size.width >= 240) {\n          this.padding = 24;\n        }\n      });\n    }, 50);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -8020,6 +8020,75 @@ exports.push([module.i, "\n.fm-btn-wrap[data-v-45eab412] {\n  height: 72;\n  ali
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _fmIcon = __webpack_require__(3);
+
+var _fmIcon2 = _interopRequireDefault(_fmIcon);
+
+var _theme = __webpack_require__(68);
+
+var _theme2 = _interopRequireDefault(_theme);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -8063,83 +8132,104 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 
-var dis_color = '#cccccc';
-var transparent = 'transparent';
 var dom = weex.requireModule('dom');
 
 exports.default = {
   name: 'FmButton',
-  data: function data() {
-    return {
-      max: false
-    };
-  },
-
+  components: { FmIcon: _fmIcon2.default },
   props: {
-    text: String,
-    bgColor: {
+    size: {
       type: String,
-      default: '#198ded'
+      default: 'small'
+    },
+    type: String,
+    theme: {
+      type: String,
+      default: 'blue'
     },
     color: {
       type: String,
-      default: '#ffffff'
+      default: ''
     },
-    disabled: Boolean,
-    freeSize: {
-      type: Boolean,
-      default: true
-    }
+    titleColor: {
+      type: String,
+      default: '#FFFFFF'
+    },
+    disabledColor: {
+      type: String,
+      default: '#B2B2B2'
+    },
+    icon: {
+      type: String,
+      default: 'wancheng'
+    },
+    width: Number,
+    height: Number,
+    animated: Boolean,
+    disabled: Boolean
+  },
+  data: function data() {
+    return {
+      active: false,
+      padding: 36
+    };
   },
   computed: {
-    btnClz: function btnClz() {
+    buttonClass: function buttonClass() {
       var clz = [];
-      if (this.max) {
-        clz.push('fm-btn-max-padding');
-      }
-      if (this.bgColor === transparent) {
-        clz.push('fm-btn-hollow');
-      }
-      if (this.freeSize) {
-        clz.push('fm-btn-freeSize');
-      }
+      this.size && clz.push('fm-button-' + this.size);
+      this.type && clz.push('fm-button-' + this.type);
       return clz;
     },
-    btnStyle: function btnStyle() {
-      var sty = {};
-      if (this.bgColor !== transparent) {
-        sty.backgroundColor = this.bgColor;
-      }
-      if (this.disabled) {
-        sty.backgroundColor = dis_color;
-      }
-      return sty;
+    computedColor: function computedColor() {
+      return this.color || _theme2.default[this.theme].normal;
     },
-    textStyle: function textStyle() {
-      var sty = {};
-      if (this.color) {
-        sty.color = this.color;
-        if (this.bgColor === transparent) {
-          sty.borderColor = this.color;
-        }
+    computedStyle: function computedStyle() {
+      var computedColor = this.computedColor,
+          active = this.active,
+          disabled = this.disabled,
+          disabledColor = this.disabledColor,
+          padding = this.padding,
+          animated = this.animated,
+          type = this.type,
+          width = this.width,
+          height = this.height;
+
+      var wrapColor = disabled ? disabledColor : computedColor;
+      var transform = !animated || disabled ? 'scale(1)' : 'scale(' + (active ? 0.95 : 1) + ')';
+      var style = {
+        borderColor: type === 'hollow' ? wrapColor : '',
+        backgroundColor: type !== 'hollow' ? wrapColor : '',
+        transform: transform,
+        paddingLeft: padding,
+        paddingRight: padding
+      };
+      if (type !== 'circle') {
+        width && (style.width = width + 'px');
+        height && (style.height = height + 'px') && (style.borderRadius = Math.ceil(height * 1000 / 2000) + 'px');
       }
-      return sty;
+      return style;
     }
   },
   methods: {
-    btnClick: function btnClick(evt) {
-      if (!this.disabled) {
-        this.$emit('buttonClicked', evt);
-      }
+    btnClick: function btnClick(e) {
+      console.log('被点击了');
+      !this.disabled && this.$emit('buttonClicked', e);
+    },
+    _startHandle: function _startHandle(e) {
+      this.active = true;
+    },
+    _endHandle: function _endHandle(e) {
+      this.active = false;
     }
   },
   mounted: function mounted() {
     var _this = this;
 
     setTimeout(function () {
-      dom.getComponentRect(_this.$refs.text, function (option) {
+      dom.getComponentRect(_this.$refs['fm-button'], function (option) {
         if (option.size.width >= 240) {
-          _this.max = true;
+          _this.padding = 24;
         }
       });
     }, 50);
@@ -8150,21 +8240,86 @@ exports.default = {
 /* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  blue: {
+    normal: '#198DED',
+    highlight: '#0A73C9'
+  },
+  limegreen: {
+    normal: '#3BC06B',
+    highlight: '#2AA155'
+  },
+  seagreen: {
+    normal: '#04C0CF',
+    highlight: '#009FAD'
+  },
+  gray: {
+    normal: '#7E97AC',
+    highlight: '#687E8F'
+  },
+  crimson: {
+    normal: '#D33A2A',
+    highlight: '#B83125'
+  },
+  firebrick: {
+    normal: '#F12528',
+    highlight: '#CF2124'
+  },
+  tomato: {
+    normal: '#FC5B23',
+    highlight: '#DB4914'
+  },
+  coral: {
+    normal: '#FFAF00',
+    highlight: '#C99014'
+  }
+};
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "fm-btn-wrap",
+    ref: "fm-button",
+    staticClass: "fm-button",
+    class: _vm.buttonClass,
     staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(_vm.btnStyle)),
+    style: (_vm.$processStyle(_vm.computedStyle)),
+    on: {
+      "click": _vm.btnClick,
+      "touchstart": _vm._startHandle,
+      "touchend": _vm._endHandle
+    }
+  }, [(!_vm.disabled) ? _c('div', {
+    staticClass: "overlay",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
     on: {
       "click": _vm.btnClick
     }
-  }, [_c('text', {
-    ref: "text",
-    staticClass: "fm-btn",
-    class: _vm.btnClz,
+  }) : _vm._e(), _vm._v(" "), (_vm.type === 'circle') ? _c('fm-icon', {
     staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(_vm.textStyle))
-  }, [_vm._v(_vm._s(_vm.text))])])
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "color": (_vm.type !== 'hollow') ? _vm.titleColor : _vm.color,
+      "name": _vm.icon,
+      "icon-style": "72"
+    }
+  }) : _vm._t("title", [_c('text', {
+    staticClass: "button-text",
+    class: ['button-text-' + _vm.size],
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      color: (_vm.type !== 'hollow') ? _vm.titleColor : _vm.computedColor
+    }))
+  }, [_vm._t("default")], 2)])], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -8175,7 +8330,7 @@ if (false) {
 }
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8185,7 +8340,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(70);
+var _index = __webpack_require__(71);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -8197,18 +8352,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(71)
+__webpack_require__(72)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(73),
-  /* template */
   __webpack_require__(74),
+  /* template */
+  __webpack_require__(75),
   /* scopeId */
   "data-v-10b8a20a",
   /* cssModules */
@@ -8235,13 +8390,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(72);
+var content = __webpack_require__(73);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -8261,7 +8416,7 @@ if(false) {
 }
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -8275,7 +8430,7 @@ exports.push([module.i, "\n@charset \"UTF-8\";\n/** 默认主题色 blue **/\n.f
 
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8472,7 +8627,7 @@ exports.default = {
 //
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -8561,7 +8716,7 @@ if (false) {
 }
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8571,7 +8726,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(76);
+var _index = __webpack_require__(77);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -8583,18 +8738,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(77)
+__webpack_require__(78)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(79),
-  /* template */
   __webpack_require__(80),
+  /* template */
+  __webpack_require__(81),
   /* scopeId */
   "data-v-9924f606",
   /* cssModules */
@@ -8621,13 +8776,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(78);
+var content = __webpack_require__(79);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -8647,7 +8802,7 @@ if(false) {
 }
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -8661,7 +8816,7 @@ exports.push([module.i, "\n.tip-wrap[data-v-9924f606] {\n  flex-direction: row;\
 
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8783,7 +8938,7 @@ exports.default = {
 //
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -8828,7 +8983,7 @@ if (false) {
 }
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8838,7 +8993,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(82);
+var _index = __webpack_require__(83);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -8850,18 +9005,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(83)
+__webpack_require__(84)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(85),
+  __webpack_require__(86),
   /* template */
-  __webpack_require__(89),
+  __webpack_require__(90),
   /* scopeId */
   "data-v-a8d59aa2",
   /* cssModules */
@@ -8888,13 +9043,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(84);
+var content = __webpack_require__(85);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -8914,7 +9069,7 @@ if(false) {
 }
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -8928,7 +9083,7 @@ exports.push([module.i, "\n.fm-rich-text[data-v-a8d59aa2] {\n  justify-content: 
 
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8938,7 +9093,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _utils = __webpack_require__(14);
+var _utils = __webpack_require__(16);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -8954,7 +9109,7 @@ var _fmTag = __webpack_require__(8);
 
 var _fmTag2 = _interopRequireDefault(_fmTag);
 
-var _fmRichTextLink = __webpack_require__(86);
+var _fmRichTextLink = __webpack_require__(87);
 
 var _fmRichTextLink2 = _interopRequireDefault(_fmRichTextLink);
 
@@ -9043,14 +9198,14 @@ exports.default = {
 //
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(87),
-  /* template */
   __webpack_require__(88),
+  /* template */
+  __webpack_require__(89),
   /* scopeId */
   null,
   /* cssModules */
@@ -9077,7 +9232,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9132,7 +9287,7 @@ exports.default = {
 //
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -9160,7 +9315,7 @@ if (false) {
 }
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -9228,7 +9383,7 @@ if (false) {
 }
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9238,7 +9393,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(91);
+var _index = __webpack_require__(92);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -9250,18 +9405,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(92)
+__webpack_require__(93)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(94),
-  /* template */
   __webpack_require__(95),
+  /* template */
+  __webpack_require__(96),
   /* scopeId */
   "data-v-584ad4ca",
   /* cssModules */
@@ -9288,13 +9443,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(93);
+var content = __webpack_require__(94);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -9314,7 +9469,7 @@ if(false) {
 }
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -9328,7 +9483,7 @@ exports.push([module.i, "\n.fm-special-rich-text[data-v-584ad4ca] {\n  position:
 
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9372,7 +9527,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 
-var _utils = __webpack_require__(14);
+var _utils = __webpack_require__(16);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -9466,7 +9621,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -9514,7 +9669,7 @@ if (false) {
 }
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9524,7 +9679,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(97);
+var _index = __webpack_require__(98);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -9536,18 +9691,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(98)
+__webpack_require__(99)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(100),
-  /* template */
   __webpack_require__(101),
+  /* template */
+  __webpack_require__(102),
   /* scopeId */
   "data-v-52ae49d0",
   /* cssModules */
@@ -9574,13 +9729,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(99);
+var content = __webpack_require__(100);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -9600,7 +9755,7 @@ if(false) {
 }
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -9614,7 +9769,7 @@ exports.push([module.i, "\n.container[data-v-52ae49d0] {\n  position: relative;\
 
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9831,7 +9986,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -9868,14 +10023,14 @@ if (false) {
 }
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(103),
-  /* template */
   __webpack_require__(104),
+  /* template */
+  __webpack_require__(105),
   /* scopeId */
   null,
   /* cssModules */
@@ -9902,7 +10057,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9972,7 +10127,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -9997,18 +10152,18 @@ if (false) {
 }
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(106)
+__webpack_require__(107)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(108),
-  /* template */
   __webpack_require__(109),
+  /* template */
+  __webpack_require__(110),
   /* scopeId */
   "data-v-10e45e81",
   /* cssModules */
@@ -10035,13 +10190,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(107);
+var content = __webpack_require__(108);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -10061,7 +10216,7 @@ if(false) {
 }
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -10075,7 +10230,7 @@ exports.push([module.i, "\n.fm-overlay[data-v-10e45e81] {\n  width: 1080;\n  pos
 
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10195,7 +10350,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10221,18 +10376,18 @@ if (false) {
 }
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(111)
+__webpack_require__(112)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(113),
+  __webpack_require__(114),
   /* template */
-  __webpack_require__(119),
+  __webpack_require__(120),
   /* scopeId */
   "data-v-2016588d",
   /* cssModules */
@@ -10259,13 +10414,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(112);
+var content = __webpack_require__(113);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -10285,7 +10440,7 @@ if(false) {
 }
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -10299,7 +10454,7 @@ exports.push([module.i, "\n.container[data-v-2016588d] {\n  position: fixed;\n  
 
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10602,18 +10757,18 @@ exports.default = {
 };
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(115)
+__webpack_require__(116)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(117),
-  /* template */
   __webpack_require__(118),
+  /* template */
+  __webpack_require__(119),
   /* scopeId */
   "data-v-5cb22ec6",
   /* cssModules */
@@ -10640,13 +10795,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(116);
+var content = __webpack_require__(117);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -10666,7 +10821,7 @@ if(false) {
 }
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -10680,7 +10835,7 @@ exports.push([module.i, "\n.dialog-btn[data-v-5cb22ec6] {\n    flex: 1;\n\t\tpad
 
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10767,7 +10922,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10795,7 +10950,7 @@ if (false) {
 }
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10866,7 +11021,7 @@ if (false) {
 }
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10877,7 +11032,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.alert = exports.confirm = undefined;
 
-var _fmDialog = __webpack_require__(15);
+var _fmDialog = __webpack_require__(17);
 
 var _fmDialog2 = _interopRequireDefault(_fmDialog);
 
@@ -10972,18 +11127,18 @@ exports.confirm = confirm;
 exports.alert = alert;
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(122)
+__webpack_require__(123)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(124),
-  /* template */
   __webpack_require__(125),
+  /* template */
+  __webpack_require__(126),
   /* scopeId */
   "data-v-0a22d546",
   /* cssModules */
@@ -11010,13 +11165,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(123);
+var content = __webpack_require__(124);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -11036,7 +11191,7 @@ if(false) {
 }
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -11050,7 +11205,7 @@ exports.push([module.i, "\n.fm-popup[data-v-0a22d546] {\n\t\tposition: fixed;\n\
 
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11282,7 +11437,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11325,7 +11480,7 @@ if (false) {
 }
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11335,7 +11490,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(127);
+var _index = __webpack_require__(128);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -11347,18 +11502,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(128)
+__webpack_require__(129)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(130),
-  /* template */
   __webpack_require__(131),
+  /* template */
+  __webpack_require__(132),
   /* scopeId */
   "data-v-81855a66",
   /* cssModules */
@@ -11385,13 +11540,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(129);
+var content = __webpack_require__(130);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -11411,7 +11566,7 @@ if(false) {
 }
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -11425,7 +11580,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"ve
 
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11435,7 +11590,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmPopup = __webpack_require__(16);
+var _fmPopup = __webpack_require__(18);
 
 var _fmPopup2 = _interopRequireDefault(_fmPopup);
 
@@ -11562,7 +11717,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11608,7 +11763,7 @@ if (false) {
 }
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11618,7 +11773,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(133);
+var _index = __webpack_require__(134);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -11630,18 +11785,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(134)
+__webpack_require__(135)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(136),
+  __webpack_require__(137),
   /* template */
-  __webpack_require__(138),
+  __webpack_require__(139),
   /* scopeId */
   "data-v-6c88d718",
   /* cssModules */
@@ -11668,13 +11823,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(135);
+var content = __webpack_require__(136);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -11694,7 +11849,7 @@ if(false) {
 }
 
 /***/ }),
-/* 135 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -11708,7 +11863,7 @@ exports.push([module.i, "\n.fm-item[data-v-6c88d718] {\n  padding: 0 48px;\n}\n.
 
 
 /***/ }),
-/* 136 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11722,7 +11877,7 @@ var _fmImage = __webpack_require__(9);
 
 var _fmImage2 = _interopRequireDefault(_fmImage);
 
-var _scene = __webpack_require__(137);
+var _scene = __webpack_require__(138);
 
 var _scene2 = _interopRequireDefault(_scene);
 
@@ -11904,7 +12059,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 137 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11956,7 +12111,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 138 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12030,7 +12185,7 @@ if (false) {
 }
 
 /***/ }),
-/* 139 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12040,7 +12195,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(140);
+var _index = __webpack_require__(141);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -12052,18 +12207,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 140 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(141)
+__webpack_require__(142)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(143),
-  /* template */
   __webpack_require__(144),
+  /* template */
+  __webpack_require__(145),
   /* scopeId */
   "data-v-8580e67a",
   /* cssModules */
@@ -12090,13 +12245,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 141 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(142);
+var content = __webpack_require__(143);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -12116,7 +12271,7 @@ if(false) {
 }
 
 /***/ }),
-/* 142 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -12130,7 +12285,7 @@ exports.push([module.i, "\n.rater-wrap[data-v-8580e67a] {\n  position: relative;
 
 
 /***/ }),
-/* 143 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12370,7 +12525,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 144 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12448,18 +12603,18 @@ if (false) {
 }
 
 /***/ }),
-/* 145 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(146)
+__webpack_require__(147)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(148),
-  /* template */
   __webpack_require__(149),
+  /* template */
+  __webpack_require__(150),
   /* scopeId */
   "data-v-81772c76",
   /* cssModules */
@@ -12486,13 +12641,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 146 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(147);
+var content = __webpack_require__(148);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -12512,7 +12667,7 @@ if(false) {
 }
 
 /***/ }),
-/* 147 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -12526,7 +12681,7 @@ exports.push([module.i, "\n.fm-snack-bar[data-v-81772c76] {\n\t\tposition: fixed
 
 
 /***/ }),
-/* 148 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12736,7 +12891,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12786,7 +12941,7 @@ if (false) {
 }
 
 /***/ }),
-/* 150 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12796,7 +12951,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmSnackBar = __webpack_require__(17);
+var _fmSnackBar = __webpack_require__(19);
 
 var _fmSnackBar2 = _interopRequireDefault(_fmSnackBar);
 
@@ -12871,7 +13026,7 @@ function showSnackBar(options) {
 exports.default = showSnackBar;
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12881,7 +13036,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(152);
+var _index = __webpack_require__(153);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -12893,18 +13048,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(153)
+__webpack_require__(154)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(155),
-  /* template */
   __webpack_require__(156),
+  /* template */
+  __webpack_require__(157),
   /* scopeId */
   "data-v-47ee1270",
   /* cssModules */
@@ -12931,13 +13086,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(154);
+var content = __webpack_require__(155);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -12957,7 +13112,7 @@ if(false) {
 }
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -12971,7 +13126,7 @@ exports.push([module.i, "\n.fm-checkbox[data-v-47ee1270] {\n}\n.border[data-v-47
 
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13166,7 +13321,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13218,7 +13373,7 @@ if (false) {
 }
 
 /***/ }),
-/* 157 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13228,7 +13383,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(158);
+var _index = __webpack_require__(159);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -13240,14 +13395,14 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(159),
-  /* template */
   __webpack_require__(160),
+  /* template */
+  __webpack_require__(161),
   /* scopeId */
   null,
   /* cssModules */
@@ -13274,7 +13429,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13312,7 +13467,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 160 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13331,7 +13486,7 @@ if (false) {
 }
 
 /***/ }),
-/* 161 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13341,7 +13496,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(162);
+var _index = __webpack_require__(163);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -13353,14 +13508,14 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 162 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(163),
-  /* template */
   __webpack_require__(164),
+  /* template */
+  __webpack_require__(165),
   /* scopeId */
   null,
   /* cssModules */
@@ -13387,7 +13542,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 163 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13408,7 +13563,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 164 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13429,18 +13584,18 @@ if (false) {
 }
 
 /***/ }),
-/* 165 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(166)
+__webpack_require__(167)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(168),
-  /* template */
   __webpack_require__(169),
+  /* template */
+  __webpack_require__(170),
   /* scopeId */
   "data-v-4cf19c5c",
   /* cssModules */
@@ -13467,13 +13622,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 166 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(167);
+var content = __webpack_require__(168);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -13493,7 +13648,7 @@ if(false) {
 }
 
 /***/ }),
-/* 167 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -13507,7 +13662,7 @@ exports.push([module.i, "\n.fm-status-bar[data-v-4cf19c5c] {\n    height: 66px;\
 
 
 /***/ }),
-/* 168 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13827,7 +13982,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 169 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13930,7 +14085,7 @@ if (false) {
 }
 
 /***/ }),
-/* 170 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13940,7 +14095,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(171);
+var _index = __webpack_require__(172);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -13952,18 +14107,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 171 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(172)
+__webpack_require__(173)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(174),
-  /* template */
   __webpack_require__(175),
+  /* template */
+  __webpack_require__(176),
   /* scopeId */
   "data-v-665f9fc0",
   /* cssModules */
@@ -13990,13 +14145,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 172 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(173);
+var content = __webpack_require__(174);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -14016,7 +14171,7 @@ if(false) {
 }
 
 /***/ }),
-/* 173 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -14030,7 +14185,7 @@ exports.push([module.i, "\n.fm-status-bar[data-v-665f9fc0] {\n  height: 66px;\n 
 
 
 /***/ }),
-/* 174 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14224,7 +14379,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 175 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -14303,7 +14458,7 @@ if (false) {
 }
 
 /***/ }),
-/* 176 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14313,7 +14468,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(177);
+var _index = __webpack_require__(178);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -14325,14 +14480,14 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 177 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(178),
+  __webpack_require__(179),
   /* template */
-  __webpack_require__(189),
+  __webpack_require__(190),
   /* scopeId */
   null,
   /* cssModules */
@@ -14359,7 +14514,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 178 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14369,7 +14524,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmMultiCheckCell = __webpack_require__(18);
+var _fmMultiCheckCell = __webpack_require__(20);
 
 var _fmMultiCheckCell2 = _interopRequireDefault(_fmMultiCheckCell);
 
@@ -14414,18 +14569,18 @@ exports.default = {
 //
 
 /***/ }),
-/* 179 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(180)
+__webpack_require__(181)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(182),
+  __webpack_require__(183),
   /* template */
-  __webpack_require__(188),
+  __webpack_require__(189),
   /* scopeId */
   "data-v-3e6c11c0",
   /* cssModules */
@@ -14452,13 +14607,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 180 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(181);
+var content = __webpack_require__(182);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -14478,7 +14633,7 @@ if(false) {
 }
 
 /***/ }),
-/* 181 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -14492,7 +14647,7 @@ exports.push([module.i, "\n.check-cell-wrap[data-v-3e6c11c0] {\n  flex-direction
 
 
 /***/ }),
-/* 182 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14502,7 +14657,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _checkIcon = __webpack_require__(183);
+var _checkIcon = __webpack_require__(184);
 
 var _checkIcon2 = _interopRequireDefault(_checkIcon);
 
@@ -14619,18 +14774,18 @@ exports.default = {
 };
 
 /***/ }),
-/* 183 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(184)
+__webpack_require__(185)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(186),
-  /* template */
   __webpack_require__(187),
+  /* template */
+  __webpack_require__(188),
   /* scopeId */
   "data-v-00ad7ec0",
   /* cssModules */
@@ -14657,13 +14812,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 184 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(185);
+var content = __webpack_require__(186);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -14683,7 +14838,7 @@ if(false) {
 }
 
 /***/ }),
-/* 185 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -14697,7 +14852,7 @@ exports.push([module.i, "\n.animate-wrap[data-v-00ad7ec0] {\n  width: 24px;\n  h
 
 
 /***/ }),
-/* 186 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14863,7 +15018,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 187 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -14906,7 +15061,7 @@ if (false) {
 }
 
 /***/ }),
-/* 188 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -14949,7 +15104,7 @@ if (false) {
 }
 
 /***/ }),
-/* 189 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -14968,7 +15123,7 @@ if (false) {
 }
 
 /***/ }),
-/* 190 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14978,7 +15133,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(191);
+var _index = __webpack_require__(192);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -14990,18 +15145,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 191 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(192)
+__webpack_require__(193)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(194),
-  /* template */
   __webpack_require__(195),
+  /* template */
+  __webpack_require__(196),
   /* scopeId */
   "data-v-fb2a1758",
   /* cssModules */
@@ -15028,13 +15183,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 192 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(193);
+var content = __webpack_require__(194);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -15054,7 +15209,7 @@ if(false) {
 }
 
 /***/ }),
-/* 193 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -15068,7 +15223,7 @@ exports.push([module.i, "\n.cell[data-v-fb2a1758] {\n  flex-direction: row;\n  j
 
 
 /***/ }),
-/* 194 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15334,7 +15489,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 195 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -15431,7 +15586,7 @@ if (false) {
 }
 
 /***/ }),
-/* 196 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15441,7 +15596,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(197);
+var _index = __webpack_require__(198);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -15453,18 +15608,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 197 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(198)
+__webpack_require__(199)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(200),
+  __webpack_require__(201),
   /* template */
-  __webpack_require__(206),
+  __webpack_require__(207),
   /* scopeId */
   "data-v-d7ab306c",
   /* cssModules */
@@ -15491,13 +15646,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 198 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(199);
+var content = __webpack_require__(200);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -15517,7 +15672,7 @@ if(false) {
 }
 
 /***/ }),
-/* 199 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -15531,7 +15686,7 @@ exports.push([module.i, "\n.list-wrap[data-v-d7ab306c] {\n  width: 1080px;\n}\n.
 
 
 /***/ }),
-/* 200 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15541,7 +15696,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _item = __webpack_require__(201);
+var _item = __webpack_require__(202);
 
 var _item2 = _interopRequireDefault(_item);
 
@@ -15654,18 +15809,18 @@ exports.default = {
 //
 
 /***/ }),
-/* 201 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(202)
+__webpack_require__(203)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(204),
-  /* template */
   __webpack_require__(205),
+  /* template */
+  __webpack_require__(206),
   /* scopeId */
   "data-v-6f5a0a6a",
   /* cssModules */
@@ -15692,13 +15847,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 202 */
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(203);
+var content = __webpack_require__(204);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -15718,7 +15873,7 @@ if(false) {
 }
 
 /***/ }),
-/* 203 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -15732,7 +15887,7 @@ exports.push([module.i, "\n.list-item[data-v-6f5a0a6a] {\n  padding: 0 48px;\n}\
 
 
 /***/ }),
-/* 204 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15894,7 +16049,7 @@ exports.default = {
 //
 
 /***/ }),
-/* 205 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -15946,7 +16101,7 @@ if (false) {
 }
 
 /***/ }),
-/* 206 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -16008,7 +16163,7 @@ if (false) {
 }
 
 /***/ }),
-/* 207 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16018,7 +16173,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(208);
+var _index = __webpack_require__(209);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -16030,18 +16185,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 208 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(209)
+__webpack_require__(210)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(211),
+  __webpack_require__(212),
   /* template */
-  __webpack_require__(214),
+  __webpack_require__(215),
   /* scopeId */
   "data-v-4c615fcc",
   /* cssModules */
@@ -16068,13 +16223,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 209 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(210);
+var content = __webpack_require__(211);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -16094,7 +16249,7 @@ if(false) {
 }
 
 /***/ }),
-/* 210 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -16108,7 +16263,7 @@ exports.push([module.i, "\n.fm-tab-page[data-v-4c615fcc] {\n  width: 1080px;\n}\
 
 
 /***/ }),
-/* 211 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16118,7 +16273,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _universalEnv = __webpack_require__(212);
+var _universalEnv = __webpack_require__(213);
 
 var _weexBindingx = __webpack_require__(7);
 
@@ -16536,7 +16691,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 212 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16555,10 +16710,10 @@ var isWeex = exports.isWeex = typeof callNative === 'function';
 var isReactNative = exports.isReactNative = typeof __fbBatchedBridgeConfig !== 'undefined';
 exports['default'] = module.exports;
 exports.default = module.exports;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(213)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(214)))
 
 /***/ }),
-/* 213 */
+/* 214 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -16748,7 +16903,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 214 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -16834,7 +16989,7 @@ if (false) {
 }
 
 /***/ }),
-/* 215 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16844,7 +16999,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(216);
+var _index = __webpack_require__(217);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -16856,14 +17011,14 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 216 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(217),
-  /* template */
   __webpack_require__(218),
+  /* template */
+  __webpack_require__(219),
   /* scopeId */
   null,
   /* cssModules */
@@ -16890,7 +17045,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 217 */
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16904,7 +17059,7 @@ var _weexBindingx = __webpack_require__(7);
 
 var _weexBindingx2 = _interopRequireDefault(_weexBindingx);
 
-var _utils = __webpack_require__(13);
+var _utils = __webpack_require__(14);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -16988,7 +17143,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 218 */
+/* 219 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -17020,7 +17175,7 @@ if (false) {
 }
 
 /***/ }),
-/* 219 */
+/* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17030,7 +17185,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(220);
+var _index = __webpack_require__(221);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -17042,18 +17197,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 220 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(221)
+__webpack_require__(222)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(223),
+  __webpack_require__(224),
   /* template */
-  __webpack_require__(229),
+  __webpack_require__(235),
   /* scopeId */
   "data-v-1595dfba",
   /* cssModules */
@@ -17080,13 +17235,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 221 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(222);
+var content = __webpack_require__(223);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -17106,7 +17261,7 @@ if(false) {
 }
 
 /***/ }),
-/* 222 */
+/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -17114,13 +17269,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-tabbar[data-v-1595dfba] {\n  flex-direction: row;\n  width: 1080px;\n  height: 144px;\n  align-items: center;\n  justify-content: center;\n  padding: 0 90px;\n  border-top-width: 2px;\n  border-top-color: rgba(0, 0, 0, 0.1);\n}\n.tabbar-item[data-v-1595dfba] {\n  flex: 1;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tabbar/index.vue?4da322d2"],"names":[],"mappings":";AAaA;EACA,oBAAA;EACA,cAAA;EACA,cAAA;EACA,oBAAA;EACA,wBAAA;EACA,gBAAA;EACA,sBAAA;EACA,qCAAA;CACA;AAEA;EACA,QAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 2018/03/12. -->\n<template>\n  <div class=\"fm-tabbar\" :style=\"{ backgroundColor: backgroundColor }\">\n    <fm-tabbar-item class=\"tabbar-item\"\n                    v-if=\"!$slots.default\"\n                    v-for=\"(item, index) in items\"\n                    :key=\"index\"\n                    v-bind=\"Object.assign({}, customStyles, item)\"></fm-tabbar-item>\n    <slot />\n  </div>\n</template>\n\n<style scoped>\n  .fm-tabbar {\n    flex-direction: row;\n    width: 1080px;\n    height: 144px;\n    align-items: center;\n    justify-content: center;\n    padding: 0 90px;\n    border-top-width: 2px;\n    border-top-color: rgba(0, 0, 0, 0.1);\n  }\n\n  .tabbar-item {\n    flex: 1;\n  }\n</style>\n\n<script>\nimport FmTabbarItem from '../fm-tabbar-item';\nexport default {\n  name: 'FmTabbar',\n  components: { FmTabbarItem },\n  props: {\n    activeIndex: {\n      type: Number,\n      default: -1\n    },\n    items: {\n      type: Array,\n      default: () => ([])\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    customStyles: {\n      type: Object,\n      default: () => ({})\n    }\n  },\n  data: () => ({\n    renderItems: []\n  }),\n  watch: {\n    renderItems () {\n      this.setActiveItem();\n    },\n    activeIndex () {\n      this.setActiveItem();\n    }\n  },\n  methods: {\n    setActiveItem () {\n      this.renderItems.forEach((item, index) => {\n        item.active = index === this.activeIndex;\n      });\n    },\n    onChange (index) {\n      this.$emit('fmTabbarSelected', { index });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-tabbar[data-v-1595dfba] {\n  flex-direction: row;\n  width: 1080px;\n  height: 144px;\n  align-items: center;\n  justify-content: center;\n  padding: 0 90px;\n  border-top-width: 2px;\n  border-top-color: rgba(0, 0, 0, 0.1);\n}\n.tabbar-item[data-v-1595dfba] {\n  flex: 1;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tabbar/index.vue?203f8489"],"names":[],"mappings":";AAaA;EACA,oBAAA;EACA,cAAA;EACA,cAAA;EACA,oBAAA;EACA,wBAAA;EACA,gBAAA;EACA,sBAAA;EACA,qCAAA;CACA;AAEA;EACA,QAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 2018/03/12. -->\n<template>\n  <fm-footer class=\"fm-tabbar\" :background-color=\"backgroundColor\">\n    <fm-tabbar-item class=\"tabbar-item\"\n                    v-if=\"!$slots.default\"\n                    v-for=\"(item, index) in items\"\n                    :key=\"index\"\n                    v-bind=\"Object.assign({}, customStyles, item)\"></fm-tabbar-item>\n    <slot />\n  </fm-footer>\n</template>\n\n<style scoped>\n  .fm-tabbar {\n    flex-direction: row;\n    width: 1080px;\n    height: 144px;\n    align-items: center;\n    justify-content: center;\n    padding: 0 90px;\n    border-top-width: 2px;\n    border-top-color: rgba(0, 0, 0, 0.1);\n  }\n\n  .tabbar-item {\n    flex: 1;\n  }\n</style>\n\n<script>\nimport FmFooter from '../fm-footer';\nimport FmTabbarItem from '../fm-tabbar-item';\nexport default {\n  name: 'FmTabbar',\n  components: { FmFooter, FmTabbarItem },\n  props: {\n    activeIndex: {\n      type: Number,\n      default: -1\n    },\n    items: {\n      type: Array,\n      default: () => ([])\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    customStyles: {\n      type: Object,\n      default: () => ({})\n    }\n  },\n  data: () => ({\n    renderItems: []\n  }),\n  watch: {\n    renderItems () {\n      this.setActiveItem();\n    },\n    activeIndex () {\n      this.setActiveItem();\n    }\n  },\n  methods: {\n    setActiveItem () {\n      this.renderItems.forEach((item, index) => {\n        item.active = index === this.activeIndex;\n      });\n    },\n    onChange (index) {\n      this.$emit('fmTabbarSelected', { index });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 223 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17130,15 +17285,49 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmTabbarItem = __webpack_require__(19);
+var _fmFooter = __webpack_require__(12);
+
+var _fmFooter2 = _interopRequireDefault(_fmFooter);
+
+var _fmTabbarItem = __webpack_require__(21);
 
 var _fmTabbarItem2 = _interopRequireDefault(_fmTabbarItem);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 exports.default = {
   name: 'FmTabbar',
-  components: { FmTabbarItem: _fmTabbarItem2.default },
+  components: { FmFooter: _fmFooter2.default, FmTabbarItem: _fmTabbarItem2.default },
   props: {
     activeIndex: {
       type: Number,
@@ -17186,49 +17375,184 @@ exports.default = {
       this.$emit('fmTabbarSelected', { index: index });
     }
   }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+};
 
 /***/ }),
-/* 224 */
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(225)
+__webpack_require__(226)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(227),
-  /* template */
   __webpack_require__(228),
+  /* template */
+  __webpack_require__(229),
+  /* scopeId */
+  "data-v-3509f5c0",
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-footer/index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3509f5c0", Component.options)
+  } else {
+    hotAPI.reload("data-v-3509f5c0", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 226 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(227);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("5c007a16", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-3509f5c0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-3509f5c0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 227 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.fm-footer[data-v-3509f5c0] {\n  flex-direction: row;\n  position: fixed;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 144px;\n  justify-content: space-between;\n  align-items: center;\n  border-top-width: 2px;\n  border-top-color: rgba(0, 0, 0, 0.1);\n}\n.fm-footer-[data-v-3509f5c0] {\n  justify-content: center;\n}\n.fm-footer-small[data-v-3509f5c0] {\n  padding: 0 48px;\n}\n.fm-footer-middle[data-v-3509f5c0] {\n  padding:  0px 90px\n}\n.fm-footer-large[data-v-3509f5c0] {\n  padding: 0 111px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-footer/index.vue?6fef4198"],"names":[],"mappings":";AAQA;EACA,oBAAA;EACA,gBAAA;EACA,SAAA;EACA,UAAA;EACA,QAAA;EACA,cAAA;EACA,+BAAA;EACA,oBAAA;EACA,sBAAA;EACA,qCAAA;CACA;AAEA;EACA,wBAAA;CACA;AAEA;EACA,gBAAA;CACA;AAEA;EACA,kBAAA;CACA;AAEA;EACA,iBAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 2018/03/13. -->\n<template>\n  <div class=\"fm-footer\" :class=\"['fm-footer-' + paddingSize]\" :style=\"{ backgroundColor: backgroundColor }\">\n    <slot></slot>\n  </div>\n</template>\n\n<style scoped>\n  .fm-footer {\n    flex-direction: row;\n    position: fixed;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    height: 144px;\n    justify-content: space-between;\n    align-items: center;\n    border-top-width: 2px;\n    border-top-color: rgba(0, 0, 0, 0.1);\n  }\n\n  .fm-footer- {\n    justify-content: center;\n  }\n\n  .fm-footer-small {\n    padding: 0 48px;\n  }\n\n  .fm-footer-middle {\n    padding:  0px 90px\n  }\n\n  .fm-footer-large {\n    padding: 0 111px;\n  }\n</style>\n\n<script>\nexport default {\n  name: 'FmFooter',\n  props: {\n    paddingSize: {\n      type: String,\n      default: ''\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+/* 228 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+  name: 'FmFooter',
+  props: {
+    paddingSize: {
+      type: String,
+      default: ''
+    },
+    backgroundColor: {
+      type: String,
+      default: '#FFFFFF'
+    }
+  }
+};
+
+/***/ }),
+/* 229 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "fm-footer",
+    class: ['fm-footer-' + _vm.paddingSize],
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      backgroundColor: _vm.backgroundColor
+    }))
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-3509f5c0", module.exports)
+  }
+}
+
+/***/ }),
+/* 230 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(231)
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(233),
+  /* template */
+  __webpack_require__(234),
   /* scopeId */
   "data-v-32d8605a",
   /* cssModules */
@@ -17255,13 +17579,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 225 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(226);
+var content = __webpack_require__(232);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -17281,7 +17605,7 @@ if(false) {
 }
 
 /***/ }),
-/* 226 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -17295,7 +17619,7 @@ exports.push([module.i, "\n.fm-tabbar-item[data-v-32d8605a] {\n  height: 144px;\
 
 
 /***/ }),
-/* 227 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17456,7 +17780,7 @@ exports.default = {
 //
 
 /***/ }),
-/* 228 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -17513,16 +17837,17 @@ if (false) {
 }
 
 /***/ }),
-/* 229 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  return _c('fm-footer', {
     staticClass: "fm-tabbar",
     staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      backgroundColor: _vm.backgroundColor
-    }))
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "background-color": _vm.backgroundColor
+    }
   }, [_vm._l((_vm.items), function(item, index) {
     return (!_vm.$slots.default) ? _c('fm-tabbar-item', _vm._b({
       key: index,
@@ -17541,7 +17866,7 @@ if (false) {
 }
 
 /***/ }),
-/* 230 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17551,7 +17876,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(231);
+var _index = __webpack_require__(237);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -17563,16 +17888,16 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 231 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(232)
+__webpack_require__(238)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(234),
+  __webpack_require__(240),
   /* template */
   __webpack_require__(241),
   /* scopeId */
@@ -17601,13 +17926,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 232 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(233);
+var content = __webpack_require__(239);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -17627,7 +17952,7 @@ if(false) {
 }
 
 /***/ }),
-/* 233 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -17635,13 +17960,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-btnbar[data-v-5aa1ccbc] {\n  flex-direction: row;\n  width: 1080px;\n  height: 144px;\n  align-items: center;\n  justify-content: center;\n  padding: 0 48px;\n  border-top-width: 2px;\n  border-top-color: rgba(0, 0, 0, 0.1);\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-btnbar/index.vue?03596a54"],"names":[],"mappings":";AAaA;EACA,oBAAA;EACA,cAAA;EACA,cAAA;EACA,oBAAA;EACA,wBAAA;EACA,gBAAA;EACA,sBAAA;EACA,qCAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 2018/03/13. -->\n<template>\n  <div class=\"fm-btnbar\" :style=\"{ backgroundColor: backgroundColor }\">\n    <fm-btnbar-item class=\"tabbar-item\"\n                    v-if=\"!$slots.default\"\n                    v-for=\"(item, index) in items\"\n                    :key=\"index\"\n                    v-bind=\"Object.assign({}, item)\"></fm-btnbar-item>\n    <slot />\n  </div>\n</template>\n\n<style scoped>\n  .fm-btnbar {\n    flex-direction: row;\n    width: 1080px;\n    height: 144px;\n    align-items: center;\n    justify-content: center;\n    padding: 0 48px;\n    border-top-width: 2px;\n    border-top-color: rgba(0, 0, 0, 0.1);\n  }\n</style>\n\n<script>\nimport FmBtnbarItem from '../fm-btnbar-item';\nexport default {\n  name: 'FmBtnbar',\n  components: { FmBtnbarItem },\n  props: {\n    items: {\n      type: Array,\n      default: () => ([])\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    }\n  },\n  data: () => ({\n    renderItems: []\n  }),\n  watch: {\n    renderItems (val) {\n      val.forEach((item, index) => {\n        item.width = val.length > 1 ? 396 : 720;\n      });\n    }\n  },\n  methods: {\n    btnClicked (index) {\n      this.$emit('fmBtnbarBtnClicked', { index });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-btnbar[data-v-5aa1ccbc] {\n  flex-direction: row;\n  width: 1080px;\n  height: 144px;\n  align-items: center;\n  justify-content: center;\n  padding: 0 48px;\n  border-top-width: 2px;\n  border-top-color: rgba(0, 0, 0, 0.1);\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-btnbar/index.vue?0ab679d1"],"names":[],"mappings":";AAgBA;EACA,oBAAA;EACA,cAAA;EACA,cAAA;EACA,oBAAA;EACA,wBAAA;EACA,gBAAA;EACA,sBAAA;EACA,qCAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 2018/03/13. -->\n<template>\n  <fm-footer :padding-size=\"paddingSize\" :backgroundColor=\"backgroundColor\">\n    <fm-button class=\"tabbar-item\"\n               @buttonClicked=\"btnClicked(index)\"\n               v-if=\"!$slots.default\"\n               v-for=\"(item, index) in items\"\n               v-bind=\"Object.assign({}, item)\"\n               :animated=\"true\"\n               :key=\"index\"\n               :size=\"buttonSize\">{{ item.title }}</fm-button>\n    <slot />\n  </fm-footer>\n</template>\n\n<style scoped>\n  .fm-btnbar {\n    flex-direction: row;\n    width: 1080px;\n    height: 144px;\n    align-items: center;\n    justify-content: center;\n    padding: 0 48px;\n    border-top-width: 2px;\n    border-top-color: rgba(0, 0, 0, 0.1);\n  }\n</style>\n\n<script>\nimport FmFooter from '../fm-footer';\nimport FmButton from '../fm-button';\nexport default {\n  name: 'FmBtnbar',\n  components: { FmButton, FmFooter },\n  props: {\n    items: {\n      type: Array,\n      default: () => ([])\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    }\n  },\n  data: () => ({\n    paddingSize: '',\n    buttonSize: ''\n  }),\n  watch: {\n    items () {\n      this.checkPadding();\n    }\n  },\n  created () {\n    this.checkPadding();\n  },\n  methods: {\n    checkPadding () {\n      if (this.items.length >= 2 || (this.$slots.default && this.$slots.default.length >= 2)) {\n        this.paddingSize = 'large';\n        this.buttonSize = 'large';\n      } else {\n        this.paddingSize = '';\n        this.buttonSize = 'huge';\n      }\n    },\n    btnClicked (index) {\n      this.$emit('fmBtnbarBtnClicked', { index });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 234 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17651,15 +17976,48 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmBtnbarItem = __webpack_require__(20);
+var _fmFooter = __webpack_require__(12);
 
-var _fmBtnbarItem2 = _interopRequireDefault(_fmBtnbarItem);
+var _fmFooter2 = _interopRequireDefault(_fmFooter);
+
+var _fmButton = __webpack_require__(15);
+
+var _fmButton2 = _interopRequireDefault(_fmButton);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 exports.default = {
   name: 'FmBtnbar',
-  components: { FmBtnbarItem: _fmBtnbarItem2.default },
+  components: { FmButton: _fmButton2.default, FmFooter: _fmFooter2.default },
   props: {
     items: {
       type: Array,
@@ -17674,362 +18032,63 @@ exports.default = {
   },
   data: function data() {
     return {
-      renderItems: []
+      paddingSize: '',
+      buttonSize: ''
     };
   },
   watch: {
-    renderItems: function renderItems(val) {
-      val.forEach(function (item, index) {
-        item.width = val.length > 1 ? 396 : 720;
-      });
+    items: function items() {
+      this.checkPadding();
     }
   },
+  created: function created() {
+    this.checkPadding();
+  },
+
   methods: {
+    checkPadding: function checkPadding() {
+      if (this.items.length >= 2 || this.$slots.default && this.$slots.default.length >= 2) {
+        this.paddingSize = 'large';
+        this.buttonSize = 'large';
+      } else {
+        this.paddingSize = '';
+        this.buttonSize = 'huge';
+      }
+    },
     btnClicked: function btnClicked(index) {
       this.$emit('fmBtnbarBtnClicked', { index: index });
     }
   }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/***/ }),
-/* 235 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(236)
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(238),
-  /* template */
-  __webpack_require__(240),
-  /* scopeId */
-  "data-v-4e5bea4c",
-  /* cssModules */
-  null
-)
-Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-btnbar-item/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4e5bea4c", Component.options)
-  } else {
-    hotAPI.reload("data-v-4e5bea4c", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 236 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(237);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("a64611d2", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-4e5bea4c\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-4e5bea4c\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 237 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(true);
-// imports
-
-
-// module
-exports.push([module.i, "\n.fm-btnbar-item[data-v-4e5bea4c] {\n  height: 114px;\n  border-radius: 57px;\n  margin: 0 33px;\n  padding: 0 33px;\n  align-items: center;\n  justify-content: center;\n  transform: scale(1);\n  transition-property: transform,backgroundColor;\n  transition-duration: 0.2s;\n  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n}\n.item-title[data-v-4e5bea4c] {\n  lines: 1;\n  text-overflow: ellipsis;\n  text-align: center;\n  color: #FFFFFF;\n  font-size: 48px;\n  font-weight: 500;\n  font-family: sans-serif-medium;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-btnbar-item/index.vue?1184a307"],"names":[],"mappings":";AAiBA;EACA,cAAA;EACA,oBAAA;EACA,eAAA;EACA,gBAAA;EACA,oBAAA;EACA,wBAAA;EACA,oBAAA;EACA,+CAAA;EACA,0BAAA;EACA,gEAAA;CACA;AAEA;EACA,SAAA;EACA,wBAAA;EACA,mBAAA;EACA,eAAA;EACA,gBAAA;EACA,iBAAA;EACA,+BAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 2018/03/13. -->\n<template>\n  <div v-if=\"width !== 0\"\n       class=\"fm-btnbar-item\"\n       :style=\"computedStyle\"\n       @click=\"onClick\"\n       @touchstart=\"_startHandle\"\n       @touchend=\"_endHandle\"\n       ref=\"btn\">\n    <slot name=\"title\">\n      <text class=\"item-title\"\n            :style=\"{ width: width - 56 }\"><slot></slot><template v-if=\"!$slots.default\">{{ title }}</template></text>\n    </slot>\n  </div>\n</template>\n\n<style scoped>\n  .fm-btnbar-item {\n    height: 114px;\n    border-radius: 57px;\n    margin: 0 33px;\n    padding: 0 33px;\n    align-items: center;\n    justify-content: center;\n    transform: scale(1);\n    transition-property: transform,backgroundColor;\n    transition-duration: 0.2s;\n    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  .item-title {\n    lines: 1;\n    text-overflow: ellipsis;\n    text-align: center;\n    color: #FFFFFF;\n    font-size: 48px;\n    font-weight: 500;\n    font-family: sans-serif-medium;\n  }\n</style>\n\n<script>\nimport THEME from './theme';\nexport default {\n  name: 'FmBtnbarItem',\n  props: {\n    title: {\n      type: String,\n      default: ''\n    },\n    theme: {\n      type: String,\n      default: 'blue'\n    },\n    titleColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    normalColor: {\n      type: String,\n      default: ''\n    },\n    activeColor: {\n      type: String,\n      default: ''\n    },\n    disabled: Boolean,\n    disabledColor: {\n      type: String,\n      default: '#B2B2B2'\n    }\n  },\n  computed: {\n    computedStyle () {\n      const { normalColor, activeColor, active, width, theme, disabled, disabledColor } = this;\n      const backgroundColor = disabled ? disabledColor : (active ? activeColor || THEME[theme].highlight : normalColor || THEME[theme].normal);\n      const transform = disabled ? 'scale(1)' : `scale(${active ? 0.95 : 1})`;\n      return {\n        backgroundColor,\n        transform,\n        width\n      };\n    }\n  },\n  data: () => ({\n    active: false,\n    width: 0\n  }),\n  methods: {\n    _startHandle (e) {\n      this.active = true;\n    },\n    _endHandle (e) {\n      this.active = false;\n    },\n    onClick (e) {\n      this.disabled || this._parent.btnClicked(this._parent.renderItems.indexOf(this));\n      this.disabled || this.$emit('btnClicked', e);\n    }\n  },\n  beforeCreate () {\n    let parent = this.$parent;\n    while (parent) {\n      if (parent.$options.name !== 'FmBtnbar') {\n        parent = parent.$parent;\n      } else {\n        this._parent = parent;\n        this._parent.renderItems.push(this);\n        break;\n      }\n    }\n  },\n  created () {\n    this.$slots.default && (this.title = this.$slots.default[0].text);\n  },\n  destroyed () {\n    this._parent.renderItems.splice(this._parent.items.indexOf(this), 1);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-/* 238 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _theme = __webpack_require__(239);
-
-var _theme2 = _interopRequireDefault(_theme);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-  name: 'FmBtnbarItem',
-  props: {
-    title: {
-      type: String,
-      default: ''
-    },
-    theme: {
-      type: String,
-      default: 'blue'
-    },
-    titleColor: {
-      type: String,
-      default: '#FFFFFF'
-    },
-    normalColor: {
-      type: String,
-      default: ''
-    },
-    activeColor: {
-      type: String,
-      default: ''
-    },
-    disabled: Boolean,
-    disabledColor: {
-      type: String,
-      default: '#B2B2B2'
-    }
-  },
-  computed: {
-    computedStyle: function computedStyle() {
-      var normalColor = this.normalColor,
-          activeColor = this.activeColor,
-          active = this.active,
-          width = this.width,
-          theme = this.theme,
-          disabled = this.disabled,
-          disabledColor = this.disabledColor;
-
-      var backgroundColor = disabled ? disabledColor : active ? activeColor || _theme2.default[theme].highlight : normalColor || _theme2.default[theme].normal;
-      var transform = disabled ? 'scale(1)' : 'scale(' + (active ? 0.95 : 1) + ')';
-      return {
-        backgroundColor: backgroundColor,
-        transform: transform,
-        width: width
-      };
-    }
-  },
-  data: function data() {
-    return {
-      active: false,
-      width: 0
-    };
-  },
-  methods: {
-    _startHandle: function _startHandle(e) {
-      this.active = true;
-    },
-    _endHandle: function _endHandle(e) {
-      this.active = false;
-    },
-    onClick: function onClick(e) {
-      this.disabled || this._parent.btnClicked(this._parent.renderItems.indexOf(this));
-      this.disabled || this.$emit('btnClicked', e);
-    }
-  },
-  beforeCreate: function beforeCreate() {
-    var parent = this.$parent;
-    while (parent) {
-      if (parent.$options.name !== 'FmBtnbar') {
-        parent = parent.$parent;
-      } else {
-        this._parent = parent;
-        this._parent.renderItems.push(this);
-        break;
-      }
-    }
-  },
-  created: function created() {
-    this.$slots.default && (this.title = this.$slots.default[0].text);
-  },
-  destroyed: function destroyed() {
-    this._parent.renderItems.splice(this._parent.items.indexOf(this), 1);
-  }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/***/ }),
-/* 239 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = {
-  blue: {
-    normal: '#198DED',
-    highlight: '#0A73C9'
-  },
-  limegreen: {
-    normal: '#3BC06B',
-    highlight: '#2AA155'
-  },
-  seagreen: {
-    normal: '#04C0CF',
-    highlight: '#009FAD'
-  },
-  gray: {
-    normal: '#7E97AC',
-    highlight: '#687E8F'
-  },
-  crimson: {
-    normal: '#D33A2A',
-    highlight: '#B83125'
-  },
-  firebrick: {
-    normal: '#F12528',
-    highlight: '#CF2124'
-  },
-  tomato: {
-    normal: '#FC5B23',
-    highlight: '#DB4914'
-  },
-  coral: {
-    normal: '#FFAF00',
-    highlight: '#C99014'
-  }
 };
-
-/***/ }),
-/* 240 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (_vm.width !== 0) ? _c('div', {
-    ref: "btn",
-    staticClass: "fm-btnbar-item",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(_vm.computedStyle)),
-    on: {
-      "click": _vm.onClick,
-      "touchstart": _vm._startHandle,
-      "touchend": _vm._endHandle
-    }
-  }, [_vm._t("title", [_c('text', {
-    staticClass: "item-title",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      width: _vm.width - 56
-    }))
-  }, [_vm._t("default"), (!_vm.$slots.default) ? [_vm._v(_vm._s(_vm.title))] : _vm._e()], 2)])], 2) : _vm._e()
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-4e5bea4c", module.exports)
-  }
-}
 
 /***/ }),
 /* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "fm-btnbar",
+  return _c('fm-footer', {
     staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      backgroundColor: _vm.backgroundColor
-    }))
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "padding-size": _vm.paddingSize,
+      "backgroundColor": _vm.backgroundColor
+    }
   }, [_vm._l((_vm.items), function(item, index) {
-    return (!_vm.$slots.default) ? _c('fm-btnbar-item', _vm._b({
+    return (!_vm.$slots.default) ? _c('fm-button', _vm._b({
       key: index,
       staticClass: "tabbar-item",
       staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle(undefined))
-    }, 'fm-btnbar-item', Object.assign({}, item), false)) : _vm._e()
+      style: (_vm.$processStyle(undefined)),
+      attrs: {
+        "animated": true,
+        "size": _vm.buttonSize
+      },
+      on: {
+        "buttonClicked": function($event) {
+          _vm.btnClicked(index)
+        }
+      }
+    }, 'fm-button', Object.assign({}, item), false), [_vm._v(_vm._s(item.title))]) : _vm._e()
   }), _vm._v(" "), _vm._t("default")], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
