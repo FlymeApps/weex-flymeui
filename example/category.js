@@ -11,6 +11,14 @@ export default {
       subname: 'FmSearchbar',
       path: 'component/searchbar'
     }, {
+      name: '底部操作栏',
+      subname: 'FmTabbar',
+      path: 'component/tabbar'
+    }, {
+      name: '底部腰圆按钮',
+      subname: 'FmBtnbar',
+      path: 'component/btnbar'
+    }, {
       name: '文本',
       subname: 'FmText',
       path: 'component/text'

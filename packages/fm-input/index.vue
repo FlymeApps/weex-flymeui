@@ -27,8 +27,8 @@
       @focus="beFocus"
       @blur="beBlur"
       ref="input" />
-    <fm-icon v-if="delShow" class="delete" name="guanbi" :icon-style="48" color="#fff" @click="delClick" />
-    <fm-icon v-if="visibleShow" class="visible" :name="visibleValue" :icon-style="72" color="#666" @click="toggleVisible" />
+    <fm-icon v-if="delShow" class="delete" name="guanbi" :icon-style="48" color="#fff" @fmIconClicked="delClick" />
+    <fm-icon v-if="visibleShow" class="visible" :name="visibleValue" :icon-style="72" color="#666" @fmIconClicked="toggleVisible" />
     <text v-if="hasError" class="error-msg">{{inputErrorMessage}}</text>
   </div>
 </template>
@@ -96,7 +96,7 @@ export default {
   },
   computed: {
     visibleValue() {
-      return this.type === 'password' ? 'chakan;' : 'yinbi'
+      return this.type === 'password' ? 'chakan' : 'yinbi'
     },
     inputClz() {
       let clz = ['fm-textarea']

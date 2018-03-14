@@ -3,10 +3,8 @@
   <div class="fm-tabbar-item" @click="onClick">
     <div class="icon-wrap">
       <slot name="icon" :active="active">
-        <fm-icon class="item-icon"
-                :name="icon"
-                icon-style="72"
-                :color="!active ? iconColor : (activeIconColor || activeColor)" />
+        <text class="item-icon"
+              :style="{ color: !active ? iconColor : (activeIconColor || activeColor)}">{{ getIcon }}</text>
       </slot>
       <div class="dot" v-if="dot"></div>
       <div class="badge" v-if="!dot && badge">
@@ -39,6 +37,9 @@
 
   .item-icon {
     margin-bottom: 6px;
+    font-size: 72px;
+    height: 72px;
+    font-family: flymeicon;
   }
 
   .item-title {
@@ -78,6 +79,9 @@
 </style>
 
 <script>
+const he = require('he');
+const dom = weex.requireModule('dom');
+import Icon from '../fm-icon/map';
 import FmIcon from '../fm-icon';
 export default {
   name: 'FmTabbarItem',
@@ -113,10 +117,22 @@ export default {
     },
     dot: Boolean
   },
+  computed: {
+    getIcon () {
+      const { Icon, icon } = this;
+      return he.decode(Icon[icon]);
+    }
+  },
   data: () => ({
-    active: false
+    active: false,
+    Icon
   }),
   beforeCreate () {
+    dom.addRule('fontFace', {
+      'fontFamily': 'flymeicon',
+      'src': "url('http://design.flyme.cn/weexui/assets/iconfont.ttf')"
+    });
+
     let parent = this.$parent;
     while (parent) {
       if (parent.$options.name !== 'FmTabbar') {

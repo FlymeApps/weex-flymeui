@@ -1,6 +1,5 @@
 <template>
-  <text :style="mergeStyle">{{ getIcon }}
-  </text>
+  <text :style="mergeStyle" @click="itemClicked(name)">{{ getIcon }}</text>
 </template>
 
 <style scoped>
@@ -56,6 +55,13 @@ export default {
       'fontFamily': 'flymeicon',
       'src': "url('http://design.flyme.cn/weexui/assets/iconfont.ttf')"
     });
+  },
+  methods: {
+    itemClicked (name) {
+      this.$emit('fmIconClicked', {
+        name
+      });
+    }
   }
 };
 </script>

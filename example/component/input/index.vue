@@ -53,6 +53,6 @@ import { setTitle } from '../../_mods/set-nav';
 const modal = weex.requireModule('modal');
 
 export default {
-    components: { Title, Category, FmInput }
-}
+  components: { Title, Category, FmInput }
+};
 </script>

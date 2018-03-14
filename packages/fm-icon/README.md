@@ -30,3 +30,8 @@ export default {
 | name | `String` |`Y`| `wancheng` | icon 名称 |
 | color | `String` |`N`| `#666666` | icon 颜色 |
 | iconStyle | `Number` `Object` |`N`| `42px` | icon 样式，传入数字则为大小，可传样式对象 |
+
+## 事件回调
+
+- `fmIconClicked`: icon 被点击
+    - `event.name`: icon 的名称
