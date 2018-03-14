@@ -171,7 +171,6 @@ export default {
   },
   methods: {
     btnClick (e) {
-      console.log('被点击了');
       !this.disabled && this.$emit('buttonClicked', e);
     },
     _startHandle (e) {
