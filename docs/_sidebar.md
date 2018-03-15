@@ -5,6 +5,7 @@
 - 基础组件
   - [fm-titlebar 导航栏](packages/fm-titlebar/)
   - [fm-searchbar 搜索栏](packages/fm-searchbar/)
+  - [fm-textbar 底部文字按钮](packages/fm-textbar/)
   - [fm-tabbar 底部操作栏](packages/fm-tabbar/)
   - [fm-btnbar 底部腰圆按钮](packages/fm-btnbar/)
   - [fm-text 文本](packages/fm-text/)
@@ -18,6 +19,7 @@
   - [fm-foldable-text 折叠文本](packages/fm-foldable-text/)
 
 - 容器组件
+  - [fm-footer 底栏](packages/fm-footer/)
   - [fm-tab-page 标签页](packages/fm-tab-page/)
   - [fm-overlay 蒙层](packages/fm-overlay/)
   - [fm-popup 侧弹窗口](packages/fm-popup/)

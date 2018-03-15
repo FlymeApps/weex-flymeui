@@ -11,6 +11,10 @@ export default {
       subname: 'FmSearchbar',
       path: 'component/searchbar'
     }, {
+      name: '底部文字按钮',
+      subname: 'FmTextbar',
+      path: 'component/textbar'
+    }, {
       name: '底部操作栏',
       subname: 'FmTabbar',
       path: 'component/tabbar'
@@ -64,6 +68,10 @@ export default {
     name: '容器组件',
     subname: 'Container conponent',
     componentList: [{
+      name: '底栏',
+      subname: 'FmFooter',
+      path: 'component/footer'
+    }, {
       name: '标签页',
       subname: 'FmTabPage',
       path: 'component/tabPage'

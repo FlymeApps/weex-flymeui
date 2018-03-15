@@ -37,6 +37,7 @@ import FmTabbar from './packages/fm-tabbar';
 import FmTabbarItem from './packages/fm-tabbar-item';
 import FmBtnbar from './packages/fm-btnbar';
 import FmFooter from './packages/fm-footer';
+import FmTextbar from './packages/fm-textbar';
 
 export {
   Utils,
@@ -78,5 +79,6 @@ export {
   FmTabbar,
   FmTabbarItem,
   FmBtnbar,
-  FmFooter
+  FmFooter,
+  FmTextbar
 };
