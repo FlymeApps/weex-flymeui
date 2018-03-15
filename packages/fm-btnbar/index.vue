@@ -13,19 +13,6 @@
   </fm-footer>
 </template>
 
-<style scoped>
-  .fm-btnbar {
-    flex-direction: row;
-    width: 1080px;
-    height: 144px;
-    align-items: center;
-    justify-content: center;
-    padding: 0 48px;
-    border-top-width: 2px;
-    border-top-color: rgba(0, 0, 0, 0.1);
-  }
-</style>
-
 <script>
 import FmFooter from '../fm-footer';
 import FmButton from '../fm-button';

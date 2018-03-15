@@ -1,6 +1,6 @@
 <!-- Created by Yanjiie on 2018/03/12. -->
 <template>
-  <fm-footer class="fm-tabbar" :background-color="backgroundColor">
+  <fm-footer class="fm-tabbar" :background-color="backgroundColor" padding-size="middle">
     <fm-tabbar-item class="tabbar-item"
                     v-if="!$slots.default"
                     v-for="(item, index) in items"
@@ -11,17 +11,6 @@
 </template>
 
 <style scoped>
-  .fm-tabbar {
-    flex-direction: row;
-    width: 1080px;
-    height: 144px;
-    align-items: center;
-    justify-content: center;
-    padding: 0 90px;
-    border-top-width: 2px;
-    border-top-color: rgba(0, 0, 0, 0.1);
-  }
-
   .tabbar-item {
     flex: 1;
   }
