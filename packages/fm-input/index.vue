@@ -41,6 +41,8 @@ import FmIcon from '../fm-icon'
 import Locale from 'weex-flymeui/lib/mixins/locale'
 import { t } from 'weex-flymeui/lib/locale'
 
+const modal = weex.requireModule('modal');
+
 export default {
   name: 'FmInput',
   mixins: [Locale],
@@ -49,7 +51,7 @@ export default {
     if (this.type === 'password') {
       this.pwdModel = true
     }
-    this.value = this.inputValue || ''
+    this.value = this.defalutValue || ''
   },
   data() {
     return {
@@ -61,12 +63,12 @@ export default {
     }
   },
   watch: {
-    inputValue(val) {
+    defalutValue(val) {
       this.value = val
     }
   },
   props: {
-    inputValue: {
+    defaultValue: {
       type: [String, Number],
       default: ''
     },
@@ -132,6 +134,7 @@ export default {
   methods: {
     delClick(e) {
       this.value = ''
+      modal.toast({message: this.value})
     },
     toggleVisible(e) {
       this.pwdVisible

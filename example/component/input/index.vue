@@ -3,16 +3,15 @@
         <scroller class="scroller">
             <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59effc7867e2274f086396b6"></title>
             <category title="默认的输入框"></category>
-                 
-            <fm-input :nightMode=true  placeholder="默认的输入框" :autofocus=true  />
+            <fm-input placeholder="默认的输入框" :autofocus="true"  />
             <category title="密文模式"></category>
-            <fm-input type="password" placeholder="password" :nightMode=true />
+            <fm-input type="password" placeholder="password" />
             <category title="日期输入"></category>
             <fm-input type="time" placeholder="time" />
             <category title="修改 placeholder"></category>
-            <fm-input type="text" placeholder="placeholder" :nightMode=true />
+            <fm-input type="text" placeholder="placeholder" />
             <category title="带初始值的输入框"></category>
-            <fm-input value="value" />
+            <fm-input default-value="value" />
             <category title="限制最大输入长度"></category>
             <fm-input maxlength="20" placeholder="maxlength:20" />
             <category title="输入校验"></category>
