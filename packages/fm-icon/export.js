@@ -5,9 +5,12 @@ export default {
   slots: null,
   props: {
     name: {
-      type: VALUE.STRING,
-      desc: '类型',
-      default: 'zhuye'
+      type: VALUE.SELECT,
+      desc: 'Icon 名称',
+      default: 'zhuye',
+      props: {
+        options: ['zhuye', 'wancheng', 'guanbi', 'gengduo', 'bianji', 'shanchu', 'fenxiang', 'xingxing']
+      }
     },
     iconStyle: {
       type: VALUE.STRING,

@@ -110,7 +110,7 @@ export default {
     inputStyle() {
       let style = { paddingRight: 24 }
       if (this.delShow || this.visibleShow) {
-        style.paddingRight = 108
+        style.paddingRight = 108 + 'px'
       }
       return style
     },

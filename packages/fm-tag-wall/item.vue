@@ -74,21 +74,21 @@ export default {
       const { borderRadius, height, padding, borderWidth, originBorderColor, originBackgroundColor, backgroundColor, borderColor, color, itemSpacing, lineSpacing } = this;
       return {
         justifyContent: 'center',
-        borderRadius,
-        height,
-        paddingLeft: padding,
-        paddingRight: padding,
-        borderWidth,
+        borderRadius: borderRadius + 'px',
+        height: height + 'px',
+        paddingLeft: padding + 'px',
+        paddingRight: padding + 'px',
+        borderWidth: borderWidth + 'px',
         backgroundColor: backgroundColor || originBackgroundColor,
         borderColor: borderColor || color || originBorderColor,
-        marginRight: itemSpacing,
-        marginBottom: lineSpacing
+        marginRight: itemSpacing + 'px',
+        marginBottom: lineSpacing + 'px'
       };
     },
     titleStyle () {
       const { fontSize, color, originTitleColor } = this;
       return {
-        fontSize,
+        fontSize: fontSize + 'px',
         color: color || originTitleColor
       };
     }

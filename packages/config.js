@@ -10,7 +10,7 @@ import FmTabPage from './fm-tab-page/export';
 import FmItem from './fm-item/export';
 import FmTabbar from './fm-tabbar/export';
 import FmBtnbar from './fm-btnbar/export';
-import FmTextbar from './fm-btnbar/export';
+import FmTextbar from './fm-textbar/export';
 import FmInput from './fm-input/export';
 
 export default {

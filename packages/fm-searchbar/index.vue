@@ -163,11 +163,7 @@ export default {
     inputBackground: String,
     borderStyle: {
       type: Object,
-      default: () => ({
-        borderBottomStyle: 'solid',
-        borderBottomWidth: 2,
-        borderBottomColor: 'rgba(0, 0, 0, 0.1)'
-      })
+      default: () => ({})
     },
     placeholder: String,
     autofocus: Boolean,
@@ -227,7 +223,7 @@ export default {
     barStyle () {
       const style = {
         borderBottomStyle: 'solid',
-        borderBottomWidth: 2,
+        borderBottomWidth: 2 + 'px',
         borderBottomColor: 'rgba(0, 0, 0, 0.1)'
       };
       Object.assign(style, this.borderStyle);
@@ -238,7 +234,7 @@ export default {
       const { value, searchColor, searchHighlightColor, searchTextSize } = this;
       return {
         color: value ? searchHighlightColor : searchColor,
-        fontSize: searchTextSize
+        fontSize: searchTextSize + 'px'
       };
     }
   },

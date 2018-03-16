@@ -1,12 +1,12 @@
 <!-- Created by Yanjiie on 18/03/06. -->
 <template>
   <div class="fm-tab-page"
-       :style="{ height: (tabPageHeight)+'px' }">
+       :style="{ height: (tabPageHeight) + 'px' }">
     <scroller class="tab-title-list"
               ref="tab-title-list"
               :show-scrollbar="false"
               scroll-direction="horizontal"
-              :style="{ height: (cTabStyles.height)+'px'}">
+              :style="{ height: (cTabStyles.height) + 'px'}">
 
       <div class="tab-title-wrap"
            ref="tab-title-wrap">
@@ -16,11 +16,11 @@
              @click="setPage(idx)"
              :ref="'fm-tab-title-'+idx">
           <text class="item-title"
-                :style="{ fontSize: cTabStyles.fontSize, color: currentPage === idx ? cTabStyles.activeTitleColor : cTabStyles.titleColor, paddingLeft: cTabStyles.padding, paddingRight: cTabStyles.padding}">{{ v.title }}</text>
+                :style="{ fontSize: cTabStyles.fontSize + 'px', color: currentPage === idx ? cTabStyles.activeTitleColor : cTabStyles.titleColor, paddingLeft: cTabStyles.padding + 'px', paddingRight: cTabStyles.padding + 'px'}">{{ v.title }}</text>
         </div>
         <div class="border-bottom"
               ref="tab-border"
-              :style="{ width: bottomInitWidth, transform: `translateX(${bottomInitOffset}px)`, backgroundColor: cTabStyles.activeBottomColor}"></div>
+              :style="{ width: bottomInitWidth + 'px', transform: `translateX(${bottomInitOffset}px)`, backgroundColor: cTabStyles.activeBottomColor}"></div>
       </div>
     </scroller>
     <div class="tab-page-wrap"
@@ -28,7 +28,7 @@
          @panstart="_onTouchStart"
          @panmove="_onTouchMove"
          @panend="_onTouchEnd"
-         :style="{ height: (tabPageHeight-cTabStyles.height)+'px' }">
+         :style="{ height: (tabPageHeight-cTabStyles.height) + 'px' }">
       <div class="tab-container"
            ref="tab-container">
         <slot></slot>
@@ -130,9 +130,9 @@ export default {
       const defaultStyle = {
         titleColor: 'rgba(0, 0, 0, 0.6)',
         activeTitleColor: '#198DED',
-        height: 102,
-        padding: 18,
-        fontSize: 42,
+        height: 102 + 'px',
+        padding: 18 + 'px',
+        fontSize: 42 + 'px',
         activeBottomColor: '#198DED'
       };
       return Object.assign({}, defaultStyle, this.tabStyles);

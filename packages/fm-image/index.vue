@@ -36,8 +36,8 @@ export default {
   computed: {
     getStyle () {
       return {
-        width: this.width,
-        height: this.height,
+        width: this.width + 'px',
+        height: this.height + 'px',
         backgroundColor: this.loaded ? 'transparent' : this.occupyingColor,
         ...this.imgStyle
       };

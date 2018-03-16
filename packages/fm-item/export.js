@@ -31,6 +31,11 @@ export default {
       type: VALUE.STRING,
       desc: '图片路径',
       default: ''
+    },
+    occupyingColor: {
+      type: VALUE.COLOR,
+      desc: '图片占位颜色',
+      default: '#FAFAFA'
     }
   },
   events: {

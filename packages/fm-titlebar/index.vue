@@ -110,11 +110,7 @@ export default {
     },
     borderStyle: {
       type: Object,
-      default: () => ({
-        borderBottomStyle: 'solid',
-        borderBottomWidth: 2,
-        borderBottomColor: 'rgba(0, 0, 0, 0.1)'
-      })
+      default: () => ({})
     },
     backgroundColor: {
       type: String,
@@ -147,9 +143,9 @@ export default {
     barStyle () {
       const style = {
         borderBottomStyle: 'solid',
-        borderBottomWidth: 2,
+        borderBottomWidth: `${2}px`,
         borderBottomColor: 'rgba(0, 0, 0, 0.1)',
-        paddingRight: this.rightBtns ? 0 : 48
+        paddingRight: `${this.rightBtns ? 0 : 48}px`
       };
       Object.assign(style, this.borderStyle);
       style.backgroundColor = this.backgroundColor;

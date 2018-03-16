@@ -8,6 +8,7 @@ export default {
       type: VALUE.ARRAY,
       desc: '导航标签列表',
       props: {
+        min: 1,
         inner: {
           title: {
             type: VALUE.STRING,

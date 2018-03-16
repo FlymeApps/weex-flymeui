@@ -116,14 +116,14 @@ export default {
     wrapStyle () {
       const { borderWidth, borderColor } = this;
       return {
-        borderBottomWidth: borderWidth,
+        borderBottomWidth: borderWidth + 'px',
         borderColor
       };
     },
     titleStyle () {
       const { color, originTitleColor, fontSize } = this;
       return {
-        fontSize,
+        fontSize: fontSize + 'px',
         color: color || originTitleColor
       };
     }

@@ -159,8 +159,8 @@ export default {
         borderColor: (type === 'hollow') ? wrapColor : '',
         backgroundColor: (type !== 'hollow') ? wrapColor : '',
         transform,
-        paddingLeft: padding,
-        paddingRight: padding
+        paddingLeft: padding + 'px',
+        paddingRight: padding + 'px'
       };
       if (type !== 'circle') {
         width && (style.width = `${width}px`);

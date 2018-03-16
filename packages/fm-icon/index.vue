@@ -36,7 +36,7 @@ export default {
   computed: {
     getIcon () {
       const { Icon, name, value } = this;
-      return he.decode(value === '' ? Icon[name] : value);
+      return he.decode(value === '' ? Icon[name] || 'wancheng' : value);
     },
     mergeStyle () {
       const { iconStyle } = this;

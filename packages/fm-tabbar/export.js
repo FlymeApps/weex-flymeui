@@ -8,14 +8,20 @@ export default {
       type: VALUE.ARRAY,
       desc: '按钮列表',
       props: {
+        min: 1,
+        max: 5,
         inner: {
           title: {
             type: VALUE.STRING,
             desc: '标题'
           },
           icon: {
-            type: VALUE.STRING,
-            desc: 'icon 名称'
+            type: VALUE.SELECT,
+            desc: 'icon 名称',
+            default: 'zhuiye',
+            props: {
+              options: ['zhuiye', 'wancheng', 'guanbi', 'gengduo', 'bianji', 'shanchu', 'fenxiang', 'xingxing']
+            }
           },
           dot: {
             type: VALUE.BOOLEAN,

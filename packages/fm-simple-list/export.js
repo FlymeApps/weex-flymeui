@@ -18,16 +18,24 @@ export default {
             desc: '标题颜色'
           },
           leftIcon: {
-            type: VALUE.STRING,
-            desc: '左 Icon'
+            type: VALUE.SELECT,
+            desc: '左 Icon',
+            default: 'shizhong',
+            props: {
+              options: ['shizhong', 'wancheng', 'guanbi', 'gengduo', 'bianji', 'shanchu', 'fenxiang', 'xingxing']
+            }
           },
           leftColor: {
             type: VALUE.COLOR,
             desc: '左 Icon 颜色'
           },
           rightIcon: {
-            type: VALUE.STRING,
-            desc: '右 Icon'
+            type: VALUE.SELECT,
+            desc: '右 Icon',
+            default: 'guanbi',
+            props: {
+              options: ['shizhong', 'wancheng', 'guanbi', 'gengduo', 'bianji', 'shanchu', 'fenxiang', 'xingxing']
+            }
           },
           rightColor: {
             type: VALUE.COLOR,
