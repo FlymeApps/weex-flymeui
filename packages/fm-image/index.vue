@@ -26,7 +26,7 @@ export default {
       default: 1
     },
     occupyingColor: {
-      type: Number,
+      type: String,
       default: 'transparent'
     },
     imgStyle: {
