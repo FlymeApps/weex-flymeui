@@ -156,6 +156,11 @@ export default {
       };
     }
   },
+  watch: {
+    type (val) {
+      this.scene = val;
+    }
+  },
   mounted () {
     this.scene = Scene[this.type];
   },

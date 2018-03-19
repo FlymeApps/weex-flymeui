@@ -325,7 +325,6 @@ export default {
       const { duration, timingFunction } = this;
       const containerEl = this.$refs[`tab-container`];
       const dist = page * 1080;
-      this.x = -dist;
       animation.transition(containerEl, {
         styles: {
           transform: `translateX(${-dist}px)`
