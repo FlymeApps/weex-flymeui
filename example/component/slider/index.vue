@@ -1,65 +1,42 @@
 <template>
-    <div class="mzui-demo">
-        <scroller class="scroller">
-            <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59f04654a5a0a6738061af08"></title>
-            <category title="基本样式"></category>
-            <div class="contaniner">
-                <text class="title">default:</text>
-                <fm-slider @selected="sel"/>
-                <text class="title">level: 10</text>
-                <fm-slider level="10" @selected="sel"/>
-                <text class="title">showProgress</text>
-                <fm-slider level="10" showProgress @selected="sel"/>
-                <text class="title">levelTexts: ['弱', '偏弱', '中等', '偏强', '强']</text>
-                <fm-slider level="10" :levelTexts="levelTexts" @selected="sel"/>
-                <text class="title">value: 40 && showProgress</text>
-                <fm-slider value="40" @selected="sel" showProgress/>
-                <text class="title">value: 3 && level: 5</text>
-                <fm-slider level="5" value="3" @selected="sel"/>
-            </div>
-        </scroller>
-    </div>
+  <scroller class="wrap">
+    <fm-slider :items="items" :auto-play="true"></fm-slider>
+    <fm-footer padding-size="large">
+      <fm-button @buttonClicked="prev" size="large">上一页</fm-button>
+      <fm-button @buttonClicked="next" theme="firebrick" size="large">下一页</fm-button>
+    </fm-footer>
+  </scroller>
 </template>
 
 <style scoped>
-    .mzui-demo {
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        background-color: #ffffff;
-    }
-    .title {
-        font-size: 42px;
-        margin-top: 60px;
-        margin-bottom: 30px;
-        color: #AAAAAA;
-    }
-    .contaniner {
-        padding: 30px;
-    }
+  .wrap {
+    flex: 1;
+    width: 1080px;
+    overflow: hidden;
+  }
 </style>
 
 <script>
-import { FmSlider } from '../../../index';
-import Title from '../../_mods/title.vue';
-import Category from '../../_mods/category.vue';
-import { setTitle } from '../../_mods/set-nav';
-
-const modal = weex.requireModule('modal');
-
+import { FmSlider, FmButton, FmText, FmFooter } from '../../../index';
 export default {
-    components: { Title, Category, FmSlider },
-	data () {
-		return {
-			levelTexts: ['弱', '偏弱', '中等', '偏强', '强']
-		}
-	},
-	methods: {
-		sel (data) {
-			modal.toast({message : data})
-		}
-	}
-}
+  components: { FmSlider, FmButton, FmText, FmFooter },
+  data: () => ({
+    page: 0,
+    items: [
+      '//gw.alicdn.com/imgextra/i4/169/TB2TlW1aLuSBuNkHFqDXXXfhVXa_!!169-0-lubanu.jpg_q50.jpg',
+      '//gw.alicdn.com/imgextra/TB2nu8oev5TBuNjSspcXXbnGFXa_!!103-0-lubanu.jpg_q50.jpg',
+      '//gw.alicdn.com/imgextra/TB2dprKdFuWBuNjSszbXXcS7FXa_!!124-0-luban.jpg_q50.jpg',
+      '//img.alicdn.com/imgextra/i4/18/TB28vYEdL9TBuNjy0FcXXbeiFXa_!!18-0-luban.jpg_q50.jpg',
+      '//aecpm.alicdn.com/simba/img/TB14ab1KpXXXXclXFXXSutbFXXX.jpg_q50.jpg'
+    ]
+  }),
+  methods: {
+    prev () {
+      this.$refs.banner.prev();
+    },
+    next () {
+      this.$refs.banner.next();
+    }
+  }
+};
 </script>

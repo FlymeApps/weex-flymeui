@@ -132,7 +132,7 @@ export default {
     }, {
       name: '滑块',
       subname: 'FmSlider',
-      path: 'component/slider'
+      path: 'component/sliderbar'
     }]
   },
   other: {

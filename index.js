@@ -4,7 +4,7 @@ import FmTag from './packages/fm-tag';
 import FmTagWall from './packages/fm-tag-wall';
 import FmText from './packages/fm-text';
 import FmIcon from './packages/fm-icon';
-import FmSlider from './packages/fm-slider';
+import FmSliderBar from './packages/fm-slider-bar';
 import FmButton from './packages/fm-button';
 import FmInput from './packages/fm-input';
 import FmTips from './packages/fm-tips';
@@ -38,6 +38,7 @@ import FmTabbarItem from './packages/fm-tabbar-item';
 import FmBtnbar from './packages/fm-btnbar';
 import FmFooter from './packages/fm-footer';
 import FmTextbar from './packages/fm-textbar';
+import FmSlider from './packages/fm-slider';
 
 export {
   Utils,
@@ -46,7 +47,7 @@ export {
   FmTagWall,
   FmText,
   FmIcon,
-  FmSlider,
+  FmSliderBar,
   FmButton,
   FmInput,
   FmTips,
@@ -80,5 +81,6 @@ export {
   FmTabbarItem,
   FmBtnbar,
   FmFooter,
-  FmTextbar
+  FmTextbar,
+  FmSlider
 };

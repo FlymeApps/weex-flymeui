@@ -19,6 +19,7 @@
   - [fm-foldable-text 折叠文本](packages/fm-foldable-text/)
 
 - 容器组件
+  - [fm-slider 轮播](packages/fm-slider/)
   - [fm-footer 底栏](packages/fm-footer/)
   - [fm-tab-page 标签页](packages/fm-tab-page/)
   - [fm-overlay 蒙层](packages/fm-overlay/)
@@ -34,7 +35,7 @@
   - [fm-button 按钮](packages/fm-button/)
   - [fm-switch 开关按钮](packages/fm-switch/)
   - [fm-input 输入框](packages/fm-input/)
-  - [fm-slider 滑块](packages/fm-slider/)
+  - [fm-slider-bar 滑块](packages/fm-slider-bar/)
   - [fm-rater 星级评分](packages/fm-rater/)
 
 - 开发方案

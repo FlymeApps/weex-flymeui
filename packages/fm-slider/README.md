@@ -1,30 +1,66 @@
 # fm-slider
 
-## 使用
-```html
-<fm-slider @selected="sel"/>
-<fm-slider level="10" @selected="sel"/>
-<fm-slider level="10" showProgress @selected="sel"/>
-<fm-slider level="10" :levelTexts="levelTexts" @selected="sel"/>
-<fm-slider value="40" @selected="sel" showProgress/>
-<fm-slider level="5" value="3" @selected="sel"/>
+> 媲美原生的 Flyme 轮播组件 ~
+
+!> `fm-slider`的滑动动画依赖于 [BindingX 解决方案](https://alibaba.github.io/bindingx/) 使用前请根据 [接入文档](https://github.com/alibaba/bindingx/blob/master/README_cn.md) 确保 App 已经支持。  **注意：组件仅为未完成的 beta 版本，使用方法有可能会变更。**
+
+## TODO
+
+* [ ] 支持单张图片（默认状态）
+* [ ] 事件回调
+* [ ] 卡片样式自定义
+* [ ] slot 支持
+* [ ] 支持 ActiveView
+* [ ] 支持初始化页数
+* [ ] 支持手动切换页数
+
+## 使用方法
+
+```vue
+<template>
+  <scroller class="wrap">
+    <fm-slider :items="items" :auto-play="true" :interval="4000"></fm-slider>
+  </scroller>
+</template>
+
+<style scoped>
+  .wrap {
+    flex: 1;
+    width: 1080px;
+    overflow: hidden;
+  }
+</style>
+
+<script>
+import { FmSlider } from 'weex-flymeui';
+export default {
+  components: { FmSlider, FmButton, FmText, FmFooter },
+  data: () => ({
+    items: [
+      '//gw.alicdn.com/imgextra/i4/169/TB2TlW1aLuSBuNkHFqDXXXfhVXa_!!169-0-lubanu.jpg_q50.jpg',
+      '//gw.alicdn.com/imgextra/TB2nu8oev5TBuNjSspcXXbnGFXa_!!103-0-lubanu.jpg_q50.jpg',
+      '//gw.alicdn.com/imgextra/TB2dprKdFuWBuNjSszbXXcS7FXa_!!124-0-luban.jpg_q50.jpg',
+      '//img.alicdn.com/imgextra/i4/18/TB28vYEdL9TBuNjy0FcXXbeiFXa_!!18-0-luban.jpg_q50.jpg',
+      '//aecpm.alicdn.com/simba/img/TB14ab1KpXXXXclXFXXSutbFXXX.jpg_q50.jpg'
+    ]
+  })
+};
+</script>
 ```
 
-**因为使用了 Weex 中的 move 手势，目前 move 手势在可滚动组件( list, scroll等 )中会存在大量时间冲突，所以在可滚动组件中使用时会有问题**
+更多详细代码例子可以参考 [demo](https://github.com/Yanjiie/weex-flymeui/blob/master/example/component/slider/index.vue)
 
-## Props
-| 属性 | 类型 | 可选值 | 示例 | 说明 |
-| -------- | -------- | -------- | -------- | 
-| level | Number | *  | level="100"  | slider 等份数，默认无级滑动
-| levelTexts | Array | * |  levelTexts=\['小', '中', '大']  | 根据级别文案滑动
-| showProgress  | Boolean  | *  |  	showProgress="true" |  显示当前位置，给定level / levelText，则显示当前level；否则显示两位数百分比
-| value  | Number  | *  |  value="2" | 初始值，给定level，对应level值，否则对应百分比
-## Events
-| 事件名 | 参数 | 事件类型 
-| -------- | -------- | -------- 
-| selected | event: {rate: .35, level: 3}  |  rate：当前选择到的比例值；level：当前选择的level值，只有在指定了level的情况下准确
+## 可配置参数
+| Prop | Type | Required | Default | Description |
+|-------------|------------|--------|-----|-----|
+| items | `Array` |`Y`| `[]` | 图片数组 |
+| auto-play | `Boolean` |`N`| `false` | 是否自动播放 |
+| interval | `Number` |`N`| `4000` | 自动播放间隔时间 |
 
-## 示例
-<div class="img-txt">
-![](http://image.res.meizu.com/image/flyme-icon/d75b411f892a435887b8546e23b7caa5z)
-</div>
+## slot
+
+**TODO**
+
+## 事件回调
+
+**TODO**

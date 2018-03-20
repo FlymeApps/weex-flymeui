@@ -1,191 +1,360 @@
+<!-- Update by Yanjiie on 2018/03/18. [!] Just a beta version! -->
 <template>
-  <div class="slider-wrap">
-    <div v-if="!!levelTexts && this.per" class="level-text-wrap" :style="textStyle">
-      <text class="level-text" v-for="(text, idx) in levelTexts" @click="levelClick(idx)" :key="idx">{{text}}</text>
-    </div>
-    <text v-else-if="showProgress" class="num" :style="progressStyle">{{progressText}}</text>
-    <div class="all" ref="bg"></div>
-    <div class="selected" :style="selStyle"></div>
-    <div class="dot-wrap" :style="dotStyle" @touchmove="move" @touchstart="start" @touchend="end">
-      <div class="dot"></div>
+  <div class="fm-banner-wrap"
+       ref="sliderCtn"
+       @panstart="onPanStart"
+       @panmove="onPanMove"
+       @panend="onPanEnd"
+       @horizontalpan="startHandle">
+    <div class="card-list"
+         ref="card-list"
+         :style="{ left: -(cardS.width * 2) + 'px' }">
+      <div v-for="(item, index) in cItems" class="card-item" :key="index" :ref="`card${index-2}`" :style="(index-2) === -1 && { transform: `translateX(-12px)` }">
+        <slot :name="`card${index-2}`">
+          <image :style="{ height: cardS.width, height: cardS.height }" :src="item" />
+        </slot>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-  .slider-wrap {
-    padding-right: 22.5px;
-    padding-left: 22.5px;
-  }
-  .level-text-wrap {
+  .fm-banner-wrap {
+    width: 1080px;
+    padding: 24px 0 24px 24px;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: -21.6px;
+    height: 386px;
+    overflow: hidden;
   }
-  .level-text {
-    flex: 1;
-    font-size: 42px;
-    padding-top: 7.2px;
-    padding-bottom: 7.2px;
-    text-align: center;
+
+  .card-list {
+    position: absolute;
+    flex-direction: row;
+    height: 338px;
   }
-  .all {
-    height: 9px;
-    margin-top: 43.2px;
-    background-color: #e6e6e6;
-  }
-  .selected {
-    margin-top: -9px;
-    height: 9px;
-    background-color: #198ded;
-  }
-  .dot-wrap {
-    height: 86.4px;
-    width: 116.4px;
-    margin-top: -47.52px;
-    margin-left: -57.6px;
-    align-items: center;
-    justify-content: center;
-  }
-  .dot {
-    height: 45px;
-    width: 45px;
-    background-color: #198ded;
-    border-radius: 43.2px;
-  }
-  .num {
-    width: 78px;
-    height: 78px;
-    margin-left: -39px;
-    border-radius: 79.2px;
-    background-color: #198ded;
-    color: #ffffff;
-    font-size: 42px;
-    font-weight: 700;
-    text-align: center;
-    line-height: 78px;
+
+  .card-item {
+    width: 792px;
+    height: 338px;
+    margin-right: 12px;
+    border-radius: 6px;
+    overflow: hidden;
   }
 </style>
 
 <script>
-const dom = weex.requireModule('dom');
+const animation = weex.requireModule('animation');
+import Utils from '../utils';
+import { isWeex } from 'universal-env';
+import Binding from 'weex-bindingx';
 
 export default {
-  name: 'FmSlider',
-  data () {
-    return {
-      transX: 0,
-      startX: 0,
-      max: 0,
-      per: 0,
-      comparePer: 0,
-      progressOpacity: 0,
-      progressText: null,
-      levelAlias: 0
-    };
-  },
-
   props: {
-    level: [String, Number],
-    levelTexts: Array,
-    showProgress: Boolean,
-    vertical: Boolean,
-    value: {
-      type: [String, Number],
+    items: {
+      type: Array,
+      default: () => ([])
+    },
+    panOffset: {
+      type: Number,
+      default: 30
+    },
+    selectIndex: {
+      type: Number,
       default: 0
+    },
+    cardS: {
+      type: Object,
+      default: () => ({
+        width: 792,
+        height: 338
+      })
+    },
+    autoPlay: {
+      type: Boolean,
+      default: false
+    },
+    interval: {
+      type: [Number, String],
+      default: 4000
+    },
+    timingFunction: {
+      type: String,
+      default: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
     }
   },
-
+  data: () => ({
+    selectIndex: 0,
+    gesToken: 0,
+    isMoving: false,
+    startX: 0,
+    startTime: 0,
+    currentIndex: 0,
+    autoPlayTimer: null
+  }),
   computed: {
-    textStyle () {
-      return {
-        width: `${this.max + this.per}px`,
-        'margin-left': `${-this.per / 2}px`
-      };
+    cItems () {
+      const { items } = this;
+      let cItems = [];
+      if (items.length >= 2) {
+        cItems = cItems.concat(items.slice(-2), items, items.slice(0, 2));
+      }
+      return cItems;
     },
-    dotStyle () {
-      return {
-        transform: `translateX(${this.transX}px)`
-      };
-    },
-    selStyle () {
-      return {
-        width: `${this.transX}px`
-      };
-    },
-    progressStyle () {
-      return {
-        transform: `translateX(${this.transX}px)`,
-        opacity: this.progressOpacity
-      };
+    cardLength () {
+      return this.items.length;
     }
   },
+  methods: {
+    startHandle (e) {
+      if (Utils.env.supportsEB() && e.state === 'start') {
+        this.clearAutoPlay();
+        setTimeout(() => {
+          const sliderCtn = this.$refs[`sliderCtn`];
+          this.bindExp(sliderCtn);
+        }, 0);
+      }
+    },
+    onPanStart (e) {
+      if (Utils.env.supportsEB()) {
+        return;
+      }
+      this.clearAutoPlay();
+      this.startX = e.changedTouches[0].clientX;
+      this.startTime = Date.now();
+    },
+    onPanMove (e) {
+      if (Utils.env.supportsEB() || this.isMoving) {
+        return;
+      }
+      const moveX = e.changedTouches[0].clientX - this.startX;
+      const currentCardLeft = this.currentIndex * (this.cardS.width + 12);
 
-  created () {
-    this.screen = 'screenY';// this.vertical ? 'screenY' : 'screenX'
+      const listEl = this.$refs['card-list'];
+      listEl && animation.transition(listEl, {
+        styles: {
+          transform: `translateX(${moveX - currentCardLeft}px)`
+        },
+        timingFunction: 'ease',
+        delay: 0,
+        duration: 0
+      }, () => {
+      });
+    },
+    onPanEnd (e) {
+      if (Utils.env.supportsEB()) {
+        return;
+      }
+      this.panEnd(e);
+    },
+    panEnd (e) {
+      this.isMoving = true;
+      let moveX = e.deltaX;
+
+      if (Utils.env.isWeb()) {
+        moveX = e.changedTouches[0].clientX - this.startX;
+      }
+
+      const originIndex = this.currentIndex;
+      let selectIndex = originIndex;
+      const duration = Date.now() - this.startTime;
+      const panOffset = this.panOffset || (this.cardS.width / 2);
+
+      if (moveX < -panOffset || (moveX < -10 && duration < 200)) {
+        // 允许向右越界
+        if (selectIndex !== this.cardLength) {
+          selectIndex++;
+        }
+      } else if (moveX > panOffset || (moveX > 10 && duration < 500)) {
+        // 允许向左越界
+        if (selectIndex !== -2) {
+          selectIndex--;
+        }
+      }
+
+      this.slideTo(originIndex, selectIndex);
+      setTimeout(() => { this.checkNeedAutoPlay(); }, 4000);
+    },
+    bindExp (element) {
+      if (element && element.ref) {
+        if (this.isMoving) {
+          Binding.unbind({
+            eventType: 'pan',
+            token: this.gesToken
+          });
+          this.gesToken = 0;
+          return;
+        }
+
+        const { currentIndex, cardS } = this;
+        const dist = currentIndex * (cardS.width + 12);
+        const listEl = this.getEl(this.$refs['card-list']);
+
+        // 卡片容器
+        const props = [{
+          element: listEl,
+          property: 'transform.translateX',
+          expression: `${-dist}+x`
+        }];
+
+        // 当前卡片
+        const currCardEl = this.getEl(this.$refs[`card${currentIndex}`][0]);
+        props.push({
+          element: currCardEl,
+          property: 'transform.translateX',
+          expression: `x <= 0 ? (x / 792 * 12) : 0`
+        });
+        // 上一张卡片
+        const lastCardEl = this.getEl(this.$refs[`card${currentIndex - 1}`][0]);
+        props.push({
+          element: lastCardEl,
+          property: 'transform.translateX',
+          expression: `x > 0 ? (1 - (x / 792)) * -12 : -12`
+        });
+
+        const gesTokenObj = Binding.bind({
+          eventType: 'pan',
+          anchor: this.getEl(element),
+          props
+        }, (e) => {
+          if (!this.isMoving && (e.state === 'end' || e.state === 'cancel' || e.state === 'exit')) {
+            this.panEnd(e);
+          }
+        });
+
+        this.gesToken = gesTokenObj.token;
+      }
+    },
+    slideTo (originIndex, selectIndex) {
+      const { cardS, timingFunction } = this;
+      const listEl = this.$refs['card-list'];
+      const dist = selectIndex * (cardS.width + 12);
+      // 卡片容器
+      listEl && animation.transition(listEl, {
+        styles: {
+          transform: `translateX(${-dist}px)`
+        },
+        duration: 500,
+        timingFunction
+      }, (e) => {
+        this.isMoving = false;
+        if (originIndex !== selectIndex) {
+          this.currentIndex = selectIndex;
+        }
+        this.checkNeedReset();
+      });
+
+      // 下一页
+      if (originIndex < selectIndex) {
+        // 当前卡片
+        const currCard = this.$refs[`card${this.currentIndex}`];
+        currCard && animation.transition(currCard[0], {
+          styles: {
+            transform: `translateX(-12px)`
+          },
+          duration: 500,
+          timingFunction
+        });
+        // 上一张卡片
+        const lastCard = this.$refs[`card${this.currentIndex - 1}`];
+        lastCard && animation.transition(lastCard[0], {
+          styles: {
+            transform: `translateX(0px)`
+          },
+          duration: 500,
+          timingFunction
+        });
+      // 上一页
+      } else if (originIndex > selectIndex) {
+        // 上一张卡片
+        const lastCard = this.$refs[`card${this.currentIndex - 1}`];
+        lastCard && animation.transition(lastCard[0], {
+          styles: {
+            transform: `translateX(0px)`
+          },
+          duration: 500,
+          timingFunction
+        });
+        // 上上张卡片
+        console.log(this.currentIndex - 2);
+        const llastCard = this.$refs[`card${this.currentIndex - 2}`];
+        llastCard && animation.transition(llastCard[0], {
+          styles: {
+            transform: `translateX(-12px)`
+          },
+          duration: 500,
+          timingFunction
+        });
+      }
+    },
+    // 检查页数是否达到临界条件进行重置处理，临界值 -2 ~ cardLength
+    checkNeedReset () {
+      const { cardS, timingFunction } = this;
+      const listEl = this.$refs['card-list'];
+      // 向右越界 重置为第一页
+      if (this.currentIndex >= this.cardLength) {
+        this.currentIndex = 0;
+        animation.transition(this.$refs[`card${this.cardLength - 1}`][0], {
+          styles: {
+            transform: `translateX(0px)`
+          },
+          duration: 0.00001,
+          timingFunction
+        });
+        animation.transition(this.$refs[`card-1`][0], {
+          styles: {
+            transform: `translateX(-12px)`
+          },
+          duration: 0.00001,
+          timingFunction
+        });
+      // 向左越界 重置为倒数第二页
+      } else if (this.currentIndex === -2) {
+        this.currentIndex = this.cardLength - 2;
+        animation.transition(this.$refs[`card${this.cardLength - 3}`][0], {
+          styles: {
+            transform: `translateX(-12px)`
+          },
+          duration: 0.00001,
+          timingFunction
+        });
+      } else {
+        return;
+      }
+      listEl && animation.transition(listEl, {
+        styles: {
+          transform: `translateX(${-this.currentIndex * (cardS.width + 12)}px)`
+        },
+        duration: 0.00001,
+        timingFunction
+      });
+    },
+    checkNeedAutoPlay () {
+      if (this.autoPlay) {
+        this.clearAutoPlay();
+        this.autoPlayTimer = setInterval(() => {
+          this.slideTo(this.currentIndex, this.currentIndex + 1);
+        }, parseInt(this.interval));
+      }
+    },
+    clearAutoPlay () {
+      this.autoPlayTimer && clearInterval(this.autoPlayTimer);
+    },
+    getEl (el) {
+      if (typeof el === 'string' || typeof el === 'number') return el;
+      return isWeex ? el.ref : el instanceof HTMLElement ? el : el.$el;
+    }
   },
-
   mounted () {
     setTimeout(() => {
-      dom.getComponentRect(this.$refs.bg, opt => {
-        this.max = opt.size.width;
-
-        if (this.levelTexts) {
-          this.levelAlias = Math.max(this.levelTexts.length - 1, 0);
-        } else {
-          this.levelAlias = this.level;
-        }
-
-        if (this.levelAlias && this.levelAlias > 0) {
-          this.per = this.max / this.levelAlias;
-          this.comparePer = this.per / 2;
-        }
-
-        this.transX = this.per ? (this.per * this.value) : (this.max * this.value / 100);
-      });
-    }, 100);
-  },
-
-  methods: {
-    levelClick (idx) {
-      this.transX = Math.min(this.per * idx, this.max);
-      this.end();
-    },
-    start (event) {
-      this.startX = event.changedTouches[0].screenX;
-      this.progressOpacity = 1;
-    },
-    move (event) {
-      const x = +event.changedTouches[0].screenX;
-      const sub = x - this.startX;
-      let target;
-
-      if (this.per) {
-        if (Math.abs(sub) >= this.comparePer) {
-          target = this.transX + (sub > 0 ? this.per : -this.per);
-          this.startX = target;
-        }
-      } else {
-        target = this.transX + sub;
-        this.startX = x;
+      const sliderCtn = this.$refs[`sliderCtn`];
+      if (Utils.env.supportsEB() && sliderCtn && sliderCtn.ref) {
+        Binding.prepare && Binding.prepare({
+          anchor: sliderCtn.ref,
+          eventType: 'pan'
+        });
       }
-
-      if (target !== undefined) {
-        this.transX = Math.min(Math.max(target, 0), this.max);
-      }
-
-      this.progressText = this.per
-        ? Math.round(this.transX / this.per)
-        : Math.floor(this.transX / this.max * 100);
-    },
-    end (event) {
-      this.progressOpacity = 0;
-      this.$emit('selected', {
-        rate: this.transX / this.max,
-        level: this.per ? Math.round(this.transX / this.per) : 0
-      });
-    }
+    }, 20);
+    this.checkNeedAutoPlay();
   }
 };
 </script>
