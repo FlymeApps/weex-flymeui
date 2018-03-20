@@ -47,5 +47,9 @@ export default {
     fmBtnbarBtnClicked: {
       desc: '按钮被点击'
     }
+  },
+  size: {
+    width: 1080,
+    height: 144
   }
 };

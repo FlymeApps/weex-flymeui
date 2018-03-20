@@ -79,5 +79,9 @@ export default {
     blur: {
       desc: '输入框失去焦点'
     }
+  },
+  size: {
+    width: 1080,
+    height: 144
   }
 };

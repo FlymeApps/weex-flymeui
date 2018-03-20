@@ -44,5 +44,9 @@ export default {
     fmSwitchStateChange: {
       desc: '开关状态变化'
     }
+  },
+  size: {
+    width: 144,
+    height: 72
   }
 };

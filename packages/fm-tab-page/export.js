@@ -28,5 +28,9 @@ export default {
     fmTabPageTabSelected: {
       desc: '页数切换'
     }
+  },
+  size: {
+    width: 1080,
+    height: 1920
   }
 };

@@ -30,5 +30,9 @@ export default {
     fmIconLongpress: {
       desc: '长按'
     }
+  },
+  size: {
+    width: 42,
+    height: 42
   }
 };

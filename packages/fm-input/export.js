@@ -36,5 +36,9 @@ export default {
     blur: {
       desc: '失去焦点'
     }
+  },
+  size: {
+    width: 1080,
+    height: 158
   }
 };

@@ -48,8 +48,8 @@ export default {
       path: 'component/simpleList'
     }, {
       name: '通用列表项',
-      subname: 'FmCell',
-      path: 'component/list'
+      subname: 'FmItem',
+      path: 'component/item'
     }, {
       name: '折叠文本',
       subname: 'FmFoldableText',

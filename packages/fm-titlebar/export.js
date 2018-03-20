@@ -37,5 +37,9 @@ export default {
     fmTitlebarRightBtnClicked: {
       desc: '右边按钮被点击'
     }
+  },
+  size: {
+    width: 1080,
+    height: 144
   }
 };

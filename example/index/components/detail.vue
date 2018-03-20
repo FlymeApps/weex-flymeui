@@ -70,7 +70,10 @@ const url = weex.config.bundleUrl;
 export default {
   props: {
     type: String,
-    category: Object
+    category: {
+      type: Object,
+      default: () => ({})
+    }
   },
   components: { FmText, FmImage, FmIcon, DCell },
   created () {

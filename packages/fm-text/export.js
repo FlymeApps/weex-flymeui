@@ -26,5 +26,9 @@ export default {
       }
     }
   },
-  events: {}
+  events: {},
+  size: {
+    width: 200,
+    height: 63
+  }
 };

@@ -83,5 +83,9 @@ export default {
     fmSimpleListRightIconClicked: {
       desc: '列表项右边 Icon 被点击'
     }
+  },
+  size: {
+    width: 1080,
+    height: 396
   }
 };

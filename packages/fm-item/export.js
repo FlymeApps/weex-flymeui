@@ -45,5 +45,9 @@ export default {
     fmTitlebarRightBtnClicked: {
       desc: '长按'
     }
+  },
+  size: {
+    width: 1080,
+    height: 269
   }
 };

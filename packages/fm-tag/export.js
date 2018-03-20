@@ -36,5 +36,9 @@ export default {
       }
     }
   },
-  events: {}
+  events: {},
+  size: {
+    width: 66,
+    height: 51
+  }
 };

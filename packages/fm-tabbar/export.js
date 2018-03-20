@@ -57,5 +57,9 @@ export default {
     fmTabbarSelected: {
       desc: '按钮被选中'
     }
+  },
+  size: {
+    width: 1080,
+    height: 144
   }
 };

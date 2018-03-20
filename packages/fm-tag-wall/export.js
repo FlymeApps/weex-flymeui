@@ -49,5 +49,9 @@ export default {
     fmTagWallSelected: {
       desc: '标签被点击'
     }
+  },
+  size: {
+    width: 1080,
+    height: 300
   }
 };
