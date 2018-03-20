@@ -39,6 +39,6 @@ export default {
   events: {},
   size: {
     width: 66,
-    height: 51
+    height: 66
   }
 };

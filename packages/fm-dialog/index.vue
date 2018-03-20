@@ -1,3 +1,5 @@
+<!-- Created by Yanjiie on one day. -->
+<!-- Update by Yanjiie on 2018/03/14. [!] Just a beta version! -->
 <template>
   <div class="container">
       <fm-overlay v-if="self_show"
@@ -13,7 +15,7 @@
            @touchend="handleTouchEnd">
         <div class="dialog-content">
           <slot name="title">
-            <fm-text class="content-title" medium title>{{ title }}</fm-text>
+            <fm-text class="content-title" font-weight="medium" size="large">{{ title }}</fm-text>
           </slot>
           <slot name="content">
             <fm-text class="content-subtext">{{ content }}</fm-text>
