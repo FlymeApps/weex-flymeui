@@ -2,14 +2,14 @@
     <div class="flymeui">
         <scroller class="scroller">
             <div class="header">
-                <fm-image width="655" height="105" :scale="1" src="http://design.flyme.cn/weexui/assets/design_logo.png"/>
+                <fm-image width="655" height="105" :scale="1" src="http://weixin-res.flyme.cn/resources/weex-flymeui/assets/design_logo.png"/>
                 <fm-text class="desc" value="为你提供最全面的公共规范内容展示，让你方便调用动画参数、设计参数以及控件代码"
                                       :style="{fontSize: 42, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
             </div>
             <div class="list">
                 <div v-for="(item, key) in category" :key="key" class="item-wrap" @click="jump(key)">
                     <div class="item">
-                        <fm-image :scale="1" class="item-icon" :src="'http://design.flyme.cn/weexui/assets/'+ key +'.png'"/>
+                        <fm-image :scale="1" class="item-icon" :src="'http://weixin-res.flyme.cn/resources/weex-flymeui/assets/'+ key +'.png'"/>
                         <div>
                             <fm-text :value="item.name" title :style="{fontSize: 48, color: '#000', fontWeight: 400}" />
                             <fm-text :value="item.componentList.length + ' 个项目'" :style="{fontSize: 36, color: 'rgba(0, 0, 0, 0.4)', fontWeight: 400}"/>
