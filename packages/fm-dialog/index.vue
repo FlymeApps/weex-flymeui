@@ -1,16 +1,23 @@
 <!-- Created by Yanjiie on one day. -->
 <!-- Update by Yanjiie on 2018/03/14. [!] Just a beta version! -->
 <template>
-  <div class="container">
-      <fm-overlay v-if="self_show"
+  <component class="container"
+             v-if="show || self_show"
+             append="node"
+             :is="isCreator ? 'fm-overlay-native' : 'div'"
+             :visible="self_show"
+             @onDismiss="overlayClicked"
+             :touchable='canAutoClose'>
+      <fm-overlay v-if="self_show && !isCreator"
                   :hasAnimation="true"
                   :canAutoClose="false"
                   :opacity="overlayOpacity"
                   @fmOverlayBodyClicked="overlayClicked"
                   ref="fm-overlay"></fm-overlay>
       <div class="dialog-box"
+           :class="!isCreator && ['dialog-box-H5']"
            ref="dialog-box"
-           v-if="self_show"
+           v-if="self_show || isCreator"
            :style="dialogStyle"
            @touchend="handleTouchEnd">
         <div class="dialog-content">
@@ -27,7 +34,7 @@
           </slot>
         </div>
       </div>
-  </div>
+  </component>
 </template>
 
 <style scoped>
@@ -39,12 +46,15 @@
   }
 
   .dialog-box {
-    position: fixed;
-    left: 72px;
     width: 936px;
     background-color: #FFFFFF;
     border-radius: 10px;
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .dialog-box-H5 {
+    position: fixed;
+    left: 72px;
   }
 
   .content-title {
@@ -123,7 +133,7 @@ export default {
       default: true
     },
     duration: {
-      type: [Number, String],
+      type: [Number],
       default: 300
     },
     timingFunction: {
@@ -171,12 +181,16 @@ export default {
           this.appearDialog(true);
         }, 50);
       } else {
-        this.$refs['fm-overlay'].hide();
+        !this.isCreator && this.$refs['fm-overlay'].hide();
         this.appearDialog(false);
       }
     }
   },
   computed: {
+    isCreator () {
+      const { appName } = weex.config.env;
+      return /com.meizu.creator.sdkdemo/.test(appName);
+    },
     dialogBtns () {
       let btns = [];
       if (!this.btns || !this.btns.length) {
@@ -205,7 +219,7 @@ export default {
     dialogStyle () {
       return {
         opacity: this.dialogOpacity,
-        top: this.top
+        top: !this.isCreator ? this.top : 0
       };
     },
     btnStyle () {
@@ -221,7 +235,7 @@ export default {
       e.preventDefault && e.preventDefault();
     },
     overlayClicked () {
-      this.canAutoClose && (this.appearDialog(false) || this.$emit('fmDialogOverlayClicked', {}));
+      this.canAutoClose && (this.appearDialog(false) || this.$emit('fmDialogDisappeared', {}));
       this.cancelCb && this.cancelCb();
     },
     btnClick (btn) {
@@ -236,7 +250,12 @@ export default {
       }
     },
     appearDialog (bool, duration = this.duration) {
-      const { hasAnimation, timingFunction } = this;
+      const { hasAnimation, timingFunction, isCreator } = this;
+      if (isCreator) {
+        this.self_show = bool;
+        this.dialogOpacity = bool ? 1 : 0;
+        return;
+      }
       const dialogEl = this.$refs['dialog-box'];
       this.dialogOpacity = bool ? 0 : 1;
       if (hasAnimation && dialogEl) {

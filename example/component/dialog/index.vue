@@ -13,7 +13,7 @@
           <fm-button class="btn" @buttonClicked="click6">弹出选择</fm-button>
           <fm-button class="btn" @buttonClicked="click7">弹出输入</fm-button>
         </div>
-      <category title="js 调用弹框"></category>
+      <category title="js 调用弹框 (在 Creator 中使用会有问题)"></category>
         <div class="container row">
           <fm-button class="btn" @buttonClicked="click4">对话框</fm-button>
           <fm-button class="btn" @buttonClicked="click5">提示框</fm-button>
@@ -34,7 +34,7 @@
         <fm-dialog :show="checkListShow"
                    title="选择语言"
                    @fmDialogBtnClicked="checkListClick"
-                   @fmDialogOverlayClicked="checkListOverlayClick"
+                   @fmDialogDisappeared="checkListOverlayClick"
                    :can-auto-close="true"
                    :overlayOpacity="0.1">
           <fm-check-list-group slot="content" @fmCheckListGroupChecked="groupChecked">
@@ -47,7 +47,7 @@
         <fm-dialog :show="inputShow"
                    title="弹出输入"
                    @fmDialogBtnClicked="inputClick"
-                   @fmDialogOverlayClicked="inputOverlayClick"
+                   @fmDialogDisappeared="inputOverlayClick"
                    :can-auto-close="true">
           <fm-input :value="inputText" slot="content" type="text" placeholder="输入点什么.." :autofocus="true" @input="inputing" />
         </fm-dialog>
@@ -56,7 +56,7 @@
                    :title="title"
                    :content="content"
                    @fmDialogBtnClicked="btnClick"
-                   @fmDialogOverlayClicked="dialogOverlayClick"
+                   @fmDialogDisappeared="dialogOverlayClick"
                    :can-auto-close="true"
                    :btns="btns">
                    </fm-dialog>
@@ -98,12 +98,11 @@
 import { FmButton, FmDialog, FmDialogBtn, confirm, alert, FmCheckListGroup, FmCheckbox, FmInput } from '../../../index';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
-import { setTitle } from '../../_mods/set-nav';
 
 const modal = weex.requireModule('modal');
 
 export default {
-  components: { Title, Category, FmButton, FmDialog, FmDialogBtn, FmCheckListGroup, FmCheckbox, FmInput },
+  components: { Title, FmDialog, Category, FmButton, FmDialogBtn, FmCheckListGroup, FmCheckbox, FmInput },
   data: () => ({
     show: false,
     checkListShow: false,
@@ -184,7 +183,6 @@ export default {
     },
     dialogOverlayClick () {
       this.show = false;
-      modal.toast({ message: '点击了蒙层' });
     },
     checkListClick (btn) {
       if (btn.type === 'cancel') {
@@ -198,7 +196,6 @@ export default {
     },
     checkListOverlayClick () {
       this.checkListShow = false;
-      modal.toast({ message: '点击了蒙层' });
     },
     groupChecked (arr) {
       this.checkList = arr;
@@ -215,7 +212,6 @@ export default {
     },
     inputOverlayClick () {
       this.inputShow = false;
-      modal.toast({ message: '点击了蒙层' });
     },
     inputing (e) {
       this.inputText = e.value;
