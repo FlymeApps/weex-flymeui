@@ -1,57 +1,49 @@
 <template>
-    <div class="flymeui">
-        <scroller class="scroller">
-            <title link="http://design.flyme.cn/book/book.html?bookId=59df3445a5a0a611eee9f119&doc=59e41a2967e2271c7fc46b4e"></title>
-            <div class="list">
-                <d-cell title="Toast" subTitle="Toast提示" @click="demo1"></d-cell>
-                <d-cell title="Toast" subTitle="Toast提示(duration)" @click="demo2"></d-cell>
-                <d-cell title="Toast" subTitle="Toast提示(gravity)" @click="demo3"></d-cell>
-                <d-cell title="两个按钮的弹框" subTitle="弹出两个按钮的弹框" @click="demo4"></d-cell>
-                <d-cell title="列表弹框" subTitle="弹出列表弹框" @click="demo5"></d-cell>
-
-            </div>
-        </scroller>
-    </div>
+  <div class="flymeui">
+    <scroller class="scroller">
+      <title link="http://design.flyme.cn/book/book.html?bookId=59df3445a5a0a611eee9f119&doc=59e41a2967e2271c7fc46b4e"></title>
+      <div class="list">
+        <d-cell title="Toast" subTitle="Toast提示" @click="demo1"></d-cell>
+        <d-cell title="Toast" subTitle="Toast提示(duration)" @click="demo2"></d-cell>
+        <d-cell title="Toast" subTitle="Toast提示(gravity)" @click="demo3"></d-cell>
+        <d-cell title="两个按钮的弹框" subTitle="弹出两个按钮的弹框" @click="demo4"></d-cell>
+        <d-cell title="列表弹框" subTitle="弹出列表弹框" @click="demo5"></d-cell>
+      </div>
+    </scroller>
+  </div>
 </template>
 
 <style scoped>
-    .actionBar {
-        height: 192px;
-        padding-top: 60px;
-    }
+  .flymeui {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #fafafa;
+  }
 
-    .actionIcon {
-        margin-top: 30px;
-        margin-right: 45px;
-        margin-left: 51px;
-    }
+  .scroller {
+    position: absolute;
+    top: 66px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
 
-    .flymeui {
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        background-color: #fafafa;
-    }
+  .header {
+    flex-direction: row;
+    align-items: flex-end;
+    margin-top: 71px;
+    margin-bottom: 104px;
+    margin-left: 72px;
+  }
 
-    .scroller {
-        background-color: #fafafa;
-    }
-
-    .header {
-        flex-direction: row;
-        align-items: flex-end;
-        margin-top: 71px;
-        margin-bottom: 104px;
-        margin-left: 72px;
-    }
-
-    .list {
-        margin-left: 28px;
-        margin-right: 28px;
-        padding: 28px;
-    }
+  .list {
+    margin-left: 28px;
+    margin-right: 28px;
+    padding: 28px;
+  }
 </style>
 
 <script>

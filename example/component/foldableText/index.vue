@@ -1,6 +1,6 @@
 <template>
   <div class="mzui-demo">
-    <scroller link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-foldable-text/">
+    <scroller class="scroller" link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-foldable-text/">
       <title title="fm-foldable-text"></title>
       <category title="可折叠文本"></category>
       <div class="container">
@@ -44,8 +44,17 @@
     bottom: 0;
     background-color: #ffffff;
   }
+
   .container {
-      padding: 30px;
+    padding: 30px;
+  }
+
+  .scroller {
+    position: absolute;
+    top: 66px;
+    right: 0;
+    left: 0;
+    bottom: 0;
   }
 </style>
 

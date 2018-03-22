@@ -41,38 +41,43 @@
 </template>
 
 <style scoped>
-.mzui-demo {
-	position: absolute;
-	top: 0;
-	right: 0;
-	left: 0;
-	bottom: 0;
-	background-color: #ffffff;
-}
+  .mzui-demo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #ffffff;
+  }
 
-.wrap {
-	padding-left: 30px;
-	padding-right: 30px;
-	padding-top: 30px;
-}
+  .wrap {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+  }
 
-.scroller {
-	padding-bottom: 60px;
-}
+  .scroller {
+    position: absolute;
+    top: 66px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    padding-bottom: 60px;
+  }
 
-.btnText {
-	font-size: 42px;
-	color: #ffffff;
-}
+  .btnText {
+    font-size: 42px;
+    color: #ffffff;
+  }
 
-.split {
-	width: 3px;
-	height: 42px;
-	margin-left: 27px;
-	margin-right: 27px;
-	background-color: #ffffff;
-	opacity: .4;
-}
+  .split {
+    width: 3px;
+    height: 42px;
+    margin-left: 27px;
+    margin-right: 27px;
+    background-color: #ffffff;
+    opacity: .4;
+  }
 </style>
 
 <script>

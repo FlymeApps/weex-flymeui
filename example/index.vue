@@ -32,6 +32,11 @@
   }
 
   .scroller {
+    position: absolute;
+    top: 66px;
+    right: 0;
+    left: 0;
+    bottom: 0;
     background-color: #fafafa;
   }
 
@@ -92,7 +97,17 @@ export default {
         }
         navigator.push({
           url: target,
-          animated: 'true'
+          animated: 'true',
+          theme: {
+            immersion: true, // 沉浸式状态栏
+            softmode: 'adjustResize',
+            theme: {
+              statusBar: { // 状态栏
+                transparent: true, // 设置后color、alpha不起作用，状态栏颜色同actionbar
+                darkIcon: false // 是否使用深色图标
+              }
+            }
+          }
         });
       }
     }

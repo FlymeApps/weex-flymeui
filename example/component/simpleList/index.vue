@@ -47,7 +47,11 @@
   }
 
   .scroller {
-    flex: 1;
+    position: absolute;
+    top: 66px;
+    right: 0;
+    left: 0;
+    bottom: 0;
   }
 </style>
 

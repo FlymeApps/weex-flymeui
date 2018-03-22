@@ -37,20 +37,24 @@
   }
 
   .scroller {
-    flex: 1;
+    position: absolute;
+    top: 66px;
+    right: 0;
+    left: 0;
+    bottom: 0;
   }
 
   .text {
-      margin-bottom: 60px;
+    margin-bottom: 60px;
   }
 
   .container {
-      padding: 60px;
-      padding-bottom: 0px;
+    padding: 60px;
+    padding-bottom: 0px;
   }
 
   .customStyle {
-      color: #198DED;
+    color: #198DED;
   }
 </style>
 

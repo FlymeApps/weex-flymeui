@@ -2,19 +2,19 @@
     <div class="flymeui">
         <div class="container">
             <div class="logo">
-                <fm-image :scale="1/3" src="http://design.flyme.cn/weexui/assets/design_logo.png"/>
-                <fm-text class="desc" textValue="为你提供最全面的公共规范内容展示，让你方便调用动画参数、设计参数以及控件代码"
-                                      :style="{fontSize: 14, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
+              <fm-image :scale="1/3" src="http://design.flyme.cn/weexui/assets/design_logo.png"/>
+              <fm-text class="desc" value="为你提供最全面的公共规范内容展示，让你方便调用动画参数、设计参数以及控件代码"
+                                    :style="{fontSize: 14, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
 
-               <fm-text class="desc" textValue="参数使用文档请参考:http://design.flyme.cn/book/book.html?bookId=59df3445a5a0a611eee9f119&doc=59df4b0567e2271c7fc46b3e"
-                                      :style="{fontSize: 14, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
-<fm-text class="desc" textValue="参数使用文档请参考:http://design.flyme.cn/book/book.html?bookId=59df3445a5a0a611eee9f119&doc=59df4b0567e2271c7fc46b3e"
-                                      :style="{fontSize: 14, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
+              <fm-text class="desc" value="参数使用文档请参考:http://design.flyme.cn/book/book.html?bookId=59df3445a5a0a611eee9f119&doc=59df4b0567e2271c7fc46b3e"
+                                    :style="{fontSize: 14, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
+              <fm-text class="desc" value="参数使用文档请参考:http://design.flyme.cn/book/book.html?bookId=59df3445a5a0a611eee9f119&doc=59df4b0567e2271c7fc46b3e"
+                                                  :style="{fontSize: 14, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
 
-<fm-text class="desc" textValue="参数使用文档请参考:http://design.flyme.cn/book/book.html?bookId=59df3445a5a0a611eee9f119&doc=59df4b0567e2271c7fc46b3e"
-                                      :style="{fontSize: 14, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
+              <fm-text class="desc" value="参数使用文档请参考:http://design.flyme.cn/book/book.html?bookId=59df3445a5a0a611eee9f119&doc=59df4b0567e2271c7fc46b3e"
+                                                  :style="{fontSize: 14, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
 
-<fm-text class="desc" textValue="参数使用文档请参考:http://design.flyme.cn/book/book.html?bookId=59df3445a5a0a611eee9f119&doc=59df4b0567e2271c7fc46b3e"
+              <fm-text class="desc" value="参数使用文档请参考:http://design.flyme.cn/book/book.html?bookId=59df3445a5a0a611eee9f119&doc=59df4b0567e2271c7fc46b3e"
                                       :style="{fontSize: 14, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
 
             </div>
@@ -26,58 +26,47 @@
 </template>
 
 <style scoped>
-    .actionBar {
-        height: 64px;
-        padding-top: 20px;
-    }
+  .flymeui {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #fafafa;
+  }
 
-    .actionIcon {
-        margin-top: 10px;
-        margin-right: 15px;
-        margin-left: 17px;
-    }
+  .container {
+    position: relative;
+    flex: 1;
+    background-color: #fafafa;
+  }
 
-    .flymeui {
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        background-color: #fafafa;
-    }
+  .logo {
+    margin-top: 64px;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-    .container {
-        position: relative;
-        flex: 1;
-        background-color: #fafafa;
-    }
+  .desc {
+    width: 258.3333px;
+    margin-top: 18px;
+  }
 
-    .logo {
-        margin-top: 64px;
-        align-items: center;
-        justify-content: space-between;
-    }
+  .content {
+    width: 258.3333px;
+    margin-top: 100px;
+  }
 
-    .desc {
-        width: 258.3333px;
-        margin-top: 18px;
-    }
-
-    .content {
-        width: 258.3333px;
-        margin-top: 100px;
-    }
-
-    .bottom {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-    }
+  .bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 </style>
 
 <script>
-import { FmText, FmIcon, FmInput } from '../../../index';
+import { FmText, FmImage, FmIcon, FmInput } from '../../../index';
 import DCell from '../../_mods/cell.vue';
 
 const navigator = weex.requireModule('navigator');

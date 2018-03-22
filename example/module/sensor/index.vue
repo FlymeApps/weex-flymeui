@@ -1,94 +1,87 @@
 <template>
-    <div class="flymeui">
-        <scroller class="scroller">
-            <title link="http://design.flyme.cn/book/book.html?bookId=59df3445a5a0a611eee9f119&doc=59e0773867e2271c7fc46b40"></title>
-            <div class="list">
-                <div class="apiTitle">
-                    <fm-text class="titleText" large title>方向传感器</fm-text>
-                    <fm-text class="data">当前方向:</fm-text>
-                    <fm-text class="data">x: {{orientation.x}}</fm-text>
-                    <fm-text class="data">y: {{orientation.y}}</fm-text>
-                    <fm-text class="data">z: {{orientation.z}}</fm-text>
-                </div>
-                <d-cell title="单次获取当前瞬间方向" subTitle="方向传感器 -- 单次获取当前瞬间方向" @click="demo1"></d-cell>
-                <d-cell title="持续监听当前方向变化" subTitle="方向传感器 -- 持续监听当前方向变化" @click="demo2"></d-cell>
-                <d-cell title="清除监听方向变化" subTitle="方向传感器 -- 清除监听方向变化" @click="demo3"></d-cell>
-                <div class="apiTitle">
-                    <fm-text class="titleText" large title>加速度传感器</fm-text>
-                    <fm-text class="data">当前方向:</fm-text>
-                    <fm-text class="data">x: {{accelerometer.x}}</fm-text>
-                    <fm-text class="data">y: {{accelerometer.y}}</fm-text>
-                    <fm-text class="data">z: {{accelerometer.z}}</fm-text>
-                </div>
-                <d-cell title="单次获取当前瞬间加速度" subTitle="加速度传感器 -- 单次获取当前瞬间加速度" @click="demo4"></d-cell>
-                <d-cell title="持续监听当前加速度变化" subTitle="加速度传感器 -- 持续获取当前加速度变化" @click="demo5"></d-cell>
-                <d-cell title="清除监听加速度变化" subTitle="加速度传感器 -- 清除监听加速度变化" @click="demo6"></d-cell>
-                <div class="apiTitle">
-                    <fm-text class="titleText" large title>陀螺仪传感器</fm-text>
-                    <fm-text class="data">当前方向:</fm-text>
-                    <fm-text class="data">x: {{gyroscope.x}}</fm-text>
-                    <fm-text class="data">y: {{gyroscope.y}}</fm-text>
-                    <fm-text class="data">z: {{gyroscope.z}}</fm-text>
-                </div>
-                <d-cell title="单次获取当前瞬间陀螺仪角速度" subTitle="陀螺仪 -- 单次获取当前瞬间陀螺仪角速度" @click="demo7"></d-cell>
-                <d-cell title="持续监听获当前陀螺仪角速度" subTitle="陀螺仪 -- 持续监听获当前陀螺仪角速度" @click="demo8"></d-cell>
-                <d-cell title="清除监听陀螺仪变化" subTitle="加速度传感器 -- 清除监听陀螺仪变化" @click="demo9"></d-cell>
-            </div>
-        </scroller>
-    </div>
+  <div class="flymeui">
+    <scroller class="scroller">
+      <title link="http://design.flyme.cn/book/book.html?bookId=59df3445a5a0a611eee9f119&doc=59e0773867e2271c7fc46b40"></title>
+      <div class="list">
+        <div class="apiTitle">
+          <fm-text class="titleText" large title>方向传感器</fm-text>
+          <fm-text class="data">当前方向:</fm-text>
+          <fm-text class="data">x: {{orientation.x}}</fm-text>
+          <fm-text class="data">y: {{orientation.y}}</fm-text>
+          <fm-text class="data">z: {{orientation.z}}</fm-text>
+        </div>
+        <d-cell title="单次获取当前瞬间方向" subTitle="方向传感器 -- 单次获取当前瞬间方向" @click="demo1"></d-cell>
+        <d-cell title="持续监听当前方向变化" subTitle="方向传感器 -- 持续监听当前方向变化" @click="demo2"></d-cell>
+        <d-cell title="清除监听方向变化" subTitle="方向传感器 -- 清除监听方向变化" @click="demo3"></d-cell>
+        <div class="apiTitle">
+          <fm-text class="titleText" large title>加速度传感器</fm-text>
+          <fm-text class="data">当前方向:</fm-text>
+          <fm-text class="data">x: {{accelerometer.x}}</fm-text>
+          <fm-text class="data">y: {{accelerometer.y}}</fm-text>
+          <fm-text class="data">z: {{accelerometer.z}}</fm-text>
+        </div>
+        <d-cell title="单次获取当前瞬间加速度" subTitle="加速度传感器 -- 单次获取当前瞬间加速度" @click="demo4"></d-cell>
+        <d-cell title="持续监听当前加速度变化" subTitle="加速度传感器 -- 持续获取当前加速度变化" @click="demo5"></d-cell>
+        <d-cell title="清除监听加速度变化" subTitle="加速度传感器 -- 清除监听加速度变化" @click="demo6"></d-cell>
+        <div class="apiTitle">
+          <fm-text class="titleText" large title>陀螺仪传感器</fm-text>
+          <fm-text class="data">当前方向:</fm-text>
+          <fm-text class="data">x: {{gyroscope.x}}</fm-text>
+          <fm-text class="data">y: {{gyroscope.y}}</fm-text>
+          <fm-text class="data">z: {{gyroscope.z}}</fm-text>
+        </div>
+        <d-cell title="单次获取当前瞬间陀螺仪角速度" subTitle="陀螺仪 -- 单次获取当前瞬间陀螺仪角速度" @click="demo7"></d-cell>
+        <d-cell title="持续监听获当前陀螺仪角速度" subTitle="陀螺仪 -- 持续监听获当前陀螺仪角速度" @click="demo8"></d-cell>
+        <d-cell title="清除监听陀螺仪变化" subTitle="加速度传感器 -- 清除监听陀螺仪变化" @click="demo9"></d-cell>
+      </div>
+    </scroller>
+  </div>
 </template>
 
 <style scoped>
-    .actionBar {
-        height: 192px;
-        padding-top: 60px;
-    }
+  .flymeui {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #fafafa;
+  }
 
-    .actionIcon {
-        margin-top: 30px;
-        margin-right: 45px;
-        margin-left: 51px;
-    }
+  .scroller {
+    position: absolute;
+    top: 66px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
 
-    .flymeui {
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        background-color: #fafafa;
-    }
+  .header {
+    flex-direction: row;
+    align-items: flex-end;
+    margin-top: 71px;
+    margin-bottom: 104px;
+    margin-left: 72px;
+  }
 
-    .scroller {
-        background-color: #fafafa;
-    }
+  .list {
+    margin-left: 28px;
+    margin-right: 28px;
+    padding: 28px;
+  }
 
-    .header {
-        flex-direction: row;
-        align-items: flex-end;
-        margin-top: 71px;
-        margin-bottom: 104px;
-        margin-left: 72px;
-    }
+  .apiTitle {
+    padding: 28px 0 0 0;
+    background-color: #ffffff;
+  }
 
-    .list {
-        margin-left: 28px;
-        margin-right: 28px;
-        padding: 28px;
-    }
+  .titleText {
+    text-align: center;
+  }
 
-    .apiTitle {
-        padding: 28px 0 0 0;
-        background-color: #ffffff;
-    }
-
-    .titleText {
-        text-align: center;
-    }
-
-    .data {
-        padding-left: 65px;
-    }
+  .data {
+    padding-left: 65px;
+  }
 </style>
 
 <script>

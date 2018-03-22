@@ -25,22 +25,29 @@
 </template>
 
 <style scoped>
-    .mzui-demo {
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        background-color: #ffffff;
-    }
-    .title {
-        margin-top: 60px;
-        margin-bottom: 30px;
-        color: #aaaaaa;
-    }
-    .contaniner {
-        padding: 30px;
-    }
+  .mzui-demo {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      background-color: #ffffff;
+  }
+  .title {
+      margin-top: 60px;
+      margin-bottom: 30px;
+      color: #aaaaaa;
+  }
+  .contaniner {
+      padding: 30px;
+  }
+  .scroller {
+    position: absolute;
+    top: 66px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
 </style>
 
 <script>

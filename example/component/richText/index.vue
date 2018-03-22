@@ -1,39 +1,44 @@
 <template>
-    <div class="mzui-demo">
-        <scroller class="scroller">
-            <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-rich-text/"></title>
-            <category title="富文本混排"></category>
-            <fm-rich-text class="special-rich"
-                         :config-list="configList"
-                         @linkBeClick="linkBeClick"
-                         ></fm-rich-text>
-            <category title="纯文本兼容"></category>
-            <fm-rich-text class="special-rich"
-                         :config-list="configString"
-                         @linkBeClick="linkBeClick"
-                         ></fm-rich-text>
-            <category title="两行文字的富文本"></category>
-            <fm-special-rich-text class="special-rich"
-                         :config-list="specialConfigList"></fm-special-rich-text>
-            <category title="两行文字的富文本"></category>
-            <fm-special-rich-text class="special-rich"
-                         :config-list="specialConfigList1"></fm-special-rich-text>
-        </scroller>
-    </div>
+  <div class="mzui-demo">
+    <scroller class="scroller">
+      <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-rich-text/"></title>
+      <category title="富文本混排"></category>
+      <fm-rich-text class="special-rich"
+                    :config-list="configList"
+                    @linkBeClick="linkBeClick"></fm-rich-text>
+      <category title="纯文本兼容"></category>
+      <fm-rich-text class="special-rich"
+                    :config-list="configString"
+                    @linkBeClick="linkBeClick"></fm-rich-text>
+      <category title="两行文字的富文本"></category>
+      <fm-special-rich-text class="special-rich"
+                            :config-list="specialConfigList"></fm-special-rich-text>
+      <category title="两行文字的富文本"></category>
+      <fm-special-rich-text class="special-rich"
+                            :config-list="specialConfigList1"></fm-special-rich-text>
+    </scroller>
+  </div>
 </template>
 
 <style scoped>
-    .mzui-demo {
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        background-color: #ffffff;
-    }
-    .special-rich {
-        margin: 30px;
-    }
+  .mzui-demo {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      background-color: #ffffff;
+  }
+  .special-rich {
+      margin: 30px;
+  }
+  .scroller {
+    position: absolute;
+    top: 66px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
 </style>
 
 <script>

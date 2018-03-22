@@ -1,91 +1,98 @@
 <template>
-    <div class="mzui-demo">
-        <scroller class="scroller">
-            <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-rater/"></title>
-            <category title="不同大小"></category>
-            <div class="container">
-                <fm-rater :starImgs="star_normal_urls" :starBgImg="star_bg_url"></fm-rater>
-            </div>
-            <div class="container">
-                <fm-rater :starImgs="star_normal_urls" :starBgImg="star_bg_url" size="small"></fm-rater>
-            </div>
-            <category title="不同主题颜色( native 支持 base64 )"></category>
-            <div class="container">
-                <fm-rater theme="normal"></fm-rater>
-            </div>
-            <div class="container">
-                <fm-rater theme="normal" size='small'></fm-rater>
-            </div>
-            <div class="container">
-                <fm-rater theme="special"></fm-rater>
-            </div>
-            <div class="container">
-                <fm-rater theme="special" size='small'></fm-rater>
-            </div>
-            <div class="container dark">
-                <fm-rater theme="dark"></fm-rater>
-            </div>
-            <div class="container dark">
-                <fm-rater theme="dark" size='small'></fm-rater>
-            </div>
-            <category title="不同主题颜色( native 不支持 base64情况 )"></category>
-            <div class="container">
-                <fm-rater theme="normal" :starImgs="star_normal_urls" :starBgImg="star_bg_url"></fm-rater>
-            </div>
-            <div class="container">
-                <fm-rater theme="normal" :starImgs="star_normal_urls" :starBgImg="star_bg_url" size='small'></fm-rater>
-            </div>
-            <div class="container">
-                <fm-rater theme="special" :starSpecialImg="star_special_url" :starBgImg="star_bg_url"></fm-rater>
-            </div>
-            <div class="container">
-                <fm-rater theme="special" :starSpecialImg="star_special_url" :starBgImg="star_bg_url" size='small'></fm-rater>
-            </div>
-            <div class="container dark">
-                <fm-rater theme="dark" :starDarkImg="star_dark_url" :starDarkBgImg="star_dark_bg"></fm-rater>
-            </div>
-            <div class="container dark">
-                <fm-rater theme="dark" :starDarkImg="star_dark_url" :starDarkBgImg="star_dark_bg" size='small'></fm-rater>
-            </div>
-            <div class="container">
-                <fm-rater :starImgs="star_normal_urls" :starBgImg="star_bg_url" size='small'></fm-rater>
-            </div>
-            <category title="不同的初始化分数"></category>
-            <div class="container">
-                <fm-rater :score="2" :canChange="false" :starImgs="star_normal_urls" :starBgImg="star_bg_url"></fm-rater>
-            </div>
-            <div class="container">
-                <fm-rater :score="4" :canChange="false" :starImgs="star_normal_urls" :starBgImg="star_bg_url"></fm-rater>
-            </div>
-            <div class="container">
-                <fm-rater :score="6" :canChange="false" :starImgs="star_normal_urls" :starBgImg="star_bg_url"></fm-rater>
-            </div>
-            <category title="分数更改后回调"></category>
-            <div class="container">
-                <fm-rater :starImgs="star_normal_urls" :starBgImg="star_bg_url" @fmRaterScoreChanged="scoreChanged"></fm-rater>
-            </div>
-        </scroller>
-    </div>
+  <div class="mzui-demo">
+    <scroller class="scroller">
+      <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-rater/"></title>
+      <category title="不同大小"></category>
+      <div class="container">
+        <fm-rater :starImgs="star_normal_urls" :starBgImg="star_bg_url"></fm-rater>
+      </div>
+      <div class="container">
+        <fm-rater :starImgs="star_normal_urls" :starBgImg="star_bg_url" size="small"></fm-rater>
+      </div>
+      <category title="不同主题颜色( native 支持 base64 )"></category>
+      <div class="container">
+        <fm-rater theme="normal"></fm-rater>
+      </div>
+      <div class="container">
+        <fm-rater theme="normal" size='small'></fm-rater>
+      </div>
+      <div class="container">
+        <fm-rater theme="special"></fm-rater>
+      </div>
+      <div class="container">
+        <fm-rater theme="special" size='small'></fm-rater>
+      </div>
+      <div class="container dark">
+        <fm-rater theme="dark"></fm-rater>
+      </div>
+      <div class="container dark">
+        <fm-rater theme="dark" size='small'></fm-rater>
+      </div>
+      <category title="不同主题颜色( native 不支持 base64情况 )"></category>
+      <div class="container">
+        <fm-rater theme="normal" :starImgs="star_normal_urls" :starBgImg="star_bg_url"></fm-rater>
+      </div>
+      <div class="container">
+        <fm-rater theme="normal" :starImgs="star_normal_urls" :starBgImg="star_bg_url" size='small'></fm-rater>
+      </div>
+      <div class="container">
+        <fm-rater theme="special" :starSpecialImg="star_special_url" :starBgImg="star_bg_url"></fm-rater>
+      </div>
+      <div class="container">
+        <fm-rater theme="special" :starSpecialImg="star_special_url" :starBgImg="star_bg_url" size='small'></fm-rater>
+      </div>
+      <div class="container dark">
+        <fm-rater theme="dark" :starDarkImg="star_dark_url" :starDarkBgImg="star_dark_bg"></fm-rater>
+      </div>
+      <div class="container dark">
+        <fm-rater theme="dark" :starDarkImg="star_dark_url" :starDarkBgImg="star_dark_bg" size='small'></fm-rater>
+      </div>
+      <div class="container">
+        <fm-rater :starImgs="star_normal_urls" :starBgImg="star_bg_url" size='small'></fm-rater>
+      </div>
+      <category title="不同的初始化分数"></category>
+      <div class="container">
+        <fm-rater :score="2" :canChange="false" :starImgs="star_normal_urls" :starBgImg="star_bg_url"></fm-rater>
+      </div>
+      <div class="container">
+        <fm-rater :score="4" :canChange="false" :starImgs="star_normal_urls" :starBgImg="star_bg_url"></fm-rater>
+      </div>
+      <div class="container">
+        <fm-rater :score="6" :canChange="false" :starImgs="star_normal_urls" :starBgImg="star_bg_url"></fm-rater>
+      </div>
+      <category title="分数更改后回调"></category>
+      <div class="container">
+        <fm-rater :starImgs="star_normal_urls" :starBgImg="star_bg_url" @fmRaterScoreChanged="scoreChanged"></fm-rater>
+      </div>
+    </scroller>
+  </div>
 </template>
 
 <style scoped>
-    .mzui-demo {
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        background-color: #ffffff;
-    }
-    .container {
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        margin-top: 50px;
-    }
-    .dark {
-        background-color: rgb(74, 74, 74);
-    }
+  .mzui-demo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #ffffff;
+  }
+  .container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  .dark {
+    background-color: rgb(74, 74, 74);
+  }
+  .scroller {
+    position: absolute;
+    top: 66px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
 </style>
 
 <script>

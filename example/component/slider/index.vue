@@ -8,9 +8,11 @@
 
 <style scoped>
   .wrap {
-    flex: 1;
-    width: 1080px;
-    overflow: hidden;
+    position: absolute;
+    top: 66px;
+    right: 0;
+    left: 0;
+    bottom: 0;
   }
 </style>
 
