@@ -2,9 +2,7 @@
 <!-- Update by Yanjiie on 2018/03/14. [!] Just a beta version! -->
 <template>
   <component class="container"
-             v-if="show || self_show"
-             append="node"
-             :is="isCreator ? 'fm-overlay-native' : 'div'"
+             :is="isCreator ? 'FmOverlayNative' : 'div'"
              :visible="self_show"
              @onDismiss="overlayClicked"
              :touchable='canAutoClose'>
@@ -133,7 +131,7 @@ export default {
       default: true
     },
     duration: {
-      type: [Number],
+      type: Number,
       default: 300
     },
     timingFunction: {
@@ -188,8 +186,7 @@ export default {
   },
   computed: {
     isCreator () {
-      const { appName } = weex.config.env;
-      return /com.meizu.creator.sdkdemo/.test(appName);
+      return weex.supports && weex.supports('@component/FmOverlayNative');
     },
     dialogBtns () {
       let btns = [];

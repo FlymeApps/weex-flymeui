@@ -13,7 +13,7 @@
           <fm-button class="btn" @buttonClicked="click6">弹出选择</fm-button>
           <fm-button class="btn" @buttonClicked="click7">弹出输入</fm-button>
         </div>
-      <category title="js 调用弹框 (在 Creator 中使用会有问题)"></category>
+      <category title="js 调用弹框"></category>
         <div class="container row">
           <fm-button class="btn" @buttonClicked="click4">对话框</fm-button>
           <fm-button class="btn" @buttonClicked="click5">提示框</fm-button>

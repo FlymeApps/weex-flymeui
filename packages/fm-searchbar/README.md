@@ -4,6 +4,8 @@
 
 !> fm-searchbar 中的搜索组件与 [Weex 内置 input 组件](https://weex.incubator.apache.org/cn/references/components/input.html#yue-shu) 具有相同的特性约束。
 
+<img src="http://image.res.meizu.com/image/flyme-icon/273747b369d64efb851cae68dea58b55z" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+
 ## 使用方法
 ```vue
 <template>

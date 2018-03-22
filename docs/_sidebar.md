@@ -27,9 +27,9 @@
   - [fm-action-sheet 底部删除弹框](packages/fm-action-sheet/)
 
 - 交互组件
-  - [fm-tips 引导提示](packages/fm-tips/)
   - [fm-snack-bar 底部提示](packages/fm-snack-bar/)
   - [fm-dialog 弹框](packages/fm-dialog/)
+  - [fm-tips 引导提示](packages/fm-tips/)
 
 - 表单组件
   - [fm-button 按钮](packages/fm-button/)

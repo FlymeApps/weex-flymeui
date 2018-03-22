@@ -14,6 +14,9 @@
 * [ ] 支持初始化页数
 * [ ] 支持手动切换页数
 
+<br/>
+<img src="http://image.res.meizu.com/image/flyme-icon/931c7561cc5e43618d20278c173dde59z" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+
 ## 使用方法
 
 ```vue

@@ -130,9 +130,9 @@ export default {
       const defaultStyle = {
         titleColor: 'rgba(0, 0, 0, 0.6)',
         activeTitleColor: '#198DED',
-        height: 102 + 'px',
-        padding: 18 + 'px',
-        fontSize: 42 + 'px',
+        height: 102,
+        padding: 18,
+        fontSize: 42,
         activeBottomColor: '#198DED'
       };
       return Object.assign({}, defaultStyle, this.tabStyles);

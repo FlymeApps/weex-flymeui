@@ -12,6 +12,8 @@ import FmTabbar from './fm-tabbar/export';
 import FmBtnbar from './fm-btnbar/export';
 import FmTextbar from './fm-textbar/export';
 import FmInput from './fm-input/export';
+import FmSlider from './fm-slider/export';
+import FmDialog from './fm-dialog/export';
 
 export default {
   FmSwitch,
@@ -27,5 +29,7 @@ export default {
   FmTabbar,
   FmBtnbar,
   FmTextbar,
-  FmInput
+  FmInput,
+  FmSlider,
+  FmDialog
 };

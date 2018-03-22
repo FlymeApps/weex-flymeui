@@ -2,6 +2,8 @@
 
 > Flyme 简单列表组件，可自定义样式
 
+<img src="http://image.res.meizu.com/image/flyme-icon/06a82ae4a6c74704a3020517fe7e068bz" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+
 ## 使用方法
 ```vue
 <template>

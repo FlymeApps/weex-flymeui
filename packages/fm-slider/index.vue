@@ -1,4 +1,4 @@
-<!-- Update by Yanjiie on 2018/03/18. [!] Just a beta version! -->
+<!-- Created by Yanjiie on 2018/03/18. [!] Just a beta version! -->
 <template>
   <div class="fm-banner-wrap"
        ref="sliderCtn"
