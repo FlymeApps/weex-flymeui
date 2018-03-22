@@ -39,7 +39,7 @@
 </style>
 
 <script>
-import { FmText, FmIcon } from '../../../index';
+import { FmText, FmIcon } from '../../index';
 
 export default {
   props: {

@@ -53,40 +53,40 @@
 
 <script>
 import Title from '../../_mods/title.vue';
-import { FmText, FmImage, FmIcon } from '../../../index';
-import DCell from '../../index/components/cell.vue';
+import { FmText, FmIcon } from '../../../index';
+import DCell from '../../_mods/cell.vue';
 
-const netinfo = weex.requireModule('netinfo')
+const netinfo = weex.requireModule('netinfo');
 
-const modal = weex.requireModule('modal')
+const modal = weex.requireModule('modal');
 
-const stream = weex.requireModule('stream')
+const stream = weex.requireModule('stream');
 
 export default {
-    components: { FmText, FmIcon, DCell, Title },
-    methods: {
-      back() {
-        navigator.pop()
-      },
-      demo1() {   // 检查网络状态
-        netinfo.getIsNetworkConnected(res => {
-          modal.toast({ message: res })
-        })
-      },
-      demo2() {  // 获取当前网络链接类型
-        netinfo.getNetType(res => {
-          modal.toast({ message: res })
-        })
-      },
-      demo3() {  // 获取当前网络链接类型
-        stream.fetch({
-          method: 'GET',
-          type: 'json',
-          url: 'https://api.github.com/repos/vuejs/vue?a='
-        }, res => {
-            modal.toast({ message:  res.ok ? res.data.stargazers_count : '(network error)' })
-        })
-      }
+  components: { FmText, FmIcon, DCell, Title },
+  methods: {
+    back () {
+      navigator.pop();
+    },
+    demo1 () { // 检查网络状态
+      netinfo.getIsNetworkConnected(res => {
+        modal.toast({ message: res });
+      });
+    },
+    demo2 () { // 获取当前网络链接类型
+      netinfo.getNetType(res => {
+        modal.toast({ message: res });
+      });
+    },
+    demo3 () { // 获取当前网络链接类型
+      stream.fetch({
+        method: 'GET',
+        type: 'json',
+        url: 'https://api.github.com/repos/vuejs/vue?a='
+      }, res => {
+        modal.toast({ message: res.ok ? res.data.stargazers_count : '(network error)' });
+      });
     }
-}
+  }
+};
 </script>

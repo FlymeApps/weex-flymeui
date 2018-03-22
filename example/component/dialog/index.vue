@@ -1,7 +1,7 @@
 <template>
   <div class="mzui-demo">
     <scroller class="scroller">
-      <title link="http://apps.flyme.cn/docs/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=5a3390d167e2277e77dcf943"></title>
+      <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-dialog/"></title>
       <category title="确认弹框"></category>
         <div class="container row">
           <fm-button class="btn" @buttonClicked="click1">两个按钮</fm-button>

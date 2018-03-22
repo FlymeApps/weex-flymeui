@@ -1,7 +1,7 @@
 <template>
   <div class="mzui-demo">
     <scroller class="scroller">
-      <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59efe977a5a0a6738061aefd"></title>
+      <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-tag/"></title>
       <category title="小标签"></category>
       <div class="cell">
         <fm-tag value="新手上asdas路"></fm-tag>
@@ -92,9 +92,6 @@
 import { FmTag } from '../../../index';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
-import { setTitle } from '../../_mods/set-nav';
-
-const modal = weex.requireModule('modal');
 
 export default {
   components: { Title, Category, FmTag }

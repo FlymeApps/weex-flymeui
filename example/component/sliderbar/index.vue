@@ -1,7 +1,7 @@
 <template>
     <div class="mzui-demo">
         <scroller class="scroller">
-            <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59f04654a5a0a6738061af08"></title>
+            <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-slider-bar/"></title>
             <category title="基本样式"></category>
             <div class="contaniner">
                 <text class="title">default:</text>
@@ -45,7 +45,6 @@
 import { FmSliderBar } from '../../../index';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
-import { setTitle } from '../../_mods/set-nav';
 
 const modal = weex.requireModule('modal');
 

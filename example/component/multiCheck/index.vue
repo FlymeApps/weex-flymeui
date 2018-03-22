@@ -5,9 +5,9 @@
       <text class="headerText">已选择 {{ checkData.length }} 个</text>
       <text class="headerText" @click="toggalAll">全选</text>
     </div>
-    <fm-multi-check-group 
-      :value="checkData" 
-      ref="multiSelect" 
+    <fm-multi-check-group
+      :value="checkData"
+      ref="multiSelect"
       @fmMultiCheckGroupSelected="selecting">
       <fm-multi-check-cell v-for="(item, index) in dataSource" :key="index" :identity="item.name" :disabled="item.disabled">
         <div class="test" bubble="true">
@@ -59,7 +59,6 @@
 import { FmMultiCheckGroup, FmMultiCheckCell } from '../../../index';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
-import { setTitle } from '../../_mods/set-nav';
 
 const modal = weex.requireModule('modal');
 

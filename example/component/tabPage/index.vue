@@ -1,6 +1,6 @@
 <template>
   <fm-tab-page :tab-titles="tabTitles"
-               ref="fm-tab-page">
+                ref="fm-tab-page">
     <list v-for="(v, index) in tabTitles" :key="index"
           class="item-container">
       <cell v-for="(item, idx) in listData" :key="idx">

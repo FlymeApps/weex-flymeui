@@ -1,7 +1,7 @@
 <template>
   <div class="mzui-demo">
     <scroller class="scroller">
-      <title link="http://apps.flyme.cn/docs/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=5a3390c267e2277e77dcf941"></title>
+      <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-snack-bar/"></title>
       <category title="不同方向的 popup"></category>
         <div class="container row">
           <fm-button class="btn" @buttonClicked="click1">默认弹出</fm-button>
@@ -66,7 +66,6 @@
 import { FmButton, FmSnackBar, showSnackBar } from '../../../index';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
-import { setTitle } from '../../_mods/set-nav';
 
 const modal = weex.requireModule('modal');
 

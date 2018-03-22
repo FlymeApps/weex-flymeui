@@ -31,9 +31,10 @@ const getEntry = dir => {
 
 const getCopyConfig = () => {
   const foundScripts = glob.sync('example/', {});
+  const CategoryfoundScripts = glob.sync('example/categories/*/', {});
   const CfoundScripts = glob.sync('example/component/*/', {});
   const MfoundScripts = glob.sync('example/module/*/', {});
-  const config = [...foundScripts, ...CfoundScripts, ...MfoundScripts];
+  const config = [...CategoryfoundScripts, ...foundScripts, ...CfoundScripts, ...MfoundScripts];
   const ret = [];
   config.forEach(scriptPath => {
     if (!/(_mods|_public)/.test(scriptPath)) {
@@ -46,11 +47,12 @@ const getCopyConfig = () => {
   return ret;
 };
 
+const categories = getEntry('example/categories');
 const component = getEntry('example/component');
 const moduleEntry = getEntry('example/module/');
 const entry = Object.assign({
   'index': './index.js'
-}, component, moduleEntry);
+}, categories, component, moduleEntry);
 entry['example/index'] = './example/index.js';
 
 const plugins = [

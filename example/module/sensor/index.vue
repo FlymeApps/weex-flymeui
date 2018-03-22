@@ -81,7 +81,7 @@
         padding: 28px 0 0 0;
         background-color: #ffffff;
     }
-    
+
     .titleText {
         text-align: center;
     }
@@ -93,100 +93,100 @@
 
 <script>
 import Title from '../../_mods/title.vue';
-import { FmText, FmImage, FmIcon } from '../../../index';
-import DCell from '../../index/components/cell.vue';
+import { FmText, FmIcon } from '../../../index';
+import DCell from '../../_mods/cell.vue';
 
-const sensor = weex.requireModule('sensor')
+const sensor = weex.requireModule('sensor');
 
-const modal = weex.requireModule('modal')
+const modal = weex.requireModule('modal');
 
 export default {
-    components: { FmText, FmIcon, DCell, Title },
-    data() {
-        return {
-            orientation: {
-                x: 0,
-                y: 0,
-                z: 0
-            },
-            orientationID: '',
-            accelerometer: {
-                x: 0,
-                y: 0,
-                z: 0
-            },
-            accelerometerID: '',
-            gyroscope: {
-                x: 0,
-                y: 0,
-                z: 0
-            },
-            gyroscopeID: ''
-        }
+  components: { FmText, FmIcon, DCell, Title },
+  data () {
+    return {
+      orientation: {
+        x: 0,
+        y: 0,
+        z: 0
+      },
+      orientationID: '',
+      accelerometer: {
+        x: 0,
+        y: 0,
+        z: 0
+      },
+      accelerometerID: '',
+      gyroscope: {
+        x: 0,
+        y: 0,
+        z: 0
+      },
+      gyroscopeID: ''
+    };
+  },
+  mounted () {
+    this.demo1();
+    this.demo4();
+    this.demo7();
+  },
+  methods: {
+    back () {
+      navigator.pop();
     },
-    mounted() {
-        this.demo1()
-        this.demo4()
-        this.demo7()
+    demo1 () { // 单次获取当前瞬间方向
+      sensor.getCurrentOrientation(res => {
+        res.result === 'success' ? (this.orientation = JSON.parse(res.data)) : modal.toast({ message: res });
+      });
     },
-    methods: {
-      back() {
-        navigator.pop()
-      },
-      demo1() {  // 单次获取当前瞬间方向
-        sensor.getCurrentOrientation(res => {
-            res.result === 'success' ? (this.orientation = JSON.parse(res.data)) : modal.toast({ message: res })
-        })
-      },
-      demo2() {   // 持续获取当前方向
-        if (this.orientationID) return
-        modal.toast({ message: '开始监听' })
-        sensor.watchCurrentOrientation(res => {
-            res.result === 'success' ? ((this.orientationID = JSON.parse(res.data).watchId) && (this.orientation = JSON.parse(res.data))) : modal.toast({ message: res })
-        })
-      },
-      demo3() {  // 清除方向监听
-        if (!this.orientationID) return
-        modal.toast({ message: '结束监听' })
-        this.orientationID && sensor.clearWatchOrientation(this.orientationID)
-        this.orientationID = ''
-      },
-      demo4() {  // 单次获取当前瞬间加速度
-        sensor.getCurrentAccelerometer(res => {
-            res.result === 'success' ? (this.accelerometer = JSON.parse(res.data)) : modal.toast({ message: res })
-        })
-      },
-      demo5() {  // 持续获取当前加速度
-        if (this.accelerometerID) return
-        modal.toast({ message: '开始监听' })
-        sensor.watchCurrentAccelerometer(res => {
-            res.result === 'success' ? ((this.accelerometerID = JSON.parse(res.data).watchId) && (this.accelerometer = JSON.parse(res.data))) : modal.toast({ message: res })
-        })
-      },
-      demo6() {  // 清除加速度监听
-        if (!this.accelerometerID) return
-        modal.toast({ message: '结束监听' })
-        this.accelerometerID && sensor.clearWatchAccelerometer(this.accelerometerID)
-        this.accelerometerID = ''
-      },
-      demo7() {  // 单次获取当前瞬间陀螺仪数据
-        sensor.getCurrentGyroscope(res => {
-            res.result === 'success' ? (this.gyroscope = JSON.parse(res.data)) : modal.toast({ message: res })
-        })
-      },
-      demo8() {  // 持续获取当前陀螺仪数据
-        if (this.gyroscopeID) return
-        modal.toast({ message: '开始监听' })
-        sensor.watchCurrentGyroscope(res => {
-            res.result === 'success' ? ((this.gyroscopeID = JSON.parse(res.data).watchId) && (this.gyroscope = JSON.parse(res.data))) : modal.toast({ message: res })
-        })
-      },
-      demo9() {  // 清除陀螺仪数据监听
-        if (!this.gyroscopeID) return
-        modal.toast({ message: '结束监听' })
-        this.gyroscopeID && sensor.clearWatchGyroscope(this.gyroscopeID)
-        this.gyroscopeID = ''
-      }
+    demo2 () { // 持续获取当前方向
+      if (this.orientationID) return;
+      modal.toast({ message: '开始监听' });
+      sensor.watchCurrentOrientation(res => {
+        res.result === 'success' ? ((this.orientationID = JSON.parse(res.data).watchId) && (this.orientation = JSON.parse(res.data))) : modal.toast({ message: res });
+      });
+    },
+    demo3 () { // 清除方向监听
+      if (!this.orientationID) return;
+      modal.toast({ message: '结束监听' });
+      this.orientationID && sensor.clearWatchOrientation(this.orientationID);
+      this.orientationID = '';
+    },
+    demo4 () { // 单次获取当前瞬间加速度
+      sensor.getCurrentAccelerometer(res => {
+        res.result === 'success' ? (this.accelerometer = JSON.parse(res.data)) : modal.toast({ message: res });
+      });
+    },
+    demo5 () { // 持续获取当前加速度
+      if (this.accelerometerID) return;
+      modal.toast({ message: '开始监听' });
+      sensor.watchCurrentAccelerometer(res => {
+        res.result === 'success' ? ((this.accelerometerID = JSON.parse(res.data).watchId) && (this.accelerometer = JSON.parse(res.data))) : modal.toast({ message: res });
+      });
+    },
+    demo6 () { // 清除加速度监听
+      if (!this.accelerometerID) return;
+      modal.toast({ message: '结束监听' });
+      this.accelerometerID && sensor.clearWatchAccelerometer(this.accelerometerID);
+      this.accelerometerID = '';
+    },
+    demo7 () { // 单次获取当前瞬间陀螺仪数据
+      sensor.getCurrentGyroscope(res => {
+        res.result === 'success' ? (this.gyroscope = JSON.parse(res.data)) : modal.toast({ message: res });
+      });
+    },
+    demo8 () { // 持续获取当前陀螺仪数据
+      if (this.gyroscopeID) return;
+      modal.toast({ message: '开始监听' });
+      sensor.watchCurrentGyroscope(res => {
+        res.result === 'success' ? ((this.gyroscopeID = JSON.parse(res.data).watchId) && (this.gyroscope = JSON.parse(res.data))) : modal.toast({ message: res });
+      });
+    },
+    demo9 () { // 清除陀螺仪数据监听
+      if (!this.gyroscopeID) return;
+      modal.toast({ message: '结束监听' });
+      this.gyroscopeID && sensor.clearWatchGyroscope(this.gyroscopeID);
+      this.gyroscopeID = '';
     }
-}
+  }
+};
 </script>

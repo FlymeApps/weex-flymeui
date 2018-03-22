@@ -55,74 +55,74 @@
 
 <script>
 import Title from '../../_mods/title.vue';
-import { FmText, FmImage, FmIcon } from '../../../index';
-import DCell from '../../index/components/cell.vue';
+import { FmText, FmIcon } from '../../../index';
+import DCell from '../../_mods/cell.vue';
 
-const location = weex.requireModule('location')
+const location = weex.requireModule('location');
 
-const modal = weex.requireModule('modal')
+const modal = weex.requireModule('modal');
 
 export default {
-    components: { FmText, FmIcon, DCell, Title },
-    data() {
-        return {
-            watchId: ''
-        }
+  components: { FmText, FmIcon, DCell, Title },
+  data () {
+    return {
+      watchId: ''
+    };
+  },
+  methods: {
+    back () {
+      navigator.pop();
     },
-    methods: {
-      back() {
-        navigator.pop()
-      },
-      demo1() {  // 获取地理位置信息 (默认调用)
-        let option = {
+    demo1 () { // 获取地理位置信息 (默认调用)
+      const option = {
 
-        }
-        location.getCurrentPosition(res => {
-            modal.toast({ message: res })
-        }, err => {
-            modal.toast({ message: err })
-        }, option)
-      },
-      demo2() {   // 获取地理位置信息 (高精度)
-        let option = {
-            enableHighAcuracy: true
-        }
-        location.getCurrentPosition(res => {
-            modal.toast({ message: res })
-        }, err => {
-            modal.toast({ message: err })
-        }, option)
-      },
-      demo3() {  // 获取详细地址信息
-        let option = {
-            enableHighAcuracy: true,
-            address: true
-        }
-        location.getCurrentPosition(res => {
-            modal.toast({ message: res })
-        }, err => {
-            modal.toast({ message: err })
-        }, option)
-      },
-      demo4() {  // 监听地理位置变化
-        let option = {
-            enableHighAcuracy: true,
-            address: true,
-            enableRefresh: true
-        }
-        location.watchPosition(res => {
-            this.watchId = res.watchId
-            modal.toast({ message: res })
-        }, err => {
-            modal.toast({ message: err })
-        }, option)
-      },
-      demo5() {  // 移除地理位置监听
-        if (!this.watchId) {
-            modal.toast({ message: '目前没有正在监听' })
-        }
-        location.clearWatch(this.watchId)
+      };
+      location.getCurrentPosition(res => {
+        modal.toast({ message: res });
+      }, err => {
+        modal.toast({ message: err });
+      }, option);
+    },
+    demo2 () { // 获取地理位置信息 (高精度)
+      const option = {
+        enableHighAcuracy: true
+      };
+      location.getCurrentPosition(res => {
+        modal.toast({ message: res });
+      }, err => {
+        modal.toast({ message: err });
+      }, option);
+    },
+    demo3 () { // 获取详细地址信息
+      const option = {
+        enableHighAcuracy: true,
+        address: true
+      };
+      location.getCurrentPosition(res => {
+        modal.toast({ message: res });
+      }, err => {
+        modal.toast({ message: err });
+      }, option);
+    },
+    demo4 () { // 监听地理位置变化
+      const option = {
+        enableHighAcuracy: true,
+        address: true,
+        enableRefresh: true
+      };
+      location.watchPosition(res => {
+        this.watchId = res.watchId;
+        modal.toast({ message: res });
+      }, err => {
+        modal.toast({ message: err });
+      }, option);
+    },
+    demo5 () { // 移除地理位置监听
+      if (!this.watchId) {
+        modal.toast({ message: '目前没有正在监听' });
       }
+      location.clearWatch(this.watchId);
     }
-}
+  }
+};
 </script>

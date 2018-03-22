@@ -1,7 +1,7 @@
 <template>
     <div class="mzui-demo">
         <scroller class="scroller">
-            <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59effa8167e2274f086396b4"></title>
+            <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-rich-text/"></title>
             <category title="富文本混排"></category>
             <fm-rich-text class="special-rich"
                          :config-list="configList"

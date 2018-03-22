@@ -1,7 +1,7 @@
 <template>
   <div class="mzui-demo">
     <scroller class="scroller">
-      <title link=""></title>
+      <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-textbar/"></title>
       <div class="btn-wrap">
         <fm-button size="huge" @buttonClicked="onClick1" theme="seagreen">单个按钮</fm-button>
         <fm-button size="huge" @buttonClicked="onClick2" theme="tomato">两个按钮</fm-button>

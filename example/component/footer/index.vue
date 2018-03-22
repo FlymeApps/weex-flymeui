@@ -1,7 +1,7 @@
 <template>
   <div class="mzui-demo">
     <scroller class="scroller">
-      <title link=""></title>
+      <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-footer/"></title>
 
       <div class="btn-wrap">
         <fm-button size="huge" @buttonClicked="onChange('none')">无内边距</fm-button>

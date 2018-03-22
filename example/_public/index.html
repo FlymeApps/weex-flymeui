@@ -27,9 +27,23 @@
 </head>
 <body>
 <div id="root"></div>
-<script src="//h5.m.taobao.com/js/trip/weex-ui/vue.runtime.min.js"></script>
-<script src="//h5.m.taobao.com/js/trip/weex-ui/weex-vue-render.min.js"></script>
+<script src="//weixin-res.flyme.cn/resources/weex-flymeui/assets/js/vue.runtime.min.js"></script>
+<script src="//weixin-res.flyme.cn/resources/weex-flymeui/assets/js/weex-vue-render.min.js"></script>
 <script src="./index.web.js"></script>
-<script src="//h5.m.taobao.com/js/trip/weex-ui/qrcode.js"></script>
+<script src="//weixin-res.flyme.cn/resources/weex-flymeui/assets/js/qrcode.min.js"></script>
+</body>
+<script>
+  var protocol = location.protocol + '//';
+  var hostname = typeof CURRENT_IP === 'string' ? window.CURRENT_IP : location.hostname;
+  var port = location.port ? ':' + location.port : '';
+  var url = protocol + hostname + port + location.pathname + 'index.native.js';
+  console.log('【 使用 Native 调试工具扫码进行调试 】地址: ' + url);
+  QRCode.toDataURL(url, function (err, url) {
+    if (err) {
+      console.log(err);
+    }
+    console.log('%c', 'padding:75px 80px 75px;line-height:160px;background:url(' + url + ') no-repeat;background-size:160px');
+  });
+</script>
 </body>
 </html>

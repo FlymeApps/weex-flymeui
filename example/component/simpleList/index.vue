@@ -1,7 +1,7 @@
 <template>
   <div class="mzui-demo">
     <scroller class="scroller">
-      <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59efee69a5a0a6738061aeff"></title>
+      <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-simple-list/"></title>
       <category title="基本态"></category>
         <fm-simple-list :list="listData"
                         @fmSimpleListSelected="onSelect"

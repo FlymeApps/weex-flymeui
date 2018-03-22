@@ -1,7 +1,7 @@
 <template>
   <div class="mzui-demo">
     <scroller class="scroller">
-      <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59ef295e67e2274f086396ae"></title>
+      <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-icon/"></title>
       <category title="默认 icon"></category>
       <div class="row">
         <fm-icon class="icon" name="biaoqing"/>
@@ -363,9 +363,6 @@
 import { FmIcon } from '../../../index';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
-import { setTitle } from '../../_mods/set-nav';
-
-const modal = weex.requireModule('modal');
 
 export default {
   components: { Title, Category, FmIcon }

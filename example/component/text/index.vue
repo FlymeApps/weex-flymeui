@@ -1,7 +1,7 @@
 <template>
   <div class="mzui-demo">
     <scroller class="scroller">
-      <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59ef0ed6a5a0a6738061aefb"></title>
+      <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-text/"></title>
       <category title="基本样式"></category>
         <div class="container">
             <FmText class="text" value="nomal基本样式" />
@@ -35,7 +35,7 @@
     bottom: 0;
     background-color: #ffffff;
   }
-  
+
   .scroller {
     flex: 1;
   }
@@ -58,11 +58,8 @@
 import { FmText } from '../../../index';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
-import { setTitle } from '../../_mods/set-nav';
-
-const modal = weex.requireModule('modal');
 
 export default {
-    components: { Title, Category, FmText },
-}
+  components: { Title, Category, FmText }
+};
 </script>

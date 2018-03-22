@@ -64,8 +64,8 @@
 
 <script>
 import Title from '../../_mods/title.vue';
-import { FmText, FmImage, FmIcon, FmInput, FmButton } from '../../../index';
-import DCell from '../../index/components/cell.vue';
+import { FmText, FmIcon, FmInput, FmButton } from '../../../index';
+import DCell from '../../_mods/cell.vue';
 
 const share = weex.requireModule('share');
 
@@ -88,7 +88,7 @@ export default {
       navigator.pop();
     },
     shareText () {
-      const { title, content, contentUrl, imageUrl } = this;
+      const { title, content } = this;
       share.shareText(title, content, res => {
         modal.toast({ message: res });
       });

@@ -56,37 +56,37 @@
 
 <script>
 import Title from '../../_mods/title.vue';
-import { FmText, FmImage, FmIcon } from '../../../index';
-import DCell from '../../index/components/cell.vue';
+import { FmText, FmIcon } from '../../../index';
+import DCell from '../../_mods/cell.vue';
 
-const device = weex.requireModule('device')
+const device = weex.requireModule('device');
 
-const modal = weex.requireModule('modal')
+const modal = weex.requireModule('modal');
 
 export default {
-    components: { FmText, FmIcon, DCell, Title },
-    methods: {
-      back() {
-        navigator.pop()
-      },
-      demo1() {  // 获取设备信息
-        modal.toast({ message: device.getDeviceInfo() })
-      },
-      demo2() {   // 获取 mac 地址
-        modal.toast({ message: device.getMacAddress() })
-      },
-      demo3() {  // 获取 IMEI 地址
-        modal.toast({ message: device.getIMEI() })
-      },
-      demo4() {  // 获取设备 id
-        modal.toast({ message: device.getDeviceId() })
-      },
-      demo5() {  // 获取设备屏幕信息
-        modal.toast({ message: device.getScreenInfo() })
-      },
-      demo6() {  // 获取 Libray 版本信息
-        modal.toast({ message: device.getLibVersion() })
-      }
+  components: { FmText, FmIcon, DCell, Title },
+  methods: {
+    back () {
+      navigator.pop();
+    },
+    demo1 () { // 获取设备信息
+      modal.toast({ message: device.getDeviceInfo() });
+    },
+    demo2 () { // 获取 mac 地址
+      modal.toast({ message: device.getMacAddress() });
+    },
+    demo3 () { // 获取 IMEI 地址
+      modal.toast({ message: device.getIMEI() });
+    },
+    demo4 () { // 获取设备 id
+      modal.toast({ message: device.getDeviceId() });
+    },
+    demo5 () { // 获取设备屏幕信息
+      modal.toast({ message: device.getScreenInfo() });
+    },
+    demo6 () { // 获取 Libray 版本信息
+      modal.toast({ message: device.getLibVersion() });
     }
-}
+  }
+};
 </script>

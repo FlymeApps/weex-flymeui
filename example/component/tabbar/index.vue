@@ -1,7 +1,7 @@
 <template>
   <div class="mzui-demo">
     <scroller class="scroller">
-      <title link=""></title>
+      <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-tabbar/"></title>
 
       <div class="btn-wrap">
         <fm-button size="huge" @buttonClicked="onChange('demo1')">基本使用</fm-button>

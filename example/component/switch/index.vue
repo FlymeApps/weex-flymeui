@@ -1,16 +1,16 @@
 <template>
   <div class="mzui-demo">
     <scroller class="scroller">
-      <title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59eff86c67e2274f086396b2"></title>
+      <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-switch/"></title>
       <category title="基本样式"></category>
       <div class="list">
         <div class="item">
             <fm-switch></fm-switch>
             <fm-switch common></fm-switch>
-            <!-- <fm-switch360 
-              border-color="#000000" 
-              background-color="green" 
-              focus-color="gray" 
+            <!-- <fm-switch360
+              border-color="#000000"
+              background-color="green"
+              focus-color="gray"
               blur-color="white"
               @fmSwitchStateChange="change"></fm-switch360> -->
         </div>
@@ -98,9 +98,6 @@
 import { FmSwitch } from '../../../index';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
-import { setTitle } from '../../_mods/set-nav';
-
-const modal = weex.requireModule('modal');
 
 export default {
   components: { Title, Category, FmSwitch },

@@ -1,7 +1,7 @@
 <template>
     <div class="mzui-demo">
         <scroller class="scroller">
-            <title link="http://apps.flyme.cn/docs/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=5a33908567e2277e77dcf93d"></title>
+            <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-overlay/"></title>
             <category title="动画蒙版"></category>
             <fm-button class="btn" @buttonClicked="openOverlay">有动画</fm-button>
             <category title="无动画蒙版"></category>
@@ -39,7 +39,6 @@
 import { FmButton, FmOverlay } from '../../../index';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
-import { setTitle } from '../../_mods/set-nav';
 
 const modal = weex.requireModule('modal');
 

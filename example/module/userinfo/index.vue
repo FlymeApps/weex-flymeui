@@ -53,43 +53,41 @@
 
 <script>
 import Title from '../../_mods/title.vue';
-import { FmText, FmImage, FmIcon } from '../../../index';
-import DCell from '../../index/components/cell.vue';
+import { FmText, FmIcon } from '../../../index';
+import DCell from '../../_mods/cell.vue';
 
-const userinfo = weex.requireModule('userinfo')
+const userinfo = weex.requireModule('userinfo');
 
-const modal = weex.requireModule('modal')
-
-let url = weex.config.bundleUrl.replace(/navigator\/index.native.js/, 'navigatorTest/index.native.js')
+const modal = weex.requireModule('modal');
 
 export default {
-    components: { FmText, FmIcon, DCell, Title },
-    methods: {
-      back() {
-        navigator.pop()
-      },
-      demo1() {   // 获取登录状态
-        userinfo.getLoginState(res => {
-            modal.toast({ message: res })
-        })
-      },
-      demo2() {  // 获取token
-        userinfo.getUserToken(res => {
-            modal.toast({ message: res })
-        })
-      },
-      demo3() {  // 获取用户信息
-        userinfo.getUserToken(res => {
-            if (res.result === 'success') {
-                let token = res.data
-                userinfo.getUserInfo(token, res => {
-                    modal.toast({ message: res })
-                })
-            } else {
-                modal.toast({ message: res })
-            }
-        })
-      }
+  components: { FmText, FmIcon, DCell, Title },
+  methods: {
+    back () {
+      navigator.pop();
+    },
+    demo1 () { // 获取登录状态
+      userinfo.getLoginState(res => {
+        modal.toast({ message: res });
+      });
+    },
+    demo2 () { // 获取token
+      userinfo.getUserToken(res => {
+        modal.toast({ message: res });
+      });
+    },
+    demo3 () { // 获取用户信息
+      userinfo.getUserToken(res => {
+        if (res.result === 'success') {
+          const token = res.data;
+          userinfo.getUserInfo(token, res => {
+            modal.toast({ message: res });
+          });
+        } else {
+          modal.toast({ message: res });
+        }
+      });
     }
-}
+  }
+};
 </script>

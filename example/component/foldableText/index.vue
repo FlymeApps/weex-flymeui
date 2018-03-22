@@ -1,6 +1,6 @@
 <template>
   <div class="mzui-demo">
-    <scroller link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59f2fdef67e2274f086396bd">
+    <scroller link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-foldable-text/">
       <title title="fm-foldable-text"></title>
       <category title="可折叠文本"></category>
       <div class="container">
@@ -53,9 +53,6 @@
 import { FmFoldableText } from '../../../index';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
-import { setTitle } from '../../_mods/set-nav';
-
-const modal = weex.requireModule('modal');
 
 export default {
   components: { Title, Category, FmFoldableText },

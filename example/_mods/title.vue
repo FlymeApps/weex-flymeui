@@ -3,8 +3,8 @@
       <fm-image :scale="1" src="http://weixin-res.flyme.cn/resources/weex-flymeui/assets/design_logo.png"/>
       <fm-text class="desc" value="为你提供最全面的公共规范内容展示，让你方便调用动画参数、设计参数以及控件代码"
                             :style="{fontSize: 42, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
-      <div class="doc">
-        <fm-text @click="click" class="link" value="查看使用文档" :style="{fontSize: 36, color: '#198ded', fontWeight: 400, textDecoration: 'underline'}" />
+      <div class="doc" @click="click">
+        <fm-text class="link" value="查看使用文档" :style="{fontSize: 36, color: '#198ded', fontWeight: 400, textDecoration: 'underline'}" />
       </div>
   </div>
 </template>
@@ -30,6 +30,7 @@
 <script>
 import { FmText, FmImage } from '../../index';
 const intent = weex.requireModule('intent');
+const modal = weex.requireModule('modal');
 export default {
   props: {
     link: String
@@ -37,6 +38,10 @@ export default {
   components: { FmText, FmImage },
   methods: {
     click () {
+      if (!this.link) {
+        modal.toast({ message: '暂无文档' });
+        return;
+      }
       if (weex.config.env.platform === 'Web') {
         window.location.href = this.link;
       } else {

@@ -51,23 +51,23 @@
 
 <script>
 import Title from '../../_mods/title.vue';
-import DCell from '../../index/components/cell.vue';
+import DCell from '../../_mods/cell.vue';
 
-const scanCode = weex.requireModule('scanCode')
+const scanCode = weex.requireModule('scanCode');
 
-const modal = weex.requireModule('modal')
+const modal = weex.requireModule('modal');
 
 export default {
-    components: { DCell, Title },
-    methods: {
-      back() {
-        navigator.pop()
-      },
-      demo1() {   // 调起扫码
-        scanCode.scanCode(res => {
-          modal.toast({ message: res })
-        })
-      }
+  components: { DCell, Title },
+  methods: {
+    back () {
+      navigator.pop();
+    },
+    demo1 () { // 调起扫码
+      scanCode.scanCode(res => {
+        modal.toast({ message: res });
+      });
     }
-}
+  }
+};
 </script>

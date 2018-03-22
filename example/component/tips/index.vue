@@ -1,7 +1,7 @@
 <template>
 	<div class="mzui-demo">
 		<scroller class="scroller">
-			<title link="http://design.flyme.cn/book/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=59eff237a5a0a6738061af04"></title>
+			<title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-tips/"></title>
 			<category title="默认样式"></category>
 			<div class="wrap">
 				<fm-text class="title" text="需要提示的文字" />
@@ -76,25 +76,24 @@
 </style>
 
 <script>
-import { FmTips, FmText } from '../../../index'
+import { FmTips, FmText } from '../../../index';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
-import { setTitle } from '../../_mods/set-nav';
 
-let modal = weex.requireModule('modal')
+const modal = weex.requireModule('modal');
 
 export default {
-	components: { Title, Category ,FmTips, FmText },
-	methods: {
-		close () {
-			modal.toast({message: 'close'})
-		},
-		copy() {
-			modal.toast({message: 'copy'})
-		},
-		paste() {
-			modal.toast({message: 'paste'})
-		}
-	}
-}
+  components: { Title, Category, FmTips, FmText },
+  methods: {
+    close () {
+      modal.toast({ message: 'close' });
+    },
+    copy () {
+      modal.toast({ message: 'copy' });
+    },
+    paste () {
+      modal.toast({ message: 'paste' });
+    }
+  }
+};
 </script>

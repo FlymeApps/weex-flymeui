@@ -1,10 +1,8 @@
 <template>
   <scroller class="wrap">
+    <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-slider/"></title>
+    <category title="基本使用"></category>
     <fm-slider :items="items" :auto-play="true"></fm-slider>
-    <fm-footer padding-size="large">
-      <fm-button @buttonClicked="prev" size="large">上一页</fm-button>
-      <fm-button @buttonClicked="next" theme="firebrick" size="large">下一页</fm-button>
-    </fm-footer>
   </scroller>
 </template>
 
@@ -18,8 +16,10 @@
 
 <script>
 import { FmSlider, FmButton, FmText, FmFooter } from '../../../index';
+import Title from '../../_mods/title.vue';
+import Category from '../../_mods/category.vue';
 export default {
-  components: { FmSlider, FmButton, FmText, FmFooter },
+  components: { Title, Category, FmSlider, FmButton, FmText, FmFooter },
   data: () => ({
     page: 0,
     items: [

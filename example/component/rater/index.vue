@@ -1,7 +1,7 @@
 <template>
     <div class="mzui-demo">
         <scroller class="scroller">
-            <title link="http://apps.flyme.cn/docs/book.html?bookId=59ef0a54a5a0a6738061aeeb&doc=5a33913867e2277e77dcf949"></title>
+            <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-rater/"></title>
             <category title="不同大小"></category>
             <div class="container">
                 <fm-rater :starImgs="star_normal_urls" :starBgImg="star_bg_url"></fm-rater>
@@ -95,24 +95,24 @@ import Category from '../../_mods/category.vue';
 const modal = weex.requireModule('modal');
 
 export default {
-    components: { Title, Category, FmRater },
-    data: () => ({
-        star_normal_urls: [
-            'http://design.flyme.cn/weexui/assets/star_normal.png',
-            'http://design.flyme.cn/weexui/assets/star_normal.png',
-            'http://design.flyme.cn/weexui/assets/star_normal.png',
-            'http://design.flyme.cn/weexui/assets/star_normal.png',
-            'http://design.flyme.cn/weexui/assets/star_normal.png',
-        ],    
-        star_bg_url: 'http://design.flyme.cn/weexui/assets/star_bg.png',
-        star_special_url: 'http://design.flyme.cn/weexui/assets/star_special.png',
-        star_dark_url: 'http://design.flyme.cn/weexui/assets/star_dark.png',
-        star_dark_bg: 'http://design.flyme.cn/weexui/assets/star_dark_bg.png'
-    }),
-    methods: {
-        scoreChanged(e) {
-            modal.toast({ message: e })
-        }
+  components: { Title, Category, FmRater },
+  data: () => ({
+    star_normal_urls: [
+      'http://design.flyme.cn/weexui/assets/star_normal.png',
+      'http://design.flyme.cn/weexui/assets/star_normal.png',
+      'http://design.flyme.cn/weexui/assets/star_normal.png',
+      'http://design.flyme.cn/weexui/assets/star_normal.png',
+      'http://design.flyme.cn/weexui/assets/star_normal.png'
+    ],
+    star_bg_url: 'http://design.flyme.cn/weexui/assets/star_bg.png',
+    star_special_url: 'http://design.flyme.cn/weexui/assets/star_special.png',
+    star_dark_url: 'http://design.flyme.cn/weexui/assets/star_dark.png',
+    star_dark_bg: 'http://design.flyme.cn/weexui/assets/star_dark_bg.png'
+  }),
+  methods: {
+    scoreChanged (e) {
+      modal.toast({ message: e });
     }
-}
+  }
+};
 </script>

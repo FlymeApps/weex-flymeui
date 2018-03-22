@@ -7106,7 +7106,7 @@ exports.default = {
   beforeCreate: function beforeCreate() {
     dom.addRule('fontFace', {
       'fontFamily': 'flymeicon',
-      'src': "url('http://design.flyme.cn/weexui/assets/iconfont.ttf')"
+      'src': "url('http://weixin-res.flyme.cn/resources/weex-flymeui/assets/iconfont.ttf')"
     });
   },
 
@@ -9961,12 +9961,14 @@ module.exports = {
     "zIndex": 99999
   },
   "dialog-box": {
-    "position": "fixed",
-    "left": "72",
     "width": "936",
     "backgroundColor": "#FFFFFF",
     "borderRadius": "10",
     "boxShadow": "0 0 30px 0 rgba(0, 0, 0, 0.3)"
+  },
+  "dialog-box-H5": {
+    "position": "fixed",
+    "left": "72"
   },
   "content-title": {
     "marginTop": "63",
@@ -10087,6 +10089,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var animation = weex.requireModule('animation');
 var type_alert = 'alert';
@@ -10137,7 +10149,7 @@ exports.default = {
       default: true
     },
     duration: {
-      type: [Number, String],
+      type: Number,
       default: 300
     },
     timingFunction: {
@@ -10197,12 +10209,15 @@ exports.default = {
           _this.appearDialog(true);
         }, 50);
       } else {
-        this.$refs['fm-overlay'].hide();
+        !this.isCreator && this.$refs['fm-overlay'].hide();
         this.appearDialog(false);
       }
     }
   },
   computed: {
+    isCreator: function isCreator() {
+      return weex.supports && weex.supports('@component/FmOverlayNative');
+    },
     dialogBtns: function dialogBtns() {
       var btns = [];
       if (!this.btns || !this.btns.length) {
@@ -10231,7 +10246,7 @@ exports.default = {
     dialogStyle: function dialogStyle() {
       return {
         opacity: this.dialogOpacity,
-        top: this.top
+        top: !this.isCreator ? this.top : 0
       };
     },
     btnStyle: function btnStyle() {
@@ -10249,7 +10264,7 @@ exports.default = {
       e.preventDefault && e.preventDefault();
     },
     overlayClicked: function overlayClicked() {
-      this.canAutoClose && (this.appearDialog(false) || this.$emit('fmDialogOverlayClicked', {}));
+      this.canAutoClose && (this.appearDialog(false) || this.$emit('fmDialogDisappeared', {}));
       this.cancelCb && this.cancelCb();
     },
     btnClick: function btnClick(btn) {
@@ -10268,8 +10283,14 @@ exports.default = {
 
       var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.duration;
       var hasAnimation = this.hasAnimation,
-          timingFunction = this.timingFunction;
+          timingFunction = this.timingFunction,
+          isCreator = this.isCreator;
 
+      if (isCreator) {
+        this.self_show = bool;
+        this.dialogOpacity = bool ? 1 : 0;
+        return;
+      }
       var dialogEl = this.$refs['dialog-box'];
       this.dialogOpacity = bool ? 0 : 1;
       if (hasAnimation && dialogEl) {
@@ -10478,9 +10499,17 @@ module.exports.render._withStripped = true
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: ["container"]
-  }, [(_vm.self_show) ? _c('fm-overlay', {
+  return _c(_vm.isCreator ? 'FmOverlayNative' : 'div', {
+    tag: "component",
+    staticClass: ["container"],
+    attrs: {
+      "visible": _vm.self_show,
+      "touchable": _vm.canAutoClose
+    },
+    on: {
+      "onDismiss": _vm.overlayClicked
+    }
+  }, [(_vm.self_show && !_vm.isCreator) ? _c('fm-overlay', {
     ref: "fm-overlay",
     attrs: {
       "hasAnimation": true,
@@ -10490,9 +10519,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "fmOverlayBodyClicked": _vm.overlayClicked
     }
-  }) : _vm._e(), (_vm.self_show) ? _c('div', {
+  }) : _vm._e(), (_vm.self_show || _vm.isCreator) ? _c('div', {
     ref: "dialog-box",
     staticClass: ["dialog-box"],
+    class: !_vm.isCreator && ['dialog-box-H5'],
     style: _vm.dialogStyle,
     on: {
       "touchend": _vm.handleTouchEnd
@@ -10502,8 +10532,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._t("title", [_c('fm-text', {
     staticClass: ["content-title"],
     attrs: {
-      "medium": "",
-      "title": ""
+      "fontWeight": "medium",
+      "size": "large"
     }
   }, [_vm._v(_vm._s(_vm.title))])]), _vm._t("content", [_c('fm-text', {
     staticClass: ["content-subtext"]
@@ -15836,9 +15866,9 @@ exports.default = {
       var defaultStyle = {
         titleColor: 'rgba(0, 0, 0, 0.6)',
         activeTitleColor: '#198DED',
-        height: 102 + 'px',
-        padding: 18 + 'px',
-        fontSize: 42 + 'px',
+        height: 102,
+        padding: 18,
+        fontSize: 42,
         activeBottomColor: '#198DED'
       };
       return Object.assign({}, defaultStyle, this.tabStyles);
