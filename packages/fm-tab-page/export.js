@@ -2,7 +2,6 @@ import VALUE from 'weex-flymeui/lib/common/variable-type';
 export default {
   name: 'FmTabPage',
   desc: '标签页组件',
-  slots: null,
   props: {
     tabTitles: {
       type: VALUE.ARRAY,
@@ -22,6 +21,11 @@ export default {
       type: VALUE.NUMBER,
       desc: '页面高度',
       default: 1920
+    },
+    selectIndex: {
+      type: VALUE.NUMBER,
+      desc: '当前选中',
+      default: 0
     }
   },
   events: {
@@ -32,5 +36,14 @@ export default {
   size: {
     width: 1080,
     height: 1920
-  }
+  },
+  slots: [{
+    dynamicSlots (tabTitles = []) {
+      if (!tabTitles) { return; }
+      return tabTitles.map((v, i) => ({
+        name: `tab-item-${i}`, desc: `子内容块${i}`
+      }));
+    },
+    params: ['tabTitles']
+  }]
 };

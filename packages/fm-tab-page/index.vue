@@ -1,7 +1,7 @@
 <!-- Created by Yanjiie on 18/03/06. -->
 <template>
   <div class="fm-tab-page"
-       :style="{ height: (tabPageHeight) + 'px' }">
+       :style="{ height: (tabPageHeight) + 'px', opacity: loaded ? 1 : 0}">
     <scroller class="tab-title-list"
               ref="tab-title-list"
               :show-scrollbar="false"
@@ -16,11 +16,11 @@
              @click="setPage(idx)"
              :ref="'fm-tab-title-'+idx">
           <text class="item-title"
-                :style="{ fontSize: cTabStyles.fontSize + 'px', color: currentPage === idx ? cTabStyles.activeTitleColor : cTabStyles.titleColor, paddingLeft: cTabStyles.padding + 'px', paddingRight: cTabStyles.padding + 'px'}">{{ v.title }}</text>
+                :style="{ fontSize: cTabStyles.fontSize + 'px', color: currentPage === idx ? cTabStyles.activeTitleColor : cTabStyles.titleColor, paddingLeft: cTabStyles.padding + 'px', paddingRight: cTabStyles.padding + 'px' }">{{ v.title }}</text>
         </div>
         <div class="border-bottom"
-              ref="tab-border"
-              :style="{ width: bottomInitWidth + 'px', transform: `translateX(${bottomInitOffset}px)`, backgroundColor: cTabStyles.activeBottomColor}"></div>
+             ref="tab-border"
+             :style="{ width: bottomInitWidth + 'px', transform: `translateX(${bottomInitOffset}px)`, backgroundColor: cTabStyles.activeBottomColor }"></div>
       </div>
     </scroller>
     <div class="tab-page-wrap"
@@ -28,10 +28,16 @@
          @panstart="_onTouchStart"
          @panmove="_onTouchMove"
          @panend="_onTouchEnd"
+         @horizontalpan="startHandler"
          :style="{ height: (tabPageHeight-cTabStyles.height) + 'px' }">
       <div class="tab-container"
            ref="tab-container">
-        <slot></slot>
+        <div class="tab-item"
+             v-for="(v, idx) in tabTitles"
+             :key="idx"
+             :style="{ height: (tabPageHeight-cTabStyles.height) + 'px' }">
+          <slot :name="`tab-item-${idx}`"></slot>
+        </div>
       </div>
     </div>
   </div>
@@ -85,13 +91,19 @@
     flex-direction: row;
     position: absolute;
   }
+
+  .tab-item {
+    width: 1080px;
+  }
 </style>
 
 <script>
 import { isWeex } from 'universal-env';
 import Binding from 'weex-bindingx';
+import index from 'vue';
 const animation = weex.requireModule('animation');
 const dom = weex.requireModule('dom');
+const modal = weex.requireModule('modal');
 const isH5 = weex.config.env.platform === 'Web';
 
 export default {
@@ -120,6 +132,17 @@ export default {
     timingFunction: {
       type: String,
       default: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+    },
+    selectIndex: {
+      type: Number,
+      default: 0
+    }
+  },
+  watch: {
+    selectIndex (val) {
+      if (this.loaded) {
+        this.setPage(this.selectIndex, false);
+      }
     }
   },
   computed: {
@@ -139,8 +162,9 @@ export default {
     }
   },
   data: () => ({
+    loaded: false,
     currentPage: 0,
-    gesToken: null,
+    gesToken: 0,
     isMoving: false,
     startTime: 0,
     deltaX: 0,
@@ -167,14 +191,15 @@ export default {
       }
       this.setPage(page);
     },
+    startHandler () {
+      this.bindExp(this.$refs['tab-page-wrap']);
+    },
     _onTouchStart (e) {
       if (isH5) {
         this.startPosX = this._getTouchXPos(e);
         this.startPosY = this._getTouchYPos(e);
         this.deltaX = 0;
         this.startTime = new Date().getTime();
-      } else {
-        this.bindExp(this.$refs['tab-page-wrap']);
       }
     },
     _onTouchMove (e) {
@@ -199,7 +224,16 @@ export default {
       }
     },
     bindExp (element) {
-      if (!this.isMoving && element && this.getEl(element)) {
+      if (element && this.getEl(element)) {
+        if (this.isMoving && this.gesToken !== 0) {
+          Binding.unbind({
+            eventType: 'pan',
+            token: this.gesToken
+          });
+          this.gesToken = 0;
+          return;
+        }
+
         const tabPageEl = this.getEl(this.$refs['tab-container']);
         const tabBorderEl = this.getEl(this.$refs['tab-border']);
         const tabScrollEl = this.getEl(this.$refs['tab-title-list']);
@@ -255,9 +289,7 @@ export default {
         const props = [{
           element: tabPageEl,
           property: 'transform.translateX',
-          expression: {
-            origin: tabExp
-          }
+          expression: tabExp
         }, {
           element: tabBorderEl,
           property: 'transform.translateX',
@@ -272,11 +304,7 @@ export default {
           expression: tabScrollExp
         }];
 
-        if (this.gesToken) {
-          Binding.unbind(this.gesToken);
-        }
-
-        this.gesToken = Binding.bind({
+        const gesTokenObj = Binding.bind({
           anchor: this.getEl(element),
           eventType: 'pan',
           props
@@ -292,9 +320,11 @@ export default {
             }
           }
         });
+
+        this.gesToken = gesTokenObj.token;
       }
     },
-    setPage (page, url = null) {
+    setPage (page, animated = true) {
       if (this.isMoving === true) {
         return;
       }
@@ -306,22 +336,21 @@ export default {
       if (tabOffset >= 1080 / 2) {
         dom.scrollToElement(currentTabEl, {
           offset: -1080 / 2 + tabWidth / 2,
-          animated: true
+          animated
         });
       } else {
         dom.scrollToElement(currentTabEl, {
           offset: -tabOffset,
-          animated: true
+          animated
         });
       }
 
-      this.isMoving = false;
       this.currentPage = page;
-      this._animateTransformX(page);
-      this._animateBorder(page);
+      this._animateTransformX(page, animated);
+      this._animateBorder(page, animated);
       this.$emit('fmTabPageTabSelected', { page });
     },
-    _animateTransformX (page) {
+    _animateTransformX (page, animated = true) {
       const { duration, timingFunction } = this;
       const containerEl = this.$refs[`tab-container`];
       const dist = page * 1080;
@@ -329,13 +358,14 @@ export default {
         styles: {
           transform: `translateX(${-dist}px)`
         },
-        duration: duration,
+        duration: animated ? duration : 0.00001,
         timingFunction,
         delay: 0
       }, () => {
+        this.isMoving = false;
       });
     },
-    _animateBorder (page) {
+    _animateBorder (page, animated = true) {
       const { duration, timingFunction, tabPositions } = this;
       const borderEl = this.$refs[`tab-border`];
       const dist = tabPositions[page].offset;
@@ -344,10 +374,11 @@ export default {
           transform: `translateX(${dist}px)`,
           width: tabPositions[page].width
         },
-        duration: duration,
+        duration: animated ? duration : 0.00001,
         timingFunction,
         needLayout: false
       }, () => {
+        this.isMoving = false;
       });
     },
     _getTouchXPos (e) {
@@ -368,7 +399,13 @@ export default {
             width: rect.size.width,
             offset: rect.size.left
           };
-          i === 0 && (this.bottomInitWidth = rect.size.width);
+          if (i === this.selectIndex) {
+            this.bottomInitWidth = rect.size.width;
+            this.setPage(this.selectIndex, false);
+            setTimeout(() => {
+              this.loaded = true;
+            }, 50);
+          }
         });
       });
     }

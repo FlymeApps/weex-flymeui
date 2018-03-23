@@ -2,6 +2,7 @@
   <fm-tab-page :tab-titles="tabTitles"
                 ref="fm-tab-page">
     <list v-for="(v, index) in tabTitles" :key="index"
+          :slot="`tab-item-${index}`"
           class="item-container">
       <cell v-for="(item, idx) in listData" :key="idx">
         <fm-pan-item @fmPanItemPan="fmPanItemPan">
@@ -41,7 +42,8 @@ export default {
       }, {
         title: '标签'
       }],
-      listData: ['哈哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈']
+      listData: ['哈哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈', '哈哈'],
+      select: 1
     };
   },
   methods: {

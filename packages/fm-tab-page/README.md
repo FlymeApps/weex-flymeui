@@ -21,7 +21,8 @@
   <fm-tab-page :tab-titles="tabTitles"
                ref="fm-tab-page">
     <list v-for="(v, index) in tabTitles" :key="index"
-          class="item-container">
+          class="item-container"
+          :slot="`tab-item-${index}`">
       <cell v-for="(item, idx) in listData" :key="idx">
         <fm-pan-item @fmPanItemPan="fmPanItemPan">
           <text class="cell">{{ item }}</text>
@@ -92,6 +93,7 @@ export default {
 | pan-dist | `Number` |`N`| `200` | 滚动多少切换上下一屏幕 |
 | duration | `Number` |`N`| `300` | 切换动画的时间 |
 | timing-function | `String` |`N`| `-` | 切换动画缓动函数 |
+| select-index | `Number` |`N`| `0` | 初始选中页数|
 
 ## 可供外部使用的方法
 
