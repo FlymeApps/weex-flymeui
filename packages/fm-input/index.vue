@@ -51,7 +51,7 @@ export default {
     if (this.type === 'password') {
       this.pwdModel = true
     }
-    this.value = this.defalutValue || ''
+    this.value = this.defaultValue || ''
   },
   data() {
     return {
@@ -63,7 +63,7 @@ export default {
     }
   },
   watch: {
-    defalutValue(val) {
+    defaultValue(val) {
       this.value = val
     }
   },
