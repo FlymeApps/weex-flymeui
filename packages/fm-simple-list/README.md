@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { FmSimpleList } from '../../../index';
+import { FmSimpleList } from 'weex-flymeui';
 const modal = weex.requireModule('modal');
 export default {
   components: { FmSimpleList },

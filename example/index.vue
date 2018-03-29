@@ -73,7 +73,7 @@
 </style>
 
 <script>
-import { FmText, FmImage } from '../index';
+import { FmText, FmImage } from 'weex-flymeui';
 import category from './category.js';
 const navigator = weex.requireModule('navigator');
 const env = weex.config.env;

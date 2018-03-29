@@ -51,7 +51,7 @@
 </style>
 
 <script>
-import { FmInput } from '../../../index';
+import { FmInput } from 'weex-flymeui';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
 

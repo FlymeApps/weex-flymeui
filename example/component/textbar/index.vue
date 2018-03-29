@@ -38,7 +38,7 @@
 </style>
 
 <script>
-import { FmTextbar, FmButton } from '../../../index';
+import { FmTextbar, FmButton } from 'weex-flymeui';
 import Title from '../../_mods/title.vue';
 const modal = weex.requireModule('modal');
 

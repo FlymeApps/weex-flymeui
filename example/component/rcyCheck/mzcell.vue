@@ -19,12 +19,12 @@
 </style>
 
 <script>
-  import { CheckIcon }from '../../../index'
-  export default {
-    components: { CheckIcon },
-    props: {
-      checking: Boolean,
-      check: Boolean
-    }
+import { CheckIcon } from '../../../index';
+export default {
+  components: { CheckIcon },
+  props: {
+    checking: Boolean,
+    check: Boolean
   }
+};
 </script>

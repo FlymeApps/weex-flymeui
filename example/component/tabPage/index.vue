@@ -25,7 +25,7 @@
 </style>
 
 <script>
-import { FmTabPage, FmPanItem, Utils } from '../../../index';
+import { FmTabPage, FmPanItem, Utils } from 'weex-flymeui';
 
 export default {
   components: { FmTabPage, FmPanItem },
@@ -34,7 +34,8 @@ export default {
       tabTitles: [{
         title: '标签1'
       }, {
-        title: '标签标签'
+        title: '标签标签',
+        selected: false
       }, {
         title: 'NBA'
       }, {
@@ -52,6 +53,12 @@ export default {
         this.$refs['fm-tab-page'].bindExp(e.element);
       }
     }
+  },
+  mounted () {
+    setTimeout(() => {
+      this.tabTitles.push({ title: '12312' });
+      // console.log(this.tabTitles);
+    });
   }
 };
 </script>

@@ -96,7 +96,7 @@
 </style>
 
 <script>
-import { FmRater } from '../../../index';
+import { FmRater } from 'weex-flymeui';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
 const modal = weex.requireModule('modal');

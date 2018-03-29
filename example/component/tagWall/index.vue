@@ -51,7 +51,7 @@
 </style>
 
 <script>
-import { FmTagWall } from '../../../index';
+import { FmTagWall } from 'weex-flymeui';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
 

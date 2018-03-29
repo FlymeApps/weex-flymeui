@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { FmTagWall } from '../../../index';
+import { FmTagWall } from 'weex-flymeui';
 const modal = weex.requireModule('modal');
 export default {
   components: { FmTagWall, Title, Category },

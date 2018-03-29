@@ -66,7 +66,7 @@
 </style>
 
 <script>
-import { FmText, FmImage, FmIcon, FmInput } from '../../../index';
+import { FmText, FmImage, FmIcon, FmInput } from 'weex-flymeui';
 import DCell from '../../_mods/cell.vue';
 
 const navigator = weex.requireModule('navigator');

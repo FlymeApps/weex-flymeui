@@ -78,7 +78,7 @@
 </style>
 
 <script>
-import { FmButton, FmText } from '../../../index';
+import { FmButton, FmText } from 'weex-flymeui';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
 

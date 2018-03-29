@@ -17,7 +17,7 @@
 </style>
 
 <script>
-import { FmSlider, FmButton, FmText, FmFooter } from '../../../index';
+import { FmSlider, FmButton, FmText, FmFooter } from 'weex-flymeui';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
 export default {

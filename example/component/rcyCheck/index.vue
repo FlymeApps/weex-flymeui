@@ -61,7 +61,7 @@
 </style>
 
 <script>
-import { FmRcyCheck } from '../../../index';
+import { FmRcyCheck } from 'weex-flymeui';
 const modal = weex.requireModule('modal');
 export default {
   components: { FmRcyCheck },

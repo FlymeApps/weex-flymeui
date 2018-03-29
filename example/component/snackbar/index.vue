@@ -67,7 +67,8 @@
 </style>
 
 <script>
-import { FmButton, FmSnackBar, showSnackBar } from '../../../index';
+import { FmButton, FmSnackBar } from 'weex-flymeui';
+import showSnackBar from '../../../packages/module/snackbar';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
 

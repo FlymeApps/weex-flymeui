@@ -57,7 +57,7 @@
 
 <script>
 import Title from '../../_mods/title.vue';
-import { FmText, FmIcon, FmInput, FmButton } from '../../../index';
+import { FmText, FmIcon, FmInput, FmButton } from 'weex-flymeui';
 import DCell from '../../_mods/cell.vue';
 
 const share = weex.requireModule('share');

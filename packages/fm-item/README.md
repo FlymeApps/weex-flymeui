@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { FmTag } from '../../../index';
+import { FmTag } from 'weex-flymeui';
 export default {
   components: { FmItem }
 };

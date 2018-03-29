@@ -53,7 +53,7 @@
 </style>
 
 <script>
-import { FmText, FmImage, FmIcon } from '../../index';
+import { FmText, FmImage, FmIcon } from 'weex-flymeui';
 import DCell from './cell.vue';
 import category from '../category';
 const navigator = weex.requireModule('navigator');

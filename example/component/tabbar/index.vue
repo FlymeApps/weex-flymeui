@@ -95,7 +95,7 @@
 </style>
 
 <script>
-import { FmTabbar, FmTabbarItem, FmButton } from '../../../index';
+import { FmTabbar, FmTabbarItem, FmButton } from 'weex-flymeui';
 import Title from '../../_mods/title.vue';
 
 export default {

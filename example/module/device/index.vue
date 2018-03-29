@@ -49,7 +49,7 @@
 
 <script>
 import Title from '../../_mods/title.vue';
-import { FmText, FmIcon } from '../../../index';
+import { FmText, FmIcon } from 'weex-flymeui';
 import DCell from '../../_mods/cell.vue';
 
 const device = weex.requireModule('device');

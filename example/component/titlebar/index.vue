@@ -84,7 +84,7 @@
 </style>
 
 <script>
-import { FmTitlebar, FmTag } from '../../../index';
+import { FmTitlebar, FmTag } from 'weex-flymeui';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
 const modal = weex.requireModule('modal');

@@ -42,7 +42,7 @@
 </style>
 
 <script>
-import { FmRichText, FmSpecialRichText } from '../../../index';
+import { FmRichText, FmSpecialRichText } from 'weex-flymeui';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
 

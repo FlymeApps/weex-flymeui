@@ -49,7 +49,7 @@
                    @fmDialogBtnClicked="inputClick"
                    @fmDialogDisappeared="inputOverlayClick"
                    :can-auto-close="true">
-          <fm-input :value="inputText" slot="content" type="text" placeholder="输入点什么.." :autofocus="true" @input="inputing" />
+          <fm-input ref="input" :default-value="inputText" slot="content" type="text" placeholder="输入点什么.." :autofocus="true" @input="inputing" />
         </fm-dialog>
 
         <fm-dialog :show="show"
@@ -99,14 +99,15 @@
 </style>
 
 <script>
-import { FmButton, FmDialog, FmDialogBtn, confirm, alert, FmCheckListGroup, FmCheckbox, FmInput } from '../../../index';
+import { FmButton, FmDialog, FmCheckListGroup, FmCheckbox, FmInput } from 'weex-flymeui';
+import { confirm, alert } from '../../../packages/module/dialog';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
 
 const modal = weex.requireModule('modal');
 
 export default {
-  components: { Title, FmDialog, Category, FmButton, FmDialogBtn, FmCheckListGroup, FmCheckbox, FmInput },
+  components: { Title, FmDialog, Category, FmButton, FmCheckListGroup, FmCheckbox, FmInput },
   data: () => ({
     show: false,
     checkListShow: false,
@@ -172,6 +173,7 @@ export default {
       this.checkList = [];
     },
     click7 () {
+      // this.$refs.input.blur()
       this.inputShow = true;
       // this.inputText = ''
     },

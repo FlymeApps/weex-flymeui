@@ -100,7 +100,7 @@
 </style>
 
 <script>
-import { FmFooter, FmButton, FmTabbar, FmTabbarItem } from '../../../index';
+import { FmFooter, FmButton, FmTabbar, FmTabbarItem } from 'weex-flymeui';
 import Title from '../../_mods/title.vue';
 
 export default {

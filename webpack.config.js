@@ -130,9 +130,10 @@ const getBaseConfig = () => ({
   plugins,
   resolve: {
     extensions: ['.js'],
-    modules: [
-      'node_modules'
-    ]
+    modules: ['node_modules'],
+    alias: {
+      'weex-flymeui': path.resolve(__dirname, '')
+    }
   }
 });
 

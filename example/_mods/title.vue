@@ -28,7 +28,7 @@
 </style>
 
 <script>
-import { FmText, FmImage } from '../../index';
+import { FmText, FmImage } from 'weex-flymeui';
 const intent = weex.requireModule('intent');
 const modal = weex.requireModule('modal');
 export default {

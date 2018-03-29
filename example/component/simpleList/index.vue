@@ -56,7 +56,7 @@
 </style>
 
 <script>
-import { FmSimpleList } from '../../../index';
+import { FmSimpleList } from 'weex-flymeui';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
 

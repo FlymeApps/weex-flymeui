@@ -83,7 +83,7 @@
 </style>
 
 <script>
-import { FmButton, FmPopup } from '../../../index';
+import { FmButton, FmPopup } from 'weex-flymeui';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
 

@@ -50,7 +50,7 @@
 </style>
 
 <script>
-import { FmButton, FmActionSheet } from '../../../index';
+import { FmButton, FmActionSheet } from 'weex-flymeui';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
 

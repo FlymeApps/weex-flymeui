@@ -1,11 +1,13 @@
 {
   "presets": [ "es2015", "stage-0" ],
   "plugins": [
-    ["module-resolver", {
-      "root": ["./"],
-      "alias": {
-        "weex-flymeui/lib": "./lib"
+    [
+      "weexcomponent",
+      {
+        "style": false,
+        "libraryName": "weex-flymeui",
+        "libDir": "packages"
       }
-    }]
+    ]
   ]
 }

@@ -77,7 +77,7 @@
 </style>
 
 <script>
-import FmSearchbar from '../../../packages/fm-searchbar';
+import { FmSearchbar } from 'weex-flymeui';
 import FmIcon from '../../../packages/fm-icon';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';

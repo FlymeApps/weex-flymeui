@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { FmTabbar } from '../../../index';
+import { FmTabbar } from 'weex-flymeui';
 const modal = weex.requireModule('modal');
 
 export default {
@@ -103,7 +103,7 @@ export default {
 </template>
 
 <script>
-import { FmTabbar, FmTabbarItem } from '../../../index';
+import { FmTabbar, FmTabbarItem } from 'weex-flymeui';
 
 export default {
   components: { FmTabbar, FmTabbarItem },

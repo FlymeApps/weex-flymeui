@@ -364,7 +364,7 @@
 </style>
 
 <script>
-import { FmIcon } from '../../../index';
+import { FmIcon } from 'weex-flymeui';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
 
