@@ -4,11 +4,6 @@ export default {
   desc: '开关按钮组件',
   slots: null,
   props: {
-    common: {
-      type: VALUE.BOOLEAN,
-      desc: '使用系统样式',
-      default: false
-    },
     checked: {
       type: VALUE.BOOLEAN,
       desc: '是否选中',

@@ -2,7 +2,6 @@ import VALUE from 'weex-flymeui/lib/common/variable-type';
 export default {
   name: 'FmTagWall',
   desc: '标签墙组件',
-  slots: null,
   props: {
     list: {
       type: VALUE.ARRAY,
@@ -19,7 +18,7 @@ export default {
           }
         }
       },
-      default: [{ title: '标签1', color: '#FC5B23' }, { title: '标签2' }]
+      default: []
     },
     title: {
       type: VALUE.STRING,
@@ -53,5 +52,12 @@ export default {
   size: {
     width: 1080,
     height: 300
-  }
+  },
+  slot: [{
+    name: 'left',
+    desc: '自定义左边按钮'
+  }, {
+    name: 'right',
+    desc: '自定义右边按钮'
+  }]
 };

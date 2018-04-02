@@ -5,8 +5,8 @@
       <category title="基本样式"></category>
       <div class="list">
         <div class="item">
-            <fm-switch></fm-switch>
-            <fm-switch common></fm-switch>
+            <fm-switch :disabled="isDis"></fm-switch>
+            <fm-switch common :disabled="isDis"></fm-switch>
             <!-- <fm-switch360
               border-color="#000000"
               background-color="green"
@@ -106,7 +106,7 @@ import Category from '../../_mods/category.vue';
 export default {
   components: { Title, Category, FmSwitch },
   data: () => ({
-    isChecked: true
+    isDis: false
   }),
   methods: {
     change (bool) {
@@ -115,9 +115,9 @@ export default {
     }
   },
   mounted () {
-    // setTimeout(() => {
-    //   this.isChecked = true
-    // }, 3000)
+    setTimeout(() => {
+      this.isDis = true;
+    }, 3000);
   }
 };
 </script>

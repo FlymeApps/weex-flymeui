@@ -2,7 +2,6 @@ import VALUE from 'weex-flymeui/lib/common/variable-type';
 export default {
   name: 'FmItem',
   desc: '通用列表组件',
-  slots: null,
   props: {
     type: {
       type: VALUE.SELECT,
@@ -49,5 +48,15 @@ export default {
   size: {
     width: 1080,
     height: 269
-  }
+  },
+  slot: [{
+    name: 'left',
+    desc: '自定义标题左边'
+  }, {
+    name: 'title',
+    desc: '自定义标题'
+  }, {
+    name: 'right',
+    desc: '自定义标题右边'
+  }]
 };

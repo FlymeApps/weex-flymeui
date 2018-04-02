@@ -15,7 +15,7 @@ export default {
           }
         }
       },
-      default: [{ title: '标签1' }, { title: '标签2' }, { title: '标签3' }]
+      default: []
     },
     tabPageHeight: {
       type: VALUE.NUMBER,
@@ -39,11 +39,16 @@ export default {
   },
   slots: [{
     dynamicSlots (tabTitles = []) {
-      if (!tabTitles) { return; }
       return tabTitles.map((v, i) => ({
-        name: `tab-item-${i}`, desc: `子内容块${i}`
+        name: `tab-item-${i}`, desc: `子页面${i + 1}`
       }));
     },
-    params: ['tabTitles']
+    dynamicParams: ['tabTitles'],
+    template (tabTitlesFiled) {
+      return `<template v-for="(item, idx) in ${tabTitlesFiled}" :slot="\`tab-item-\$\{idx\}\`">
+        <component v-for="s in allPages" :item="item" :is="s.name" v-if="item.type === s.type"></component>
+      </template>`;
+    },
+    templateParams: ['tabTitles']
   }]
 };

@@ -11,7 +11,7 @@ export default {
         inner: VALUE.STRING,
         desc: '图片链接'
       },
-      default: ['//gw.alicdn.com/imgextra/i4/169/TB2TlW1aLuSBuNkHFqDXXXfhVXa_!!169-0-lubanu.jpg_q50.jpg', '//gw.alicdn.com/imgextra/TB2nu8oev5TBuNjSspcXXbnGFXa_!!103-0-lubanu.jpg_q50.jpg']
+      default: []
     },
     autoPlay: {
       type: VALUE.BOOLEAN,

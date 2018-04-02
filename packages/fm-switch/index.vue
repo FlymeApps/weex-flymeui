@@ -7,7 +7,24 @@
   </div>
 </template>
 
-<style lang="css" src="../../lib/theme-paint/lib/switch.css" scoped>
+<style scoped>
+  .fm-switch {
+    flex-direction: row;
+    align-items: center;
+    width: 144px;
+    height: 72px;
+    border-radius: 72px;
+    background-color: #198ded;
+    border-width: 5px;
+    border-color: #198ded;
+  }
+
+  .ctr-ball {
+    width: 42px;
+    height: 42px;
+    border-radius: 21px;
+    margin-left: 10px;
+  }
 </style>
 
 <script>
@@ -50,9 +67,9 @@ export default {
       const style =
           common
             ? {
-              borderWidth: 6,
-              borderColor: '#7E97AC',
-              backgroundColor: 'none'
+              borderWidth: '5px',
+              borderColor: '#D9D9D9',
+              backgroundColor: 'transparent'
             }
             : {};
       if (disabled) {
@@ -61,10 +78,12 @@ export default {
         style.opacity = 1;
       }
       if (borderColor) {
-        style.borderWidth = 6;
+        style.borderWidth = '5px';
         style.borderColor = borderColor;
       }
       if (backgroundColor) {
+        style.borderWidth = '5px';
+        style.borderColor = backgroundColor;
         style.backgroundColor = backgroundColor;
       }
       return style;
@@ -77,13 +96,12 @@ export default {
   },
   methods: {
     changeState (e) {
-      if (this.isAnimate || this.disabled) return;
+      if (this.disabled) return;
       this.checked = !this.checked;
       this.toggleState(this.checked);
       this.$emit('fmSwitchStateChange', this.checked);
     },
     toggleState (bool) {
-      this.isAnimate = true;
       const style = bool
         ? {
           backgroundColor: this.focusColor,
@@ -92,7 +110,7 @@ export default {
         }
         : {
           backgroundColor: this.blurColor,
-          transform: 'scale(0.6)',
+          transform: 'scale(0.429)',
           transformOrigin: 'center center'
         };
       const ctrBall = this.$refs.ctrBall;
@@ -105,17 +123,14 @@ export default {
           styles: style,
           timingFunction: 'ease',
           duration: 260
-        },
-        () => {
-          this.isAnimate = false;
         }
       );
     }
   },
-  mounted () {
+  created () {
     if (this.common) {
       this.focusColor = '#198DED';
-      this.blurColor = '#7E97AC';
+      this.blurColor = '#D9D9D9';
     }
     this.checked
       ? (this.ballStyle = {
@@ -124,7 +139,7 @@ export default {
       })
       : (this.ballStyle = {
         backgroundColor: this.blurColor,
-        transform: 'scale(0.6)'
+        transform: 'scale(0.429)'
       });
   }
 };

@@ -51,14 +51,14 @@
   .tab-title-list {
     width: 1080px;
     flex-direction: row;
+    border-bottom-width: 2px;
+    border-color: rgba(0,0,0,0.10);
   }
 
   .tab-title-wrap {
     flex-direction: row;
     justify-content: space-around;
     padding: 0 48px;
-    border-bottom-width: 2px;
-    border-color: rgba(0,0,0,0.10);
   }
 
   .title-item {
@@ -100,10 +100,8 @@
 <script>
 import { isWeex } from 'universal-env';
 import Binding from 'weex-bindingx';
-import index from 'vue';
 const animation = weex.requireModule('animation');
 const dom = weex.requireModule('dom');
-const modal = weex.requireModule('modal');
 const isH5 = weex.config.env.platform === 'Web';
 
 export default {
@@ -173,7 +171,7 @@ export default {
     startPosY: 0,
     judge: 'INITIAL',
     bottomInitWidth: 0,
-    bottomInitOffset: 48,
+    bottomInitOffset: 0,
     tabPositions: []
   }),
   methods: {
@@ -401,6 +399,7 @@ export default {
           };
           if (i === this.selectIndex) {
             this.bottomInitWidth = rect.size.width;
+            this.bottomInitOffset = rect.size.left;
             this.setPage(this.selectIndex, false);
             setTimeout(() => {
               this.loaded = true;

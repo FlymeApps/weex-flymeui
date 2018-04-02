@@ -161,7 +161,7 @@ export default {
       this.scene = val;
     }
   },
-  mounted () {
+  created () {
     this.scene = Scene[this.type];
   },
   methods: {

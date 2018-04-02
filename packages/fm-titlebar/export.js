@@ -2,7 +2,6 @@ import VALUE from 'weex-flymeui/lib/common/variable-type';
 export default {
   name: 'FmTitlebar',
   desc: '导航栏组件',
-  slots: null,
   props: {
     title: {
       type: VALUE.STRING,
@@ -41,5 +40,15 @@ export default {
   size: {
     width: 1080,
     height: 144
-  }
+  },
+  slot: [{
+    name: 'left',
+    desc: '自定义左边按钮'
+  }, {
+    name: 'middle',
+    desc: '自定义标题'
+  }, {
+    name: 'right',
+    desc: '自定义右边按钮'
+  }]
 };

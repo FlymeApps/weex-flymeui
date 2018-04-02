@@ -29,13 +29,7 @@ export default {
           }
         }
       },
-      default: [{
-        title: '取消订单',
-        disabled: true
-      }, {
-        title: '提交订单',
-        theme: 'blue'
-      }]
+      default: []
     },
     backgroundColor: {
       type: VALUE.COLOR,

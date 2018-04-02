@@ -18,9 +18,9 @@ export default {
           icon: {
             type: VALUE.SELECT,
             desc: 'icon 名称',
-            default: 'zhuiye',
+            default: 'zhuye',
             props: {
-              options: ['zhuiye', 'wancheng', 'guanbi', 'gengduo', 'bianji', 'shanchu', 'fenxiang', 'xingxing']
+              options: ['zhuye', 'wancheng', 'guanbi', 'gengduo', 'bianji', 'shanchu', 'fenxiang', 'xingxing']
             }
           },
           dot: {
@@ -33,19 +33,7 @@ export default {
           }
         }
       },
-      default: [{
-        title: '信息',
-        icon: 'xinxi1',
-        badge: 99
-      }, {
-        title: '下载',
-        icon: 'xiazai',
-        dot: true
-      }, {
-        title: '删除',
-        icon: 'shanchu',
-        badge: 999
-      }]
+      default: []
     },
     backgroundColor: {
       type: VALUE.COLOR,

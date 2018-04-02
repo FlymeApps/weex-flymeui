@@ -2,7 +2,6 @@ import VALUE from 'weex-flymeui/lib/common/variable-type';
 export default {
   name: 'FmSearchbar',
   desc: '搜索栏组件',
-  slots: null,
   props: {
     inputValue: {
       type: VALUE.STRING,
@@ -83,5 +82,15 @@ export default {
   size: {
     width: 1080,
     height: 144
-  }
+  },
+  slot: [{
+    name: 'left',
+    desc: '自定义左边按钮'
+  }, {
+    name: 'input-right',
+    desc: '自定义输入框右侧'
+  }, {
+    name: 'right',
+    desc: '自定义搜索按钮'
+  }]
 };
