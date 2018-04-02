@@ -53,7 +53,7 @@ export default {
     width: 1080,
     height: 300
   },
-  slot: [{
+  slots: [{
     name: 'left',
     desc: '自定义左边按钮'
   }, {
