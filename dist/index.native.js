@@ -9806,7 +9806,7 @@ exports.default = {
       var Icon = this.Icon,
           icon = this.icon;
 
-      return he.decode(Icon[icon] || 'wancheng');
+      return he.decode(Icon[icon] || Icon['wancheng']);
     }
   },
   data: function data() {

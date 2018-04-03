@@ -120,7 +120,7 @@ export default {
   computed: {
     getIcon () {
       const { Icon, icon } = this;
-      return he.decode(Icon[icon] || 'wancheng');
+      return he.decode(Icon[icon] || Icon['wancheng']);
     }
   },
   data: () => ({
