@@ -6,7 +6,7 @@ import FmTitlebar from './fm-titlebar/export';
 import FmIcon from './fm-icon/export';
 import FmTagWall from './fm-tag-wall/export';
 import FmSimpleList from './fm-simple-list/export';
-import FmTabPage from './fm-tab-page/export';
+import FmNativeTab from './fm-native-tab/export';
 import FmItem from './fm-item/export';
 import FmTabbar from './fm-tabbar/export';
 import FmBtnbar from './fm-btnbar/export';
@@ -24,7 +24,7 @@ export default {
   FmIcon,
   FmTagWall,
   FmSimpleList,
-  FmTabPage,
+  FmNativeTab,
   FmItem,
   FmTabbar,
   FmBtnbar,

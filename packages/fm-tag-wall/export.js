@@ -15,6 +15,14 @@ export default {
           color: {
             type: VALUE.COLOR,
             desc: '标题颜色'
+          },
+          backgroundColor: {
+            type: VALUE.COLOR,
+            desc: '背景颜色'
+          },
+          borderColor: {
+            type: VALUE.COLOR,
+            desc: '边框颜色'
           }
         }
       },

@@ -121,14 +121,12 @@
 </style>
 
 <script>
-import Binding from 'weex-bindingx/lib/index.weex.js';
 const animation = weex.requireModule('animation');
-const modal = weex.requireModule('modal');
 const dom = weex.requireModule('dom');
 const isH5 = weex.config.env.platform === 'Web';
 
 export default {
-  name: 'FmTabPage',
+  name: 'FmNativeTab',
   props: {
     tabTitles: {
       type: Array,
@@ -257,7 +255,7 @@ export default {
       }
     },
     setPage (page, animated = true) {
-      if (this.isMoving === true) {
+      if (this.isMoving === true || this.tabTitles.length <= 0) {
         return;
       }
       this.isMoving = true;

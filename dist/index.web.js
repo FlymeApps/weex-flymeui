@@ -7825,6 +7825,72 @@ if (false) {
 /* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(113);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(86);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 82 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(91);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
 
   ;(function(fn) {
     if (true) {
@@ -8616,72 +8682,6 @@ module.exports = {
 
 /***/ })
 /******/ ])});;
-
-/***/ }),
-/* 81 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(113);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 82 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(86);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 83 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(91);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 /* 84 */
@@ -9945,7 +9945,7 @@ var _fmFooter = __webpack_require__(48);
 
 var _fmFooter2 = _interopRequireDefault(_fmFooter);
 
-var _fmTabbarItem = __webpack_require__(81);
+var _fmTabbarItem = __webpack_require__(80);
 
 var _fmTabbarItem2 = _interopRequireDefault(_fmTabbarItem);
 
@@ -12876,7 +12876,7 @@ var _fmText = __webpack_require__(3);
 
 var _fmText2 = _interopRequireDefault(_fmText);
 
-var _fmSimpleBtn = __webpack_require__(82);
+var _fmSimpleBtn = __webpack_require__(81);
 
 var _fmSimpleBtn2 = _interopRequireDefault(_fmSimpleBtn);
 
@@ -13476,11 +13476,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmPopup = __webpack_require__(83);
+var _fmPopup = __webpack_require__(82);
 
 var _fmPopup2 = _interopRequireDefault(_fmPopup);
 
-var _fmSimpleBtn = __webpack_require__(82);
+var _fmSimpleBtn = __webpack_require__(81);
 
 var _fmSimpleBtn2 = _interopRequireDefault(_fmSimpleBtn);
 
@@ -17718,7 +17718,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _indexWeex = __webpack_require__(80);
+var _indexWeex = __webpack_require__(83);
 
 var _indexWeex2 = _interopRequireDefault(_indexWeex);
 
@@ -18362,7 +18362,7 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-tab-page[data-v-c6e0f338] {\n  width: 1080px;\n}\n.tab-title-list[data-v-c6e0f338] {\n  width: 1080px;\n  flex-direction: row;\n  border-bottom-width: 2px;\n  border-color: rgba(0,0,0,0.10);\n}\n.tab-title-wrap[data-v-c6e0f338] {\n  flex-direction: row;\n  justify-content: space-around;\n  padding: 0 48px;\n}\n.title-item[data-v-c6e0f338] {\n  border-color: #198DED;\n  padding: 27px 18px;\n  margin-right: 42px;\n}\n.item-title[data-v-c6e0f338] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 42px;\n  line-height: 57px;\n}\n.border-bottom[data-v-c6e0f338] {\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  height: 3px;\n  width: 132px;\n}\n.tab-page-wrap[data-v-c6e0f338] {\n  width: 1080px;\n  overflow: hidden;\n}\n.tab-container[data-v-c6e0f338] {\n  flex: 1;\n  flex-direction: row;\n  position: absolute;\n}\n.tab-item[data-v-c6e0f338] {\n  width: 1080px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-native-tab/index.vue?8b0d87c8"],"names":[],"mappings":";AAoEA;EACA,cAAA;CACA;AAEA;EACA,cAAA;EACA,oBAAA;EACA,yBAAA;EACA,+BAAA;CACA;AAEA;EACA,oBAAA;EACA,8BAAA;EACA,gBAAA;CACA;AAEA;EACA,sBAAA;EACA,mBAAA;EACA,mBAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,UAAA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,cAAA;EACA,iBAAA;CACA;AAEA;EACA,QAAA;EACA,oBAAA;EACA,mBAAA;CACA;AAEA;EACA,cAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 18/04/03. -->\n<template>\n  <div v-if=\"!isCreator\" class=\"fm-tab-page\"\n       :style=\"{ height: (tabPageHeight) + 'px', opacity: loaded ? 1 : 0}\">\n    <scroller class=\"tab-title-list\"\n              ref=\"tab-title-list\"\n              :show-scrollbar=\"false\"\n              scroll-direction=\"horizontal\"\n              :style=\"{ height: (cTabStyles.height) + 'px'}\">\n\n      <div class=\"tab-title-wrap\"\n           ref=\"tab-title-wrap\">\n        <div class=\"title-item\"\n             v-for=\"(v, idx) in tabTitles\"\n             :key=\"idx\"\n             @click=\"setPage(idx)\"\n             :ref=\"'fm-tab-title-'+idx\"\n             :style=\"{ borderBottomWidth: currentPage === idx ? '3px' : '0px' }\">\n          <text class=\"item-title\"\n                :style=\"{ fontSize: cTabStyles.fontSize + 'px',\n                          color: currentPage === idx ? cTabStyles.activeTitleColor : cTabStyles.titleColor,\n                          paddingLeft: cTabStyles.padding + 'px',\n                          paddingRight: cTabStyles.padding + 'px' }\">{{ v.text }}</text>\n        </div>\n      </div>\n    </scroller>\n    <div class=\"tab-page-wrap\"\n         ref=\"tab-page-wrap\"\n         @panstart=\"_onTouchStart\"\n         @panmove=\"_onTouchMove\"\n         @panend=\"_onTouchEnd\"\n         :style=\"{ height: (tabPageHeight-cTabStyles.height) + 'px' }\">\n      <div class=\"tab-container\"\n           ref=\"tab-container\">\n        <div class=\"tab-item\"\n             v-for=\"(v, idx) in tabTitles\"\n             :key=\"idx\"\n             :style=\"{ height: (tabPageHeight-cTabStyles.height) + 'px' }\">\n          <slot :name=\"`tab-item-${idx}`\"></slot>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <FmTab v-else\n         :style=\"{ height: (tabPageHeight) + 'px' }\"\n         :container=\"{\n            viewpagepaddingLeft: 0,\n            viewpagepaddingRight: 0,\n            viewpagepaddingTop: cTabStyles.height + 12,\n            viewpagepaddingBottom: 0,\n            tabpaddingLeft: 48,\n            tabpaddingRight: 48,\n            tabpaddingTop: 0,\n            tabpaddingBottom: 0\n         }\"\n         :tab=\"cTabTitles\"\n         @tabPosition=\"nativeTabSlided\">\n    <div class=\"tab-item\"\n         v-for=\"(v, idx) in tabTitles\"\n         :key=\"idx\"\n         :style=\"{ height: (tabPageHeight-cTabStyles.height-12) + 'px' }\">\n      <slot :name=\"`tab-item-${idx}`\"></slot>\n    </div>\n  </FmTab>\n</template>\n\n<style scoped>\n  .fm-tab-page {\n    width: 1080px;\n  }\n\n  .tab-title-list {\n    width: 1080px;\n    flex-direction: row;\n    border-bottom-width: 2px;\n    border-color: rgba(0,0,0,0.10);\n  }\n\n  .tab-title-wrap {\n    flex-direction: row;\n    justify-content: space-around;\n    padding: 0 48px;\n  }\n\n  .title-item {\n    border-color: #198DED;\n    padding: 27px 18px;\n    margin-right: 42px;\n  }\n\n  .item-title {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 42px;\n    line-height: 57px;\n  }\n\n  .border-bottom {\n    position: absolute;\n    left: 0;\n    bottom: 0;\n    height: 3px;\n    width: 132px;\n  }\n\n  .tab-page-wrap {\n    width: 1080px;\n    overflow: hidden;\n  }\n\n  .tab-container {\n    flex: 1;\n    flex-direction: row;\n    position: absolute;\n  }\n\n  .tab-item {\n    width: 1080px;\n  }\n</style>\n\n<script>\nimport Binding from 'weex-bindingx/lib/index.weex.js';\nconst animation = weex.requireModule('animation');\nconst modal = weex.requireModule('modal');\nconst dom = weex.requireModule('dom');\nconst isH5 = weex.config.env.platform === 'Web';\n\nexport default {\n  name: 'FmTabPage',\n  props: {\n    tabTitles: {\n      type: Array,\n      default: () => ([])\n    },\n    panDist: {\n      type: Number,\n      default: 200\n    },\n    duration: {\n      type: [Number, String],\n      default: 300\n    },\n    tabPageHeight: {\n      type: [String, Number],\n      default: 1854\n    },\n    tabStyles: {\n      type: Object,\n      default: () => ({})\n    },\n    timingFunction: {\n      type: String,\n      default: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'\n    },\n    selectIndex: {\n      type: Number,\n      default: 0\n    }\n  },\n  watch: {\n    selectIndex (val) {\n      if (this.loaded) {\n        this.setPage(this.selectIndex, false);\n      }\n    },\n    tabTitles (val) {\n    }\n  },\n  computed: {\n    isCreator () {\n      return weex.supports && weex.supports('@component/FmTab');\n    },\n    maxPage () {\n      return this.tabTitles.length - 1;\n    },\n    cTabTitles () {\n      const { tabStyles } = this;\n      const def = {\n        paddingStart: 18,\n        paddingEnd: 18,\n        minWidth: 120,\n        textunSelectColor: tabStyles.activeTitleColor || '#198DED',\n        textSelectColor: tabStyles.titleColor || '#99000000'\n      };\n      return this.tabTitles.map(item => {\n        return Object.assign({}, def, item);\n      });\n    },\n    cTabStyles () {\n      const defaultStyle = {\n        titleColor: 'rgba(0, 0, 0, 0.6)',\n        activeTitleColor: '#198DED',\n        height: 102,\n        padding: 18,\n        fontSize: 42,\n        activeBottomColor: '#198DED'\n      };\n      return Object.assign({}, defaultStyle, this.tabStyles);\n    }\n  },\n  data: () => ({\n    loaded: false,\n    currentPage: 0,\n    gesToken: 0,\n    isMoving: false,\n    startTime: 0,\n    deltaX: 0,\n    translateX: 0,\n    startPosX: 0,\n    startPosY: 0,\n    judge: 'INITIAL'\n  }),\n  methods: {\n    next () {\n      let page = this.currentPage;\n      if (page < this.maxPage) {\n        page++;\n      }\n      this.setPage(page);\n    },\n    prev () {\n      let page = this.currentPage;\n      if (page > 0) {\n        page--;\n      }\n      this.setPage(page);\n    },\n    _onTouchStart (e) {\n      if (isH5) {\n        this.startPosX = this._getTouchXPos(e);\n        this.startPosY = this._getTouchYPos(e);\n        this.deltaX = 0;\n        this.startTime = new Date().getTime();\n      }\n    },\n    _onTouchMove (e) {\n      if (isH5) {\n        this.deltaX = this._getTouchXPos(e) - this.startPosX;\n        this.deltaY = Math.abs(this._getTouchYPos(e) - this.startPosY + 1);\n        if (this.judge === 'INITIAL' && Math.abs(this.deltaX) / this.deltaY > 1.73) {\n          this.judge = 'SLIDE_ING';\n        }\n      }\n    },\n    _onTouchEnd (e) {\n      if (isH5) {\n        if (this.judge === 'SLIDE_ING') {\n          if (this.deltaX < -50) {\n            this.next();\n          } else if (this.deltaX > 50) {\n            this.prev();\n          }\n        }\n        this.judge = 'INITIAL';\n      }\n    },\n    setPage (page, animated = true) {\n      if (this.isMoving === true) {\n        return;\n      }\n      this.isMoving = true;\n      const currentTabEl = this.$refs[`fm-tab-title-${page}`][0];\n      const tabWidth = this.$refs[`fm-tab-title-${page}`][0].$el.clientWidth;\n      const tabOffset = this.$refs[`fm-tab-title-${page}`][0].$el.offsetLeft;\n\n      if (tabOffset >= 1080 / 2) {\n        dom.scrollToElement(currentTabEl, {\n          offset: -1080 / 2 + tabWidth / 2,\n          animated\n        });\n      } else {\n        dom.scrollToElement(currentTabEl, {\n          offset: -tabOffset,\n          animated\n        });\n      }\n\n      this.currentPage = page;\n      this._animateTransformX(page, animated);\n      this.$emit('fmTabPageTabSelected', { page });\n    },\n    nativeTabSlided (e) {\n      this.$emit('fmTabPageTabSelected', { page: e.position });\n    },\n    _animateTransformX (page, animated = true) {\n      const { duration, timingFunction } = this;\n      const containerEl = this.$refs[`tab-container`];\n      const dist = page * 1080;\n      animation.transition(containerEl, {\n        styles: {\n          transform: `translateX(${-dist}px)`\n        },\n        duration: animated ? duration : 0.00001,\n        timingFunction,\n        delay: 0\n      }, () => {\n        this.isMoving = false;\n      });\n    },\n    _getTouchXPos (e) {\n      return e.changedTouches[0]['pageX'];\n    },\n    _getTouchYPos (e) {\n      return e.changedTouches[0]['pageY'];\n    }\n  },\n  mounted () {\n    if (this.isCreator) { return; }\n    this.setPage(this.selectIndex, false);\n    setTimeout(() => {\n      this.loaded = true;\n    }, 50);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-tab-page[data-v-c6e0f338] {\n  width: 1080px;\n}\n.tab-title-list[data-v-c6e0f338] {\n  width: 1080px;\n  flex-direction: row;\n  border-bottom-width: 2px;\n  border-color: rgba(0,0,0,0.10);\n}\n.tab-title-wrap[data-v-c6e0f338] {\n  flex-direction: row;\n  justify-content: space-around;\n  padding: 0 48px;\n}\n.title-item[data-v-c6e0f338] {\n  border-color: #198DED;\n  padding: 27px 18px;\n  margin-right: 42px;\n}\n.item-title[data-v-c6e0f338] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 42px;\n  line-height: 57px;\n}\n.border-bottom[data-v-c6e0f338] {\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  height: 3px;\n  width: 132px;\n}\n.tab-page-wrap[data-v-c6e0f338] {\n  width: 1080px;\n  overflow: hidden;\n}\n.tab-container[data-v-c6e0f338] {\n  flex: 1;\n  flex-direction: row;\n  position: absolute;\n}\n.tab-item[data-v-c6e0f338] {\n  width: 1080px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-native-tab/index.vue?45f87800"],"names":[],"mappings":";AAoEA;EACA,cAAA;CACA;AAEA;EACA,cAAA;EACA,oBAAA;EACA,yBAAA;EACA,+BAAA;CACA;AAEA;EACA,oBAAA;EACA,8BAAA;EACA,gBAAA;CACA;AAEA;EACA,sBAAA;EACA,mBAAA;EACA,mBAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,UAAA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,cAAA;EACA,iBAAA;CACA;AAEA;EACA,QAAA;EACA,oBAAA;EACA,mBAAA;CACA;AAEA;EACA,cAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 18/04/03. -->\n<template>\n  <div v-if=\"!isCreator\" class=\"fm-tab-page\"\n       :style=\"{ height: (tabPageHeight) + 'px', opacity: loaded ? 1 : 0}\">\n    <scroller class=\"tab-title-list\"\n              ref=\"tab-title-list\"\n              :show-scrollbar=\"false\"\n              scroll-direction=\"horizontal\"\n              :style=\"{ height: (cTabStyles.height) + 'px'}\">\n\n      <div class=\"tab-title-wrap\"\n           ref=\"tab-title-wrap\">\n        <div class=\"title-item\"\n             v-for=\"(v, idx) in tabTitles\"\n             :key=\"idx\"\n             @click=\"setPage(idx)\"\n             :ref=\"'fm-tab-title-'+idx\"\n             :style=\"{ borderBottomWidth: currentPage === idx ? '3px' : '0px' }\">\n          <text class=\"item-title\"\n                :style=\"{ fontSize: cTabStyles.fontSize + 'px',\n                          color: currentPage === idx ? cTabStyles.activeTitleColor : cTabStyles.titleColor,\n                          paddingLeft: cTabStyles.padding + 'px',\n                          paddingRight: cTabStyles.padding + 'px' }\">{{ v.text }}</text>\n        </div>\n      </div>\n    </scroller>\n    <div class=\"tab-page-wrap\"\n         ref=\"tab-page-wrap\"\n         @panstart=\"_onTouchStart\"\n         @panmove=\"_onTouchMove\"\n         @panend=\"_onTouchEnd\"\n         :style=\"{ height: (tabPageHeight-cTabStyles.height) + 'px' }\">\n      <div class=\"tab-container\"\n           ref=\"tab-container\">\n        <div class=\"tab-item\"\n             v-for=\"(v, idx) in tabTitles\"\n             :key=\"idx\"\n             :style=\"{ height: (tabPageHeight-cTabStyles.height) + 'px' }\">\n          <slot :name=\"`tab-item-${idx}`\"></slot>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <FmTab v-else\n         :style=\"{ height: (tabPageHeight) + 'px' }\"\n         :container=\"{\n            viewpagepaddingLeft: 0,\n            viewpagepaddingRight: 0,\n            viewpagepaddingTop: cTabStyles.height + 12,\n            viewpagepaddingBottom: 0,\n            tabpaddingLeft: 48,\n            tabpaddingRight: 48,\n            tabpaddingTop: 0,\n            tabpaddingBottom: 0\n         }\"\n         :tab=\"cTabTitles\"\n         @tabPosition=\"nativeTabSlided\">\n    <div class=\"tab-item\"\n         v-for=\"(v, idx) in tabTitles\"\n         :key=\"idx\"\n         :style=\"{ height: (tabPageHeight-cTabStyles.height-12) + 'px' }\">\n      <slot :name=\"`tab-item-${idx}`\"></slot>\n    </div>\n  </FmTab>\n</template>\n\n<style scoped>\n  .fm-tab-page {\n    width: 1080px;\n  }\n\n  .tab-title-list {\n    width: 1080px;\n    flex-direction: row;\n    border-bottom-width: 2px;\n    border-color: rgba(0,0,0,0.10);\n  }\n\n  .tab-title-wrap {\n    flex-direction: row;\n    justify-content: space-around;\n    padding: 0 48px;\n  }\n\n  .title-item {\n    border-color: #198DED;\n    padding: 27px 18px;\n    margin-right: 42px;\n  }\n\n  .item-title {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 42px;\n    line-height: 57px;\n  }\n\n  .border-bottom {\n    position: absolute;\n    left: 0;\n    bottom: 0;\n    height: 3px;\n    width: 132px;\n  }\n\n  .tab-page-wrap {\n    width: 1080px;\n    overflow: hidden;\n  }\n\n  .tab-container {\n    flex: 1;\n    flex-direction: row;\n    position: absolute;\n  }\n\n  .tab-item {\n    width: 1080px;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nconst dom = weex.requireModule('dom');\nconst isH5 = weex.config.env.platform === 'Web';\n\nexport default {\n  name: 'FmNativeTab',\n  props: {\n    tabTitles: {\n      type: Array,\n      default: () => ([])\n    },\n    panDist: {\n      type: Number,\n      default: 200\n    },\n    duration: {\n      type: [Number, String],\n      default: 300\n    },\n    tabPageHeight: {\n      type: [String, Number],\n      default: 1854\n    },\n    tabStyles: {\n      type: Object,\n      default: () => ({})\n    },\n    timingFunction: {\n      type: String,\n      default: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'\n    },\n    selectIndex: {\n      type: Number,\n      default: 0\n    }\n  },\n  watch: {\n    selectIndex (val) {\n      if (this.loaded) {\n        this.setPage(this.selectIndex, false);\n      }\n    },\n    tabTitles (val) {\n    }\n  },\n  computed: {\n    isCreator () {\n      return weex.supports && weex.supports('@component/FmTab');\n    },\n    maxPage () {\n      return this.tabTitles.length - 1;\n    },\n    cTabTitles () {\n      const { tabStyles } = this;\n      const def = {\n        paddingStart: 18,\n        paddingEnd: 18,\n        minWidth: 120,\n        textunSelectColor: tabStyles.activeTitleColor || '#198DED',\n        textSelectColor: tabStyles.titleColor || '#99000000'\n      };\n      return this.tabTitles.map(item => {\n        return Object.assign({}, def, item);\n      });\n    },\n    cTabStyles () {\n      const defaultStyle = {\n        titleColor: 'rgba(0, 0, 0, 0.6)',\n        activeTitleColor: '#198DED',\n        height: 102,\n        padding: 18,\n        fontSize: 42,\n        activeBottomColor: '#198DED'\n      };\n      return Object.assign({}, defaultStyle, this.tabStyles);\n    }\n  },\n  data: () => ({\n    loaded: false,\n    currentPage: 0,\n    gesToken: 0,\n    isMoving: false,\n    startTime: 0,\n    deltaX: 0,\n    translateX: 0,\n    startPosX: 0,\n    startPosY: 0,\n    judge: 'INITIAL'\n  }),\n  methods: {\n    next () {\n      let page = this.currentPage;\n      if (page < this.maxPage) {\n        page++;\n      }\n      this.setPage(page);\n    },\n    prev () {\n      let page = this.currentPage;\n      if (page > 0) {\n        page--;\n      }\n      this.setPage(page);\n    },\n    _onTouchStart (e) {\n      if (isH5) {\n        this.startPosX = this._getTouchXPos(e);\n        this.startPosY = this._getTouchYPos(e);\n        this.deltaX = 0;\n        this.startTime = new Date().getTime();\n      }\n    },\n    _onTouchMove (e) {\n      if (isH5) {\n        this.deltaX = this._getTouchXPos(e) - this.startPosX;\n        this.deltaY = Math.abs(this._getTouchYPos(e) - this.startPosY + 1);\n        if (this.judge === 'INITIAL' && Math.abs(this.deltaX) / this.deltaY > 1.73) {\n          this.judge = 'SLIDE_ING';\n        }\n      }\n    },\n    _onTouchEnd (e) {\n      if (isH5) {\n        if (this.judge === 'SLIDE_ING') {\n          if (this.deltaX < -50) {\n            this.next();\n          } else if (this.deltaX > 50) {\n            this.prev();\n          }\n        }\n        this.judge = 'INITIAL';\n      }\n    },\n    setPage (page, animated = true) {\n      if (this.isMoving === true || this.tabTitles.length <= 0) {\n        return;\n      }\n      this.isMoving = true;\n      const currentTabEl = this.$refs[`fm-tab-title-${page}`][0];\n      const tabWidth = this.$refs[`fm-tab-title-${page}`][0].$el.clientWidth;\n      const tabOffset = this.$refs[`fm-tab-title-${page}`][0].$el.offsetLeft;\n\n      if (tabOffset >= 1080 / 2) {\n        dom.scrollToElement(currentTabEl, {\n          offset: -1080 / 2 + tabWidth / 2,\n          animated\n        });\n      } else {\n        dom.scrollToElement(currentTabEl, {\n          offset: -tabOffset,\n          animated\n        });\n      }\n\n      this.currentPage = page;\n      this._animateTransformX(page, animated);\n      this.$emit('fmTabPageTabSelected', { page });\n    },\n    nativeTabSlided (e) {\n      this.$emit('fmTabPageTabSelected', { page: e.position });\n    },\n    _animateTransformX (page, animated = true) {\n      const { duration, timingFunction } = this;\n      const containerEl = this.$refs[`tab-container`];\n      const dist = page * 1080;\n      animation.transition(containerEl, {\n        styles: {\n          transform: `translateX(${-dist}px)`\n        },\n        duration: animated ? duration : 0.00001,\n        timingFunction,\n        delay: 0\n      }, () => {\n        this.isMoving = false;\n      });\n    },\n    _getTouchXPos (e) {\n      return e.changedTouches[0]['pageX'];\n    },\n    _getTouchYPos (e) {\n      return e.changedTouches[0]['pageY'];\n    }\n  },\n  mounted () {\n    if (this.isCreator) { return; }\n    this.setPage(this.selectIndex, false);\n    setTimeout(() => {\n      this.loaded = true;\n    }, 50);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -18377,14 +18377,7 @@ exports.push([module.i, "\n.fm-tab-page[data-v-c6e0f338] {\n  width: 1080px;\n}\
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _indexWeex = __webpack_require__(80);
-
-var _indexWeex2 = _interopRequireDefault(_indexWeex);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var animation = weex.requireModule('animation'); //
+//
 //
 //
 //
@@ -18507,12 +18500,12 @@ var animation = weex.requireModule('animation'); //
 //
 //
 
-var modal = weex.requireModule('modal');
+var animation = weex.requireModule('animation');
 var dom = weex.requireModule('dom');
 var isH5 = weex.config.env.platform === 'Web';
 
 exports.default = {
-  name: 'FmTabPage',
+  name: 'FmNativeTab',
   props: {
     tabTitles: {
       type: Array,
@@ -18649,7 +18642,7 @@ exports.default = {
     setPage: function setPage(page) {
       var animated = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
-      if (this.isMoving === true) {
+      if (this.isMoving === true || this.tabTitles.length <= 0) {
         return;
       }
       this.isMoving = true;
@@ -19539,7 +19532,7 @@ var _utils2 = _interopRequireDefault(_utils);
 
 var _universalEnv = __webpack_require__(276);
 
-var _indexWeex = __webpack_require__(80);
+var _indexWeex = __webpack_require__(83);
 
 var _indexWeex2 = _interopRequireDefault(_indexWeex);
 
@@ -20265,13 +20258,13 @@ var _fmDialog = __webpack_require__(85);
 
 var _fmDialog2 = _interopRequireDefault(_fmDialog);
 
-var _fmSimpleBtn = __webpack_require__(82);
+var _fmSimpleBtn = __webpack_require__(81);
 
 var _fmSimpleBtn2 = _interopRequireDefault(_fmSimpleBtn);
 
 var _dialog = __webpack_require__(172);
 
-var _fmPopup = __webpack_require__(83);
+var _fmPopup = __webpack_require__(82);
 
 var _fmPopup2 = _interopRequireDefault(_fmPopup);
 
@@ -20347,7 +20340,7 @@ var _fmTabbar = __webpack_require__(108);
 
 var _fmTabbar2 = _interopRequireDefault(_fmTabbar);
 
-var _fmTabbarItem = __webpack_require__(81);
+var _fmTabbarItem = __webpack_require__(80);
 
 var _fmTabbarItem2 = _interopRequireDefault(_fmTabbarItem);
 

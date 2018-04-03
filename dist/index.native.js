@@ -7412,6 +7412,72 @@ module.exports.render._withStripped = true
 /* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(94);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(71);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(75);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
+
 
   ;(function(fn) {
     if (true) {
@@ -8203,72 +8269,6 @@ module.exports = {
 
 /***/ })
 /******/ ])});;
-
-/***/ }),
-/* 66 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(94);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 67 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(71);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 68 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(75);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 /* 69 */
@@ -9483,7 +9483,7 @@ var _fmFooter = __webpack_require__(38);
 
 var _fmFooter2 = _interopRequireDefault(_fmFooter);
 
-var _fmTabbarItem = __webpack_require__(66);
+var _fmTabbarItem = __webpack_require__(65);
 
 var _fmTabbarItem2 = _interopRequireDefault(_fmTabbarItem);
 
@@ -12314,7 +12314,7 @@ var _fmText = __webpack_require__(0);
 
 var _fmText2 = _interopRequireDefault(_fmText);
 
-var _fmSimpleBtn = __webpack_require__(67);
+var _fmSimpleBtn = __webpack_require__(66);
 
 var _fmSimpleBtn2 = _interopRequireDefault(_fmSimpleBtn);
 
@@ -12866,11 +12866,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmPopup = __webpack_require__(68);
+var _fmPopup = __webpack_require__(67);
 
 var _fmPopup2 = _interopRequireDefault(_fmPopup);
 
-var _fmSimpleBtn = __webpack_require__(67);
+var _fmSimpleBtn = __webpack_require__(66);
 
 var _fmSimpleBtn2 = _interopRequireDefault(_fmSimpleBtn);
 
@@ -17072,7 +17072,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _indexWeex = __webpack_require__(65);
+var _indexWeex = __webpack_require__(68);
 
 var _indexWeex2 = _interopRequireDefault(_indexWeex);
 
@@ -17736,14 +17736,7 @@ module.exports = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _indexWeex = __webpack_require__(65);
-
-var _indexWeex2 = _interopRequireDefault(_indexWeex);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var animation = weex.requireModule('animation'); //
+//
 //
 //
 //
@@ -17866,12 +17859,12 @@ var animation = weex.requireModule('animation'); //
 //
 //
 
-var modal = weex.requireModule('modal');
+var animation = weex.requireModule('animation');
 var dom = weex.requireModule('dom');
 var isH5 = weex.config.env.platform === 'Web';
 
 exports.default = {
-  name: 'FmTabPage',
+  name: 'FmNativeTab',
   props: {
     tabTitles: {
       type: Array,
@@ -18008,7 +18001,7 @@ exports.default = {
     setPage: function setPage(page) {
       var animated = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
-      if (this.isMoving === true) {
+      if (this.isMoving === true || this.tabTitles.length <= 0) {
         return;
       }
       this.isMoving = true;
@@ -18843,7 +18836,7 @@ var _utils2 = _interopRequireDefault(_utils);
 
 var _universalEnv = __webpack_require__(233);
 
-var _indexWeex = __webpack_require__(65);
+var _indexWeex = __webpack_require__(68);
 
 var _indexWeex2 = _interopRequireDefault(_indexWeex);
 
@@ -19558,13 +19551,13 @@ var _fmDialog = __webpack_require__(70);
 
 var _fmDialog2 = _interopRequireDefault(_fmDialog);
 
-var _fmSimpleBtn = __webpack_require__(67);
+var _fmSimpleBtn = __webpack_require__(66);
 
 var _fmSimpleBtn2 = _interopRequireDefault(_fmSimpleBtn);
 
 var _dialog = __webpack_require__(144);
 
-var _fmPopup = __webpack_require__(68);
+var _fmPopup = __webpack_require__(67);
 
 var _fmPopup2 = _interopRequireDefault(_fmPopup);
 
@@ -19640,7 +19633,7 @@ var _fmTabbar = __webpack_require__(90);
 
 var _fmTabbar2 = _interopRequireDefault(_fmTabbar);
 
-var _fmTabbarItem = __webpack_require__(66);
+var _fmTabbarItem = __webpack_require__(65);
 
 var _fmTabbarItem2 = _interopRequireDefault(_fmTabbarItem);
 
