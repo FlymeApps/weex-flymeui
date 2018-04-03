@@ -1,7 +1,7 @@
 import VALUE from 'weex-flymeui/lib/common/variable-type';
 export default {
-  name: 'FmTabPage',
-  desc: '标签页组件',
+  name: 'FmNativeTab',
+  desc: '原生标签页组件',
   props: {
     tabTitles: {
       type: VALUE.ARRAY,
@@ -9,7 +9,7 @@ export default {
       props: {
         min: 1,
         inner: {
-          title: {
+          text: {
             type: VALUE.STRING,
             desc: '标题'
           }

@@ -20,7 +20,7 @@
         </div>
         <div class="border-bottom"
              ref="tab-border"
-             :style="{ width: bottomInitWidth + 'px', transform: `translateX(${bottomInitOffset}px)`, backgroundColor: cTabStyles.activeBottomColor }"></div>
+             :style="{ width: bottomInitWidth + 'px', backgroundColor: cTabStyles.activeBottomColor }"></div>
       </div>
     </scroller>
     <div class="tab-page-wrap"
@@ -98,7 +98,6 @@
 </style>
 
 <script>
-import { isWeex } from 'universal-env';
 import Binding from 'weex-bindingx/lib/index.weex.js';
 const animation = weex.requireModule('animation');
 const dom = weex.requireModule('dom');
@@ -121,7 +120,7 @@ export default {
     },
     tabPageHeight: {
       type: [String, Number],
-      default: 1920
+      default: 1854
     },
     tabStyles: {
       type: Object,
@@ -406,9 +405,9 @@ export default {
     }
   },
   mounted () {
-    const tabPageEl = this.getEl(this.$refs['tab-page-wrap']);
+    const tabPageEl = this.$refs['tab-page-wrap'];
     Binding.prepare && Binding.prepare({
-      anchor: tabPageEl,
+      anchor: tabPageEl.ref,
       eventType: 'pan'
     });
     setTimeout(() => {
