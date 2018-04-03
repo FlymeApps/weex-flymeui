@@ -61,6 +61,6 @@
         "gulp": "^3.9.1",
         "gulp-sass": "^3.1.0",
         "minimist": "^1.2.0",
-        "weex-bindingx": "0.0.12"
+        "weex-bindingx": "0.0.17"
     }
 }

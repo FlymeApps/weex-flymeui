@@ -46,7 +46,7 @@
 const animation = weex.requireModule('animation');
 import Utils from '../utils';
 import { isWeex } from 'universal-env';
-import Binding from 'weex-bindingx';
+import Binding from 'weex-bindingx/lib/index.weex.js';
 
 export default {
   props: {
@@ -187,33 +187,33 @@ export default {
 
         const { currentIndex, cardS } = this;
         const dist = currentIndex * (cardS.width + 12);
-        const listEl = this.getEl(this.$refs['card-list']);
+        const listEl = this.$refs['card-list'];
 
         // 卡片容器
         const props = [{
-          element: listEl,
+          element: listEl.ref,
           property: 'transform.translateX',
           expression: `${-dist}+x`
         }];
 
         // 当前卡片
-        const currCardEl = this.getEl(this.$refs[`card${currentIndex}`][0]);
+        const currCardEl = this.$refs[`card${currentIndex}`][0];
         props.push({
-          element: currCardEl,
+          element: currCardEl.ref,
           property: 'transform.translateX',
           expression: `x <= 0 ? (x / 792 * 12) : 0`
         });
         // 上一张卡片
-        const lastCardEl = this.getEl(this.$refs[`card${currentIndex - 1}`][0]);
+        const lastCardEl = this.$refs[`card${currentIndex - 1}`][0];
         props.push({
-          element: lastCardEl,
+          element: lastCardEl.ref,
           property: 'transform.translateX',
           expression: `x > 0 ? (1 - (x / 792)) * -12 : -12`
         });
 
         const gesTokenObj = Binding.bind({
           eventType: 'pan',
-          anchor: this.getEl(element),
+          anchor: element.ref,
           props
         }, (e) => {
           if (!this.isMoving && (e.state === 'end' || e.state === 'cancel' || e.state === 'exit')) {
@@ -338,10 +338,6 @@ export default {
     },
     clearAutoPlay () {
       this.autoPlayTimer && clearInterval(this.autoPlayTimer);
-    },
-    getEl (el) {
-      if (typeof el === 'string' || typeof el === 'number') return el;
-      return isWeex ? el.ref : el instanceof HTMLElement ? el : el.$el;
     }
   },
   mounted () {

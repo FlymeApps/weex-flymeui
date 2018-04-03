@@ -99,7 +99,7 @@
 
 <script>
 import { isWeex } from 'universal-env';
-import Binding from 'weex-bindingx';
+import Binding from 'weex-bindingx/lib/index.weex.js';
 const animation = weex.requireModule('animation');
 const dom = weex.requireModule('dom');
 const isH5 = weex.config.env.platform === 'Web';
@@ -222,7 +222,7 @@ export default {
       }
     },
     bindExp (element) {
-      if (element && this.getEl(element)) {
+      if (element && element.ref) {
         if (this.isMoving && this.gesToken !== 0) {
           Binding.unbind({
             eventType: 'pan',
@@ -232,9 +232,9 @@ export default {
           return;
         }
 
-        const tabPageEl = this.getEl(this.$refs['tab-container']);
-        const tabBorderEl = this.getEl(this.$refs['tab-border']);
-        const tabScrollEl = this.getEl(this.$refs['tab-title-list']);
+        const tabPageEl = this.$refs['tab-container'];
+        const tabBorderEl = this.$refs['tab-border'];
+        const tabScrollEl = this.$refs['tab-title-list'];
         const { currentPage, panDist, maxPage } = this;
         const dist = currentPage * 1080; // tab 页偏移距离
 
@@ -285,25 +285,25 @@ export default {
         }
 
         const props = [{
-          element: tabPageEl,
+          element: tabPageEl.ref,
           property: 'transform.translateX',
           expression: tabExp
         }, {
-          element: tabBorderEl,
+          element: tabBorderEl.ref,
           property: 'transform.translateX',
           expression: borderMoveExp
         }, {
-          element: tabBorderEl,
+          element: tabBorderEl.ref,
           property: 'width',
           expression: borderWidthExp
         }, {
-          element: tabScrollEl,
+          element: tabScrollEl.ref,
           property: 'scroll.contentOffset',
           expression: tabScrollExp
         }];
 
         const gesTokenObj = Binding.bind({
-          anchor: this.getEl(element),
+          anchor: element.ref,
           eventType: 'pan',
           props
         }, (e) => {
@@ -384,10 +384,6 @@ export default {
     },
     _getTouchYPos (e) {
       return e.changedTouches[0]['pageY'];
-    },
-    getEl (el) {
-      if (typeof el === 'string' || typeof el === 'number') return el;
-      return isWeex ? el.ref : el instanceof HTMLElement ? el : el.$el;
     },
     _calculatePositions () {
       const { tabTitles } = this;
