@@ -5,14 +5,8 @@
       <category title="基本样式"></category>
       <div class="list">
         <div class="item">
-            <fm-switch :disabled="isDis"></fm-switch>
-            <fm-switch common :disabled="isDis"></fm-switch>
-            <!-- <fm-switch360
-              border-color="#000000"
-              background-color="green"
-              focus-color="gray"
-              blur-color="white"
-              @fmSwitchStateChange="change"></fm-switch360> -->
+            <fm-switch></fm-switch>
+            <fm-switch common focus-color="#FFC900" :checked="true"></fm-switch>
         </div>
       </div>
       <category title="不同主题样式"></category>
@@ -111,13 +105,7 @@ export default {
   methods: {
     change (bool) {
       this.isChecked = bool;
-      console.log(this.isChecked);
     }
-  },
-  mounted () {
-    setTimeout(() => {
-      this.isDis = true;
-    }, 3000);
   }
 };
 </script>

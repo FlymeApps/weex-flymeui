@@ -10030,7 +10030,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
 
 var animation = weex.requireModule('animation');
 
@@ -10130,7 +10129,7 @@ exports.default = {
   },
   created: function created() {
     if (this.common) {
-      this.focusColor = '#198DED';
+      this.focusColor = this.focusColor || '#198DED';
       this.blurColor = '#D9D9D9';
     }
     this.checked ? this.ballStyle = {

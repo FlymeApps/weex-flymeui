@@ -1,9 +1,8 @@
 <template>
   <div class="fm-switch" @click="changeState" :style="getBgStyle">
-    <div
-      class="ctr-ball"
-      :style="ballStyle"
-      ref="ctrBall"></div>
+    <div class="ctr-ball"
+         :style="ballStyle"
+         ref="ctrBall"></div>
   </div>
 </template>
 
@@ -129,7 +128,7 @@ export default {
   },
   created () {
     if (this.common) {
-      this.focusColor = '#198DED';
+      this.focusColor = this.focusColor || '#198DED';
       this.blurColor = '#D9D9D9';
     }
     this.checked
