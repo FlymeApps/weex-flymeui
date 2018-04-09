@@ -18953,7 +18953,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
 
 var animation = weex.requireModule('animation');
 exports.default = {
@@ -18967,10 +18966,6 @@ exports.default = {
     panOffset: {
       type: Number,
       default: 30
-    },
-    selectIndex: {
-      type: Number,
-      default: 0
     },
     cardS: {
       type: Object,
@@ -19057,6 +19052,9 @@ exports.default = {
       var currentCardLeft = this.currentIndex * (this.cardS.width + 12);
 
       var listEl = this.$refs['card-list'];
+      if (!listEl) {
+        return;
+      }
       listEl && animation.transition(listEl, {
         styles: {
           transform: 'translateX(' + (moveX - currentCardLeft) + 'px)'
@@ -19165,6 +19163,9 @@ exports.default = {
           timingFunction = this.timingFunction;
 
       var listEl = this.$refs['card-list'];
+      if (!listEl) {
+        return;
+      }
       var dist = selectIndex * (cardS.width + 12);
       // 卡片容器
       listEl && animation.transition(listEl, {
@@ -19230,6 +19231,9 @@ exports.default = {
           timingFunction = this.timingFunction;
 
       var listEl = this.$refs['card-list'];
+      if (!listEl) {
+        return;
+      }
       // 向右越界 重置为第一页
       if (this.currentIndex >= this.cardLength) {
         this.currentIndex = 0;
@@ -19271,7 +19275,7 @@ exports.default = {
     checkNeedAutoPlay: function checkNeedAutoPlay() {
       var _this5 = this;
 
-      if (this.autoPlay) {
+      if (this.autoPlay && this.items.length >= 1) {
         this.clearAutoPlay();
         this.autoPlayTimer = setInterval(function () {
           _this5.slideTo(_this5.currentIndex, _this5.currentIndex + 1);
@@ -19299,6 +19303,9 @@ exports.default = {
       }
     }, 20);
     this.checkNeedAutoPlay();
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.clearAutoPlay();
   }
 };
 
@@ -19334,8 +19341,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_vm._t(("card" + (index-2)), [_c('image', {
       style: {
-        width: _vm.cardS.width,
-        height: _vm.cardS.height
+        width: ((_vm.cardS.width) + "px"),
+        height: ((_vm.cardS.height) + "px")
       },
       attrs: {
         "src": item.src
@@ -19347,7 +19354,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     })])], 2)
   })) : _c('div', {
-    ref: "card-list",
     staticClass: ["card-list"]
   }, _vm._l((_vm.items), function(item, index) {
     return _c('div', {

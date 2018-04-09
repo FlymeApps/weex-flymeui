@@ -103,10 +103,6 @@ export default {
       type: Number,
       default: 30
     },
-    selectIndex: {
-      type: Number,
-      default: 0
-    },
     cardS: {
       type: Object,
       default: () => ({
@@ -411,6 +407,9 @@ export default {
       }
     }, 20);
     this.checkNeedAutoPlay();
+  },
+  beforeDestroy () {
+    this.clearAutoPlay();
   }
 };
 </script>
