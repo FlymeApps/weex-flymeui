@@ -8,8 +8,13 @@ export default {
       type: VALUE.ARRAY,
       desc: '数据源',
       props: {
-        inner: VALUE.STRING,
-        desc: '图片链接'
+        min: 1,
+        inner: {
+          src: {
+            type: VALUE.STRING,
+            desc: '图片或者 act 的链接'
+          }
+        }
       },
       default: []
     },
@@ -28,6 +33,6 @@ export default {
   },
   size: {
     width: 1080,
-    height: 386
+    height: 516
   }
 };

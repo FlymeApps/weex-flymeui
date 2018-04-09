@@ -6,11 +6,11 @@
 
 ## TODO
 
-* [ ] 支持单张图片（默认状态）
-* [ ] 事件回调
-* [ ] 卡片样式自定义
+* [x] 支持单张图片（默认状态）
+* [x] 事件回调
+* [x] 卡片样式自定义
 * [ ] slot 支持
-* [ ] 支持 ActiveView
+* [x] 支持 ActiveView
 * [ ] 支持初始化页数
 * [ ] 支持手动切换页数
 
@@ -40,11 +40,21 @@ export default {
   components: { FmSlider, FmButton, FmText, FmFooter },
   data: () => ({
     items: [
-      '//gw.alicdn.com/imgextra/i4/169/TB2TlW1aLuSBuNkHFqDXXXfhVXa_!!169-0-lubanu.jpg_q50.jpg',
-      '//gw.alicdn.com/imgextra/TB2nu8oev5TBuNjSspcXXbnGFXa_!!103-0-lubanu.jpg_q50.jpg',
-      '//gw.alicdn.com/imgextra/TB2dprKdFuWBuNjSszbXXcS7FXa_!!124-0-luban.jpg_q50.jpg',
-      '//img.alicdn.com/imgextra/i4/18/TB28vYEdL9TBuNjy0FcXXbeiFXa_!!18-0-luban.jpg_q50.jpg',
-      '//aecpm.alicdn.com/simba/img/TB14ab1KpXXXXclXFXXSutbFXXX.jpg_q50.jpg'
+      {
+        src: 'http://gw.alicdn.com/imgextra/i4/169/TB2TlW1aLuSBuNkHFqDXXXfhVXa_!!169-0-lubanu.jpg_q50.jpg'
+      },
+      {
+        src: 'http://gw.alicdn.com/imgextra/TB2nu8oev5TBuNjSspcXXbnGFXa_!!103-0-lubanu.jpg_q50.jpg'
+      },
+      {
+        src: 'http://gw.alicdn.com/imgextra/TB2dprKdFuWBuNjSszbXXcS7FXa_!!124-0-luban.jpg_q50.jpg'
+      },
+      {
+        src: 'http://img.alicdn.com/imgextra/i4/18/TB28vYEdL9TBuNjy0FcXXbeiFXa_!!18-0-luban.jpg_q50.jpg'
+      },
+      {
+        src: 'http://aecpm.alicdn.com/simba/img/TB14ab1KpXXXXclXFXXSutbFXXX.jpg_q50.jpg'
+      }
     ]
   })
 };
@@ -56,7 +66,8 @@ export default {
 ## 可配置参数
 | Prop | Type | Required | Default | Description |
 |-------------|------------|--------|-----|-----|
-| items | `Array` |`Y`| `[]` | 图片数组 |
+| items | `Array[Object]` |`Y`| `[]` | 图片数组 |
+| items[{`src`}] | `String` |`Y`| `''` | 图片地址，可使用 act |
 | auto-play | `Boolean` |`N`| `false` | 是否自动播放 |
 | interval | `Number` |`N`| `4000` | 自动播放间隔时间 |
 
