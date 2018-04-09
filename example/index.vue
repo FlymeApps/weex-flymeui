@@ -9,7 +9,7 @@
       <div class="list">
         <div v-for="(item, key) in category" :key="key" class="item-wrap" @click="jump(key)">
           <div class="item">
-            <fm-image :scale="1" class="item-icon" :src="'http://weixin-res.flyme.cn/resources/weex-flymeui/assets/'+ key +'.png'"/>
+            <fm-image width="100" height="100" :scale="1" class="item-icon" :src="'http://weixin-res.flyme.cn/resources/weex-flymeui/assets/'+ key +'.png'"/>
             <div>
               <fm-text :value="item.name" title :style="{fontSize: 48, color: '#000', fontWeight: 400}" />
               <fm-text :value="item.componentList.length + ' 个项目'" :style="{fontSize: 36, color: 'rgba(0, 0, 0, 0.4)', fontWeight: 400}"/>
