@@ -1,21 +1,50 @@
 <!-- Created by Yanjiie on 2018/03/18. [!] Just a beta version! -->
 <template>
-  <div class="fm-banner-wrap"
+  <div v-if="!isCreator"
+       class="fm-banner-wrap"
+       :class="['banner-wrap--' + items.length]"
        ref="sliderCtn"
        @panstart="onPanStart"
        @panmove="onPanMove"
        @panend="onPanEnd"
        @horizontalpan="startHandle">
     <div class="card-list"
+         v-if="items.length > 1"
          ref="card-list"
          :style="{ left: -(cardS.width * 2) + 'px' }">
-      <div v-for="(item, index) in cItems" class="card-item" :key="index" :ref="`card${index-2}`" :style="(index-2) === -1 && { transform: `translateX(-12px)` }">
+      <div class="card-item"
+           v-for="(item, index) in cItems"
+           :key="index"
+           :ref="`card${index-2}`"
+           :style="(index-2) === -1 && { transform: `translateX(-12px)` }">
         <slot :name="`card${index-2}`">
-          <image :style="{ height: cardS.width, height: cardS.height }" :src="item" />
+          <image :style="{ width: cardS.width, height: cardS.height }"
+                 :src="item.src"
+                 @click="itemClicked(index-2 < 0 ? index-2+items.length : index-2 >= items.length ? index-2-items.length : index-2 )" />
+        </slot>
+      </div>
+    </div>
+    <div class="card-list"
+         v-else
+         ref="card-list">
+      <div v-for="(item, index) in items"
+           :key="index"
+           :ref="`card${index}`">
+        <slot :name="`card${index}`">
+          <image :style="{ width: `${cardS.width*1.2425}px`, height: `${cardS.height*1.2425}px` }"
+                 :src="item.src"
+                 @click="itemClicked(index)" />
         </slot>
       </div>
     </div>
   </div>
+  <FmSliderNative v-else
+                  class="fm-nativeBanner-wrap"
+                  :class="['nativeBanner-wrap--' + items.length]"
+                  :autoplay="autoPlay"
+                  @itemclick="itemClicked"
+                  :data="cNativeItems">
+  </FmSliderNative>
 </template>
 
 <style scoped>
@@ -25,6 +54,24 @@
     flex-direction: row;
     height: 386px;
     overflow: hidden;
+  }
+
+  .banner-wrap--1 {
+    width: 1080px;
+    height: 516px;
+    padding: 48px 48px;
+  }
+
+  .fm-nativeBanner-wrap {
+    width: 1080px;
+    height: 386px;
+    padding: 24px 0;
+  }
+
+  .nativeBanner-wrap--1 {
+    width: 1080px;
+    height: 516px;
+    padding: 48px 24px;
   }
 
   .card-list {
@@ -45,7 +92,6 @@
 <script>
 const animation = weex.requireModule('animation');
 import Utils from '../utils';
-import { isWeex } from 'universal-env';
 import Binding from 'weex-bindingx/lib/index.weex.js';
 
 export default {
@@ -92,6 +138,9 @@ export default {
     autoPlayTimer: null
   }),
   computed: {
+    isCreator () {
+      return weex.supports && weex.supports('@component/FmSliderNative');
+    },
     cItems () {
       const { items } = this;
       let cItems = [];
@@ -99,6 +148,12 @@ export default {
         cItems = cItems.concat(items.slice(-2), items, items.slice(0, 2));
       }
       return cItems;
+    },
+    cNativeItems () {
+      const { items } = this;
+      return items.map((item) => {
+        return item.src;
+      });
     },
     cardLength () {
       return this.items.length;
@@ -275,7 +330,6 @@ export default {
           timingFunction
         });
         // 上上张卡片
-        console.log(this.currentIndex - 2);
         const llastCard = this.$refs[`card${this.currentIndex - 2}`];
         llastCard && animation.transition(llastCard[0], {
           styles: {
@@ -338,6 +392,10 @@ export default {
     },
     clearAutoPlay () {
       this.autoPlayTimer && clearInterval(this.autoPlayTimer);
+    },
+    itemClicked (e) {
+      const idx = this.isCreator ? e.position : e;
+      this.$emit('fmSliderItemClicked', idx);
     }
   },
   mounted () {

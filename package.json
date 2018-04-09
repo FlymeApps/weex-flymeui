@@ -1,6 +1,6 @@
 {
     "name": "weex-flymeui",
-    "version": "0.1.10",
+    "version": "0.1.11",
     "description": "A Flyme Style UI library based on Weex for Creator.",
     "main": "index.js",
     "lib": "vue",

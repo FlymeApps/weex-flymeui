@@ -162,8 +162,6 @@ export default {
       if (this.loaded) {
         this.setPage(this.selectIndex, false);
       }
-    },
-    tabTitles (val) {
     }
   },
   computed: {
