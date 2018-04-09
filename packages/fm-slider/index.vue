@@ -18,15 +18,14 @@
            :ref="`card${index-2}`"
            :style="(index-2) === -1 && { transform: `translateX(-12px)` }">
         <slot :name="`card${index-2}`">
-          <image :style="{ width: cardS.width, height: cardS.height }"
+          <image :style="{ width: `${cardS.width}px`, height: `${cardS.height}px` }"
                  :src="item.src"
                  @click="itemClicked(index-2 < 0 ? index-2+items.length : index-2 >= items.length ? index-2-items.length : index-2 )" />
         </slot>
       </div>
     </div>
     <div class="card-list"
-         v-else
-         ref="card-list">
+         v-else>
       <div v-for="(item, index) in items"
            :key="index"
            :ref="`card${index}`">
@@ -185,6 +184,7 @@ export default {
       const currentCardLeft = this.currentIndex * (this.cardS.width + 12);
 
       const listEl = this.$refs['card-list'];
+      if (!listEl) { return; }
       listEl && animation.transition(listEl, {
         styles: {
           transform: `translateX(${moveX - currentCardLeft}px)`
@@ -282,6 +282,7 @@ export default {
     slideTo (originIndex, selectIndex) {
       const { cardS, timingFunction } = this;
       const listEl = this.$refs['card-list'];
+      if (!listEl) { return; }
       const dist = selectIndex * (cardS.width + 12);
       // 卡片容器
       listEl && animation.transition(listEl, {
@@ -344,6 +345,7 @@ export default {
     checkNeedReset () {
       const { cardS, timingFunction } = this;
       const listEl = this.$refs['card-list'];
+      if (!listEl) { return; }
       // 向右越界 重置为第一页
       if (this.currentIndex >= this.cardLength) {
         this.currentIndex = 0;
@@ -383,7 +385,7 @@ export default {
       });
     },
     checkNeedAutoPlay () {
-      if (this.autoPlay) {
+      if (this.autoPlay && this.items.length >= 1) {
         this.clearAutoPlay();
         this.autoPlayTimer = setInterval(() => {
           this.slideTo(this.currentIndex, this.currentIndex + 1);

@@ -30,6 +30,9 @@ export default {
     }
   },
   events: {
+    fmSliderItemClicked: {
+      desc: '内容被点击'
+    }
   },
   size: {
     width: 1080,
