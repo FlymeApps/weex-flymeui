@@ -1,13 +1,25 @@
 <template>
   <div class="flymeui">
     <scroller class="scroller">
-      <div class="header">
-        <fm-image width="655" height="105" :scale="1" src="http://weixin-res.flyme.cn/resources/weex-flymeui/assets/design_logo.png"/>
-        <fm-text class="desc" value="为你提供最全面的公共规范内容展示，让你方便调用动画参数、设计参数以及控件代码"
-                              :style="{fontSize: 42, color: 'rgba(0, 0, 0, 0.6)', fontWeight: 400}" />
-      </div>
+      <title></title>
       <div class="list">
-        <div v-for="(item, key) in category" :key="key" class="item-wrap" @click="jump(key)">
+        <template v-for="(item, key) in category">
+          <div class="list-section" :key="key">
+            <fm-image :width="42" :height="36" :scale="0.4" :src="`http://weixin-res.flyme.cn/resources/weex-flymeui/assets/${key}.png`"/>
+            <text class="list-section--text">{{ item.name }}</text>
+          </div>
+          <template v-for="(component, idx) in item.componentList">
+            <fm-item class="list-item"
+                     :key="idx"
+                     :title="component.name"
+                     :summary="component.subname"
+                     type="icon-small"
+                     :imgSrc="component.icon"
+                     occupying-color="#FFFFFF"
+                     @fmItemClicked="jump(component.path)"></fm-item>
+          </template>
+        </template>
+        <!-- <div v-for="(item, key) in category" :key="key" class="item-wrap" @click="jump(key)">
           <div class="item">
             <fm-image width="100" height="100" :scale="1" class="item-icon" :src="'http://weixin-res.flyme.cn/resources/weex-flymeui/assets/'+ key +'.png'"/>
             <div>
@@ -15,7 +27,7 @@
               <fm-text :value="item.componentList.length + ' 个项目'" :style="{fontSize: 36, color: 'rgba(0, 0, 0, 0.4)', fontWeight: 400}"/>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </scroller>
   </div>
@@ -33,7 +45,7 @@
 
   .scroller {
     position: absolute;
-    top: 66px;
+    top: 0;
     right: 0;
     left: 0;
     bottom: 0;
@@ -41,41 +53,44 @@
   }
 
   .header {
-    margin-top: 267px;
-    margin-bottom: 93px;
-    margin-left: 77px;
+    align-items: center;
+    margin: 72px 0;
   }
 
   .desc {
     width: 775px;
     margin-top: 54px;
+    text-align: center;
   }
 
-  .list {
+  .list-section {
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 48px;
+    height: 108px;
+    width: 1080px;
+    padding: 40px 0 0 42px;
+    background-color: #F2F2F2;
   }
 
-  .item-wrap {
-    justify-content: space-between;
-    background-color: #ffffff;
-    width: 480px;
-    height: 360px;
-    margin-bottom: 20px;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.04);
+  .list-section--text {
+    margin-left: 10px;
+    font-family: sans-serif-medium;
+    font-weight: 500;
+    font-size: 36px;
+    color: rgba(0, 0, 0, 0.4);
+    line-height: 42px;
   }
 
-  .item {
-    padding: 50px;
+  .list-item {
+    background-color: #FFFFFF;
   }
 </style>
 
 <script>
-import { FmText, FmImage } from 'weex-flymeui';
+import { FmText, FmImage, FmItem } from 'weex-flymeui';
+import Title from './_mods/title.vue';
 import category from './category.js';
 const navigator = weex.requireModule('navigator');
+const modal = weex.requireModule('modal');
 const env = weex.config.env;
 const url = weex.config.bundleUrl;
 
@@ -85,29 +100,19 @@ export default {
       category: category
     };
   },
-  components: { FmText, FmImage },
+  components: { FmText, FmImage, FmItem, Title },
   methods: {
-    jump (type) {
+    jump (path) {
       if (env.platform === 'Web') {
-        window.location.href = `/categories/${type}`;
+        window.location.href = window.location.href + path;
       } else {
-        let target = url.replace('index.native.js', `categories/${type}/index.native.js`);
-        if (type.startsWith('http')) {
-          target = type;
+        let target = url.replace('index.native.js', `${path}/index.native.js`);
+        if (path.startsWith('http')) {
+          target = path;
         }
         navigator.push({
           url: target,
-          animated: 'true',
-          theme: {
-            immersion: true, // 沉浸式状态栏
-            softmode: 'adjustResize',
-            theme: {
-              statusBar: { // 状态栏
-                transparent: true, // 设置后color、alpha不起作用，状态栏颜色同actionbar
-                darkIcon: false // 是否使用深色图标
-              }
-            }
-          }
+          animated: 'true'
         });
       }
     }
