@@ -106,7 +106,7 @@ export default {
       if (env.platform === 'Web') {
         window.location.href = window.location.href + path;
       } else {
-        let target = url.replace('index.native.js', `${path}/index.native.js`);
+        let target = url.replace('index.creator.js', `${path}/index.creator.js`);
         if (path.startsWith('http')) {
           target = path;
         }

@@ -2,6 +2,8 @@ node_modules
 dist/example
 docs
 example
+depoly
+release
 .*
 /*.js
 /*.json

@@ -31,10 +31,8 @@ const getEntry = dir => {
 
 const getCopyConfig = () => {
   const foundScripts = glob.sync('example/', {});
-  const CategoryfoundScripts = glob.sync('example/categories/*/', {});
   const CfoundScripts = glob.sync('example/component/*/', {});
-  const MfoundScripts = glob.sync('example/module/*/', {});
-  const config = [...CategoryfoundScripts, ...foundScripts, ...CfoundScripts, ...MfoundScripts];
+  const config = [...foundScripts, ...CfoundScripts];
   const ret = [];
   config.forEach(scriptPath => {
     if (!/(_mods|_public)/.test(scriptPath)) {
@@ -47,12 +45,10 @@ const getCopyConfig = () => {
   return ret;
 };
 
-const categories = getEntry('example/categories');
 const component = getEntry('example/component');
-const moduleEntry = getEntry('example/module/');
 const entry = Object.assign({
   'index': './index.js'
-}, categories, component, moduleEntry);
+}, component);
 entry['example/index'] = './example/index.js';
 
 const plugins = [
@@ -158,7 +154,7 @@ webCfg.module.rules[1].use.push({
 });
 
 const nativeCfg = getBaseConfig();
-nativeCfg.output.filename = '[name].native.js';
+nativeCfg.output.filename = '[name].creator.js';
 nativeCfg.module.rules[1].use.push('weex-loader');
 
 const exportConfig = [

@@ -17,5 +17,6 @@ mods/.sass-cache/
 lerna-debug.log
 dist/example
 dist/*.map
+release
 
 npm-debug*

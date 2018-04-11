@@ -12,7 +12,8 @@
         "serve": "anywhere -d dist/example/ -p 8888",
         "build:theme": "gulp build --gulpfile lib/theme-paint/gulpfile.js",
         "public": "npm run build; npm pgitublish",
-        "start": "npm run build; (npm run serve & npm run watch)"
+        "start": "npm run build; (npm run serve & npm run watch)",
+        "release": "npm run build; node ./depoly/pack-prod.js"
     },
     "keywords": [
         "Flyme",
@@ -55,7 +56,8 @@
         "vue-template-compiler": "^2.4.1",
         "webpack": "~3.6.0",
         "weex-loader": "^0.7.2",
-        "weex-vue-loader": "~0.6.1"
+        "weex-vue-loader": "~0.6.1",
+        "archiver": "^2.1.1"
     },
     "dependencies": {
         "weex-bindingx": "0.0.17"
