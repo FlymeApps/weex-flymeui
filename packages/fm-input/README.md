@@ -2,7 +2,7 @@
 
 > Flyme 输入框
 
-!> 由于 `fm-input` 依赖 `weex input component`， 因为 Weex SDK 的版本差异，新版 SDK 中的 input 组件存在 bug，会导致 input 内容无法情况
+!> 由于 `fm-input` 依赖 `weex input component`， 因为 Weex SDK 的版本差异，新版 SDK 中的 input 组件存在 bug，会导致 input 内容无法清空
 
 ## 使用方法
 ```html
@@ -33,7 +33,7 @@ export default {
 </script>
 ```
 
-更多详细代码例子可以参考 [demo](https://github.com/Yanjiie/weex-flymeui/blob/master/example/component/input/index.vue)
+更多详细代码例子可以参考 [demo](https://github.com/FlymeApps/weex-flymeui/blob/master/example/component/input/index.vue)
 
 ## 可配置参数
 | Prop | Type | Required | Default | Description |

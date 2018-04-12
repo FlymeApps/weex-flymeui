@@ -1,31 +1,53 @@
 # fm-overlay
 
-## 说明
-FmOverlay 是一个占满 viewport 的半透明覆盖层，可以使用在提示型组件或场景中。
+> 一个占满 viewport 的半透明覆盖层，可以使用在提示型组件或场景中。
+
 <video src="http://baas.dfs.flyme.cn/group3/M05/B5/B1/CgOUhlpLcCyAGgXDABMiUByYU7s066.mp4" style="width: 375px;" controls="controls"></video>
 
-## 使用
+## 使用方法
 ```html
-<fm-overlay :show="show"
-            duration="300"
-            :hasAnimation="hasAnimation"
-            :timingFunction="timingFunction"
-            @fmOverlayBodyClicked="fmOverlayBodyClicked"
-            opacity="0.5"></fm-overlay>
+<template>
+  <div class="wrapper">
+    <div class="btn" @click="openOverlay">
+      <text class="btn-txt">点击打开蒙层</text>
+    </div>
+    <fm-overlay
+      :show="show"
+      opacity="0.6"
+      @fmOverlayBodyClicked="fmOverlayBodyClicked"></wxc-overlay>
+  </div>
+</template>
+<script>
+  import { FmOverlay } from 'weex-flymeui';
+  export default {
+    components: { FmOverlay },
+    data: () => ({
+      show: false
+    }),
+    methods: {
+      openOverlay () {
+        this.show = true;
+      },
+      fmOverlayBodyClicked () {
+        this.show = false;
+      }
+    }
+  };
+</script>
 ```
+更多详细代码例子可以参考 [demo](https://github.com/FlymeApps/weex-flymeui/blob/master/example/component/overlay/index.vue)
 
-## Props
-| 属性 | 类型 | 示例 | 说明 |
-| -------- | -------- | -------- | 
-| show | Boolean | show="show"  | 蒙层是否显示，单项数据流从父组件传入
-| duration | Number | duration="300"  | 动画过渡时间。默认为 300
-| hasAnimation | Boolean | hasAnimation="true"  | 是否使用动画过渡，默认为使用动画过渡
-| timingFunction | Array | :timingFunction="\['ease-in', 'ease-out'\]"  | 自定义动画过渡形式，数组下标 0 为进入动画，下标 1 为退出动画
-| opacity | Number | opacity="0.5"  | 蒙层的透明度，默认为 0.5
-| canAutoClose | Boolean | canAutoClose="true"  | 点击蒙层时是否可以触发关闭，默认为 true
+## 可配置参数
+| Prop | Type | Required | Default | Description |
+|-------------|------------|--------|-----|-----|
+| show | `Boolean` |`Y`| `false` | 蒙层是否显示，单项数据流从父组件传入 |
+| duration | `Number` |`N`| `300` | 动画过渡时间。默认为 300 |
+| hasAnimation | `Boolean` |`N`| `true` | 是否使用动画过渡 |
+| timingFunction | `Array` |`N`| `['ease-in','ease-out']` | 蒙层显示和隐藏动画函数 |
+| opacity | `Number` |`N`| `0.5` | 蒙层的透明度 |
+| can-auto-close | `Boolean` |`N`| `true` | 是否可以点击自动关闭 |
 
-## Events
-| 事件名 | 事件类型 
-| -------- | -------- 
-| fmOverlayBodyClicked | 蒙层被点击时触发
+## 事件回调
 
+- `fmOverlayBodyClicked` 消失后触发
+- `fmOverlayBodyClicking` 被点击时，消失前触发

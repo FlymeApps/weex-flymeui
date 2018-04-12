@@ -20,7 +20,7 @@ export default {
       name: '轮播',
       subname: 'FmSlider',
       icon: 'http://p1nq9peby.bkt.clouddn.com/weex-flymeui/slider.png',
-      path: 'component/sliderbar'
+      path: 'component/slider'
     }, {
       name: '底栏',
       subname: 'FmFooter',

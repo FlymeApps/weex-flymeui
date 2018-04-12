@@ -5,10 +5,10 @@
 
       <div class="btn-wrap">
         <fm-button size="huge" @buttonClicked="onChange('demo1')">基本使用</fm-button>
-        <fm-button size="huge" @buttonClicked="onChange('demo2')" theme="limegreen">active 状态</fm-button>
-        <fm-button size="huge" @buttonClicked="onChange('demo3')" theme="seagreen">徽章与新消息提醒</fm-button>
-        <fm-button size="huge" @buttonClicked="onChange('demo4')" theme="crimson">自定义样式</fm-button>
-        <fm-button size="huge" @buttonClicked="onChange('demo5')" theme="firebrick">高级使用"</fm-button>
+        <fm-button size="huge" @buttonClicked="onChange('demo2')" color="#3bc06b">active 状态</fm-button>
+        <fm-button size="huge" @buttonClicked="onChange('demo3')" color="#04c0cf">徽章与新消息提醒</fm-button>
+        <fm-button size="huge" @buttonClicked="onChange('demo4')" color="#dc2a2a">自定义样式</fm-button>
+        <fm-button size="huge" @buttonClicked="onChange('demo5')" color="#ffaf00">高级使用"</fm-button>
       </div>
 
       <template v-if="type === 'demo1'">
@@ -69,7 +69,7 @@
 
   .scroller {
     position: absolute;
-    top: 66px;
+    top: 0;
     right: 0;
     left: 0;
     bottom: 0;

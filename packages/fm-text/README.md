@@ -23,7 +23,7 @@
 </script>
 ```
 
-更多详细代码例子可以参考 [demo](https://github.com/Yanjiie/weex-flymeui/blob/master/example/component/text/index.vue)
+更多详细代码例子可以参考 [demo](https://github.com/FlymeApps/weex-flymeui/blob/master/example/component/text/index.vue)
 
 ## 可配置参数
 | Prop | Type | Required | Default | Description |

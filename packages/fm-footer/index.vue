@@ -1,3 +1,4 @@
+<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->
 <!-- Created by Yanjiie on 2018/03/13. -->
 <template>
   <div class="fm-footer" :class="['fm-footer-' + paddingSize]" :style="{ backgroundColor: backgroundColor }">

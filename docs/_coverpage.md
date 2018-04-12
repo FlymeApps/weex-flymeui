@@ -4,7 +4,7 @@
 
 > <span style="line-height:1.8rem;font-weight:400;font-size:1.3rem">🐼 A Flyme Style UI library based on Weex for Creator.<span>
 
-[GitHub](https://github.com/Yanjiie/weex-flymeui)
+[GitHub](https://github.com/FlymeApps/weex-flymeui)
 [Get Started](#weex-flymeui)
 
 <!-- background image -->

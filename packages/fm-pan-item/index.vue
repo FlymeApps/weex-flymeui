@@ -1,3 +1,4 @@
+<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->
 <!-- Created by Yanjiie on 18/03/08. Inspired by https://github.com/alibaba/weex-ui -->
 <!-- 处理android上面有点击时候事件不传递问题! -->
 <!-- 需要是 滑动组件中接受 fmPanItemPan，事件同时判断是 android 下调用 bindExp -->

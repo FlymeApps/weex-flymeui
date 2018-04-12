@@ -24,7 +24,7 @@
                  @fmPopupOverlayClicked="popupOverlayBottomClick"
                  pos="bottom"
                  height="400">
-          <fm-button class="btn" text="主动隐藏" @click="clickHide" />
+          <fm-button class="btn" @buttonClicked="clickHide">主动隐藏</fm-button>
       </fm-popup>
       <fm-popup :have-overlay="isTrue"
                  popup-color="#FFFFFF"

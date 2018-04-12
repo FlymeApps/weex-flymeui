@@ -1,7 +1,9 @@
+<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->
+<!-- Created and Update by Yanjiie on 2018/04/12. -->
 <template>
   <list ref="group">
     <slot></slot>
-  </list>  
+  </list>
 </template>
 
 <script>

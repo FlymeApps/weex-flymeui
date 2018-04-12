@@ -1,3 +1,5 @@
+<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->
+<!-- Created and Updated by Yanjiie on 2018/04/12. Fork from weex-ui. -->
 <template>
   <div>
     <div class="fm-overlay"
@@ -12,7 +14,7 @@
 
 <style scoped>
   .fm-overlay {
-    width: 1080;
+    width: 1080px;
     position: fixed;
     left: 0;
     top: 0;

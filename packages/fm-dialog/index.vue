@@ -1,5 +1,5 @@
-<!-- Created by Yanjiie on one day. -->
-<!-- Update by Yanjiie on 2018/03/14. [!] Just a beta version! -->
+<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->
+<!-- Created and Update by Yanjiie on 2018/03/14. [!] Just a beta version! -->
 <template>
   <component class="container"
              :is="isCreator ? 'FmOverlayNative' : 'div'"

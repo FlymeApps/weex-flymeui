@@ -5,7 +5,7 @@
     "main": "index.js",
     "lib": "vue",
     "type": "weex",
-    "repository": "https://github.com/Yanjiie/weex-flymeui",
+    "repository": "https://github.com/FlymeApps/weex-flymeui",
     "scripts": {
         "build": "webpack --progress",
         "watch": "webpack --progress --watch",

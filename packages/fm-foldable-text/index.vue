@@ -1,3 +1,5 @@
+<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->
+<!-- Created and Update by Yanjiie on 2018/04/12. [!] Just a beta version! -->
 <template>
   <div class="wrapper" @click="fold">
     <div class="container" ref="plane" :style="planeStyle">

@@ -1,3 +1,5 @@
+<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->
+<!-- Created and Update by Yanjiie on 2018/04/12. -->
 <template>
   <div v-if="show" class="tip-wrap" :style="wrapStyle">
     <div class="content-wrap" :style="background">

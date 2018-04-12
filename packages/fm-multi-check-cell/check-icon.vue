@@ -1,12 +1,14 @@
+<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->
+<!-- Created and Update by Yanjiie on 2018/04/12. -->
 <template>
   <div class="check-icon">
     <div class="animate-wrap" :hack="isNeedShow" ref="animate-wrap" :style="wrapStyle">
       <image
         class="unchecked"
         :src="bgImg" />
-      <image 
+      <image
         class="checked"
-        :src="getCheckedImg" 
+        :src="getCheckedImg"
         ref="check-icon"
         :watch="isNeedChecked" />
     </div>

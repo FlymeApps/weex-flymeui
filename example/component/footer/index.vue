@@ -5,9 +5,9 @@
 
       <div class="btn-wrap">
         <fm-button size="huge" @buttonClicked="onChange('none')">无内边距</fm-button>
-        <fm-button size="huge" @buttonClicked="onChange('large')" theme="crimson">大内边距</fm-button>
-        <fm-button size="huge" @buttonClicked="onChange('middle')" theme="seagreen">中等内边距</fm-button>
-        <fm-button size="huge" @buttonClicked="onChange('small')" theme="limegreen">小内边距</fm-button>
+        <fm-button size="huge" @buttonClicked="onChange('large')" color="#dc2a2a">大内边距</fm-button>
+        <fm-button size="huge" @buttonClicked="onChange('middle')" color="#04c0cf">中等内边距</fm-button>
+        <fm-button size="huge" @buttonClicked="onChange('small')" color="#3bc06b">小内边距</fm-button>
       </div>
 
       <template v-if="type === 'none'">
@@ -40,7 +40,7 @@
             <text class="price">20</text>
             <text class="label">元</text>
           </div>
-          <fm-button theme="firebrick" size="middle" animated>立即支付</fm-button>
+          <fm-button color="#dc2a2a" size="middle" animated>立即支付</fm-button>
         </fm-footer>
       </template>
 
