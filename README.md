@@ -4,7 +4,7 @@
 [![Travis](https://img.shields.io/travis/Yanjiie/weex-flymeui.svg?branch=master&style=flat-square)](https://travis-ci.org/Yanjiie/weex-flymeui)
 [![GitHub last commit](https://img.shields.io/github/last-commit/Yanjiie/weex-flymeui.svg?style=flat-square)](https://github.com/alibaba/weex-flymeui/commits/master)
 [![npm](https://img.shields.io/npm/v/weex-flymeui.svg?style=flat-square)](https://www.npmjs.com/package/weex-flymeui?_blank)
-[![license](https://img.shields.io/github/license/Yanjiie/weex-flymeui.svg?style=flat-square)](https://github.com/Yanjiie/weex-flymeui/blob/master/LICENSE)
+[![license](https://img.shields.io/github/license/Yanjiie/weex-flymeui.svg?style=flat-square)](https://github.com/FlymeApps/weex-flymeui/blob/master/LICENSE)
 
 > 遵循 [Flyme](https://www.flyme.cn/) 系统设计风格、基于 [Weex](https://github.com/apache/incubator-weex) 的跨平台通用组件库。
 
