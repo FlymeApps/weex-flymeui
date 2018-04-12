@@ -5,8 +5,12 @@
       "weexcomponent",
       {
         "style": false,
+        "jsTheme": true,
         "libraryName": "weex-flymeui",
-        "libDir": "packages"
+        "libDir": "packages",
+        "themeConfig": {
+          "name": "default"
+        }
       }
     ]
   ]

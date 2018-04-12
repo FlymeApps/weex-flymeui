@@ -1,5 +1,6 @@
-<!-- Created by Yanjiie on one day. -->
-<!-- Update by Yanjiie on 2018/03/14. -->
+<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->
+<!-- Created and Update by Yanjiie on 2018/04/12. -->
+
 <template>
   <div ref="fm-button"
        class="fm-button"
@@ -91,6 +92,7 @@
     right: 0;
     bottom: 0;
     z-index: 30;
+    border-radius: 200px;
   }
 
   .overlay:active {
@@ -100,7 +102,7 @@
 
 <script>
 import FmIcon from '../fm-icon';
-import THEME from './theme';
+import STYLE from 'weex-flymeui/lib/theme/default/';
 const dom = weex.requireModule('dom');
 
 export default {
@@ -112,21 +114,13 @@ export default {
       default: 'small'
     },
     type: String,
-    theme: {
-      type: String,
-      default: 'blue'
-    },
     color: {
       type: String,
-      default: ''
+      default: STYLE.primaryColor
     },
     titleColor: {
       type: String,
       default: '#FFFFFF'
-    },
-    disabledColor: {
-      type: String,
-      default: '#B2B2B2'
     },
     icon: {
       type: String,
@@ -152,12 +146,12 @@ export default {
       return this.color || THEME[this.theme].normal;
     },
     computedStyle () {
-      const { computedColor, active, disabled, disabledColor, padding, animated, type, width, height } = this;
-      const wrapColor = disabled ? disabledColor : computedColor;
+      const { color, active, disabled, padding, animated, type, width, height } = this;
       const transform = !animated || disabled ? 'scale(1)' : `scale(${active ? 0.95 : 1})`;
       const style = {
-        borderColor: (type === 'hollow') ? wrapColor : '',
-        backgroundColor: (type !== 'hollow') ? wrapColor : '',
+        borderColor: (type === 'hollow') ? color : '',
+        backgroundColor: (type !== 'hollow') ? color : '',
+        opacity: disabled ? 0.2 : 1,
         transform,
         paddingLeft: padding + 'px',
         paddingRight: padding + 'px'

@@ -1,3 +1,5 @@
+<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->
+<!-- Created and updated by Yanjiie on 2018/4/12. -->
 <template>
   <div class="fm-switch" @click="changeState" :style="getBgStyle">
     <div class="ctr-ball"
@@ -13,9 +15,7 @@
     width: 144px;
     height: 72px;
     border-radius: 72px;
-    background-color: #198ded;
     border-width: 5px;
-    border-color: #198ded;
   }
 
   .ctr-ball {
@@ -27,6 +27,7 @@
 </style>
 
 <script>
+import STYLE from 'weex-flymeui/lib/theme/default/';
 const animation = weex.requireModule('animation');
 
 export default {
@@ -36,79 +37,74 @@ export default {
       type: Boolean,
       default: false
     },
-    common: Boolean,
+    solid: Boolean,
     disabled: {
       type: Boolean,
       default: false
     },
-    blurColor: {
+    blurColor: String,
+    focusColor: String,
+    borderColor: {
       type: String,
-      default: '#FFFFFF'
+      default: '#D9D9D9'
     },
-    focusColor: {
+    backgroundColor: {
       type: String,
-      default: '#FFFFFF'
-    },
-    borderColor: String,
-    backgroundColor: String
+      default: STYLE.primaryColor
+    }
   },
   data () {
     return {
       isAnimate: false,
-      ballStyle: {
-        backgroundColor: this.blurColor
-      }
+      _checked: false,
+      ballStyle: {}
     };
   },
   computed: {
     getBgStyle () {
-      const { common, borderColor, backgroundColor, disabled } = this;
+      const { solid, borderColor, backgroundColor, disabled } = this;
       const style =
-          common
+          !solid
             ? {
               borderWidth: '5px',
-              borderColor: '#D9D9D9',
+              borderColor: borderColor,
               backgroundColor: 'transparent'
             }
-            : {};
+            : {
+              borderWidth: '5px',
+              borderColor: backgroundColor,
+              backgroundColor: backgroundColor
+            };
       if (disabled) {
         style.opacity = 0.3;
       } else {
         style.opacity = 1;
-      }
-      if (borderColor) {
-        style.borderWidth = '5px';
-        style.borderColor = borderColor;
-      }
-      if (backgroundColor) {
-        style.borderWidth = '5px';
-        style.borderColor = backgroundColor;
-        style.backgroundColor = backgroundColor;
       }
       return style;
     }
   },
   watch: {
     checked (bool) {
+      this._checked = bool;
       this.toggleState(bool);
     }
   },
   methods: {
     changeState (e) {
       if (this.disabled) return;
-      this.checked = !this.checked;
-      this.toggleState(this.checked);
-      this.$emit('fmSwitchStateChange', this.checked);
+      this._checked = !this._checked;
+      this.toggleState(this._checked);
+      this.$emit('fmSwitchStateChange', this._checked);
     },
-    toggleState (bool) {
+    toggleState (bool, animated = true) {
       const style = bool
         ? {
-          backgroundColor: this.focusColor,
+          backgroundColor: this.focusColor || (this.solid ? '#FFFFFF' : this.backgroundColor),
           transform: 'scale(1) translate(72px, 0)',
           transformOrigin: 'center center'
         }
         : {
-          backgroundColor: this.blurColor,
+          backgroundColor: this.blurColor || (this.solid ? '#FFFFFF' : this.borderColor),
           transform: 'scale(0.429)',
           transformOrigin: 'center center'
         };
@@ -121,25 +117,24 @@ export default {
         {
           styles: style,
           timingFunction: 'ease',
-          duration: 260
+          duration: animated ? 260 : 0.00001
         }
       );
     }
   },
   created () {
-    if (this.common) {
-      this.focusColor = this.focusColor || '#198DED';
-      this.blurColor = '#D9D9D9';
-    }
     this.checked
       ? (this.ballStyle = {
-        backgroundColor: this.focusColor,
+        backgroundColor: this.focusColor || (this.solid ? '#FFFFFF' : this.backgroundColor),
         transform: 'scale(1.0) translate(72px, 0)'
       })
       : (this.ballStyle = {
-        backgroundColor: this.blurColor,
+        backgroundColor: this.blurColor || (this.solid ? '#FFFFFF' : this.borderColor),
         transform: 'scale(0.429)'
       });
+
+    this._checked = this.checked;
+    this.toggleState(this._checked, false);
   }
 };
 </script>

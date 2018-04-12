@@ -35,7 +35,7 @@
 ## 可配置参数
 | Prop | Type | Required | Default | Description |
 |-------------|------------|--------|-----|-----|
-| common | `Boolean` |`N`| `false` | 使用系统样式 |
+| solid | `Boolean` |`N`| `false` | 是否使用实心开关 |
 | checked | `Boolean` |`N`| `false` | 控制选中状态 |
 | disabled | `Boolean` |`N`| `false` | 禁用按钮 |
 | focus-color | `String` |`N`| `#FFFFFF` | 球的聚焦颜色 |

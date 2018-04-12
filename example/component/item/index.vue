@@ -102,7 +102,7 @@
 
   .scroller {
     position: absolute;
-    top: 66px;
+    top: 0;
     right: 0;
     left: 0;
     bottom: 0;
@@ -113,6 +113,7 @@
 import { FmItem, FmButton, FmTag } from 'weex-flymeui';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
+const modal = weex.requireModule('modal');
 
 export default {
   components: { Title, Category, FmItem, FmButton, FmTag },

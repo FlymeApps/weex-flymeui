@@ -12,19 +12,19 @@
         </div>
         <div class="container row">
           <fm-text>中等大小按钮</fm-text>
-          <fm-button size="middle" theme="firebrick">提交订单</fm-button>
+          <fm-button size="middle" color="#DC2A2A">提交订单</fm-button>
         </div>
         <div class="container row">
           <fm-text>大按钮</fm-text>
-          <fm-button size="large" theme="tomato">查看详情</fm-button>
+          <fm-button size="large" color="#FC5B23">查看详情</fm-button>
         </div>
         <div class="container row">
           <fm-text>超大按钮</fm-text>
-          <fm-button size="huge" theme="limegreen">开始</fm-button>
+          <fm-button size="huge" color="#3BC06B">开始</fm-button>
         </div>
         <div class="container row">
           <fm-text>自定义大小</fm-text>
-          <fm-button width="300" height="150" theme="coral">自定义</fm-button>
+          <fm-button width="300" height="150" color="#FFAF00">自定义</fm-button>
         </div>
         <div class="container row">
           <fm-text>空心按钮</fm-text>
@@ -36,7 +36,7 @@
         </div>
         <div class="container row">
           <fm-text>active 动画</fm-text>
-          <fm-button size="huge" theme="seagreen" animated>开始</fm-button>
+          <fm-button size="huge" color="#04C0CF" animated>开始</fm-button>
         </div>
         <div class="container row" :style="{ paddingBottom: 60 }">
           <fm-text>禁用状态</fm-text>

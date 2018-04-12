@@ -1,3 +1,4 @@
+<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->
 <!-- Created by Yanjiie on 2018/3/9. -->
 <template>
   <div class="fm-item" @click="itemClicked" @longpress="itemLongpress">
