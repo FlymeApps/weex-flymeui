@@ -17,7 +17,7 @@
                                       value: '更多',
                                      color: '#FFAF00'
                                    }" @fmTitlebarRightBtnClicked="rightBtnClick"/>
-      <fm-titlebar title="混排按钮( 不超过3个 )" :rightBtns="btns1"  @fmTitlebarRightBtnClicked="rightBtnClick"/>
+      <fm-titlebar title="混排按钮( 不超过3个 )" :rightBtns="btns1" @fmTitlebarRightBtnClicked="rightBtnClick"/>
       <category title="预留状态栏"></category>
       <fm-titlebar title="预留状态栏" :statusbar="true" />
       <category title="文字过长处理"></category>
