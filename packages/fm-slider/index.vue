@@ -92,9 +92,11 @@
 <script>
 const animation = weex.requireModule('animation');
 import Utils from '../utils';
+import BindEnv from '../utils/bind-env';
 import Binding from 'weex-bindingx/lib/index.weex.js';
 
 export default {
+  name: 'FmSlider',
   props: {
     items: {
       type: Array,
@@ -157,7 +159,7 @@ export default {
   },
   methods: {
     startHandle (e) {
-      if (Utils.env.supportsEB() && e.state === 'start') {
+      if (BindEnv.supportsEB() && e.state === 'start') {
         this.clearAutoPlay();
         setTimeout(() => {
           const sliderCtn = this.$refs[`sliderCtn`];
@@ -166,7 +168,7 @@ export default {
       }
     },
     onPanStart (e) {
-      if (Utils.env.supportsEB()) {
+      if (BindEnv.supportsEB()) {
         return;
       }
       this.clearAutoPlay();
@@ -174,7 +176,7 @@ export default {
       this.startTime = Date.now();
     },
     onPanMove (e) {
-      if (Utils.env.supportsEB() || this.isMoving) {
+      if (BindEnv.supportsEB() || this.isMoving) {
         return;
       }
       const moveX = e.changedTouches[0].clientX - this.startX;
@@ -193,7 +195,7 @@ export default {
       });
     },
     onPanEnd (e) {
-      if (Utils.env.supportsEB()) {
+      if (BindEnv.supportsEB()) {
         return;
       }
       this.panEnd(e);
@@ -400,7 +402,7 @@ export default {
   mounted () {
     setTimeout(() => {
       const sliderCtn = this.$refs[`sliderCtn`];
-      if (Utils.env.supportsEB() && sliderCtn && sliderCtn.ref) {
+      if (BindEnv.supportsEB() && sliderCtn && sliderCtn.ref) {
         Binding.prepare && Binding.prepare({
           anchor: sliderCtn.ref,
           eventType: 'pan'

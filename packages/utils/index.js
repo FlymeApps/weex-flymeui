@@ -2,8 +2,6 @@
  * Created by Yanjiie on 18/03/08. Fork from https://github.com/alibaba/weex-ui
  */
 
-import Binding from 'weex-bindingx';
-
 const Utils = {
   _typeof (obj) {
     return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
@@ -100,26 +98,6 @@ const Utils = {
       const { platform } = weex.config.env;
       return platform.toLowerCase() === 'android';
     },
-    supportsEB () {
-      return Binding.isSupportBinding && !Utils.env.isWeb();
-    },
-
-    /**
-     * 判断Android容器是否支持是否支持expressionBinding(处理方式很不一致)
-     * @returns {boolean}
-     */
-    supportsEBForAndroid () {
-      return (Utils.env.isAndroid()) && Utils.env.supportsEB();
-    },
-
-    /**
-     * 判断IOS容器是否支持是否支持expressionBinding
-     * @returns {boolean}
-     */
-    supportsEBForIos () {
-      return (Utils.env.isIOS()) && Utils.env.supportsEB();
-    },
-
     /**
      * 获取weex屏幕真实的设置高度，需要减去导航栏高度
      * @returns {Number}
