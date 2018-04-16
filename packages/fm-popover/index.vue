@@ -6,15 +6,24 @@
                 :hasAnimation="true"
                 :canAutoClose="true"
                 :opacity="overlayOpacity"
-                @fmOverlayBodyClicking="overlayClicking"
+                @fmOverlayBodyClicking="visible(false)"
                 ref="fm-overlay"></fm-overlay>
     <div ref="fm-popover"
          class="popover"
          v-if="show || showIn"
          :style="popoverStyle"
          @touchend="handleTouchEnd">
-      <div class="content">
-
+      <div class="content"
+           :style="{ height: buttons.length * 168 - 2 + 'px' }">
+        <div v-for="(item, index) in buttons"
+             :key="index"
+             class="item"
+             @click="onClicked(index)">
+          <div class="item-content">
+            <fm-icon class="item-icon" v-if="item.icon" :name="item.icon" :icon-style="67" />
+            <text class="item-text">{{ item.text }}</text>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -30,34 +39,61 @@
 
   .popover {
     position: fixed;
-    z-index: 10;
+    z-index: 99;
     width: 628px;
     padding: 20px;
-    height: 675px;
     border-radius: 10px;
   }
 
   .content {
     flex: 1;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
     background-color: #FFFFFF;
     border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .item {
+    height: 168px;
+    padding: 0 48px;
+  }
+
+  .item-content {
+    flex: 1;
+    flex-direction: row;
+    border-bottom-width: 2px;
+    border-color: rgba(0,0,0,0.10);
+    align-items: center;
+  }
+
+  .item-text {
+    font-size: 48px;
+  }
+
+  .item-icon {
+    margin-right: 15px;
   }
 </style>
 
 <script>
 import FmOverlay from '../fm-overlay';
+import FmIcon from '../fm-icon';
 const animation = weex.requireModule('animation');
 
 export default {
   name: 'FmPopover',
-  components: { FmOverlay },
+  components: { FmOverlay, FmIcon },
   props: {
+    buttons: {
+      type: Array,
+      default: () => ([])
+    },
     position: {
       type: Object,
       default: () => ({
-        x: -1,
-        y: 124
+        pos: 'top',
+        x: 0,
+        y: 0
       })
     },
     hasAnimation: {
@@ -66,7 +102,7 @@ export default {
     },
     overlayOpacity: {
       type: Number,
-      default: 0.2
+      default: 0.0
     }
   },
   data: () => ({
@@ -75,11 +111,24 @@ export default {
   }),
   computed: {
     popoverStyle () {
-      const { x = 0, y = 0 } = this.position;
+      const { x = 0, y = 0, pos = 'top' } = this.position;
       const style = {};
       x < 0 ? (style.right = `${-x}px`) : (style.left = `${x}px`);
       y < 0 ? (style.bottom = `${-y}px`) : (style.top = `${y}px`);
-      style.transform = `translateY(${this.showIn ? 0 : -30}px)`;
+      switch (pos) {
+        case 'top':
+          style.transform = `translateY(${this.showIn ? 0 : -20}px)`;
+          break;
+        case 'bottom':
+          style.transform = `translateY(${this.showIn ? 0 : 20}px)`;
+          break;
+        case 'left':
+          style.transform = `translateX(${this.showIn ? 0 : -20}px)`;
+          break;
+        case 'right':
+          style.transform = `translateX(${this.showIn ? 0 : 20}px)`;
+          break;
+      }
       style.opacity = !this.showIn ? 0 : 1;
       return style;
     }
@@ -91,26 +140,44 @@ export default {
     },
     appearPopover (bool) {
       const { hasAnimation } = this;
+      const { pos = 'top' } = this.position;
       const popoverEl = this.$refs['fm-popover'];
       if (!popoverEl) {
         return;
       }
+      let hideTransform;
+      switch (pos) {
+        case 'top':
+          hideTransform = 'translateY(-20px)';
+          break;
+        case 'bottom':
+          hideTransform = 'translateY(20px)';
+          break;
+        case 'left':
+          hideTransform = 'translateX(-20px)';
+          break;
+        case 'right':
+          hideTransform = 'translateX(20px)';
+          break;
+      }
       const styles = bool ? {
-        transform: 'translateY(0px)',
+        transform: 'translateX(0px) translateY(0px)',
         opacity: 1
       } : {
-        transform: 'translateY(-30px)',
+        transform: hideTransform,
         opacity: 0
       };
       animation.transition(popoverEl, {
         styles,
-        duration: hasAnimation ? 300 : 0.0001
+        duration: hasAnimation ? 150 : 0.0001,
+        timingFunction: 'ease-out'
       }, e => {
         this.showIn = bool;
       });
     },
-    overlayClicking () {
+    onClicked (index) {
       this.visible(false);
+      this.$emit('fmPopoverBtnClicked', { index });
     },
     visible (bool) {
       this.show = bool;

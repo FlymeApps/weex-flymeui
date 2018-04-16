@@ -159,6 +159,11 @@ export default {
       icon: 'http://p1nq9peby.bkt.clouddn.com/weex-flymeui/dialog.png',
       path: 'component/dialog'
     }, {
+      name: '气泡菜单',
+      subname: 'FmPopOver',
+      icon: 'http://p1nq9peby.bkt.clouddn.com/weex-flymeui/popover.png',
+      path: 'component/popover'
+    }, {
       name: '底部删除弹框',
       subname: 'FmActionSheet',
       icon: 'http://p1nq9peby.bkt.clouddn.com/weex-flymeui/actionsheet.png',

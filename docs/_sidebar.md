@@ -38,6 +38,7 @@
   - [fm-tips 引导提示](packages/fm-tips/)
   - [fm-snack-bar 底部提示](packages/fm-snack-bar/)
   - [fm-dialog 弹框](packages/fm-dialog/)
+  - [fm-popover 气泡弹框](packages/fm-popover/)
   - [fm-action-sheet 底部删除弹框](packages/fm-action-sheet/)
 
 - 开发方案

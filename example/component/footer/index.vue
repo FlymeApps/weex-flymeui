@@ -12,7 +12,7 @@
 
       <template v-if="type === 'none'">
         <fm-footer>
-          <fm-button theme="firebrick" size="huge" animated>立即开始</fm-button>
+          <fm-button color="#dc2a2a" size="huge" animated>立即开始</fm-button>
         </fm-footer>
       </template>
 

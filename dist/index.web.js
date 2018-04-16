@@ -72,7 +72,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 282);
+/******/ 	return __webpack_require__(__webpack_require__.s = 272);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -234,7 +234,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(5)
+var listToStyles = __webpack_require__(4)
 
 /*
 type StyleObject = {
@@ -459,28 +459,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(17);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports) {
 
 /**
@@ -513,7 +491,7 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -524,6 +502,28 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _index = __webpack_require__(12);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(28);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -607,7 +607,7 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.text[data-v-68596e9c] {\n\tfont-size: 42;\n\tline-height: 63;\n\tcolor: #999999;\n\tfont-family: \"Source Han Sans CN\", Roboto, sans-serif;\n}\n.medium[data-v-68596e9c] {\n\tfont-family: sans-serif-medium;\n\tfont-weight: 500;\n}\n.bold[data-v-68596e9c] {\n\tfont-weight: 700;\n}\n.light[data-v-68596e9c] {\n\tfont-weight: 400;\n}\n.small[data-v-68596e9c] {\n\tfont-size: 36;\n}\n.large[data-v-68596e9c] {\n\tfont-size: 48;\n\tfont-weight: 500;\n\tline-height: 72;\n\tcolor: #000000;\n}\n.huge[data-v-68596e9c] {\n\tfont-size: 54;\n\tline-height: 81;\n\tcolor: #000000;\n}\n.margin-text[data-v-68596e9c] {\n\tmargin-right: 9;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-text/index.vue?d3bc9fac"],"names":[],"mappings":";AAKA;CACA,cAAA;CACA,gBAAA;CACA,eAAA;CACA,sDAAA;CACA;AACA;CACA,+BAAA;CACA,iBAAA;CACA;AACA;CACA,iBAAA;CACA;AACA;CACA,iBAAA;CACA;AACA;CACA,cAAA;CACA;AACA;CACA,cAAA;CACA,iBAAA;CACA,gBAAA;CACA,eAAA;CACA;AACA;CACA,cAAA;CACA,gBAAA;CACA,eAAA;CACA;AACA;CACA,gBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <text :class=\"textClz\"><slot></slot><template v-if=\"!$slots.default\">{{ value }}</template></text>\n</template>\n\n<style scoped>\n\t.text {\n\t\tfont-size: 42;\n\t\tline-height: 63;\n\t\tcolor: #999999;\n\t\tfont-family: \"Source Han Sans CN\", Roboto, sans-serif;\n\t}\n\t.medium {\n\t\tfont-family: sans-serif-medium;\n\t\tfont-weight: 500;\n\t}\n\t.bold {\n\t\tfont-weight: 700;\n\t}\n\t.light {\n\t\tfont-weight: 400;\n\t}\n\t.small {\n\t\tfont-size: 36;\n\t}\n\t.large {\n\t\tfont-size: 48;\n\t\tfont-weight: 500;\n\t\tline-height: 72;\n\t\tcolor: #000000;\n\t}\n\t.huge {\n\t\tfont-size: 54;\n\t\tline-height: 81;\n\t\tcolor: #000000;\n\t}\n\t.margin-text {\n\t\tmargin-right: 9;\n\t}\n</style>\n\n<script>\nexport default {\n  name: 'FmText',\n  props: {\n    value: String,\n    fontWeight: {\n      type: String,\n      default: 'normal'\n    },\n    size: {\n      type: String,\n      default: 'normal'\n    },\n    hasTextMargin: {\n      type: Boolean,\n      default: true\n    }\n  },\n  computed: {\n    textClz () {\n      const clz = ['text'];\n      if (this.hasTextMargin) {\n        clz.push('margin-text');\n      }\n      if (this.size !== 'normal') {\n        clz.push(`${this.size}`);\n      }\n      if (this.fontWeight !== 'normal') {\n        clz.push(`${this.fontWeight}`);\n      }\n      return clz;\n    }\n  },\n  created () {\n    this.$slots.default && (this.value = this.$slots.default[0].text);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.text[data-v-68596e9c] {\n\tfont-size: 42;\n\tline-height: 63;\n\tcolor: #999999;\n\tfont-family: \"Source Han Sans CN\", Roboto, sans-serif;\n}\n.medium[data-v-68596e9c] {\n\tfont-family: sans-serif-medium;\n\tfont-weight: 500;\n}\n.bold[data-v-68596e9c] {\n\tfont-weight: 700;\n}\n.light[data-v-68596e9c] {\n\tfont-weight: 400;\n}\n.small[data-v-68596e9c] {\n\tfont-size: 36;\n}\n.large[data-v-68596e9c] {\n\tfont-size: 48;\n\tfont-weight: 500;\n\tline-height: 72;\n\tcolor: #000000;\n}\n.huge[data-v-68596e9c] {\n\tfont-size: 54;\n\tline-height: 81;\n\tcolor: #000000;\n}\n.margin-text[data-v-68596e9c] {\n\tmargin-right: 9;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-text/index.vue?5d6db4b5"],"names":[],"mappings":";AAOA;CACA,cAAA;CACA,gBAAA;CACA,eAAA;CACA,sDAAA;CACA;AACA;CACA,+BAAA;CACA,iBAAA;CACA;AACA;CACA,iBAAA;CACA;AACA;CACA,iBAAA;CACA;AACA;CACA,cAAA;CACA;AACA;CACA,cAAA;CACA,iBAAA;CACA,gBAAA;CACA,eAAA;CACA;AACA;CACA,cAAA;CACA,gBAAA;CACA,eAAA;CACA;AACA;CACA,gBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <text :class=\"textClz\"><slot></slot><template v-if=\"!$slots.default\">{{ value }}</template></text>\n</template>\n\n<style scoped>\n\t.text {\n\t\tfont-size: 42;\n\t\tline-height: 63;\n\t\tcolor: #999999;\n\t\tfont-family: \"Source Han Sans CN\", Roboto, sans-serif;\n\t}\n\t.medium {\n\t\tfont-family: sans-serif-medium;\n\t\tfont-weight: 500;\n\t}\n\t.bold {\n\t\tfont-weight: 700;\n\t}\n\t.light {\n\t\tfont-weight: 400;\n\t}\n\t.small {\n\t\tfont-size: 36;\n\t}\n\t.large {\n\t\tfont-size: 48;\n\t\tfont-weight: 500;\n\t\tline-height: 72;\n\t\tcolor: #000000;\n\t}\n\t.huge {\n\t\tfont-size: 54;\n\t\tline-height: 81;\n\t\tcolor: #000000;\n\t}\n\t.margin-text {\n\t\tmargin-right: 9;\n\t}\n</style>\n\n<script>\nexport default {\n  name: 'FmText',\n  props: {\n    value: String,\n    fontWeight: {\n      type: String,\n      default: 'normal'\n    },\n    size: {\n      type: String,\n      default: 'normal'\n    },\n    hasTextMargin: {\n      type: Boolean,\n      default: true\n    }\n  },\n  computed: {\n    textClz () {\n      const clz = ['text'];\n      if (this.hasTextMargin) {\n        clz.push('margin-text');\n      }\n      if (this.size !== 'normal') {\n        clz.push(`${this.size}`);\n      }\n      if (this.fontWeight !== 'normal') {\n        clz.push(`${this.fontWeight}`);\n      }\n      return clz;\n    }\n  },\n  created () {\n    this.$slots.default && (this.value = this.$slots.default[0].text);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -622,6 +622,8 @@ exports.push([module.i, "\n.text[data-v-68596e9c] {\n\tfont-size: 42;\n\tline-he
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+//
+//
 //
 //
 //
@@ -770,6 +772,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 exports.default = {
   name: 'FmImage',
@@ -849,7 +853,59 @@ if (false) {
 }
 
 /***/ }),
-/* 15 */
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.use = exports.t = undefined;
+
+var _zhCN = __webpack_require__(37);
+
+var _zhCN2 = _interopRequireDefault(_zhCN);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var lang = _zhCN2.default;
+
+var t = exports.t = function t(path, options) {
+  var value = void 0;
+
+  var array = path.split('.');
+  var current = lang;
+
+  for (var i = 0, j = array.length; i < j; i++) {
+    var property = array[i];
+    value = current[property];
+    if (i === j - 1) return value;
+    if (!value) return '';
+    current = value;
+  }
+  return '';
+};
+
+var use = exports.use = function use(l) {
+  lang = l || lang;
+};
+
+exports.default = { t: t, use: use };
+
+/***/ }),
+/* 21 */,
+/* 22 */,
+/* 23 */,
+/* 24 */,
+/* 25 */,
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -948,7 +1004,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 16 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {var __WEBPACK_AMD_DEFINE_RESULT__;/*! https://mths.be/he v1.1.1 by @mathias | MIT license */
@@ -1293,21 +1349,21 @@ exports.default = {
 
 }(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)(module)))
 
 /***/ }),
-/* 17 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(18)
+__webpack_require__(29)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(20),
+  __webpack_require__(31),
   /* template */
-  __webpack_require__(22),
+  __webpack_require__(33),
   /* scopeId */
   "data-v-77aa90fe",
   /* cssModules */
@@ -1334,13 +1390,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 18 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(19);
+var content = __webpack_require__(30);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -1360,7 +1416,7 @@ if(false) {
 }
 
 /***/ }),
-/* 19 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -1368,13 +1424,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"index.vue","sourceRoot":""}]);
+exports.push([module.i, "\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"index.vue","sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 20 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1386,7 +1442,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _map = __webpack_require__(15);
+var _map = __webpack_require__(26);
 
 var _map2 = _interopRequireDefault(_map);
 
@@ -1399,9 +1455,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
 
 // 引入he模块，使用它解决weex-template-compiler在编译阶段进行decode
-var he = __webpack_require__(16);
+var he = __webpack_require__(27);
 var dom = weex.requireModule('dom');
 exports.default = {
   name: 'FmIcon',
@@ -1466,7 +1524,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 21 */
+/* 32 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -1494,7 +1552,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 22 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -1517,58 +1575,6 @@ if (false) {
 }
 
 /***/ }),
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.use = exports.t = undefined;
-
-var _zhCN = __webpack_require__(41);
-
-var _zhCN2 = _interopRequireDefault(_zhCN);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var lang = _zhCN2.default;
-
-var t = exports.t = function t(path, options) {
-  var value = void 0;
-
-  var array = path.split('.');
-  var current = lang;
-
-  for (var i = 0, j = array.length; i < j; i++) {
-    var property = array[i];
-    value = current[property];
-    if (i === j - 1) return value;
-    if (!value) return '';
-    current = value;
-  }
-  return '';
-};
-
-var use = exports.use = function use(l) {
-  lang = l || lang;
-};
-
-exports.default = { t: t, use: use };
-
-/***/ }),
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
 /* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1579,7 +1585,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _locale = __webpack_require__(28);
+var _locale = __webpack_require__(20);
 
 exports.default = {
   methods: {
@@ -1603,8 +1609,34 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+/**
+ * CopyRight (C) 2017-2022 Alibaba Group Holding Limited.
+ * Created by Yanjiie on 18/04/01
+ */
+exports.default = {
+  primaryColor: '#198DED',
+  lightColor: '#269CFC',
+  highlightColor: '#0A73C9',
+  weakColor: '#E6F8FF',
+  disabledColor: '#BDE2FB',
+  grayColor: '#F2F3F4',
+  fontColorLight: '#FFFFFF',
+  fontColorDark: '#3D3D3D',
+  fontColorGray: '#F2F3F4'
+};
 
-var _index = __webpack_require__(42);
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(38);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -1616,12 +1648,7 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1660,18 +1687,18 @@ exports.default = {
 };
 
 /***/ }),
-/* 42 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(43)
+__webpack_require__(39)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(45),
+  __webpack_require__(41),
   /* template */
-  __webpack_require__(47),
+  __webpack_require__(42),
   /* scopeId */
   "data-v-45eab412",
   /* cssModules */
@@ -1698,13 +1725,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 43 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(44);
+var content = __webpack_require__(40);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -1724,7 +1751,7 @@ if(false) {
 }
 
 /***/ }),
-/* 44 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -1732,13 +1759,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-button[data-v-45eab412] {\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  overflow: hidden;\n  transform: scale(1);\n  transition-property: transform,backgroundColor;\n  transition-duration: 0.2s;\n  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n}\n.fm-button-hollow[data-v-45eab412] {\n  border-width: 4px;\n}\n.button-text[data-v-45eab412] {\n  flex: 1;\n  text-align: center;\n  color: #FFFFFF;\n  font-weight: 500;\n  font-family: sans-serif-medium;\n}\n.fm-button-small[data-v-45eab412] {\n  height: 72px;\n  border-radius: 36px;\n}\n.fm-button-middle[data-v-45eab412] {\n  width: 312px;\n  height: 114px;\n  border-radius: 57px;\n}\n.fm-button-large[data-v-45eab412] {\n  width: 396px;\n  height: 114px;\n  border-radius: 57px;\n}\n.fm-button-circle[data-v-45eab412] {\n  width: 168px;\n  height: 168px;\n  border-radius: 84px;\n}\n.fm-button-huge[data-v-45eab412] {\n  width: 720px;\n  height: 114px;\n  border-radius: 57px;\n}\n.button-text-small[data-v-45eab412] {\n  font-size: 36px;\n}\n.button-text-middle[data-v-45eab412],\n.button-text-large[data-v-45eab412],\n.button-text-huge[data-v-45eab412] {\n  font-size: 48px;\n}\n.overlay[data-v-45eab412] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  z-index: 30;\n}\n.overlay[data-v-45eab412]:active {\n  background-color: rgba(0, 0, 0, 0.1);\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-button/index.vue?169461ec"],"names":[],"mappings":";AAwBA;EACA,oBAAA;EACA,oBAAA;EACA,wBAAA;EACA,iBAAA;EACA,oBAAA;EACA,+CAAA;EACA,0BAAA;EACA,gEAAA;CACA;AAEA;EACA,kBAAA;CACA;AAEA;EACA,QAAA;EACA,mBAAA;EACA,eAAA;EACA,iBAAA;EACA,+BAAA;CACA;AAEA;EACA,aAAA;EACA,oBAAA;CACA;AAEA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;CACA;AAEA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;CACA;AAEA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;CACA;AAEA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;CACA;AAEA;EACA,gBAAA;CACA;AAEA;;;EAGA,gBAAA;CACA;AAEA;EACA,mBAAA;EACA,OAAA;EACA,QAAA;EACA,SAAA;EACA,UAAA;EACA,YAAA;CACA;AAEA;EACA,qCAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on one day. -->\n<!-- Update by Yanjiie on 2018/03/14. -->\n<template>\n  <div ref=\"fm-button\"\n       class=\"fm-button\"\n       :class=\"buttonClass\"\n       @click=\"btnClick\"\n       @touchstart=\"_startHandle\"\n       @touchend=\"_endHandle\"\n       :style=\"computedStyle\">\n    <div v-if=\"!disabled\" class=\"overlay\" @click=\"btnClick\"></div>\n    <fm-icon v-if=\"type === 'circle'\"\n             :color=\"(type !== 'hollow') ? titleColor : color\"\n             :name=\"icon\"\n             icon-style=\"72\"></fm-icon>\n    <slot v-else name=\"title\">\n      <text :class=\"['button-text-' + size]\"\n            :style=\"{color: (type !== 'hollow') ? titleColor : computedColor}\"\n            class=\"button-text\" ><slot></slot></text>\n    </slot>\n  </div>\n</template>\n\n<style scoped>\n  .fm-button {\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    overflow: hidden;\n    transform: scale(1);\n    transition-property: transform,backgroundColor;\n    transition-duration: 0.2s;\n    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  .fm-button-hollow {\n    border-width: 4px;\n  }\n\n  .button-text {\n    flex: 1;\n    text-align: center;\n    color: #FFFFFF;\n    font-weight: 500;\n    font-family: sans-serif-medium;\n  }\n\n  .fm-button-small {\n    height: 72px;\n    border-radius: 36px;\n  }\n\n  .fm-button-middle {\n    width: 312px;\n    height: 114px;\n    border-radius: 57px;\n  }\n\n  .fm-button-large {\n    width: 396px;\n    height: 114px;\n    border-radius: 57px;\n  }\n\n  .fm-button-circle {\n    width: 168px;\n    height: 168px;\n    border-radius: 84px;\n  }\n\n  .fm-button-huge {\n    width: 720px;\n    height: 114px;\n    border-radius: 57px;\n  }\n\n  .button-text-small {\n    font-size: 36px;\n  }\n\n  .button-text-middle,\n  .button-text-large,\n  .button-text-huge {\n    font-size: 48px;\n  }\n\n  .overlay {\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    z-index: 30;\n  }\n\n  .overlay:active {\n    background-color: rgba(0, 0, 0, 0.1);\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nimport THEME from './theme';\nconst dom = weex.requireModule('dom');\n\nexport default {\n  name: 'FmButton',\n  components: { FmIcon },\n  props: {\n    size: {\n      type: String,\n      default: 'small'\n    },\n    type: String,\n    theme: {\n      type: String,\n      default: 'blue'\n    },\n    color: {\n      type: String,\n      default: ''\n    },\n    titleColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    disabledColor: {\n      type: String,\n      default: '#B2B2B2'\n    },\n    icon: {\n      type: String,\n      default: 'wancheng'\n    },\n    width: Number,\n    height: Number,\n    animated: Boolean,\n    disabled: Boolean\n  },\n  data: () => ({\n    active: false,\n    padding: 36\n  }),\n  computed: {\n    buttonClass () {\n      const clz = [];\n      this.size && clz.push(`fm-button-${this.size}`);\n      this.type && clz.push(`fm-button-${this.type}`);\n      return clz;\n    },\n    computedColor () {\n      return this.color || THEME[this.theme].normal;\n    },\n    computedStyle () {\n      const { computedColor, active, disabled, disabledColor, padding, animated, type, width, height } = this;\n      const wrapColor = disabled ? disabledColor : computedColor;\n      const transform = !animated || disabled ? 'scale(1)' : `scale(${active ? 0.95 : 1})`;\n      const style = {\n        borderColor: (type === 'hollow') ? wrapColor : '',\n        backgroundColor: (type !== 'hollow') ? wrapColor : '',\n        transform,\n        paddingLeft: padding + 'px',\n        paddingRight: padding + 'px'\n      };\n      if (type !== 'circle') {\n        width && (style.width = `${width}px`);\n        height && (style.height = `${height}px`) && (style.borderRadius = `${Math.ceil(height * 1000 / 2000)}px`);\n      }\n      return style;\n    }\n  },\n  methods: {\n    btnClick (e) {\n      !this.disabled && this.$emit('buttonClicked', e);\n    },\n    _startHandle (e) {\n      this.active = true;\n    },\n    _endHandle (e) {\n      this.active = false;\n    }\n  },\n  mounted () {\n    setTimeout(() => {\n      dom.getComponentRect(this.$refs['fm-button'], option => {\n        if (option.size.width >= 240) {\n          this.padding = 24;\n        }\n      });\n    }, 50);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-button[data-v-45eab412] {\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  overflow: hidden;\n  transform: scale(1);\n  transition-property: transform,backgroundColor;\n  transition-duration: 0.2s;\n  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n}\n.fm-button-hollow[data-v-45eab412] {\n  border-width: 4px;\n}\n.button-text[data-v-45eab412] {\n  flex: 1;\n  text-align: center;\n  color: #FFFFFF;\n  font-weight: 500;\n  font-family: sans-serif-medium;\n}\n.fm-button-small[data-v-45eab412] {\n  height: 72px;\n  border-radius: 36px;\n}\n.fm-button-middle[data-v-45eab412] {\n  width: 312px;\n  height: 114px;\n  border-radius: 57px;\n}\n.fm-button-large[data-v-45eab412] {\n  width: 396px;\n  height: 114px;\n  border-radius: 57px;\n}\n.fm-button-circle[data-v-45eab412] {\n  width: 168px;\n  height: 168px;\n  border-radius: 84px;\n}\n.fm-button-huge[data-v-45eab412] {\n  width: 720px;\n  height: 114px;\n  border-radius: 57px;\n}\n.button-text-small[data-v-45eab412] {\n  font-size: 36px;\n}\n.button-text-middle[data-v-45eab412],\n.button-text-large[data-v-45eab412],\n.button-text-huge[data-v-45eab412] {\n  font-size: 48px;\n}\n.overlay[data-v-45eab412] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  z-index: 30;\n  border-radius: 200px;\n}\n.overlay[data-v-45eab412]:active {\n  background-color: rgba(0, 0, 0, 0.1);\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-button/index.vue?40496a92"],"names":[],"mappings":";AAwBA;EACA,oBAAA;EACA,oBAAA;EACA,wBAAA;EACA,iBAAA;EACA,oBAAA;EACA,+CAAA;EACA,0BAAA;EACA,gEAAA;CACA;AAEA;EACA,kBAAA;CACA;AAEA;EACA,QAAA;EACA,mBAAA;EACA,eAAA;EACA,iBAAA;EACA,+BAAA;CACA;AAEA;EACA,aAAA;EACA,oBAAA;CACA;AAEA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;CACA;AAEA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;CACA;AAEA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;CACA;AAEA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;CACA;AAEA;EACA,gBAAA;CACA;AAEA;;;EAGA,gBAAA;CACA;AAEA;EACA,mBAAA;EACA,OAAA;EACA,QAAA;EACA,SAAA;EACA,UAAA;EACA,YAAA;EACA,qBAAA;CACA;AAEA;EACA,qCAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div ref=\"fm-button\"\n       class=\"fm-button\"\n       :class=\"buttonClass\"\n       @click=\"btnClick\"\n       @touchstart=\"_startHandle\"\n       @touchend=\"_endHandle\"\n       :style=\"computedStyle\">\n    <div v-if=\"!disabled\" class=\"overlay\" @click=\"btnClick\"></div>\n    <fm-icon v-if=\"type === 'circle'\"\n             :color=\"(type !== 'hollow') ? titleColor : color\"\n             :name=\"icon\"\n             icon-style=\"72\"></fm-icon>\n    <slot v-else name=\"title\">\n      <text :class=\"['button-text-' + size]\"\n            :style=\"{color: (type !== 'hollow') ? titleColor : computedColor}\"\n            class=\"button-text\" ><slot></slot></text>\n    </slot>\n  </div>\n</template>\n\n<style scoped>\n  .fm-button {\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    overflow: hidden;\n    transform: scale(1);\n    transition-property: transform,backgroundColor;\n    transition-duration: 0.2s;\n    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  .fm-button-hollow {\n    border-width: 4px;\n  }\n\n  .button-text {\n    flex: 1;\n    text-align: center;\n    color: #FFFFFF;\n    font-weight: 500;\n    font-family: sans-serif-medium;\n  }\n\n  .fm-button-small {\n    height: 72px;\n    border-radius: 36px;\n  }\n\n  .fm-button-middle {\n    width: 312px;\n    height: 114px;\n    border-radius: 57px;\n  }\n\n  .fm-button-large {\n    width: 396px;\n    height: 114px;\n    border-radius: 57px;\n  }\n\n  .fm-button-circle {\n    width: 168px;\n    height: 168px;\n    border-radius: 84px;\n  }\n\n  .fm-button-huge {\n    width: 720px;\n    height: 114px;\n    border-radius: 57px;\n  }\n\n  .button-text-small {\n    font-size: 36px;\n  }\n\n  .button-text-middle,\n  .button-text-large,\n  .button-text-huge {\n    font-size: 48px;\n  }\n\n  .overlay {\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    z-index: 30;\n    border-radius: 200px;\n  }\n\n  .overlay:active {\n    background-color: rgba(0, 0, 0, 0.1);\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nimport STYLE from 'weex-flymeui/lib/theme/default/';\nconst dom = weex.requireModule('dom');\n\nexport default {\n  name: 'FmButton',\n  components: { FmIcon },\n  props: {\n    size: {\n      type: String,\n      default: 'small'\n    },\n    type: String,\n    color: {\n      type: String,\n      default: STYLE.primaryColor\n    },\n    titleColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    icon: {\n      type: String,\n      default: 'wancheng'\n    },\n    width: Number,\n    height: Number,\n    animated: Boolean,\n    disabled: Boolean\n  },\n  data: () => ({\n    active: false,\n    padding: 36\n  }),\n  computed: {\n    buttonClass () {\n      const clz = [];\n      this.size && clz.push(`fm-button-${this.size}`);\n      this.type && clz.push(`fm-button-${this.type}`);\n      return clz;\n    },\n    computedColor () {\n      return this.color || THEME[this.theme].normal;\n    },\n    computedStyle () {\n      const { color, active, disabled, padding, animated, type, width, height } = this;\n      const transform = !animated || disabled ? 'scale(1)' : `scale(${active ? 0.95 : 1})`;\n      const style = {\n        borderColor: (type === 'hollow') ? color : '',\n        backgroundColor: (type !== 'hollow') ? color : '',\n        opacity: disabled ? 0.2 : 1,\n        transform,\n        paddingLeft: padding + 'px',\n        paddingRight: padding + 'px'\n      };\n      if (type !== 'circle') {\n        width && (style.width = `${width}px`);\n        height && (style.height = `${height}px`) && (style.borderRadius = `${Math.ceil(height * 1000 / 2000)}px`);\n      }\n      return style;\n    }\n  },\n  methods: {\n    btnClick (e) {\n      !this.disabled && this.$emit('buttonClicked', e);\n    },\n    _startHandle (e) {\n      this.active = true;\n    },\n    _endHandle (e) {\n      this.active = false;\n    }\n  },\n  mounted () {\n    setTimeout(() => {\n      dom.getComponentRect(this.$refs['fm-button'], option => {\n        if (option.size.width >= 240) {\n          this.padding = 24;\n        }\n      });\n    }, 50);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 45 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1748,16 +1775,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmIcon = __webpack_require__(4);
+var _fmIcon = __webpack_require__(6);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
-var _theme = __webpack_require__(46);
+var _default = __webpack_require__(35);
 
-var _theme2 = _interopRequireDefault(_theme);
+var _default2 = _interopRequireDefault(_default);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
 //
 //
 //
@@ -1870,21 +1898,13 @@ exports.default = {
       default: 'small'
     },
     type: String,
-    theme: {
-      type: String,
-      default: 'blue'
-    },
     color: {
       type: String,
-      default: ''
+      default: _default2.default.primaryColor
     },
     titleColor: {
       type: String,
       default: '#FFFFFF'
-    },
-    disabledColor: {
-      type: String,
-      default: '#B2B2B2'
     },
     icon: {
       type: String,
@@ -1909,24 +1929,23 @@ exports.default = {
       return clz;
     },
     computedColor: function computedColor() {
-      return this.color || _theme2.default[this.theme].normal;
+      return this.color || THEME[this.theme].normal;
     },
     computedStyle: function computedStyle() {
-      var computedColor = this.computedColor,
+      var color = this.color,
           active = this.active,
           disabled = this.disabled,
-          disabledColor = this.disabledColor,
           padding = this.padding,
           animated = this.animated,
           type = this.type,
           width = this.width,
           height = this.height;
 
-      var wrapColor = disabled ? disabledColor : computedColor;
       var transform = !animated || disabled ? 'scale(1)' : 'scale(' + (active ? 0.95 : 1) + ')';
       var style = {
-        borderColor: type === 'hollow' ? wrapColor : '',
-        backgroundColor: type !== 'hollow' ? wrapColor : '',
+        borderColor: type === 'hollow' ? color : '',
+        backgroundColor: type !== 'hollow' ? color : '',
+        opacity: disabled ? 0.2 : 1,
         transform: transform,
         paddingLeft: padding + 'px',
         paddingRight: padding + 'px'
@@ -1963,52 +1982,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = {
-  blue: {
-    normal: '#198DED',
-    highlight: '#0A73C9'
-  },
-  limegreen: {
-    normal: '#3BC06B',
-    highlight: '#2AA155'
-  },
-  seagreen: {
-    normal: '#04C0CF',
-    highlight: '#009FAD'
-  },
-  gray: {
-    normal: '#7E97AC',
-    highlight: '#687E8F'
-  },
-  crimson: {
-    normal: '#D33A2A',
-    highlight: '#B83125'
-  },
-  firebrick: {
-    normal: '#F12528',
-    highlight: '#CF2124'
-  },
-  tomato: {
-    normal: '#FC5B23',
-    highlight: '#DB4914'
-  },
-  coral: {
-    normal: '#FFAF00',
-    highlight: '#C99014'
-  }
-};
-
-/***/ }),
-/* 47 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -2056,7 +2030,7 @@ if (false) {
 }
 
 /***/ }),
-/* 48 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2066,7 +2040,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(52);
+var _index = __webpack_require__(51);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -2078,8 +2052,7 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 49 */,
-/* 50 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2089,7 +2062,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(64);
+var _index = __webpack_require__(46);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -2099,42 +2072,268 @@ Object.defineProperty(exports, 'default', {
 });
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(58);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(47)
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(49),
+  /* template */
+  __webpack_require__(50),
+  /* scopeId */
+  "data-v-10e45e81",
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-overlay/index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-10e45e81", Component.options)
+  } else {
+    hotAPI.reload("data-v-10e45e81", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(48);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("78c6b5b6", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-10e45e81\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-10e45e81\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.fm-overlay[data-v-10e45e81] {\n  width: 1080px;\n  position: fixed;\n  left: 0;\n  top: 0;\n  bottom: 0;\n  right: 0;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-overlay/index.vue?d95ec95a"],"names":[],"mappings":";AAeA;EACA,cAAA;EACA,gBAAA;EACA,QAAA;EACA,OAAA;EACA,UAAA;EACA,SAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Updated by Yanjiie on 2018/04/12. Fork from weex-ui. -->\n<template>\n  <div>\n    <div class=\"fm-overlay\"\n         ref=\"fm-overlay\"\n         v-if=\"show\"\n         :watch=\"shouldShow\"\n         @click=\"overlayClicked\"\n         :style=\"overlayStyle\">\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-overlay {\n    width: 1080px;\n    position: fixed;\n    left: 0;\n    top: 0;\n    bottom: 0;\n    right: 0;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nexport default {\n  name: 'FmOverlay',\n  props: {\n    show: {\n      type: Boolean,\n      default: true\n    },\n    hasAnimation: {\n      type: Boolean,\n      default: true\n    },\n    duration: {\n      type: [Number, String],\n      default: 300\n    },\n    timingFunction: {\n      type: Array,\n      default: () => (['ease-in', 'ease-out'])\n    },\n    opacity: {\n      type: [Number, String],\n      default: 0.5\n    },\n    canAutoClose: {\n      type: Boolean,\n      default: true\n    }\n  },\n  computed: {\n    overlayStyle () {\n      return {\n        opacity: this.hasAnimation ? 0 : 1,\n        backgroundColor: `rgba(0, 0, 0,${this.opacity})`\n      };\n    },\n    shouldShow () {\n      const { show, hasAnimation } = this;\n      hasAnimation && setTimeout(() => {\n        this.appearOverlay(show);\n      }, 50);\n      return show;\n    }\n  },\n  methods: {\n    overlayClicked (e) {\n      this.canAutoClose ? this.appearOverlay(false) : this.$emit('fmOverlayBodyClicked', {});\n    },\n    appearOverlay (bool, duration = this.duration) {\n      const { hasAnimation, timingFunction, canAutoClose } = this;\n      const needEmit = !bool && canAutoClose;\n      needEmit && (this.$emit('fmOverlayBodyClicking', {}));\n      const overlayEl = this.$refs['fm-overlay'];\n      if (hasAnimation && overlayEl) {\n        animation.transition(overlayEl, {\n          styles: {\n            opacity: bool ? 1 : 0\n          },\n          duration,\n          timingFunction: timingFunction[bool ? 0 : 1],\n          delay: 0\n        }, () => {\n          needEmit && (this.$emit('fmOverlayBodyClicked', {}));\n        });\n      } else {\n        needEmit && (this.$emit('fmOverlayBodyClicked', {}));\n      }\n    },\n    hide () {\n      this.appearOverlay(false);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var animation = weex.requireModule('animation');
+exports.default = {
+  name: 'FmOverlay',
+  props: {
+    show: {
+      type: Boolean,
+      default: true
+    },
+    hasAnimation: {
+      type: Boolean,
+      default: true
+    },
+    duration: {
+      type: [Number, String],
+      default: 300
+    },
+    timingFunction: {
+      type: Array,
+      default: function _default() {
+        return ['ease-in', 'ease-out'];
+      }
+    },
+    opacity: {
+      type: [Number, String],
+      default: 0.5
+    },
+    canAutoClose: {
+      type: Boolean,
+      default: true
+    }
+  },
+  computed: {
+    overlayStyle: function overlayStyle() {
+      return {
+        opacity: this.hasAnimation ? 0 : 1,
+        backgroundColor: 'rgba(0, 0, 0,' + this.opacity + ')'
+      };
+    },
+    shouldShow: function shouldShow() {
+      var _this = this;
+
+      var show = this.show,
+          hasAnimation = this.hasAnimation;
+
+      hasAnimation && setTimeout(function () {
+        _this.appearOverlay(show);
+      }, 50);
+      return show;
+    }
+  },
+  methods: {
+    overlayClicked: function overlayClicked(e) {
+      this.canAutoClose ? this.appearOverlay(false) : this.$emit('fmOverlayBodyClicked', {});
+    },
+    appearOverlay: function appearOverlay(bool) {
+      var _this2 = this;
+
+      var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.duration;
+      var hasAnimation = this.hasAnimation,
+          timingFunction = this.timingFunction,
+          canAutoClose = this.canAutoClose;
+
+      var needEmit = !bool && canAutoClose;
+      needEmit && this.$emit('fmOverlayBodyClicking', {});
+      var overlayEl = this.$refs['fm-overlay'];
+      if (hasAnimation && overlayEl) {
+        animation.transition(overlayEl, {
+          styles: {
+            opacity: bool ? 1 : 0
+          },
+          duration: duration,
+          timingFunction: timingFunction[bool ? 0 : 1],
+          delay: 0
+        }, function () {
+          needEmit && _this2.$emit('fmOverlayBodyClicked', {});
+        });
+      } else {
+        needEmit && this.$emit('fmOverlayBodyClicked', {});
+      }
+    },
+    hide: function hide() {
+      this.appearOverlay(false);
+    }
+  }
+};
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [(_vm.show) ? _c('div', {
+    ref: "fm-overlay",
+    staticClass: "fm-overlay",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(_vm.overlayStyle)),
+    attrs: {
+      "watch": _vm.shouldShow
+    },
+    on: {
+      "click": _vm.overlayClicked
+    }
+  }) : _vm._e()])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-10e45e81", module.exports)
+  }
+}
 
 /***/ }),
 /* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(75);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
 
 /* styles */
-__webpack_require__(53)
+__webpack_require__(52)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(55),
+  __webpack_require__(54),
   /* template */
-  __webpack_require__(56),
+  __webpack_require__(55),
   /* scopeId */
   "data-v-3509f5c0",
   /* cssModules */
@@ -2161,13 +2360,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 53 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(54);
+var content = __webpack_require__(53);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -2187,7 +2386,7 @@ if(false) {
 }
 
 /***/ }),
-/* 54 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -2195,13 +2394,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-footer[data-v-3509f5c0] {\n  flex-direction: row;\n  position: fixed;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 144px;\n  justify-content: space-between;\n  align-items: center;\n  border-top-width: 2px;\n  border-top-color: rgba(0, 0, 0, 0.1);\n}\n.fm-footer-[data-v-3509f5c0] {\n  justify-content: center;\n}\n.fm-footer-small[data-v-3509f5c0] {\n  padding: 0 48px;\n}\n.fm-footer-middle[data-v-3509f5c0] {\n  padding:  0px 90px\n}\n.fm-footer-large[data-v-3509f5c0] {\n  padding: 0 111px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-footer/index.vue?6fef4198"],"names":[],"mappings":";AAQA;EACA,oBAAA;EACA,gBAAA;EACA,SAAA;EACA,UAAA;EACA,QAAA;EACA,cAAA;EACA,+BAAA;EACA,oBAAA;EACA,sBAAA;EACA,qCAAA;CACA;AAEA;EACA,wBAAA;CACA;AAEA;EACA,gBAAA;CACA;AAEA;EACA,kBAAA;CACA;AAEA;EACA,iBAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 2018/03/13. -->\n<template>\n  <div class=\"fm-footer\" :class=\"['fm-footer-' + paddingSize]\" :style=\"{ backgroundColor: backgroundColor }\">\n    <slot></slot>\n  </div>\n</template>\n\n<style scoped>\n  .fm-footer {\n    flex-direction: row;\n    position: fixed;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    height: 144px;\n    justify-content: space-between;\n    align-items: center;\n    border-top-width: 2px;\n    border-top-color: rgba(0, 0, 0, 0.1);\n  }\n\n  .fm-footer- {\n    justify-content: center;\n  }\n\n  .fm-footer-small {\n    padding: 0 48px;\n  }\n\n  .fm-footer-middle {\n    padding:  0px 90px\n  }\n\n  .fm-footer-large {\n    padding: 0 111px;\n  }\n</style>\n\n<script>\nexport default {\n  name: 'FmFooter',\n  props: {\n    paddingSize: {\n      type: String,\n      default: ''\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-footer[data-v-3509f5c0] {\n  flex-direction: row;\n  position: fixed;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 144px;\n  justify-content: space-between;\n  align-items: center;\n  border-top-width: 2px;\n  border-top-color: rgba(0, 0, 0, 0.1);\n}\n.fm-footer-[data-v-3509f5c0] {\n  justify-content: center;\n}\n.fm-footer-small[data-v-3509f5c0] {\n  padding: 0 48px;\n}\n.fm-footer-middle[data-v-3509f5c0] {\n  padding:  0px 90px\n}\n.fm-footer-large[data-v-3509f5c0] {\n  padding: 0 111px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-footer/index.vue?ba88bfa2"],"names":[],"mappings":";AASA;EACA,oBAAA;EACA,gBAAA;EACA,SAAA;EACA,UAAA;EACA,QAAA;EACA,cAAA;EACA,+BAAA;EACA,oBAAA;EACA,sBAAA;EACA,qCAAA;CACA;AAEA;EACA,wBAAA;CACA;AAEA;EACA,gBAAA;CACA;AAEA;EACA,kBAAA;CACA;AAEA;EACA,iBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/03/13. -->\n<template>\n  <div class=\"fm-footer\" :class=\"['fm-footer-' + paddingSize]\" :style=\"{ backgroundColor: backgroundColor }\">\n    <slot></slot>\n  </div>\n</template>\n\n<style scoped>\n  .fm-footer {\n    flex-direction: row;\n    position: fixed;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    height: 144px;\n    justify-content: space-between;\n    align-items: center;\n    border-top-width: 2px;\n    border-top-color: rgba(0, 0, 0, 0.1);\n  }\n\n  .fm-footer- {\n    justify-content: center;\n  }\n\n  .fm-footer-small {\n    padding: 0 48px;\n  }\n\n  .fm-footer-middle {\n    padding:  0px 90px\n  }\n\n  .fm-footer-large {\n    padding: 0 111px;\n  }\n</style>\n\n<script>\nexport default {\n  name: 'FmFooter',\n  props: {\n    paddingSize: {\n      type: String,\n      default: ''\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 55 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2210,6 +2409,7 @@ exports.push([module.i, "\n.fm-footer[data-v-3509f5c0] {\n  flex-direction: row;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+//
 //
 //
 //
@@ -2264,7 +2464,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 56 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -2286,12 +2486,7 @@ if (false) {
 }
 
 /***/ }),
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */,
-/* 61 */,
-/* 62 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2305,7 +2500,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
                                                                                                                                                                                                                                                                                 * Created by Yanjiie on 18/03/08. Fork from https://github.com/alibaba/weex-ui
                                                                                                                                                                                                                                                                                 */
 
-var _weexBindingx = __webpack_require__(63);
+var _weexBindingx = __webpack_require__(57);
 
 var _weexBindingx2 = _interopRequireDefault(_weexBindingx);
 
@@ -2596,7 +2791,7 @@ var Utils = {
 exports.default = Utils;
 
 /***/ }),
-/* 63 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -6886,18 +7081,18 @@ exports.default = Fn;
 /******/ ])});;
 
 /***/ }),
-/* 64 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(65)
+__webpack_require__(59)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(67),
+  __webpack_require__(61),
   /* template */
-  __webpack_require__(68),
+  __webpack_require__(62),
   /* scopeId */
   "data-v-2072c04b",
   /* cssModules */
@@ -6924,13 +7119,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 65 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(66);
+var content = __webpack_require__(60);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -6950,7 +7145,7 @@ if(false) {
 }
 
 /***/ }),
-/* 66 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -6958,13 +7153,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-tag[data-v-2072c04b] {\n    align-items: center;\n\t  flex-direction: row;\n}\n.tag-item[data-v-2072c04b] {\n    padding: 9px;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n}\n.tag-border[data-v-2072c04b] {\n    border-radius: 4.5px;\n}\n.tag-huge[data-v-2072c04b] {\n    border-radius: 100px;\n    height: 72px;\n    padding: 12px 42px;\n}\n.tag-hollow[data-v-2072c04b] {\n    border-width: 3px;\n}\n.tag-text[data-v-2072c04b] {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    font-weight: bold;\n}\n.tag-font-small[data-v-2072c04b] {\n    font-size: 24px;\n}\n.tag-font-big[data-v-2072c04b] {\n    font-size: 30px;\n}\n.tag-font-huge[data-v-2072c04b] {\n    font-size: 42px;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n}\n.tag-margin-small[data-v-2072c04b] {\n    margin-right: 6px;\n    margin-bottom: 6px;\n}\n.tag-margin-big[data-v-2072c04b] {\n    margin-right: 12px;\n    margin-bottom: 12px;\n}\n.tag-margin-huge[data-v-2072c04b] {\n    margin-right: 36px;\n    margin-bottom: 36px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag/index.vue?e5b149b2"],"names":[],"mappings":";AAWA;IACA,oBAAA;GACA,oBAAA;CACA;AAEA;IACA,aAAA;IACA,wBAAA;IACA,oBAAA;IACA,iBAAA;CACA;AAEA;IACA,qBAAA;CACA;AAEA;IACA,qBAAA;IACA,aAAA;IACA,mBAAA;CACA;AAEA;IACA,kBAAA;CACA;AAEA;IACA,sDAAA;IACA,kBAAA;CACA;AAEA;IACA,gBAAA;CACA;AAEA;IACA,gBAAA;CACA;AAEA;IACA,gBAAA;IACA,+BAAA;IACA,iBAAA;CACA;AAEA;IACA,kBAAA;IACA,mBAAA;CACA;AAEA;IACA,mBAAA;IACA,oBAAA;CACA;AAEA;IACA,mBAAA;IACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div :class=\"tagClass\">\n    <div v-if=\"showSolid || showHollow\"\n        :class=\"['tag-item', 'tag-border', size === 'huge' && 'tag-huge', showHollow && 'tag-hollow']\"\n        :style=\"tagTextStyle\">\n      <text :class=\"textClass\" ref='content' :style=\"textStyle\"><slot></slot><template v-if=\"!$slots.default\">{{ value }}</template></text>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-tag {\n    align-items: center;\n\t  flex-direction: row;\n  }\n\n  .tag-item {\n    padding: 9px;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n  }\n\n  .tag-border {\n    border-radius: 4.5px;\n  }\n\n  .tag-huge {\n    border-radius: 100px;\n    height: 72px;\n    padding: 12px 42px;\n  }\n\n  .tag-hollow {\n    border-width: 3px;\n  }\n\n  .tag-text {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    font-weight: bold;\n  }\n\n  .tag-font-small {\n    font-size: 24px;\n  }\n\n  .tag-font-big {\n    font-size: 30px;\n  }\n\n  .tag-font-huge {\n    font-size: 42px;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n  }\n\n  .tag-margin-small {\n    margin-right: 6px;\n    margin-bottom: 6px;\n  }\n\n  .tag-margin-big {\n    margin-right: 12px;\n    margin-bottom: 12px;\n  }\n\n  .tag-margin-huge {\n    margin-right: 36px;\n    margin-bottom: 36px;\n  }\n</style>\n\n<script>\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmTag',\n  mixins: [Locale],\n  props: {\n    type: {\n      type: String,\n      default: 'solid'\n    },\n    size: {\n      type: String,\n      default: 'small'\n    },\n    value: {\n      type: [String, Number],\n      default () {\n        return t('el.tag.tagName');\n      }\n    },\n    color: {\n      type: String,\n      default: '#198DED'\n    },\n    fontColor: {\n      type: String,\n      default: '#FFFFFF'\n    }\n  },\n  computed: {\n    showSolid () {\n      const { type, value } = this;\n      return type === 'solid' && value !== '';\n    },\n    showHollow () {\n      const { type, value } = this;\n      return type === 'hollow' && value !== '';\n    },\n    tagTextStyle () {\n      const { color, showSolid } = this;\n      return showSolid ? { backgroundColor: color } : { borderColor: color };\n    },\n    textStyle () {\n      const { fontColor } = this;\n      return { color: fontColor };\n    },\n    textClass () {\n      const clz = ['tag-text'];\n      const { size } = this;\n      clz.push(`tag-font-${size}`);\n      return clz;\n    },\n    tagClass () {\n      const clz = ['fm-tag'];\n      const { size } = this;\n      clz.push(`tag-margin-${size}`);\n      return clz;\n    }\n  },\n  created () {\n    this.$slots.default && (this.value = this.$slots.default[0].text);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-tag[data-v-2072c04b] {\n    align-items: center;\n\t  flex-direction: row;\n}\n.tag-item[data-v-2072c04b] {\n    padding: 9px;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n}\n.tag-border[data-v-2072c04b] {\n    border-radius: 4.5px;\n}\n.tag-huge[data-v-2072c04b] {\n    border-radius: 100px;\n    height: 72px;\n    padding: 12px 42px;\n}\n.tag-hollow[data-v-2072c04b] {\n    border-width: 3px;\n}\n.tag-text[data-v-2072c04b] {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    font-weight: bold;\n}\n.tag-font-small[data-v-2072c04b] {\n    font-size: 24px;\n}\n.tag-font-big[data-v-2072c04b] {\n    font-size: 30px;\n}\n.tag-font-huge[data-v-2072c04b] {\n    font-size: 42px;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n}\n.tag-margin-small[data-v-2072c04b] {\n    margin-right: 6px;\n    margin-bottom: 6px;\n}\n.tag-margin-big[data-v-2072c04b] {\n    margin-right: 12px;\n    margin-bottom: 12px;\n}\n.tag-margin-huge[data-v-2072c04b] {\n    margin-right: 36px;\n    margin-bottom: 36px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag/index.vue?cd9bef08"],"names":[],"mappings":";AAaA;IACA,oBAAA;GACA,oBAAA;CACA;AAEA;IACA,aAAA;IACA,wBAAA;IACA,oBAAA;IACA,iBAAA;CACA;AAEA;IACA,qBAAA;CACA;AAEA;IACA,qBAAA;IACA,aAAA;IACA,mBAAA;CACA;AAEA;IACA,kBAAA;CACA;AAEA;IACA,sDAAA;IACA,kBAAA;CACA;AAEA;IACA,gBAAA;CACA;AAEA;IACA,gBAAA;CACA;AAEA;IACA,gBAAA;IACA,+BAAA;IACA,iBAAA;CACA;AAEA;IACA,kBAAA;IACA,mBAAA;CACA;AAEA;IACA,mBAAA;IACA,oBAAA;CACA;AAEA;IACA,mBAAA;IACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div :class=\"tagClass\">\n    <div v-if=\"showSolid || showHollow\"\n        :class=\"['tag-item', 'tag-border', size === 'huge' && 'tag-huge', showHollow && 'tag-hollow']\"\n        :style=\"tagTextStyle\">\n      <text :class=\"textClass\" ref='content' :style=\"textStyle\"><slot></slot><template v-if=\"!$slots.default\">{{ value }}</template></text>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-tag {\n    align-items: center;\n\t  flex-direction: row;\n  }\n\n  .tag-item {\n    padding: 9px;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n  }\n\n  .tag-border {\n    border-radius: 4.5px;\n  }\n\n  .tag-huge {\n    border-radius: 100px;\n    height: 72px;\n    padding: 12px 42px;\n  }\n\n  .tag-hollow {\n    border-width: 3px;\n  }\n\n  .tag-text {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    font-weight: bold;\n  }\n\n  .tag-font-small {\n    font-size: 24px;\n  }\n\n  .tag-font-big {\n    font-size: 30px;\n  }\n\n  .tag-font-huge {\n    font-size: 42px;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n  }\n\n  .tag-margin-small {\n    margin-right: 6px;\n    margin-bottom: 6px;\n  }\n\n  .tag-margin-big {\n    margin-right: 12px;\n    margin-bottom: 12px;\n  }\n\n  .tag-margin-huge {\n    margin-right: 36px;\n    margin-bottom: 36px;\n  }\n</style>\n\n<script>\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmTag',\n  mixins: [Locale],\n  props: {\n    type: {\n      type: String,\n      default: 'solid'\n    },\n    size: {\n      type: String,\n      default: 'small'\n    },\n    value: {\n      type: [String, Number],\n      default () {\n        return t('el.tag.tagName');\n      }\n    },\n    color: {\n      type: String,\n      default: '#198DED'\n    },\n    fontColor: {\n      type: String,\n      default: '#FFFFFF'\n    }\n  },\n  computed: {\n    showSolid () {\n      const { type, value } = this;\n      return type === 'solid' && value !== '';\n    },\n    showHollow () {\n      const { type, value } = this;\n      return type === 'hollow' && value !== '';\n    },\n    tagTextStyle () {\n      const { color, showSolid } = this;\n      return showSolid ? { backgroundColor: color } : { borderColor: color };\n    },\n    textStyle () {\n      const { fontColor } = this;\n      return { color: fontColor };\n    },\n    textClass () {\n      const clz = ['tag-text'];\n      const { size } = this;\n      clz.push(`tag-font-${size}`);\n      return clz;\n    },\n    tagClass () {\n      const clz = ['fm-tag'];\n      const { size } = this;\n      clz.push(`tag-margin-${size}`);\n      return clz;\n    }\n  },\n  created () {\n    this.$slots.default && (this.value = this.$slots.default[0].text);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 67 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6978,10 +7173,12 @@ var _locale = __webpack_require__(34);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(28);
+var _locale3 = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
 //
 //
 //
@@ -7127,7 +7324,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 68 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -7155,7 +7352,7 @@ if (false) {
 }
 
 /***/ }),
-/* 69 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7165,7 +7362,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(70);
+var _index = __webpack_require__(115);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -7177,85 +7374,7 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 70 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(71)
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(73),
-  /* template */
-  __webpack_require__(74),
-  /* scopeId */
-  "data-v-10b8a20a",
-  /* cssModules */
-  null
-)
-Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-input/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-10b8a20a", Component.options)
-  } else {
-    hotAPI.reload("data-v-10b8a20a", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 71 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(72);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("1f79d965", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-10b8a20a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-10b8a20a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 72 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(true);
-// imports
-
-
-// module
-exports.push([module.i, "\n.fm-wrapper[data-v-10b8a20a] {\n  padding-top: 72;\n  padding-right: 48;\n  padding-left: 48;\n}\n.fm-textarea[data-v-10b8a20a] {\n  padding-bottom: 27;\n  padding-left: 24;\n  border-bottom-style: solid;\n  border-bottom-width: 3;\n  border-bottom-color: #e6e6e6;\n  font-size: 48;\n  color: #000000;\n  placeholder-color: #dddddd;\n  caret-color: #198ded;\n}\n.fm-input-wrap[data-v-10b8a20a] {\n  position: relative;\n}\n.delete[data-v-10b8a20a] {\n  position: absolute;\n  top: 69;\n  right: 72;\n  width: 60;\n  height: 60;\n  padding: 6;\n  background-color: rgba(0, 0, 0, 0.2);\n  border-radius: 30;\n}\n.visible[data-v-10b8a20a] {\n  position: absolute;\n  top: 63;\n  right: 72;\n  width: 72;\n  height: 72;\n}\n.fm-textarea[data-v-10b8a20a]:focus {\n  border-bottom-color: #198ded;\n}\n.fm-textarea-error[data-v-10b8a20a] {\n  border-bottom-color: #df2b18;\n}\n.error-msg[data-v-10b8a20a] {\n  font-size: 36;\n  color: #df2b18;\n  margin-left: 24;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-input/index.vue?515c5be9"],"names":[],"mappings":";AAoCA;EACA,gBAAA;EACA,kBAAA;EACA,iBAAA;CACA;AAEA;EACA,mBAAA;EACA,iBAAA;EACA,2BAAA;EACA,uBAAA;EACA,6BAAA;EACA,cAAA;EACA,eAAA;EACA,2BAAA;EACA,qBAAA;CACA;AAEA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,UAAA;EACA,UAAA;EACA,WAAA;EACA,WAAA;EACA,qCAAA;EACA,kBAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,UAAA;EACA,UAAA;EACA,WAAA;CACA;AAEA;EACA,6BAAA;CACA;AAEA;EACA,6BAAA;CACA;AAEA;EACA,cAAA;EACA,eAAA;EACA,gBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"fm-wrapper\">\n    <textarea v-if=\"type === 'textarea'\"\n      :class=\"inputClz\"\n      :value=\"value\"\n      :rows=\"rows\"\n      :maxlength=\"maxlength\"\n      :placeholder=\"placeholder\"\n      @input=\"input\"\n      @change=\"change\"\n      @focus=\"beFocus\"\n      @blur=\"beBlur\"\n      ref=\"input\" />\n    <input v-else\n      :type=\"type\"\n      :class=\"inputClz\"\n      :style=\"inputStyle\"\n      :value=\"value\"\n      :maxlength=\"maxlength\"\n      :placeholder=\"placeholder\"\n      :autofocus=\"autofocus\"\n      :disabled=\"disabled\"\n      :return-key-type=\"returnKeyType\"\n      :nightMode=\"nightMode\"\n      @input=\"input\"\n      @change=\"change\"\n      @focus=\"beFocus\"\n      @blur=\"beBlur\"\n      ref=\"input\" />\n    <fm-icon v-if=\"delShow\" class=\"delete\" name=\"guanbi\" :icon-style=\"48\" color=\"#fff\" @fmIconClicked=\"delClick\" />\n    <fm-icon v-if=\"visibleShow\" class=\"visible\" :name=\"visibleValue\" :icon-style=\"72\" color=\"#666\" @fmIconClicked=\"toggleVisible\" />\n    <text v-if=\"hasError\" class=\"error-msg\">{{inputErrorMessage}}</text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-wrapper {\n    padding-top: 72;\n    padding-right: 48;\n    padding-left: 48;\n  }\n\n  .fm-textarea {\n    padding-bottom: 27;\n    padding-left: 24;\n    border-bottom-style: solid;\n    border-bottom-width: 3;\n    border-bottom-color: #e6e6e6;\n    font-size: 48;\n    color: #000000;\n    placeholder-color: #dddddd;\n    caret-color: #198ded;\n  }\n\n  .fm-input-wrap {\n    position: relative;\n  }\n\n  .delete {\n    position: absolute;\n    top: 69;\n    right: 72;\n    width: 60;\n    height: 60;\n    padding: 6;\n    background-color: rgba(0, 0, 0, 0.2);\n    border-radius: 30;\n  }\n\n  .visible {\n    position: absolute;\n    top: 63;\n    right: 72;\n    width: 72;\n    height: 72;\n  }\n\n  .fm-textarea:focus {\n    border-bottom-color: #198ded;\n  }\n\n  .fm-textarea-error {\n    border-bottom-color: #df2b18;\n  }\n\n  .error-msg {\n    font-size: 36;\n    color: #df2b18;\n    margin-left: 24;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon'\nimport Locale from 'weex-flymeui/lib/mixins/locale'\nimport { t } from 'weex-flymeui/lib/locale'\n\nconst modal = weex.requireModule('modal');\n\nexport default {\n  name: 'FmInput',\n  mixins: [Locale],\n  components: { FmIcon },\n  mounted() {\n    if (this.type === 'password') {\n      this.pwdModel = true\n    }\n    this.value = this.defaultValue || ''\n  },\n  data() {\n    return {\n      value: '',\n      rows: 1,\n      isFocus: false,\n      pwdModel: false,\n      pwdVisible: false\n    }\n  },\n  watch: {\n    defaultValue(val) {\n      this.value = val\n    }\n  },\n  props: {\n    defaultValue: {\n      type: [String, Number],\n      default: ''\n    },\n    placeholder: {\n      type: String,\n      default() {\n        return t('el.input.placeholder')\n      }\n    },\n    maxlength: [String, Number],\n    inputPattern: RegExp,\n    inputErrorMessage: {\n      type: String,\n      default: '输入有误'\n    },\n    type: String,\n    autofocus: Boolean,\n    disabled: Boolean,\n    returnKeyType: {\n      type: String,\n      default: 'default'\n    },\n    nightMode: {\n\t\t\ttype: Boolean,\n\t\t\tdefault: false\n\t\t}\n  },\n  computed: {\n    visibleValue() {\n      return this.type === 'password' ? 'chakan' : 'yinbi'\n    },\n    inputClz() {\n      let clz = ['fm-textarea']\n      if (this.hasError) {\n        clz.push('fm-textarea-error')\n      }\n      return clz\n    },\n    inputStyle() {\n      let style = { paddingRight: 24 }\n      if (this.delShow || this.visibleShow) {\n        style.paddingRight = 108 + 'px'\n      }\n      return style\n    },\n    delShow() {\n      return !this.pwdModel && this.isFocus && this.value\n    },\n    visibleShow() {\n      return this.isFocus && this.pwdModel\n    },\n    hasError() {\n      const { inputPattern, value } = this\n      if (inputPattern) {\n        if (!value.match(inputPattern)) {\n          return true\n        }\n        return false\n      }\n      return false\n    }\n  },\n  methods: {\n    delClick(e) {\n      this.value = ''\n      modal.toast({message: this.value})\n    },\n    toggleVisible(e) {\n      this.pwdVisible\n        ? this.$refs.input.setType('password')\n        : this.$refs.input.setType('visible')\n      this.pwdVisible = !this.pwdVisible\n      // if (this.type === 'password') {\n      // \tthis.type = 'text'\n      // } else {\n      // \tthis.type = 'password'\n      // }\n    },\n    input(evt) {\n      this.value = evt.value\n      this.$emit('input', evt)\n    },\n    change(evt) {\n      this.$emit('change', evt)\n    },\n    beFocus(evt) {\n      this.isFocus = true\n      this.$emit('focus', evt)\n    },\n    beBlur(evt) {\n      this.isFocus = false\n      this.$emit('blur', evt)\n    },\n    focus() {\n      this.$refs.input.focus()\n    },\n    blur() {\n      this.$refs.input.blur()\n    },\n    setSelectionRange(start, end) {\n      this.$refs.input.setSelectionRange(start, end)\n    },\n    getEditSelectionRange(callback) {\n      this.$refs.input.getEditSelectionRange(callback)\n    },\n    setValue (value) {\n      this.value = value\n    }\n  }\n}\n</script>\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-/* 73 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7265,574 +7384,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmIcon = __webpack_require__(4);
-
-var _fmIcon2 = _interopRequireDefault(_fmIcon);
-
-var _locale = __webpack_require__(34);
-
-var _locale2 = _interopRequireDefault(_locale);
-
-var _locale3 = __webpack_require__(28);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var modal = weex.requireModule('modal'); //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-exports.default = {
-  name: 'FmInput',
-  mixins: [_locale2.default],
-  components: { FmIcon: _fmIcon2.default },
-  mounted: function mounted() {
-    if (this.type === 'password') {
-      this.pwdModel = true;
-    }
-    this.value = this.defaultValue || '';
-  },
-  data: function data() {
-    return {
-      value: '',
-      rows: 1,
-      isFocus: false,
-      pwdModel: false,
-      pwdVisible: false
-    };
-  },
-
-  watch: {
-    defaultValue: function defaultValue(val) {
-      this.value = val;
-    }
-  },
-  props: {
-    defaultValue: {
-      type: [String, Number],
-      default: ''
-    },
-    placeholder: {
-      type: String,
-      default: function _default() {
-        return (0, _locale3.t)('el.input.placeholder');
-      }
-    },
-    maxlength: [String, Number],
-    inputPattern: RegExp,
-    inputErrorMessage: {
-      type: String,
-      default: '输入有误'
-    },
-    type: String,
-    autofocus: Boolean,
-    disabled: Boolean,
-    returnKeyType: {
-      type: String,
-      default: 'default'
-    },
-    nightMode: {
-      type: Boolean,
-      default: false
-    }
-  },
-  computed: {
-    visibleValue: function visibleValue() {
-      return this.type === 'password' ? 'chakan' : 'yinbi';
-    },
-    inputClz: function inputClz() {
-      var clz = ['fm-textarea'];
-      if (this.hasError) {
-        clz.push('fm-textarea-error');
-      }
-      return clz;
-    },
-    inputStyle: function inputStyle() {
-      var style = { paddingRight: 24 };
-      if (this.delShow || this.visibleShow) {
-        style.paddingRight = 108 + 'px';
-      }
-      return style;
-    },
-    delShow: function delShow() {
-      return !this.pwdModel && this.isFocus && this.value;
-    },
-    visibleShow: function visibleShow() {
-      return this.isFocus && this.pwdModel;
-    },
-    hasError: function hasError() {
-      var inputPattern = this.inputPattern,
-          value = this.value;
-
-      if (inputPattern) {
-        if (!value.match(inputPattern)) {
-          return true;
-        }
-        return false;
-      }
-      return false;
-    }
-  },
-  methods: {
-    delClick: function delClick(e) {
-      this.value = '';
-      modal.toast({ message: this.value });
-    },
-    toggleVisible: function toggleVisible(e) {
-      this.pwdVisible ? this.$refs.input.setType('password') : this.$refs.input.setType('visible');
-      this.pwdVisible = !this.pwdVisible;
-      // if (this.type === 'password') {
-      // 	this.type = 'text'
-      // } else {
-      // 	this.type = 'password'
-      // }
-    },
-    input: function input(evt) {
-      this.value = evt.value;
-      this.$emit('input', evt);
-    },
-    change: function change(evt) {
-      this.$emit('change', evt);
-    },
-    beFocus: function beFocus(evt) {
-      this.isFocus = true;
-      this.$emit('focus', evt);
-    },
-    beBlur: function beBlur(evt) {
-      this.isFocus = false;
-      this.$emit('blur', evt);
-    },
-    focus: function focus() {
-      this.$refs.input.focus();
-    },
-    blur: function blur() {
-      this.$refs.input.blur();
-    },
-    setSelectionRange: function setSelectionRange(start, end) {
-      this.$refs.input.setSelectionRange(start, end);
-    },
-    getEditSelectionRange: function getEditSelectionRange(callback) {
-      this.$refs.input.getEditSelectionRange(callback);
-    },
-    setValue: function setValue(value) {
-      this.value = value;
-    }
-  }
-};
-
-/***/ }),
-/* 74 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "fm-wrapper",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [(_vm.type === 'textarea') ? _c('textarea', {
-    ref: "input",
-    class: _vm.inputClz,
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    attrs: {
-      "rows": _vm.rows,
-      "maxlength": _vm.maxlength,
-      "placeholder": _vm.placeholder
-    },
-    domProps: {
-      "value": _vm.value
-    },
-    on: {
-      "input": _vm.input,
-      "change": _vm.change,
-      "focus": _vm.beFocus,
-      "blur": _vm.beBlur
-    }
-  }) : _c('input', {
-    ref: "input",
-    class: _vm.inputClz,
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(_vm.inputStyle)),
-    attrs: {
-      "type": _vm.type,
-      "maxlength": _vm.maxlength,
-      "placeholder": _vm.placeholder,
-      "autofocus": _vm.autofocus,
-      "disabled": _vm.disabled,
-      "return-key-type": _vm.returnKeyType,
-      "nightMode": _vm.nightMode
-    },
-    domProps: {
-      "value": _vm.value
-    },
-    on: {
-      "input": _vm.input,
-      "change": _vm.change,
-      "focus": _vm.beFocus,
-      "blur": _vm.beBlur
-    }
-  }), _vm._v(" "), (_vm.delShow) ? _c('fm-icon', {
-    staticClass: "delete",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    attrs: {
-      "name": "guanbi",
-      "icon-style": 48,
-      "color": "#fff"
-    },
-    on: {
-      "fmIconClicked": _vm.delClick
-    }
-  }) : _vm._e(), _vm._v(" "), (_vm.visibleShow) ? _c('fm-icon', {
-    staticClass: "visible",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    attrs: {
-      "name": _vm.visibleValue,
-      "icon-style": 72,
-      "color": "#666"
-    },
-    on: {
-      "fmIconClicked": _vm.toggleVisible
-    }
-  }) : _vm._e(), _vm._v(" "), (_vm.hasError) ? _c('text', {
-    staticClass: "error-msg",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [_vm._v(_vm._s(_vm.inputErrorMessage))]) : _vm._e()], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-10b8a20a", module.exports)
-  }
-}
-
-/***/ }),
-/* 75 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(76)
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(78),
-  /* template */
-  __webpack_require__(79),
-  /* scopeId */
-  "data-v-10e45e81",
-  /* cssModules */
-  null
-)
-Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-overlay/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-10e45e81", Component.options)
-  } else {
-    hotAPI.reload("data-v-10e45e81", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 76 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(77);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("78c6b5b6", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-10e45e81\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-10e45e81\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 77 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(true);
-// imports
-
-
-// module
-exports.push([module.i, "\n.fm-overlay[data-v-10e45e81] {\n  width: 1080;\n  position: fixed;\n  left: 0;\n  top: 0;\n  bottom: 0;\n  right: 0;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-overlay/index.vue?5977a40c"],"names":[],"mappings":";AAaA;EACA,YAAA;EACA,gBAAA;EACA,QAAA;EACA,OAAA;EACA,UAAA;EACA,SAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div>\n    <div class=\"fm-overlay\"\n         ref=\"fm-overlay\"\n         v-if=\"show\"\n         :watch=\"shouldShow\"\n         @click=\"overlayClicked\"\n         :style=\"overlayStyle\">\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-overlay {\n    width: 1080;\n    position: fixed;\n    left: 0;\n    top: 0;\n    bottom: 0;\n    right: 0;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nexport default {\n  name: 'FmOverlay',\n  props: {\n    show: {\n      type: Boolean,\n      default: true\n    },\n    hasAnimation: {\n      type: Boolean,\n      default: true\n    },\n    duration: {\n      type: [Number, String],\n      default: 300\n    },\n    timingFunction: {\n      type: Array,\n      default: () => (['ease-in', 'ease-out'])\n    },\n    opacity: {\n      type: [Number, String],\n      default: 0.5\n    },\n    canAutoClose: {\n      type: Boolean,\n      default: true\n    }\n  },\n  computed: {\n    overlayStyle () {\n      return {\n        opacity: this.hasAnimation ? 0 : 1,\n        backgroundColor: `rgba(0, 0, 0,${this.opacity})`\n      };\n    },\n    shouldShow () {\n      const { show, hasAnimation } = this;\n      hasAnimation && setTimeout(() => {\n        this.appearOverlay(show);\n      }, 50);\n      return show;\n    }\n  },\n  methods: {\n    overlayClicked (e) {\n      this.canAutoClose ? this.appearOverlay(false) : this.$emit('fmOverlayBodyClicked', {});\n    },\n    appearOverlay (bool, duration = this.duration) {\n      const { hasAnimation, timingFunction, canAutoClose } = this;\n      const needEmit = !bool && canAutoClose;\n      needEmit && (this.$emit('fmOverlayBodyClicking', {}));\n      const overlayEl = this.$refs['fm-overlay'];\n      if (hasAnimation && overlayEl) {\n        animation.transition(overlayEl, {\n          styles: {\n            opacity: bool ? 1 : 0\n          },\n          duration,\n          timingFunction: timingFunction[bool ? 0 : 1],\n          delay: 0\n        }, () => {\n          needEmit && (this.$emit('fmOverlayBodyClicked', {}));\n        });\n      } else {\n        needEmit && (this.$emit('fmOverlayBodyClicked', {}));\n      }\n    },\n    hide () {\n      this.appearOverlay(false);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-/* 78 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var animation = weex.requireModule('animation');
-exports.default = {
-  name: 'FmOverlay',
-  props: {
-    show: {
-      type: Boolean,
-      default: true
-    },
-    hasAnimation: {
-      type: Boolean,
-      default: true
-    },
-    duration: {
-      type: [Number, String],
-      default: 300
-    },
-    timingFunction: {
-      type: Array,
-      default: function _default() {
-        return ['ease-in', 'ease-out'];
-      }
-    },
-    opacity: {
-      type: [Number, String],
-      default: 0.5
-    },
-    canAutoClose: {
-      type: Boolean,
-      default: true
-    }
-  },
-  computed: {
-    overlayStyle: function overlayStyle() {
-      return {
-        opacity: this.hasAnimation ? 0 : 1,
-        backgroundColor: 'rgba(0, 0, 0,' + this.opacity + ')'
-      };
-    },
-    shouldShow: function shouldShow() {
-      var _this = this;
-
-      var show = this.show,
-          hasAnimation = this.hasAnimation;
-
-      hasAnimation && setTimeout(function () {
-        _this.appearOverlay(show);
-      }, 50);
-      return show;
-    }
-  },
-  methods: {
-    overlayClicked: function overlayClicked(e) {
-      this.canAutoClose ? this.appearOverlay(false) : this.$emit('fmOverlayBodyClicked', {});
-    },
-    appearOverlay: function appearOverlay(bool) {
-      var _this2 = this;
-
-      var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.duration;
-      var hasAnimation = this.hasAnimation,
-          timingFunction = this.timingFunction,
-          canAutoClose = this.canAutoClose;
-
-      var needEmit = !bool && canAutoClose;
-      needEmit && this.$emit('fmOverlayBodyClicking', {});
-      var overlayEl = this.$refs['fm-overlay'];
-      if (hasAnimation && overlayEl) {
-        animation.transition(overlayEl, {
-          styles: {
-            opacity: bool ? 1 : 0
-          },
-          duration: duration,
-          timingFunction: timingFunction[bool ? 0 : 1],
-          delay: 0
-        }, function () {
-          needEmit && _this2.$emit('fmOverlayBodyClicked', {});
-        });
-      } else {
-        needEmit && this.$emit('fmOverlayBodyClicked', {});
-      }
-    },
-    hide: function hide() {
-      this.appearOverlay(false);
-    }
-  }
-};
-
-/***/ }),
-/* 79 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [(_vm.show) ? _c('div', {
-    ref: "fm-overlay",
-    staticClass: "fm-overlay",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(_vm.overlayStyle)),
-    attrs: {
-      "watch": _vm.shouldShow
-    },
-    on: {
-      "click": _vm.overlayClicked
-    }
-  }) : _vm._e()])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-10e45e81", module.exports)
-  }
-}
-
-/***/ }),
-/* 80 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(114);
+var _index = __webpack_require__(75);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -7844,7 +7396,7 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 81 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7854,7 +7406,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(87);
+var _index = __webpack_require__(80);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -7866,30 +7418,7 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 82 */,
-/* 83 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(92);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 84 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -8685,7 +8214,414 @@ module.exports = {
 /******/ ])});;
 
 /***/ }),
-/* 85 */
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(68);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(69)
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(71),
+  /* template */
+  __webpack_require__(72),
+  /* scopeId */
+  "data-v-10b8a20a",
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-input/index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-10b8a20a", Component.options)
+  } else {
+    hotAPI.reload("data-v-10b8a20a", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(70);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("1f79d965", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-10b8a20a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-10b8a20a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.fm-wrapper[data-v-10b8a20a] {\n  padding-top: 72px;\n  padding-right: 48px;\n  padding-left: 48px;\n}\n.fm-input[data-v-10b8a20a] {\n  padding-bottom: 27px;\n  padding-left: 24px;\n  border-bottom-style: solid;\n  border-bottom-width: 3px;\n  border-bottom-color: #e6e6e6;\n  font-size: 48px;\n  color: #000000;\n  placeholder-color: #dddddd;\n}\n.fm-input-wrap[data-v-10b8a20a] {\n  position: relative;\n}\n.delete[data-v-10b8a20a] {\n  position: absolute;\n  top: 69px;\n  right: 72px;\n  width: 60px;\n  height: 60px;\n  padding: 6px;\n  background-color: rgba(0, 0, 0, 0.2);\n  border-radius: 30px;\n}\n.visible[data-v-10b8a20a] {\n  position: absolute;\n  top: 63px;\n  right: 72px;\n  width: 72px;\n  height: 72px;\n}\n.error-msg[data-v-10b8a20a] {\n  font-size: 36px;\n  color: #df2b18;\n  margin-left: 24px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-input/index.vue?9f984a0c"],"names":[],"mappings":";AA2BA;EACA,kBAAA;EACA,oBAAA;EACA,mBAAA;CACA;AAEA;EACA,qBAAA;EACA,mBAAA;EACA,2BAAA;EACA,yBAAA;EACA,6BAAA;EACA,gBAAA;EACA,eAAA;EACA,2BAAA;CACA;AAEA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;EACA,UAAA;EACA,YAAA;EACA,YAAA;EACA,aAAA;EACA,aAAA;EACA,qCAAA;EACA,oBAAA;CACA;AAEA;EACA,mBAAA;EACA,UAAA;EACA,YAAA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,gBAAA;EACA,eAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div class=\"fm-wrapper\">\n    <input\n      :type=\"type\"\n      class=\"fm-input\"\n      :style=\"inputStyle\"\n      :value=\"value\"\n      :maxlength=\"maxlength\"\n      :placeholder=\"placeholder\"\n      :autofocus=\"autofocus\"\n      :disabled=\"disabled\"\n      :return-key-type=\"returnKeyType\"\n      :nightMode=\"nightMode\"\n      @input=\"input\"\n      @change=\"change\"\n      @focus=\"beFocus\"\n      @blur=\"beBlur\"\n      ref=\"input\" />\n    <fm-icon v-if=\"delShow\" class=\"delete\" name=\"guanbi\" :icon-style=\"48\" color=\"#fff\" @fmIconClicked=\"delClick\" />\n    <fm-icon v-if=\"visibleShow\" class=\"visible\" :name=\"visibleValue\" :icon-style=\"72\" color=\"#666\" @fmIconClicked=\"toggleVisible\" />\n    <text v-if=\"hasError\" class=\"error-msg\">{{inputErrorMessage}}</text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-wrapper {\n    padding-top: 72px;\n    padding-right: 48px;\n    padding-left: 48px;\n  }\n\n  .fm-input {\n    padding-bottom: 27px;\n    padding-left: 24px;\n    border-bottom-style: solid;\n    border-bottom-width: 3px;\n    border-bottom-color: #e6e6e6;\n    font-size: 48px;\n    color: #000000;\n    placeholder-color: #dddddd;\n  }\n\n  .fm-input-wrap {\n    position: relative;\n  }\n\n  .delete {\n    position: absolute;\n    top: 69px;\n    right: 72px;\n    width: 60px;\n    height: 60px;\n    padding: 6px;\n    background-color: rgba(0, 0, 0, 0.2);\n    border-radius: 30px;\n  }\n\n  .visible {\n    position: absolute;\n    top: 63px;\n    right: 72px;\n    width: 72px;\n    height: 72px;\n  }\n\n  .error-msg {\n    font-size: 36px;\n    color: #df2b18;\n    margin-left: 24px;\n  }\n</style>\n\n<script>\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\nimport STYLE from 'weex-flymeui/lib/theme/default/';\nimport FmIcon from '../fm-icon';\n\nexport default {\n  name: 'FmInput',\n  mixins: [Locale],\n  components: { FmIcon },\n  mounted () {\n    if (this.type === 'password') {\n      this.pwdModel = true;\n    }\n    this.value = this.defaultValue || '';\n  },\n  data () {\n    return {\n      value: '',\n      rows: 1,\n      isFocus: false,\n      pwdModel: false,\n      pwdVisible: false\n    };\n  },\n  watch: {\n    defaultValue (val) {\n      this.value = val;\n    }\n  },\n  props: {\n    defaultValue: {\n      type: [String, Number],\n      default: ''\n    },\n    placeholder: {\n      type: String,\n      default () {\n        return t('el.input.placeholder');\n      }\n    },\n    maxlength: [String, Number],\n    inputPattern: RegExp,\n    inputErrorMessage: {\n      type: String,\n      default: '输入有误'\n    },\n    type: String,\n    autofocus: Boolean,\n    disabled: Boolean,\n    returnKeyType: {\n      type: String,\n      default: 'default'\n    },\n    nightMode: {\n      type: Boolean,\n      default: false\n    }\n  },\n  computed: {\n    visibleValue () {\n      return this.type === 'password' ? 'chakan' : 'yinbi';\n    },\n    inputStyle () {\n      const style = { paddingRight: 24 };\n      style.borderBottomColor = !this.hasError ? this.isFocus ? STYLE.primaryColor : '#e6e6e6' : '#df2b18';\n      style.caretColor = STYLE.primaryColor;\n      if (this.delShow || this.visibleShow) {\n        style.paddingRight = 108 + 'px';\n      }\n      return style;\n    },\n    delShow () {\n      return !this.pwdModel && this.isFocus && this.value;\n    },\n    visibleShow () {\n      return this.isFocus && this.pwdModel;\n    },\n    hasError () {\n      const { inputPattern, value } = this;\n      if (inputPattern) {\n        if (!value.match(inputPattern)) {\n          return true;\n        }\n        return false;\n      }\n      return false;\n    }\n  },\n  methods: {\n    delClick (e) {\n      this.value = '';\n    },\n    toggleVisible (e) {\n      if (this.$refs.input.setType) {\n        this.pwdVisible\n          ? this.$refs.input.setType('password')\n          : this.$refs.input.setType('visible');\n        this.pwdVisible = !this.pwdVisible;\n      } else {\n        if (this.type === 'password') {\n          this.type = 'text';\n        } else {\n          this.type = 'password';\n        }\n      }\n    },\n    input (evt) {\n      this.value = evt.value;\n      this.$emit('input', evt);\n    },\n    change (evt) {\n      this.$emit('change', evt);\n    },\n    beFocus (evt) {\n      this.isFocus = true;\n      this.$emit('focus', evt);\n    },\n    beBlur (evt) {\n      this.isFocus = false;\n      this.$emit('blur', evt);\n    },\n    focus () {\n      this.$refs.input.focus();\n    },\n    blur () {\n      this.$refs.input.blur();\n    },\n    setSelectionRange (start, end) {\n      this.$refs.input.setSelectionRange(start, end);\n    },\n    getEditSelectionRange (callback) {\n      this.$refs.input.getEditSelectionRange(callback);\n    },\n    setValue (value) {\n      this.value = value;\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _locale = __webpack_require__(34);
+
+var _locale2 = _interopRequireDefault(_locale);
+
+var _locale3 = __webpack_require__(20);
+
+var _default2 = __webpack_require__(35);
+
+var _default3 = _interopRequireDefault(_default2);
+
+var _fmIcon = __webpack_require__(6);
+
+var _fmIcon2 = _interopRequireDefault(_fmIcon);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+  name: 'FmInput',
+  mixins: [_locale2.default],
+  components: { FmIcon: _fmIcon2.default },
+  mounted: function mounted() {
+    if (this.type === 'password') {
+      this.pwdModel = true;
+    }
+    this.value = this.defaultValue || '';
+  },
+  data: function data() {
+    return {
+      value: '',
+      rows: 1,
+      isFocus: false,
+      pwdModel: false,
+      pwdVisible: false
+    };
+  },
+
+  watch: {
+    defaultValue: function defaultValue(val) {
+      this.value = val;
+    }
+  },
+  props: {
+    defaultValue: {
+      type: [String, Number],
+      default: ''
+    },
+    placeholder: {
+      type: String,
+      default: function _default() {
+        return (0, _locale3.t)('el.input.placeholder');
+      }
+    },
+    maxlength: [String, Number],
+    inputPattern: RegExp,
+    inputErrorMessage: {
+      type: String,
+      default: '输入有误'
+    },
+    type: String,
+    autofocus: Boolean,
+    disabled: Boolean,
+    returnKeyType: {
+      type: String,
+      default: 'default'
+    },
+    nightMode: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    visibleValue: function visibleValue() {
+      return this.type === 'password' ? 'chakan' : 'yinbi';
+    },
+    inputStyle: function inputStyle() {
+      var style = { paddingRight: 24 };
+      style.borderBottomColor = !this.hasError ? this.isFocus ? _default3.default.primaryColor : '#e6e6e6' : '#df2b18';
+      style.caretColor = _default3.default.primaryColor;
+      if (this.delShow || this.visibleShow) {
+        style.paddingRight = 108 + 'px';
+      }
+      return style;
+    },
+    delShow: function delShow() {
+      return !this.pwdModel && this.isFocus && this.value;
+    },
+    visibleShow: function visibleShow() {
+      return this.isFocus && this.pwdModel;
+    },
+    hasError: function hasError() {
+      var inputPattern = this.inputPattern,
+          value = this.value;
+
+      if (inputPattern) {
+        if (!value.match(inputPattern)) {
+          return true;
+        }
+        return false;
+      }
+      return false;
+    }
+  },
+  methods: {
+    delClick: function delClick(e) {
+      this.value = '';
+    },
+    toggleVisible: function toggleVisible(e) {
+      if (this.$refs.input.setType) {
+        this.pwdVisible ? this.$refs.input.setType('password') : this.$refs.input.setType('visible');
+        this.pwdVisible = !this.pwdVisible;
+      } else {
+        if (this.type === 'password') {
+          this.type = 'text';
+        } else {
+          this.type = 'password';
+        }
+      }
+    },
+    input: function input(evt) {
+      this.value = evt.value;
+      this.$emit('input', evt);
+    },
+    change: function change(evt) {
+      this.$emit('change', evt);
+    },
+    beFocus: function beFocus(evt) {
+      this.isFocus = true;
+      this.$emit('focus', evt);
+    },
+    beBlur: function beBlur(evt) {
+      this.isFocus = false;
+      this.$emit('blur', evt);
+    },
+    focus: function focus() {
+      this.$refs.input.focus();
+    },
+    blur: function blur() {
+      this.$refs.input.blur();
+    },
+    setSelectionRange: function setSelectionRange(start, end) {
+      this.$refs.input.setSelectionRange(start, end);
+    },
+    getEditSelectionRange: function getEditSelectionRange(callback) {
+      this.$refs.input.getEditSelectionRange(callback);
+    },
+    setValue: function setValue(value) {
+      this.value = value;
+    }
+  }
+};
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "fm-wrapper",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_c('input', {
+    ref: "input",
+    staticClass: "fm-input",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(_vm.inputStyle)),
+    attrs: {
+      "type": _vm.type,
+      "maxlength": _vm.maxlength,
+      "placeholder": _vm.placeholder,
+      "autofocus": _vm.autofocus,
+      "disabled": _vm.disabled,
+      "return-key-type": _vm.returnKeyType,
+      "nightMode": _vm.nightMode
+    },
+    domProps: {
+      "value": _vm.value
+    },
+    on: {
+      "input": _vm.input,
+      "change": _vm.change,
+      "focus": _vm.beFocus,
+      "blur": _vm.beBlur
+    }
+  }), _vm._v(" "), (_vm.delShow) ? _c('fm-icon', {
+    staticClass: "delete",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "name": "guanbi",
+      "icon-style": 48,
+      "color": "#fff"
+    },
+    on: {
+      "fmIconClicked": _vm.delClick
+    }
+  }) : _vm._e(), _vm._v(" "), (_vm.visibleShow) ? _c('fm-icon', {
+    staticClass: "visible",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "name": _vm.visibleValue,
+      "icon-style": 72,
+      "color": "#666"
+    },
+    on: {
+      "fmIconClicked": _vm.toggleVisible
+    }
+  }) : _vm._e(), _vm._v(" "), (_vm.hasError) ? _c('text', {
+    staticClass: "error-msg",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_vm._v(_vm._s(_vm.inputErrorMessage))]) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-10b8a20a", module.exports)
+  }
+}
+
+/***/ }),
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8760,7 +8696,7 @@ var Utils = {
 exports.default = Utils;
 
 /***/ }),
-/* 86 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8770,7 +8706,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(168);
+var _index = __webpack_require__(169);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -8782,18 +8718,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 87 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(88)
+__webpack_require__(76)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(90),
+  __webpack_require__(78),
   /* template */
-  __webpack_require__(91),
+  __webpack_require__(79),
   /* scopeId */
   "data-v-5cb22ec6",
   /* cssModules */
@@ -8820,13 +8756,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 88 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(89);
+var content = __webpack_require__(77);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -8846,7 +8782,7 @@ if(false) {
 }
 
 /***/ }),
-/* 89 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -8854,13 +8790,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.dialog-btn[data-v-5cb22ec6] {\n    flex: 1;\n\t\tpadding-left: 48px;\n\t\tpadding-right: 48px;\n}\n.btnText[data-v-5cb22ec6] {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    color: #198ded;\n    text-align: center;\n}\n.dialog-btnText[data-v-5cb22ec6] {\n    padding: 36px;\n}\n.actionSheet-btnText[data-v-5cb22ec6] {\n\t\tline-height: 192px;\n\t\tborder-bottom-style: solid;\n\t\tborder-bottom-width: 1px;\n\t\tborder-bottom-color: #E6E6E6;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-simple-btn/index.vue?010236d4"],"names":[],"mappings":";AAOA;IACA,QAAA;EACA,mBAAA;EACA,oBAAA;CACA;AAEA;IACA,+BAAA;IACA,iBAAA;IACA,gBAAA;IACA,eAAA;IACA,mBAAA;CACA;AAEA;IACA,cAAA;CACA;AAEA;EACA,mBAAA;EACA,2BAAA;EACA,yBAAA;EACA,6BAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"dialog-btn\">\n    <text :class=\"btnClz\" :style=\"btnStyle\" @click=\"click()\">{{ text }}</text>\n\t</div>\n</template>\n\n<style scoped>\n  .dialog-btn {\n    flex: 1;\n\t\tpadding-left: 48px;\n\t\tpadding-right: 48px;\n  }\n\n\t.btnText {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    color: #198ded;\n    text-align: center;\n\t}\n\n  .dialog-btnText {\n    padding: 36px;\n  }\n\n\t.actionSheet-btnText {\n\t\tline-height: 192px;\n\t\tborder-bottom-style: solid;\n\t\tborder-bottom-width: 1px;\n\t\tborder-bottom-color: #E6E6E6;\n\t}\n</style>\n\n<script>\nexport default {\n  name: 'FmSimpleBtn',\n  props: {\n    text: String,\n    type: String,\n    color: String,\n    msg: [String, Number, Array, Object],\n    scene: {\n      type: String,\n      defalut: 'dialog'\n    }\n  },\n  computed: {\n    btnClz () {\n      const clz = ['btnText'];\n      if (this.scene === 'dialog') {\n        clz.push('dialog-btnText');\n      } else if (this.scene === 'actionSheet') {\n        clz.push('actionSheet-btnText');\n      }\n      return clz;\n    },\n    btnStyle () {\n      const { color } = this;\n      if (color) {\n        return {\n          color: color\n        };\n      }\n    }\n  },\n  methods: {\n    click () {\n      const { text, msg, type } = this;\n      this.$emit('click', { text: text, type: type, msg: msg });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.dialog-btn[data-v-5cb22ec6] {\n    flex: 1;\n\t\tpadding-left: 48px;\n\t\tpadding-right: 48px;\n}\n.btnText[data-v-5cb22ec6] {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    color: #198ded;\n    text-align: center;\n}\n.dialog-btnText[data-v-5cb22ec6] {\n    padding: 36px;\n}\n.actionSheet-btnText[data-v-5cb22ec6] {\n\t\tline-height: 192px;\n\t\tborder-bottom-style: solid;\n\t\tborder-bottom-width: 1px;\n\t\tborder-bottom-color: #E6E6E6;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-simple-btn/index.vue?21b3716b"],"names":[],"mappings":";AASA;IACA,QAAA;EACA,mBAAA;EACA,oBAAA;CACA;AAEA;IACA,+BAAA;IACA,iBAAA;IACA,gBAAA;IACA,eAAA;IACA,mBAAA;CACA;AAEA;IACA,cAAA;CACA;AAEA;EACA,mBAAA;EACA,2BAAA;EACA,yBAAA;EACA,6BAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div class=\"dialog-btn\">\n    <text :class=\"btnClz\" :style=\"btnStyle\" @click=\"click()\">{{ text }}</text>\n\t</div>\n</template>\n\n<style scoped>\n  .dialog-btn {\n    flex: 1;\n\t\tpadding-left: 48px;\n\t\tpadding-right: 48px;\n  }\n\n\t.btnText {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    color: #198ded;\n    text-align: center;\n\t}\n\n  .dialog-btnText {\n    padding: 36px;\n  }\n\n\t.actionSheet-btnText {\n\t\tline-height: 192px;\n\t\tborder-bottom-style: solid;\n\t\tborder-bottom-width: 1px;\n\t\tborder-bottom-color: #E6E6E6;\n\t}\n</style>\n\n<script>\nexport default {\n  name: 'FmSimpleBtn',\n  props: {\n    text: String,\n    type: String,\n    color: String,\n    msg: [String, Number, Array, Object],\n    scene: {\n      type: String,\n      defalut: 'dialog'\n    }\n  },\n  computed: {\n    btnClz () {\n      const clz = ['btnText'];\n      if (this.scene === 'dialog') {\n        clz.push('dialog-btnText');\n      } else if (this.scene === 'actionSheet') {\n        clz.push('actionSheet-btnText');\n      }\n      return clz;\n    },\n    btnStyle () {\n      const { color } = this;\n      if (color) {\n        return {\n          color: color\n        };\n      }\n    }\n  },\n  methods: {\n    click () {\n      const { text, msg, type } = this;\n      this.$emit('click', { text: text, type: type, msg: msg });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 90 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8869,6 +8805,8 @@ exports.push([module.i, "\n.dialog-btn[data-v-5cb22ec6] {\n    flex: 1;\n\t\tpad
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+//
+//
 //
 //
 //
@@ -8947,7 +8885,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 91 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -8975,18 +8913,18 @@ if (false) {
 }
 
 /***/ }),
-/* 92 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(93)
+__webpack_require__(81)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(95),
+  __webpack_require__(83),
   /* template */
-  __webpack_require__(96),
+  __webpack_require__(84),
   /* scopeId */
   "data-v-0a22d546",
   /* cssModules */
@@ -9013,13 +8951,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 93 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(94);
+var content = __webpack_require__(82);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -9039,7 +8977,7 @@ if(false) {
 }
 
 /***/ }),
-/* 94 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -9047,13 +8985,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-popup[data-v-0a22d546] {\n\t\tposition: fixed;\n\t\twidth: 1080px;\n}\n.top[data-v-0a22d546] {\n    left: 0;\n    right: 0;\n}\n.bottom[data-v-0a22d546] {\n    left: 0;\n    right: 0;\n}\n.left[data-v-0a22d546] {\n    bottom: 0;\n    top: 0;\n}\n.right[data-v-0a22d546] {\n    bottom: 0;\n    top: 0;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-popup/index.vue?76594ed0"],"names":[],"mappings":";AAsBA;EACA,gBAAA;EACA,cAAA;CACA;AAEA;IACA,QAAA;IACA,SAAA;CACA;AAEA;IACA,QAAA;IACA,SAAA;CACA;AAEA;IACA,UAAA;IACA,OAAA;CACA;AAEA;IACA,UAAA;IACA,OAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div>\n    <div @touchend=\"handleTouchEnd\">\n      <fm-overlay :show=\"haveOverlay && isOverShow\"\n                   v-if=\"show\"\n                   ref=\"overlay\"\n                   v-bind=\"overlayCfg\"\n                   @fmOverlayBodyClicking=\"fmOverlayBodyClicking\"></fm-overlay>\n    </div>\n    <div ref=\"fm-popup\"\n         v-if=\"show\"\n         :height=\"_height\"\n         :hack=\"isNeedShow\"\n         @click=\"()=>{}\"\n         :class=\"['fm-popup', pos]\"\n         :style=\"padStyle\">\n      <slot></slot>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n\t.fm-popup {\n\t\tposition: fixed;\n\t\twidth: 1080px;\n\t}\n\n  .top {\n    left: 0;\n    right: 0;\n  }\n\n  .bottom {\n    left: 0;\n    right: 0;\n  }\n\n  .left {\n    bottom: 0;\n    top: 0;\n  }\n\n  .right {\n    bottom: 0;\n    top: 0;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nconst { platform } = weex.config.env;\nconst isWeb = typeof (window) === 'object' && platform.toLowerCase() === 'web';\nimport FmOverlay from '../fm-overlay';\n\nexport default {\n  name: 'FmPopup',\n  components: { FmOverlay },\n  props: {\n    show: {\n      type: Boolean,\n      default: false\n    },\n    pos: {\n      type: String,\n      default: 'bottom'\n    },\n    popupColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    overlayCfg: {\n      type: Object,\n      default: () => ({\n        hasAnimation: true,\n        timingFunction: ['ease-in', 'ease-out'],\n        duration: 300,\n        opacity: 0.5\n      })\n    },\n    height: {\n      type: [Number, String],\n      default: 840\n    },\n    standOut: {\n      type: [Number, String],\n      default: 0\n    },\n    width: {\n      type: [Number, String],\n      default: 1080\n    },\n    animation: {\n      type: Object,\n      default: () => ({\n        timingFunction: 'ease-out'\n      })\n    }\n  },\n  data: () => ({\n    haveOverlay: true,\n    isOverShow: true\n  }),\n  computed: {\n    isNeedShow () {\n      setTimeout(() => {\n        this.appearPopup(this.show);\n      }, 50);\n      return this.show;\n    },\n    _height () {\n      this.appearPopup(this.show, 150);\n      return this.height;\n    },\n    transformValue () {\n      return this.getTransform(this.pos, this.width, this.height, true);\n    },\n    padStyle () {\n      const { pos, width, height, popupColor } = this;\n      let style = {\n        width: `${width}px`,\n        backgroundColor: popupColor\n      };\n      pos === 'top' && (style = {\n        ...style,\n        top: `${-height}px`,\n        height: `${height}px`\n      });\n      pos === 'bottom' && (style = {\n        ...style,\n        bottom: `${-height}px`,\n        height: `${height}px`\n      });\n      pos === 'left' && (style = {\n        ...style,\n        left: `${-width}px`\n      });\n      pos === 'right' && (style = {\n        ...style,\n        right: `${-width}px`\n      });\n      return style;\n    }\n  },\n  methods: {\n    handleTouchEnd (e) {\n      const { platform } = weex.config.env;\n      platform === 'Web' && e.preventDefault && e.preventDefault();\n    },\n    hide () {\n      this.appearPopup(false);\n      this.$refs.overlay.appearOverlay(false);\n    },\n    fmOverlayBodyClicking () {\n      this.isShow && this.appearPopup(false);\n    },\n    appearPopup (bool, duration = 300) {\n      this.isShow = bool;\n      const popupEl = this.$refs['fm-popup'];\n      if (!popupEl) {\n        return;\n      }\n      animation.transition(popupEl, {\n        styles: {\n          transform: this.getTransform(this.pos, this.width, this.height, !bool)\n        },\n        duration,\n        delay: 0,\n        ...this.animation\n      }, () => {\n        if (!bool) {\n          this.$emit('fmPopupOverlayClicked', { pos: this.pos });\n        }\n      });\n    },\n    getTransform (pos, width, height, bool) {\n      let _size = pos === 'top' || pos === 'bottom' ? height : width;\n      let _transform;\n      if (isWeb) {\n        _size -= this.standOut;\n      }\n      bool && (_size = 0);\n      switch (pos) {\n        case 'top':\n          _transform = `translateY(${_size}px)`;\n          break;\n        case 'bottom':\n          _transform = `translateY(-${_size}px)`;\n          break;\n        case 'left':\n          _transform = `translateX(${_size}px)`;\n          break;\n        case 'right':\n          _transform = `translateX(-${_size}px)`;\n          break;\n      }\n      return _transform;\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-popup[data-v-0a22d546] {\n\t\tposition: fixed;\n\t\twidth: 1080px;\n}\n.top[data-v-0a22d546] {\n    left: 0;\n    right: 0;\n}\n.bottom[data-v-0a22d546] {\n    left: 0;\n    right: 0;\n}\n.left[data-v-0a22d546] {\n    bottom: 0;\n    top: 0;\n}\n.right[data-v-0a22d546] {\n    bottom: 0;\n    top: 0;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-popup/index.vue?0910bc5f"],"names":[],"mappings":";AAwBA;EACA,gBAAA;EACA,cAAA;CACA;AAEA;IACA,QAAA;IACA,SAAA;CACA;AAEA;IACA,QAAA;IACA,SAAA;CACA;AAEA;IACA,UAAA;IACA,OAAA;CACA;AAEA;IACA,UAAA;IACA,OAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Updated by Yanjiie on 2018/04/12. Fork from weex-ui. -->\n<template>\n  <div>\n    <div @touchend=\"handleTouchEnd\">\n      <fm-overlay :show=\"haveOverlay && isOverShow\"\n                   v-if=\"show\"\n                   ref=\"overlay\"\n                   v-bind=\"overlayCfg\"\n                   @fmOverlayBodyClicking=\"fmOverlayBodyClicking\"></fm-overlay>\n    </div>\n    <div ref=\"fm-popup\"\n         v-if=\"show\"\n         :height=\"_height\"\n         :hack=\"isNeedShow\"\n         @click=\"()=>{}\"\n         :class=\"['fm-popup', pos]\"\n         :style=\"padStyle\">\n      <slot></slot>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n\t.fm-popup {\n\t\tposition: fixed;\n\t\twidth: 1080px;\n\t}\n\n  .top {\n    left: 0;\n    right: 0;\n  }\n\n  .bottom {\n    left: 0;\n    right: 0;\n  }\n\n  .left {\n    bottom: 0;\n    top: 0;\n  }\n\n  .right {\n    bottom: 0;\n    top: 0;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nconst { platform } = weex.config.env;\nconst isWeb = typeof (window) === 'object' && platform.toLowerCase() === 'web';\nimport FmOverlay from '../fm-overlay';\n\nexport default {\n  name: 'FmPopup',\n  components: { FmOverlay },\n  props: {\n    show: {\n      type: Boolean,\n      default: false\n    },\n    pos: {\n      type: String,\n      default: 'bottom'\n    },\n    popupColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    overlayCfg: {\n      type: Object,\n      default: () => ({\n        hasAnimation: true,\n        timingFunction: ['ease-in', 'ease-out'],\n        duration: 300,\n        opacity: 0.5\n      })\n    },\n    height: {\n      type: [Number, String],\n      default: 840\n    },\n    standOut: {\n      type: [Number, String],\n      default: 0\n    },\n    width: {\n      type: [Number, String],\n      default: 1080\n    },\n    animation: {\n      type: Object,\n      default: () => ({\n        timingFunction: 'ease-out'\n      })\n    }\n  },\n  data: () => ({\n    haveOverlay: true,\n    isOverShow: true\n  }),\n  computed: {\n    isNeedShow () {\n      setTimeout(() => {\n        this.appearPopup(this.show);\n      }, 50);\n      return this.show;\n    },\n    _height () {\n      this.appearPopup(this.show, 150);\n      return this.height;\n    },\n    transformValue () {\n      return this.getTransform(this.pos, this.width, this.height, true);\n    },\n    padStyle () {\n      const { pos, width, height, popupColor } = this;\n      let style = {\n        width: `${width}px`,\n        backgroundColor: popupColor\n      };\n      pos === 'top' && (style = {\n        ...style,\n        top: `${-height}px`,\n        height: `${height}px`\n      });\n      pos === 'bottom' && (style = {\n        ...style,\n        bottom: `${-height}px`,\n        height: `${height}px`\n      });\n      pos === 'left' && (style = {\n        ...style,\n        left: `${-width}px`\n      });\n      pos === 'right' && (style = {\n        ...style,\n        right: `${-width}px`\n      });\n      return style;\n    }\n  },\n  methods: {\n    handleTouchEnd (e) {\n      const { platform } = weex.config.env;\n      platform === 'Web' && e.preventDefault && e.preventDefault();\n    },\n    hide () {\n      this.appearPopup(false);\n      this.$refs.overlay.appearOverlay(false);\n    },\n    fmOverlayBodyClicking () {\n      this.isShow && this.appearPopup(false);\n    },\n    appearPopup (bool, duration = 300) {\n      this.isShow = bool;\n      const popupEl = this.$refs['fm-popup'];\n      if (!popupEl) {\n        return;\n      }\n      animation.transition(popupEl, {\n        styles: {\n          transform: this.getTransform(this.pos, this.width, this.height, !bool)\n        },\n        duration,\n        delay: 0,\n        ...this.animation\n      }, () => {\n        if (!bool) {\n          this.$emit('fmPopupOverlayClicked', { pos: this.pos });\n        }\n      });\n    },\n    getTransform (pos, width, height, bool) {\n      let _size = pos === 'top' || pos === 'bottom' ? height : width;\n      let _transform;\n      if (isWeb) {\n        _size -= this.standOut;\n      }\n      bool && (_size = 0);\n      switch (pos) {\n        case 'top':\n          _transform = `translateY(${_size}px)`;\n          break;\n        case 'bottom':\n          _transform = `translateY(-${_size}px)`;\n          break;\n        case 'left':\n          _transform = `translateX(${_size}px)`;\n          break;\n        case 'right':\n          _transform = `translateX(-${_size}px)`;\n          break;\n      }\n      return _transform;\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 95 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9067,12 +9005,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _fmOverlay = __webpack_require__(51);
+var _fmOverlay = __webpack_require__(44);
 
 var _fmOverlay2 = _interopRequireDefault(_fmOverlay);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
 //
 //
 //
@@ -9285,7 +9225,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 96 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -9328,7 +9268,7 @@ if (false) {
 }
 
 /***/ }),
-/* 97 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9338,7 +9278,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(193);
+var _index = __webpack_require__(86);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -9350,40 +9290,468 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 98 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(99);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 99 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(100)
+__webpack_require__(87)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(102),
+  __webpack_require__(89),
   /* template */
-  __webpack_require__(103),
+  __webpack_require__(91),
+  /* scopeId */
+  "data-v-6c88d718",
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-item/index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6c88d718", Component.options)
+  } else {
+    hotAPI.reload("data-v-6c88d718", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(88);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("c2621516", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-6c88d718\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-6c88d718\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 88 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.fm-item[data-v-6c88d718] {\n  padding: 0 48px;\n}\n.fm-item[data-v-6c88d718]:active {\n  background-color: rgba(0, 0, 0, 0.05);\n}\n.item-wrapper[data-v-6c88d718] {\n  flex-direction: row;\n  align-items: center;\n}\n.item-border[data-v-6c88d718] {\n  background-color: rgba(0, 0, 0, 0.1);\n  height: 2px;\n}\n.content[data-v-6c88d718] {\n  flex: 1;\n  flex-direction: row;\n}\n.content-text[data-v-6c88d718] {\n  flex: 1;\n  justify-content: center;\n}\n.text-title[data-v-6c88d718] {\n  font-size: 48px;\n  color: #000000;\n  line-height: 57px;\n  text-overflow: ellipsis;\n  lines: 1;\n}\n.text-summary[data-v-6c88d718] {\n  margin-top: 9px;\n  font-size: 36px;\n  color: rgba(0, 0, 0, 0.4);\n  line-height: 42px;\n  text-overflow: ellipsis;\n  lines: 1;\n}\n.text-description[data-v-6c88d718] {\n  flex: 1;\n  margin-top: 9px;\n  font-size: 36px;\n  color: rgba(0, 0, 0, 0.4);\n  line-height: 42px;\n}\n.image[data-v-6c88d718] {\n  margin-right: 48px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-item/index.vue?15cde195"],"names":[],"mappings":";AA+BA;EACA,gBAAA;CACA;AAEA;EACA,sCAAA;CACA;AAEA;EACA,oBAAA;EACA,oBAAA;CACA;AAEA;EACA,qCAAA;EACA,YAAA;CACA;AAEA;EACA,QAAA;EACA,oBAAA;CACA;AAEA;EACA,QAAA;EACA,wBAAA;CACA;AAEA;EACA,gBAAA;EACA,eAAA;EACA,kBAAA;EACA,wBAAA;EACA,SAAA;CACA;AAEA;EACA,gBAAA;EACA,gBAAA;EACA,0BAAA;EACA,kBAAA;EACA,wBAAA;EACA,SAAA;CACA;AAEA;EACA,QAAA;EACA,gBAAA;EACA,gBAAA;EACA,0BAAA;EACA,kBAAA;CACA;AAEA;EACA,mBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/3/9. -->\n<template>\n  <div class=\"fm-item\" @click=\"itemClicked\" @longpress=\"itemLongpress\">\n    <div class=\"item-wrapper\" :style=\"wrapStyle\">\n      <div v-if=\"imgSrc\" class=\"image\">\n        <fm-image :src=\"imgSrc\"\n                  :width=\"scene.imgWidth || imgWidth\"\n                  :height=\"scene.imgHeight || imgHeight\"\n                  :style=\"{ borderRadius: scene.imgRadius || imgRadius }\"\n                  :occupyingColor=\"occupyingColor\"></fm-image>\n      </div>\n      <div class=\"content\">\n        <slot name=\"left\">\n        </slot>\n        <div class=\"content-text\">\n          <slot name=\"title\">\n            <text v-if=\"title\" class=\"text-title\" :style=\"{ color: titleColor }\">{{ title }}</text>\n          </slot>\n          <text v-if=\"summary\" class=\"text-summary\" :style=\"{ color: summaryColor }\">{{ summary }}</text>\n          <text v-if=\"description\" class=\"text-description\" :style=\"{ color: descColor }\">{{ description }}</text>\n        </div>\n        <slot name=\"right\">\n        </slot>\n      </div>\n    </div>\n    <div class=\"item-border\" :style=\"{ marginLeft: imgSrc ? (scene.imgWidth || imgWidth) + 48 : 0 }\"></div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-item {\n    padding: 0 48px;\n  }\n\n  .fm-item:active {\n    background-color: rgba(0, 0, 0, 0.05);\n  }\n\n  .item-wrapper {\n    flex-direction: row;\n    align-items: center;\n  }\n\n  .item-border {\n    background-color: rgba(0, 0, 0, 0.1);\n    height: 2px;\n  }\n\n  .content {\n    flex: 1;\n    flex-direction: row;\n  }\n\n  .content-text {\n    flex: 1;\n    justify-content: center;\n  }\n\n  .text-title {\n    font-size: 48px;\n    color: #000000;\n    line-height: 57px;\n    text-overflow: ellipsis;\n    lines: 1;\n  }\n\n  .text-summary {\n    margin-top: 9px;\n    font-size: 36px;\n    color: rgba(0, 0, 0, 0.4);\n    line-height: 42px;\n    text-overflow: ellipsis;\n    lines: 1;\n  }\n\n  .text-description {\n    flex: 1;\n    margin-top: 9px;\n    font-size: 36px;\n    color: rgba(0, 0, 0, 0.4);\n    line-height: 42px;\n  }\n\n  .image {\n    margin-right: 48px;\n  }\n</style>\n\n<script>\nimport FmImage from '../fm-image';\nimport Scene from './scene';\n\nexport default {\n  name: 'FmItem',\n  components: { FmImage },\n  props: {\n    type: {\n      type: String,\n      default: 'normal'\n    },\n    title: String,\n    summary: String,\n    description: String,\n    imgSrc: String,\n    titleColor: {\n      type: String,\n      default: '#000000'\n    },\n    summaryColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    descColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    imgWidth: {\n      type: Number,\n      default: 96\n    },\n    imgHeight: {\n      type: Number,\n      default: 96\n    },\n    imgRadius: {\n      type: Number,\n      default: 0\n    },\n    imgPosition: {\n      type: String,\n      default: 'center'\n    },\n    paddingTop: {\n      type: Number,\n      default: 54\n    },\n    paddingBottom: {\n      type: Number,\n      default: 54\n    },\n    occupyingColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.1)'\n    }\n  },\n  data: () => ({\n    scene: {}\n  }),\n  computed: {\n    wrapStyle () {\n      const { paddingTop, paddingBottom, imgPosition, scene } = this;\n      return {\n        paddingTop: scene.paddingTop || paddingTop,\n        paddingBottom: scene.paddingBottom || paddingBottom,\n        alignItems: (scene.imgPosition || imgPosition) === 'top' ? 'flex-start' : (scene.imgPosition || imgPosition) === 'bottom' ? 'flex-end' : 'center'\n      };\n    }\n  },\n  watch: {\n    type (val) {\n      this.scene = val;\n    }\n  },\n  created () {\n    this.scene = Scene[this.type];\n  },\n  methods: {\n    itemClicked (e) {\n      this.$emit('fmItemClicked', e);\n    },\n    itemLongpress (e) {\n      this.$emit('fmItemLongpress', e);\n    }\n  }\n};\n</script>\n\n\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _fmImage = __webpack_require__(5);
+
+var _fmImage2 = _interopRequireDefault(_fmImage);
+
+var _scene = __webpack_require__(90);
+
+var _scene2 = _interopRequireDefault(_scene);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+  name: 'FmItem',
+  components: { FmImage: _fmImage2.default },
+  props: {
+    type: {
+      type: String,
+      default: 'normal'
+    },
+    title: String,
+    summary: String,
+    description: String,
+    imgSrc: String,
+    titleColor: {
+      type: String,
+      default: '#000000'
+    },
+    summaryColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, 0.4)'
+    },
+    descColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, 0.4)'
+    },
+    imgWidth: {
+      type: Number,
+      default: 96
+    },
+    imgHeight: {
+      type: Number,
+      default: 96
+    },
+    imgRadius: {
+      type: Number,
+      default: 0
+    },
+    imgPosition: {
+      type: String,
+      default: 'center'
+    },
+    paddingTop: {
+      type: Number,
+      default: 54
+    },
+    paddingBottom: {
+      type: Number,
+      default: 54
+    },
+    occupyingColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, 0.1)'
+    }
+  },
+  data: function data() {
+    return {
+      scene: {}
+    };
+  },
+  computed: {
+    wrapStyle: function wrapStyle() {
+      var paddingTop = this.paddingTop,
+          paddingBottom = this.paddingBottom,
+          imgPosition = this.imgPosition,
+          scene = this.scene;
+
+      return {
+        paddingTop: scene.paddingTop || paddingTop,
+        paddingBottom: scene.paddingBottom || paddingBottom,
+        alignItems: (scene.imgPosition || imgPosition) === 'top' ? 'flex-start' : (scene.imgPosition || imgPosition) === 'bottom' ? 'flex-end' : 'center'
+      };
+    }
+  },
+  watch: {
+    type: function type(val) {
+      this.scene = val;
+    }
+  },
+  created: function created() {
+    this.scene = _scene2.default[this.type];
+  },
+
+  methods: {
+    itemClicked: function itemClicked(e) {
+      this.$emit('fmItemClicked', e);
+    },
+    itemLongpress: function itemLongpress(e) {
+      this.$emit('fmItemLongpress', e);
+    }
+  }
+};
+
+/***/ }),
+/* 90 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  'single': {
+    paddingTop: 48,
+    paddingBottom: 48
+  },
+  'normal': {},
+  'avatar-single': {
+    imgWidth: 120,
+    imgHeight: 120,
+    imgRadius: 60,
+    paddingTop: 48,
+    paddingBottom: 48
+  },
+  'avatar-normal': {
+    imgWidth: 120,
+    imgHeight: 120,
+    imgRadius: 60,
+    paddingTop: 48,
+    paddingBottom: 48,
+    imgPosition: 'top'
+  },
+  'icon-small': {
+    imgWidth: 96,
+    imgHeight: 96,
+    paddingTop: 36,
+    paddingBottom: 36
+  },
+  'icon-middle': {
+    imgWidth: 138,
+    imgHeight: 138,
+    imgRadius: 4,
+    paddingTop: 24,
+    paddingBottom: 24
+  },
+  'icon-large': {
+    imgWidth: 192,
+    imgHeight: 192,
+    paddingTop: 36,
+    paddingBottom: 36
+  }
+};
+
+/***/ }),
+/* 91 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "fm-item",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    on: {
+      "click": _vm.itemClicked,
+      "longpress": _vm.itemLongpress
+    }
+  }, [_c('div', {
+    staticClass: "item-wrapper",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(_vm.wrapStyle))
+  }, [(_vm.imgSrc) ? _c('div', {
+    staticClass: "image",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_c('fm-image', {
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      borderRadius: _vm.scene.imgRadius || _vm.imgRadius
+    })),
+    attrs: {
+      "src": _vm.imgSrc,
+      "width": _vm.scene.imgWidth || _vm.imgWidth,
+      "height": _vm.scene.imgHeight || _vm.imgHeight,
+      "occupyingColor": _vm.occupyingColor
+    }
+  })], 1) : _vm._e(), _vm._v(" "), _c('div', {
+    staticClass: "content",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_vm._t("left"), _vm._v(" "), _c('div', {
+    staticClass: "content-text",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_vm._t("title", [(_vm.title) ? _c('text', {
+    staticClass: "text-title",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      color: _vm.titleColor
+    }))
+  }, [_vm._v(_vm._s(_vm.title))]) : _vm._e()]), _vm._v(" "), (_vm.summary) ? _c('text', {
+    staticClass: "text-summary",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      color: _vm.summaryColor
+    }))
+  }, [_vm._v(_vm._s(_vm.summary))]) : _vm._e(), _vm._v(" "), (_vm.description) ? _c('text', {
+    staticClass: "text-description",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      color: _vm.descColor
+    }))
+  }, [_vm._v(_vm._s(_vm.description))]) : _vm._e()], 2), _vm._v(" "), _vm._t("right")], 2)]), _vm._v(" "), _c('div', {
+    staticClass: "item-border",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      marginLeft: _vm.imgSrc ? (_vm.scene.imgWidth || _vm.imgWidth) + 48 : 0
+    }))
+  })])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-6c88d718", module.exports)
+  }
+}
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(187);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 93 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(94);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 94 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(95)
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(97),
+  /* template */
+  __webpack_require__(98),
   /* scopeId */
   "data-v-47ee1270",
   /* cssModules */
@@ -9410,13 +9778,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 100 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(101);
+var content = __webpack_require__(96);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -9436,7 +9804,7 @@ if(false) {
 }
 
 /***/ }),
-/* 101 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -9444,13 +9812,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-checkbox[data-v-47ee1270] {\n}\n.border[data-v-47ee1270] {\n  margin: 0 48px;\n  background-color: #e6e6e6;\n  height: 1px;\n}\n.checkbox-content[data-v-47ee1270] {\n  position: relative;\n  flex: 1;\n  flex-direction: row;\n  padding: 51px 96px;\n  align-items: center;\n  justify-content: space-between;\n}\n.checkbox-content[data-v-47ee1270]:active {\n  background-color: #eeeeee;\n}\n.label[data-v-47ee1270] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 48px;\n  line-height: 54px;\n  justify-content: center;\n}\n.checked[data-v-47ee1270] {\n  color: #198ded;\n}\n.icon-wrap[data-v-47ee1270] {\n  position: absolute;\n  right: 102px;\n  top: 0px;\n  bottom: 0px;\n  opacity: 1;\n  overflow: hidden;\n  padding: 40px 0;\n  width: 72px;\n}\n.icon[data-v-47ee1270] {\n  font-size: 72px;\n  color: #198ded;\n  font-weight: bold;\n  width: 72px;\n  height: 64px;\n  justify-content: center;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-checkbox/index.vue?b01f3cd6"],"names":[],"mappings":";AAgBA;CACA;AAEA;EACA,eAAA;EACA,0BAAA;EACA,YAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,oBAAA;EACA,mBAAA;EACA,oBAAA;EACA,+BAAA;CACA;AAEA;EACA,0BAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;EACA,wBAAA;CACA;AAEA;EACA,eAAA;CACA;AAEA;EACA,mBAAA;EACA,aAAA;EACA,SAAA;EACA,YAAA;EACA,WAAA;EACA,iBAAA;EACA,gBAAA;EACA,YAAA;CACA;AAEA;EACA,gBAAA;EACA,eAAA;EACA,kBAAA;EACA,YAAA;EACA,aAAA;EACA,wBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"fm-checkbox\">\n    <div class=\"checkbox-content\" @click=\"toggleChecked\">\n      <text class=\"label\"  v-if=\"$slots.default || value\" :style=\"{ color: _checked ? '#198DED': '#000000' }\">\n        <slot></slot>\n      <template v-if=\"!$slots.default\">{{ value }}</template>\n      </text>\n      <div class=\"icon-wrap\">\n        <fm-icon class=\"icon\" ref=\"fm-icon\" :style=\"{ width: isChecked ? 72 : 1 }\" name=\"wancheng\" :icon-style=\"48\" color=\"#0A73C9\" />\n      </div>\n    </div>\n    <div class=\"border\"></div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-checkbox {\n  }\n\n  .border {\n    margin: 0 48px;\n    background-color: #e6e6e6;\n    height: 1px;\n  }\n\n  .checkbox-content {\n    position: relative;\n    flex: 1;\n    flex-direction: row;\n    padding: 51px 96px;\n    align-items: center;\n    justify-content: space-between;\n  }\n\n  .checkbox-content:active {\n    background-color: #eeeeee;\n  }\n\n  .label {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 54px;\n    justify-content: center;\n  }\n\n  .checked {\n    color: #198ded;\n  }\n\n  .icon-wrap {\n    position: absolute;\n    right: 102px;\n    top: 0px;\n    bottom: 0px;\n    opacity: 1;\n    overflow: hidden;\n    padding: 40px 0;\n    width: 72px;\n  }\n\n  .icon {\n    font-size: 72px;\n    color: #198ded;\n    font-weight: bold;\n    width: 72px;\n    height: 64px;\n    justify-content: center;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nimport FmIcon from '../fm-icon';\nexport default {\n  name: 'FmCheckbox',\n  components: { FmIcon },\n  props: {\n    value: {\n      type: String,\n      default: ''\n    },\n    checked: Boolean,\n    disabled: Boolean\n  },\n  data: () => ({\n    isChecked: false,\n    selfChecked: false\n  }),\n  computed: {\n    _checked: {\n      get () {\n        return this.isGroup\n          ? this.store.indexOf(this.value) !== -1\n          : this.selfChecked;\n      },\n      set (val) {\n        if (this.isGroup) {\n          if (val) {\n            this.isLimitExceeded = false;\n            this._checkboxGroup.max !== undefined &&\n                this.store.length >= this._checkboxGroup.max &&\n                (this.isLimitExceeded = true);\n\n            this.isLimitExceeded === false &&\n                (this.addToStore() || this.appearIcon(val));\n          } else {\n            this.isLimitExceeded = false;\n            this._checkboxGroup.min !== undefined &&\n                this.store.length <= this._checkboxGroup.min &&\n                (this.isLimitExceeded = true);\n\n            this.isLimitExceeded === false &&\n                (this.deleteFromStore() || this.appearIcon(val));\n          }\n        } else {\n          this.selfChecked = val;\n          this.appearIcon(val);\n        }\n        this.$emit('fmCheckboxChecked', { value: this.value, checked: val });\n      }\n    },\n    isGroup () {\n      let parent = this.$parent;\n      while (parent) {\n        if (parent.$options.componentName !== 'FmCheckListGroup') {\n          parent = parent.$parent;\n        } else {\n          this._checkboxGroup = parent;\n          return true;\n        }\n      }\n      return false;\n    },\n    store () {\n      return this._checkboxGroup ? this._checkboxGroup.value : this.value;\n    }\n  },\n  methods: {\n    toggleChecked () {\n      !this.disabled && (this._checked = !this._checked);\n    },\n    appearIcon (bool, duration = 150) {\n      const iconEl = this.$refs['fm-icon'];\n      if (!iconEl) {\n        return;\n      }\n      const style = bool\n        ? {\n          opacity: 1,\n          width: 72\n        }\n        : {\n          opacity: 0\n        };\n      animation.transition(\n        iconEl,\n        {\n          styles: style,\n          duration,\n          delay: 0,\n          timingFunction: 'ease-out'\n        },\n        () => {\n          this.isChecked = bool;\n        }\n      );\n    },\n    addToStore () {\n      if (Array.isArray(this.store) && this.store.indexOf(this.value) === -1) {\n        this.store.push(this.value);\n      }\n    },\n    deleteFromStore () {\n      if (Array.isArray(this.store) && this.store.indexOf(this.value) !== -1) {\n        this.store.splice(this.store.indexOf(this.value), 1);\n      }\n    }\n  },\n  created () {\n    this.isGroup;\n    this.$slots.default && (this.value = this.$slots.default[0].text);\n    this.checked &&\n        (this.addToStore() ||\n          ((this.selfChecked = true) && (this.isChecked = true)));\n    this._checked && ((this.selfChecked = true) && (this.isChecked = true));\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-checkbox[data-v-47ee1270] {\n}\n.border[data-v-47ee1270] {\n  margin: 0 48px;\n  background-color: #e6e6e6;\n  height: 1px;\n}\n.checkbox-content[data-v-47ee1270] {\n  position: relative;\n  flex: 1;\n  flex-direction: row;\n  padding: 51px 96px;\n  align-items: center;\n  justify-content: space-between;\n}\n.checkbox-content[data-v-47ee1270]:active {\n  background-color: #eeeeee;\n}\n.label[data-v-47ee1270] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 48px;\n  line-height: 54px;\n  justify-content: center;\n}\n.checked[data-v-47ee1270] {\n  color: #198ded;\n}\n.icon-wrap[data-v-47ee1270] {\n  position: absolute;\n  right: 102px;\n  top: 0px;\n  bottom: 0px;\n  opacity: 1;\n  overflow: hidden;\n  padding: 40px 0;\n  width: 72px;\n}\n.icon[data-v-47ee1270] {\n  font-size: 72px;\n  color: #198ded;\n  font-weight: bold;\n  width: 72px;\n  height: 64px;\n  justify-content: center;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-checkbox/index.vue?3497f420"],"names":[],"mappings":";AAkBA;CACA;AAEA;EACA,eAAA;EACA,0BAAA;EACA,YAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,oBAAA;EACA,mBAAA;EACA,oBAAA;EACA,+BAAA;CACA;AAEA;EACA,0BAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;EACA,wBAAA;CACA;AAEA;EACA,eAAA;CACA;AAEA;EACA,mBAAA;EACA,aAAA;EACA,SAAA;EACA,YAAA;EACA,WAAA;EACA,iBAAA;EACA,gBAAA;EACA,YAAA;CACA;AAEA;EACA,gBAAA;EACA,eAAA;EACA,kBAAA;EACA,YAAA;EACA,aAAA;EACA,wBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Updated by Yanjiie on 2018/04/12. -->\n<template>\n  <div class=\"fm-checkbox\">\n    <div class=\"checkbox-content\" @click=\"toggleChecked\">\n      <text class=\"label\"  v-if=\"$slots.default || value\" :style=\"{ color: _checked ? '#198DED': '#000000' }\">\n        <slot></slot>\n      <template v-if=\"!$slots.default\">{{ value }}</template>\n      </text>\n      <div class=\"icon-wrap\">\n        <fm-icon class=\"icon\" ref=\"fm-icon\" :style=\"{ width: isChecked ? 72 : 1 }\" name=\"wancheng\" :icon-style=\"48\" color=\"#0A73C9\" />\n      </div>\n    </div>\n    <div class=\"border\"></div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-checkbox {\n  }\n\n  .border {\n    margin: 0 48px;\n    background-color: #e6e6e6;\n    height: 1px;\n  }\n\n  .checkbox-content {\n    position: relative;\n    flex: 1;\n    flex-direction: row;\n    padding: 51px 96px;\n    align-items: center;\n    justify-content: space-between;\n  }\n\n  .checkbox-content:active {\n    background-color: #eeeeee;\n  }\n\n  .label {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 54px;\n    justify-content: center;\n  }\n\n  .checked {\n    color: #198ded;\n  }\n\n  .icon-wrap {\n    position: absolute;\n    right: 102px;\n    top: 0px;\n    bottom: 0px;\n    opacity: 1;\n    overflow: hidden;\n    padding: 40px 0;\n    width: 72px;\n  }\n\n  .icon {\n    font-size: 72px;\n    color: #198ded;\n    font-weight: bold;\n    width: 72px;\n    height: 64px;\n    justify-content: center;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nimport FmIcon from '../fm-icon';\nexport default {\n  name: 'FmCheckbox',\n  components: { FmIcon },\n  props: {\n    value: {\n      type: String,\n      default: ''\n    },\n    checked: Boolean,\n    disabled: Boolean\n  },\n  data: () => ({\n    isChecked: false,\n    selfChecked: false\n  }),\n  computed: {\n    _checked: {\n      get () {\n        return this.isGroup\n          ? this.store.indexOf(this.value) !== -1\n          : this.selfChecked;\n      },\n      set (val) {\n        if (this.isGroup) {\n          if (val) {\n            this.isLimitExceeded = false;\n            this._checkboxGroup.max !== undefined &&\n                this.store.length >= this._checkboxGroup.max &&\n                (this.isLimitExceeded = true);\n\n            this.isLimitExceeded === false &&\n                (this.addToStore() || this.appearIcon(val));\n          } else {\n            this.isLimitExceeded = false;\n            this._checkboxGroup.min !== undefined &&\n                this.store.length <= this._checkboxGroup.min &&\n                (this.isLimitExceeded = true);\n\n            this.isLimitExceeded === false &&\n                (this.deleteFromStore() || this.appearIcon(val));\n          }\n        } else {\n          this.selfChecked = val;\n          this.appearIcon(val);\n        }\n        this.$emit('fmCheckboxChecked', { value: this.value, checked: val });\n      }\n    },\n    isGroup () {\n      let parent = this.$parent;\n      while (parent) {\n        if (parent.$options.componentName !== 'FmCheckListGroup') {\n          parent = parent.$parent;\n        } else {\n          this._checkboxGroup = parent;\n          return true;\n        }\n      }\n      return false;\n    },\n    store () {\n      return this._checkboxGroup ? this._checkboxGroup.value : this.value;\n    }\n  },\n  methods: {\n    toggleChecked () {\n      !this.disabled && (this._checked = !this._checked);\n    },\n    appearIcon (bool, duration = 150) {\n      const iconEl = this.$refs['fm-icon'];\n      if (!iconEl) {\n        return;\n      }\n      const style = bool\n        ? {\n          opacity: 1,\n          width: 72\n        }\n        : {\n          opacity: 0\n        };\n      animation.transition(\n        iconEl,\n        {\n          styles: style,\n          duration,\n          delay: 0,\n          timingFunction: 'ease-out'\n        },\n        () => {\n          this.isChecked = bool;\n        }\n      );\n    },\n    addToStore () {\n      if (Array.isArray(this.store) && this.store.indexOf(this.value) === -1) {\n        this.store.push(this.value);\n      }\n    },\n    deleteFromStore () {\n      if (Array.isArray(this.store) && this.store.indexOf(this.value) !== -1) {\n        this.store.splice(this.store.indexOf(this.value), 1);\n      }\n    }\n  },\n  created () {\n    this.isGroup;\n    this.$slots.default && (this.value = this.$slots.default[0].text);\n    this.checked &&\n        (this.addToStore() ||\n          ((this.selfChecked = true) && (this.isChecked = true)));\n    this._checked && ((this.selfChecked = true) && (this.isChecked = true));\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 102 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9460,12 +9828,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmIcon = __webpack_require__(4);
+var _fmIcon = __webpack_require__(6);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
 //
 //
 //
@@ -9645,7 +10015,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 103 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -9697,7 +10067,7 @@ if (false) {
 }
 
 /***/ }),
-/* 104 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9707,7 +10077,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(105);
+var _index = __webpack_require__(100);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -9719,14 +10089,14 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 105 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(106),
+  __webpack_require__(101),
   /* template */
-  __webpack_require__(107),
+  __webpack_require__(102),
   /* scopeId */
   null,
   /* cssModules */
@@ -9753,7 +10123,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 106 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9762,6 +10132,8 @@ module.exports = Component.exports
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+//
+//
 //
 //
 //
@@ -9791,7 +10163,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 107 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -9810,7 +10182,7 @@ if (false) {
 }
 
 /***/ }),
-/* 108 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9820,7 +10192,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(218);
+var _index = __webpack_require__(104);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -9830,6 +10202,355 @@ Object.defineProperty(exports, 'default', {
 });
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 104 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(105)
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(107),
+  /* template */
+  __webpack_require__(108),
+  /* scopeId */
+  "data-v-665f9fc0",
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-titlebar/index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-665f9fc0", Component.options)
+  } else {
+    hotAPI.reload("data-v-665f9fc0", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 105 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(106);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("430b124e", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-665f9fc0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-665f9fc0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 106 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.fm-status-bar[data-v-665f9fc0] {\n  height: 66px;\n  width: 1080px;\n}\n.fm-title-bar[data-v-665f9fc0] {\n  padding-left: 48px;\n  width: 1080px;\n  height: 144px;\n  flex-direction: row;\n  align-items: center;\n  justify-content: space-between;\n}\n.title-bar-back[data-v-665f9fc0] {\n  margin-left: -18px;\n  margin-right: 45px;\n  line-height: 72px;\n  height: 72px;\n  font-weight: 700;\n}\n.title-wrap[data-v-665f9fc0] {\n  flex: 1;\n}\n.title-text[data-v-665f9fc0] {\n  flex: 1;\n  text-overflow: ellipsis;\n  lines: 1;\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 48px;\n  line-height: 57px;\n  color: rgba(0, 0, 0, 0.6);\n}\n.btn-icon[data-v-665f9fc0] {\n  margin-right: 48px;\n  color: #198DED;\n  line-height: 72px;\n  height: 72px;\n}\n.btn-text[data-v-665f9fc0] {\n  margin-right: 48px;\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 48px;\n  line-height: 57px;\n  color: #198DED;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-titlebar/index.vue?70579d02"],"names":[],"mappings":";AAyBA;EACA,aAAA;EACA,cAAA;CACA;AAEA;EACA,mBAAA;EACA,cAAA;EACA,cAAA;EACA,oBAAA;EACA,oBAAA;EACA,+BAAA;CACA;AAEA;EACA,mBAAA;EACA,mBAAA;EACA,kBAAA;EACA,aAAA;EACA,iBAAA;CACA;AAEA;EACA,QAAA;CACA;AAEA;EACA,QAAA;EACA,wBAAA;EACA,SAAA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;EACA,0BAAA;CACA;AAEA;EACA,mBAAA;EACA,eAAA;EACA,kBAAA;EACA,aAAA;CACA;AAEA;EACA,mBAAA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;EACA,eAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div v-if=\"show\">\n    <div class=\"fm-status-bar\" v-if=\"statusbar\" :style=\"{ backgroundColor: backgroundColor }\"></div>\n    <div class=\"fm-title-bar\" :style=\"barStyle\">\n      <slot name=\"left\" v-if=\"hasPrev\">\n        <fm-icon @fmIconClicked=\"onBack\" class=\"title-bar-back\" name=\"fanhui\" :icon-style=\"72\" :color=\"leftColor\" />\n      </slot>\n      <div class=\"title-wrap\">\n        <slot name=\"middle\">\n          <text class=\"title-text\" :style=\"{ color: titleColor }\">{{ title }}</text>\n        </slot>\n      </div>\n      <slot name=\"right\">\n        <div v-for=\"(item, idx) in btns\" :key=\"idx\">\n          <fm-icon class=\"btn-icon\" v-if=\"item.type === 'icon'\" :name=\"item.value\" :style=\"item.color ? { color:item.color } : {}\" :icon-style=\"72\" @fmIconClicked=\"rightBtnClick(idx, item)\"/>\n          <text class=\"btn-text\" v-else :style=\"item.color ? { color:item.color } : {}\" @click=\"rightBtnClick(idx, item)\">{{ item.value }}</text>\n        </div>\n      </slot>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-status-bar {\n    height: 66px;\n    width: 1080px;\n  }\n\n  .fm-title-bar {\n    padding-left: 48px;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n  }\n\n  .title-bar-back {\n    margin-left: -18px;\n    margin-right: 45px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n  }\n\n  .title-wrap {\n    flex: 1;\n  }\n\n  .title-text {\n    flex: 1;\n    text-overflow: ellipsis;\n    lines: 1;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 57px;\n    color: rgba(0, 0, 0, 0.6);\n  }\n\n  .btn-icon {\n    margin-right: 48px;\n    color: #198DED;\n    line-height: 72px;\n    height: 72px;\n  }\n\n  .btn-text {\n    margin-right: 48px;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 57px;\n    color: #198DED;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\nconst Navigator = weex.requireModule('navigator');\n\nexport default {\n  name: 'FmTitlebar',\n  mixins: [Locale],\n  components: { FmIcon },\n  props: {\n    title: {\n      type: String,\n      default () {\n        return t('el.titlebar.title');\n      }\n    },\n    titleColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.6)'\n    },\n    statusbar: {\n      type: Boolean,\n      default: false\n    },\n    useDefaultReturn: {\n      type: Boolean,\n      default: true\n    },\n    hasPrev: {\n      type: Boolean,\n      default: true\n    },\n    borderStyle: {\n      type: Object,\n      default: () => ({})\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    leftColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.6)'\n    },\n    rightBtns: [Object, Array],\n    rightText: String,\n    show: {\n      type: Boolean,\n      default: true\n    }\n  },\n  computed: {\n    btns () {\n      const { rightBtns, rightText } = this;\n      let btns = [];\n      if (Array.isArray(rightBtns)) {\n        btns = btns.concat(rightBtns.slice(0, 3));\n      } else if (Object.prototype.toString.call(rightBtns).slice(8, -1).toLowerCase() === 'object') {\n        btns.push(rightBtns);\n      } else if (rightText) {\n        btns.push({ type: 'text', value: rightText });\n      }\n      return btns;\n    },\n    barStyle () {\n      const style = {\n        borderBottomStyle: 'solid',\n        borderBottomWidth: `${2}px`,\n        borderBottomColor: 'rgba(0, 0, 0, 0.1)',\n        paddingRight: `${this.rightBtns ? 0 : 48}px`\n      };\n      Object.assign(style, this.borderStyle);\n      style.backgroundColor = this.backgroundColor;\n      return style;\n    }\n  },\n  methods: {\n    onBack (e) {\n      const self = this;\n      if (self.useDefaultReturn) {\n        Navigator.pop({}, e => {\n        });\n      }\n      self.$emit('fmTitlebarLeftBtnClicked', {});\n    },\n    rightBtnClick (idx, item) {\n      this.$emit('fmTitlebarRightBtnClicked', { idx: idx, value: item });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+/* 107 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _fmIcon = __webpack_require__(6);
+
+var _fmIcon2 = _interopRequireDefault(_fmIcon);
+
+var _locale = __webpack_require__(34);
+
+var _locale2 = _interopRequireDefault(_locale);
+
+var _locale3 = __webpack_require__(20);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Navigator = weex.requireModule('navigator'); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+  name: 'FmTitlebar',
+  mixins: [_locale2.default],
+  components: { FmIcon: _fmIcon2.default },
+  props: {
+    title: {
+      type: String,
+      default: function _default() {
+        return (0, _locale3.t)('el.titlebar.title');
+      }
+    },
+    titleColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, 0.6)'
+    },
+    statusbar: {
+      type: Boolean,
+      default: false
+    },
+    useDefaultReturn: {
+      type: Boolean,
+      default: true
+    },
+    hasPrev: {
+      type: Boolean,
+      default: true
+    },
+    borderStyle: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
+    backgroundColor: {
+      type: String,
+      default: '#FFFFFF'
+    },
+    leftColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, 0.6)'
+    },
+    rightBtns: [Object, Array],
+    rightText: String,
+    show: {
+      type: Boolean,
+      default: true
+    }
+  },
+  computed: {
+    btns: function btns() {
+      var rightBtns = this.rightBtns,
+          rightText = this.rightText;
+
+      var btns = [];
+      if (Array.isArray(rightBtns)) {
+        btns = btns.concat(rightBtns.slice(0, 3));
+      } else if (Object.prototype.toString.call(rightBtns).slice(8, -1).toLowerCase() === 'object') {
+        btns.push(rightBtns);
+      } else if (rightText) {
+        btns.push({ type: 'text', value: rightText });
+      }
+      return btns;
+    },
+    barStyle: function barStyle() {
+      var style = {
+        borderBottomStyle: 'solid',
+        borderBottomWidth: 2 + 'px',
+        borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+        paddingRight: (this.rightBtns ? 0 : 48) + 'px'
+      };
+      Object.assign(style, this.borderStyle);
+      style.backgroundColor = this.backgroundColor;
+      return style;
+    }
+  },
+  methods: {
+    onBack: function onBack(e) {
+      var self = this;
+      if (self.useDefaultReturn) {
+        Navigator.pop({}, function (e) {});
+      }
+      self.$emit('fmTitlebarLeftBtnClicked', {});
+    },
+    rightBtnClick: function rightBtnClick(idx, item) {
+      this.$emit('fmTitlebarRightBtnClicked', { idx: idx, value: item });
+    }
+  }
+};
+
+/***/ }),
+/* 108 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return (_vm.show) ? _c('div', [(_vm.statusbar) ? _c('div', {
+    staticClass: "fm-status-bar",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      backgroundColor: _vm.backgroundColor
+    }))
+  }) : _vm._e(), _vm._v(" "), _c('div', {
+    staticClass: "fm-title-bar",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(_vm.barStyle))
+  }, [(_vm.hasPrev) ? _vm._t("left", [_c('fm-icon', {
+    staticClass: "title-bar-back",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "name": "fanhui",
+      "icon-style": 72,
+      "color": _vm.leftColor
+    },
+    on: {
+      "fmIconClicked": _vm.onBack
+    }
+  })]) : _vm._e(), _vm._v(" "), _c('div', {
+    staticClass: "title-wrap",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_vm._t("middle", [_c('text', {
+    staticClass: "title-text",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      color: _vm.titleColor
+    }))
+  }, [_vm._v(_vm._s(_vm.title))])])], 2), _vm._v(" "), _vm._t("right", _vm._l((_vm.btns), function(item, idx) {
+    return _c('div', {
+      key: idx,
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(undefined))
+    }, [(item.type === 'icon') ? _c('fm-icon', {
+      staticClass: "btn-icon",
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(item.color ? {
+        color: item.color
+      } : {})),
+      attrs: {
+        "name": item.value,
+        "icon-style": 72
+      },
+      on: {
+        "fmIconClicked": function($event) {
+          _vm.rightBtnClick(idx, item)
+        }
+      }
+    }) : _c('text', {
+      staticClass: "btn-text",
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(item.color ? {
+        color: item.color
+      } : {})),
+      on: {
+        "click": function($event) {
+          _vm.rightBtnClick(idx, item)
+        }
+      }
+    }, [_vm._v(_vm._s(item.value))])], 1)
+  }))], 2)]) : _vm._e()
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-665f9fc0", module.exports)
+  }
+}
 
 /***/ }),
 /* 109 */
@@ -9842,7 +10563,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(110);
+var _index = __webpack_require__(206);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -9857,15 +10578,37 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(111);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 111 */
+/***/ (function(module, exports, __webpack_require__) {
+
 
 /* styles */
-__webpack_require__(111)
+__webpack_require__(112)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(113),
+  __webpack_require__(114),
   /* template */
-  __webpack_require__(119),
+  __webpack_require__(120),
   /* scopeId */
   "data-v-1595dfba",
   /* cssModules */
@@ -9892,13 +10635,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(112);
+var content = __webpack_require__(113);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -9918,7 +10661,7 @@ if(false) {
 }
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -9926,13 +10669,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.tabbar-item[data-v-1595dfba] {\n  flex: 1;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tabbar/index.vue?71df504e"],"names":[],"mappings":";AAaA;EACA,QAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 2018/03/12. -->\n<template>\n  <fm-footer class=\"fm-tabbar\" :background-color=\"backgroundColor\" padding-size=\"middle\">\n    <fm-tabbar-item class=\"tabbar-item\"\n                    v-if=\"!$slots.default\"\n                    v-for=\"(item, index) in items\"\n                    :key=\"index\"\n                    v-bind=\"Object.assign({}, customStyles, item)\"></fm-tabbar-item>\n    <slot />\n  </fm-footer>\n</template>\n\n<style scoped>\n  .tabbar-item {\n    flex: 1;\n  }\n</style>\n\n<script>\nimport FmFooter from '../fm-footer';\nimport FmTabbarItem from '../fm-tabbar-item';\nexport default {\n  name: 'FmTabbar',\n  components: { FmFooter, FmTabbarItem },\n  props: {\n    activeIndex: {\n      type: Number,\n      default: -1\n    },\n    items: {\n      type: Array,\n      default: () => ([])\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    customStyles: {\n      type: Object,\n      default: () => ({})\n    }\n  },\n  data: () => ({\n    renderItems: []\n  }),\n  watch: {\n    renderItems () {\n      this.setActiveItem();\n    },\n    activeIndex () {\n      this.setActiveItem();\n    }\n  },\n  methods: {\n    setActiveItem () {\n      this.renderItems.forEach((item, index) => {\n        item.active = index === this.activeIndex;\n      });\n    },\n    onChange (index) {\n      this.$emit('fmTabbarSelected', { index });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.tabbar-item[data-v-1595dfba] {\n  flex: 1;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tabbar/index.vue?226da3a2"],"names":[],"mappings":";AAcA;EACA,QAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/03/12. -->\n<template>\n  <fm-footer class=\"fm-tabbar\" :background-color=\"backgroundColor\" padding-size=\"middle\">\n    <fm-tabbar-item class=\"tabbar-item\"\n                    v-if=\"!$slots.default\"\n                    v-for=\"(item, index) in items\"\n                    :key=\"index\"\n                    v-bind=\"Object.assign({}, customStyles, item)\"></fm-tabbar-item>\n    <slot />\n  </fm-footer>\n</template>\n\n<style scoped>\n  .tabbar-item {\n    flex: 1;\n  }\n</style>\n\n<script>\nimport FmFooter from '../fm-footer';\nimport FmTabbarItem from '../fm-tabbar-item';\nexport default {\n  name: 'FmTabbar',\n  components: { FmFooter, FmTabbarItem },\n  props: {\n    activeIndex: {\n      type: Number,\n      default: -1\n    },\n    items: {\n      type: Array,\n      default: () => ([])\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    customStyles: {\n      type: Object,\n      default: () => ({})\n    }\n  },\n  data: () => ({\n    renderItems: []\n  }),\n  watch: {\n    renderItems () {\n      this.setActiveItem();\n    },\n    activeIndex () {\n      this.setActiveItem();\n    }\n  },\n  methods: {\n    setActiveItem () {\n      this.renderItems.forEach((item, index) => {\n        item.active = index === this.activeIndex;\n      });\n    },\n    onChange (index) {\n      this.$emit('fmTabbarSelected', { index });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9942,16 +10685,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmFooter = __webpack_require__(48);
+var _fmFooter = __webpack_require__(43);
 
 var _fmFooter2 = _interopRequireDefault(_fmFooter);
 
-var _fmTabbarItem = __webpack_require__(80);
+var _fmTabbarItem = __webpack_require__(63);
 
 var _fmTabbarItem2 = _interopRequireDefault(_fmTabbarItem);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
 //
 //
 //
@@ -10024,18 +10768,18 @@ exports.default = {
 };
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(115)
+__webpack_require__(116)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(117),
-  /* template */
   __webpack_require__(118),
+  /* template */
+  __webpack_require__(119),
   /* scopeId */
   "data-v-32d8605a",
   /* cssModules */
@@ -10062,13 +10806,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(116);
+var content = __webpack_require__(117);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -10088,7 +10832,7 @@ if(false) {
 }
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -10096,13 +10840,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-tabbar-item[data-v-32d8605a] {\n  height: 144px;\n  align-items: center;\n  justify-content: center;\n}\n.fm-tabbar-item[data-v-32d8605a]:active {\n  background-color: rgba(0, 0, 0, 0.05);\n}\n.icon-wrap[data-v-32d8605a] {\n  padding-top: 8px;\n  padding-left: 30px;\n  padding-right: 30px;\n  margin-top: -8px;\n}\n.item-icon[data-v-32d8605a] {\n  margin-bottom: 6px;\n  font-size: 72px;\n  height: 72px;\n  font-family: flymeicon;\n}\n.item-title[data-v-32d8605a] {\n  font-size: 30px;\n  line-height: 36px;\n}\n.dot[data-v-32d8605a] {\n  position: absolute;\n  top: 8px;\n  right: 30px;\n  width: 18px;\n  height: 18px;\n  border-radius: 9px;\n  background-color: #EF2828;\n  box-shadow: 0 0 0 3px #FFFFFF;\n}\n.badge[data-v-32d8605a] {\n  position: absolute;\n  justify-content: center;\n  top: 0;\n  left: 69px;\n  border-width: 3px;\n  border-color: #FFFFFF;\n  border-radius: 24px;\n}\n.badge-msg[data-v-32d8605a] {\n  line-height: 36px;\n  padding: 0 6px;\n  font-size: 24px;\n  color: #FFFFFF;\n  background-color: #EF2828;\n  border-radius: 24px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tabbar-item/index.vue?7254e2b2"],"names":[],"mappings":";AAoBA;EACA,cAAA;EACA,oBAAA;EACA,wBAAA;CACA;AAEA;EACA,sCAAA;CACA;AAEA;EACA,iBAAA;EACA,mBAAA;EACA,oBAAA;EACA,iBAAA;CACA;AAEA;EACA,mBAAA;EACA,gBAAA;EACA,aAAA;EACA,uBAAA;CACA;AAEA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,mBAAA;EACA,SAAA;EACA,YAAA;EACA,YAAA;EACA,aAAA;EACA,mBAAA;EACA,0BAAA;EACA,8BAAA;CACA;AAEA;EACA,mBAAA;EACA,wBAAA;EACA,OAAA;EACA,WAAA;EACA,kBAAA;EACA,sBAAA;EACA,oBAAA;CACA;AAEA;EACA,kBAAA;EACA,eAAA;EACA,gBAAA;EACA,eAAA;EACA,0BAAA;EACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 2018/03/12. -->\n<template>\n  <div class=\"fm-tabbar-item\" @click=\"onClick\">\n    <div class=\"icon-wrap\">\n      <slot name=\"icon\" :active=\"active\">\n        <text class=\"item-icon\"\n              :style=\"{ color: !active ? iconColor : (activeIconColor || activeColor)}\">{{ getIcon }}</text>\n      </slot>\n      <div class=\"dot\" v-if=\"dot\"></div>\n      <div class=\"badge\" v-if=\"!dot && badge\">\n        <text class=\"badge-msg\">{{ badge }}</text>\n      </div>\n    </div>\n    <slot name=\"title\" :active=\"active\">\n      <text class=\"item-title\" :style=\"{ color: !active ? titleColor : activeColor }\"><slot></slot><template v-if=\"!$slots.default\">{{ title }}</template></text>\n    </slot>\n  </div>\n</template>\n\n<style scoped>\n  .fm-tabbar-item {\n    height: 144px;\n    align-items: center;\n    justify-content: center;\n  }\n\n  .fm-tabbar-item:active {\n    background-color: rgba(0, 0, 0, 0.05);\n  }\n\n  .icon-wrap {\n    padding-top: 8px;\n    padding-left: 30px;\n    padding-right: 30px;\n    margin-top: -8px;\n  }\n\n  .item-icon {\n    margin-bottom: 6px;\n    font-size: 72px;\n    height: 72px;\n    font-family: flymeicon;\n  }\n\n  .item-title {\n    font-size: 30px;\n    line-height: 36px;\n  }\n\n  .dot {\n    position: absolute;\n    top: 8px;\n    right: 30px;\n    width: 18px;\n    height: 18px;\n    border-radius: 9px;\n    background-color: #EF2828;\n    box-shadow: 0 0 0 3px #FFFFFF;\n  }\n\n  .badge {\n    position: absolute;\n    justify-content: center;\n    top: 0;\n    left: 69px;\n    border-width: 3px;\n    border-color: #FFFFFF;\n    border-radius: 24px;\n  }\n\n  .badge-msg {\n    line-height: 36px;\n    padding: 0 6px;\n    font-size: 24px;\n    color: #FFFFFF;\n    background-color: #EF2828;\n    border-radius: 24px;\n  }\n</style>\n\n<script>\nconst he = require('he');\nconst dom = weex.requireModule('dom');\nimport Icon from '../fm-icon/map';\nimport FmIcon from '../fm-icon';\nexport default {\n  name: 'FmTabbarItem',\n  components: { FmIcon },\n  props: {\n    title: {\n      type: String,\n      default: ''\n    },\n    titleColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.75)'\n    },\n    activeColor: {\n      type: String,\n      default: '#198DED'\n    },\n    icon: {\n      type: String,\n      default: ''\n    },\n    iconColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.6)'\n    },\n    activeIconColor: {\n      type: String,\n      default: ''\n    },\n    badge: {\n      type: [Number, String],\n      default: ''\n    },\n    dot: Boolean\n  },\n  computed: {\n    getIcon () {\n      const { Icon, icon } = this;\n      return he.decode(Icon[icon] || Icon['wancheng']);\n    }\n  },\n  data: () => ({\n    active: false,\n    Icon\n  }),\n  beforeCreate () {\n    dom.addRule('fontFace', {\n      'fontFamily': 'flymeicon',\n      'src': \"url('http://design.flyme.cn/weexui/assets/iconfont.ttf')\"\n    });\n\n    let parent = this.$parent;\n    while (parent) {\n      if (parent.$options.name !== 'FmTabbar') {\n        parent = parent.$parent;\n      } else {\n        this._parent = parent;\n        break;\n      }\n    }\n    this._parent.renderItems.push(this);\n  },\n  created () {\n    this.$slots.default && (this.title = this.$slots.default[0].text);\n  },\n  destroyed () {\n    this._parent.renderItems.splice(this._parent.items.indexOf(this), 1);\n  },\n  methods: {\n    onClick (e) {\n      this._parent.onChange(this._parent.renderItems.indexOf(this));\n      this.$emit('select', this.index);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-tabbar-item[data-v-32d8605a] {\n  height: 144px;\n  align-items: center;\n  justify-content: center;\n}\n.fm-tabbar-item[data-v-32d8605a]:active {\n  background-color: rgba(0, 0, 0, 0.05);\n}\n.icon-wrap[data-v-32d8605a] {\n  padding-top: 8px;\n  padding-left: 30px;\n  padding-right: 30px;\n  margin-top: -8px;\n}\n.item-icon[data-v-32d8605a] {\n  margin-bottom: 6px;\n  font-size: 72px;\n  height: 72px;\n  font-family: flymeicon;\n}\n.item-title[data-v-32d8605a] {\n  font-size: 30px;\n  line-height: 36px;\n}\n.dot[data-v-32d8605a] {\n  position: absolute;\n  top: 8px;\n  right: 30px;\n  width: 18px;\n  height: 18px;\n  border-radius: 9px;\n  background-color: #EF2828;\n  box-shadow: 0 0 0 3px #FFFFFF;\n}\n.badge[data-v-32d8605a] {\n  position: absolute;\n  justify-content: center;\n  top: 0;\n  left: 69px;\n  border-width: 3px;\n  border-color: #FFFFFF;\n  border-radius: 24px;\n}\n.badge-msg[data-v-32d8605a] {\n  line-height: 36px;\n  padding: 0 6px;\n  font-size: 24px;\n  color: #FFFFFF;\n  background-color: #EF2828;\n  border-radius: 24px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tabbar-item/index.vue?2d4c5709"],"names":[],"mappings":";AAqBA;EACA,cAAA;EACA,oBAAA;EACA,wBAAA;CACA;AAEA;EACA,sCAAA;CACA;AAEA;EACA,iBAAA;EACA,mBAAA;EACA,oBAAA;EACA,iBAAA;CACA;AAEA;EACA,mBAAA;EACA,gBAAA;EACA,aAAA;EACA,uBAAA;CACA;AAEA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,mBAAA;EACA,SAAA;EACA,YAAA;EACA,YAAA;EACA,aAAA;EACA,mBAAA;EACA,0BAAA;EACA,8BAAA;CACA;AAEA;EACA,mBAAA;EACA,wBAAA;EACA,OAAA;EACA,WAAA;EACA,kBAAA;EACA,sBAAA;EACA,oBAAA;CACA;AAEA;EACA,kBAAA;EACA,eAAA;EACA,gBAAA;EACA,eAAA;EACA,0BAAA;EACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/03/12. -->\n<template>\n  <div class=\"fm-tabbar-item\" @click=\"onClick\">\n    <div class=\"icon-wrap\">\n      <slot name=\"icon\" :active=\"active\">\n        <text class=\"item-icon\"\n              :style=\"{ color: !active ? iconColor : (activeIconColor || activeColor)}\">{{ getIcon }}</text>\n      </slot>\n      <div class=\"dot\" v-if=\"dot\"></div>\n      <div class=\"badge\" v-if=\"!dot && badge\">\n        <text class=\"badge-msg\">{{ badge }}</text>\n      </div>\n    </div>\n    <slot name=\"title\" :active=\"active\">\n      <text class=\"item-title\" :style=\"{ color: !active ? titleColor : activeColor }\"><slot></slot><template v-if=\"!$slots.default\">{{ title }}</template></text>\n    </slot>\n  </div>\n</template>\n\n<style scoped>\n  .fm-tabbar-item {\n    height: 144px;\n    align-items: center;\n    justify-content: center;\n  }\n\n  .fm-tabbar-item:active {\n    background-color: rgba(0, 0, 0, 0.05);\n  }\n\n  .icon-wrap {\n    padding-top: 8px;\n    padding-left: 30px;\n    padding-right: 30px;\n    margin-top: -8px;\n  }\n\n  .item-icon {\n    margin-bottom: 6px;\n    font-size: 72px;\n    height: 72px;\n    font-family: flymeicon;\n  }\n\n  .item-title {\n    font-size: 30px;\n    line-height: 36px;\n  }\n\n  .dot {\n    position: absolute;\n    top: 8px;\n    right: 30px;\n    width: 18px;\n    height: 18px;\n    border-radius: 9px;\n    background-color: #EF2828;\n    box-shadow: 0 0 0 3px #FFFFFF;\n  }\n\n  .badge {\n    position: absolute;\n    justify-content: center;\n    top: 0;\n    left: 69px;\n    border-width: 3px;\n    border-color: #FFFFFF;\n    border-radius: 24px;\n  }\n\n  .badge-msg {\n    line-height: 36px;\n    padding: 0 6px;\n    font-size: 24px;\n    color: #FFFFFF;\n    background-color: #EF2828;\n    border-radius: 24px;\n  }\n</style>\n\n<script>\nconst he = require('he');\nconst dom = weex.requireModule('dom');\nimport Icon from '../fm-icon/map';\nimport FmIcon from '../fm-icon';\nexport default {\n  name: 'FmTabbarItem',\n  components: { FmIcon },\n  props: {\n    title: {\n      type: String,\n      default: ''\n    },\n    titleColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.75)'\n    },\n    activeColor: {\n      type: String,\n      default: '#198DED'\n    },\n    icon: {\n      type: String,\n      default: ''\n    },\n    iconColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.6)'\n    },\n    activeIconColor: {\n      type: String,\n      default: ''\n    },\n    badge: {\n      type: [Number, String],\n      default: ''\n    },\n    dot: Boolean\n  },\n  computed: {\n    getIcon () {\n      const { Icon, icon } = this;\n      return he.decode(Icon[icon] || Icon['wancheng']);\n    }\n  },\n  data: () => ({\n    active: false,\n    Icon\n  }),\n  beforeCreate () {\n    dom.addRule('fontFace', {\n      'fontFamily': 'flymeicon',\n      'src': \"url('http://design.flyme.cn/weexui/assets/iconfont.ttf')\"\n    });\n\n    let parent = this.$parent;\n    while (parent) {\n      if (parent.$options.name !== 'FmTabbar') {\n        parent = parent.$parent;\n      } else {\n        this._parent = parent;\n        break;\n      }\n    }\n    this._parent.renderItems.push(this);\n  },\n  created () {\n    this.$slots.default && (this.title = this.$slots.default[0].text);\n  },\n  destroyed () {\n    this._parent.renderItems.splice(this._parent.items.indexOf(this), 1);\n  },\n  methods: {\n    onClick (e) {\n      this._parent.onChange(this._parent.renderItems.indexOf(this));\n      this.$emit('select', this.index);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10112,11 +10856,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _map = __webpack_require__(15);
+var _map = __webpack_require__(26);
 
 var _map2 = _interopRequireDefault(_map);
 
-var _fmIcon = __webpack_require__(4);
+var _fmIcon = __webpack_require__(6);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
@@ -10202,8 +10946,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 
-var he = __webpack_require__(16);
+var he = __webpack_require__(27);
 var dom = weex.requireModule('dom');
 exports.default = {
   name: 'FmTabbarItem',
@@ -10286,7 +11031,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10340,7 +11085,7 @@ if (false) {
 }
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10370,7 +11115,7 @@ if (false) {
 }
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10380,7 +11125,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(121);
+var _index = __webpack_require__(122);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -10392,18 +11137,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(122)
+__webpack_require__(123)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(124),
-  /* template */
   __webpack_require__(125),
+  /* template */
+  __webpack_require__(126),
   /* scopeId */
   "data-v-058cc90e",
   /* cssModules */
@@ -10430,13 +11175,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(123);
+var content = __webpack_require__(124);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -10456,7 +11201,7 @@ if(false) {
 }
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -10464,13 +11209,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-switch[data-v-058cc90e] {\n  flex-direction: row;\n  align-items: center;\n  width: 144px;\n  height: 72px;\n  border-radius: 72px;\n  background-color: #198ded;\n  border-width: 5px;\n  border-color: #198ded;\n}\n.ctr-ball[data-v-058cc90e] {\n  width: 42px;\n  height: 42px;\n  border-radius: 21px;\n  margin-left: 10px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-switch/index.vue?e8c61592"],"names":[],"mappings":";AASA;EACA,oBAAA;EACA,oBAAA;EACA,aAAA;EACA,aAAA;EACA,oBAAA;EACA,0BAAA;EACA,kBAAA;EACA,sBAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;EACA,oBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"fm-switch\" @click=\"changeState\" :style=\"getBgStyle\">\n    <div class=\"ctr-ball\"\n         :style=\"ballStyle\"\n         ref=\"ctrBall\"></div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-switch {\n    flex-direction: row;\n    align-items: center;\n    width: 144px;\n    height: 72px;\n    border-radius: 72px;\n    background-color: #198ded;\n    border-width: 5px;\n    border-color: #198ded;\n  }\n\n  .ctr-ball {\n    width: 42px;\n    height: 42px;\n    border-radius: 21px;\n    margin-left: 10px;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\n\nexport default {\n  name: 'FmSwitch',\n  props: {\n    checked: {\n      type: Boolean,\n      default: false\n    },\n    common: Boolean,\n    disabled: {\n      type: Boolean,\n      default: false\n    },\n    blurColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    focusColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    borderColor: String,\n    backgroundColor: String\n  },\n  data () {\n    return {\n      isAnimate: false,\n      ballStyle: {\n        backgroundColor: this.blurColor\n      }\n    };\n  },\n  computed: {\n    getBgStyle () {\n      const { common, borderColor, backgroundColor, disabled } = this;\n      const style =\n          common\n            ? {\n              borderWidth: '5px',\n              borderColor: '#D9D9D9',\n              backgroundColor: 'transparent'\n            }\n            : {};\n      if (disabled) {\n        style.opacity = 0.3;\n      } else {\n        style.opacity = 1;\n      }\n      if (borderColor) {\n        style.borderWidth = '5px';\n        style.borderColor = borderColor;\n      }\n      if (backgroundColor) {\n        style.borderWidth = '5px';\n        style.borderColor = backgroundColor;\n        style.backgroundColor = backgroundColor;\n      }\n      return style;\n    }\n  },\n  watch: {\n    checked (bool) {\n      this.toggleState(bool);\n    }\n  },\n  methods: {\n    changeState (e) {\n      if (this.disabled) return;\n      this.checked = !this.checked;\n      this.toggleState(this.checked);\n      this.$emit('fmSwitchStateChange', this.checked);\n    },\n    toggleState (bool) {\n      const style = bool\n        ? {\n          backgroundColor: this.focusColor,\n          transform: 'scale(1) translate(72px, 0)',\n          transformOrigin: 'center center'\n        }\n        : {\n          backgroundColor: this.blurColor,\n          transform: 'scale(0.429)',\n          transformOrigin: 'center center'\n        };\n      const ctrBall = this.$refs.ctrBall;\n      if (!ctrBall) {\n        return;\n      }\n      animation.transition(\n        ctrBall,\n        {\n          styles: style,\n          timingFunction: 'ease',\n          duration: 260\n        }\n      );\n    }\n  },\n  created () {\n    if (this.common) {\n      this.focusColor = this.focusColor || '#198DED';\n      this.blurColor = '#D9D9D9';\n    }\n    this.checked\n      ? (this.ballStyle = {\n        backgroundColor: this.focusColor,\n        transform: 'scale(1.0) translate(72px, 0)'\n      })\n      : (this.ballStyle = {\n        backgroundColor: this.blurColor,\n        transform: 'scale(0.429)'\n      });\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-switch[data-v-058cc90e] {\n  flex-direction: row;\n  align-items: center;\n  width: 144px;\n  height: 72px;\n  border-radius: 72px;\n  border-width: 5px;\n}\n.ctr-ball[data-v-058cc90e] {\n  width: 42px;\n  height: 42px;\n  border-radius: 21px;\n  margin-left: 10px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-switch/index.vue?4daa901e"],"names":[],"mappings":";AAWA;EACA,oBAAA;EACA,oBAAA;EACA,aAAA;EACA,aAAA;EACA,oBAAA;EACA,kBAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;EACA,oBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and updated by Yanjiie on 2018/4/12. -->\n<template>\n  <div class=\"fm-switch\" @click=\"changeState\" :style=\"getBgStyle\">\n    <div class=\"ctr-ball\"\n         :style=\"ballStyle\"\n         ref=\"ctrBall\"></div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-switch {\n    flex-direction: row;\n    align-items: center;\n    width: 144px;\n    height: 72px;\n    border-radius: 72px;\n    border-width: 5px;\n  }\n\n  .ctr-ball {\n    width: 42px;\n    height: 42px;\n    border-radius: 21px;\n    margin-left: 10px;\n  }\n</style>\n\n<script>\nimport STYLE from 'weex-flymeui/lib/theme/default/';\nconst animation = weex.requireModule('animation');\n\nexport default {\n  name: 'FmSwitch',\n  props: {\n    checked: {\n      type: Boolean,\n      default: false\n    },\n    solid: Boolean,\n    disabled: {\n      type: Boolean,\n      default: false\n    },\n    blurColor: String,\n    focusColor: String,\n    borderColor: {\n      type: String,\n      default: '#D9D9D9'\n    },\n    backgroundColor: {\n      type: String,\n      default: STYLE.primaryColor\n    }\n  },\n  data () {\n    return {\n      isAnimate: false,\n      _checked: false,\n      ballStyle: {}\n    };\n  },\n  computed: {\n    getBgStyle () {\n      const { solid, borderColor, backgroundColor, disabled } = this;\n      const style =\n          !solid\n            ? {\n              borderWidth: '5px',\n              borderColor: borderColor,\n              backgroundColor: 'transparent'\n            }\n            : {\n              borderWidth: '5px',\n              borderColor: backgroundColor,\n              backgroundColor: backgroundColor\n            };\n      if (disabled) {\n        style.opacity = 0.3;\n      } else {\n        style.opacity = 1;\n      }\n      return style;\n    }\n  },\n  watch: {\n    checked (bool) {\n      this._checked = bool;\n      this.toggleState(bool);\n    }\n  },\n  methods: {\n    changeState (e) {\n      if (this.disabled) return;\n      this._checked = !this._checked;\n      this.toggleState(this._checked);\n      this.$emit('fmSwitchStateChange', this._checked);\n    },\n    toggleState (bool, animated = true) {\n      const style = bool\n        ? {\n          backgroundColor: this.focusColor || (this.solid ? '#FFFFFF' : this.backgroundColor),\n          transform: 'scale(1) translate(72px, 0)',\n          transformOrigin: 'center center'\n        }\n        : {\n          backgroundColor: this.blurColor || (this.solid ? '#FFFFFF' : this.borderColor),\n          transform: 'scale(0.429)',\n          transformOrigin: 'center center'\n        };\n      const ctrBall = this.$refs.ctrBall;\n      if (!ctrBall) {\n        return;\n      }\n      animation.transition(\n        ctrBall,\n        {\n          styles: style,\n          timingFunction: 'ease',\n          duration: animated ? 260 : 0.00001\n        }\n      );\n    }\n  },\n  created () {\n    this.checked\n      ? (this.ballStyle = {\n        backgroundColor: this.focusColor || (this.solid ? '#FFFFFF' : this.backgroundColor),\n        transform: 'scale(1.0) translate(72px, 0)'\n      })\n      : (this.ballStyle = {\n        backgroundColor: this.blurColor || (this.solid ? '#FFFFFF' : this.borderColor),\n        transform: 'scale(0.429)'\n      });\n\n    this._checked = this.checked;\n    this.toggleState(this._checked, false);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10479,36 +11224,41 @@ exports.push([module.i, "\n.fm-switch[data-v-058cc90e] {\n  flex-direction: row;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
-var animation = weex.requireModule('animation');
+var _default = __webpack_require__(35);
+
+var _default2 = _interopRequireDefault(_default);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var animation = weex.requireModule('animation'); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
   name: 'FmSwitch',
@@ -10517,79 +11267,76 @@ exports.default = {
       type: Boolean,
       default: false
     },
-    common: Boolean,
+    solid: Boolean,
     disabled: {
       type: Boolean,
       default: false
     },
-    blurColor: {
+    blurColor: String,
+    focusColor: String,
+    borderColor: {
       type: String,
-      default: '#FFFFFF'
+      default: '#D9D9D9'
     },
-    focusColor: {
+    backgroundColor: {
       type: String,
-      default: '#FFFFFF'
-    },
-    borderColor: String,
-    backgroundColor: String
+      default: _default2.default.primaryColor
+    }
   },
   data: function data() {
     return {
       isAnimate: false,
-      ballStyle: {
-        backgroundColor: this.blurColor
-      }
+      _checked: false,
+      ballStyle: {}
     };
   },
 
   computed: {
     getBgStyle: function getBgStyle() {
-      var common = this.common,
+      var solid = this.solid,
           borderColor = this.borderColor,
           backgroundColor = this.backgroundColor,
           disabled = this.disabled;
 
-      var style = common ? {
+      var style = !solid ? {
         borderWidth: '5px',
-        borderColor: '#D9D9D9',
+        borderColor: borderColor,
         backgroundColor: 'transparent'
-      } : {};
+      } : {
+        borderWidth: '5px',
+        borderColor: backgroundColor,
+        backgroundColor: backgroundColor
+      };
       if (disabled) {
         style.opacity = 0.3;
       } else {
         style.opacity = 1;
-      }
-      if (borderColor) {
-        style.borderWidth = '5px';
-        style.borderColor = borderColor;
-      }
-      if (backgroundColor) {
-        style.borderWidth = '5px';
-        style.borderColor = backgroundColor;
-        style.backgroundColor = backgroundColor;
       }
       return style;
     }
   },
   watch: {
     checked: function checked(bool) {
+      this._checked = bool;
       this.toggleState(bool);
     }
   },
   methods: {
     changeState: function changeState(e) {
       if (this.disabled) return;
-      this.checked = !this.checked;
-      this.toggleState(this.checked);
-      this.$emit('fmSwitchStateChange', this.checked);
+      this._checked = !this._checked;
+      this.toggleState(this._checked);
+      this.$emit('fmSwitchStateChange', this._checked);
     },
     toggleState: function toggleState(bool) {
+      var animated = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
       var style = bool ? {
-        backgroundColor: this.focusColor,
+        backgroundColor: this.focusColor || (this.solid ? '#FFFFFF' : this.backgroundColor),
         transform: 'scale(1) translate(72px, 0)',
         transformOrigin: 'center center'
       } : {
-        backgroundColor: this.blurColor,
+        backgroundColor: this.blurColor || (this.solid ? '#FFFFFF' : this.borderColor),
         transform: 'scale(0.429)',
         transformOrigin: 'center center'
       };
@@ -10600,27 +11347,26 @@ exports.default = {
       animation.transition(ctrBall, {
         styles: style,
         timingFunction: 'ease',
-        duration: 260
+        duration: animated ? 260 : 0.00001
       });
     }
   },
   created: function created() {
-    if (this.common) {
-      this.focusColor = this.focusColor || '#198DED';
-      this.blurColor = '#D9D9D9';
-    }
     this.checked ? this.ballStyle = {
-      backgroundColor: this.focusColor,
+      backgroundColor: this.focusColor || (this.solid ? '#FFFFFF' : this.backgroundColor),
       transform: 'scale(1.0) translate(72px, 0)'
     } : this.ballStyle = {
-      backgroundColor: this.blurColor,
+      backgroundColor: this.blurColor || (this.solid ? '#FFFFFF' : this.borderColor),
       transform: 'scale(0.429)'
     };
+
+    this._checked = this.checked;
+    this.toggleState(this._checked, false);
   }
 };
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10647,7 +11393,7 @@ if (false) {
 }
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10657,7 +11403,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(127);
+var _index = __webpack_require__(128);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -10669,18 +11415,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(128)
+__webpack_require__(129)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(130),
+  __webpack_require__(131),
   /* template */
-  __webpack_require__(134),
+  __webpack_require__(135),
   /* scopeId */
   "data-v-1a0456a2",
   /* cssModules */
@@ -10707,13 +11453,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(129);
+var content = __webpack_require__(130);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -10733,7 +11479,7 @@ if(false) {
 }
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -10741,13 +11487,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.wall-wrap[data-v-1a0456a2] {\n  width: 1080px;\n}\n.title-wrap[data-v-1a0456a2] {\n  flex-direction: row;\n  padding: 27px 49px;\n  justify-content: space-between;\n}\n.title-text[data-v-1a0456a2] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 36px;\n  line-height: 54px;\n}\n.title-rightBtn[data-v-1a0456a2] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 36px;\n  line-height: 54px;\n}\n.tags-wrap[data-v-1a0456a2] {\n  flex-direction: row;\n  flex-wrap: wrap;\n  padding: 0 24px 0 48px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag-wall/index.vue?aaa8f3b6"],"names":[],"mappings":";AAsBA;EACA,cAAA;CACA;AAEA;EACA,oBAAA;EACA,mBAAA;EACA,+BAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,oBAAA;EACA,gBAAA;EACA,uBAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 2018/3/2. -->\n<template>\n  <div class=\"wall-wrap\">\n    <div class=\"title-wrap\">\n      <slot name=\"left\">\n        <text class=\"title-text\" :style=\"{ color: titleColor }\">{{ title }}</text>\n      </slot>\n      <slot name=\"right\">\n        <text class=\"title-rightBtn\" :style=\"{ color: rightColor }\" @click=\"btnClicked\">{{ rightText }}</text>\n      </slot>\n    </div>\n    <div class=\"tags-wrap\">\n      <item v-for=\"(item, index) in list\"\n            v-bind=\"Object.assign({}, customStyles, item)\"\n            :key=\"index\"\n            :index=\"index\"\n            @select=\"onSelect(index)\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .wall-wrap {\n    width: 1080px;\n  }\n\n  .title-wrap {\n    flex-direction: row;\n    padding: 27px 49px;\n    justify-content: space-between;\n  }\n\n  .title-text {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 36px;\n    line-height: 54px;\n  }\n\n  .title-rightBtn {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 36px;\n    line-height: 54px;\n  }\n\n  .tags-wrap {\n    flex-direction: row;\n    flex-wrap: wrap;\n    padding: 0 24px 0 48px;\n  }\n</style>\n\n<script>\nimport Item from './item.vue';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmTagWall',\n  mixins: [Locale],\n  components: { Item },\n  props: {\n    list: {\n      type: Array,\n      default: () => ([])\n    },\n    title: {\n      type: String,\n      default () {\n        return t('el.common.title');\n      }\n    },\n    titleColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    rightText: {\n      type: String,\n      default: ''\n    },\n    rightColor: {\n      type: String,\n      default: '#198DED'\n    },\n    customStyles: {\n      type: Object,\n      default: () => ({})\n    }\n  },\n  methods: {\n    onSelect (index) {\n      this.$emit('fmTagWallSelected', { title: this.list[index].title, index });\n    },\n    btnClicked () {\n      this.$emit('fmTagWallRightBtnClicked');\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.wall-wrap[data-v-1a0456a2] {\n  width: 1080px;\n}\n.title-wrap[data-v-1a0456a2] {\n  flex-direction: row;\n  padding: 27px 49px;\n  justify-content: space-between;\n}\n.title-text[data-v-1a0456a2] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 36px;\n  line-height: 54px;\n}\n.title-rightBtn[data-v-1a0456a2] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 36px;\n  line-height: 54px;\n}\n.tags-wrap[data-v-1a0456a2] {\n  flex-direction: row;\n  flex-wrap: wrap;\n  padding: 0 24px 0 48px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag-wall/index.vue?6697c608"],"names":[],"mappings":";AAuBA;EACA,cAAA;CACA;AAEA;EACA,oBAAA;EACA,mBAAA;EACA,+BAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,oBAAA;EACA,gBAAA;EACA,uBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/3/2. -->\n<template>\n  <div class=\"wall-wrap\">\n    <div class=\"title-wrap\">\n      <slot name=\"left\">\n        <text class=\"title-text\" :style=\"{ color: titleColor }\">{{ title }}</text>\n      </slot>\n      <slot name=\"right\">\n        <text class=\"title-rightBtn\" :style=\"{ color: rightColor }\" @click=\"btnClicked\">{{ rightText }}</text>\n      </slot>\n    </div>\n    <div class=\"tags-wrap\">\n      <item v-for=\"(item, index) in list\"\n            v-bind=\"Object.assign({}, customStyles, item)\"\n            :key=\"index\"\n            :index=\"index\"\n            @select=\"onSelect(index)\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .wall-wrap {\n    width: 1080px;\n  }\n\n  .title-wrap {\n    flex-direction: row;\n    padding: 27px 49px;\n    justify-content: space-between;\n  }\n\n  .title-text {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 36px;\n    line-height: 54px;\n  }\n\n  .title-rightBtn {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 36px;\n    line-height: 54px;\n  }\n\n  .tags-wrap {\n    flex-direction: row;\n    flex-wrap: wrap;\n    padding: 0 24px 0 48px;\n  }\n</style>\n\n<script>\nimport Item from './item.vue';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmTagWall',\n  mixins: [Locale],\n  components: { Item },\n  props: {\n    list: {\n      type: Array,\n      default: () => ([])\n    },\n    title: {\n      type: String,\n      default () {\n        return t('el.common.title');\n      }\n    },\n    titleColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    rightText: {\n      type: String,\n      default: ''\n    },\n    rightColor: {\n      type: String,\n      default: '#198DED'\n    },\n    customStyles: {\n      type: Object,\n      default: () => ({})\n    }\n  },\n  methods: {\n    onSelect (index) {\n      this.$emit('fmTagWallSelected', { title: this.list[index].title, index });\n    },\n    btnClicked () {\n      this.$emit('fmTagWallRightBtnClicked');\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10757,7 +11503,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _item = __webpack_require__(131);
+var _item = __webpack_require__(132);
 
 var _item2 = _interopRequireDefault(_item);
 
@@ -10765,7 +11511,7 @@ var _locale = __webpack_require__(34);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(28);
+var _locale3 = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10866,16 +11612,17 @@ exports.default = {
 //
 //
 //
+//
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(132),
-  /* template */
   __webpack_require__(133),
+  /* template */
+  __webpack_require__(134),
   /* scopeId */
   null,
   /* cssModules */
@@ -10902,7 +11649,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10911,6 +11658,7 @@ module.exports = Component.exports
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+//
 //
 //
 //
@@ -11028,7 +11776,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11054,7 +11802,7 @@ if (false) {
 }
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11110,7 +11858,7 @@ if (false) {
 }
 
 /***/ }),
-/* 135 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11120,7 +11868,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(136);
+var _index = __webpack_require__(137);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -11132,18 +11880,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 136 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(137)
+__webpack_require__(138)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(139),
-  /* template */
   __webpack_require__(140),
+  /* template */
+  __webpack_require__(141),
   /* scopeId */
   "data-v-11fe3cac",
   /* cssModules */
@@ -11170,13 +11918,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 137 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(138);
+var content = __webpack_require__(139);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -11196,7 +11944,7 @@ if(false) {
 }
 
 /***/ }),
-/* 138 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -11204,13 +11952,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.slider-wrap[data-v-11fe3cac] {\n  padding-right: 22.5px;\n  padding-left: 22.5px;\n}\n.level-text-wrap[data-v-11fe3cac] {\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  margin-bottom: -21.6px;\n}\n.level-text[data-v-11fe3cac] {\n  flex: 1;\n  font-size: 42px;\n  padding-top: 7.2px;\n  padding-bottom: 7.2px;\n  text-align: center;\n}\n.all[data-v-11fe3cac] {\n  height: 9px;\n  margin-top: 43.2px;\n  background-color: #e6e6e6;\n}\n.selected[data-v-11fe3cac] {\n  margin-top: -9px;\n  height: 9px;\n  background-color: #198ded;\n}\n.dot-wrap[data-v-11fe3cac] {\n  height: 86.4px;\n  width: 116.4px;\n  margin-top: -47.52px;\n  margin-left: -57.6px;\n  align-items: center;\n  justify-content: center;\n}\n.dot[data-v-11fe3cac] {\n  height: 45px;\n  width: 45px;\n  background-color: #198ded;\n  border-radius: 43.2px;\n}\n.num[data-v-11fe3cac] {\n  width: 78px;\n  height: 78px;\n  margin-left: -39px;\n  border-radius: 79.2px;\n  background-color: #198ded;\n  color: #ffffff;\n  font-size: 42px;\n  font-weight: 700;\n  text-align: center;\n  line-height: 78px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-slider-bar/index.vue?05ecf7de"],"names":[],"mappings":";AAeA;EACA,sBAAA;EACA,qBAAA;CACA;AACA;EACA,oBAAA;EACA,oBAAA;EACA,wBAAA;EACA,uBAAA;CACA;AACA;EACA,QAAA;EACA,gBAAA;EACA,mBAAA;EACA,sBAAA;EACA,mBAAA;CACA;AACA;EACA,YAAA;EACA,mBAAA;EACA,0BAAA;CACA;AACA;EACA,iBAAA;EACA,YAAA;EACA,0BAAA;CACA;AACA;EACA,eAAA;EACA,eAAA;EACA,qBAAA;EACA,qBAAA;EACA,oBAAA;EACA,wBAAA;CACA;AACA;EACA,aAAA;EACA,YAAA;EACA,0BAAA;EACA,sBAAA;CACA;AACA;EACA,YAAA;EACA,aAAA;EACA,mBAAA;EACA,sBAAA;EACA,0BAAA;EACA,eAAA;EACA,gBAAA;EACA,iBAAA;EACA,mBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"slider-wrap\">\n    <div v-if=\"!!levelTexts && this.per\" class=\"level-text-wrap\" :style=\"textStyle\">\n      <text class=\"level-text\" v-for=\"(text, idx) in levelTexts\" @click=\"levelClick(idx)\" :key=\"idx\">{{text}}</text>\n    </div>\n    <text v-else-if=\"showProgress\" class=\"num\" :style=\"progressStyle\">{{progressText}}</text>\n    <div class=\"all\" ref=\"bg\"></div>\n    <div class=\"selected\" :style=\"selStyle\"></div>\n    <div class=\"dot-wrap\" :style=\"dotStyle\" @touchmove=\"move\" @touchstart=\"start\" @touchend=\"end\">\n      <div class=\"dot\"></div>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .slider-wrap {\n    padding-right: 22.5px;\n    padding-left: 22.5px;\n  }\n  .level-text-wrap {\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    margin-bottom: -21.6px;\n  }\n  .level-text {\n    flex: 1;\n    font-size: 42px;\n    padding-top: 7.2px;\n    padding-bottom: 7.2px;\n    text-align: center;\n  }\n  .all {\n    height: 9px;\n    margin-top: 43.2px;\n    background-color: #e6e6e6;\n  }\n  .selected {\n    margin-top: -9px;\n    height: 9px;\n    background-color: #198ded;\n  }\n  .dot-wrap {\n    height: 86.4px;\n    width: 116.4px;\n    margin-top: -47.52px;\n    margin-left: -57.6px;\n    align-items: center;\n    justify-content: center;\n  }\n  .dot {\n    height: 45px;\n    width: 45px;\n    background-color: #198ded;\n    border-radius: 43.2px;\n  }\n  .num {\n    width: 78px;\n    height: 78px;\n    margin-left: -39px;\n    border-radius: 79.2px;\n    background-color: #198ded;\n    color: #ffffff;\n    font-size: 42px;\n    font-weight: 700;\n    text-align: center;\n    line-height: 78px;\n  }\n</style>\n\n<script>\nconst dom = weex.requireModule('dom');\n\nexport default {\n  name: 'FmSlider',\n  data () {\n    return {\n      transX: 0,\n      startX: 0,\n      max: 0,\n      per: 0,\n      comparePer: 0,\n      progressOpacity: 0,\n      progressText: null,\n      levelAlias: 0\n    };\n  },\n\n  props: {\n    level: [String, Number],\n    levelTexts: Array,\n    showProgress: Boolean,\n    vertical: Boolean,\n    value: {\n      type: [String, Number],\n      default: 0\n    }\n  },\n\n  computed: {\n    textStyle () {\n      return {\n        width: `${this.max + this.per}px`,\n        'margin-left': `${-this.per / 2}px`\n      };\n    },\n    dotStyle () {\n      return {\n        transform: `translateX(${this.transX}px)`\n      };\n    },\n    selStyle () {\n      return {\n        width: `${this.transX}px`\n      };\n    },\n    progressStyle () {\n      return {\n        transform: `translateX(${this.transX}px)`,\n        opacity: this.progressOpacity\n      };\n    }\n  },\n\n  created () {\n    this.screen = 'screenY';// this.vertical ? 'screenY' : 'screenX'\n  },\n\n  mounted () {\n    setTimeout(() => {\n      dom.getComponentRect(this.$refs.bg, opt => {\n        this.max = opt.size.width;\n\n        if (this.levelTexts) {\n          this.levelAlias = Math.max(this.levelTexts.length - 1, 0);\n        } else {\n          this.levelAlias = this.level;\n        }\n\n        if (this.levelAlias && this.levelAlias > 0) {\n          this.per = this.max / this.levelAlias;\n          this.comparePer = this.per / 2;\n        }\n\n        this.transX = this.per ? (this.per * this.value) : (this.max * this.value / 100);\n      });\n    }, 100);\n  },\n\n  methods: {\n    levelClick (idx) {\n      this.transX = Math.min(this.per * idx, this.max);\n      this.end();\n    },\n    start (event) {\n      this.startX = event.changedTouches[0].screenX;\n      this.progressOpacity = 1;\n    },\n    move (event) {\n      const x = +event.changedTouches[0].screenX;\n      const sub = x - this.startX;\n      let target;\n\n      if (this.per) {\n        if (Math.abs(sub) >= this.comparePer) {\n          target = this.transX + (sub > 0 ? this.per : -this.per);\n          this.startX = target;\n        }\n      } else {\n        target = this.transX + sub;\n        this.startX = x;\n      }\n\n      if (target !== undefined) {\n        this.transX = Math.min(Math.max(target, 0), this.max);\n      }\n\n      this.progressText = this.per\n        ? Math.round(this.transX / this.per)\n        : Math.floor(this.transX / this.max * 100);\n    },\n    end (event) {\n      this.progressOpacity = 0;\n      this.$emit('selected', {\n        rate: this.transX / this.max,\n        level: this.per ? Math.round(this.transX / this.per) : 0\n      });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.slider-wrap[data-v-11fe3cac] {\n  padding-right: 22.5px;\n  padding-left: 22.5px;\n}\n.level-text-wrap[data-v-11fe3cac] {\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  margin-bottom: -21.6px;\n}\n.level-text[data-v-11fe3cac] {\n  flex: 1;\n  font-size: 42px;\n  padding-top: 7.2px;\n  padding-bottom: 7.2px;\n  text-align: center;\n}\n.all[data-v-11fe3cac] {\n  height: 9px;\n  margin-top: 43.2px;\n  background-color: #e6e6e6;\n}\n.selected[data-v-11fe3cac] {\n  margin-top: -9px;\n  height: 9px;\n  background-color: #198ded;\n}\n.dot-wrap[data-v-11fe3cac] {\n  height: 86.4px;\n  width: 116.4px;\n  margin-top: -47.52px;\n  margin-left: -57.6px;\n  align-items: center;\n  justify-content: center;\n}\n.dot[data-v-11fe3cac] {\n  height: 45px;\n  width: 45px;\n  background-color: #198ded;\n  border-radius: 43.2px;\n}\n.num[data-v-11fe3cac] {\n  width: 78px;\n  height: 78px;\n  margin-left: -39px;\n  border-radius: 79.2px;\n  background-color: #198ded;\n  color: #ffffff;\n  font-size: 42px;\n  font-weight: 700;\n  text-align: center;\n  line-height: 78px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-slider-bar/index.vue?bce00f48"],"names":[],"mappings":";AAiBA;EACA,sBAAA;EACA,qBAAA;CACA;AACA;EACA,oBAAA;EACA,oBAAA;EACA,wBAAA;EACA,uBAAA;CACA;AACA;EACA,QAAA;EACA,gBAAA;EACA,mBAAA;EACA,sBAAA;EACA,mBAAA;CACA;AACA;EACA,YAAA;EACA,mBAAA;EACA,0BAAA;CACA;AACA;EACA,iBAAA;EACA,YAAA;EACA,0BAAA;CACA;AACA;EACA,eAAA;EACA,eAAA;EACA,qBAAA;EACA,qBAAA;EACA,oBAAA;EACA,wBAAA;CACA;AACA;EACA,aAAA;EACA,YAAA;EACA,0BAAA;EACA,sBAAA;CACA;AACA;EACA,YAAA;EACA,aAAA;EACA,mBAAA;EACA,sBAAA;EACA,0BAAA;EACA,eAAA;EACA,gBAAA;EACA,iBAAA;EACA,mBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div class=\"slider-wrap\">\n    <div v-if=\"!!levelTexts && this.per\" class=\"level-text-wrap\" :style=\"textStyle\">\n      <text class=\"level-text\" v-for=\"(text, idx) in levelTexts\" @click=\"levelClick(idx)\" :key=\"idx\">{{text}}</text>\n    </div>\n    <text v-else-if=\"showProgress\" class=\"num\" :style=\"progressStyle\">{{progressText}}</text>\n    <div class=\"all\" ref=\"bg\"></div>\n    <div class=\"selected\" :style=\"selStyle\"></div>\n    <div class=\"dot-wrap\" :style=\"dotStyle\" @touchmove=\"move\" @touchstart=\"start\" @touchend=\"end\">\n      <div class=\"dot\"></div>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .slider-wrap {\n    padding-right: 22.5px;\n    padding-left: 22.5px;\n  }\n  .level-text-wrap {\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    margin-bottom: -21.6px;\n  }\n  .level-text {\n    flex: 1;\n    font-size: 42px;\n    padding-top: 7.2px;\n    padding-bottom: 7.2px;\n    text-align: center;\n  }\n  .all {\n    height: 9px;\n    margin-top: 43.2px;\n    background-color: #e6e6e6;\n  }\n  .selected {\n    margin-top: -9px;\n    height: 9px;\n    background-color: #198ded;\n  }\n  .dot-wrap {\n    height: 86.4px;\n    width: 116.4px;\n    margin-top: -47.52px;\n    margin-left: -57.6px;\n    align-items: center;\n    justify-content: center;\n  }\n  .dot {\n    height: 45px;\n    width: 45px;\n    background-color: #198ded;\n    border-radius: 43.2px;\n  }\n  .num {\n    width: 78px;\n    height: 78px;\n    margin-left: -39px;\n    border-radius: 79.2px;\n    background-color: #198ded;\n    color: #ffffff;\n    font-size: 42px;\n    font-weight: 700;\n    text-align: center;\n    line-height: 78px;\n  }\n</style>\n\n<script>\nconst dom = weex.requireModule('dom');\n\nexport default {\n  name: 'FmSlider',\n  data () {\n    return {\n      transX: 0,\n      startX: 0,\n      max: 0,\n      per: 0,\n      comparePer: 0,\n      progressOpacity: 0,\n      progressText: null,\n      levelAlias: 0\n    };\n  },\n\n  props: {\n    level: [String, Number],\n    levelTexts: Array,\n    showProgress: Boolean,\n    vertical: Boolean,\n    value: {\n      type: [String, Number],\n      default: 0\n    }\n  },\n\n  computed: {\n    textStyle () {\n      return {\n        width: `${this.max + this.per}px`,\n        'margin-left': `${-this.per / 2}px`\n      };\n    },\n    dotStyle () {\n      return {\n        transform: `translateX(${this.transX}px)`\n      };\n    },\n    selStyle () {\n      return {\n        width: `${this.transX}px`\n      };\n    },\n    progressStyle () {\n      return {\n        transform: `translateX(${this.transX}px)`,\n        opacity: this.progressOpacity\n      };\n    }\n  },\n\n  created () {\n    this.screen = 'screenY';// this.vertical ? 'screenY' : 'screenX'\n  },\n\n  mounted () {\n    setTimeout(() => {\n      dom.getComponentRect(this.$refs.bg, opt => {\n        this.max = opt.size.width;\n\n        if (this.levelTexts) {\n          this.levelAlias = Math.max(this.levelTexts.length - 1, 0);\n        } else {\n          this.levelAlias = this.level;\n        }\n\n        if (this.levelAlias && this.levelAlias > 0) {\n          this.per = this.max / this.levelAlias;\n          this.comparePer = this.per / 2;\n        }\n\n        this.transX = this.per ? (this.per * this.value) : (this.max * this.value / 100);\n      });\n    }, 100);\n  },\n\n  methods: {\n    levelClick (idx) {\n      this.transX = Math.min(this.per * idx, this.max);\n      this.end();\n    },\n    start (event) {\n      this.startX = event.changedTouches[0].screenX;\n      this.progressOpacity = 1;\n    },\n    move (event) {\n      const x = +event.changedTouches[0].screenX;\n      const sub = x - this.startX;\n      let target;\n\n      if (this.per) {\n        if (Math.abs(sub) >= this.comparePer) {\n          target = this.transX + (sub > 0 ? this.per : -this.per);\n          this.startX = target;\n        }\n      } else {\n        target = this.transX + sub;\n        this.startX = x;\n      }\n\n      if (target !== undefined) {\n        this.transX = Math.min(Math.max(target, 0), this.max);\n      }\n\n      this.progressText = this.per\n        ? Math.round(this.transX / this.per)\n        : Math.floor(this.transX / this.max * 100);\n    },\n    end (event) {\n      this.progressOpacity = 0;\n      this.$emit('selected', {\n        rate: this.transX / this.max,\n        level: this.per ? Math.round(this.transX / this.per) : 0\n      });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 139 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11219,6 +11967,8 @@ exports.push([module.i, "\n.slider-wrap[data-v-11fe3cac] {\n  padding-right: 22.
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+//
+//
 //
 //
 //
@@ -11412,7 +12162,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 140 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11473,7 +12223,7 @@ if (false) {
 }
 
 /***/ }),
-/* 141 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11483,7 +12233,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(142);
+var _index = __webpack_require__(143);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -11495,18 +12245,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 142 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(143)
+__webpack_require__(144)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(145),
-  /* template */
   __webpack_require__(146),
+  /* template */
+  __webpack_require__(147),
   /* scopeId */
   "data-v-9924f606",
   /* cssModules */
@@ -11533,13 +12283,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 143 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(144);
+var content = __webpack_require__(145);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -11559,7 +12309,7 @@ if(false) {
 }
 
 /***/ }),
-/* 144 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -11567,13 +12317,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.tip-wrap[data-v-9924f606] {\n  flex-direction: row;\n  height: 120px;\n  padding-top: 21.6px;\n}\n.arrow[data-v-9924f606] {\n  position: absolute;\n  top: 10.8px;\n  width: 21.6px;\n  height: 21.6px;\n  transform: rotate(45deg);\n}\n.content-wrap[data-v-9924f606] {\n  flex-direction: row;\n  align-items: center;\n  padding-top: 27px;\n  padding-bottom: 27px;\n  padding-left: 30px;\n  border-radius: 6px;\n}\n.content[data-v-9924f606] {\n  height: 51px;\n  max-width: 678px;\n  font-size: 42px;\n  color: #ffffff;\n}\n.split[data-v-9924f606] {\n  width: 3px;\n  height: 42px;\n  margin-left: 27px;\n  background-color: #ffffff;\n  opacity: .4;\n}\n.close[data-v-9924f606] {\n  color: #ffffff;\n  font-size: 54px;\n  margin-top: 9px;\n  margin-left: 30px;\n  margin-right: 30px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tips/index.vue?080b1a82"],"names":[],"mappings":";AAaA;EACA,oBAAA;EACA,cAAA;EACA,oBAAA;CACA;AACA;EACA,mBAAA;EACA,YAAA;EACA,cAAA;EACA,eAAA;EACA,yBAAA;CACA;AACA;EACA,oBAAA;EACA,oBAAA;EACA,kBAAA;EACA,qBAAA;EACA,mBAAA;EACA,mBAAA;CACA;AACA;EACA,aAAA;EACA,iBAAA;EACA,gBAAA;EACA,eAAA;CACA;AACA;EACA,WAAA;EACA,aAAA;EACA,kBAAA;EACA,0BAAA;EACA,YAAA;CACA;AACA;EACA,eAAA;EACA,gBAAA;EACA,gBAAA;EACA,kBAAA;EACA,mBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div v-if=\"show\" class=\"tip-wrap\" :style=\"wrapStyle\">\n    <div class=\"content-wrap\" :style=\"background\">\n      <slot></slot>\n      <text class=\"content\">{{message}}</text>\n      <text class=\"split\"></text>\n      <fm-icon class=\"close\" @fmIconClicked=\"close\" name=\"guanbi\" />\n    </div>\n    <text class=\"arrow\" :style=\"arrowStyle\"></text>\n  </div>\n</template>\n\n<style scoped>\n  .tip-wrap {\n    flex-direction: row;\n    height: 120px;\n    padding-top: 21.6px;\n  }\n  .arrow {\n    position: absolute;\n    top: 10.8px;\n    width: 21.6px;\n    height: 21.6px;\n    transform: rotate(45deg);\n  }\n  .content-wrap {\n    flex-direction: row;\n    align-items: center;\n    padding-top: 27px;\n    padding-bottom: 27px;\n    padding-left: 30px;\n    border-radius: 6px;\n  }\n  .content {\n    height: 51px;\n    max-width: 678px;\n    font-size: 42px;\n    color: #ffffff;\n  }\n  .split {\n    width: 3px;\n    height: 42px;\n    margin-left: 27px;\n    background-color: #ffffff;\n    opacity: .4;\n  }\n  .close {\n    color: #ffffff;\n    font-size: 54px;\n    margin-top: 9px;\n    margin-left: 30px;\n    margin-right: 30px;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nexport default {\n  name: 'FmTips',\n  data () {\n    return {\n      show: true\n    };\n  },\n  components: { FmIcon },\n  computed: {\n    background () {\n      return {\n        backgroundColor: this.bgColor\n      };\n    },\n    wrapStyle () {\n      return {\n        'justify-content': this.right ? 'flex-end' : 'flex-start'\n      };\n    },\n    arrowStyle () {\n      const sty = {\n        backgroundColor: this.bgColor\n      };\n      if (this.right) {\n        sty.right = '18px';\n      } else {\n        sty.left = '18px';\n      }\n\n      return sty;\n    }\n  },\n\n  props: {\n    message: String,\n    bgColor: {\n      type: String,\n      default: '#198ded'\n    },\n    right: Boolean\n  },\n\n  methods: {\n    close () {\n      this.show = false;\n      this.$emit('close');\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.tip-wrap[data-v-9924f606] {\n  flex-direction: row;\n  height: 120px;\n  padding-top: 21.6px;\n}\n.arrow[data-v-9924f606] {\n  position: absolute;\n  top: 10.8px;\n  width: 21.6px;\n  height: 21.6px;\n  transform: rotate(45deg);\n}\n.content-wrap[data-v-9924f606] {\n  flex-direction: row;\n  align-items: center;\n  padding-top: 27px;\n  padding-bottom: 27px;\n  padding-left: 30px;\n  border-radius: 6px;\n}\n.content[data-v-9924f606] {\n  height: 51px;\n  max-width: 678px;\n  font-size: 42px;\n  color: #ffffff;\n}\n.split[data-v-9924f606] {\n  width: 3px;\n  height: 42px;\n  margin-left: 27px;\n  background-color: #ffffff;\n  opacity: .4;\n}\n.close[data-v-9924f606] {\n  color: #ffffff;\n  font-size: 54px;\n  margin-top: 9px;\n  margin-left: 30px;\n  margin-right: 30px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tips/index.vue?697e41cd"],"names":[],"mappings":";AAeA;EACA,oBAAA;EACA,cAAA;EACA,oBAAA;CACA;AACA;EACA,mBAAA;EACA,YAAA;EACA,cAAA;EACA,eAAA;EACA,yBAAA;CACA;AACA;EACA,oBAAA;EACA,oBAAA;EACA,kBAAA;EACA,qBAAA;EACA,mBAAA;EACA,mBAAA;CACA;AACA;EACA,aAAA;EACA,iBAAA;EACA,gBAAA;EACA,eAAA;CACA;AACA;EACA,WAAA;EACA,aAAA;EACA,kBAAA;EACA,0BAAA;EACA,YAAA;CACA;AACA;EACA,eAAA;EACA,gBAAA;EACA,gBAAA;EACA,kBAAA;EACA,mBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div v-if=\"show\" class=\"tip-wrap\" :style=\"wrapStyle\">\n    <div class=\"content-wrap\" :style=\"background\">\n      <slot></slot>\n      <text class=\"content\">{{message}}</text>\n      <text class=\"split\"></text>\n      <fm-icon class=\"close\" @fmIconClicked=\"close\" name=\"guanbi\" />\n    </div>\n    <text class=\"arrow\" :style=\"arrowStyle\"></text>\n  </div>\n</template>\n\n<style scoped>\n  .tip-wrap {\n    flex-direction: row;\n    height: 120px;\n    padding-top: 21.6px;\n  }\n  .arrow {\n    position: absolute;\n    top: 10.8px;\n    width: 21.6px;\n    height: 21.6px;\n    transform: rotate(45deg);\n  }\n  .content-wrap {\n    flex-direction: row;\n    align-items: center;\n    padding-top: 27px;\n    padding-bottom: 27px;\n    padding-left: 30px;\n    border-radius: 6px;\n  }\n  .content {\n    height: 51px;\n    max-width: 678px;\n    font-size: 42px;\n    color: #ffffff;\n  }\n  .split {\n    width: 3px;\n    height: 42px;\n    margin-left: 27px;\n    background-color: #ffffff;\n    opacity: .4;\n  }\n  .close {\n    color: #ffffff;\n    font-size: 54px;\n    margin-top: 9px;\n    margin-left: 30px;\n    margin-right: 30px;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nexport default {\n  name: 'FmTips',\n  data () {\n    return {\n      show: true\n    };\n  },\n  components: { FmIcon },\n  computed: {\n    background () {\n      return {\n        backgroundColor: this.bgColor\n      };\n    },\n    wrapStyle () {\n      return {\n        'justify-content': this.right ? 'flex-end' : 'flex-start'\n      };\n    },\n    arrowStyle () {\n      const sty = {\n        backgroundColor: this.bgColor\n      };\n      if (this.right) {\n        sty.right = '18px';\n      } else {\n        sty.left = '18px';\n      }\n\n      return sty;\n    }\n  },\n\n  props: {\n    message: String,\n    bgColor: {\n      type: String,\n      default: '#198ded'\n    },\n    right: Boolean\n  },\n\n  methods: {\n    close () {\n      this.show = false;\n      this.$emit('close');\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 145 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11583,7 +12333,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmIcon = __webpack_require__(4);
+var _fmIcon = __webpack_require__(6);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
@@ -11693,9 +12443,11 @@ exports.default = {
 //
 //
 //
+//
+//
 
 /***/ }),
-/* 146 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11740,7 +12492,7 @@ if (false) {
 }
 
 /***/ }),
-/* 147 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11750,7 +12502,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(148);
+var _index = __webpack_require__(149);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -11762,18 +12514,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 148 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(149)
+__webpack_require__(150)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(151),
+  __webpack_require__(152),
   /* template */
-  __webpack_require__(155),
+  __webpack_require__(156),
   /* scopeId */
   "data-v-a8d59aa2",
   /* cssModules */
@@ -11800,13 +12552,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(150);
+var content = __webpack_require__(151);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -11826,7 +12578,7 @@ if(false) {
 }
 
 /***/ }),
-/* 150 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -11834,13 +12586,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-rich-text[data-v-a8d59aa2] {\n  justify-content: flex-start;\n  align-items: center;\n  flex-wrap: wrap;\n  flex-direction: row;\n  flex-shrink: 1;\n}\n.default-text[data-v-a8d59aa2] {\n  color: #A5A5A5;\n  font-size: 36px;\n  line-height: 48px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rich-text/index.vue?dc6bd536"],"names":[],"mappings":";AAiCA;EACA,4BAAA;EACA,oBAAA;EACA,gBAAA;EACA,oBAAA;EACA,eAAA;CACA;AAEA;EACA,eAAA;EACA,gBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div>\n    <div class=\"fm-rich-text\" v-if=\"isNotEmptyArray\">\n      <div v-for=\"(v, idx) in configList\" :key=\"idx\">\n        <fm-text v-if=\"v.type=='text' && v.text\"\n                            :value=\"v.text\"\n                            :has-text-margin=\"hasTextMargin\"></fm-text>\n\n        <fm-rich-text-link v-if=\"v.type=='link' && v.href && v.text\"\n                            :link-value=\"v.text\"\n                            :link-style=\"v.style\"\n                            :link-href=\"v.href\"\n                            :has-text-margin=\"hasTextMargin\"\n                            @fmRichTextLinkClick=\"linkBeClick\"></fm-rich-text-link>\n\n        <fm-icon v-if=\"v.type=='icon'\"\n                            :color=\"v.color\"\n                            :name=\"v.value\"\n                            :iconStyle=\"v.style\"></fm-icon>\n\n        <fm-tag v-if=\"v.type=='tag'\"\n                           :type=\"v.tagType\"\n                           :size=\"v.size\"\n                           :value=\"v.value\"\n                           :color=\"v.color\"\n                           :fontColor=\"v.fontColor\"></fm-tag>\n      </div>\n    </div>\n    <fm-text :value=\"configList\" v-if=\"isString\"></fm-text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-rich-text {\n    justify-content: flex-start;\n    align-items: center;\n    flex-wrap: wrap;\n    flex-direction: row;\n    flex-shrink: 1;\n  }\n\n  .default-text {\n    color: #A5A5A5;\n    font-size: 36px;\n    line-height: 48px;\n  }\n</style>\n\n<script>\nimport Utils from './utils';\nimport FmText from '../fm-text';\nimport FmIcon from '../fm-icon';\nimport FmTag from '../fm-tag';\nimport FmRichTextLink from './fm-rich-text-link.vue';\nexport default {\n  name: 'FmRichText',\n  components: {\n    FmText, FmIcon, FmTag, FmRichTextLink\n  },\n  props: {\n    configList: {\n      type: [Array, String],\n      default: function () {\n        return [];\n      }\n    },\n    hasTextMargin: {\n      type: Boolean,\n      default: true\n    }\n  },\n  data: () => ({}),\n  computed: {\n    isNotEmptyArray () {\n      return Utils.isNonEmptyArray(this.configList);\n    },\n    isString () {\n      return Utils.isString(this.configList);\n    }\n  },\n  methods: {\n    linkBeClick (obj) {\n      this.$emit('linkBeClick', obj);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-rich-text[data-v-a8d59aa2] {\n  justify-content: flex-start;\n  align-items: center;\n  flex-wrap: wrap;\n  flex-direction: row;\n  flex-shrink: 1;\n}\n.default-text[data-v-a8d59aa2] {\n  color: #A5A5A5;\n  font-size: 36px;\n  line-height: 48px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rich-text/index.vue?78aa833a"],"names":[],"mappings":";AAmCA;EACA,4BAAA;EACA,oBAAA;EACA,gBAAA;EACA,oBAAA;EACA,eAAA;CACA;AAEA;EACA,eAAA;EACA,gBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div>\n    <div class=\"fm-rich-text\" v-if=\"isNotEmptyArray\">\n      <div v-for=\"(v, idx) in configList\" :key=\"idx\">\n        <fm-text v-if=\"v.type=='text' && v.text\"\n                            :value=\"v.text\"\n                            :has-text-margin=\"hasTextMargin\"></fm-text>\n\n        <fm-rich-text-link v-if=\"v.type=='link' && v.href && v.text\"\n                            :link-value=\"v.text\"\n                            :link-style=\"v.style\"\n                            :link-href=\"v.href\"\n                            :has-text-margin=\"hasTextMargin\"\n                            @fmRichTextLinkClick=\"linkBeClick\"></fm-rich-text-link>\n\n        <fm-icon v-if=\"v.type=='icon'\"\n                            :color=\"v.color\"\n                            :name=\"v.value\"\n                            :iconStyle=\"v.style\"></fm-icon>\n\n        <fm-tag v-if=\"v.type=='tag'\"\n                           :type=\"v.tagType\"\n                           :size=\"v.size\"\n                           :value=\"v.value\"\n                           :color=\"v.color\"\n                           :fontColor=\"v.fontColor\"></fm-tag>\n      </div>\n    </div>\n    <fm-text :value=\"configList\" v-if=\"isString\"></fm-text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-rich-text {\n    justify-content: flex-start;\n    align-items: center;\n    flex-wrap: wrap;\n    flex-direction: row;\n    flex-shrink: 1;\n  }\n\n  .default-text {\n    color: #A5A5A5;\n    font-size: 36px;\n    line-height: 48px;\n  }\n</style>\n\n<script>\nimport Utils from './utils';\nimport FmText from '../fm-text';\nimport FmIcon from '../fm-icon';\nimport FmTag from '../fm-tag';\nimport FmRichTextLink from './fm-rich-text-link.vue';\nexport default {\n  name: 'FmRichText',\n  components: {\n    FmText, FmIcon, FmTag, FmRichTextLink\n  },\n  props: {\n    configList: {\n      type: [Array, String],\n      default: function () {\n        return [];\n      }\n    },\n    hasTextMargin: {\n      type: Boolean,\n      default: true\n    }\n  },\n  data: () => ({}),\n  computed: {\n    isNotEmptyArray () {\n      return Utils.isNonEmptyArray(this.configList);\n    },\n    isString () {\n      return Utils.isString(this.configList);\n    }\n  },\n  methods: {\n    linkBeClick (obj) {\n      this.$emit('linkBeClick', obj);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11850,7 +12602,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _utils = __webpack_require__(85);
+var _utils = __webpack_require__(73);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -11858,15 +12610,15 @@ var _fmText = __webpack_require__(3);
 
 var _fmText2 = _interopRequireDefault(_fmText);
 
-var _fmIcon = __webpack_require__(4);
+var _fmIcon = __webpack_require__(6);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
-var _fmTag = __webpack_require__(50);
+var _fmTag = __webpack_require__(45);
 
 var _fmTag2 = _interopRequireDefault(_fmTag);
 
-var _fmRichTextLink = __webpack_require__(152);
+var _fmRichTextLink = __webpack_require__(153);
 
 var _fmRichTextLink2 = _interopRequireDefault(_fmRichTextLink);
 
@@ -11953,16 +12705,18 @@ exports.default = {
 //
 //
 //
+//
+//
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(153),
-  /* template */
   __webpack_require__(154),
+  /* template */
+  __webpack_require__(155),
   /* scopeId */
   null,
   /* cssModules */
@@ -11989,7 +12743,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12042,9 +12796,11 @@ exports.default = {
 //
 //
 //
+//
+//
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12072,7 +12828,7 @@ if (false) {
 }
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12140,7 +12896,7 @@ if (false) {
 }
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12150,7 +12906,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(157);
+var _index = __webpack_require__(158);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -12162,18 +12918,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 157 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(158)
+__webpack_require__(159)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(160),
-  /* template */
   __webpack_require__(161),
+  /* template */
+  __webpack_require__(162),
   /* scopeId */
   "data-v-584ad4ca",
   /* cssModules */
@@ -12200,13 +12956,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(159);
+var content = __webpack_require__(160);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -12226,7 +12982,7 @@ if(false) {
 }
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -12234,13 +12990,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-special-rich-text[data-v-584ad4ca] {\n  position: relative;\n}\n.tag-div[data-v-584ad4ca] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  color: #A5A5A5;\n  font-size: 36px;\n  line-height: 48px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-special-rich-text/index.vue?8fdb50e6"],"names":[],"mappings":";AAmBA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;EACA,OAAA;EACA,QAAA;EACA,eAAA;EACA,gBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"fm-special-rich-text\">\n    <div class=\"tag-div\"\n         :style=\"{top:top+'px'}\">\n      <fm-icon v-if=\"newList[0].type == 'icon' && newList[0].value\"\n                          :name=\"newList[0].value\"\n                          :iconStyle=\"newList[0].style\"></fm-icon>\n      <fm-tag v-if=\"newList[0].type=='tag'\"\n                          :type=\"newList[0].tagType\"\n                          :size=\"newList[0].size\"\n                          :value=\"newList[0].value\"\n                          :color=\"newList[0].color\"\n                          :fontColor=\"newList[0].fontColor\"></fm-tag>\n    </div>\n    <fm-text :value=\"newList[1].value\" v-if=\"newList[1].value\"></fm-text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-special-rich-text {\n    position: relative;\n  }\n\n  .tag-div {\n    position: absolute;\n    top: 0;\n    left: 0;\n    color: #A5A5A5;\n    font-size: 36px;\n    line-height: 48px;\n  }\n</style>\n\n<script>\nimport Utils from '../fm-rich-text/utils';\nimport FmText from '../fm-text';\nimport FmIcon from '../fm-icon';\nimport FmTag from '../fm-tag';\nexport default {\n  name: 'FmSpecialRichText',\n  components: {\n    FmText, FmIcon, FmTag\n  },\n  props: {\n    configList: {\n      type: [Array, String],\n      default: () => ({})\n    }\n  },\n  computed: {\n    newList () {\n      const { configList } = this;\n      if (Utils.isNonEmptyArray(configList) && configList.length === 2) {\n        let r1 = configList[0];\n        let r2 = configList[1];\n        const iconStyle = r1.style;\n        const textStyle = r2.style;\n        let style = {};\n        let fontSize = 36;\n        const tagWidth = iconStyle && iconStyle.width ? iconStyle.width : 36;\n\n        if (textStyle && textStyle.fontSize) {\n          fontSize = textStyle.fontSize;\n          style = {\n            fontSize: textStyle.fontSize,\n            lineHeight: textStyle.fontSize * 1.4\n          };\n        }\n\n        if (textStyle && textStyle.color) {\n          style = {\n            ...style,\n            color: textStyle.color\n          };\n        }\n\n        if (r1.type === 'tag' && iconStyle && iconStyle.width) {\n          r1 = {\n            ...r1,\n            style: { ...iconStyle, width: null }\n          };\n        }\n        const newValue = r2.value ? new Array(Math.ceil(tagWidth / fontSize) + 1).join('   ') + `  ${r2.value}` : '';\n        r2 = {\n          ...r2,\n          style,\n          value: newValue\n        };\n        return [r1, r2];\n      } else {\n        return [];\n      }\n    },\n    top () {\n      const { configList } = this;\n      if (configList[0].type === 'tag') return 0;\n      if (Utils.isNonEmptyArray(configList) && configList.length === 2) {\n        const iconStyle = configList[0].style;\n        const textStyle = configList[1].style;\n        let fontSize = 36;\n        const tagHeight = iconStyle && iconStyle.height ? iconStyle.height : 39;\n        if (textStyle && textStyle.fontSize) {\n          fontSize = textStyle.fontSize;\n        }\n        return Math.ceil((fontSize * 1.3 - tagHeight) / 2);\n      } else {\n        return 0;\n      }\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-special-rich-text[data-v-584ad4ca] {\n  position: relative;\n}\n.tag-div[data-v-584ad4ca] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  color: #A5A5A5;\n  font-size: 36px;\n  line-height: 48px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-special-rich-text/index.vue?3d052ea2"],"names":[],"mappings":";AAqBA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;EACA,OAAA;EACA,QAAA;EACA,eAAA;EACA,gBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div class=\"fm-special-rich-text\">\n    <div class=\"tag-div\"\n         :style=\"{top:top+'px'}\">\n      <fm-icon v-if=\"newList[0].type == 'icon' && newList[0].value\"\n                          :name=\"newList[0].value\"\n                          :iconStyle=\"newList[0].style\"></fm-icon>\n      <fm-tag v-if=\"newList[0].type=='tag'\"\n                          :type=\"newList[0].tagType\"\n                          :size=\"newList[0].size\"\n                          :value=\"newList[0].value\"\n                          :color=\"newList[0].color\"\n                          :fontColor=\"newList[0].fontColor\"></fm-tag>\n    </div>\n    <fm-text :value=\"newList[1].value\" v-if=\"newList[1].value\"></fm-text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-special-rich-text {\n    position: relative;\n  }\n\n  .tag-div {\n    position: absolute;\n    top: 0;\n    left: 0;\n    color: #A5A5A5;\n    font-size: 36px;\n    line-height: 48px;\n  }\n</style>\n\n<script>\nimport Utils from '../fm-rich-text/utils';\nimport FmText from '../fm-text';\nimport FmIcon from '../fm-icon';\nimport FmTag from '../fm-tag';\nexport default {\n  name: 'FmSpecialRichText',\n  components: {\n    FmText, FmIcon, FmTag\n  },\n  props: {\n    configList: {\n      type: [Array, String],\n      default: () => ({})\n    }\n  },\n  computed: {\n    newList () {\n      const { configList } = this;\n      if (Utils.isNonEmptyArray(configList) && configList.length === 2) {\n        let r1 = configList[0];\n        let r2 = configList[1];\n        const iconStyle = r1.style;\n        const textStyle = r2.style;\n        let style = {};\n        let fontSize = 36;\n        const tagWidth = iconStyle && iconStyle.width ? iconStyle.width : 36;\n\n        if (textStyle && textStyle.fontSize) {\n          fontSize = textStyle.fontSize;\n          style = {\n            fontSize: textStyle.fontSize,\n            lineHeight: textStyle.fontSize * 1.4\n          };\n        }\n\n        if (textStyle && textStyle.color) {\n          style = {\n            ...style,\n            color: textStyle.color\n          };\n        }\n\n        if (r1.type === 'tag' && iconStyle && iconStyle.width) {\n          r1 = {\n            ...r1,\n            style: { ...iconStyle, width: null }\n          };\n        }\n        const newValue = r2.value ? new Array(Math.ceil(tagWidth / fontSize) + 1).join('   ') + `  ${r2.value}` : '';\n        r2 = {\n          ...r2,\n          style,\n          value: newValue\n        };\n        return [r1, r2];\n      } else {\n        return [];\n      }\n    },\n    top () {\n      const { configList } = this;\n      if (configList[0].type === 'tag') return 0;\n      if (Utils.isNonEmptyArray(configList) && configList.length === 2) {\n        const iconStyle = configList[0].style;\n        const textStyle = configList[1].style;\n        let fontSize = 36;\n        const tagHeight = iconStyle && iconStyle.height ? iconStyle.height : 39;\n        if (textStyle && textStyle.fontSize) {\n          fontSize = textStyle.fontSize;\n        }\n        return Math.ceil((fontSize * 1.3 - tagHeight) / 2);\n      } else {\n        return 0;\n      }\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 160 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12283,8 +13039,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
-var _utils = __webpack_require__(85);
+var _utils = __webpack_require__(73);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -12292,11 +13050,11 @@ var _fmText = __webpack_require__(3);
 
 var _fmText2 = _interopRequireDefault(_fmText);
 
-var _fmIcon = __webpack_require__(4);
+var _fmIcon = __webpack_require__(6);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
-var _fmTag = __webpack_require__(50);
+var _fmTag = __webpack_require__(45);
 
 var _fmTag2 = _interopRequireDefault(_fmTag);
 
@@ -12378,7 +13136,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 161 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12426,7 +13184,7 @@ if (false) {
 }
 
 /***/ }),
-/* 162 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12436,7 +13194,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(163);
+var _index = __webpack_require__(164);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -12448,18 +13206,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 163 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(164)
+__webpack_require__(165)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(166),
-  /* template */
   __webpack_require__(167),
+  /* template */
+  __webpack_require__(168),
   /* scopeId */
   "data-v-52ae49d0",
   /* cssModules */
@@ -12486,13 +13244,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 164 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(165);
+var content = __webpack_require__(166);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -12512,7 +13270,7 @@ if(false) {
 }
 
 /***/ }),
-/* 165 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -12520,13 +13278,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.container[data-v-52ae49d0] {\n  position: relative;\n}\n.text[data-v-52ae49d0] {\n  font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n  color: #999999;\n}\n.text_small[data-v-52ae49d0] {\n  font-size: 36px;\n  line-height: 42px;\n}\n.text_large[data-v-52ae49d0] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 48px;\n  font-weight: 500;\n  line-height: 72px;\n}\n.text_huge[data-v-52ae49d0] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 54px;\n  line-height: 78px;\n}\n.more[data-v-52ae49d0] {\n  position: absolute;\n  right: 18px;\n  bottom: 0;\n  font-family: sans-serif-medium;\n  font-weight: 500;\n}\n.test[data-v-52ae49d0] {\n  flex-direction: row;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-foldable-text/index.vue?30e80c3a"],"names":[],"mappings":";AAUA;EACA,mBAAA;CACA;AACA;EACA,sDAAA;EACA,eAAA;CACA;AACA;EACA,gBAAA;EACA,kBAAA;CACA;AACA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,iBAAA;EACA,kBAAA;CACA;AACA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AACA;EACA,mBAAA;EACA,YAAA;EACA,UAAA;EACA,+BAAA;EACA,iBAAA;CACA;AACA;EACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"wrapper\" @click=\"fold\">\n    <div class=\"container\" ref=\"plane\" :style=\"planeStyle\">\n      <text :class=\"textClz\" ref=\"text\" :style=\"textStyle\">{{ getText }}</text>\n      <text class=\"more\" v-if=\"foldable && folded\" ref=\"more\" :style=\"moreStyle\">{{ tipValue }}</text>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .container {\n    position: relative;\n  }\n  .text {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    color: #999999;\n  }\n  .text_small {\n    font-size: 36px;\n    line-height: 42px;\n  }\n  .text_large {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    font-weight: 500;\n    line-height: 72px;\n  }\n  .text_huge {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 54px;\n    line-height: 78px;\n  }\n  .more {\n    position: absolute;\n    right: 18px;\n    bottom: 0;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n  }\n  .test {\n    flex-direction: row;\n  }\n</style>\n\n<script>\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmFoldableText',\n  mixins: [Locale],\n  data () {\n    return {\n      expandHeight: '',\n      unexpandHeight: '',\n      animationHeight: '',\n      foldText: '',\n      foldable: true\n    };\n  },\n  props: {\n    width: {\n      type: Number,\n      default: 1020\n    },\n    text: {\n      type: String,\n      default: ''\n    },\n    lines: {\n      type: Number,\n      default: 2\n    },\n    folded: {\n      type: Boolean,\n      default: true\n    },\n    small: {\n      type: Boolean,\n      default: true\n    },\n    large: Boolean,\n    huge: Boolean,\n    textStyle: Object,\n    tipStyle: Object,\n    tipValue: {\n      type: String,\n      default () {\n        return t('el.foldabletext.more');\n      }\n    }\n  },\n  mounted () {\n    if (this.foldText === '') {\n      const { textStyle } = this;\n      const fontSize = (textStyle && textStyle.fontSize) ? textStyle.fontSize : this.large ? 48 : this.huge ? 54 : 36;\n      // 计算折叠后的文本\n      const size1 = fontSize + 36 * 0.04; // 汉字\n      const size2 = fontSize * 0.56; // 英文\n      const size3 = fontSize * 0.556; // 数字\n      const size4 = fontSize * 0.80; // 全角\n      const size5 = fontSize * 0.2; // 半角\n      let tSize = 0;\n      let tmpStr = '';\n      const hideWidth = this.width * this.lines + fontSize; // 不显示“更多”情况下所能容纳最大的字体宽度\n      const maxWith = this.width * this.lines - size1 * this.tipValue.length; // 显示“更多”情况下所能容纳最大的字体宽度\n      for (const c of this.text) {\n        if (/^[\\u4e00-\\u9fa5]/.test(c)) {\n          // 汉字\n          tSize += size1;\n        } else if (/^[a-zA-Z]/.test(c)) {\n          // 英文\n          tSize += size2;\n        } else if (/^[0-9]/.test(c)) {\n          // 数字\n          tSize += size3;\n        } else if (/^[·《》，。？、：；“”‘’——【】]/.test(c)) {\n          // 全角\n          tSize += size4;\n        } else if (/^[`~!@#\\$%\\^&\\*\\(\\)_\\-\\+=\\{\\}\\[\\]|\\\\:;\"'<>,.\\?\\/\\s]/.test(c)) {\n          // 半角\n          tSize += size5;\n        } else {\n          // 其他\n          tSize += size1;\n        }\n        if (tSize >= maxWith) {\n          if (tSize >= hideWidth) {\n            tmpStr += '..';\n            break;\n          }\n        } else {\n          tmpStr += c;\n        }\n      }\n      // 文字不超过范围 不折叠\n      (tSize < hideWidth) && (this.foldable = false) && (this.folded = false);\n      this.foldText = tmpStr;\n    }\n  },\n  computed: {\n    getText () {\n      return this.folded && this.foldable ? this.foldText : this.text;\n    },\n    planeStyle () {\n      return {\n        width: this.width\n      };\n    },\n    moreStyle () {\n      return {\n        fontSize: this.large ? 48 : this.huge ? 54 : 36,\n        lineHeight: this.large ? 72 : this.huge ? 78 : 42,\n        color: '#198ded',\n        fontWeight: '600',\n        ...this.tipStyle\n      };\n    },\n    textClz () {\n      const clz = ['text', 'text_small'];\n      if (this.large) {\n        clz.push('text_large');\n      } else if (this.huge) {\n        clz.push('text_huge');\n      }\n      return clz;\n    }\n  },\n  methods: {\n    fold () {\n      this.foldable && (this.folded = !this.folded);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.container[data-v-52ae49d0] {\n  position: relative;\n}\n.text[data-v-52ae49d0] {\n  font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n  color: #999999;\n}\n.text_small[data-v-52ae49d0] {\n  font-size: 36px;\n  line-height: 42px;\n}\n.text_large[data-v-52ae49d0] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 48px;\n  font-weight: 500;\n  line-height: 72px;\n}\n.text_huge[data-v-52ae49d0] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 54px;\n  line-height: 78px;\n}\n.more[data-v-52ae49d0] {\n  position: absolute;\n  right: 18px;\n  bottom: 0;\n  font-family: sans-serif-medium;\n  font-weight: 500;\n}\n.test[data-v-52ae49d0] {\n  flex-direction: row;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-foldable-text/index.vue?88cc6f38"],"names":[],"mappings":";AAYA;EACA,mBAAA;CACA;AACA;EACA,sDAAA;EACA,eAAA;CACA;AACA;EACA,gBAAA;EACA,kBAAA;CACA;AACA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,iBAAA;EACA,kBAAA;CACA;AACA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AACA;EACA,mBAAA;EACA,YAAA;EACA,UAAA;EACA,+BAAA;EACA,iBAAA;CACA;AACA;EACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. [!] Just a beta version! -->\n<template>\n  <div class=\"wrapper\" @click=\"fold\">\n    <div class=\"container\" ref=\"plane\" :style=\"planeStyle\">\n      <text :class=\"textClz\" ref=\"text\" :style=\"textStyle\">{{ getText }}</text>\n      <text class=\"more\" v-if=\"foldable && folded\" ref=\"more\" :style=\"moreStyle\">{{ tipValue }}</text>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .container {\n    position: relative;\n  }\n  .text {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    color: #999999;\n  }\n  .text_small {\n    font-size: 36px;\n    line-height: 42px;\n  }\n  .text_large {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    font-weight: 500;\n    line-height: 72px;\n  }\n  .text_huge {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 54px;\n    line-height: 78px;\n  }\n  .more {\n    position: absolute;\n    right: 18px;\n    bottom: 0;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n  }\n  .test {\n    flex-direction: row;\n  }\n</style>\n\n<script>\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmFoldableText',\n  mixins: [Locale],\n  data () {\n    return {\n      expandHeight: '',\n      unexpandHeight: '',\n      animationHeight: '',\n      foldText: '',\n      foldable: true\n    };\n  },\n  props: {\n    width: {\n      type: Number,\n      default: 1020\n    },\n    text: {\n      type: String,\n      default: ''\n    },\n    lines: {\n      type: Number,\n      default: 2\n    },\n    folded: {\n      type: Boolean,\n      default: true\n    },\n    small: {\n      type: Boolean,\n      default: true\n    },\n    large: Boolean,\n    huge: Boolean,\n    textStyle: Object,\n    tipStyle: Object,\n    tipValue: {\n      type: String,\n      default () {\n        return t('el.foldabletext.more');\n      }\n    }\n  },\n  mounted () {\n    if (this.foldText === '') {\n      const { textStyle } = this;\n      const fontSize = (textStyle && textStyle.fontSize) ? textStyle.fontSize : this.large ? 48 : this.huge ? 54 : 36;\n      // 计算折叠后的文本\n      const size1 = fontSize + 36 * 0.04; // 汉字\n      const size2 = fontSize * 0.56; // 英文\n      const size3 = fontSize * 0.556; // 数字\n      const size4 = fontSize * 0.80; // 全角\n      const size5 = fontSize * 0.2; // 半角\n      let tSize = 0;\n      let tmpStr = '';\n      const hideWidth = this.width * this.lines + fontSize; // 不显示“更多”情况下所能容纳最大的字体宽度\n      const maxWith = this.width * this.lines - size1 * this.tipValue.length; // 显示“更多”情况下所能容纳最大的字体宽度\n      for (const c of this.text) {\n        if (/^[\\u4e00-\\u9fa5]/.test(c)) {\n          // 汉字\n          tSize += size1;\n        } else if (/^[a-zA-Z]/.test(c)) {\n          // 英文\n          tSize += size2;\n        } else if (/^[0-9]/.test(c)) {\n          // 数字\n          tSize += size3;\n        } else if (/^[·《》，。？、：；“”‘’——【】]/.test(c)) {\n          // 全角\n          tSize += size4;\n        } else if (/^[`~!@#\\$%\\^&\\*\\(\\)_\\-\\+=\\{\\}\\[\\]|\\\\:;\"'<>,.\\?\\/\\s]/.test(c)) {\n          // 半角\n          tSize += size5;\n        } else {\n          // 其他\n          tSize += size1;\n        }\n        if (tSize >= maxWith) {\n          if (tSize >= hideWidth) {\n            tmpStr += '..';\n            break;\n          }\n        } else {\n          tmpStr += c;\n        }\n      }\n      // 文字不超过范围 不折叠\n      (tSize < hideWidth) && (this.foldable = false) && (this.folded = false);\n      this.foldText = tmpStr;\n    }\n  },\n  computed: {\n    getText () {\n      return this.folded && this.foldable ? this.foldText : this.text;\n    },\n    planeStyle () {\n      return {\n        width: this.width\n      };\n    },\n    moreStyle () {\n      return {\n        fontSize: this.large ? 48 : this.huge ? 54 : 36,\n        lineHeight: this.large ? 72 : this.huge ? 78 : 42,\n        color: '#198ded',\n        fontWeight: '600',\n        ...this.tipStyle\n      };\n    },\n    textClz () {\n      const clz = ['text', 'text_small'];\n      if (this.large) {\n        clz.push('text_large');\n      } else if (this.huge) {\n        clz.push('text_huge');\n      }\n      return clz;\n    }\n  },\n  methods: {\n    fold () {\n      this.foldable && (this.folded = !this.folded);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 166 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12582,12 +13340,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 var _locale = __webpack_require__(34);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(28);
+var _locale3 = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12743,7 +13503,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 167 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12780,18 +13540,18 @@ if (false) {
 }
 
 /***/ }),
-/* 168 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(169)
+__webpack_require__(170)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(171),
-  /* template */
   __webpack_require__(172),
+  /* template */
+  __webpack_require__(173),
   /* scopeId */
   "data-v-2016588d",
   /* cssModules */
@@ -12818,13 +13578,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 169 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(170);
+var content = __webpack_require__(171);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -12844,7 +13604,7 @@ if(false) {
 }
 
 /***/ }),
-/* 170 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -12852,13 +13612,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.container[data-v-2016588d] {\n  position: fixed;\n  width: 1080px;\n  /*兼容H5异常*/\n  z-index: 99999;\n}\n.dialog-box[data-v-2016588d] {\n  width: 936px;\n  background-color: #FFFFFF;\n  border-radius: 10px;\n  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);\n}\n.dialog-box-H5[data-v-2016588d] {\n  position: fixed;\n  left: 72px;\n}\n.content-title[data-v-2016588d] {\n  margin-top: 63px;\n  padding-left: 72px;\n  padding-right: 72px;\n  margin-bottom: 18px;\n}\n.content-subtext[data-v-2016588d] {\n  padding-left: 72px;\n  padding-right: 72px;\n}\n.dialog-footer[data-v-2016588d] {\n  justify-content: center;\n  align-items: center;\n  flex-wrap: wrap;\n  padding: 36px 0;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-dialog/index.vue?e8506710"],"names":[],"mappings":";AAsCA;EACA,gBAAA;EACA,cAAA;EACA,UAAA;EACA,eAAA;CACA;AAEA;EACA,aAAA;EACA,0BAAA;EACA,oBAAA;EACA,0CAAA;CACA;AAEA;EACA,gBAAA;EACA,WAAA;CACA;AAEA;EACA,iBAAA;EACA,mBAAA;EACA,oBAAA;EACA,oBAAA;CACA;AAEA;EACA,mBAAA;EACA,oBAAA;CACA;AAEA;EACA,wBAAA;EACA,oBAAA;EACA,gBAAA;EACA,gBAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on one day. -->\n<!-- Update by Yanjiie on 2018/03/14. [!] Just a beta version! -->\n<template>\n  <component class=\"container\"\n             :is=\"isCreator ? 'FmOverlayNative' : 'div'\"\n             :visible=\"self_show\"\n             @onDismiss=\"overlayClicked\"\n             :touchable='canAutoClose'>\n      <fm-overlay v-if=\"self_show && !isCreator\"\n                  :hasAnimation=\"true\"\n                  :canAutoClose=\"false\"\n                  :opacity=\"overlayOpacity\"\n                  @fmOverlayBodyClicked=\"overlayClicked\"\n                  ref=\"fm-overlay\"></fm-overlay>\n      <div class=\"dialog-box\"\n           :class=\"!isCreator && ['dialog-box-H5']\"\n           ref=\"dialog-box\"\n           v-if=\"self_show || isCreator\"\n           :style=\"dialogStyle\"\n           @touchend=\"handleTouchEnd\">\n        <div class=\"dialog-content\">\n          <slot name=\"title\">\n            <fm-text class=\"content-title\" font-weight=\"medium\" size=\"large\">{{ title }}</fm-text>\n          </slot>\n          <slot name=\"content\">\n            <fm-text class=\"content-subtext\">{{ content }}</fm-text>\n          </slot>\n        </div>\n        <div class=\"dialog-footer\" :style=\"btnStyle\">\n          <slot name=\"btn-group\">\n            <fm-simple-btn v-for=\"(btn, index) in dialogBtns\" scene=\"dialog\" v-bind=\"btn\" @click=\"btnClick\" :key=\"index\"></fm-simple-btn>\n          </slot>\n        </div>\n      </div>\n  </component>\n</template>\n\n<style scoped>\n  .container {\n    position: fixed;\n    width: 1080px;\n    /*兼容H5异常*/\n    z-index: 99999;\n  }\n\n  .dialog-box {\n    width: 936px;\n    background-color: #FFFFFF;\n    border-radius: 10px;\n    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);\n  }\n\n  .dialog-box-H5 {\n    position: fixed;\n    left: 72px;\n  }\n\n  .content-title {\n    margin-top: 63px;\n    padding-left: 72px;\n    padding-right: 72px;\n    margin-bottom: 18px;\n  }\n\n  .content-subtext {\n    padding-left: 72px;\n    padding-right: 72px;\n  }\n\n  .dialog-footer {\n    justify-content: center;\n    align-items: center;\n    flex-wrap: wrap;\n    padding: 36px 0;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nconst type_alert = 'alert';\nconst type_confirm = 'confirm';\nimport FmOverlay from '../fm-overlay';\nimport FmText from '../fm-text';\nimport FmSimpleBtn from '../fm-simple-btn';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmDialog',\n  mixins: [Locale],\n  components: { FmOverlay, FmText, FmSimpleBtn },\n  props: {\n    show: {\n      type: Boolean,\n      default: false\n    },\n    title: {\n      type: String,\n      default: ''\n    },\n    content: {\n      type: String,\n      default: ''\n    },\n    top: {\n      type: Number,\n      default: 400\n    },\n    cancelText: {\n      type: String,\n      default () {\n        return t('el.common.cancel');\n      }\n    },\n    confirmText: {\n      type: String,\n      default () {\n        return t('el.common.confirm');\n      }\n    },\n    confirmColor: {\n      type: String,\n      default: '#198DED'\n    },\n    cancelColor: {\n      type: String,\n      default: '#198DED'\n    },\n    hasAnimation: {\n      type: Boolean,\n      default: true\n    },\n    duration: {\n      type: Number,\n      default: 300\n    },\n    timingFunction: {\n      type: Array,\n      default: () => (['ease-out', 'ease-out'])\n    },\n    canAutoClose: {\n      type: Boolean,\n      default: true\n    },\n    btns: {\n      type: Array,\n      default: () => ([])\n    },\n    btnDirection: {\n      type: String,\n      default: 'row'\n    },\n    cancelCb: Function,\n    confirmCb: Function,\n    type: {\n      type: String,\n      default: type_confirm\n    },\n    overlayOpacity: {\n      type: Number,\n      default: 0.5\n    }\n  },\n  data: () => ({\n    pageHeight: 1334,\n    self_show: false,\n    dialogOpacity: 0\n  }),\n  created () {\n    const { env: { deviceHeight, deviceWidth }} = weex.config;\n    this.pageHeight = deviceHeight / deviceWidth * 1080;\n    this.self_show = this.show;\n  },\n  watch: {\n    show: function (val, oldVal) {\n      if (val) {\n        this.self_show = true;\n        setTimeout(() => {\n          this.appearDialog(true);\n        }, 50);\n      } else {\n        !this.isCreator && this.$refs['fm-overlay'].hide();\n        this.appearDialog(false);\n      }\n    }\n  },\n  computed: {\n    isCreator () {\n      return weex.supports && weex.supports('@component/FmOverlayNative');\n    },\n    dialogBtns () {\n      let btns = [];\n      if (!this.btns || !this.btns.length) {\n        if (this.type === type_alert) {\n          btns = [{\n            text: this.confirmText,\n            color: this.confirmColor,\n            type: 'confirm'\n          }];\n        } else if (this.type === type_confirm) {\n          btns = [{\n            text: this.cancelText,\n            color: this.cancelColor,\n            type: 'cancel'\n          }, {\n            text: this.confirmText,\n            color: this.confirmColor,\n            type: 'confirm'\n          }];\n        }\n      } else {\n        btns = btns.concat(this.btns);\n      }\n      return btns;\n    },\n    dialogStyle () {\n      return {\n        opacity: this.dialogOpacity,\n        top: !this.isCreator ? this.top : 0\n      };\n    },\n    btnStyle () {\n      const { btnDirection, btns } = this;\n      return {\n        flexDirection: btns.length > 2 ? 'column' : btnDirection\n      };\n    }\n  },\n  methods: {\n    handleTouchEnd (e) {\n      // 原生上有点击穿透问题\n      e.preventDefault && e.preventDefault();\n    },\n    overlayClicked () {\n      this.canAutoClose && (this.appearDialog(false) || this.$emit('fmDialogDisappeared', {}));\n      this.cancelCb && this.cancelCb();\n    },\n    btnClick (btn) {\n      if (btn.type && btn.type === 'cancel') {\n        this.$emit('fmDialogBtnClicked', { type: 'cancel' });\n        this.cancelCb && this.cancelCb();\n      } else if (btn.type && btn.type === 'confirm') {\n        this.$emit('fmDialogBtnClicked', { type: 'confirm' });\n        this.confirmCb && this.confirmCb();\n      } else {\n        this.$emit('fmDialogBtnClicked', btn);\n      }\n    },\n    appearDialog (bool, duration = this.duration) {\n      const { hasAnimation, timingFunction, isCreator } = this;\n      if (isCreator) {\n        this.self_show = bool;\n        this.dialogOpacity = bool ? 1 : 0;\n        return;\n      }\n      const dialogEl = this.$refs['dialog-box'];\n      this.dialogOpacity = bool ? 0 : 1;\n      if (hasAnimation && dialogEl) {\n        animation.transition(dialogEl, {\n          styles: {\n            opacity: bool ? 1 : 0\n          },\n          duration,\n          timingFunction: timingFunction[bool ? 0 : 1],\n          delay: 0\n        }, () => {\n          this.self_show = bool;\n          this.dialogOpacity = bool ? 1 : 0;\n        });\n      } else {\n        this.self_show = bool;\n        this.dialogOpacity = bool ? 1 : 0;\n      }\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.container[data-v-2016588d] {\n  position: fixed;\n  width: 1080px;\n  /*兼容H5异常*/\n  z-index: 99999;\n}\n.dialog-box[data-v-2016588d] {\n  width: 936px;\n  background-color: #FFFFFF;\n  border-radius: 10px;\n  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);\n}\n.dialog-box-H5[data-v-2016588d] {\n  position: fixed;\n  left: 72px;\n}\n.content-title[data-v-2016588d] {\n  margin-top: 63px;\n  padding-left: 72px;\n  padding-right: 72px;\n  margin-bottom: 18px;\n}\n.content-subtext[data-v-2016588d] {\n  padding-left: 72px;\n  padding-right: 72px;\n}\n.dialog-footer[data-v-2016588d] {\n  justify-content: center;\n  align-items: center;\n  flex-wrap: wrap;\n  padding: 36px 0;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-dialog/index.vue?09157c5a"],"names":[],"mappings":";AAsCA;EACA,gBAAA;EACA,cAAA;EACA,UAAA;EACA,eAAA;CACA;AAEA;EACA,aAAA;EACA,0BAAA;EACA,oBAAA;EACA,0CAAA;CACA;AAEA;EACA,gBAAA;EACA,WAAA;CACA;AAEA;EACA,iBAAA;EACA,mBAAA;EACA,oBAAA;EACA,oBAAA;CACA;AAEA;EACA,mBAAA;EACA,oBAAA;CACA;AAEA;EACA,wBAAA;EACA,oBAAA;EACA,gBAAA;EACA,gBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/03/14. [!] Just a beta version! -->\n<template>\n  <component class=\"container\"\n             :is=\"isCreator ? 'FmOverlayNative' : 'div'\"\n             :visible=\"self_show\"\n             @onDismiss=\"overlayClicked\"\n             :touchable='canAutoClose'>\n      <fm-overlay v-if=\"self_show && !isCreator\"\n                  :hasAnimation=\"true\"\n                  :canAutoClose=\"false\"\n                  :opacity=\"overlayOpacity\"\n                  @fmOverlayBodyClicked=\"overlayClicked\"\n                  ref=\"fm-overlay\"></fm-overlay>\n      <div class=\"dialog-box\"\n           :class=\"!isCreator && ['dialog-box-H5']\"\n           ref=\"dialog-box\"\n           v-if=\"self_show || isCreator\"\n           :style=\"dialogStyle\"\n           @touchend=\"handleTouchEnd\">\n        <div class=\"dialog-content\">\n          <slot name=\"title\">\n            <fm-text class=\"content-title\" font-weight=\"medium\" size=\"large\">{{ title }}</fm-text>\n          </slot>\n          <slot name=\"content\">\n            <fm-text class=\"content-subtext\">{{ content }}</fm-text>\n          </slot>\n        </div>\n        <div class=\"dialog-footer\" :style=\"btnStyle\">\n          <slot name=\"btn-group\">\n            <fm-simple-btn v-for=\"(btn, index) in dialogBtns\" scene=\"dialog\" v-bind=\"btn\" @click=\"btnClick\" :key=\"index\"></fm-simple-btn>\n          </slot>\n        </div>\n      </div>\n  </component>\n</template>\n\n<style scoped>\n  .container {\n    position: fixed;\n    width: 1080px;\n    /*兼容H5异常*/\n    z-index: 99999;\n  }\n\n  .dialog-box {\n    width: 936px;\n    background-color: #FFFFFF;\n    border-radius: 10px;\n    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);\n  }\n\n  .dialog-box-H5 {\n    position: fixed;\n    left: 72px;\n  }\n\n  .content-title {\n    margin-top: 63px;\n    padding-left: 72px;\n    padding-right: 72px;\n    margin-bottom: 18px;\n  }\n\n  .content-subtext {\n    padding-left: 72px;\n    padding-right: 72px;\n  }\n\n  .dialog-footer {\n    justify-content: center;\n    align-items: center;\n    flex-wrap: wrap;\n    padding: 36px 0;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nconst type_alert = 'alert';\nconst type_confirm = 'confirm';\nimport FmOverlay from '../fm-overlay';\nimport FmText from '../fm-text';\nimport FmSimpleBtn from '../fm-simple-btn';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmDialog',\n  mixins: [Locale],\n  components: { FmOverlay, FmText, FmSimpleBtn },\n  props: {\n    show: {\n      type: Boolean,\n      default: false\n    },\n    title: {\n      type: String,\n      default: ''\n    },\n    content: {\n      type: String,\n      default: ''\n    },\n    top: {\n      type: Number,\n      default: 400\n    },\n    cancelText: {\n      type: String,\n      default () {\n        return t('el.common.cancel');\n      }\n    },\n    confirmText: {\n      type: String,\n      default () {\n        return t('el.common.confirm');\n      }\n    },\n    confirmColor: {\n      type: String,\n      default: '#198DED'\n    },\n    cancelColor: {\n      type: String,\n      default: '#198DED'\n    },\n    hasAnimation: {\n      type: Boolean,\n      default: true\n    },\n    duration: {\n      type: Number,\n      default: 300\n    },\n    timingFunction: {\n      type: Array,\n      default: () => (['ease-out', 'ease-out'])\n    },\n    canAutoClose: {\n      type: Boolean,\n      default: true\n    },\n    btns: {\n      type: Array,\n      default: () => ([])\n    },\n    btnDirection: {\n      type: String,\n      default: 'row'\n    },\n    cancelCb: Function,\n    confirmCb: Function,\n    type: {\n      type: String,\n      default: type_confirm\n    },\n    overlayOpacity: {\n      type: Number,\n      default: 0.5\n    }\n  },\n  data: () => ({\n    pageHeight: 1334,\n    self_show: false,\n    dialogOpacity: 0\n  }),\n  created () {\n    const { env: { deviceHeight, deviceWidth }} = weex.config;\n    this.pageHeight = deviceHeight / deviceWidth * 1080;\n    this.self_show = this.show;\n  },\n  watch: {\n    show: function (val, oldVal) {\n      if (val) {\n        this.self_show = true;\n        setTimeout(() => {\n          this.appearDialog(true);\n        }, 50);\n      } else {\n        !this.isCreator && this.$refs['fm-overlay'].hide();\n        this.appearDialog(false);\n      }\n    }\n  },\n  computed: {\n    isCreator () {\n      return weex.supports && weex.supports('@component/FmOverlayNative');\n    },\n    dialogBtns () {\n      let btns = [];\n      if (!this.btns || !this.btns.length) {\n        if (this.type === type_alert) {\n          btns = [{\n            text: this.confirmText,\n            color: this.confirmColor,\n            type: 'confirm'\n          }];\n        } else if (this.type === type_confirm) {\n          btns = [{\n            text: this.cancelText,\n            color: this.cancelColor,\n            type: 'cancel'\n          }, {\n            text: this.confirmText,\n            color: this.confirmColor,\n            type: 'confirm'\n          }];\n        }\n      } else {\n        btns = btns.concat(this.btns);\n      }\n      return btns;\n    },\n    dialogStyle () {\n      return {\n        opacity: this.dialogOpacity,\n        top: !this.isCreator ? this.top : 0\n      };\n    },\n    btnStyle () {\n      const { btnDirection, btns } = this;\n      return {\n        flexDirection: btns.length > 2 ? 'column' : btnDirection\n      };\n    }\n  },\n  methods: {\n    handleTouchEnd (e) {\n      // 原生上有点击穿透问题\n      e.preventDefault && e.preventDefault();\n    },\n    overlayClicked () {\n      this.canAutoClose && (this.appearDialog(false) || this.$emit('fmDialogDisappeared', {}));\n      this.cancelCb && this.cancelCb();\n    },\n    btnClick (btn) {\n      if (btn.type && btn.type === 'cancel') {\n        this.$emit('fmDialogBtnClicked', { type: 'cancel' });\n        this.cancelCb && this.cancelCb();\n      } else if (btn.type && btn.type === 'confirm') {\n        this.$emit('fmDialogBtnClicked', { type: 'confirm' });\n        this.confirmCb && this.confirmCb();\n      } else {\n        this.$emit('fmDialogBtnClicked', btn);\n      }\n    },\n    appearDialog (bool, duration = this.duration) {\n      const { hasAnimation, timingFunction, isCreator } = this;\n      if (isCreator) {\n        this.self_show = bool;\n        this.dialogOpacity = bool ? 1 : 0;\n        return;\n      }\n      const dialogEl = this.$refs['dialog-box'];\n      this.dialogOpacity = bool ? 0 : 1;\n      if (hasAnimation && dialogEl) {\n        animation.transition(dialogEl, {\n          styles: {\n            opacity: bool ? 1 : 0\n          },\n          duration,\n          timingFunction: timingFunction[bool ? 0 : 1],\n          delay: 0\n        }, () => {\n          this.self_show = bool;\n          this.dialogOpacity = bool ? 1 : 0;\n        });\n      } else {\n        this.self_show = bool;\n        this.dialogOpacity = bool ? 1 : 0;\n      }\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 171 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12868,7 +13628,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmOverlay = __webpack_require__(51);
+var _fmOverlay = __webpack_require__(44);
 
 var _fmOverlay2 = _interopRequireDefault(_fmOverlay);
 
@@ -12876,7 +13636,7 @@ var _fmText = __webpack_require__(3);
 
 var _fmText2 = _interopRequireDefault(_fmText);
 
-var _fmSimpleBtn = __webpack_require__(81);
+var _fmSimpleBtn = __webpack_require__(64);
 
 var _fmSimpleBtn2 = _interopRequireDefault(_fmSimpleBtn);
 
@@ -12884,7 +13644,7 @@ var _locale = __webpack_require__(34);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(28);
+var _locale3 = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13180,7 +13940,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 172 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13260,7 +14020,7 @@ if (false) {
 }
 
 /***/ }),
-/* 173 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13271,11 +14031,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.alert = exports.confirm = undefined;
 
-var _fmDialog = __webpack_require__(86);
+var _fmDialog = __webpack_require__(74);
 
 var _fmDialog2 = _interopRequireDefault(_fmDialog);
 
-var _locale = __webpack_require__(28);
+var _locale = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13366,7 +14126,7 @@ exports.confirm = confirm;
 exports.alert = alert;
 
 /***/ }),
-/* 174 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13376,7 +14136,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(175);
+var _index = __webpack_require__(176);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -13388,18 +14148,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 175 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(176)
+__webpack_require__(177)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(178),
-  /* template */
   __webpack_require__(179),
+  /* template */
+  __webpack_require__(180),
   /* scopeId */
   "data-v-81855a66",
   /* cssModules */
@@ -13426,13 +14186,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 176 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(177);
+var content = __webpack_require__(178);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -13452,7 +14212,7 @@ if(false) {
 }
 
 /***/ }),
-/* 177 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -13460,13 +14220,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"index.vue","sourceRoot":""}]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"index.vue","sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 178 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13476,11 +14236,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmPopup = __webpack_require__(83);
+var _fmPopup = __webpack_require__(65);
 
 var _fmPopup2 = _interopRequireDefault(_fmPopup);
 
-var _fmSimpleBtn = __webpack_require__(81);
+var _fmSimpleBtn = __webpack_require__(64);
 
 var _fmSimpleBtn2 = _interopRequireDefault(_fmSimpleBtn);
 
@@ -13488,10 +14248,12 @@ var _locale = __webpack_require__(34);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(28);
+var _locale3 = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
 //
 //
 //
@@ -13603,7 +14365,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 179 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13649,7 +14411,7 @@ if (false) {
 }
 
 /***/ }),
-/* 180 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13659,7 +14421,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(181);
+var _index = __webpack_require__(182);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -13669,447 +14431,20 @@ Object.defineProperty(exports, 'default', {
 });
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 181 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(182)
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(184),
-  /* template */
-  __webpack_require__(186),
-  /* scopeId */
-  "data-v-6c88d718",
-  /* cssModules */
-  null
-)
-Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-item/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6c88d718", Component.options)
-  } else {
-    hotAPI.reload("data-v-6c88d718", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
 
 /***/ }),
 /* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(183);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("c2621516", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-6c88d718\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-6c88d718\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 183 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(true);
-// imports
-
-
-// module
-exports.push([module.i, "\n.fm-item[data-v-6c88d718] {\n  padding: 0 48px;\n}\n.fm-item[data-v-6c88d718]:active {\n  background-color: rgba(0, 0, 0, 0.05);\n}\n.item-wrapper[data-v-6c88d718] {\n  flex-direction: row;\n  align-items: center;\n}\n.item-border[data-v-6c88d718] {\n  background-color: rgba(0, 0, 0, 0.1);\n  height: 2px;\n}\n.content[data-v-6c88d718] {\n  flex: 1;\n  flex-direction: row;\n}\n.content-text[data-v-6c88d718] {\n  flex: 1;\n  justify-content: center;\n}\n.text-title[data-v-6c88d718] {\n  font-size: 48px;\n  color: #000000;\n  line-height: 57px;\n  text-overflow: ellipsis;\n  lines: 1;\n}\n.text-summary[data-v-6c88d718] {\n  margin-top: 9px;\n  font-size: 36px;\n  color: rgba(0, 0, 0, 0.4);\n  line-height: 42px;\n  text-overflow: ellipsis;\n  lines: 1;\n}\n.text-description[data-v-6c88d718] {\n  flex: 1;\n  margin-top: 9px;\n  font-size: 36px;\n  color: rgba(0, 0, 0, 0.4);\n  line-height: 42px;\n}\n.image[data-v-6c88d718] {\n  margin-right: 48px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-item/index.vue?39bfeffe"],"names":[],"mappings":";AA8BA;EACA,gBAAA;CACA;AAEA;EACA,sCAAA;CACA;AAEA;EACA,oBAAA;EACA,oBAAA;CACA;AAEA;EACA,qCAAA;EACA,YAAA;CACA;AAEA;EACA,QAAA;EACA,oBAAA;CACA;AAEA;EACA,QAAA;EACA,wBAAA;CACA;AAEA;EACA,gBAAA;EACA,eAAA;EACA,kBAAA;EACA,wBAAA;EACA,SAAA;CACA;AAEA;EACA,gBAAA;EACA,gBAAA;EACA,0BAAA;EACA,kBAAA;EACA,wBAAA;EACA,SAAA;CACA;AAEA;EACA,QAAA;EACA,gBAAA;EACA,gBAAA;EACA,0BAAA;EACA,kBAAA;CACA;AAEA;EACA,mBAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 2018/3/9. -->\n<template>\n  <div class=\"fm-item\" @click=\"itemClicked\" @longpress=\"itemLongpress\">\n    <div class=\"item-wrapper\" :style=\"wrapStyle\">\n      <div v-if=\"imgSrc\" class=\"image\">\n        <fm-image :src=\"imgSrc\"\n                  :width=\"scene.imgWidth || imgWidth\"\n                  :height=\"scene.imgHeight || imgHeight\"\n                  :style=\"{ borderRadius: scene.imgRadius || imgRadius }\"\n                  :occupyingColor=\"occupyingColor\"></fm-image>\n      </div>\n      <div class=\"content\">\n        <slot name=\"left\">\n        </slot>\n        <div class=\"content-text\">\n          <slot name=\"title\">\n            <text v-if=\"title\" class=\"text-title\" :style=\"{ color: titleColor }\">{{ title }}</text>\n          </slot>\n          <text v-if=\"summary\" class=\"text-summary\" :style=\"{ color: summaryColor }\">{{ summary }}</text>\n          <text v-if=\"description\" class=\"text-description\" :style=\"{ color: descColor }\">{{ description }}</text>\n        </div>\n        <slot name=\"right\">\n        </slot>\n      </div>\n    </div>\n    <div class=\"item-border\" :style=\"{ marginLeft: imgSrc ? (scene.imgWidth || imgWidth) + 48 : 0 }\"></div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-item {\n    padding: 0 48px;\n  }\n\n  .fm-item:active {\n    background-color: rgba(0, 0, 0, 0.05);\n  }\n\n  .item-wrapper {\n    flex-direction: row;\n    align-items: center;\n  }\n\n  .item-border {\n    background-color: rgba(0, 0, 0, 0.1);\n    height: 2px;\n  }\n\n  .content {\n    flex: 1;\n    flex-direction: row;\n  }\n\n  .content-text {\n    flex: 1;\n    justify-content: center;\n  }\n\n  .text-title {\n    font-size: 48px;\n    color: #000000;\n    line-height: 57px;\n    text-overflow: ellipsis;\n    lines: 1;\n  }\n\n  .text-summary {\n    margin-top: 9px;\n    font-size: 36px;\n    color: rgba(0, 0, 0, 0.4);\n    line-height: 42px;\n    text-overflow: ellipsis;\n    lines: 1;\n  }\n\n  .text-description {\n    flex: 1;\n    margin-top: 9px;\n    font-size: 36px;\n    color: rgba(0, 0, 0, 0.4);\n    line-height: 42px;\n  }\n\n  .image {\n    margin-right: 48px;\n  }\n</style>\n\n<script>\nimport FmImage from '../fm-image';\nimport Scene from './scene';\n\nexport default {\n  name: 'FmItem',\n  components: { FmImage },\n  props: {\n    type: {\n      type: String,\n      default: 'normal'\n    },\n    title: String,\n    summary: String,\n    description: String,\n    imgSrc: String,\n    titleColor: {\n      type: String,\n      default: '#000000'\n    },\n    summaryColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    descColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    imgWidth: {\n      type: Number,\n      default: 96\n    },\n    imgHeight: {\n      type: Number,\n      default: 96\n    },\n    imgRadius: {\n      type: Number,\n      default: 0\n    },\n    imgPosition: {\n      type: String,\n      default: 'center'\n    },\n    paddingTop: {\n      type: Number,\n      default: 54\n    },\n    paddingBottom: {\n      type: Number,\n      default: 54\n    },\n    occupyingColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.1)'\n    }\n  },\n  data: () => ({\n    scene: {}\n  }),\n  computed: {\n    wrapStyle () {\n      const { paddingTop, paddingBottom, imgPosition, scene } = this;\n      return {\n        paddingTop: scene.paddingTop || paddingTop,\n        paddingBottom: scene.paddingBottom || paddingBottom,\n        alignItems: (scene.imgPosition || imgPosition) === 'top' ? 'flex-start' : (scene.imgPosition || imgPosition) === 'bottom' ? 'flex-end' : 'center'\n      };\n    }\n  },\n  watch: {\n    type (val) {\n      this.scene = val;\n    }\n  },\n  created () {\n    this.scene = Scene[this.type];\n  },\n  methods: {\n    itemClicked (e) {\n      this.$emit('fmItemClicked', e);\n    },\n    itemLongpress (e) {\n      this.$emit('fmItemLongpress', e);\n    }\n  }\n};\n</script>\n\n\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-/* 184 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _fmImage = __webpack_require__(6);
-
-var _fmImage2 = _interopRequireDefault(_fmImage);
-
-var _scene = __webpack_require__(185);
-
-var _scene2 = _interopRequireDefault(_scene);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-exports.default = {
-  name: 'FmItem',
-  components: { FmImage: _fmImage2.default },
-  props: {
-    type: {
-      type: String,
-      default: 'normal'
-    },
-    title: String,
-    summary: String,
-    description: String,
-    imgSrc: String,
-    titleColor: {
-      type: String,
-      default: '#000000'
-    },
-    summaryColor: {
-      type: String,
-      default: 'rgba(0, 0, 0, 0.4)'
-    },
-    descColor: {
-      type: String,
-      default: 'rgba(0, 0, 0, 0.4)'
-    },
-    imgWidth: {
-      type: Number,
-      default: 96
-    },
-    imgHeight: {
-      type: Number,
-      default: 96
-    },
-    imgRadius: {
-      type: Number,
-      default: 0
-    },
-    imgPosition: {
-      type: String,
-      default: 'center'
-    },
-    paddingTop: {
-      type: Number,
-      default: 54
-    },
-    paddingBottom: {
-      type: Number,
-      default: 54
-    },
-    occupyingColor: {
-      type: String,
-      default: 'rgba(0, 0, 0, 0.1)'
-    }
-  },
-  data: function data() {
-    return {
-      scene: {}
-    };
-  },
-  computed: {
-    wrapStyle: function wrapStyle() {
-      var paddingTop = this.paddingTop,
-          paddingBottom = this.paddingBottom,
-          imgPosition = this.imgPosition,
-          scene = this.scene;
-
-      return {
-        paddingTop: scene.paddingTop || paddingTop,
-        paddingBottom: scene.paddingBottom || paddingBottom,
-        alignItems: (scene.imgPosition || imgPosition) === 'top' ? 'flex-start' : (scene.imgPosition || imgPosition) === 'bottom' ? 'flex-end' : 'center'
-      };
-    }
-  },
-  watch: {
-    type: function type(val) {
-      this.scene = val;
-    }
-  },
-  created: function created() {
-    this.scene = _scene2.default[this.type];
-  },
-
-  methods: {
-    itemClicked: function itemClicked(e) {
-      this.$emit('fmItemClicked', e);
-    },
-    itemLongpress: function itemLongpress(e) {
-      this.$emit('fmItemLongpress', e);
-    }
-  }
-};
-
-/***/ }),
-/* 185 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = {
-  'single': {
-    paddingTop: 48,
-    paddingBottom: 48
-  },
-  'normal': {},
-  'avatar-single': {
-    imgWidth: 120,
-    imgHeight: 120,
-    imgRadius: 60,
-    paddingTop: 48,
-    paddingBottom: 48
-  },
-  'avatar-normal': {
-    imgWidth: 120,
-    imgHeight: 120,
-    imgRadius: 60,
-    paddingTop: 48,
-    paddingBottom: 48,
-    imgPosition: 'top'
-  },
-  'icon-small': {
-    imgWidth: 96,
-    imgHeight: 96,
-    paddingTop: 36,
-    paddingBottom: 36
-  },
-  'icon-middle': {
-    imgWidth: 138,
-    imgHeight: 138,
-    imgRadius: 4,
-    paddingTop: 24,
-    paddingBottom: 24
-  },
-  'icon-large': {
-    imgWidth: 192,
-    imgHeight: 192,
-    paddingTop: 36,
-    paddingBottom: 36
-  }
-};
-
-/***/ }),
-/* 186 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "fm-item",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    on: {
-      "click": _vm.itemClicked,
-      "longpress": _vm.itemLongpress
-    }
-  }, [_c('div', {
-    staticClass: "item-wrapper",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(_vm.wrapStyle))
-  }, [(_vm.imgSrc) ? _c('div', {
-    staticClass: "image",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [_c('fm-image', {
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      borderRadius: _vm.scene.imgRadius || _vm.imgRadius
-    })),
-    attrs: {
-      "src": _vm.imgSrc,
-      "width": _vm.scene.imgWidth || _vm.imgWidth,
-      "height": _vm.scene.imgHeight || _vm.imgHeight,
-      "occupyingColor": _vm.occupyingColor
-    }
-  })], 1) : _vm._e(), _vm._v(" "), _c('div', {
-    staticClass: "content",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [_vm._t("left"), _vm._v(" "), _c('div', {
-    staticClass: "content-text",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [_vm._t("title", [(_vm.title) ? _c('text', {
-    staticClass: "text-title",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      color: _vm.titleColor
-    }))
-  }, [_vm._v(_vm._s(_vm.title))]) : _vm._e()]), _vm._v(" "), (_vm.summary) ? _c('text', {
-    staticClass: "text-summary",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      color: _vm.summaryColor
-    }))
-  }, [_vm._v(_vm._s(_vm.summary))]) : _vm._e(), _vm._v(" "), (_vm.description) ? _c('text', {
-    staticClass: "text-description",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      color: _vm.descColor
-    }))
-  }, [_vm._v(_vm._s(_vm.description))]) : _vm._e()], 2), _vm._v(" "), _vm._t("right")], 2)]), _vm._v(" "), _c('div', {
-    staticClass: "item-border",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      marginLeft: _vm.imgSrc ? (_vm.scene.imgWidth || _vm.imgWidth) + 48 : 0
-    }))
-  })])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-6c88d718", module.exports)
-  }
-}
-
-/***/ }),
-/* 187 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(188);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 188 */
-/***/ (function(module, exports, __webpack_require__) {
-
 
 /* styles */
-__webpack_require__(189)
+__webpack_require__(183)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(191),
+  __webpack_require__(185),
   /* template */
-  __webpack_require__(192),
+  __webpack_require__(186),
   /* scopeId */
   "data-v-8580e67a",
   /* cssModules */
@@ -14136,13 +14471,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 189 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(190);
+var content = __webpack_require__(184);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -14162,7 +14497,7 @@ if(false) {
 }
 
 /***/ }),
-/* 190 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -14170,13 +14505,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.rater-wrap[data-v-8580e67a] {\n  position: relative;\n  flex-direction: row;\n}\n.rater-star[data-v-8580e67a] {\n  flex-direction: row;\n  position: absolute;\n  overflow: hidden;\n  left: 0;\n  top: 0;\n}\n.rater-star-bg[data-v-8580e67a] {\n  flex-direction: row;\n}\n.rater-star-cover[data-v-8580e67a] {\n  position: absolute;\n  overflow: hidden;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n}\n.star[data-v-8580e67a] {\n}\n.star_small[data-v-8580e67a] {\n  width: 30px;\n  height: 30px;\n  margin: 0 3px;\n}\n.star_big[data-v-8580e67a] {\n  width: 60px;\n  height: 60px;\n  margin: 0 13px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rater/index.vue?42367a60"],"names":[],"mappings":";AAgBA;EACA,mBAAA;EACA,oBAAA;CACA;AAEA;EACA,oBAAA;EACA,mBAAA;EACA,iBAAA;EACA,QAAA;EACA,OAAA;CACA;AAEA;EACA,oBAAA;CACA;AAEA;EACA,mBAAA;EACA,iBAAA;EACA,OAAA;EACA,UAAA;EACA,QAAA;EACA,SAAA;CACA;AAEA;CAEA;AAEA;EACA,YAAA;EACA,aAAA;EACA,cAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;EACA,eAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div class=\"rater-wrap\" ref=\"rater\" @touchstart=\"raterTouchStart\" @touchmove=\"raterTouchmove\" @touchend=\"raterTouchend\">\n    <div class=\"rater-star-bg\">\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n    </div>\n    <div class=\"rater-star\" :style=\"wraperWidth\">\n      <image :class=\"starClz\" v-for=\"(item, index) in getImgs\" :key=\"index\" :src=\"item\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .rater-wrap {\n    position: relative;\n    flex-direction: row;\n  }\n\n  .rater-star {\n    flex-direction: row;\n    position: absolute;\n    overflow: hidden;\n    left: 0;\n    top: 0;\n  }\n\n  .rater-star-bg {\n    flex-direction: row;\n  }\n\n  .rater-star-cover {\n    position: absolute;\n    overflow: hidden;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n  }\n\n  .star {\n\n  }\n\n  .star_small {\n    width: 30px;\n    height: 30px;\n    margin: 0 3px;\n  }\n\n  .star_big {\n    width: 60px;\n    height: 60px;\n    margin: 0 13px;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nimport FmImage from '../fm-image';\nconst dom = weex.requireModule('dom');\nexport default {\n  name: 'FmRater',\n  components: { FmIcon, FmImage },\n  props: {\n    score: {\n      type: Number,\n      default: 5\n    },\n    fullScore: {\n      type: Number,\n      default: 10\n    },\n    size: {\n      type: String,\n      default: 'big'\n    },\n    theme: {\n      type: String,\n      default: 'normal'\n    },\n    canChange: {\n      type: Boolean,\n      default: true\n    },\n    canSlide: {\n      type: Boolean,\n      default: true\n    },\n    starImgs: {\n      type: Array,\n      default: [\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star1.png',\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star2.png',\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star3.png',\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star4.png',\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star5.png'\n      ]\n    },\n    starSpecialImg: {\n      type: String,\n      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_special.png'\n    },\n    starDarkImg: {\n      type: String,\n      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_dark.png'\n    },\n    starBgImg: {\n      type: String,\n      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_bg.png'\n    },\n    starDarkBgImg: {\n      type: String,\n      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_dark_bg.png'\n    }\n  },\n  data: () => ({\n    offset_left: 0,\n    starCount: 5\n  }),\n  computed: {\n    starClz () {\n      const clz = ['star'];\n      this.size === 'big' ? clz.push('star_big') : clz.push('star_small');\n      return clz;\n    },\n    wraperWidth () {\n      const { score, fullScore, size } = this;\n      const half_star_width = size === 'big' ? 43 : 18;\n      const percent = score / fullScore;\n      let length = score <= 0 ? 0 : percent >= 1 ? 10 : percent.toFixed(1) * 10;\n      length = isNaN(length) ? 0 : length;\n      return !length ? {\n        width: 1,\n        opacity: 0\n      } : {\n        width: length * half_star_width,\n        opacity: 1\n      };\n    },\n    getImgs () {\n      const { theme } = this;\n      if (theme === 'normal') {\n        return this.starImgs;\n      } else if (theme === 'special') {\n        const arr = [];\n        for (let i = 0; i < 5; i++) {\n          arr.push(this.starSpecialImg);\n        }\n        return arr;\n      } else if (theme === 'dark') {\n        const arr = [];\n        for (let i = 0; i < 5; i++) {\n          arr.push(this.starDarkImg);\n        }\n        return arr;\n      }\n    },\n    getBgImgs () {\n      const { theme } = this;\n      if (theme === 'normal' || theme === 'special') {\n        return this.starBgImg;\n      } else if (theme === 'dark') {\n        return this.starDarkBgImg;\n      }\n    }\n  },\n  methods: {\n    raterTouchStart (e) {\n      const { canChange, canSlide } = this;\n      if (!canChange || !canSlide) return;\n      this.calculateScore(e.changedTouches[0].pageX, true);\n    },\n    raterTouchmove (e) {\n      const { canChange, canSlide } = this;\n      if (!canChange || !canSlide) return;\n      this.calculateScore(e.changedTouches[0].pageX, true);\n    },\n    raterTouchend (e) {\n      const { canChange } = this;\n      if (!canChange) return;\n      this.calculateScore(e.changedTouches[0].pageX, true);\n    },\n    calculateScore (pageX, needEmit) {\n      const { size, fullScore } = this;\n      if (weex.config.env.platform === 'Web') {\n        pageX = pageX * 2 / 750 * 1080 - this.offset_left;\n      } else if (weex.config.env.platform === 'iOS') {\n        pageX = pageX - this.offset_left;\n      }\n      const half_star_width = size === 'big' ? 43 : 18;\n      const half_star_score = fullScore / 10;\n      const star_num = (pageX / half_star_width).toFixed(0);\n      const score_percent = star_num <= 0 ? 0 : star_num >= 10 ? 10 : star_num;\n      this.score = score_percent * half_star_score;\n      needEmit && this.$emit('fmRaterScoreChanged', { score: this.score });\n    }\n  },\n  mounted () {\n    if (weex.config.env.platform !== 'Android') {\n      setTimeout(() => {\n        dom.getComponentRect(this.$refs.rater, option => {\n          this.offset_left = option.size.left;\n        });\n      }, 50);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.rater-wrap[data-v-8580e67a] {\n  position: relative;\n  flex-direction: row;\n}\n.rater-star[data-v-8580e67a] {\n  flex-direction: row;\n  position: absolute;\n  overflow: hidden;\n  left: 0;\n  top: 0;\n}\n.rater-star-bg[data-v-8580e67a] {\n  flex-direction: row;\n}\n.rater-star-cover[data-v-8580e67a] {\n  position: absolute;\n  overflow: hidden;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n}\n.star[data-v-8580e67a] {\n}\n.star_small[data-v-8580e67a] {\n  width: 30px;\n  height: 30px;\n  margin: 0 3px;\n}\n.star_big[data-v-8580e67a] {\n  width: 60px;\n  height: 60px;\n  margin: 0 13px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rater/index.vue?5ca4e196"],"names":[],"mappings":";AAkBA;EACA,mBAAA;EACA,oBAAA;CACA;AAEA;EACA,oBAAA;EACA,mBAAA;EACA,iBAAA;EACA,QAAA;EACA,OAAA;CACA;AAEA;EACA,oBAAA;CACA;AAEA;EACA,mBAAA;EACA,iBAAA;EACA,OAAA;EACA,UAAA;EACA,QAAA;EACA,SAAA;CACA;AAEA;CAEA;AAEA;EACA,YAAA;EACA,aAAA;EACA,cAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;EACA,eAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div class=\"rater-wrap\" ref=\"rater\" @touchstart=\"raterTouchStart\" @touchmove=\"raterTouchmove\" @touchend=\"raterTouchend\">\n    <div class=\"rater-star-bg\">\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n    </div>\n    <div class=\"rater-star\" :style=\"wraperWidth\">\n      <image :class=\"starClz\" v-for=\"(item, index) in getImgs\" :key=\"index\" :src=\"item\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .rater-wrap {\n    position: relative;\n    flex-direction: row;\n  }\n\n  .rater-star {\n    flex-direction: row;\n    position: absolute;\n    overflow: hidden;\n    left: 0;\n    top: 0;\n  }\n\n  .rater-star-bg {\n    flex-direction: row;\n  }\n\n  .rater-star-cover {\n    position: absolute;\n    overflow: hidden;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n  }\n\n  .star {\n\n  }\n\n  .star_small {\n    width: 30px;\n    height: 30px;\n    margin: 0 3px;\n  }\n\n  .star_big {\n    width: 60px;\n    height: 60px;\n    margin: 0 13px;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nimport FmImage from '../fm-image';\nconst dom = weex.requireModule('dom');\nexport default {\n  name: 'FmRater',\n  components: { FmIcon, FmImage },\n  props: {\n    score: {\n      type: Number,\n      default: 5\n    },\n    fullScore: {\n      type: Number,\n      default: 10\n    },\n    size: {\n      type: String,\n      default: 'big'\n    },\n    theme: {\n      type: String,\n      default: 'normal'\n    },\n    canChange: {\n      type: Boolean,\n      default: true\n    },\n    canSlide: {\n      type: Boolean,\n      default: true\n    },\n    starImgs: {\n      type: Array,\n      default: [\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star1.png',\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star2.png',\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star3.png',\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star4.png',\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star5.png'\n      ]\n    },\n    starSpecialImg: {\n      type: String,\n      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_special.png'\n    },\n    starDarkImg: {\n      type: String,\n      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_dark.png'\n    },\n    starBgImg: {\n      type: String,\n      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_bg.png'\n    },\n    starDarkBgImg: {\n      type: String,\n      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_dark_bg.png'\n    }\n  },\n  data: () => ({\n    offset_left: 0,\n    starCount: 5\n  }),\n  computed: {\n    starClz () {\n      const clz = ['star'];\n      this.size === 'big' ? clz.push('star_big') : clz.push('star_small');\n      return clz;\n    },\n    wraperWidth () {\n      const { score, fullScore, size } = this;\n      const half_star_width = size === 'big' ? 43 : 18;\n      const percent = score / fullScore;\n      let length = score <= 0 ? 0 : percent >= 1 ? 10 : percent.toFixed(1) * 10;\n      length = isNaN(length) ? 0 : length;\n      return !length ? {\n        width: 1,\n        opacity: 0\n      } : {\n        width: length * half_star_width,\n        opacity: 1\n      };\n    },\n    getImgs () {\n      const { theme } = this;\n      if (theme === 'normal') {\n        return this.starImgs;\n      } else if (theme === 'special') {\n        const arr = [];\n        for (let i = 0; i < 5; i++) {\n          arr.push(this.starSpecialImg);\n        }\n        return arr;\n      } else if (theme === 'dark') {\n        const arr = [];\n        for (let i = 0; i < 5; i++) {\n          arr.push(this.starDarkImg);\n        }\n        return arr;\n      }\n    },\n    getBgImgs () {\n      const { theme } = this;\n      if (theme === 'normal' || theme === 'special') {\n        return this.starBgImg;\n      } else if (theme === 'dark') {\n        return this.starDarkBgImg;\n      }\n    }\n  },\n  methods: {\n    raterTouchStart (e) {\n      const { canChange, canSlide } = this;\n      if (!canChange || !canSlide) return;\n      this.calculateScore(e.changedTouches[0].pageX, true);\n    },\n    raterTouchmove (e) {\n      const { canChange, canSlide } = this;\n      if (!canChange || !canSlide) return;\n      this.calculateScore(e.changedTouches[0].pageX, true);\n    },\n    raterTouchend (e) {\n      const { canChange } = this;\n      if (!canChange) return;\n      this.calculateScore(e.changedTouches[0].pageX, true);\n    },\n    calculateScore (pageX, needEmit) {\n      const { size, fullScore } = this;\n      if (weex.config.env.platform === 'Web') {\n        pageX = pageX * 2 / 750 * 1080 - this.offset_left;\n      } else if (weex.config.env.platform === 'iOS') {\n        pageX = pageX - this.offset_left;\n      }\n      const half_star_width = size === 'big' ? 43 : 18;\n      const half_star_score = fullScore / 10;\n      const star_num = (pageX / half_star_width).toFixed(0);\n      const score_percent = star_num <= 0 ? 0 : star_num >= 10 ? 10 : star_num;\n      this.score = score_percent * half_star_score;\n      needEmit && this.$emit('fmRaterScoreChanged', { score: this.score });\n    }\n  },\n  mounted () {\n    if (weex.config.env.platform !== 'Android') {\n      setTimeout(() => {\n        dom.getComponentRect(this.$refs.rater, option => {\n          this.offset_left = option.size.left;\n        });\n      }, 50);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 191 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14186,16 +14521,18 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmIcon = __webpack_require__(4);
+var _fmIcon = __webpack_require__(6);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
-var _fmImage = __webpack_require__(6);
+var _fmImage = __webpack_require__(5);
 
 var _fmImage2 = _interopRequireDefault(_fmImage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
 //
 //
 //
@@ -14416,7 +14753,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 192 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -14494,18 +14831,18 @@ if (false) {
 }
 
 /***/ }),
-/* 193 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(194)
+__webpack_require__(188)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(196),
+  __webpack_require__(190),
   /* template */
-  __webpack_require__(197),
+  __webpack_require__(191),
   /* scopeId */
   "data-v-81772c76",
   /* cssModules */
@@ -14532,13 +14869,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 194 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(195);
+var content = __webpack_require__(189);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -14558,7 +14895,7 @@ if(false) {
 }
 
 /***/ }),
-/* 195 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -14566,13 +14903,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-snack-bar[data-v-81772c76] {\n\t\tposition: fixed;\n\t\tleft: 0;\n\t\tright: 0;\n\t\tbackground-color: #FFFFFF;\n\t\tflex-direction: row;\n\t\tpadding: 0 72px;\n\t\tjustify-content: space-between;\n\t\talign-items: center;\n\t\tmin-height: 0;\n}\n.title[data-v-81772c76], .closeText[data-v-81772c76] {\n\t\tfont-size: 42px;\n\t\tfont-family: sans-serif-medium;\n\t\tfont-weight: 500;\n}\n.rotate[data-v-81772c76] {\n\t\tfont-size: 54px;\n    height: 54px;\n\t\tfont-weight: 700;\n\t\ttransform: rotate(180deg);\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-snack-bar/index.vue?39a4b4a5"],"names":[],"mappings":";AAkBA;EACA,gBAAA;EACA,QAAA;EACA,SAAA;EACA,0BAAA;EACA,oBAAA;EACA,gBAAA;EACA,+BAAA;EACA,oBAAA;EACA,cAAA;CACA;AAEA;EACA,gBAAA;EACA,+BAAA;EACA,iBAAA;CACA;AAEA;EACA,gBAAA;IACA,aAAA;EACA,iBAAA;EACA,0BAAA;CACA","file":"index.vue","sourcesContent":["<template>\n\t<div ref=\"fm-snack-bar\"\n\t\tv-if=\"show\"\n\t\t:hack=\"isNeedShow\"\n\t\tclass=\"fm-snack-bar\"\n\t\t:style=\"barStyle\"\n\t\t@click=\"snackClick\">\n\t\t<slot name=\"title\">\n\t\t\t<text class=\"title\" :style=\"{ color: titleColor }\">{{ title }}</text>\n\t\t</slot>\n\t\t<slot name=\"right\">\n\t\t\t<fm-icon v-if=\"type === 'jump'\" name=\"fanhui\" class=\"rotate\" :style=\"{ color: titleColor }\" />\n\t\t\t<text v-else-if=\"type === 'normal'\" class=\"closeText\" :style=\"{ color: closeColor }\" @click=\"ctrClick\">{{ closeText }}</text>\n\t\t</slot>\n\t</div>\n</template>\n\n<style scoped>\n\t.fm-snack-bar {\n\t\tposition: fixed;\n\t\tleft: 0;\n\t\tright: 0;\n\t\tbackground-color: #FFFFFF;\n\t\tflex-direction: row;\n\t\tpadding: 0 72px;\n\t\tjustify-content: space-between;\n\t\talign-items: center;\n\t\tmin-height: 0;\n\t}\n\n\t.title, .closeText {\n\t\tfont-size: 42px;\n\t\tfont-family: sans-serif-medium;\n\t\tfont-weight: 500;\n\t}\n\n\t.rotate {\n\t\tfont-size: 54px;\n    height: 54px;\n\t\tfont-weight: 700;\n\t\ttransform: rotate(180deg);\n\t}\n\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nimport FmIcon from '../fm-icon';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\nexport default {\n  name: 'FmSnackBar',\n  mixins: [Locale],\n  components: { FmIcon },\n  props: {\n    show: {\n      type: Boolean,\n      default: false\n    },\n    backgroundColor: {\n      type: String,\n      default: '#323232'\n    },\n    title: String,\n    titleColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    closeText: {\n      type: String,\n      default () {\n        return t('el.common.close');\n      }\n    },\n    closeColor: {\n      type: String,\n      default: '#198DED'\n    },\n    height: {\n      type: Number,\n      default: 144\n    },\n    animation: {\n      type: Object,\n      default: () => ({\n        timingFunction: 'ease-out'\n      })\n    },\n    autoClose: {\n      type: Boolean,\n      default: true\n    },\n    stayTime: {\n      type: Number,\n      default: 3000\n    },\n    type: {\n      type: String,\n      default: 'normal'\n    },\n    clickCb: Function,\n    dismissCb: Function\n  },\n  computed: {\n    barStyle () {\n      const { height, backgroundColor } = this;\n      return {\n        backgroundColor: backgroundColor,\n        bottom: `${-height}px`,\n        height: `${height}px`\n      };\n    },\n    isNeedShow () {\n      setTimeout(() => {\n        this.appearBar(this.show);\n      }, 50);\n      return this.show;\n    }\n  },\n  data: () => ({\n    timer: null\n  }),\n  methods: {\n    appearBar (bool, duration = 150) {\n      this.isShow = bool;\n      const popupEl = this.$refs['fm-snack-bar'];\n      if (!popupEl) {\n        return;\n      }\n      animation.transition(popupEl, {\n        styles: {\n          transform: this.getTransform(this.height, bool)\n        },\n        duration,\n        delay: 0,\n        ...this.animation\n      }, () => {\n        const { autoClose, stayTime } = this;\n        if (bool && autoClose) {\n          this.timer = setTimeout(() => {\n            this.appearBar(false);\n          }, stayTime);\n        } else if (!bool) {\n          this.dismissCb && this.dismissCb();\n          this.$emit('fmSnackBarDismissed', { pos: this.pos });\n        }\n      });\n    },\n    getTransform (height, bool) {\n      bool || (height = 0);\n      return `translateY(-${height}px)`;\n    },\n    hide () {\n      if (this.timer) {\n        clearTimeout(this.timer);\n        this.timer = null;\n      }\n      this.appearBar(false);\n    },\n    ctrClick () {\n      this.clickCb && this.clickCb();\n      this.hide();\n    },\n    snackClick () {\n      const { type } = this;\n      if (type === 'jump') {\n        this.clickCb && this.clickCb();\n        this.hide();\n      }\n      this.$emit('fmSnackBarBeClicked', {});\n    }\n  }\n};\n</script>\n\n\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-snack-bar[data-v-81772c76] {\n\t\tposition: fixed;\n\t\tleft: 0;\n\t\tright: 0;\n\t\tbackground-color: #FFFFFF;\n\t\tflex-direction: row;\n\t\tpadding: 0 72px;\n\t\tjustify-content: space-between;\n\t\talign-items: center;\n\t\tmin-height: 0;\n}\n.title[data-v-81772c76], .closeText[data-v-81772c76] {\n\t\tfont-size: 42px;\n\t\tfont-family: sans-serif-medium;\n\t\tfont-weight: 500;\n}\n.rotate[data-v-81772c76] {\n\t\tfont-size: 54px;\n    height: 54px;\n\t\tfont-weight: 700;\n\t\ttransform: rotate(180deg);\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-snack-bar/index.vue?4191eea0"],"names":[],"mappings":";AAoBA;EACA,gBAAA;EACA,QAAA;EACA,SAAA;EACA,0BAAA;EACA,oBAAA;EACA,gBAAA;EACA,+BAAA;EACA,oBAAA;EACA,cAAA;CACA;AAEA;EACA,gBAAA;EACA,+BAAA;EACA,iBAAA;CACA;AAEA;EACA,gBAAA;IACA,aAAA;EACA,iBAAA;EACA,0BAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n\t<div ref=\"fm-snack-bar\"\n\t\tv-if=\"show\"\n\t\t:hack=\"isNeedShow\"\n\t\tclass=\"fm-snack-bar\"\n\t\t:style=\"barStyle\"\n\t\t@click=\"snackClick\">\n\t\t<slot name=\"title\">\n\t\t\t<text class=\"title\" :style=\"{ color: titleColor }\">{{ title }}</text>\n\t\t</slot>\n\t\t<slot name=\"right\">\n\t\t\t<fm-icon v-if=\"type === 'jump'\" name=\"fanhui\" class=\"rotate\" :style=\"{ color: titleColor }\" />\n\t\t\t<text v-else-if=\"type === 'normal'\" class=\"closeText\" :style=\"{ color: closeColor }\" @click=\"ctrClick\">{{ closeText }}</text>\n\t\t</slot>\n\t</div>\n</template>\n\n<style scoped>\n\t.fm-snack-bar {\n\t\tposition: fixed;\n\t\tleft: 0;\n\t\tright: 0;\n\t\tbackground-color: #FFFFFF;\n\t\tflex-direction: row;\n\t\tpadding: 0 72px;\n\t\tjustify-content: space-between;\n\t\talign-items: center;\n\t\tmin-height: 0;\n\t}\n\n\t.title, .closeText {\n\t\tfont-size: 42px;\n\t\tfont-family: sans-serif-medium;\n\t\tfont-weight: 500;\n\t}\n\n\t.rotate {\n\t\tfont-size: 54px;\n    height: 54px;\n\t\tfont-weight: 700;\n\t\ttransform: rotate(180deg);\n\t}\n\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nimport FmIcon from '../fm-icon';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\nexport default {\n  name: 'FmSnackBar',\n  mixins: [Locale],\n  components: { FmIcon },\n  props: {\n    show: {\n      type: Boolean,\n      default: false\n    },\n    backgroundColor: {\n      type: String,\n      default: '#323232'\n    },\n    title: String,\n    titleColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    closeText: {\n      type: String,\n      default () {\n        return t('el.common.close');\n      }\n    },\n    closeColor: {\n      type: String,\n      default: '#198DED'\n    },\n    height: {\n      type: Number,\n      default: 144\n    },\n    animation: {\n      type: Object,\n      default: () => ({\n        timingFunction: 'ease-out'\n      })\n    },\n    autoClose: {\n      type: Boolean,\n      default: true\n    },\n    stayTime: {\n      type: Number,\n      default: 3000\n    },\n    type: {\n      type: String,\n      default: 'normal'\n    },\n    clickCb: Function,\n    dismissCb: Function\n  },\n  computed: {\n    barStyle () {\n      const { height, backgroundColor } = this;\n      return {\n        backgroundColor: backgroundColor,\n        bottom: `${-height}px`,\n        height: `${height}px`\n      };\n    },\n    isNeedShow () {\n      setTimeout(() => {\n        this.appearBar(this.show);\n      }, 50);\n      return this.show;\n    }\n  },\n  data: () => ({\n    timer: null\n  }),\n  methods: {\n    appearBar (bool, duration = 150) {\n      this.isShow = bool;\n      const popupEl = this.$refs['fm-snack-bar'];\n      if (!popupEl) {\n        return;\n      }\n      animation.transition(popupEl, {\n        styles: {\n          transform: this.getTransform(this.height, bool)\n        },\n        duration,\n        delay: 0,\n        ...this.animation\n      }, () => {\n        const { autoClose, stayTime } = this;\n        if (bool && autoClose) {\n          this.timer = setTimeout(() => {\n            this.appearBar(false);\n          }, stayTime);\n        } else if (!bool) {\n          this.dismissCb && this.dismissCb();\n          this.$emit('fmSnackBarDismissed', { pos: this.pos });\n        }\n      });\n    },\n    getTransform (height, bool) {\n      bool || (height = 0);\n      return `translateY(-${height}px)`;\n    },\n    hide () {\n      if (this.timer) {\n        clearTimeout(this.timer);\n        this.timer = null;\n      }\n      this.appearBar(false);\n    },\n    ctrClick () {\n      this.clickCb && this.clickCb();\n      this.hide();\n    },\n    snackClick () {\n      const { type } = this;\n      if (type === 'jump') {\n        this.clickCb && this.clickCb();\n        this.hide();\n      }\n      this.$emit('fmSnackBarBeClicked', {});\n    }\n  }\n};\n</script>\n\n\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 196 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14584,7 +14921,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _fmIcon = __webpack_require__(4);
+var _fmIcon = __webpack_require__(6);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
@@ -14592,10 +14929,12 @@ var _locale = __webpack_require__(34);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(28);
+var _locale3 = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
 //
 //
 //
@@ -14782,7 +15121,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 197 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -14832,7 +15171,7 @@ if (false) {
 }
 
 /***/ }),
-/* 198 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14842,11 +15181,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmSnackBar = __webpack_require__(97);
+var _fmSnackBar = __webpack_require__(92);
 
 var _fmSnackBar2 = _interopRequireDefault(_fmSnackBar);
 
-var _locale = __webpack_require__(28);
+var _locale = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14917,7 +15256,7 @@ function showSnackBar(options) {
 exports.default = showSnackBar;
 
 /***/ }),
-/* 199 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14927,7 +15266,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(200);
+var _index = __webpack_require__(194);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -14939,14 +15278,14 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 200 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(201),
+  __webpack_require__(195),
   /* template */
-  __webpack_require__(202),
+  __webpack_require__(196),
   /* scopeId */
   null,
   /* cssModules */
@@ -14973,7 +15312,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 201 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14982,6 +15321,8 @@ module.exports = Component.exports
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+//
+//
 //
 //
 //
@@ -14994,7 +15335,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 202 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -15015,7 +15356,7 @@ if (false) {
 }
 
 /***/ }),
-/* 203 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15025,7 +15366,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(204);
+var _index = __webpack_require__(198);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -15037,18 +15378,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 204 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(205)
+__webpack_require__(199)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(207),
+  __webpack_require__(201),
   /* template */
-  __webpack_require__(208),
+  __webpack_require__(202),
   /* scopeId */
   "data-v-4cf19c5c",
   /* cssModules */
@@ -15075,13 +15416,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 205 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(206);
+var content = __webpack_require__(200);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -15101,7 +15442,7 @@ if(false) {
 }
 
 /***/ }),
-/* 206 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -15109,13 +15450,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-status-bar[data-v-4cf19c5c] {\n    height: 66px;\n    width: 1080px;\n    background-color: #ffffff;\n}\n.fm-search-bar[data-v-4cf19c5c] {\n    padding: 0 48px;\n    background-color: #ffffff;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom-style: solid;\n    border-bottom-width: 2px;\n    border-bottom-color: rgba(0, 0, 0, 0.1);\n}\n.search-input-wrap[data-v-4cf19c5c] {\n    flex: 1;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    padding-left: 35px;\n    height: 90px;\n    background-color: rgba(0, 0, 0, 0.05);\n    outline: none;\n    border-radius: 45px;\n}\n.search-bar-input[data-v-4cf19c5c] {\n    flex: 1;\n    height: 90px;\n    margin-left: 24px;\n    margin-right: 9px;\n    line-height: 90px;\n    font-size: 42px;\n    background-color: transparent;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    color: #616161;\n}\n.search-bar-icon[data-v-4cf19c5c] {\n    line-height: 42px;\n    height: 42px;\n    font-weight: 700;\n}\n.search-bar-back[data-v-4cf19c5c] {\n\t\tmargin-left: -18px;\n\t\tmargin-right: 30px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n}\n.search-bar-delete[data-v-4cf19c5c] {\n    width: 60px;\n    height: 60px;\n    margin-right: 15px;\n    font-weight: 700;\n    padding: 6px 5px;\n    background-color: rgba(77, 77, 77, 0.5);\n    border-radius: 30px;\n}\n.search-enter[data-v-4cf19c5c] {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 96px;\n    margin-left: 48px;\n    color: rgba(0, 0, 0, 0.4);\n    text-align: center;\n}\n.right-btn[data-v-4cf19c5c] {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    right: 24px;\n    justify-content: center;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-searchbar/index.vue?b1f71fbe"],"names":[],"mappings":";AAoCA;IACA,aAAA;IACA,cAAA;IACA,0BAAA;CACA;AAEA;IACA,gBAAA;IACA,0BAAA;IACA,cAAA;IACA,cAAA;IACA,oBAAA;IACA,oBAAA;IACA,+BAAA;IACA,2BAAA;IACA,yBAAA;IACA,wCAAA;CACA;AAEA;IACA,QAAA;IACA,oBAAA;IACA,oBAAA;IACA,wBAAA;IACA,mBAAA;IACA,aAAA;IACA,sCAAA;IACA,cAAA;IACA,oBAAA;CACA;AAEA;IACA,QAAA;IACA,aAAA;IACA,kBAAA;IACA,kBAAA;IACA,kBAAA;IACA,gBAAA;IACA,8BAAA;IACA,+BAAA;IACA,iBAAA;IACA,eAAA;CACA;AAEA;IACA,kBAAA;IACA,aAAA;IACA,iBAAA;CACA;AAEA;EACA,mBAAA;EACA,mBAAA;IACA,kBAAA;IACA,aAAA;IACA,iBAAA;CACA;AAEA;IACA,YAAA;IACA,aAAA;IACA,mBAAA;IACA,iBAAA;IACA,iBAAA;IACA,wCAAA;IACA,oBAAA;CACA;AAEA;IACA,+BAAA;IACA,iBAAA;IACA,gBAAA;IACA,kBAAA;IACA,kBAAA;IACA,0BAAA;IACA,mBAAA;CACA;AAEA;IACA,mBAAA;IACA,OAAA;IACA,UAAA;IACA,YAAA;IACA,wBAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 18/02/26-->\n<template>\n  <div v-if=\"show\">\n    <div class=\"fm-status-bar\" v-if=\"statusbar\" :style=\"{ backgroundColor: backgroundColor }\"></div>\n    <div class=\"fm-search-bar\" :style=\"barStyle\">\n      <slot name=\"left\" v-if=\"hasPrev\">\n        <fm-icon @fmIconClicked=\"onBack\" class=\"search-bar-back\" name=\"fanhui\" :icon-style=\"72\" :color=\"leftColor\"/>\n      </slot>\n        <div class=\"search-input-wrap\" :style=\"inputBackground ? { backgroundColor: inputBackground} : {}\">\n          <fm-icon class=\"search-bar-icon\" name=\"sousuo\" :icon-style=\"42\" :color=\"iconColor\" />\n          <input @blur=\"onBlur\"\n                @focus=\"onFocus\"\n                @input=\"onInput\"\n                @return=\"onSubmit\"\n                :autofocus=\"autofocus\"\n                :disabled=\"disabled\"\n                :value=\"value\"\n                ref=\"input\"\n                :type=\"inputType\"\n                :return-key-type=\"returnKeyType\"\n                :placeholder=\"placeholder\"\n                :style=\"{color: inputColor, 'placeholder-color': placeholderColor}\"\n                class=\"search-bar-input\"/>\n          <fm-icon :style=\"{ opacity: delShow ? 1 : 0 }\" class=\"search-bar-delete\" name=\"guanbi\" :icon-style=\"48\" color=\"#FFFFFF\" @fmIconClicked=\"delClick\" />\n          <div :style=\"{ opacity: !delShow ? 1 : 0 }\" class=\"right-btn\">\n            <slot name=\"input-right\"></slot>\n          </div>\n        </div>\n      <slot name=\"right\">\n        <text v-if=\"searchText\" class=\"search-enter\" @click=\"onSearch\" :style=\"searchTextStyle\">{{ searchText }}</text>\n      </slot>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-status-bar {\n    height: 66px;\n    width: 1080px;\n    background-color: #ffffff;\n  }\n\n  .fm-search-bar {\n    padding: 0 48px;\n    background-color: #ffffff;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom-style: solid;\n    border-bottom-width: 2px;\n    border-bottom-color: rgba(0, 0, 0, 0.1);\n  }\n\n  .search-input-wrap {\n    flex: 1;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    padding-left: 35px;\n    height: 90px;\n    background-color: rgba(0, 0, 0, 0.05);\n    outline: none;\n    border-radius: 45px;\n  }\n\n  .search-bar-input {\n    flex: 1;\n    height: 90px;\n    margin-left: 24px;\n    margin-right: 9px;\n    line-height: 90px;\n    font-size: 42px;\n    background-color: transparent;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    color: #616161;\n  }\n\n  .search-bar-icon {\n    line-height: 42px;\n    height: 42px;\n    font-weight: 700;\n  }\n\n  .search-bar-back {\n\t\tmargin-left: -18px;\n\t\tmargin-right: 30px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n  }\n\n  .search-bar-delete {\n    width: 60px;\n    height: 60px;\n    margin-right: 15px;\n    font-weight: 700;\n    padding: 6px 5px;\n    background-color: rgba(77, 77, 77, 0.5);\n    border-radius: 30px;\n  }\n\n  .search-enter {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 96px;\n    margin-left: 48px;\n    color: rgba(0, 0, 0, 0.4);\n    text-align: center;\n  }\n\n  .right-btn {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    right: 24px;\n    justify-content: center;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\nconst Navigator = weex.requireModule('navigator');\n\nexport default {\n  name: 'FmSearchbar',\n  mixins: [Locale],\n  components: { FmIcon },\n  props: {\n    statusbar: {\n      type: Boolean,\n      default: false\n    },\n    inputValue: {\n      type: [String, Number],\n      default: ''\n    },\n    useDefaultReturn: {\n      type: Boolean,\n      default: true\n    },\n    hasPrev: {\n      type: Boolean,\n      default: true\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    iconColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    leftColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.6)'\n    },\n    inputBackground: String,\n    borderStyle: {\n      type: Object,\n      default: () => ({})\n    },\n    placeholder: String,\n    autofocus: Boolean,\n    disabled: Boolean,\n    inputType: {\n      type: String,\n      default: 'text'\n    },\n    searchText: {\n      type: String,\n      default () {\n        return t('el.searchbar.search');\n      }\n    },\n    searchColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    searchHighlightColor: {\n      type: String,\n      default: '#198DED'\n    },\n    searchTextSize: {\n      type: Number,\n      default: 48\n    },\n    returnKeyType: {\n      type: String,\n      default: 'search'\n    },\n    placeholderColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    inputColor: {\n      type: String,\n      default: '#616161'\n    },\n    show: {\n      type: Boolean,\n      default: true\n    }\n  },\n  watch: {\n    inputValue (val) {\n      this.value = val;\n    }\n  },\n  data: () => ({\n    isFocus: false,\n    value: ''\n  }),\n  computed: {\n    delShow () {\n      return this.isFocus && this.value;\n    },\n    barStyle () {\n      const style = {\n        borderBottomStyle: 'solid',\n        borderBottomWidth: 2 + 'px',\n        borderBottomColor: 'rgba(0, 0, 0, 0.1)'\n      };\n      Object.assign(style, this.borderStyle);\n      style.backgroundColor = this.backgroundColor;\n      return style;\n    },\n    searchTextStyle () {\n      const { value, searchColor, searchHighlightColor, searchTextSize } = this;\n      return {\n        color: value ? searchHighlightColor : searchColor,\n        fontSize: searchTextSize + 'px'\n      };\n    }\n  },\n  methods: {\n    onBack (e) {\n      const self = this;\n      if (self.useDefaultReturn) {\n        Navigator.pop({}, e => {\n        });\n      }\n      self.$emit('fmSearchbarleftBtnClicked', {});\n    },\n    delClick (e) {\n      this.value = '';\n    },\n    onInput (e) {\n      this.value = e.value;\n      this.$emit('input', e);\n    },\n    onFocus (e) {\n      this.isFocus = true;\n      this.$emit('focus', e);\n    },\n    onBlur (e) {\n      this.isFocus = false;\n      this.$emit('blur', e);\n    },\n    focus () {\n      this.$refs.input.focus();\n    },\n    blur () {\n      this.$refs.input.blur();\n    },\n    onSubmit (e) {\n      this.$emit('fmSearchbarSubmit', { value: this.value });\n    },\n    onSearch (e) {\n      this.$emit('fmSearchbarSubmit', { value: this.value });\n    },\n    setSelectionRange (start, end) {\n      this.$refs.input.setSelectionRange(start, end);\n    },\n    getEditSelectionRange (callback) {\n      this.$refs.input.getEditSelectionRange(callback);\n    },\n    setValue (value) {\n      this.value = value;\n    }\n  },\n  mounted () {\n    this.value = this.inputValue || '';\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-status-bar[data-v-4cf19c5c] {\n    height: 66px;\n    width: 1080px;\n    background-color: #ffffff;\n}\n.fm-search-bar[data-v-4cf19c5c] {\n    padding: 0 48px;\n    background-color: #ffffff;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom-style: solid;\n    border-bottom-width: 2px;\n    border-bottom-color: rgba(0, 0, 0, 0.1);\n}\n.search-input-wrap[data-v-4cf19c5c] {\n    flex: 1;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    padding-left: 35px;\n    height: 90px;\n    background-color: rgba(0, 0, 0, 0.05);\n    outline: none;\n    border-radius: 45px;\n}\n.search-bar-input[data-v-4cf19c5c] {\n    flex: 1;\n    height: 90px;\n    margin-left: 24px;\n    margin-right: 9px;\n    line-height: 90px;\n    font-size: 42px;\n    background-color: transparent;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    color: #616161;\n}\n.search-bar-icon[data-v-4cf19c5c] {\n    line-height: 42px;\n    height: 42px;\n    font-weight: 700;\n}\n.search-bar-back[data-v-4cf19c5c] {\n\t\tmargin-left: -18px;\n\t\tmargin-right: 30px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n}\n.search-bar-delete[data-v-4cf19c5c] {\n    width: 60px;\n    height: 60px;\n    margin-right: 15px;\n    font-weight: 700;\n    padding: 6px 5px;\n    background-color: rgba(77, 77, 77, 0.5);\n    border-radius: 30px;\n}\n.search-enter[data-v-4cf19c5c] {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 96px;\n    margin-left: 48px;\n    color: rgba(0, 0, 0, 0.4);\n    text-align: center;\n}\n.right-btn[data-v-4cf19c5c] {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    right: 24px;\n    justify-content: center;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-searchbar/index.vue?137553ea"],"names":[],"mappings":";AAqCA;IACA,aAAA;IACA,cAAA;IACA,0BAAA;CACA;AAEA;IACA,gBAAA;IACA,0BAAA;IACA,cAAA;IACA,cAAA;IACA,oBAAA;IACA,oBAAA;IACA,+BAAA;IACA,2BAAA;IACA,yBAAA;IACA,wCAAA;CACA;AAEA;IACA,QAAA;IACA,oBAAA;IACA,oBAAA;IACA,wBAAA;IACA,mBAAA;IACA,aAAA;IACA,sCAAA;IACA,cAAA;IACA,oBAAA;CACA;AAEA;IACA,QAAA;IACA,aAAA;IACA,kBAAA;IACA,kBAAA;IACA,kBAAA;IACA,gBAAA;IACA,8BAAA;IACA,+BAAA;IACA,iBAAA;IACA,eAAA;CACA;AAEA;IACA,kBAAA;IACA,aAAA;IACA,iBAAA;CACA;AAEA;EACA,mBAAA;EACA,mBAAA;IACA,kBAAA;IACA,aAAA;IACA,iBAAA;CACA;AAEA;IACA,YAAA;IACA,aAAA;IACA,mBAAA;IACA,iBAAA;IACA,iBAAA;IACA,wCAAA;IACA,oBAAA;CACA;AAEA;IACA,+BAAA;IACA,iBAAA;IACA,gBAAA;IACA,kBAAA;IACA,kBAAA;IACA,0BAAA;IACA,mBAAA;CACA;AAEA;IACA,mBAAA;IACA,OAAA;IACA,UAAA;IACA,YAAA;IACA,wBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 18/02/26-->\n<template>\n  <div v-if=\"show\">\n    <div class=\"fm-status-bar\" v-if=\"statusbar\" :style=\"{ backgroundColor: backgroundColor }\"></div>\n    <div class=\"fm-search-bar\" :style=\"barStyle\">\n      <slot name=\"left\" v-if=\"hasPrev\">\n        <fm-icon @fmIconClicked=\"onBack\" class=\"search-bar-back\" name=\"fanhui\" :icon-style=\"72\" :color=\"leftColor\"/>\n      </slot>\n        <div class=\"search-input-wrap\" :style=\"inputBackground ? { backgroundColor: inputBackground} : {}\">\n          <fm-icon class=\"search-bar-icon\" name=\"sousuo\" :icon-style=\"42\" :color=\"iconColor\" />\n          <input @blur=\"onBlur\"\n                @focus=\"onFocus\"\n                @input=\"onInput\"\n                @return=\"onSubmit\"\n                :autofocus=\"autofocus\"\n                :disabled=\"disabled\"\n                :value=\"value\"\n                ref=\"input\"\n                :type=\"inputType\"\n                :return-key-type=\"returnKeyType\"\n                :placeholder=\"placeholder\"\n                :style=\"{color: inputColor, 'placeholder-color': placeholderColor}\"\n                class=\"search-bar-input\"/>\n          <fm-icon :style=\"{ opacity: delShow ? 1 : 0 }\" class=\"search-bar-delete\" name=\"guanbi\" :icon-style=\"48\" color=\"#FFFFFF\" @fmIconClicked=\"delClick\" />\n          <div :style=\"{ opacity: !delShow ? 1 : 0 }\" class=\"right-btn\">\n            <slot name=\"input-right\"></slot>\n          </div>\n        </div>\n      <slot name=\"right\">\n        <text v-if=\"searchText\" class=\"search-enter\" @click=\"onSearch\" :style=\"searchTextStyle\">{{ searchText }}</text>\n      </slot>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-status-bar {\n    height: 66px;\n    width: 1080px;\n    background-color: #ffffff;\n  }\n\n  .fm-search-bar {\n    padding: 0 48px;\n    background-color: #ffffff;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom-style: solid;\n    border-bottom-width: 2px;\n    border-bottom-color: rgba(0, 0, 0, 0.1);\n  }\n\n  .search-input-wrap {\n    flex: 1;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    padding-left: 35px;\n    height: 90px;\n    background-color: rgba(0, 0, 0, 0.05);\n    outline: none;\n    border-radius: 45px;\n  }\n\n  .search-bar-input {\n    flex: 1;\n    height: 90px;\n    margin-left: 24px;\n    margin-right: 9px;\n    line-height: 90px;\n    font-size: 42px;\n    background-color: transparent;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    color: #616161;\n  }\n\n  .search-bar-icon {\n    line-height: 42px;\n    height: 42px;\n    font-weight: 700;\n  }\n\n  .search-bar-back {\n\t\tmargin-left: -18px;\n\t\tmargin-right: 30px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n  }\n\n  .search-bar-delete {\n    width: 60px;\n    height: 60px;\n    margin-right: 15px;\n    font-weight: 700;\n    padding: 6px 5px;\n    background-color: rgba(77, 77, 77, 0.5);\n    border-radius: 30px;\n  }\n\n  .search-enter {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 96px;\n    margin-left: 48px;\n    color: rgba(0, 0, 0, 0.4);\n    text-align: center;\n  }\n\n  .right-btn {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    right: 24px;\n    justify-content: center;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\nconst Navigator = weex.requireModule('navigator');\n\nexport default {\n  name: 'FmSearchbar',\n  mixins: [Locale],\n  components: { FmIcon },\n  props: {\n    statusbar: {\n      type: Boolean,\n      default: false\n    },\n    inputValue: {\n      type: [String, Number],\n      default: ''\n    },\n    useDefaultReturn: {\n      type: Boolean,\n      default: true\n    },\n    hasPrev: {\n      type: Boolean,\n      default: true\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    iconColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    leftColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.6)'\n    },\n    inputBackground: String,\n    borderStyle: {\n      type: Object,\n      default: () => ({})\n    },\n    placeholder: String,\n    autofocus: Boolean,\n    disabled: Boolean,\n    inputType: {\n      type: String,\n      default: 'text'\n    },\n    searchText: {\n      type: String,\n      default () {\n        return t('el.searchbar.search');\n      }\n    },\n    searchColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    searchHighlightColor: {\n      type: String,\n      default: '#198DED'\n    },\n    searchTextSize: {\n      type: Number,\n      default: 48\n    },\n    returnKeyType: {\n      type: String,\n      default: 'search'\n    },\n    placeholderColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    inputColor: {\n      type: String,\n      default: '#616161'\n    },\n    show: {\n      type: Boolean,\n      default: true\n    }\n  },\n  watch: {\n    inputValue (val) {\n      this.value = val;\n    }\n  },\n  data: () => ({\n    isFocus: false,\n    value: ''\n  }),\n  computed: {\n    delShow () {\n      return this.isFocus && this.value;\n    },\n    barStyle () {\n      const style = {\n        borderBottomStyle: 'solid',\n        borderBottomWidth: 2 + 'px',\n        borderBottomColor: 'rgba(0, 0, 0, 0.1)'\n      };\n      Object.assign(style, this.borderStyle);\n      style.backgroundColor = this.backgroundColor;\n      return style;\n    },\n    searchTextStyle () {\n      const { value, searchColor, searchHighlightColor, searchTextSize } = this;\n      return {\n        color: value ? searchHighlightColor : searchColor,\n        fontSize: searchTextSize + 'px'\n      };\n    }\n  },\n  methods: {\n    onBack (e) {\n      const self = this;\n      if (self.useDefaultReturn) {\n        Navigator.pop({}, e => {\n        });\n      }\n      self.$emit('fmSearchbarleftBtnClicked', {});\n    },\n    delClick (e) {\n      this.value = '';\n    },\n    onInput (e) {\n      this.value = e.value;\n      this.$emit('input', e);\n    },\n    onFocus (e) {\n      this.isFocus = true;\n      this.$emit('focus', e);\n    },\n    onBlur (e) {\n      this.isFocus = false;\n      this.$emit('blur', e);\n    },\n    focus () {\n      this.$refs.input.focus();\n    },\n    blur () {\n      this.$refs.input.blur();\n    },\n    onSubmit (e) {\n      this.$emit('fmSearchbarSubmit', { value: this.value });\n    },\n    onSearch (e) {\n      this.$emit('fmSearchbarSubmit', { value: this.value });\n    },\n    setSelectionRange (start, end) {\n      this.$refs.input.setSelectionRange(start, end);\n    },\n    getEditSelectionRange (callback) {\n      this.$refs.input.getEditSelectionRange(callback);\n    },\n    setValue (value) {\n      this.value = value;\n    }\n  },\n  mounted () {\n    this.value = this.inputValue || '';\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 207 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15125,7 +15466,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmIcon = __webpack_require__(4);
+var _fmIcon = __webpack_require__(6);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
@@ -15133,11 +15474,12 @@ var _locale = __webpack_require__(34);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(28);
+var _locale3 = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Navigator = weex.requireModule('navigator'); //
+//
 //
 //
 //
@@ -15431,7 +15773,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 208 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -15534,7 +15876,7 @@ if (false) {
 }
 
 /***/ }),
-/* 209 */
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15544,7 +15886,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(210);
+var _index = __webpack_require__(204);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -15556,383 +15898,14 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 210 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(211)
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(213),
-  /* template */
-  __webpack_require__(214),
-  /* scopeId */
-  "data-v-665f9fc0",
-  /* cssModules */
-  null
-)
-Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-titlebar/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-665f9fc0", Component.options)
-  } else {
-    hotAPI.reload("data-v-665f9fc0", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 211 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(212);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("430b124e", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-665f9fc0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-665f9fc0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 212 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(true);
-// imports
-
-
-// module
-exports.push([module.i, "\n.fm-status-bar[data-v-665f9fc0] {\n  height: 66px;\n  width: 1080px;\n}\n.fm-title-bar[data-v-665f9fc0] {\n  padding-left: 48px;\n  width: 1080px;\n  height: 144px;\n  flex-direction: row;\n  align-items: center;\n  justify-content: space-between;\n}\n.title-bar-back[data-v-665f9fc0] {\n  margin-left: -18px;\n  margin-right: 45px;\n  line-height: 72px;\n  height: 72px;\n  font-weight: 700;\n}\n.title-wrap[data-v-665f9fc0] {\n  flex: 1;\n}\n.title-text[data-v-665f9fc0] {\n  flex: 1;\n  text-overflow: ellipsis;\n  lines: 1;\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 48px;\n  line-height: 57px;\n  color: rgba(0, 0, 0, 0.6);\n}\n.btn-icon[data-v-665f9fc0] {\n  margin-right: 48px;\n  color: #198DED;\n  line-height: 72px;\n  height: 72px;\n}\n.btn-text[data-v-665f9fc0] {\n  margin-right: 48px;\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 48px;\n  line-height: 57px;\n  color: #198DED;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-titlebar/index.vue?2721d2b7"],"names":[],"mappings":";AAuBA;EACA,aAAA;EACA,cAAA;CACA;AAEA;EACA,mBAAA;EACA,cAAA;EACA,cAAA;EACA,oBAAA;EACA,oBAAA;EACA,+BAAA;CACA;AAEA;EACA,mBAAA;EACA,mBAAA;EACA,kBAAA;EACA,aAAA;EACA,iBAAA;CACA;AAEA;EACA,QAAA;CACA;AAEA;EACA,QAAA;EACA,wBAAA;EACA,SAAA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;EACA,0BAAA;CACA;AAEA;EACA,mBAAA;EACA,eAAA;EACA,kBAAA;EACA,aAAA;CACA;AAEA;EACA,mBAAA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;EACA,eAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <div v-if=\"show\">\n    <div class=\"fm-status-bar\" v-if=\"statusbar\" :style=\"{ backgroundColor: backgroundColor }\"></div>\n    <div class=\"fm-title-bar\" :style=\"barStyle\">\n      <slot name=\"left\" v-if=\"hasPrev\">\n        <fm-icon @fmIconClicked=\"onBack\" class=\"title-bar-back\" name=\"fanhui\" :icon-style=\"72\" :color=\"leftColor\" />\n      </slot>\n      <div class=\"title-wrap\">\n        <slot name=\"middle\">\n          <text class=\"title-text\" :style=\"{ color: titleColor }\">{{ title }}</text>\n        </slot>\n      </div>\n      <slot name=\"right\">\n        <div v-for=\"(item, idx) in btns\" :key=\"idx\">\n          <fm-icon class=\"btn-icon\" v-if=\"item.type === 'icon'\" :name=\"item.value\" :style=\"item.color ? { color:item.color } : {}\" :icon-style=\"72\" @fmIconClicked=\"rightBtnClick(idx, item)\"/>\n          <text class=\"btn-text\" v-else :style=\"item.color ? { color:item.color } : {}\" @click=\"rightBtnClick(idx, item)\">{{ item.value }}</text>\n        </div>\n      </slot>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-status-bar {\n    height: 66px;\n    width: 1080px;\n  }\n\n  .fm-title-bar {\n    padding-left: 48px;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n  }\n\n  .title-bar-back {\n    margin-left: -18px;\n    margin-right: 45px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n  }\n\n  .title-wrap {\n    flex: 1;\n  }\n\n  .title-text {\n    flex: 1;\n    text-overflow: ellipsis;\n    lines: 1;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 57px;\n    color: rgba(0, 0, 0, 0.6);\n  }\n\n  .btn-icon {\n    margin-right: 48px;\n    color: #198DED;\n    line-height: 72px;\n    height: 72px;\n  }\n\n  .btn-text {\n    margin-right: 48px;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 57px;\n    color: #198DED;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\nconst Navigator = weex.requireModule('navigator');\n\nexport default {\n  name: 'FmTitlebar',\n  mixins: [Locale],\n  components: { FmIcon },\n  props: {\n    title: {\n      type: String,\n      default () {\n        return t('el.titlebar.title');\n      }\n    },\n    titleColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.6)'\n    },\n    statusbar: {\n      type: Boolean,\n      default: false\n    },\n    useDefaultReturn: {\n      type: Boolean,\n      default: true\n    },\n    hasPrev: {\n      type: Boolean,\n      default: true\n    },\n    borderStyle: {\n      type: Object,\n      default: () => ({})\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    leftColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.6)'\n    },\n    rightBtns: [Object, Array],\n    rightText: String,\n    show: {\n      type: Boolean,\n      default: true\n    }\n  },\n  computed: {\n    btns () {\n      const { rightBtns, rightText } = this;\n      let btns = [];\n      if (Array.isArray(rightBtns)) {\n        btns = btns.concat(rightBtns.slice(0, 3));\n      } else if (Object.prototype.toString.call(rightBtns).slice(8, -1).toLowerCase() === 'object') {\n        btns.push(rightBtns);\n      } else if (rightText) {\n        btns.push({ type: 'text', value: rightText });\n      }\n      return btns;\n    },\n    barStyle () {\n      const style = {\n        borderBottomStyle: 'solid',\n        borderBottomWidth: `${2}px`,\n        borderBottomColor: 'rgba(0, 0, 0, 0.1)',\n        paddingRight: `${this.rightBtns ? 0 : 48}px`\n      };\n      Object.assign(style, this.borderStyle);\n      style.backgroundColor = this.backgroundColor;\n      return style;\n    }\n  },\n  methods: {\n    onBack (e) {\n      const self = this;\n      if (self.useDefaultReturn) {\n        Navigator.pop({}, e => {\n        });\n      }\n      self.$emit('fmTitlebarLeftBtnClicked', {});\n    },\n    rightBtnClick (idx, item) {\n      this.$emit('fmTitlebarRightBtnClicked', { idx: idx, value: item });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-/* 213 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _fmIcon = __webpack_require__(4);
-
-var _fmIcon2 = _interopRequireDefault(_fmIcon);
-
-var _locale = __webpack_require__(34);
-
-var _locale2 = _interopRequireDefault(_locale);
-
-var _locale3 = __webpack_require__(28);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Navigator = weex.requireModule('navigator'); //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-exports.default = {
-  name: 'FmTitlebar',
-  mixins: [_locale2.default],
-  components: { FmIcon: _fmIcon2.default },
-  props: {
-    title: {
-      type: String,
-      default: function _default() {
-        return (0, _locale3.t)('el.titlebar.title');
-      }
-    },
-    titleColor: {
-      type: String,
-      default: 'rgba(0, 0, 0, 0.6)'
-    },
-    statusbar: {
-      type: Boolean,
-      default: false
-    },
-    useDefaultReturn: {
-      type: Boolean,
-      default: true
-    },
-    hasPrev: {
-      type: Boolean,
-      default: true
-    },
-    borderStyle: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
-    },
-    backgroundColor: {
-      type: String,
-      default: '#FFFFFF'
-    },
-    leftColor: {
-      type: String,
-      default: 'rgba(0, 0, 0, 0.6)'
-    },
-    rightBtns: [Object, Array],
-    rightText: String,
-    show: {
-      type: Boolean,
-      default: true
-    }
-  },
-  computed: {
-    btns: function btns() {
-      var rightBtns = this.rightBtns,
-          rightText = this.rightText;
-
-      var btns = [];
-      if (Array.isArray(rightBtns)) {
-        btns = btns.concat(rightBtns.slice(0, 3));
-      } else if (Object.prototype.toString.call(rightBtns).slice(8, -1).toLowerCase() === 'object') {
-        btns.push(rightBtns);
-      } else if (rightText) {
-        btns.push({ type: 'text', value: rightText });
-      }
-      return btns;
-    },
-    barStyle: function barStyle() {
-      var style = {
-        borderBottomStyle: 'solid',
-        borderBottomWidth: 2 + 'px',
-        borderBottomColor: 'rgba(0, 0, 0, 0.1)',
-        paddingRight: (this.rightBtns ? 0 : 48) + 'px'
-      };
-      Object.assign(style, this.borderStyle);
-      style.backgroundColor = this.backgroundColor;
-      return style;
-    }
-  },
-  methods: {
-    onBack: function onBack(e) {
-      var self = this;
-      if (self.useDefaultReturn) {
-        Navigator.pop({}, function (e) {});
-      }
-      self.$emit('fmTitlebarLeftBtnClicked', {});
-    },
-    rightBtnClick: function rightBtnClick(idx, item) {
-      this.$emit('fmTitlebarRightBtnClicked', { idx: idx, value: item });
-    }
-  }
-};
-
-/***/ }),
-/* 214 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (_vm.show) ? _c('div', [(_vm.statusbar) ? _c('div', {
-    staticClass: "fm-status-bar",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      backgroundColor: _vm.backgroundColor
-    }))
-  }) : _vm._e(), _vm._v(" "), _c('div', {
-    staticClass: "fm-title-bar",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(_vm.barStyle))
-  }, [(_vm.hasPrev) ? _vm._t("left", [_c('fm-icon', {
-    staticClass: "title-bar-back",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    attrs: {
-      "name": "fanhui",
-      "icon-style": 72,
-      "color": _vm.leftColor
-    },
-    on: {
-      "fmIconClicked": _vm.onBack
-    }
-  })]) : _vm._e(), _vm._v(" "), _c('div', {
-    staticClass: "title-wrap",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [_vm._t("middle", [_c('text', {
-    staticClass: "title-text",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      color: _vm.titleColor
-    }))
-  }, [_vm._v(_vm._s(_vm.title))])])], 2), _vm._v(" "), _vm._t("right", _vm._l((_vm.btns), function(item, idx) {
-    return _c('div', {
-      key: idx,
-      staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle(undefined))
-    }, [(item.type === 'icon') ? _c('fm-icon', {
-      staticClass: "btn-icon",
-      staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle(item.color ? {
-        color: item.color
-      } : {})),
-      attrs: {
-        "name": item.value,
-        "icon-style": 72
-      },
-      on: {
-        "fmIconClicked": function($event) {
-          _vm.rightBtnClick(idx, item)
-        }
-      }
-    }) : _c('text', {
-      staticClass: "btn-text",
-      staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle(item.color ? {
-        color: item.color
-      } : {})),
-      on: {
-        "click": function($event) {
-          _vm.rightBtnClick(idx, item)
-        }
-      }
-    }, [_vm._v(_vm._s(item.value))])], 1)
-  }))], 2)]) : _vm._e()
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-665f9fc0", module.exports)
-  }
-}
-
-/***/ }),
-/* 215 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(216);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 216 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(217),
+  __webpack_require__(205),
   /* template */
-  __webpack_require__(228),
+  __webpack_require__(216),
   /* scopeId */
   null,
   /* cssModules */
@@ -15959,7 +15932,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 217 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15969,7 +15942,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmMultiCheckCell = __webpack_require__(108);
+var _fmMultiCheckCell = __webpack_require__(109);
 
 var _fmMultiCheckCell2 = _interopRequireDefault(_fmMultiCheckCell);
 
@@ -16012,20 +15985,22 @@ exports.default = {
 //
 //
 //
+//
+//
 
 /***/ }),
-/* 218 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(219)
+__webpack_require__(207)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(221),
+  __webpack_require__(209),
   /* template */
-  __webpack_require__(227),
+  __webpack_require__(215),
   /* scopeId */
   "data-v-3e6c11c0",
   /* cssModules */
@@ -16052,13 +16027,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 219 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(220);
+var content = __webpack_require__(208);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -16078,7 +16053,7 @@ if(false) {
 }
 
 /***/ }),
-/* 220 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -16086,13 +16061,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.check-cell-wrap[data-v-3e6c11c0] {\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 20px;\n}\n.check-cell-wrap[data-v-3e6c11c0]:active {\n  background-color: #eeeeee;\n}\n.right[data-v-3e6c11c0] {\n  width: 24px;\n  height: 24px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-multi-check-cell/index.vue?2192434a"],"names":[],"mappings":";AAYA;EACA,oBAAA;EACA,+BAAA;EACA,oBAAA;EACA,gBAAA;CACA;AAEA;EACA,0BAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <cell class=\"check-cell-wrap\" @longpress=\"onLongpress\" @click=\"onClick\" ripple=\"normal\">\n    <div class=\"wrapper\" ref=\"wrapper\">\n      <slot></slot>\n    </div>\n    <div class=\"right\">\n      <check-icon :show=\"checking\" :checked=\"_selected\" :disabled=\"disabled\"></check-icon>\n    </div>\n  </cell>\n</template>\n\n<style scoped>\n  .check-cell-wrap {\n    flex-direction: row;\n    justify-content: space-between;\n    align-items: center;\n    padding: 0 20px;\n  }\n\n  .check-cell-wrap:active {\n    background-color: #eeeeee;\n  }\n\n  .right {\n    width: 24px;\n    height: 24px;\n  }\n</style>\n\n<script>\nconst dom = weex.requireModule('dom');\nimport CheckIcon from './check-icon.vue';\n\nexport default {\n  name: 'FmMultiCheckCell',\n  components: { CheckIcon },\n  props: {\n    identity: {\n      type: [String, Object, Number, Array],\n      required: true\n    },\n    disabled: {\n      type: Boolean,\n      default: false\n    }\n  },\n  computed: {\n    _selected: {\n      get () {\n        return this.store.indexOf(this.identity) !== -1;\n      },\n      set (val) {\n        if (val) {\n          this.addToStore();\n        } else {\n          this.deleteFromStore();\n        }\n      }\n    },\n    isGroup () {\n      let parent = this.$parent;\n      while (parent) {\n        if (parent.$options.componentName !== 'FmM\bultiCheckGroup') {\n          parent = parent.$parent;\n        } else {\n          this._group = parent;\n          return true;\n        }\n      }\n      return false;\n    },\n    checking () {\n      return this._group.checking;\n    },\n    store () {\n      return this._group.value;\n    }\n  },\n  methods: {\n    onClick (e) {\n      if (this._group.checking && !this.disabled) {\n        this.toggleSelected();\n      }\n    },\n    toggleSelected () {\n      !this.disabled && (this._selected = !this._selected);\n    },\n    onLongpress (e) {\n      !this._group.checking &&\n          (this._group.checking = true) &&\n          !this.disabled &&\n          (this._selected = true);\n    },\n    addToStore () {\n      const { identity } = this;\n      if (Array.isArray(this.store) && this.store.indexOf(identity) === -1) {\n        this.store.push(identity);\n      }\n    },\n    deleteFromStore () {\n      const { identity } = this;\n      if (Array.isArray(this.store) && this.store.indexOf(identity) !== -1) {\n        this.store.splice(this.store.indexOf(identity), 1);\n      }\n    }\n  },\n  created () {\n    if (!this.isGroup) {\n      throw Error('fm-multi-check-cell must be used in fm-multi-check-group !');\n    }\n  }\n};\n</script>\n\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.check-cell-wrap[data-v-3e6c11c0] {\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 20px;\n}\n.check-cell-wrap[data-v-3e6c11c0]:active {\n  background-color: #eeeeee;\n}\n.right[data-v-3e6c11c0] {\n  width: 24px;\n  height: 24px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-multi-check-cell/index.vue?10802bd5"],"names":[],"mappings":";AAcA;EACA,oBAAA;EACA,+BAAA;EACA,oBAAA;EACA,gBAAA;CACA;AAEA;EACA,0BAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <cell class=\"check-cell-wrap\" @longpress=\"onLongpress\" @click=\"onClick\" ripple=\"normal\">\n    <div class=\"wrapper\" ref=\"wrapper\">\n      <slot></slot>\n    </div>\n    <div class=\"right\">\n      <check-icon :show=\"checking\" :checked=\"_selected\" :disabled=\"disabled\"></check-icon>\n    </div>\n  </cell>\n</template>\n\n<style scoped>\n  .check-cell-wrap {\n    flex-direction: row;\n    justify-content: space-between;\n    align-items: center;\n    padding: 0 20px;\n  }\n\n  .check-cell-wrap:active {\n    background-color: #eeeeee;\n  }\n\n  .right {\n    width: 24px;\n    height: 24px;\n  }\n</style>\n\n<script>\nconst dom = weex.requireModule('dom');\nimport CheckIcon from './check-icon.vue';\n\nexport default {\n  name: 'FmMultiCheckCell',\n  components: { CheckIcon },\n  props: {\n    identity: {\n      type: [String, Object, Number, Array],\n      required: true\n    },\n    disabled: {\n      type: Boolean,\n      default: false\n    }\n  },\n  computed: {\n    _selected: {\n      get () {\n        return this.store.indexOf(this.identity) !== -1;\n      },\n      set (val) {\n        if (val) {\n          this.addToStore();\n        } else {\n          this.deleteFromStore();\n        }\n      }\n    },\n    isGroup () {\n      let parent = this.$parent;\n      while (parent) {\n        if (parent.$options.componentName !== 'FmM\bultiCheckGroup') {\n          parent = parent.$parent;\n        } else {\n          this._group = parent;\n          return true;\n        }\n      }\n      return false;\n    },\n    checking () {\n      return this._group.checking;\n    },\n    store () {\n      return this._group.value;\n    }\n  },\n  methods: {\n    onClick (e) {\n      if (this._group.checking && !this.disabled) {\n        this.toggleSelected();\n      }\n    },\n    toggleSelected () {\n      !this.disabled && (this._selected = !this._selected);\n    },\n    onLongpress (e) {\n      !this._group.checking &&\n          (this._group.checking = true) &&\n          !this.disabled &&\n          (this._selected = true);\n    },\n    addToStore () {\n      const { identity } = this;\n      if (Array.isArray(this.store) && this.store.indexOf(identity) === -1) {\n        this.store.push(identity);\n      }\n    },\n    deleteFromStore () {\n      const { identity } = this;\n      if (Array.isArray(this.store) && this.store.indexOf(identity) !== -1) {\n        this.store.splice(this.store.indexOf(identity), 1);\n      }\n    }\n  },\n  created () {\n    if (!this.isGroup) {\n      throw Error('fm-multi-check-cell must be used in fm-multi-check-group !');\n    }\n  }\n};\n</script>\n\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 221 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16102,12 +16077,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _checkIcon = __webpack_require__(222);
+var _checkIcon = __webpack_require__(210);
 
 var _checkIcon2 = _interopRequireDefault(_checkIcon);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
 //
 //
 //
@@ -16219,18 +16196,18 @@ exports.default = {
 };
 
 /***/ }),
-/* 222 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(223)
+__webpack_require__(211)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(225),
+  __webpack_require__(213),
   /* template */
-  __webpack_require__(226),
+  __webpack_require__(214),
   /* scopeId */
   "data-v-00ad7ec0",
   /* cssModules */
@@ -16257,13 +16234,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 223 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(224);
+var content = __webpack_require__(212);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -16283,7 +16260,7 @@ if(false) {
 }
 
 /***/ }),
-/* 224 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -16291,13 +16268,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.animate-wrap[data-v-00ad7ec0] {\n  width: 24px;\n  height: 24px;\n}\n.unchecked[data-v-00ad7ec0] {\n  width: 24px;\n  height: 24px;\n}\n.checked[data-v-00ad7ec0] {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 24px;\n  height: 24px;\n  transform: scale(0);\n  background-color: #ffffff;\n  border-radius: 12px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-multi-check-cell/check-icon.vue?7ced5edf"],"names":[],"mappings":";AAgBA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,OAAA;EACA,YAAA;EACA,aAAA;EACA,oBAAA;EACA,0BAAA;EACA,oBAAA;CACA","file":"check-icon.vue","sourcesContent":["<template>\n  <div class=\"check-icon\">\n    <div class=\"animate-wrap\" :hack=\"isNeedShow\" ref=\"animate-wrap\" :style=\"wrapStyle\">\n      <image\n        class=\"unchecked\"\n        :src=\"bgImg\" />\n      <image \n        class=\"checked\"\n        :src=\"getCheckedImg\" \n        ref=\"check-icon\"\n        :watch=\"isNeedChecked\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .animate-wrap {\n    width: 24px;\n    height: 24px;\n  }\n\n  .unchecked {\n    width: 24px;\n    height: 24px;\n  }\n\n  .checked {\n    position: absolute;\n    left: 0;\n    top: 0;\n    width: 24px;\n    height: 24px;\n    transform: scale(0);\n    background-color: #ffffff;\n    border-radius: 12px;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nconst animation = weex.requireModule('animation');\nexport default {\n  components: { FmIcon },\n  props: {\n    show: {\n      type: Boolean,\n      default: false\n    },\n    checked: {\n      type: Boolean,\n      default: false\n    },\n    bgImg: {\n      type: String,\n      default:\n          'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_off.png'\n    },\n    checkedImg: {\n      type: String,\n      default:\n          'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on.png'\n    },\n    checkedDisableImg: {\n      type: String,\n      default:\n          'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on_disable.png'\n    },\n    disabled: {\n      type: Boolean,\n      default: false\n    }\n  },\n  watch: {\n    checked (bool) {\n      this.appearChecked(bool);\n    }\n  },\n  data: () => ({}),\n  computed: {\n    getCheckedImg () {\n      const { disabled, checkedImg, checkedDisableImg } = this;\n      return disabled ? checkedDisableImg : checkedImg;\n    },\n    wrapStyle () {\n      return this.show\n        ? {\n          opacity: 1\n        }\n        : {\n          opacity: 0,\n          transform: 'rotateX(90deg)'\n        };\n    },\n    checkedStyle () {\n      return this.checked\n        ? {\n          opacity: 1\n        }\n        : {\n          opacity: 0\n        };\n    },\n    isNeedShow () {\n      this.appear(this.show);\n    },\n    isNeedChecked () {\n      setTimeout(() => {\n        this.appearChecked(this.checked);\n      }, 50);\n    }\n  },\n  methods: {\n    appear (bool, duration = 200) {\n      const animateEl = this.$refs['animate-wrap'];\n      if (!animateEl || !bool) {\n        return;\n      }\n      const style = {\n        transform: 'rotateX(0deg)'\n      };\n      animation.transition(\n        animateEl,\n        {\n          styles: style,\n          duration,\n          delay: 0,\n          timingFunction: 'ease-out'\n        },\n        () => {}\n      );\n    },\n    appearChecked (bool, duration = 30) {\n      const animateEl = this.$refs['check-icon'];\n      if (!animateEl) {\n        return;\n      }\n      const style = bool\n        ? {\n          transform: 'scale(1)'\n        }\n        : {\n          transform: 'scale(0)'\n        };\n      animation.transition(\n        animateEl,\n        {\n          styles: style,\n          duration,\n          delay: 0,\n          timingFunction: 'ease-out'\n        },\n        () => {}\n      );\n    }\n  }\n};\n</script>\n\n\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.animate-wrap[data-v-00ad7ec0] {\n  width: 24px;\n  height: 24px;\n}\n.unchecked[data-v-00ad7ec0] {\n  width: 24px;\n  height: 24px;\n}\n.checked[data-v-00ad7ec0] {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 24px;\n  height: 24px;\n  transform: scale(0);\n  background-color: #ffffff;\n  border-radius: 12px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-multi-check-cell/check-icon.vue?28999800"],"names":[],"mappings":";AAkBA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,OAAA;EACA,YAAA;EACA,aAAA;EACA,oBAAA;EACA,0BAAA;EACA,oBAAA;CACA","file":"check-icon.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div class=\"check-icon\">\n    <div class=\"animate-wrap\" :hack=\"isNeedShow\" ref=\"animate-wrap\" :style=\"wrapStyle\">\n      <image\n        class=\"unchecked\"\n        :src=\"bgImg\" />\n      <image\n        class=\"checked\"\n        :src=\"getCheckedImg\"\n        ref=\"check-icon\"\n        :watch=\"isNeedChecked\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .animate-wrap {\n    width: 24px;\n    height: 24px;\n  }\n\n  .unchecked {\n    width: 24px;\n    height: 24px;\n  }\n\n  .checked {\n    position: absolute;\n    left: 0;\n    top: 0;\n    width: 24px;\n    height: 24px;\n    transform: scale(0);\n    background-color: #ffffff;\n    border-radius: 12px;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nconst animation = weex.requireModule('animation');\nexport default {\n  components: { FmIcon },\n  props: {\n    show: {\n      type: Boolean,\n      default: false\n    },\n    checked: {\n      type: Boolean,\n      default: false\n    },\n    bgImg: {\n      type: String,\n      default:\n          'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_off.png'\n    },\n    checkedImg: {\n      type: String,\n      default:\n          'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on.png'\n    },\n    checkedDisableImg: {\n      type: String,\n      default:\n          'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on_disable.png'\n    },\n    disabled: {\n      type: Boolean,\n      default: false\n    }\n  },\n  watch: {\n    checked (bool) {\n      this.appearChecked(bool);\n    }\n  },\n  data: () => ({}),\n  computed: {\n    getCheckedImg () {\n      const { disabled, checkedImg, checkedDisableImg } = this;\n      return disabled ? checkedDisableImg : checkedImg;\n    },\n    wrapStyle () {\n      return this.show\n        ? {\n          opacity: 1\n        }\n        : {\n          opacity: 0,\n          transform: 'rotateX(90deg)'\n        };\n    },\n    checkedStyle () {\n      return this.checked\n        ? {\n          opacity: 1\n        }\n        : {\n          opacity: 0\n        };\n    },\n    isNeedShow () {\n      this.appear(this.show);\n    },\n    isNeedChecked () {\n      setTimeout(() => {\n        this.appearChecked(this.checked);\n      }, 50);\n    }\n  },\n  methods: {\n    appear (bool, duration = 200) {\n      const animateEl = this.$refs['animate-wrap'];\n      if (!animateEl || !bool) {\n        return;\n      }\n      const style = {\n        transform: 'rotateX(0deg)'\n      };\n      animation.transition(\n        animateEl,\n        {\n          styles: style,\n          duration,\n          delay: 0,\n          timingFunction: 'ease-out'\n        },\n        () => {}\n      );\n    },\n    appearChecked (bool, duration = 30) {\n      const animateEl = this.$refs['check-icon'];\n      if (!animateEl) {\n        return;\n      }\n      const style = bool\n        ? {\n          transform: 'scale(1)'\n        }\n        : {\n          transform: 'scale(0)'\n        };\n      animation.transition(\n        animateEl,\n        {\n          styles: style,\n          duration,\n          delay: 0,\n          timingFunction: 'ease-out'\n        },\n        () => {}\n      );\n    }\n  }\n};\n</script>\n\n\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 225 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16307,13 +16284,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmIcon = __webpack_require__(4);
+var _fmIcon = __webpack_require__(6);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var animation = weex.requireModule('animation'); //
+//
+//
 //
 //
 //
@@ -16463,7 +16442,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 226 */
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -16506,7 +16485,7 @@ if (false) {
 }
 
 /***/ }),
-/* 227 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -16549,7 +16528,7 @@ if (false) {
 }
 
 /***/ }),
-/* 228 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -16568,7 +16547,7 @@ if (false) {
 }
 
 /***/ }),
-/* 229 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16578,7 +16557,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(230);
+var _index = __webpack_require__(218);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -16590,18 +16569,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 230 */
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(231)
+__webpack_require__(219)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(233),
+  __webpack_require__(221),
   /* template */
-  __webpack_require__(234),
+  __webpack_require__(222),
   /* scopeId */
   "data-v-fb2a1758",
   /* cssModules */
@@ -16628,13 +16607,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 231 */
+/* 219 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(232);
+var content = __webpack_require__(220);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -16654,7 +16633,7 @@ if(false) {
 }
 
 /***/ }),
-/* 232 */
+/* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -16662,13 +16641,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.cell[data-v-fb2a1758] {\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 20px;\n  width: 360px;\n  height: 92px;\n}\n.check-wrap[data-v-fb2a1758] {\n  width: 24px;\n  height: 24px;\n}\n.unchecked[data-v-fb2a1758] {\n  width: 24px;\n  height: 24px;\n}\n.checked[data-v-fb2a1758] {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 24px;\n  height: 24px;\n  transform: scale(0);\n  border-radius: 12px;\n}\n.loading[data-v-fb2a1758] {\n  justify-content: center;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rcy-check/index.vue?40005bbf"],"names":[],"mappings":";AA8CA;EACA,oBAAA;EACA,+BAAA;EACA,oBAAA;EACA,gBAAA;EACA,aAAA;EACA,aAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,OAAA;EACA,YAAA;EACA,aAAA;EACA,oBAAA;EACA,oBAAA;CACA;AAEA;EACA,wBAAA;CACA","file":"index.vue","sourcesContent":["<template>\n  <recycle-list\n    ref=\"rcy\"\n    template-key=\"type\"\n    alias=\"item\"\n    index=\"i\"\n    append='tree'\n    @loadmore=\"$onLoadMore()\"\n    showScrollbar=\"true\" style='width:360px'\n    @mlongclick=\"$onCellLongpress\"\n    for=\"(item, i) in dataSource\">\n\n    <cell-slot template-type=\"check-cell\" :itemId=\"item.itemId\" @click=\"$onCellCheck(item, i)\" ripple=\"normal\">\n      <div>\n        <div class=\"cell\">\n          <!-- Content start -->\n          <div class=\"content\">\n            <text>{{ item.itemId }}</text>\n            <text v-once :a=\"i\">{{ i }}</text>\n          </div>\n          <!-- Content end -->\n\n          <!-- Right circle start -->\n          <div class=\"check-wrap\" v-if=\"item.checking\">\n            <image\n              class=\"unchecked\"\n              src=\"http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_off.png\" />\n            <image\n              class=\"checked\"\n              v-if=\"item.checked\"\n              :src=\"item.disabled ? 'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on_disable.png' : 'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on.png'\"\n            />\n          </div>\n          <!-- Right circle end -->\n        </div>\n      </div>\n    </cell-slot>\n\n    <loading class=\"loading\" @loading=\"onloading\" display=\"hide\">\n      <text class=\"indicator\" ref=\"loadText\">正在加载中 ..</text>\n    </loading>\n\n  </recycle-list>\n</template>\n\n<style scoped>\n  .cell {\n    flex-direction: row;\n    justify-content: space-between;\n    align-items: center;\n    padding: 0 20px;\n    width: 360px;\n    height: 92px;\n  }\n\n  .check-wrap {\n    width: 24px;\n    height: 24px;\n  }\n\n  .unchecked {\n    width: 24px;\n    height: 24px;\n  }\n\n  .checked {\n    position: absolute;\n    left: 0;\n    top: 0;\n    width: 24px;\n    height: 24px;\n    transform: scale(0);\n    border-radius: 12px;\n  }\n\n  .loading {\n    justify-content: center;\n  }\n</style>\n\n<script>\nexport default {\n  props: {\n    // List dataSource\n    dataSource: {\n      type: Array,\n      default: () => []\n    },\n    // Custom load data function\n    loadData: Function\n  },\n  data () {\n    return {\n      // Is checkind state\n      checking: false,\n      // Is load end\n      end: false\n    };\n  },\n  computed: {\n    recycleList () {\n      return this.$refs.rcy;\n    }\n  },\n  methods: {\n    /*\n       * InSide Function\n       */\n    // Handle cell be longpress\n    $onCellLongpress (e) {\n      if (!this.checking) {\n        const index = e.index;\n        const tmp = [];\n        this.recycleList.getListDataSize(res => {\n          this.checking = true;\n          this.recycleList.resetLoadmore();\n          this.recycleList.setPullLoadEnable(false);\n          for (let i = 0; i < res; i++) {\n            this.dataSource[i].checking = this.checking;\n            tmp.push(this.dataSource[i]);\n          }\n          tmp[index].checked = true;\n          this.dataSource = tmp;\n          this.recycleList.setListData(this.dataSource);\n          this.$emit('fmRcyCheckStateChange', true);\n        });\n      }\n    },\n    // Handle cell be click\n    $onCellCheck (item, i) {\n      if (item.checking) {\n        item.checked = !item.checked;\n        this.dataSource[i] = item;\n        this.recycleList.updateData(this.dataSource[i], i);\n        this.$emit('fmRcyCheckValueChange', this.dataSource);\n      } else {\n        this.$emit('fmRcyCheckCellBeClick', { value: item, index: i });\n      }\n    },\n    // Handle list loadmore, is a js hook\n    $onLoadMore () {\n      if (!this.checking && !this.end) {\n        if (this.loadData && typeof this.loadData === 'function') { this.loadData(); }\n      }\n      if (!this.checked) {\n        this.recycleList.setLoadingDisplay('hide');\n        this.recycleList.setPullLoadEnable(false);\n      } else if (!this.end) {\n        setTimeout(() => {\n          this.recycleList.setLoadingDisplay('hide');\n          this.recycleList.setPullLoadEnable(true);\n          this.recycleList.resetLoadmore();\n        }, 400);\n      }\n    },\n\n    /*\n       * OutSide Function\n       */\n    // Quit checking model if this.checking is true, will emit @fmRcyCheckFinish Event.\n    finish () {\n      if (this.checking) {\n        this.recycleList.getListDataSize(res => {\n          const tmp = [];\n          const checkList = [];\n          const checkIndex = [];\n          this.checking = false;\n          this.recycleList.setPullLoadEnable(true);\n          this.recycleList.resetLoadmore();\n          for (let i = 0; i < res; i++) {\n            this.dataSource[i].checking = this.checking;\n            this.dataSource[i].checked && (checkList.push(this.dataSource[i])) && (checkIndex.push(i));\n            tmp.push(this.dataSource[i]);\n          }\n          this.dataSource = tmp;\n          this.recycleList.setListData(this.dataSource);\n          this.$emit('fmRcyCheckFinish', { indexs: checkIndex, values: checkList });\n          this.$emit('fmRcyCheckStateChange', false);\n        });\n      }\n    },\n    // Toggle all item's checked state when in checking Model, will emit @fmRcyCheckValueChange Event.\n    toggleAll (bool) {\n      if (this.checking) {\n        const tmp = [];\n        this.recycleList.getListDataSize(res => {\n          for (let i = 0; i < res; i++) {\n            this.dataSource[i].checked = bool;\n            tmp.push(this.dataSource[i]);\n          }\n          this.dataSource = tmp;\n          this.recycleList.setListData(this.dataSource);\n          this.$emit('fmRcyCheckValueChange', this.dataSource);\n        });\n      }\n    },\n    // Append data at this.dataSource and append item at recycle-list.\n    appendData (data) {\n      this.dataSource = this.dataSource.concat(data);\n      this.recycleList.appendData(data);\n    },\n    // Remove data from this.dataSource and remove item from recycle-list.\n    removeData (array) {\n      this.dataSource = this.dataSource.filter((value, index) => {\n        return array.indexOf(index) < 0;\n      });\n      this.recycleList.removeData(array);\n      this.$emit('fmRcyCheckValueChange', this.dataSource);\n    },\n    // When this.loadData function complete, call this function to reset loading state.\n    resetLoading () {\n      this.recycleList.setLoadingDisplay('hide');\n    },\n    // Set loading no more data Tip and change loading state.\n    loadingEnd (tipStr) {\n      this.end = true;\n      this.$refs.loadText.setAttr('value', tipStr, false);\n      setTimeout(() => {\n        this.recycleList.setLoadingDisplay('hide');\n        this.recycleList.setPullLoadEnable(true);\n        this.recycleList.resetLoadmore();\n      }, 400);\n    },\n    // Reset loding, make it can load more again.\n    resetLoadMore () {\n      this.end = true;\n      this.recycleList.setPullLoadEnable(true);\n      this.recycleList.resetLoadmore();\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.cell[data-v-fb2a1758] {\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 20px;\n  width: 360px;\n  height: 92px;\n}\n.check-wrap[data-v-fb2a1758] {\n  width: 24px;\n  height: 24px;\n}\n.unchecked[data-v-fb2a1758] {\n  width: 24px;\n  height: 24px;\n}\n.checked[data-v-fb2a1758] {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 24px;\n  height: 24px;\n  transform: scale(0);\n  border-radius: 12px;\n}\n.loading[data-v-fb2a1758] {\n  justify-content: center;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rcy-check/index.vue?21f080d4"],"names":[],"mappings":";AAgDA;EACA,oBAAA;EACA,+BAAA;EACA,oBAAA;EACA,gBAAA;EACA,aAAA;EACA,aAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,OAAA;EACA,YAAA;EACA,aAAA;EACA,oBAAA;EACA,oBAAA;CACA;AAEA;EACA,wBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <recycle-list\n    ref=\"rcy\"\n    template-key=\"type\"\n    alias=\"item\"\n    index=\"i\"\n    append='tree'\n    @loadmore=\"$onLoadMore()\"\n    showScrollbar=\"true\" style='width:360px'\n    @mlongclick=\"$onCellLongpress\"\n    for=\"(item, i) in dataSource\">\n\n    <cell-slot template-type=\"check-cell\" :itemId=\"item.itemId\" @click=\"$onCellCheck(item, i)\" ripple=\"normal\">\n      <div>\n        <div class=\"cell\">\n          <!-- Content start -->\n          <div class=\"content\">\n            <text>{{ item.itemId }}</text>\n            <text v-once :a=\"i\">{{ i }}</text>\n          </div>\n          <!-- Content end -->\n\n          <!-- Right circle start -->\n          <div class=\"check-wrap\" v-if=\"item.checking\">\n            <image\n              class=\"unchecked\"\n              src=\"http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_off.png\" />\n            <image\n              class=\"checked\"\n              v-if=\"item.checked\"\n              :src=\"item.disabled ? 'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on_disable.png' : 'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on.png'\"\n            />\n          </div>\n          <!-- Right circle end -->\n        </div>\n      </div>\n    </cell-slot>\n\n    <loading class=\"loading\" @loading=\"onloading\" display=\"hide\">\n      <text class=\"indicator\" ref=\"loadText\">正在加载中 ..</text>\n    </loading>\n\n  </recycle-list>\n</template>\n\n<style scoped>\n  .cell {\n    flex-direction: row;\n    justify-content: space-between;\n    align-items: center;\n    padding: 0 20px;\n    width: 360px;\n    height: 92px;\n  }\n\n  .check-wrap {\n    width: 24px;\n    height: 24px;\n  }\n\n  .unchecked {\n    width: 24px;\n    height: 24px;\n  }\n\n  .checked {\n    position: absolute;\n    left: 0;\n    top: 0;\n    width: 24px;\n    height: 24px;\n    transform: scale(0);\n    border-radius: 12px;\n  }\n\n  .loading {\n    justify-content: center;\n  }\n</style>\n\n<script>\nexport default {\n  props: {\n    // List dataSource\n    dataSource: {\n      type: Array,\n      default: () => []\n    },\n    // Custom load data function\n    loadData: Function\n  },\n  data () {\n    return {\n      // Is checkind state\n      checking: false,\n      // Is load end\n      end: false\n    };\n  },\n  computed: {\n    recycleList () {\n      return this.$refs.rcy;\n    }\n  },\n  methods: {\n    /*\n       * InSide Function\n       */\n    // Handle cell be longpress\n    $onCellLongpress (e) {\n      if (!this.checking) {\n        const index = e.index;\n        const tmp = [];\n        this.recycleList.getListDataSize(res => {\n          this.checking = true;\n          this.recycleList.resetLoadmore();\n          this.recycleList.setPullLoadEnable(false);\n          for (let i = 0; i < res; i++) {\n            this.dataSource[i].checking = this.checking;\n            tmp.push(this.dataSource[i]);\n          }\n          tmp[index].checked = true;\n          this.dataSource = tmp;\n          this.recycleList.setListData(this.dataSource);\n          this.$emit('fmRcyCheckStateChange', true);\n        });\n      }\n    },\n    // Handle cell be click\n    $onCellCheck (item, i) {\n      if (item.checking) {\n        item.checked = !item.checked;\n        this.dataSource[i] = item;\n        this.recycleList.updateData(this.dataSource[i], i);\n        this.$emit('fmRcyCheckValueChange', this.dataSource);\n      } else {\n        this.$emit('fmRcyCheckCellBeClick', { value: item, index: i });\n      }\n    },\n    // Handle list loadmore, is a js hook\n    $onLoadMore () {\n      if (!this.checking && !this.end) {\n        if (this.loadData && typeof this.loadData === 'function') { this.loadData(); }\n      }\n      if (!this.checked) {\n        this.recycleList.setLoadingDisplay('hide');\n        this.recycleList.setPullLoadEnable(false);\n      } else if (!this.end) {\n        setTimeout(() => {\n          this.recycleList.setLoadingDisplay('hide');\n          this.recycleList.setPullLoadEnable(true);\n          this.recycleList.resetLoadmore();\n        }, 400);\n      }\n    },\n\n    /*\n       * OutSide Function\n       */\n    // Quit checking model if this.checking is true, will emit @fmRcyCheckFinish Event.\n    finish () {\n      if (this.checking) {\n        this.recycleList.getListDataSize(res => {\n          const tmp = [];\n          const checkList = [];\n          const checkIndex = [];\n          this.checking = false;\n          this.recycleList.setPullLoadEnable(true);\n          this.recycleList.resetLoadmore();\n          for (let i = 0; i < res; i++) {\n            this.dataSource[i].checking = this.checking;\n            this.dataSource[i].checked && (checkList.push(this.dataSource[i])) && (checkIndex.push(i));\n            tmp.push(this.dataSource[i]);\n          }\n          this.dataSource = tmp;\n          this.recycleList.setListData(this.dataSource);\n          this.$emit('fmRcyCheckFinish', { indexs: checkIndex, values: checkList });\n          this.$emit('fmRcyCheckStateChange', false);\n        });\n      }\n    },\n    // Toggle all item's checked state when in checking Model, will emit @fmRcyCheckValueChange Event.\n    toggleAll (bool) {\n      if (this.checking) {\n        const tmp = [];\n        this.recycleList.getListDataSize(res => {\n          for (let i = 0; i < res; i++) {\n            this.dataSource[i].checked = bool;\n            tmp.push(this.dataSource[i]);\n          }\n          this.dataSource = tmp;\n          this.recycleList.setListData(this.dataSource);\n          this.$emit('fmRcyCheckValueChange', this.dataSource);\n        });\n      }\n    },\n    // Append data at this.dataSource and append item at recycle-list.\n    appendData (data) {\n      this.dataSource = this.dataSource.concat(data);\n      this.recycleList.appendData(data);\n    },\n    // Remove data from this.dataSource and remove item from recycle-list.\n    removeData (array) {\n      this.dataSource = this.dataSource.filter((value, index) => {\n        return array.indexOf(index) < 0;\n      });\n      this.recycleList.removeData(array);\n      this.$emit('fmRcyCheckValueChange', this.dataSource);\n    },\n    // When this.loadData function complete, call this function to reset loading state.\n    resetLoading () {\n      this.recycleList.setLoadingDisplay('hide');\n    },\n    // Set loading no more data Tip and change loading state.\n    loadingEnd (tipStr) {\n      this.end = true;\n      this.$refs.loadText.setAttr('value', tipStr, false);\n      setTimeout(() => {\n        this.recycleList.setLoadingDisplay('hide');\n        this.recycleList.setPullLoadEnable(true);\n        this.recycleList.resetLoadmore();\n      }, 400);\n    },\n    // Reset loding, make it can load more again.\n    resetLoadMore () {\n      this.end = true;\n      this.recycleList.setPullLoadEnable(true);\n      this.recycleList.resetLoadmore();\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 233 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16677,6 +16656,8 @@ exports.push([module.i, "\n.cell[data-v-fb2a1758] {\n  flex-direction: row;\n  j
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+//
+//
 //
 //
 //
@@ -16934,7 +16915,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 234 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -17031,7 +17012,7 @@ if (false) {
 }
 
 /***/ }),
-/* 235 */
+/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17041,7 +17022,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(236);
+var _index = __webpack_require__(224);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -17053,18 +17034,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 236 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(237)
+__webpack_require__(225)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(239),
+  __webpack_require__(227),
   /* template */
-  __webpack_require__(245),
+  __webpack_require__(233),
   /* scopeId */
   "data-v-d7ab306c",
   /* cssModules */
@@ -17091,13 +17072,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 237 */
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(238);
+var content = __webpack_require__(226);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -17117,7 +17098,7 @@ if(false) {
 }
 
 /***/ }),
-/* 238 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -17125,13 +17106,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.list-wrap[data-v-d7ab306c] {\n  width: 1080px;\n}\n.title-wrap[data-v-d7ab306c] {\n  flex-direction: row;\n  padding: 27px 49px;\n  justify-content: space-between;\n}\n.title-text[data-v-d7ab306c] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 36px;\n  line-height: 54px;\n}\n.title-rightBtn[data-v-d7ab306c] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 36px;\n  line-height: 54px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-simple-list/index.vue?50baeb08"],"names":[],"mappings":";AAwBA;EACA,cAAA;CACA;AAEA;EACA,oBAAA;EACA,mBAAA;EACA,+BAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 2018/3/5. -->\n<template>\n  <div class=\"list-wrap\">\n    <div class=\"title-wrap\">\n      <slot name=\"left\">\n        <text class=\"title-text\" :style=\"{ color: titleColor }\">{{ title }}</text>\n      </slot>\n      <slot name=\"right\">\n        <text class=\"title-rightBtn\" :style=\"{ color: rightColor }\" @click=\"btnClicked\">{{ rightText }}</text>\n      </slot>\n    </div>\n    <div class=\"item-wrap\">\n      <item v-for=\"(item, index) in list\"\n            v-bind=\"Object.assign({}, customStyles, item)\"\n            :key=\"index\"\n            :index=\"index\"\n            @select=\"onSelect(index)\"\n            @leftClicked=\"leftIconClicked(index)\"\n            @rightClicked=\"rightIconClicked(index)\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .list-wrap {\n    width: 1080px;\n  }\n\n  .title-wrap {\n    flex-direction: row;\n    padding: 27px 49px;\n    justify-content: space-between;\n  }\n\n  .title-text {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 36px;\n    line-height: 54px;\n  }\n\n  .title-rightBtn {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 36px;\n    line-height: 54px;\n  }\n</style>\n\n<script>\nimport Item from './item.vue';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmSimpleList',\n  mixins: [Locale],\n  components: { Item },\n  props: {\n    list: {\n      type: Array,\n      default: () => ([])\n    },\n    title: {\n      type: String,\n      default () {\n        return t('el.common.title');\n      }\n    },\n    titleColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    rightText: {\n      type: String,\n      default: ''\n    },\n    rightColor: {\n      type: String,\n      default: '#198DED'\n    },\n    customStyles: {\n      type: Object,\n      default: () => ({})\n    }\n  },\n  methods: {\n    onSelect (index) {\n      this.$emit('fmSimpleListSelected', { model: this.list[index], index });\n    },\n    btnClicked () {\n      this.$emit('fmSimpleListRightBtnClicked');\n    },\n    leftIconClicked (index) {\n      this.$emit('fmSimpleListLeftIconClicked', { model: this.list[index], index });\n    },\n    rightIconClicked (index) {\n      this.$emit('fmSimpleListRightIconClicked', { model: this.list[index], index });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.list-wrap[data-v-d7ab306c] {\n  width: 1080px;\n}\n.title-wrap[data-v-d7ab306c] {\n  flex-direction: row;\n  padding: 27px 49px;\n  justify-content: space-between;\n}\n.title-text[data-v-d7ab306c] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 36px;\n  line-height: 54px;\n}\n.title-rightBtn[data-v-d7ab306c] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 36px;\n  line-height: 54px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-simple-list/index.vue?5299ae85"],"names":[],"mappings":";AAyBA;EACA,cAAA;CACA;AAEA;EACA,oBAAA;EACA,mBAAA;EACA,+BAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/3/5. -->\n<template>\n  <div class=\"list-wrap\">\n    <div class=\"title-wrap\">\n      <slot name=\"left\">\n        <text class=\"title-text\" :style=\"{ color: titleColor }\">{{ title }}</text>\n      </slot>\n      <slot name=\"right\">\n        <text class=\"title-rightBtn\" :style=\"{ color: rightColor }\" @click=\"btnClicked\">{{ rightText }}</text>\n      </slot>\n    </div>\n    <div class=\"item-wrap\">\n      <item v-for=\"(item, index) in list\"\n            v-bind=\"Object.assign({}, customStyles, item)\"\n            :key=\"index\"\n            :index=\"index\"\n            @select=\"onSelect(index)\"\n            @leftClicked=\"leftIconClicked(index)\"\n            @rightClicked=\"rightIconClicked(index)\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .list-wrap {\n    width: 1080px;\n  }\n\n  .title-wrap {\n    flex-direction: row;\n    padding: 27px 49px;\n    justify-content: space-between;\n  }\n\n  .title-text {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 36px;\n    line-height: 54px;\n  }\n\n  .title-rightBtn {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 36px;\n    line-height: 54px;\n  }\n</style>\n\n<script>\nimport Item from './item.vue';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmSimpleList',\n  mixins: [Locale],\n  components: { Item },\n  props: {\n    list: {\n      type: Array,\n      default: () => ([])\n    },\n    title: {\n      type: String,\n      default () {\n        return t('el.common.title');\n      }\n    },\n    titleColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    rightText: {\n      type: String,\n      default: ''\n    },\n    rightColor: {\n      type: String,\n      default: '#198DED'\n    },\n    customStyles: {\n      type: Object,\n      default: () => ({})\n    }\n  },\n  methods: {\n    onSelect (index) {\n      this.$emit('fmSimpleListSelected', { model: this.list[index], index });\n    },\n    btnClicked () {\n      this.$emit('fmSimpleListRightBtnClicked');\n    },\n    leftIconClicked (index) {\n      this.$emit('fmSimpleListLeftIconClicked', { model: this.list[index], index });\n    },\n    rightIconClicked (index) {\n      this.$emit('fmSimpleListRightIconClicked', { model: this.list[index], index });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 239 */
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17141,7 +17122,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _item = __webpack_require__(240);
+var _item = __webpack_require__(228);
 
 var _item2 = _interopRequireDefault(_item);
 
@@ -17149,7 +17130,7 @@ var _locale = __webpack_require__(34);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(28);
+var _locale3 = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17252,20 +17233,21 @@ exports.default = {
 //
 //
 //
+//
 
 /***/ }),
-/* 240 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(241)
+__webpack_require__(229)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(243),
+  __webpack_require__(231),
   /* template */
-  __webpack_require__(244),
+  __webpack_require__(232),
   /* scopeId */
   "data-v-6f5a0a6a",
   /* cssModules */
@@ -17292,13 +17274,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 241 */
+/* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(242);
+var content = __webpack_require__(230);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -17318,7 +17300,7 @@ if(false) {
 }
 
 /***/ }),
-/* 242 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -17332,7 +17314,7 @@ exports.push([module.i, "\n.list-item[data-v-6f5a0a6a] {\n  padding: 0 48px;\n}\
 
 
 /***/ }),
-/* 243 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17342,7 +17324,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmIcon = __webpack_require__(4);
+var _fmIcon = __webpack_require__(6);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
@@ -17494,7 +17476,7 @@ exports.default = {
 //
 
 /***/ }),
-/* 244 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -17546,7 +17528,7 @@ if (false) {
 }
 
 /***/ }),
-/* 245 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -17608,7 +17590,7 @@ if (false) {
 }
 
 /***/ }),
-/* 246 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17618,7 +17600,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(247);
+var _index = __webpack_require__(235);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -17630,18 +17612,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 247 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(248)
+__webpack_require__(236)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(250),
+  __webpack_require__(238),
   /* template */
-  __webpack_require__(251),
+  __webpack_require__(239),
   /* scopeId */
   "data-v-4c615fcc",
   /* cssModules */
@@ -17668,13 +17650,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 248 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(249);
+var content = __webpack_require__(237);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -17694,7 +17676,7 @@ if(false) {
 }
 
 /***/ }),
-/* 249 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -17702,13 +17684,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-tab-page[data-v-4c615fcc] {\n  width: 1080px;\n}\n.tab-title-list[data-v-4c615fcc] {\n  width: 1080px;\n  flex-direction: row;\n  border-bottom-width: 2px;\n  border-color: rgba(0,0,0,0.10);\n}\n.tab-title-wrap[data-v-4c615fcc] {\n  flex-direction: row;\n  justify-content: space-around;\n  padding: 0 48px;\n}\n.title-item[data-v-4c615fcc] {\n  padding: 27px 18px;\n  margin-right: 42px;\n}\n.item-title[data-v-4c615fcc] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 42px;\n  line-height: 57px;\n}\n.border-bottom[data-v-4c615fcc] {\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  height: 3px;\n  width: 132px;\n}\n.tab-page-wrap[data-v-4c615fcc] {\n  width: 1080px;\n  overflow: hidden;\n}\n.tab-container[data-v-4c615fcc] {\n  flex: 1;\n  flex-direction: row;\n  position: absolute;\n}\n.tab-item[data-v-4c615fcc] {\n  width: 1080px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tab-page/index.vue?626af69e"],"names":[],"mappings":";AA8CA;EACA,cAAA;CACA;AAEA;EACA,cAAA;EACA,oBAAA;EACA,yBAAA;EACA,+BAAA;CACA;AAEA;EACA,oBAAA;EACA,8BAAA;EACA,gBAAA;CACA;AAEA;EACA,mBAAA;EACA,mBAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,UAAA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,cAAA;EACA,iBAAA;CACA;AAEA;EACA,QAAA;EACA,oBAAA;EACA,mBAAA;CACA;AAEA;EACA,cAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 18/03/06. -->\n<template>\n  <div class=\"fm-tab-page\"\n       :style=\"{ height: (tabPageHeight) + 'px', opacity: loaded ? 1 : 0}\">\n    <scroller class=\"tab-title-list\"\n              ref=\"tab-title-list\"\n              :show-scrollbar=\"false\"\n              scroll-direction=\"horizontal\"\n              :style=\"{ height: (cTabStyles.height) + 'px'}\">\n\n      <div class=\"tab-title-wrap\"\n           ref=\"tab-title-wrap\">\n        <div class=\"title-item\"\n             v-for=\"(v, idx) in tabTitles\"\n             :key=\"idx\"\n             @click=\"setPage(idx)\"\n             :ref=\"'fm-tab-title-'+idx\">\n          <text class=\"item-title\"\n                :style=\"{ fontSize: cTabStyles.fontSize + 'px', color: currentPage === idx ? cTabStyles.activeTitleColor : cTabStyles.titleColor, paddingLeft: cTabStyles.padding + 'px', paddingRight: cTabStyles.padding + 'px' }\">{{ v.title }}</text>\n        </div>\n        <div class=\"border-bottom\"\n             ref=\"tab-border\"\n             :style=\"{ width: bottomInitWidth + 'px', backgroundColor: cTabStyles.activeBottomColor }\"></div>\n      </div>\n    </scroller>\n    <div class=\"tab-page-wrap\"\n         ref=\"tab-page-wrap\"\n         @panstart=\"_onTouchStart\"\n         @panmove=\"_onTouchMove\"\n         @panend=\"_onTouchEnd\"\n         @horizontalpan=\"startHandler\"\n         :style=\"{ height: (tabPageHeight-cTabStyles.height) + 'px' }\">\n      <div class=\"tab-container\"\n           ref=\"tab-container\">\n        <div class=\"tab-item\"\n             v-for=\"(v, idx) in tabTitles\"\n             :key=\"idx\"\n             :style=\"{ height: (tabPageHeight-cTabStyles.height) + 'px' }\">\n          <slot :name=\"`tab-item-${idx}`\"></slot>\n        </div>\n      </div>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-tab-page {\n    width: 1080px;\n  }\n\n  .tab-title-list {\n    width: 1080px;\n    flex-direction: row;\n    border-bottom-width: 2px;\n    border-color: rgba(0,0,0,0.10);\n  }\n\n  .tab-title-wrap {\n    flex-direction: row;\n    justify-content: space-around;\n    padding: 0 48px;\n  }\n\n  .title-item {\n    padding: 27px 18px;\n    margin-right: 42px;\n  }\n\n  .item-title {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 42px;\n    line-height: 57px;\n  }\n\n  .border-bottom {\n    position: absolute;\n    left: 0;\n    bottom: 0;\n    height: 3px;\n    width: 132px;\n  }\n\n  .tab-page-wrap {\n    width: 1080px;\n    overflow: hidden;\n  }\n\n  .tab-container {\n    flex: 1;\n    flex-direction: row;\n    position: absolute;\n  }\n\n  .tab-item {\n    width: 1080px;\n  }\n</style>\n\n<script>\nimport Binding from 'weex-bindingx/lib/index.weex.js';\nconst animation = weex.requireModule('animation');\nconst dom = weex.requireModule('dom');\nconst isH5 = weex.config.env.platform === 'Web';\n\nexport default {\n  name: 'FmTabPage',\n  props: {\n    tabTitles: {\n      type: Array,\n      default: () => ([])\n    },\n    panDist: {\n      type: Number,\n      default: 200\n    },\n    duration: {\n      type: [Number, String],\n      default: 300\n    },\n    tabPageHeight: {\n      type: [String, Number],\n      default: 1854\n    },\n    tabStyles: {\n      type: Object,\n      default: () => ({})\n    },\n    timingFunction: {\n      type: String,\n      default: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'\n    },\n    selectIndex: {\n      type: Number,\n      default: 0\n    }\n  },\n  watch: {\n    selectIndex (val) {\n      if (this.loaded) {\n        this.setPage(this.selectIndex, false);\n      }\n    }\n  },\n  computed: {\n    maxPage () {\n      return this.tabTitles.length - 1;\n    },\n    cTabStyles () {\n      const defaultStyle = {\n        titleColor: 'rgba(0, 0, 0, 0.6)',\n        activeTitleColor: '#198DED',\n        height: 102,\n        padding: 18,\n        fontSize: 42,\n        activeBottomColor: '#198DED'\n      };\n      return Object.assign({}, defaultStyle, this.tabStyles);\n    }\n  },\n  data: () => ({\n    loaded: false,\n    currentPage: 0,\n    gesToken: 0,\n    isMoving: false,\n    startTime: 0,\n    deltaX: 0,\n    translateX: 0,\n    startPosX: 0,\n    startPosY: 0,\n    judge: 'INITIAL',\n    bottomInitWidth: 0,\n    bottomInitOffset: 0,\n    tabPositions: []\n  }),\n  methods: {\n    next () {\n      let page = this.currentPage;\n      if (page < this.maxPage) {\n        page++;\n      }\n      this.setPage(page);\n    },\n    prev () {\n      let page = this.currentPage;\n      if (page > 0) {\n        page--;\n      }\n      this.setPage(page);\n    },\n    startHandler () {\n      this.bindExp(this.$refs['tab-page-wrap']);\n    },\n    _onTouchStart (e) {\n      if (isH5) {\n        this.startPosX = this._getTouchXPos(e);\n        this.startPosY = this._getTouchYPos(e);\n        this.deltaX = 0;\n        this.startTime = new Date().getTime();\n      }\n    },\n    _onTouchMove (e) {\n      if (isH5) {\n        this.deltaX = this._getTouchXPos(e) - this.startPosX;\n        this.deltaY = Math.abs(this._getTouchYPos(e) - this.startPosY + 1);\n        if (this.judge === 'INITIAL' && Math.abs(this.deltaX) / this.deltaY > 1.73) {\n          this.judge = 'SLIDE_ING';\n        }\n      }\n    },\n    _onTouchEnd (e) {\n      if (isH5) {\n        if (this.judge === 'SLIDE_ING') {\n          if (this.deltaX < -50) {\n            this.next();\n          } else if (this.deltaX > 50) {\n            this.prev();\n          }\n        }\n        this.judge = 'INITIAL';\n      }\n    },\n    bindExp (element) {\n      if (element && element.ref) {\n        if (this.isMoving && this.gesToken !== 0) {\n          Binding.unbind({\n            eventType: 'pan',\n            token: this.gesToken\n          });\n          this.gesToken = 0;\n          return;\n        }\n\n        const tabPageEl = this.$refs['tab-container'];\n        const tabBorderEl = this.$refs['tab-border'];\n        const tabScrollEl = this.$refs['tab-title-list'];\n        const { currentPage, panDist, maxPage } = this;\n        const dist = currentPage * 1080; // tab 页偏移距离\n\n        const currOffset = this.tabPositions[currentPage].offset; // 当前 title 偏移量\n        const currWidth = this.tabPositions[currentPage].width; // 当前 title 宽度\n        const prevOffset = this.tabPositions[currentPage <= 0 ? 0 : currentPage - 1].offset; // 上一页 title 偏移量\n        const prevWidth = this.tabPositions[currentPage <= 0 ? 0 : currentPage - 1].width; // 上一页 title 宽度\n        const nextOffset = this.tabPositions[currentPage >= maxPage ? maxPage : currentPage + 1].offset; // 下一页 title 偏移量\n        const nextWidth = this.tabPositions[currentPage >= maxPage ? maxPage : currentPage + 1].width; // 上一页 title 宽度\n\n        // binding props\n        let tabExp = `x + ${-dist}`; // tab 页插值表达式\n\n        // bottom border 偏移动画插值表达式\n        const borderMoveExp = `x / 1080 * (x > 0 ? -${currOffset - prevOffset} : -${nextOffset - currOffset}) + ${currOffset}`;\n\n        /**\n         * bottom border 宽度动画变化规则描述\n         * @param currWidth 当前 tab 宽度(起始宽度)\n         * @param peakWidth 峰值宽度\n         * @param toWidth 最终宽度\n         * 变化描述：\n         *  当 currWidth === toWidth 时:\n         *    动画公式：currWidth -> toWidth (currWidth 递增至 toWidth)\n         *  当 currWidth !== toWidth 时:\n         *    动画公式：currWidth -> peakWidth -> toWidth (currWidth 先递增至 peakWidth 然后递减至 toWidth)\n         * peakWidth 峰值计算公式：peakWidth = currWidth / 2 + currWidth\n         */\n        // 滑向下一页的宽度变化动画插值表达式\n        const peakValue = currWidth / 2;\n        // 滑向下一页的宽度变化动画插值器\n        const nextInterpolator = nextWidth === currWidth ? `(abs(x) <= 540 ? (abs(x)/540 * ${peakValue}) : (2-abs(x)/540) * ${peakValue})` : `(abs(x)/1080 * ${nextWidth - currWidth})`;\n        // 滑向上一页的宽度变化动画插值器\n        const prevInterpolator = prevWidth === currWidth ? `(abs(x) <= 540 ? (abs(x)/540 * ${peakValue}) : (2-abs(x)/540) * ${peakValue})` : `(abs(x)/1080 * ${prevWidth - currWidth})`;\n        // bottom border 宽度变化动画插值器\n        let borderWidthExp = `${currWidth} + (x > 0 ? ${prevInterpolator} : ${nextInterpolator})`;\n\n        // tab scroller 滑动动画插值表达式\n        const tabScrollExp = `${(currOffset - 540 + currWidth / 2)} - x / 1080 * ${(nextOffset - 540 + nextWidth / 2) - (currOffset - 540 + currWidth / 2)} - ${(currOffset - 540) < 0 ? 48 : 0}`;\n\n        // 当页数为 0 或 max 时去除尽头动画\n        if (currentPage === 0) {\n          tabExp = `x >= 0 ? 0 : x`;\n          borderWidthExp = `x >= 0 ? ${currWidth} : ${borderWidthExp}`;\n        } else if (currentPage === maxPage) {\n          tabExp = `x <= 0 ? ${-maxPage * 1080} : x + ${-dist}`;\n          borderWidthExp = `x <= 0 ? ${currWidth} : ${borderWidthExp}`;\n        }\n\n        const props = [{\n          element: tabPageEl.ref,\n          property: 'transform.translateX',\n          expression: tabExp\n        }, {\n          element: tabBorderEl.ref,\n          property: 'transform.translateX',\n          expression: borderMoveExp\n        }, {\n          element: tabBorderEl.ref,\n          property: 'width',\n          expression: borderWidthExp\n        }, {\n          element: tabScrollEl.ref,\n          property: 'scroll.contentOffset',\n          expression: tabScrollExp\n        }];\n\n        const gesTokenObj = Binding.bind({\n          anchor: element.ref,\n          eventType: 'pan',\n          props\n        }, (e) => {\n          const { deltaX, state } = e;\n          if (state === 'end') {\n            if (deltaX < -panDist) {\n              this.next();\n            } else if (deltaX > panDist) {\n              this.prev();\n            } else {\n              this.setPage(currentPage);\n            }\n          }\n        });\n\n        this.gesToken = gesTokenObj.token;\n      }\n    },\n    setPage (page, animated = true) {\n      if (this.isMoving === true) {\n        return;\n      }\n      this.isMoving = true;\n      const currentTabEl = this.$refs[`fm-tab-title-${page}`][0];\n      const tabWidth = this.tabPositions[page].width;\n      const tabOffset = this.tabPositions[page].offset;\n\n      if (tabOffset >= 1080 / 2) {\n        dom.scrollToElement(currentTabEl, {\n          offset: -1080 / 2 + tabWidth / 2,\n          animated\n        });\n      } else {\n        dom.scrollToElement(currentTabEl, {\n          offset: -tabOffset,\n          animated\n        });\n      }\n\n      this.currentPage = page;\n      this._animateTransformX(page, animated);\n      this._animateBorder(page, animated);\n      this.$emit('fmTabPageTabSelected', { page });\n    },\n    _animateTransformX (page, animated = true) {\n      const { duration, timingFunction } = this;\n      const containerEl = this.$refs[`tab-container`];\n      const dist = page * 1080;\n      animation.transition(containerEl, {\n        styles: {\n          transform: `translateX(${-dist}px)`\n        },\n        duration: animated ? duration : 0.00001,\n        timingFunction,\n        delay: 0\n      }, () => {\n        this.isMoving = false;\n      });\n    },\n    _animateBorder (page, animated = true) {\n      const { duration, timingFunction, tabPositions } = this;\n      const borderEl = this.$refs[`tab-border`];\n      const dist = tabPositions[page].offset;\n      animation.transition(borderEl, {\n        styles: {\n          transform: `translateX(${dist}px)`,\n          width: tabPositions[page].width\n        },\n        duration: animated ? duration : 0.00001,\n        timingFunction,\n        needLayout: false\n      }, () => {\n        this.isMoving = false;\n      });\n    },\n    _getTouchXPos (e) {\n      return e.changedTouches[0]['pageX'];\n    },\n    _getTouchYPos (e) {\n      return e.changedTouches[0]['pageY'];\n    },\n    _calculatePositions () {\n      const { tabTitles } = this;\n      tabTitles.map((item, i) => {\n        dom.getComponentRect(this.$refs['fm-tab-title-' + i][0], rect => {\n          this.tabPositions[i] = {\n            width: rect.size.width,\n            offset: rect.size.left\n          };\n          if (i === this.selectIndex) {\n            this.bottomInitWidth = rect.size.width;\n            this.bottomInitOffset = rect.size.left;\n            this.setPage(this.selectIndex, false);\n            setTimeout(() => {\n              this.loaded = true;\n            }, 50);\n          }\n        });\n      });\n    }\n  },\n  mounted () {\n    const tabPageEl = this.$refs['tab-page-wrap'];\n    Binding.prepare && Binding.prepare({\n      anchor: tabPageEl.ref,\n      eventType: 'pan'\n    });\n    setTimeout(() => {\n      this._calculatePositions();\n    }, 50);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-tab-page[data-v-4c615fcc] {\n  width: 1080px;\n}\n.tab-title-list[data-v-4c615fcc] {\n  width: 1080px;\n  flex-direction: row;\n  border-bottom-width: 2px;\n  border-color: rgba(0,0,0,0.10);\n}\n.tab-title-wrap[data-v-4c615fcc] {\n  flex-direction: row;\n  justify-content: space-around;\n  padding: 0 48px;\n}\n.title-item[data-v-4c615fcc] {\n  padding: 27px 18px;\n  margin-right: 42px;\n}\n.item-title[data-v-4c615fcc] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 42px;\n  line-height: 57px;\n}\n.border-bottom[data-v-4c615fcc] {\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  height: 3px;\n  width: 132px;\n}\n.tab-page-wrap[data-v-4c615fcc] {\n  width: 1080px;\n  overflow: hidden;\n}\n.tab-container[data-v-4c615fcc] {\n  flex: 1;\n  flex-direction: row;\n  position: absolute;\n}\n.tab-item[data-v-4c615fcc] {\n  width: 1080px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tab-page/index.vue?fd23c670"],"names":[],"mappings":";AA+CA;EACA,cAAA;CACA;AAEA;EACA,cAAA;EACA,oBAAA;EACA,yBAAA;EACA,+BAAA;CACA;AAEA;EACA,oBAAA;EACA,8BAAA;EACA,gBAAA;CACA;AAEA;EACA,mBAAA;EACA,mBAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,UAAA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,cAAA;EACA,iBAAA;CACA;AAEA;EACA,QAAA;EACA,oBAAA;EACA,mBAAA;CACA;AAEA;EACA,cAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 18/03/06. -->\n<template>\n  <div class=\"fm-tab-page\"\n       :style=\"{ height: (tabPageHeight) + 'px', opacity: loaded ? 1 : 0}\">\n    <scroller class=\"tab-title-list\"\n              ref=\"tab-title-list\"\n              :show-scrollbar=\"false\"\n              scroll-direction=\"horizontal\"\n              :style=\"{ height: (cTabStyles.height) + 'px'}\">\n\n      <div class=\"tab-title-wrap\"\n           ref=\"tab-title-wrap\">\n        <div class=\"title-item\"\n             v-for=\"(v, idx) in tabTitles\"\n             :key=\"idx\"\n             @click=\"setPage(idx)\"\n             :ref=\"'fm-tab-title-'+idx\">\n          <text class=\"item-title\"\n                :style=\"{ fontSize: cTabStyles.fontSize + 'px', color: currentPage === idx ? cTabStyles.activeTitleColor : cTabStyles.titleColor, paddingLeft: cTabStyles.padding + 'px', paddingRight: cTabStyles.padding + 'px' }\">{{ v.title }}</text>\n        </div>\n        <div class=\"border-bottom\"\n             ref=\"tab-border\"\n             :style=\"{ width: bottomInitWidth + 'px', backgroundColor: cTabStyles.activeBottomColor }\"></div>\n      </div>\n    </scroller>\n    <div class=\"tab-page-wrap\"\n         ref=\"tab-page-wrap\"\n         @panstart=\"_onTouchStart\"\n         @panmove=\"_onTouchMove\"\n         @panend=\"_onTouchEnd\"\n         @horizontalpan=\"startHandler\"\n         :style=\"{ height: (tabPageHeight-cTabStyles.height) + 'px' }\">\n      <div class=\"tab-container\"\n           ref=\"tab-container\">\n        <div class=\"tab-item\"\n             v-for=\"(v, idx) in tabTitles\"\n             :key=\"idx\"\n             :style=\"{ height: (tabPageHeight-cTabStyles.height) + 'px' }\">\n          <slot :name=\"`tab-item-${idx}`\"></slot>\n        </div>\n      </div>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-tab-page {\n    width: 1080px;\n  }\n\n  .tab-title-list {\n    width: 1080px;\n    flex-direction: row;\n    border-bottom-width: 2px;\n    border-color: rgba(0,0,0,0.10);\n  }\n\n  .tab-title-wrap {\n    flex-direction: row;\n    justify-content: space-around;\n    padding: 0 48px;\n  }\n\n  .title-item {\n    padding: 27px 18px;\n    margin-right: 42px;\n  }\n\n  .item-title {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 42px;\n    line-height: 57px;\n  }\n\n  .border-bottom {\n    position: absolute;\n    left: 0;\n    bottom: 0;\n    height: 3px;\n    width: 132px;\n  }\n\n  .tab-page-wrap {\n    width: 1080px;\n    overflow: hidden;\n  }\n\n  .tab-container {\n    flex: 1;\n    flex-direction: row;\n    position: absolute;\n  }\n\n  .tab-item {\n    width: 1080px;\n  }\n</style>\n\n<script>\nimport Binding from 'weex-bindingx/lib/index.weex.js';\nconst animation = weex.requireModule('animation');\nconst dom = weex.requireModule('dom');\nconst isH5 = weex.config.env.platform === 'Web';\n\nexport default {\n  name: 'FmTabPage',\n  props: {\n    tabTitles: {\n      type: Array,\n      default: () => ([])\n    },\n    panDist: {\n      type: Number,\n      default: 200\n    },\n    duration: {\n      type: [Number, String],\n      default: 300\n    },\n    tabPageHeight: {\n      type: [String, Number],\n      default: 1854\n    },\n    tabStyles: {\n      type: Object,\n      default: () => ({})\n    },\n    timingFunction: {\n      type: String,\n      default: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'\n    },\n    selectIndex: {\n      type: Number,\n      default: 0\n    }\n  },\n  watch: {\n    selectIndex (val) {\n      if (this.loaded) {\n        this.setPage(this.selectIndex, false);\n      }\n    }\n  },\n  computed: {\n    maxPage () {\n      return this.tabTitles.length - 1;\n    },\n    cTabStyles () {\n      const defaultStyle = {\n        titleColor: 'rgba(0, 0, 0, 0.6)',\n        activeTitleColor: '#198DED',\n        height: 102,\n        padding: 18,\n        fontSize: 42,\n        activeBottomColor: '#198DED'\n      };\n      return Object.assign({}, defaultStyle, this.tabStyles);\n    }\n  },\n  data: () => ({\n    loaded: false,\n    currentPage: 0,\n    gesToken: 0,\n    isMoving: false,\n    startTime: 0,\n    deltaX: 0,\n    translateX: 0,\n    startPosX: 0,\n    startPosY: 0,\n    judge: 'INITIAL',\n    bottomInitWidth: 0,\n    bottomInitOffset: 0,\n    tabPositions: []\n  }),\n  methods: {\n    next () {\n      let page = this.currentPage;\n      if (page < this.maxPage) {\n        page++;\n      }\n      this.setPage(page);\n    },\n    prev () {\n      let page = this.currentPage;\n      if (page > 0) {\n        page--;\n      }\n      this.setPage(page);\n    },\n    startHandler () {\n      this.bindExp(this.$refs['tab-page-wrap']);\n    },\n    _onTouchStart (e) {\n      if (isH5) {\n        this.startPosX = this._getTouchXPos(e);\n        this.startPosY = this._getTouchYPos(e);\n        this.deltaX = 0;\n        this.startTime = new Date().getTime();\n      }\n    },\n    _onTouchMove (e) {\n      if (isH5) {\n        this.deltaX = this._getTouchXPos(e) - this.startPosX;\n        this.deltaY = Math.abs(this._getTouchYPos(e) - this.startPosY + 1);\n        if (this.judge === 'INITIAL' && Math.abs(this.deltaX) / this.deltaY > 1.73) {\n          this.judge = 'SLIDE_ING';\n        }\n      }\n    },\n    _onTouchEnd (e) {\n      if (isH5) {\n        if (this.judge === 'SLIDE_ING') {\n          if (this.deltaX < -50) {\n            this.next();\n          } else if (this.deltaX > 50) {\n            this.prev();\n          }\n        }\n        this.judge = 'INITIAL';\n      }\n    },\n    bindExp (element) {\n      if (element && element.ref) {\n        if (this.isMoving && this.gesToken !== 0) {\n          Binding.unbind({\n            eventType: 'pan',\n            token: this.gesToken\n          });\n          this.gesToken = 0;\n          return;\n        }\n\n        const tabPageEl = this.$refs['tab-container'];\n        const tabBorderEl = this.$refs['tab-border'];\n        const tabScrollEl = this.$refs['tab-title-list'];\n        const { currentPage, panDist, maxPage } = this;\n        const dist = currentPage * 1080; // tab 页偏移距离\n\n        const currOffset = this.tabPositions[currentPage].offset; // 当前 title 偏移量\n        const currWidth = this.tabPositions[currentPage].width; // 当前 title 宽度\n        const prevOffset = this.tabPositions[currentPage <= 0 ? 0 : currentPage - 1].offset; // 上一页 title 偏移量\n        const prevWidth = this.tabPositions[currentPage <= 0 ? 0 : currentPage - 1].width; // 上一页 title 宽度\n        const nextOffset = this.tabPositions[currentPage >= maxPage ? maxPage : currentPage + 1].offset; // 下一页 title 偏移量\n        const nextWidth = this.tabPositions[currentPage >= maxPage ? maxPage : currentPage + 1].width; // 上一页 title 宽度\n\n        // binding props\n        let tabExp = `x + ${-dist}`; // tab 页插值表达式\n\n        // bottom border 偏移动画插值表达式\n        const borderMoveExp = `x / 1080 * (x > 0 ? -${currOffset - prevOffset} : -${nextOffset - currOffset}) + ${currOffset}`;\n\n        /**\n         * bottom border 宽度动画变化规则描述\n         * @param currWidth 当前 tab 宽度(起始宽度)\n         * @param peakWidth 峰值宽度\n         * @param toWidth 最终宽度\n         * 变化描述：\n         *  当 currWidth === toWidth 时:\n         *    动画公式：currWidth -> toWidth (currWidth 递增至 toWidth)\n         *  当 currWidth !== toWidth 时:\n         *    动画公式：currWidth -> peakWidth -> toWidth (currWidth 先递增至 peakWidth 然后递减至 toWidth)\n         * peakWidth 峰值计算公式：peakWidth = currWidth / 2 + currWidth\n         */\n        // 滑向下一页的宽度变化动画插值表达式\n        const peakValue = currWidth / 2;\n        // 滑向下一页的宽度变化动画插值器\n        const nextInterpolator = nextWidth === currWidth ? `(abs(x) <= 540 ? (abs(x)/540 * ${peakValue}) : (2-abs(x)/540) * ${peakValue})` : `(abs(x)/1080 * ${nextWidth - currWidth})`;\n        // 滑向上一页的宽度变化动画插值器\n        const prevInterpolator = prevWidth === currWidth ? `(abs(x) <= 540 ? (abs(x)/540 * ${peakValue}) : (2-abs(x)/540) * ${peakValue})` : `(abs(x)/1080 * ${prevWidth - currWidth})`;\n        // bottom border 宽度变化动画插值器\n        let borderWidthExp = `${currWidth} + (x > 0 ? ${prevInterpolator} : ${nextInterpolator})`;\n\n        // tab scroller 滑动动画插值表达式\n        const tabScrollExp = `${(currOffset - 540 + currWidth / 2)} - x / 1080 * ${(nextOffset - 540 + nextWidth / 2) - (currOffset - 540 + currWidth / 2)} - ${(currOffset - 540) < 0 ? 48 : 0}`;\n\n        // 当页数为 0 或 max 时去除尽头动画\n        if (currentPage === 0) {\n          tabExp = `x >= 0 ? 0 : x`;\n          borderWidthExp = `x >= 0 ? ${currWidth} : ${borderWidthExp}`;\n        } else if (currentPage === maxPage) {\n          tabExp = `x <= 0 ? ${-maxPage * 1080} : x + ${-dist}`;\n          borderWidthExp = `x <= 0 ? ${currWidth} : ${borderWidthExp}`;\n        }\n\n        const props = [{\n          element: tabPageEl.ref,\n          property: 'transform.translateX',\n          expression: tabExp\n        }, {\n          element: tabBorderEl.ref,\n          property: 'transform.translateX',\n          expression: borderMoveExp\n        }, {\n          element: tabBorderEl.ref,\n          property: 'width',\n          expression: borderWidthExp\n        }, {\n          element: tabScrollEl.ref,\n          property: 'scroll.contentOffset',\n          expression: tabScrollExp\n        }];\n\n        const gesTokenObj = Binding.bind({\n          anchor: element.ref,\n          eventType: 'pan',\n          props\n        }, (e) => {\n          const { deltaX, state } = e;\n          if (state === 'end') {\n            if (deltaX < -panDist) {\n              this.next();\n            } else if (deltaX > panDist) {\n              this.prev();\n            } else {\n              this.setPage(currentPage);\n            }\n          }\n        });\n\n        this.gesToken = gesTokenObj.token;\n      }\n    },\n    setPage (page, animated = true) {\n      if (this.isMoving === true) {\n        return;\n      }\n      this.isMoving = true;\n      const currentTabEl = this.$refs[`fm-tab-title-${page}`][0];\n      const tabWidth = this.tabPositions[page].width;\n      const tabOffset = this.tabPositions[page].offset;\n\n      if (tabOffset >= 1080 / 2) {\n        dom.scrollToElement(currentTabEl, {\n          offset: -1080 / 2 + tabWidth / 2,\n          animated\n        });\n      } else {\n        dom.scrollToElement(currentTabEl, {\n          offset: -tabOffset,\n          animated\n        });\n      }\n\n      this.currentPage = page;\n      this._animateTransformX(page, animated);\n      this._animateBorder(page, animated);\n      this.$emit('fmTabPageTabSelected', { page });\n    },\n    _animateTransformX (page, animated = true) {\n      const { duration, timingFunction } = this;\n      const containerEl = this.$refs[`tab-container`];\n      const dist = page * 1080;\n      animation.transition(containerEl, {\n        styles: {\n          transform: `translateX(${-dist}px)`\n        },\n        duration: animated ? duration : 0.00001,\n        timingFunction,\n        delay: 0\n      }, () => {\n        this.isMoving = false;\n      });\n    },\n    _animateBorder (page, animated = true) {\n      const { duration, timingFunction, tabPositions } = this;\n      const borderEl = this.$refs[`tab-border`];\n      const dist = tabPositions[page].offset;\n      animation.transition(borderEl, {\n        styles: {\n          transform: `translateX(${dist}px)`,\n          width: tabPositions[page].width\n        },\n        duration: animated ? duration : 0.00001,\n        timingFunction,\n        needLayout: false\n      }, () => {\n        this.isMoving = false;\n      });\n    },\n    _getTouchXPos (e) {\n      return e.changedTouches[0]['pageX'];\n    },\n    _getTouchYPos (e) {\n      return e.changedTouches[0]['pageY'];\n    },\n    _calculatePositions () {\n      const { tabTitles } = this;\n      tabTitles.map((item, i) => {\n        dom.getComponentRect(this.$refs['fm-tab-title-' + i][0], rect => {\n          this.tabPositions[i] = {\n            width: rect.size.width,\n            offset: rect.size.left\n          };\n          if (i === this.selectIndex) {\n            this.bottomInitWidth = rect.size.width;\n            this.bottomInitOffset = rect.size.left;\n            this.setPage(this.selectIndex, false);\n            setTimeout(() => {\n              this.loaded = true;\n            }, 50);\n          }\n        });\n      });\n    }\n  },\n  mounted () {\n    const tabPageEl = this.$refs['tab-page-wrap'];\n    Binding.prepare && Binding.prepare({\n      anchor: tabPageEl.ref,\n      eventType: 'pan'\n    });\n    setTimeout(() => {\n      this._calculatePositions();\n    }, 50);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 250 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17718,13 +17700,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _indexWeex = __webpack_require__(84);
+var _indexWeex = __webpack_require__(66);
 
 var _indexWeex2 = _interopRequireDefault(_indexWeex);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var animation = weex.requireModule('animation'); //
+//
 //
 //
 //
@@ -18172,7 +18155,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 251 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -18268,7 +18251,7 @@ if (false) {
 }
 
 /***/ }),
-/* 252 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18278,7 +18261,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(253);
+var _index = __webpack_require__(241);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -18290,18 +18273,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 253 */
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(254)
+__webpack_require__(242)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(256),
+  __webpack_require__(244),
   /* template */
-  __webpack_require__(257),
+  __webpack_require__(245),
   /* scopeId */
   "data-v-c6e0f338",
   /* cssModules */
@@ -18328,13 +18311,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 254 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(255);
+var content = __webpack_require__(243);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -18354,7 +18337,7 @@ if(false) {
 }
 
 /***/ }),
-/* 255 */
+/* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -18362,13 +18345,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-tab-page[data-v-c6e0f338] {\n  width: 1080px;\n}\n.tab-title-list[data-v-c6e0f338] {\n  width: 1080px;\n  flex-direction: row;\n  border-bottom-width: 2px;\n  border-color: rgba(0,0,0,0.10);\n}\n.tab-title-wrap[data-v-c6e0f338] {\n  flex-direction: row;\n  justify-content: space-around;\n  padding: 0 48px;\n}\n.title-item[data-v-c6e0f338] {\n  border-color: #198DED;\n  padding: 27px 18px;\n  margin-right: 42px;\n}\n.item-title[data-v-c6e0f338] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 42px;\n  line-height: 57px;\n}\n.border-bottom[data-v-c6e0f338] {\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  height: 3px;\n  width: 132px;\n}\n.tab-page-wrap[data-v-c6e0f338] {\n  width: 1080px;\n  overflow: hidden;\n}\n.tab-container[data-v-c6e0f338] {\n  flex: 1;\n  flex-direction: row;\n  position: absolute;\n}\n.tab-item[data-v-c6e0f338] {\n  width: 1080px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-native-tab/index.vue?608a2dbc"],"names":[],"mappings":";AAoEA;EACA,cAAA;CACA;AAEA;EACA,cAAA;EACA,oBAAA;EACA,yBAAA;EACA,+BAAA;CACA;AAEA;EACA,oBAAA;EACA,8BAAA;EACA,gBAAA;CACA;AAEA;EACA,sBAAA;EACA,mBAAA;EACA,mBAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,UAAA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,cAAA;EACA,iBAAA;CACA;AAEA;EACA,QAAA;EACA,oBAAA;EACA,mBAAA;CACA;AAEA;EACA,cAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 18/04/03. -->\n<template>\n  <div v-if=\"!isCreator\" class=\"fm-tab-page\"\n       :style=\"{ height: (tabPageHeight) + 'px', opacity: loaded ? 1 : 0}\">\n    <scroller class=\"tab-title-list\"\n              ref=\"tab-title-list\"\n              :show-scrollbar=\"false\"\n              scroll-direction=\"horizontal\"\n              :style=\"{ height: (cTabStyles.height) + 'px'}\">\n\n      <div class=\"tab-title-wrap\"\n           ref=\"tab-title-wrap\">\n        <div class=\"title-item\"\n             v-for=\"(v, idx) in tabTitles\"\n             :key=\"idx\"\n             @click=\"setPage(idx)\"\n             :ref=\"'fm-tab-title-'+idx\"\n             :style=\"{ borderBottomWidth: currentPage === idx ? '3px' : '0px' }\">\n          <text class=\"item-title\"\n                :style=\"{ fontSize: cTabStyles.fontSize + 'px',\n                          color: currentPage === idx ? cTabStyles.activeTitleColor : cTabStyles.titleColor,\n                          paddingLeft: cTabStyles.padding + 'px',\n                          paddingRight: cTabStyles.padding + 'px' }\">{{ v.text }}</text>\n        </div>\n      </div>\n    </scroller>\n    <div class=\"tab-page-wrap\"\n         ref=\"tab-page-wrap\"\n         @panstart=\"_onTouchStart\"\n         @panmove=\"_onTouchMove\"\n         @panend=\"_onTouchEnd\"\n         :style=\"{ height: (tabPageHeight-cTabStyles.height) + 'px' }\">\n      <div class=\"tab-container\"\n           ref=\"tab-container\">\n        <div class=\"tab-item\"\n             v-for=\"(v, idx) in tabTitles\"\n             :key=\"idx\"\n             :style=\"{ height: (tabPageHeight-cTabStyles.height) + 'px' }\">\n          <slot :name=\"`tab-item-${idx}`\"></slot>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <FmTab v-else\n         :style=\"{ height: (tabPageHeight) + 'px' }\"\n         :container=\"{\n            viewpagepaddingLeft: 0,\n            viewpagepaddingRight: 0,\n            viewpagepaddingTop: cTabStyles.height + 12,\n            viewpagepaddingBottom: 0,\n            tabpaddingLeft: 48,\n            tabpaddingRight: 48,\n            tabpaddingTop: 0,\n            tabpaddingBottom: 0\n         }\"\n         :tab=\"cTabTitles\"\n         @tabPosition=\"nativeTabSlided\">\n    <div class=\"tab-item\"\n         v-for=\"(v, idx) in tabTitles\"\n         :key=\"idx\"\n         :style=\"{ height: (tabPageHeight-cTabStyles.height-12) + 'px' }\">\n      <slot :name=\"`tab-item-${idx}`\"></slot>\n    </div>\n  </FmTab>\n</template>\n\n<style scoped>\n  .fm-tab-page {\n    width: 1080px;\n  }\n\n  .tab-title-list {\n    width: 1080px;\n    flex-direction: row;\n    border-bottom-width: 2px;\n    border-color: rgba(0,0,0,0.10);\n  }\n\n  .tab-title-wrap {\n    flex-direction: row;\n    justify-content: space-around;\n    padding: 0 48px;\n  }\n\n  .title-item {\n    border-color: #198DED;\n    padding: 27px 18px;\n    margin-right: 42px;\n  }\n\n  .item-title {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 42px;\n    line-height: 57px;\n  }\n\n  .border-bottom {\n    position: absolute;\n    left: 0;\n    bottom: 0;\n    height: 3px;\n    width: 132px;\n  }\n\n  .tab-page-wrap {\n    width: 1080px;\n    overflow: hidden;\n  }\n\n  .tab-container {\n    flex: 1;\n    flex-direction: row;\n    position: absolute;\n  }\n\n  .tab-item {\n    width: 1080px;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nconst dom = weex.requireModule('dom');\nconst isH5 = weex.config.env.platform === 'Web';\n\nexport default {\n  name: 'FmNativeTab',\n  props: {\n    tabTitles: {\n      type: Array,\n      default: () => ([])\n    },\n    panDist: {\n      type: Number,\n      default: 200\n    },\n    duration: {\n      type: [Number, String],\n      default: 300\n    },\n    tabPageHeight: {\n      type: [String, Number],\n      default: 1854\n    },\n    tabStyles: {\n      type: Object,\n      default: () => ({})\n    },\n    timingFunction: {\n      type: String,\n      default: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'\n    },\n    selectIndex: {\n      type: Number,\n      default: 0\n    }\n  },\n  watch: {\n    selectIndex (val) {\n      if (this.loaded) {\n        this.setPage(this.selectIndex, false);\n      }\n    }\n  },\n  computed: {\n    isCreator () {\n      return weex.supports && weex.supports('@component/FmTab');\n    },\n    maxPage () {\n      return this.tabTitles.length - 1;\n    },\n    cTabTitles () {\n      const { tabStyles } = this;\n      const def = {\n        paddingStart: 18,\n        paddingEnd: 18,\n        minWidth: 120,\n        textunSelectColor: tabStyles.activeTitleColor || '#198DED',\n        textSelectColor: tabStyles.titleColor || '#99000000'\n      };\n      return this.tabTitles.map(item => {\n        return Object.assign({}, def, item);\n      });\n    },\n    cTabStyles () {\n      const defaultStyle = {\n        titleColor: 'rgba(0, 0, 0, 0.6)',\n        activeTitleColor: '#198DED',\n        height: 102,\n        padding: 18,\n        fontSize: 42,\n        activeBottomColor: '#198DED'\n      };\n      return Object.assign({}, defaultStyle, this.tabStyles);\n    }\n  },\n  data: () => ({\n    loaded: false,\n    currentPage: 0,\n    gesToken: 0,\n    isMoving: false,\n    startTime: 0,\n    deltaX: 0,\n    translateX: 0,\n    startPosX: 0,\n    startPosY: 0,\n    judge: 'INITIAL'\n  }),\n  methods: {\n    next () {\n      let page = this.currentPage;\n      if (page < this.maxPage) {\n        page++;\n      }\n      this.setPage(page);\n    },\n    prev () {\n      let page = this.currentPage;\n      if (page > 0) {\n        page--;\n      }\n      this.setPage(page);\n    },\n    _onTouchStart (e) {\n      if (isH5) {\n        this.startPosX = this._getTouchXPos(e);\n        this.startPosY = this._getTouchYPos(e);\n        this.deltaX = 0;\n        this.startTime = new Date().getTime();\n      }\n    },\n    _onTouchMove (e) {\n      if (isH5) {\n        this.deltaX = this._getTouchXPos(e) - this.startPosX;\n        this.deltaY = Math.abs(this._getTouchYPos(e) - this.startPosY + 1);\n        if (this.judge === 'INITIAL' && Math.abs(this.deltaX) / this.deltaY > 1.73) {\n          this.judge = 'SLIDE_ING';\n        }\n      }\n    },\n    _onTouchEnd (e) {\n      if (isH5) {\n        if (this.judge === 'SLIDE_ING') {\n          if (this.deltaX < -50) {\n            this.next();\n          } else if (this.deltaX > 50) {\n            this.prev();\n          }\n        }\n        this.judge = 'INITIAL';\n      }\n    },\n    setPage (page, animated = true) {\n      if (this.isMoving === true || this.tabTitles.length <= 0) {\n        return;\n      }\n      this.isMoving = true;\n      const currentTabEl = this.$refs[`fm-tab-title-${page}`][0];\n      const tabWidth = this.$refs[`fm-tab-title-${page}`][0].$el.clientWidth;\n      const tabOffset = this.$refs[`fm-tab-title-${page}`][0].$el.offsetLeft;\n\n      if (tabOffset >= 1080 / 2) {\n        dom.scrollToElement(currentTabEl, {\n          offset: -1080 / 2 + tabWidth / 2,\n          animated\n        });\n      } else {\n        dom.scrollToElement(currentTabEl, {\n          offset: -tabOffset,\n          animated\n        });\n      }\n\n      this.currentPage = page;\n      this._animateTransformX(page, animated);\n      this.$emit('fmTabPageTabSelected', { page });\n    },\n    nativeTabSlided (e) {\n      this.$emit('fmTabPageTabSelected', { page: e.position });\n    },\n    _animateTransformX (page, animated = true) {\n      const { duration, timingFunction } = this;\n      const containerEl = this.$refs[`tab-container`];\n      const dist = page * 1080;\n      animation.transition(containerEl, {\n        styles: {\n          transform: `translateX(${-dist}px)`\n        },\n        duration: animated ? duration : 0.00001,\n        timingFunction,\n        delay: 0\n      }, () => {\n        this.isMoving = false;\n      });\n    },\n    _getTouchXPos (e) {\n      return e.changedTouches[0]['pageX'];\n    },\n    _getTouchYPos (e) {\n      return e.changedTouches[0]['pageY'];\n    }\n  },\n  mounted () {\n    if (this.isCreator) { return; }\n    this.setPage(this.selectIndex, false);\n    setTimeout(() => {\n      this.loaded = true;\n    }, 50);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-tab-page[data-v-c6e0f338] {\n  width: 1080px;\n}\n.tab-title-list[data-v-c6e0f338] {\n  width: 1080px;\n  flex-direction: row;\n  border-bottom-width: 2px;\n  border-color: rgba(0,0,0,0.10);\n}\n.tab-title-wrap[data-v-c6e0f338] {\n  flex-direction: row;\n  justify-content: space-around;\n  padding: 0 48px;\n}\n.title-item[data-v-c6e0f338] {\n  border-color: #198DED;\n  padding: 27px 18px;\n  margin-right: 42px;\n}\n.item-title[data-v-c6e0f338] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 42px;\n  line-height: 57px;\n}\n.border-bottom[data-v-c6e0f338] {\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  height: 3px;\n  width: 132px;\n}\n.tab-page-wrap[data-v-c6e0f338] {\n  width: 1080px;\n  overflow: hidden;\n}\n.tab-container[data-v-c6e0f338] {\n  flex: 1;\n  flex-direction: row;\n  position: absolute;\n}\n.tab-item[data-v-c6e0f338] {\n  width: 1080px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-native-tab/index.vue?41235fd3"],"names":[],"mappings":";AAqEA;EACA,cAAA;CACA;AAEA;EACA,cAAA;EACA,oBAAA;EACA,yBAAA;EACA,+BAAA;CACA;AAEA;EACA,oBAAA;EACA,8BAAA;EACA,gBAAA;CACA;AAEA;EACA,sBAAA;EACA,mBAAA;EACA,mBAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,UAAA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,cAAA;EACA,iBAAA;CACA;AAEA;EACA,QAAA;EACA,oBAAA;EACA,mBAAA;CACA;AAEA;EACA,cAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 18/04/03. -->\n<template>\n  <div v-if=\"!isCreator\" class=\"fm-tab-page\"\n       :style=\"{ height: (tabPageHeight) + 'px', opacity: loaded ? 1 : 0}\">\n    <scroller class=\"tab-title-list\"\n              ref=\"tab-title-list\"\n              :show-scrollbar=\"false\"\n              scroll-direction=\"horizontal\"\n              :style=\"{ height: (cTabStyles.height) + 'px'}\">\n\n      <div class=\"tab-title-wrap\"\n           ref=\"tab-title-wrap\">\n        <div class=\"title-item\"\n             v-for=\"(v, idx) in tabTitles\"\n             :key=\"idx\"\n             @click=\"setPage(idx)\"\n             :ref=\"'fm-tab-title-'+idx\"\n             :style=\"{ borderBottomWidth: currentPage === idx ? '3px' : '0px' }\">\n          <text class=\"item-title\"\n                :style=\"{ fontSize: cTabStyles.fontSize + 'px',\n                          color: currentPage === idx ? cTabStyles.activeTitleColor : cTabStyles.titleColor,\n                          paddingLeft: cTabStyles.padding + 'px',\n                          paddingRight: cTabStyles.padding + 'px' }\">{{ v.text }}</text>\n        </div>\n      </div>\n    </scroller>\n    <div class=\"tab-page-wrap\"\n         ref=\"tab-page-wrap\"\n         @panstart=\"_onTouchStart\"\n         @panmove=\"_onTouchMove\"\n         @panend=\"_onTouchEnd\"\n         :style=\"{ height: (tabPageHeight-cTabStyles.height) + 'px' }\">\n      <div class=\"tab-container\"\n           ref=\"tab-container\">\n        <div class=\"tab-item\"\n             v-for=\"(v, idx) in tabTitles\"\n             :key=\"idx\"\n             :style=\"{ height: (tabPageHeight-cTabStyles.height) + 'px' }\">\n          <slot :name=\"`tab-item-${idx}`\"></slot>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <FmTab v-else\n         :style=\"{ height: (tabPageHeight) + 'px' }\"\n         :container=\"{\n            viewpagepaddingLeft: 0,\n            viewpagepaddingRight: 0,\n            viewpagepaddingTop: cTabStyles.height + 12,\n            viewpagepaddingBottom: 0,\n            tabpaddingLeft: 48,\n            tabpaddingRight: 48,\n            tabpaddingTop: 0,\n            tabpaddingBottom: 0\n         }\"\n         :tab=\"cTabTitles\"\n         @tabPosition=\"nativeTabSlided\">\n    <div class=\"tab-item\"\n         v-for=\"(v, idx) in tabTitles\"\n         :key=\"idx\"\n         :style=\"{ height: (tabPageHeight-cTabStyles.height-12) + 'px' }\">\n      <slot :name=\"`tab-item-${idx}`\"></slot>\n    </div>\n  </FmTab>\n</template>\n\n<style scoped>\n  .fm-tab-page {\n    width: 1080px;\n  }\n\n  .tab-title-list {\n    width: 1080px;\n    flex-direction: row;\n    border-bottom-width: 2px;\n    border-color: rgba(0,0,0,0.10);\n  }\n\n  .tab-title-wrap {\n    flex-direction: row;\n    justify-content: space-around;\n    padding: 0 48px;\n  }\n\n  .title-item {\n    border-color: #198DED;\n    padding: 27px 18px;\n    margin-right: 42px;\n  }\n\n  .item-title {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 42px;\n    line-height: 57px;\n  }\n\n  .border-bottom {\n    position: absolute;\n    left: 0;\n    bottom: 0;\n    height: 3px;\n    width: 132px;\n  }\n\n  .tab-page-wrap {\n    width: 1080px;\n    overflow: hidden;\n  }\n\n  .tab-container {\n    flex: 1;\n    flex-direction: row;\n    position: absolute;\n  }\n\n  .tab-item {\n    width: 1080px;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nconst dom = weex.requireModule('dom');\nconst isH5 = weex.config.env.platform === 'Web';\n\nexport default {\n  name: 'FmNativeTab',\n  props: {\n    tabTitles: {\n      type: Array,\n      default: () => ([])\n    },\n    panDist: {\n      type: Number,\n      default: 200\n    },\n    duration: {\n      type: [Number, String],\n      default: 300\n    },\n    tabPageHeight: {\n      type: [String, Number],\n      default: 1854\n    },\n    tabStyles: {\n      type: Object,\n      default: () => ({})\n    },\n    timingFunction: {\n      type: String,\n      default: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'\n    },\n    selectIndex: {\n      type: Number,\n      default: 0\n    }\n  },\n  watch: {\n    selectIndex (val) {\n      if (this.loaded) {\n        this.setPage(this.selectIndex, false);\n      }\n    }\n  },\n  computed: {\n    isCreator () {\n      return weex.supports && weex.supports('@component/FmTab');\n    },\n    maxPage () {\n      return this.tabTitles.length - 1;\n    },\n    cTabTitles () {\n      const { tabStyles } = this;\n      const def = {\n        paddingStart: 18,\n        paddingEnd: 18,\n        minWidth: 120,\n        textunSelectColor: tabStyles.activeTitleColor || '#198DED',\n        textSelectColor: tabStyles.titleColor || '#99000000'\n      };\n      return this.tabTitles.map(item => {\n        return Object.assign({}, def, item);\n      });\n    },\n    cTabStyles () {\n      const defaultStyle = {\n        titleColor: 'rgba(0, 0, 0, 0.6)',\n        activeTitleColor: '#198DED',\n        height: 102,\n        padding: 18,\n        fontSize: 42,\n        activeBottomColor: '#198DED'\n      };\n      return Object.assign({}, defaultStyle, this.tabStyles);\n    }\n  },\n  data: () => ({\n    loaded: false,\n    currentPage: 0,\n    gesToken: 0,\n    isMoving: false,\n    startTime: 0,\n    deltaX: 0,\n    translateX: 0,\n    startPosX: 0,\n    startPosY: 0,\n    judge: 'INITIAL'\n  }),\n  methods: {\n    next () {\n      let page = this.currentPage;\n      if (page < this.maxPage) {\n        page++;\n      }\n      this.setPage(page);\n    },\n    prev () {\n      let page = this.currentPage;\n      if (page > 0) {\n        page--;\n      }\n      this.setPage(page);\n    },\n    _onTouchStart (e) {\n      if (isH5) {\n        this.startPosX = this._getTouchXPos(e);\n        this.startPosY = this._getTouchYPos(e);\n        this.deltaX = 0;\n        this.startTime = new Date().getTime();\n      }\n    },\n    _onTouchMove (e) {\n      if (isH5) {\n        this.deltaX = this._getTouchXPos(e) - this.startPosX;\n        this.deltaY = Math.abs(this._getTouchYPos(e) - this.startPosY + 1);\n        if (this.judge === 'INITIAL' && Math.abs(this.deltaX) / this.deltaY > 1.73) {\n          this.judge = 'SLIDE_ING';\n        }\n      }\n    },\n    _onTouchEnd (e) {\n      if (isH5) {\n        if (this.judge === 'SLIDE_ING') {\n          if (this.deltaX < -50) {\n            this.next();\n          } else if (this.deltaX > 50) {\n            this.prev();\n          }\n        }\n        this.judge = 'INITIAL';\n      }\n    },\n    setPage (page, animated = true) {\n      if (this.isMoving === true || this.tabTitles.length <= 0) {\n        return;\n      }\n      this.isMoving = true;\n      const currentTabEl = this.$refs[`fm-tab-title-${page}`][0];\n      const tabWidth = this.$refs[`fm-tab-title-${page}`][0].$el.clientWidth;\n      const tabOffset = this.$refs[`fm-tab-title-${page}`][0].$el.offsetLeft;\n\n      if (tabOffset >= 1080 / 2) {\n        dom.scrollToElement(currentTabEl, {\n          offset: -1080 / 2 + tabWidth / 2,\n          animated\n        });\n      } else {\n        dom.scrollToElement(currentTabEl, {\n          offset: -tabOffset,\n          animated\n        });\n      }\n\n      this.currentPage = page;\n      this._animateTransformX(page, animated);\n      this.$emit('fmTabPageTabSelected', { page });\n    },\n    nativeTabSlided (e) {\n      this.$emit('fmTabPageTabSelected', { page: e.position });\n    },\n    _animateTransformX (page, animated = true) {\n      const { duration, timingFunction } = this;\n      const containerEl = this.$refs[`tab-container`];\n      const dist = page * 1080;\n      animation.transition(containerEl, {\n        styles: {\n          transform: `translateX(${-dist}px)`\n        },\n        duration: animated ? duration : 0.00001,\n        timingFunction,\n        delay: 0\n      }, () => {\n        this.isMoving = false;\n      });\n    },\n    _getTouchXPos (e) {\n      return e.changedTouches[0]['pageX'];\n    },\n    _getTouchYPos (e) {\n      return e.changedTouches[0]['pageY'];\n    }\n  },\n  mounted () {\n    if (this.isCreator) { return; }\n    this.setPage(this.selectIndex, false);\n    setTimeout(() => {\n      this.loaded = true;\n    }, 50);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 256 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18377,6 +18360,7 @@ exports.push([module.i, "\n.fm-tab-page[data-v-c6e0f338] {\n  width: 1080px;\n}\
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+//
 //
 //
 //
@@ -18709,7 +18693,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 257 */
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -18828,7 +18812,7 @@ if (false) {
 }
 
 /***/ }),
-/* 258 */
+/* 246 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18838,7 +18822,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(259);
+var _index = __webpack_require__(247);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -18850,14 +18834,14 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 259 */
+/* 247 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(260),
+  __webpack_require__(248),
   /* template */
-  __webpack_require__(261),
+  __webpack_require__(249),
   /* scopeId */
   null,
   /* cssModules */
@@ -18884,7 +18868,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 260 */
+/* 248 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18894,16 +18878,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _weexBindingx = __webpack_require__(63);
+var _weexBindingx = __webpack_require__(57);
 
 var _weexBindingx2 = _interopRequireDefault(_weexBindingx);
 
-var _utils = __webpack_require__(62);
+var _utils = __webpack_require__(56);
 
 var _utils2 = _interopRequireDefault(_utils);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
 //
 //
 //
@@ -18982,7 +18967,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 261 */
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -19014,7 +18999,7 @@ if (false) {
 }
 
 /***/ }),
-/* 262 */
+/* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19024,7 +19009,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(263);
+var _index = __webpack_require__(251);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -19036,14 +19021,14 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 263 */
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(264),
+  __webpack_require__(252),
   /* template */
-  __webpack_require__(265),
+  __webpack_require__(253),
   /* scopeId */
   null,
   /* cssModules */
@@ -19070,7 +19055,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 264 */
+/* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19080,16 +19065,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmFooter = __webpack_require__(48);
+var _fmFooter = __webpack_require__(43);
 
 var _fmFooter2 = _interopRequireDefault(_fmFooter);
 
-var _fmButton = __webpack_require__(35);
+var _fmButton = __webpack_require__(36);
 
 var _fmButton2 = _interopRequireDefault(_fmButton);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
 //
 //
 //
@@ -19153,7 +19139,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 265 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -19191,7 +19177,7 @@ if (false) {
 }
 
 /***/ }),
-/* 266 */
+/* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19201,7 +19187,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(267);
+var _index = __webpack_require__(255);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -19213,18 +19199,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 267 */
+/* 255 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(268)
+__webpack_require__(256)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(270),
+  __webpack_require__(258),
   /* template */
-  __webpack_require__(271),
+  __webpack_require__(259),
   /* scopeId */
   "data-v-95a96b12",
   /* cssModules */
@@ -19251,13 +19237,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 268 */
+/* 256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(269);
+var content = __webpack_require__(257);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -19277,7 +19263,7 @@ if(false) {
 }
 
 /***/ }),
-/* 269 */
+/* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -19285,13 +19271,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.button-wrap[data-v-95a96b12] {\n  flex: 1;\n  height: 144px;\n  align-items: center;\n  justify-content: center;\n}\n.border[data-v-95a96b12] {\n  width: 2px;\n  height: 72px;\n  background-color: rgba(0, 0, 0, 0.1);\n}\n.button-wrap[data-v-95a96b12]:active {\n  background-color: rgba(0, 0, 0, 0.05);\n}\n.button-title[data-v-95a96b12] {\n  font-size: 48px;\n  color: #198DED;\n  font-weight: 500;\n  font-family: sans-serif-medium;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-textbar/index.vue?2e318c89"],"names":[],"mappings":";AAiBA;EACA,QAAA;EACA,cAAA;EACA,oBAAA;EACA,wBAAA;CACA;AAEA;EACA,WAAA;EACA,aAAA;EACA,qCAAA;CACA;AAEA;EACA,sCAAA;CACA;AAEA;EACA,gBAAA;EACA,eAAA;EACA,iBAAA;EACA,+BAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 2018/03/13. -->\n<template>\n  <fm-footer :backgroundColor=\"backgroundColor\">\n    <template v-for=\"(item, index) in items\">\n      <div class=\"button-wrap\"\n           :key=\"index\"\n           @click=\"onClick(index)\">\n        <text class=\"button-title\" :style=\"item.color && { color: item.color }\">{{ item.title }}</text>\n      </div>\n      <template v-if=\"items.length >= 2 && index != items.length - 1\">\n        <div class=\"border\" :key=\"index\"></div>\n      </template>\n    </template>\n  </fm-footer>\n</template>\n\n<style scoped>\n  .button-wrap {\n    flex: 1;\n    height: 144px;\n    align-items: center;\n    justify-content: center;\n  }\n\n  .border {\n    width: 2px;\n    height: 72px;\n    background-color: rgba(0, 0, 0, 0.1);\n  }\n\n  .button-wrap:active {\n    background-color: rgba(0, 0, 0, 0.05);\n  }\n\n  .button-title {\n    font-size: 48px;\n    color: #198DED;\n    font-weight: 500;\n    font-family: sans-serif-medium;\n  }\n</style>\n\n<script>\nimport FmFooter from '../fm-footer';\nexport default {\n  name: 'FmTextbar',\n  components: { FmFooter },\n  props: {\n    items: {\n      type: Array,\n      default: () => ([])\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    }\n  },\n  methods: {\n    onClick (index) {\n      this.$emit('fmTextbarBtnClicked', { index });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.button-wrap[data-v-95a96b12] {\n  flex: 1;\n  height: 144px;\n  align-items: center;\n  justify-content: center;\n}\n.border[data-v-95a96b12] {\n  width: 2px;\n  height: 72px;\n  background-color: rgba(0, 0, 0, 0.1);\n}\n.button-wrap[data-v-95a96b12]:active {\n  background-color: rgba(0, 0, 0, 0.05);\n}\n.button-title[data-v-95a96b12] {\n  font-size: 48px;\n  color: #198DED;\n  font-weight: 500;\n  font-family: sans-serif-medium;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-textbar/index.vue?33eae060"],"names":[],"mappings":";AAkBA;EACA,QAAA;EACA,cAAA;EACA,oBAAA;EACA,wBAAA;CACA;AAEA;EACA,WAAA;EACA,aAAA;EACA,qCAAA;CACA;AAEA;EACA,sCAAA;CACA;AAEA;EACA,gBAAA;EACA,eAAA;EACA,iBAAA;EACA,+BAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/03/13. -->\n<template>\n  <fm-footer :backgroundColor=\"backgroundColor\">\n    <template v-for=\"(item, index) in items\">\n      <div class=\"button-wrap\"\n           :key=\"index\"\n           @click=\"onClick(index)\">\n        <text class=\"button-title\" :style=\"item.color && { color: item.color }\">{{ item.title }}</text>\n      </div>\n      <template v-if=\"items.length >= 2 && index != items.length - 1\">\n        <div class=\"border\" :key=\"index\"></div>\n      </template>\n    </template>\n  </fm-footer>\n</template>\n\n<style scoped>\n  .button-wrap {\n    flex: 1;\n    height: 144px;\n    align-items: center;\n    justify-content: center;\n  }\n\n  .border {\n    width: 2px;\n    height: 72px;\n    background-color: rgba(0, 0, 0, 0.1);\n  }\n\n  .button-wrap:active {\n    background-color: rgba(0, 0, 0, 0.05);\n  }\n\n  .button-title {\n    font-size: 48px;\n    color: #198DED;\n    font-weight: 500;\n    font-family: sans-serif-medium;\n  }\n</style>\n\n<script>\nimport FmFooter from '../fm-footer';\nexport default {\n  name: 'FmTextbar',\n  components: { FmFooter },\n  props: {\n    items: {\n      type: Array,\n      default: () => ([])\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    }\n  },\n  methods: {\n    onClick (index) {\n      this.$emit('fmTextbarBtnClicked', { index });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 270 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19301,7 +19287,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmFooter = __webpack_require__(48);
+var _fmFooter = __webpack_require__(43);
 
 var _fmFooter2 = _interopRequireDefault(_fmFooter);
 
@@ -19369,9 +19355,10 @@ exports.default = {
 //
 //
 //
+//
 
 /***/ }),
-/* 271 */
+/* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -19415,7 +19402,7 @@ if (false) {
 }
 
 /***/ }),
-/* 272 */
+/* 260 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19425,7 +19412,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(273);
+var _index = __webpack_require__(261);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -19437,18 +19424,18 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 273 */
+/* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(274)
+__webpack_require__(262)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(276),
+  __webpack_require__(264),
   /* template */
-  __webpack_require__(277),
+  __webpack_require__(265),
   /* scopeId */
   "data-v-18ede8e6",
   /* cssModules */
@@ -19475,13 +19462,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 274 */
+/* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(275);
+var content = __webpack_require__(263);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -19501,7 +19488,7 @@ if(false) {
 }
 
 /***/ }),
-/* 275 */
+/* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -19509,13 +19496,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-banner-wrap[data-v-18ede8e6] {\n  width: 1080px;\n  padding: 24px 0 24px 24px;\n  flex-direction: row;\n  height: 386px;\n  overflow: hidden;\n}\n.banner-wrap--1[data-v-18ede8e6] {\n  width: 1080px;\n  height: 516px;\n  padding: 48px 48px;\n}\n.fm-nativeBanner-wrap[data-v-18ede8e6] {\n  width: 1080px;\n  height: 386px;\n  padding: 24px 0;\n}\n.nativeBanner-wrap--1[data-v-18ede8e6] {\n  width: 1080px;\n  height: 516px;\n  padding: 48px 24px;\n}\n.card-list[data-v-18ede8e6] {\n  position: absolute;\n  flex-direction: row;\n  height: 338px;\n}\n.card-item[data-v-18ede8e6] {\n  width: 792px;\n  height: 338px;\n  margin-right: 12px;\n  border-radius: 6px;\n  overflow: hidden;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-slider/index.vue?3dd45a62"],"names":[],"mappings":";AAiDA;EACA,cAAA;EACA,0BAAA;EACA,oBAAA;EACA,cAAA;EACA,iBAAA;CACA;AAEA;EACA,cAAA;EACA,cAAA;EACA,mBAAA;CACA;AAEA;EACA,cAAA;EACA,cAAA;EACA,gBAAA;CACA;AAEA;EACA,cAAA;EACA,cAAA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;EACA,oBAAA;EACA,cAAA;CACA;AAEA;EACA,aAAA;EACA,cAAA;EACA,mBAAA;EACA,mBAAA;EACA,iBAAA;CACA","file":"index.vue","sourcesContent":["<!-- Created by Yanjiie on 2018/03/18. [!] Just a beta version! -->\n<template>\n  <div v-if=\"!isCreator\"\n       class=\"fm-banner-wrap\"\n       :class=\"['banner-wrap--' + items.length]\"\n       ref=\"sliderCtn\"\n       @panstart=\"onPanStart\"\n       @panmove=\"onPanMove\"\n       @panend=\"onPanEnd\"\n       @horizontalpan=\"startHandle\">\n    <div class=\"card-list\"\n         v-if=\"items.length > 1\"\n         ref=\"card-list\"\n         :style=\"{ left: -(cardS.width * 2) + 'px' }\">\n      <div class=\"card-item\"\n           v-for=\"(item, index) in cItems\"\n           :key=\"index\"\n           :ref=\"`card${index-2}`\"\n           :style=\"(index-2) === -1 && { transform: `translateX(-12px)` }\">\n        <slot :name=\"`card${index-2}`\">\n          <image :style=\"{ width: `${cardS.width}px`, height: `${cardS.height}px` }\"\n                 :src=\"item.src\"\n                 @click=\"itemClicked(index-2 < 0 ? index-2+items.length : index-2 >= items.length ? index-2-items.length : index-2 )\" />\n        </slot>\n      </div>\n    </div>\n    <div class=\"card-list\"\n         v-else>\n      <div v-for=\"(item, index) in items\"\n           :key=\"index\"\n           :ref=\"`card${index}`\">\n        <slot :name=\"`card${index}`\">\n          <image :style=\"{ width: `${cardS.width*1.2425}px`, height: `${cardS.height*1.2425}px` }\"\n                 :src=\"item.src\"\n                 @click=\"itemClicked(index)\" />\n        </slot>\n      </div>\n    </div>\n  </div>\n  <FmSliderNative v-else\n                  class=\"fm-nativeBanner-wrap\"\n                  :class=\"['nativeBanner-wrap--' + items.length]\"\n                  :autoplay=\"autoPlay\"\n                  @itemclick=\"itemClicked\"\n                  :data=\"cNativeItems\">\n  </FmSliderNative>\n</template>\n\n<style scoped>\n  .fm-banner-wrap {\n    width: 1080px;\n    padding: 24px 0 24px 24px;\n    flex-direction: row;\n    height: 386px;\n    overflow: hidden;\n  }\n\n  .banner-wrap--1 {\n    width: 1080px;\n    height: 516px;\n    padding: 48px 48px;\n  }\n\n  .fm-nativeBanner-wrap {\n    width: 1080px;\n    height: 386px;\n    padding: 24px 0;\n  }\n\n  .nativeBanner-wrap--1 {\n    width: 1080px;\n    height: 516px;\n    padding: 48px 24px;\n  }\n\n  .card-list {\n    position: absolute;\n    flex-direction: row;\n    height: 338px;\n  }\n\n  .card-item {\n    width: 792px;\n    height: 338px;\n    margin-right: 12px;\n    border-radius: 6px;\n    overflow: hidden;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nimport Utils from '../utils';\nimport Binding from 'weex-bindingx/lib/index.weex.js';\n\nexport default {\n  props: {\n    items: {\n      type: Array,\n      default: () => ([])\n    },\n    panOffset: {\n      type: Number,\n      default: 30\n    },\n    cardS: {\n      type: Object,\n      default: () => ({\n        width: 792,\n        height: 338\n      })\n    },\n    autoPlay: {\n      type: Boolean,\n      default: false\n    },\n    interval: {\n      type: [Number, String],\n      default: 4000\n    },\n    timingFunction: {\n      type: String,\n      default: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'\n    }\n  },\n  data: () => ({\n    selectIndex: 0,\n    gesToken: 0,\n    isMoving: false,\n    startX: 0,\n    startTime: 0,\n    currentIndex: 0,\n    autoPlayTimer: null\n  }),\n  computed: {\n    isCreator () {\n      return weex.supports && weex.supports('@component/FmSliderNative');\n    },\n    cItems () {\n      const { items } = this;\n      let cItems = [];\n      if (items.length >= 2) {\n        cItems = cItems.concat(items.slice(-2), items, items.slice(0, 2));\n      }\n      return cItems;\n    },\n    cNativeItems () {\n      const { items } = this;\n      return items.map((item) => {\n        return item.src;\n      });\n    },\n    cardLength () {\n      return this.items.length;\n    }\n  },\n  methods: {\n    startHandle (e) {\n      if (Utils.env.supportsEB() && e.state === 'start') {\n        this.clearAutoPlay();\n        setTimeout(() => {\n          const sliderCtn = this.$refs[`sliderCtn`];\n          this.bindExp(sliderCtn);\n        }, 0);\n      }\n    },\n    onPanStart (e) {\n      if (Utils.env.supportsEB()) {\n        return;\n      }\n      this.clearAutoPlay();\n      this.startX = e.changedTouches[0].clientX;\n      this.startTime = Date.now();\n    },\n    onPanMove (e) {\n      if (Utils.env.supportsEB() || this.isMoving) {\n        return;\n      }\n      const moveX = e.changedTouches[0].clientX - this.startX;\n      const currentCardLeft = this.currentIndex * (this.cardS.width + 12);\n\n      const listEl = this.$refs['card-list'];\n      if (!listEl) { return; }\n      listEl && animation.transition(listEl, {\n        styles: {\n          transform: `translateX(${moveX - currentCardLeft}px)`\n        },\n        timingFunction: 'ease',\n        delay: 0,\n        duration: 0\n      }, () => {\n      });\n    },\n    onPanEnd (e) {\n      if (Utils.env.supportsEB()) {\n        return;\n      }\n      this.panEnd(e);\n    },\n    panEnd (e) {\n      this.isMoving = true;\n      let moveX = e.deltaX;\n\n      if (Utils.env.isWeb()) {\n        moveX = e.changedTouches[0].clientX - this.startX;\n      }\n\n      const originIndex = this.currentIndex;\n      let selectIndex = originIndex;\n      const duration = Date.now() - this.startTime;\n      const panOffset = this.panOffset || (this.cardS.width / 2);\n\n      if (moveX < -panOffset || (moveX < -10 && duration < 200)) {\n        // 允许向右越界\n        if (selectIndex !== this.cardLength) {\n          selectIndex++;\n        }\n      } else if (moveX > panOffset || (moveX > 10 && duration < 500)) {\n        // 允许向左越界\n        if (selectIndex !== -2) {\n          selectIndex--;\n        }\n      }\n\n      this.slideTo(originIndex, selectIndex);\n      setTimeout(() => { this.checkNeedAutoPlay(); }, 4000);\n    },\n    bindExp (element) {\n      if (element && element.ref) {\n        if (this.isMoving) {\n          Binding.unbind({\n            eventType: 'pan',\n            token: this.gesToken\n          });\n          this.gesToken = 0;\n          return;\n        }\n\n        const { currentIndex, cardS } = this;\n        const dist = currentIndex * (cardS.width + 12);\n        const listEl = this.$refs['card-list'];\n\n        // 卡片容器\n        const props = [{\n          element: listEl.ref,\n          property: 'transform.translateX',\n          expression: `${-dist}+x`\n        }];\n\n        // 当前卡片\n        const currCardEl = this.$refs[`card${currentIndex}`][0];\n        props.push({\n          element: currCardEl.ref,\n          property: 'transform.translateX',\n          expression: `x <= 0 ? (x / 792 * 12) : 0`\n        });\n        // 上一张卡片\n        const lastCardEl = this.$refs[`card${currentIndex - 1}`][0];\n        props.push({\n          element: lastCardEl.ref,\n          property: 'transform.translateX',\n          expression: `x > 0 ? (1 - (x / 792)) * -12 : -12`\n        });\n\n        const gesTokenObj = Binding.bind({\n          eventType: 'pan',\n          anchor: element.ref,\n          props\n        }, (e) => {\n          if (!this.isMoving && (e.state === 'end' || e.state === 'cancel' || e.state === 'exit')) {\n            this.panEnd(e);\n          }\n        });\n\n        this.gesToken = gesTokenObj.token;\n      }\n    },\n    slideTo (originIndex, selectIndex) {\n      const { cardS, timingFunction } = this;\n      const listEl = this.$refs['card-list'];\n      if (!listEl) { return; }\n      const dist = selectIndex * (cardS.width + 12);\n      // 卡片容器\n      listEl && animation.transition(listEl, {\n        styles: {\n          transform: `translateX(${-dist}px)`\n        },\n        duration: 500,\n        timingFunction\n      }, (e) => {\n        this.isMoving = false;\n        if (originIndex !== selectIndex) {\n          this.currentIndex = selectIndex;\n        }\n        this.checkNeedReset();\n      });\n\n      // 下一页\n      if (originIndex < selectIndex) {\n        // 当前卡片\n        const currCard = this.$refs[`card${this.currentIndex}`];\n        currCard && animation.transition(currCard[0], {\n          styles: {\n            transform: `translateX(-12px)`\n          },\n          duration: 500,\n          timingFunction\n        });\n        // 上一张卡片\n        const lastCard = this.$refs[`card${this.currentIndex - 1}`];\n        lastCard && animation.transition(lastCard[0], {\n          styles: {\n            transform: `translateX(0px)`\n          },\n          duration: 500,\n          timingFunction\n        });\n      // 上一页\n      } else if (originIndex > selectIndex) {\n        // 上一张卡片\n        const lastCard = this.$refs[`card${this.currentIndex - 1}`];\n        lastCard && animation.transition(lastCard[0], {\n          styles: {\n            transform: `translateX(0px)`\n          },\n          duration: 500,\n          timingFunction\n        });\n        // 上上张卡片\n        const llastCard = this.$refs[`card${this.currentIndex - 2}`];\n        llastCard && animation.transition(llastCard[0], {\n          styles: {\n            transform: `translateX(-12px)`\n          },\n          duration: 500,\n          timingFunction\n        });\n      }\n    },\n    // 检查页数是否达到临界条件进行重置处理，临界值 -2 ~ cardLength\n    checkNeedReset () {\n      const { cardS, timingFunction } = this;\n      const listEl = this.$refs['card-list'];\n      if (!listEl) { return; }\n      // 向右越界 重置为第一页\n      if (this.currentIndex >= this.cardLength) {\n        this.currentIndex = 0;\n        animation.transition(this.$refs[`card${this.cardLength - 1}`][0], {\n          styles: {\n            transform: `translateX(0px)`\n          },\n          duration: 0.00001,\n          timingFunction\n        });\n        animation.transition(this.$refs[`card-1`][0], {\n          styles: {\n            transform: `translateX(-12px)`\n          },\n          duration: 0.00001,\n          timingFunction\n        });\n      // 向左越界 重置为倒数第二页\n      } else if (this.currentIndex === -2) {\n        this.currentIndex = this.cardLength - 2;\n        animation.transition(this.$refs[`card${this.cardLength - 3}`][0], {\n          styles: {\n            transform: `translateX(-12px)`\n          },\n          duration: 0.00001,\n          timingFunction\n        });\n      } else {\n        return;\n      }\n      listEl && animation.transition(listEl, {\n        styles: {\n          transform: `translateX(${-this.currentIndex * (cardS.width + 12)}px)`\n        },\n        duration: 0.00001,\n        timingFunction\n      });\n    },\n    checkNeedAutoPlay () {\n      if (this.autoPlay && this.items.length >= 1) {\n        this.clearAutoPlay();\n        this.autoPlayTimer = setInterval(() => {\n          this.slideTo(this.currentIndex, this.currentIndex + 1);\n        }, parseInt(this.interval));\n      }\n    },\n    clearAutoPlay () {\n      this.autoPlayTimer && clearInterval(this.autoPlayTimer);\n    },\n    itemClicked (e) {\n      const idx = this.isCreator ? e.position : e;\n      this.$emit('fmSliderItemClicked', idx);\n    }\n  },\n  mounted () {\n    setTimeout(() => {\n      const sliderCtn = this.$refs[`sliderCtn`];\n      if (Utils.env.supportsEB() && sliderCtn && sliderCtn.ref) {\n        Binding.prepare && Binding.prepare({\n          anchor: sliderCtn.ref,\n          eventType: 'pan'\n        });\n      }\n    }, 20);\n    this.checkNeedAutoPlay();\n  },\n  beforeDestroy () {\n    this.clearAutoPlay();\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-banner-wrap[data-v-18ede8e6] {\n  width: 1080px;\n  padding: 24px 0 24px 24px;\n  flex-direction: row;\n  height: 386px;\n  overflow: hidden;\n}\n.banner-wrap--1[data-v-18ede8e6] {\n  width: 1080px;\n  height: 516px;\n  padding: 48px 48px;\n}\n.fm-nativeBanner-wrap[data-v-18ede8e6] {\n  width: 1080px;\n  height: 386px;\n  padding: 24px 0;\n}\n.nativeBanner-wrap--1[data-v-18ede8e6] {\n  width: 1080px;\n  height: 516px;\n  padding: 48px 24px;\n}\n.card-list[data-v-18ede8e6] {\n  position: absolute;\n  flex-direction: row;\n  height: 338px;\n}\n.card-item[data-v-18ede8e6] {\n  width: 792px;\n  height: 338px;\n  margin-right: 12px;\n  border-radius: 6px;\n  overflow: hidden;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-slider/index.vue?2a0230e6"],"names":[],"mappings":";AAkDA;EACA,cAAA;EACA,0BAAA;EACA,oBAAA;EACA,cAAA;EACA,iBAAA;CACA;AAEA;EACA,cAAA;EACA,cAAA;EACA,mBAAA;CACA;AAEA;EACA,cAAA;EACA,cAAA;EACA,gBAAA;CACA;AAEA;EACA,cAAA;EACA,cAAA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;EACA,oBAAA;EACA,cAAA;CACA;AAEA;EACA,aAAA;EACA,cAAA;EACA,mBAAA;EACA,mBAAA;EACA,iBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/03/18. [!] Just a beta version! -->\n<template>\n  <div v-if=\"!isCreator\"\n       class=\"fm-banner-wrap\"\n       :class=\"['banner-wrap--' + items.length]\"\n       ref=\"sliderCtn\"\n       @panstart=\"onPanStart\"\n       @panmove=\"onPanMove\"\n       @panend=\"onPanEnd\"\n       @horizontalpan=\"startHandle\">\n    <div class=\"card-list\"\n         v-if=\"items.length > 1\"\n         ref=\"card-list\"\n         :style=\"{ left: -(cardS.width * 2) + 'px' }\">\n      <div class=\"card-item\"\n           v-for=\"(item, index) in cItems\"\n           :key=\"index\"\n           :ref=\"`card${index-2}`\"\n           :style=\"(index-2) === -1 && { transform: `translateX(-12px)` }\">\n        <slot :name=\"`card${index-2}`\">\n          <image :style=\"{ width: `${cardS.width}px`, height: `${cardS.height}px` }\"\n                 :src=\"item.src\"\n                 @click=\"itemClicked(index-2 < 0 ? index-2+items.length : index-2 >= items.length ? index-2-items.length : index-2 )\" />\n        </slot>\n      </div>\n    </div>\n    <div class=\"card-list\"\n         v-else>\n      <div v-for=\"(item, index) in items\"\n           :key=\"index\"\n           :ref=\"`card${index}`\">\n        <slot :name=\"`card${index}`\">\n          <image :style=\"{ width: `${cardS.width*1.2425}px`, height: `${cardS.height*1.2425}px` }\"\n                 :src=\"item.src\"\n                 @click=\"itemClicked(index)\" />\n        </slot>\n      </div>\n    </div>\n  </div>\n  <FmSliderNative v-else\n                  class=\"fm-nativeBanner-wrap\"\n                  :class=\"['nativeBanner-wrap--' + items.length]\"\n                  :autoplay=\"autoPlay\"\n                  @itemclick=\"itemClicked\"\n                  :data=\"cNativeItems\">\n  </FmSliderNative>\n</template>\n\n<style scoped>\n  .fm-banner-wrap {\n    width: 1080px;\n    padding: 24px 0 24px 24px;\n    flex-direction: row;\n    height: 386px;\n    overflow: hidden;\n  }\n\n  .banner-wrap--1 {\n    width: 1080px;\n    height: 516px;\n    padding: 48px 48px;\n  }\n\n  .fm-nativeBanner-wrap {\n    width: 1080px;\n    height: 386px;\n    padding: 24px 0;\n  }\n\n  .nativeBanner-wrap--1 {\n    width: 1080px;\n    height: 516px;\n    padding: 48px 24px;\n  }\n\n  .card-list {\n    position: absolute;\n    flex-direction: row;\n    height: 338px;\n  }\n\n  .card-item {\n    width: 792px;\n    height: 338px;\n    margin-right: 12px;\n    border-radius: 6px;\n    overflow: hidden;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nimport Utils from '../utils';\nimport Binding from 'weex-bindingx/lib/index.weex.js';\n\nexport default {\n  props: {\n    items: {\n      type: Array,\n      default: () => ([])\n    },\n    panOffset: {\n      type: Number,\n      default: 30\n    },\n    cardS: {\n      type: Object,\n      default: () => ({\n        width: 792,\n        height: 338\n      })\n    },\n    autoPlay: {\n      type: Boolean,\n      default: false\n    },\n    interval: {\n      type: [Number, String],\n      default: 4000\n    },\n    timingFunction: {\n      type: String,\n      default: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'\n    }\n  },\n  data: () => ({\n    selectIndex: 0,\n    gesToken: 0,\n    isMoving: false,\n    startX: 0,\n    startTime: 0,\n    currentIndex: 0,\n    autoPlayTimer: null\n  }),\n  computed: {\n    isCreator () {\n      return weex.supports && weex.supports('@component/FmSliderNative');\n    },\n    cItems () {\n      const { items } = this;\n      let cItems = [];\n      if (items.length >= 2) {\n        cItems = cItems.concat(items.slice(-2), items, items.slice(0, 2));\n      }\n      return cItems;\n    },\n    cNativeItems () {\n      const { items } = this;\n      return items.map((item) => {\n        return item.src;\n      });\n    },\n    cardLength () {\n      return this.items.length;\n    }\n  },\n  methods: {\n    startHandle (e) {\n      if (Utils.env.supportsEB() && e.state === 'start') {\n        this.clearAutoPlay();\n        setTimeout(() => {\n          const sliderCtn = this.$refs[`sliderCtn`];\n          this.bindExp(sliderCtn);\n        }, 0);\n      }\n    },\n    onPanStart (e) {\n      if (Utils.env.supportsEB()) {\n        return;\n      }\n      this.clearAutoPlay();\n      this.startX = e.changedTouches[0].clientX;\n      this.startTime = Date.now();\n    },\n    onPanMove (e) {\n      if (Utils.env.supportsEB() || this.isMoving) {\n        return;\n      }\n      const moveX = e.changedTouches[0].clientX - this.startX;\n      const currentCardLeft = this.currentIndex * (this.cardS.width + 12);\n\n      const listEl = this.$refs['card-list'];\n      if (!listEl) { return; }\n      listEl && animation.transition(listEl, {\n        styles: {\n          transform: `translateX(${moveX - currentCardLeft}px)`\n        },\n        timingFunction: 'ease',\n        delay: 0,\n        duration: 0\n      }, () => {\n      });\n    },\n    onPanEnd (e) {\n      if (Utils.env.supportsEB()) {\n        return;\n      }\n      this.panEnd(e);\n    },\n    panEnd (e) {\n      this.isMoving = true;\n      let moveX = e.deltaX;\n\n      if (Utils.env.isWeb()) {\n        moveX = e.changedTouches[0].clientX - this.startX;\n      }\n\n      const originIndex = this.currentIndex;\n      let selectIndex = originIndex;\n      const duration = Date.now() - this.startTime;\n      const panOffset = this.panOffset || (this.cardS.width / 2);\n\n      if (moveX < -panOffset || (moveX < -10 && duration < 200)) {\n        // 允许向右越界\n        if (selectIndex !== this.cardLength) {\n          selectIndex++;\n        }\n      } else if (moveX > panOffset || (moveX > 10 && duration < 500)) {\n        // 允许向左越界\n        if (selectIndex !== -2) {\n          selectIndex--;\n        }\n      }\n\n      this.slideTo(originIndex, selectIndex);\n      setTimeout(() => { this.checkNeedAutoPlay(); }, 4000);\n    },\n    bindExp (element) {\n      if (element && element.ref) {\n        if (this.isMoving) {\n          Binding.unbind({\n            eventType: 'pan',\n            token: this.gesToken\n          });\n          this.gesToken = 0;\n          return;\n        }\n\n        const { currentIndex, cardS } = this;\n        const dist = currentIndex * (cardS.width + 12);\n        const listEl = this.$refs['card-list'];\n\n        // 卡片容器\n        const props = [{\n          element: listEl.ref,\n          property: 'transform.translateX',\n          expression: `${-dist}+x`\n        }];\n\n        // 当前卡片\n        const currCardEl = this.$refs[`card${currentIndex}`][0];\n        props.push({\n          element: currCardEl.ref,\n          property: 'transform.translateX',\n          expression: `x <= 0 ? (x / 792 * 12) : 0`\n        });\n        // 上一张卡片\n        const lastCardEl = this.$refs[`card${currentIndex - 1}`][0];\n        props.push({\n          element: lastCardEl.ref,\n          property: 'transform.translateX',\n          expression: `x > 0 ? (1 - (x / 792)) * -12 : -12`\n        });\n\n        const gesTokenObj = Binding.bind({\n          eventType: 'pan',\n          anchor: element.ref,\n          props\n        }, (e) => {\n          if (!this.isMoving && (e.state === 'end' || e.state === 'cancel' || e.state === 'exit')) {\n            this.panEnd(e);\n          }\n        });\n\n        this.gesToken = gesTokenObj.token;\n      }\n    },\n    slideTo (originIndex, selectIndex) {\n      const { cardS, timingFunction } = this;\n      const listEl = this.$refs['card-list'];\n      if (!listEl) { return; }\n      const dist = selectIndex * (cardS.width + 12);\n      // 卡片容器\n      listEl && animation.transition(listEl, {\n        styles: {\n          transform: `translateX(${-dist}px)`\n        },\n        duration: 500,\n        timingFunction\n      }, (e) => {\n        this.isMoving = false;\n        if (originIndex !== selectIndex) {\n          this.currentIndex = selectIndex;\n        }\n        this.checkNeedReset();\n      });\n\n      // 下一页\n      if (originIndex < selectIndex) {\n        // 当前卡片\n        const currCard = this.$refs[`card${this.currentIndex}`];\n        currCard && animation.transition(currCard[0], {\n          styles: {\n            transform: `translateX(-12px)`\n          },\n          duration: 500,\n          timingFunction\n        });\n        // 上一张卡片\n        const lastCard = this.$refs[`card${this.currentIndex - 1}`];\n        lastCard && animation.transition(lastCard[0], {\n          styles: {\n            transform: `translateX(0px)`\n          },\n          duration: 500,\n          timingFunction\n        });\n      // 上一页\n      } else if (originIndex > selectIndex) {\n        // 上一张卡片\n        const lastCard = this.$refs[`card${this.currentIndex - 1}`];\n        lastCard && animation.transition(lastCard[0], {\n          styles: {\n            transform: `translateX(0px)`\n          },\n          duration: 500,\n          timingFunction\n        });\n        // 上上张卡片\n        const llastCard = this.$refs[`card${this.currentIndex - 2}`];\n        llastCard && animation.transition(llastCard[0], {\n          styles: {\n            transform: `translateX(-12px)`\n          },\n          duration: 500,\n          timingFunction\n        });\n      }\n    },\n    // 检查页数是否达到临界条件进行重置处理，临界值 -2 ~ cardLength\n    checkNeedReset () {\n      const { cardS, timingFunction } = this;\n      const listEl = this.$refs['card-list'];\n      if (!listEl) { return; }\n      // 向右越界 重置为第一页\n      if (this.currentIndex >= this.cardLength) {\n        this.currentIndex = 0;\n        animation.transition(this.$refs[`card${this.cardLength - 1}`][0], {\n          styles: {\n            transform: `translateX(0px)`\n          },\n          duration: 0.00001,\n          timingFunction\n        });\n        animation.transition(this.$refs[`card-1`][0], {\n          styles: {\n            transform: `translateX(-12px)`\n          },\n          duration: 0.00001,\n          timingFunction\n        });\n      // 向左越界 重置为倒数第二页\n      } else if (this.currentIndex === -2) {\n        this.currentIndex = this.cardLength - 2;\n        animation.transition(this.$refs[`card${this.cardLength - 3}`][0], {\n          styles: {\n            transform: `translateX(-12px)`\n          },\n          duration: 0.00001,\n          timingFunction\n        });\n      } else {\n        return;\n      }\n      listEl && animation.transition(listEl, {\n        styles: {\n          transform: `translateX(${-this.currentIndex * (cardS.width + 12)}px)`\n        },\n        duration: 0.00001,\n        timingFunction\n      });\n    },\n    checkNeedAutoPlay () {\n      if (this.autoPlay && this.items.length >= 1) {\n        this.clearAutoPlay();\n        this.autoPlayTimer = setInterval(() => {\n          this.slideTo(this.currentIndex, this.currentIndex + 1);\n        }, parseInt(this.interval));\n      }\n    },\n    clearAutoPlay () {\n      this.autoPlayTimer && clearInterval(this.autoPlayTimer);\n    },\n    itemClicked (e) {\n      const idx = this.isCreator ? e.position : e;\n      this.$emit('fmSliderItemClicked', idx);\n    }\n  },\n  mounted () {\n    setTimeout(() => {\n      const sliderCtn = this.$refs[`sliderCtn`];\n      if (Utils.env.supportsEB() && sliderCtn && sliderCtn.ref) {\n        Binding.prepare && Binding.prepare({\n          anchor: sliderCtn.ref,\n          eventType: 'pan'\n        });\n      }\n    }, 20);\n    this.checkNeedAutoPlay();\n  },\n  beforeDestroy () {\n    this.clearAutoPlay();\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 276 */
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19525,16 +19512,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _utils = __webpack_require__(62);
+var _utils = __webpack_require__(56);
 
 var _utils2 = _interopRequireDefault(_utils);
 
-var _indexWeex = __webpack_require__(84);
+var _indexWeex = __webpack_require__(66);
 
 var _indexWeex2 = _interopRequireDefault(_indexWeex);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
 //
 //
 //
@@ -19982,7 +19970,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 277 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -20079,11 +20067,7 @@ if (false) {
 }
 
 /***/ }),
-/* 278 */,
-/* 279 */,
-/* 280 */,
-/* 281 */,
-/* 282 */
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20092,21 +20076,424 @@ if (false) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.FmSlider = exports.FmTextbar = exports.FmFooter = exports.FmBtnbar = exports.FmTabbarItem = exports.FmTabbar = exports.FmPanItem = exports.FmNativeTab = exports.FmTabPage = exports.FmSimpleList = exports.FmRcyCheck = exports.FmMultiCheckCell = exports.FmMultiCheckGroup = exports.FmTitlebar = exports.FmSearchbar = exports.FmActionView = exports.FmCheckListGroup = exports.FmCheckbox = exports.showSnackBar = exports.FmSnackBar = exports.FmRater = exports.FmItem = exports.FmActionSheet = exports.FmPopup = exports.alert = exports.confirm = exports.FmSimpleBtn = exports.FmDialog = exports.FmOverlay = exports.FmImage = exports.FmFoldableText = exports.FmSpecialRichText = exports.FmRichText = exports.FmTips = exports.FmInput = exports.FmButton = exports.FmSliderBar = exports.FmIcon = exports.FmText = exports.FmTagWall = exports.FmTag = exports.FmSwitch = exports.Utils = undefined;
 
-var _utils = __webpack_require__(62);
+var _index = __webpack_require__(267);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 267 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(268)
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(270),
+  /* template */
+  __webpack_require__(271),
+  /* scopeId */
+  "data-v-69ed5ad4",
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-popover/index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-69ed5ad4", Component.options)
+  } else {
+    hotAPI.reload("data-v-69ed5ad4", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 268 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(269);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("5183b4cc", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-69ed5ad4\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-69ed5ad4\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 269 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.popover-wrap[data-v-69ed5ad4]{\n  position: fixed;\n  width: 1080px;\n  /*兼容H5异常*/\n  z-index: 99999;\n}\n.popover[data-v-69ed5ad4] {\n  position: fixed;\n  z-index: 99;\n  width: 628px;\n  padding: 20px;\n  border-radius: 10px;\n}\n.content[data-v-69ed5ad4] {\n  flex: 1;\n  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);\n  background-color: #FFFFFF;\n  border-radius: 10px;\n  overflow: hidden;\n}\n.item[data-v-69ed5ad4] {\n  height: 168px;\n  padding: 0 48px;\n}\n.item-content[data-v-69ed5ad4] {\n  flex: 1;\n  flex-direction: row;\n  border-bottom-width: 2px;\n  border-color: rgba(0,0,0,0.10);\n  align-items: center;\n}\n.item-text[data-v-69ed5ad4] {\n  font-size: 48px;\n}\n.item-icon[data-v-69ed5ad4] {\n  margin-right: 15px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-popover/index.vue?67f87e2b"],"names":[],"mappings":";AAgCA;EACA,gBAAA;EACA,cAAA;EACA,UAAA;EACA,eAAA;CACA;AAEA;EACA,gBAAA;EACA,YAAA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;CACA;AAEA;EACA,QAAA;EACA,0CAAA;EACA,0BAAA;EACA,oBAAA;EACA,iBAAA;CACA;AAEA;EACA,cAAA;EACA,gBAAA;CACA;AAEA;EACA,QAAA;EACA,oBAAA;EACA,yBAAA;EACA,+BAAA;EACA,oBAAA;CACA;AAEA;EACA,gBAAA;CACA;AAEA;EACA,mBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/04/12. -->\n<template>\n  <div class=\"popover-wrap\">\n    <fm-overlay v-if=\"show || showIn\"\n                :hasAnimation=\"true\"\n                :canAutoClose=\"true\"\n                :opacity=\"overlayOpacity\"\n                @fmOverlayBodyClicking=\"visible(false)\"\n                ref=\"fm-overlay\"></fm-overlay>\n    <div ref=\"fm-popover\"\n         class=\"popover\"\n         v-if=\"show || showIn\"\n         :style=\"popoverStyle\"\n         @touchend=\"handleTouchEnd\">\n      <div class=\"content\"\n           :style=\"{ height: buttons.length * 168 - 2 + 'px' }\">\n        <div v-for=\"(item, index) in buttons\"\n             :key=\"index\"\n             class=\"item\"\n             @click=\"onClicked(index)\">\n          <div class=\"item-content\">\n            <fm-icon class=\"item-icon\" v-if=\"item.icon\" :name=\"item.icon\" :icon-style=\"67\" />\n            <text class=\"item-text\">{{ item.text }}</text>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .popover-wrap{\n    position: fixed;\n    width: 1080px;\n    /*兼容H5异常*/\n    z-index: 99999;\n  }\n\n  .popover {\n    position: fixed;\n    z-index: 99;\n    width: 628px;\n    padding: 20px;\n    border-radius: 10px;\n  }\n\n  .content {\n    flex: 1;\n    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);\n    background-color: #FFFFFF;\n    border-radius: 10px;\n    overflow: hidden;\n  }\n\n  .item {\n    height: 168px;\n    padding: 0 48px;\n  }\n\n  .item-content {\n    flex: 1;\n    flex-direction: row;\n    border-bottom-width: 2px;\n    border-color: rgba(0,0,0,0.10);\n    align-items: center;\n  }\n\n  .item-text {\n    font-size: 48px;\n  }\n\n  .item-icon {\n    margin-right: 15px;\n  }\n</style>\n\n<script>\nimport FmOverlay from '../fm-overlay';\nimport FmIcon from '../fm-icon';\nconst animation = weex.requireModule('animation');\n\nexport default {\n  name: 'FmPopover',\n  components: { FmOverlay, FmIcon },\n  props: {\n    buttons: {\n      type: Array,\n      default: () => ([])\n    },\n    position: {\n      type: Object,\n      default: () => ({\n        pos: 'top',\n        x: 0,\n        y: 0\n      })\n    },\n    hasAnimation: {\n      type: Boolean,\n      default: true\n    },\n    overlayOpacity: {\n      type: Number,\n      default: 0.0\n    }\n  },\n  data: () => ({\n    show: false,\n    showIn: false\n  }),\n  computed: {\n    popoverStyle () {\n      const { x = 0, y = 0, pos = 'top' } = this.position;\n      const style = {};\n      x < 0 ? (style.right = `${-x}px`) : (style.left = `${x}px`);\n      y < 0 ? (style.bottom = `${-y}px`) : (style.top = `${y}px`);\n      switch (pos) {\n        case 'top':\n          style.transform = `translateY(${this.showIn ? 0 : -20}px)`;\n          break;\n        case 'bottom':\n          style.transform = `translateY(${this.showIn ? 0 : 20}px)`;\n          break;\n        case 'left':\n          style.transform = `translateX(${this.showIn ? 0 : -20}px)`;\n          break;\n        case 'right':\n          style.transform = `translateX(${this.showIn ? 0 : 20}px)`;\n          break;\n      }\n      style.opacity = !this.showIn ? 0 : 1;\n      return style;\n    }\n  },\n  methods: {\n    handleTouchEnd (e) {\n      // 原生上有点击穿透问题\n      e.preventDefault && e.preventDefault();\n    },\n    appearPopover (bool) {\n      const { hasAnimation } = this;\n      const { pos = 'top' } = this.position;\n      const popoverEl = this.$refs['fm-popover'];\n      if (!popoverEl) {\n        return;\n      }\n      let hideTransform;\n      switch (pos) {\n        case 'top':\n          hideTransform = 'translateY(-20px)';\n          break;\n        case 'bottom':\n          hideTransform = 'translateY(20px)';\n          break;\n        case 'left':\n          hideTransform = 'translateX(-20px)';\n          break;\n        case 'right':\n          hideTransform = 'translateX(20px)';\n          break;\n      }\n      const styles = bool ? {\n        transform: 'translateX(0px) translateY(0px)',\n        opacity: 1\n      } : {\n        transform: hideTransform,\n        opacity: 0\n      };\n      animation.transition(popoverEl, {\n        styles,\n        duration: hasAnimation ? 150 : 0.0001,\n        timingFunction: 'ease-out'\n      }, e => {\n        this.showIn = bool;\n      });\n    },\n    onClicked (index) {\n      this.visible(false);\n      this.$emit('fmPopoverBtnClicked', { index });\n    },\n    visible (bool) {\n      this.show = bool;\n      setTimeout(() => {\n        this.appearPopover(bool);\n      }, 40);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+/* 270 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _fmOverlay = __webpack_require__(44);
+
+var _fmOverlay2 = _interopRequireDefault(_fmOverlay);
+
+var _fmIcon = __webpack_require__(6);
+
+var _fmIcon2 = _interopRequireDefault(_fmIcon);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var animation = weex.requireModule('animation');
+
+exports.default = {
+  name: 'FmPopover',
+  components: { FmOverlay: _fmOverlay2.default, FmIcon: _fmIcon2.default },
+  props: {
+    buttons: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    position: {
+      type: Object,
+      default: function _default() {
+        return {
+          pos: 'top',
+          x: 0,
+          y: 0
+        };
+      }
+    },
+    hasAnimation: {
+      type: Boolean,
+      default: true
+    },
+    overlayOpacity: {
+      type: Number,
+      default: 0.0
+    }
+  },
+  data: function data() {
+    return {
+      show: false,
+      showIn: false
+    };
+  },
+  computed: {
+    popoverStyle: function popoverStyle() {
+      var _position = this.position,
+          _position$x = _position.x,
+          x = _position$x === undefined ? 0 : _position$x,
+          _position$y = _position.y,
+          y = _position$y === undefined ? 0 : _position$y,
+          _position$pos = _position.pos,
+          pos = _position$pos === undefined ? 'top' : _position$pos;
+
+      var style = {};
+      x < 0 ? style.right = -x + 'px' : style.left = x + 'px';
+      y < 0 ? style.bottom = -y + 'px' : style.top = y + 'px';
+      switch (pos) {
+        case 'top':
+          style.transform = 'translateY(' + (this.showIn ? 0 : -20) + 'px)';
+          break;
+        case 'bottom':
+          style.transform = 'translateY(' + (this.showIn ? 0 : 20) + 'px)';
+          break;
+        case 'left':
+          style.transform = 'translateX(' + (this.showIn ? 0 : -20) + 'px)';
+          break;
+        case 'right':
+          style.transform = 'translateX(' + (this.showIn ? 0 : 20) + 'px)';
+          break;
+      }
+      style.opacity = !this.showIn ? 0 : 1;
+      return style;
+    }
+  },
+  methods: {
+    handleTouchEnd: function handleTouchEnd(e) {
+      // 原生上有点击穿透问题
+      e.preventDefault && e.preventDefault();
+    },
+    appearPopover: function appearPopover(bool) {
+      var _this = this;
+
+      var hasAnimation = this.hasAnimation;
+      var _position$pos2 = this.position.pos,
+          pos = _position$pos2 === undefined ? 'top' : _position$pos2;
+
+      var popoverEl = this.$refs['fm-popover'];
+      if (!popoverEl) {
+        return;
+      }
+      var hideTransform = void 0;
+      switch (pos) {
+        case 'top':
+          hideTransform = 'translateY(-20px)';
+          break;
+        case 'bottom':
+          hideTransform = 'translateY(20px)';
+          break;
+        case 'left':
+          hideTransform = 'translateX(-20px)';
+          break;
+        case 'right':
+          hideTransform = 'translateX(20px)';
+          break;
+      }
+      var styles = bool ? {
+        transform: 'translateX(0px) translateY(0px)',
+        opacity: 1
+      } : {
+        transform: hideTransform,
+        opacity: 0
+      };
+      animation.transition(popoverEl, {
+        styles: styles,
+        duration: hasAnimation ? 150 : 0.0001,
+        timingFunction: 'ease-out'
+      }, function (e) {
+        _this.showIn = bool;
+      });
+    },
+    onClicked: function onClicked(index) {
+      this.visible(false);
+      this.$emit('fmPopoverBtnClicked', { index: index });
+    },
+    visible: function visible(bool) {
+      var _this2 = this;
+
+      this.show = bool;
+      setTimeout(function () {
+        _this2.appearPopover(bool);
+      }, 40);
+    }
+  }
+};
+
+/***/ }),
+/* 271 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "popover-wrap",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [(_vm.show || _vm.showIn) ? _c('fm-overlay', {
+    ref: "fm-overlay",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "hasAnimation": true,
+      "canAutoClose": true,
+      "opacity": _vm.overlayOpacity
+    },
+    on: {
+      "fmOverlayBodyClicking": function($event) {
+        _vm.visible(false)
+      }
+    }
+  }) : _vm._e(), _vm._v(" "), (_vm.show || _vm.showIn) ? _c('div', {
+    ref: "fm-popover",
+    staticClass: "popover",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(_vm.popoverStyle)),
+    on: {
+      "touchend": _vm.handleTouchEnd
+    }
+  }, [_c('div', {
+    staticClass: "content",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      height: _vm.buttons.length * 168 - 2 + 'px'
+    }))
+  }, _vm._l((_vm.buttons), function(item, index) {
+    return _c('div', {
+      key: index,
+      staticClass: "item",
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(undefined)),
+      on: {
+        "click": function($event) {
+          _vm.onClicked(index)
+        }
+      }
+    }, [_c('div', {
+      staticClass: "item-content",
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(undefined))
+    }, [(item.icon) ? _c('fm-icon', {
+      staticClass: "item-icon",
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(undefined)),
+      attrs: {
+        "name": item.icon,
+        "icon-style": 67
+      }
+    }) : _vm._e(), _vm._v(" "), _c('text', {
+      staticClass: "item-text",
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(undefined))
+    }, [_vm._v(_vm._s(item.text))])], 1)])
+  }))]) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-69ed5ad4", module.exports)
+  }
+}
+
+/***/ }),
+/* 272 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.FmPopover = exports.FmSlider = exports.FmTextbar = exports.FmFooter = exports.FmBtnbar = exports.FmTabbarItem = exports.FmTabbar = exports.FmPanItem = exports.FmNativeTab = exports.FmTabPage = exports.FmSimpleList = exports.FmRcyCheck = exports.FmMultiCheckCell = exports.FmMultiCheckGroup = exports.FmTitlebar = exports.FmSearchbar = exports.FmActionView = exports.FmCheckListGroup = exports.FmCheckbox = exports.showSnackBar = exports.FmSnackBar = exports.FmRater = exports.FmItem = exports.FmActionSheet = exports.FmPopup = exports.alert = exports.confirm = exports.FmSimpleBtn = exports.FmDialog = exports.FmOverlay = exports.FmImage = exports.FmFoldableText = exports.FmSpecialRichText = exports.FmRichText = exports.FmTips = exports.FmInput = exports.FmButton = exports.FmSliderBar = exports.FmIcon = exports.FmText = exports.FmTagWall = exports.FmTag = exports.FmSwitch = exports.Utils = undefined;
+
+var _utils = __webpack_require__(56);
 
 var _utils2 = _interopRequireDefault(_utils);
 
-var _fmSwitch = __webpack_require__(120);
+var _fmSwitch = __webpack_require__(121);
 
 var _fmSwitch2 = _interopRequireDefault(_fmSwitch);
 
-var _fmTag = __webpack_require__(50);
+var _fmTag = __webpack_require__(45);
 
 var _fmTag2 = _interopRequireDefault(_fmTag);
 
-var _fmTagWall = __webpack_require__(126);
+var _fmTagWall = __webpack_require__(127);
 
 var _fmTagWall2 = _interopRequireDefault(_fmTagWall);
 
@@ -20114,151 +20501,155 @@ var _fmText = __webpack_require__(3);
 
 var _fmText2 = _interopRequireDefault(_fmText);
 
-var _fmIcon = __webpack_require__(4);
+var _fmIcon = __webpack_require__(6);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
-var _fmSliderBar = __webpack_require__(135);
+var _fmSliderBar = __webpack_require__(136);
 
 var _fmSliderBar2 = _interopRequireDefault(_fmSliderBar);
 
-var _fmButton = __webpack_require__(35);
+var _fmButton = __webpack_require__(36);
 
 var _fmButton2 = _interopRequireDefault(_fmButton);
 
-var _fmInput = __webpack_require__(69);
+var _fmInput = __webpack_require__(67);
 
 var _fmInput2 = _interopRequireDefault(_fmInput);
 
-var _fmTips = __webpack_require__(141);
+var _fmTips = __webpack_require__(142);
 
 var _fmTips2 = _interopRequireDefault(_fmTips);
 
-var _fmRichText = __webpack_require__(147);
+var _fmRichText = __webpack_require__(148);
 
 var _fmRichText2 = _interopRequireDefault(_fmRichText);
 
-var _fmSpecialRichText = __webpack_require__(156);
+var _fmSpecialRichText = __webpack_require__(157);
 
 var _fmSpecialRichText2 = _interopRequireDefault(_fmSpecialRichText);
 
-var _fmFoldableText = __webpack_require__(162);
+var _fmFoldableText = __webpack_require__(163);
 
 var _fmFoldableText2 = _interopRequireDefault(_fmFoldableText);
 
-var _fmImage = __webpack_require__(6);
+var _fmImage = __webpack_require__(5);
 
 var _fmImage2 = _interopRequireDefault(_fmImage);
 
-var _fmOverlay = __webpack_require__(51);
+var _fmOverlay = __webpack_require__(44);
 
 var _fmOverlay2 = _interopRequireDefault(_fmOverlay);
 
-var _fmDialog = __webpack_require__(86);
+var _fmDialog = __webpack_require__(74);
 
 var _fmDialog2 = _interopRequireDefault(_fmDialog);
 
-var _fmSimpleBtn = __webpack_require__(81);
+var _fmSimpleBtn = __webpack_require__(64);
 
 var _fmSimpleBtn2 = _interopRequireDefault(_fmSimpleBtn);
 
-var _dialog = __webpack_require__(173);
+var _dialog = __webpack_require__(174);
 
-var _fmPopup = __webpack_require__(83);
+var _fmPopup = __webpack_require__(65);
 
 var _fmPopup2 = _interopRequireDefault(_fmPopup);
 
-var _fmActionSheet = __webpack_require__(174);
+var _fmActionSheet = __webpack_require__(175);
 
 var _fmActionSheet2 = _interopRequireDefault(_fmActionSheet);
 
-var _fmItem = __webpack_require__(180);
+var _fmItem = __webpack_require__(85);
 
 var _fmItem2 = _interopRequireDefault(_fmItem);
 
-var _fmRater = __webpack_require__(187);
+var _fmRater = __webpack_require__(181);
 
 var _fmRater2 = _interopRequireDefault(_fmRater);
 
-var _fmSnackBar = __webpack_require__(97);
+var _fmSnackBar = __webpack_require__(92);
 
 var _fmSnackBar2 = _interopRequireDefault(_fmSnackBar);
 
-var _snackbar = __webpack_require__(198);
+var _snackbar = __webpack_require__(192);
 
 var _snackbar2 = _interopRequireDefault(_snackbar);
 
-var _fmCheckbox = __webpack_require__(98);
+var _fmCheckbox = __webpack_require__(93);
 
 var _fmCheckbox2 = _interopRequireDefault(_fmCheckbox);
 
-var _fmCheckListGroup = __webpack_require__(104);
+var _fmCheckListGroup = __webpack_require__(99);
 
 var _fmCheckListGroup2 = _interopRequireDefault(_fmCheckListGroup);
 
-var _fmActionView = __webpack_require__(199);
+var _fmActionView = __webpack_require__(193);
 
 var _fmActionView2 = _interopRequireDefault(_fmActionView);
 
-var _fmSearchbar = __webpack_require__(203);
+var _fmSearchbar = __webpack_require__(197);
 
 var _fmSearchbar2 = _interopRequireDefault(_fmSearchbar);
 
-var _fmTitlebar = __webpack_require__(209);
+var _fmTitlebar = __webpack_require__(103);
 
 var _fmTitlebar2 = _interopRequireDefault(_fmTitlebar);
 
-var _fmMultiCheckGroup = __webpack_require__(215);
+var _fmMultiCheckGroup = __webpack_require__(203);
 
 var _fmMultiCheckGroup2 = _interopRequireDefault(_fmMultiCheckGroup);
 
-var _fmMultiCheckCell = __webpack_require__(108);
+var _fmMultiCheckCell = __webpack_require__(109);
 
 var _fmMultiCheckCell2 = _interopRequireDefault(_fmMultiCheckCell);
 
-var _fmRcyCheck = __webpack_require__(229);
+var _fmRcyCheck = __webpack_require__(217);
 
 var _fmRcyCheck2 = _interopRequireDefault(_fmRcyCheck);
 
-var _fmSimpleList = __webpack_require__(235);
+var _fmSimpleList = __webpack_require__(223);
 
 var _fmSimpleList2 = _interopRequireDefault(_fmSimpleList);
 
-var _fmTabPage = __webpack_require__(246);
+var _fmTabPage = __webpack_require__(234);
 
 var _fmTabPage2 = _interopRequireDefault(_fmTabPage);
 
-var _fmNativeTab = __webpack_require__(252);
+var _fmNativeTab = __webpack_require__(240);
 
 var _fmNativeTab2 = _interopRequireDefault(_fmNativeTab);
 
-var _fmPanItem = __webpack_require__(258);
+var _fmPanItem = __webpack_require__(246);
 
 var _fmPanItem2 = _interopRequireDefault(_fmPanItem);
 
-var _fmTabbar = __webpack_require__(109);
+var _fmTabbar = __webpack_require__(110);
 
 var _fmTabbar2 = _interopRequireDefault(_fmTabbar);
 
-var _fmTabbarItem = __webpack_require__(80);
+var _fmTabbarItem = __webpack_require__(63);
 
 var _fmTabbarItem2 = _interopRequireDefault(_fmTabbarItem);
 
-var _fmBtnbar = __webpack_require__(262);
+var _fmBtnbar = __webpack_require__(250);
 
 var _fmBtnbar2 = _interopRequireDefault(_fmBtnbar);
 
-var _fmFooter = __webpack_require__(48);
+var _fmFooter = __webpack_require__(43);
 
 var _fmFooter2 = _interopRequireDefault(_fmFooter);
 
-var _fmTextbar = __webpack_require__(266);
+var _fmTextbar = __webpack_require__(254);
 
 var _fmTextbar2 = _interopRequireDefault(_fmTextbar);
 
-var _fmSlider = __webpack_require__(272);
+var _fmSlider = __webpack_require__(260);
 
 var _fmSlider2 = _interopRequireDefault(_fmSlider);
+
+var _fmPopover = __webpack_require__(266);
+
+var _fmPopover2 = _interopRequireDefault(_fmPopover);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20305,6 +20696,7 @@ exports.FmBtnbar = _fmBtnbar2.default;
 exports.FmFooter = _fmFooter2.default;
 exports.FmTextbar = _fmTextbar2.default;
 exports.FmSlider = _fmSlider2.default;
+exports.FmPopover = _fmPopover2.default;
 
 /***/ })
 /******/ ]);
