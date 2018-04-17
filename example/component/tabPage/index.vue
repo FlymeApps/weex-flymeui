@@ -25,7 +25,7 @@
 </style>
 
 <script>
-import { FmTabPage, FmPanItem, Utils } from 'weex-flymeui';
+import { FmTabPage, FmPanItem, Utils, BindEnv } from '../../../index';
 
 export default {
   components: { FmTabPage, FmPanItem },
@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     fmPanItemPan (e) {
-      if (Utils.env.supportsEBForAndroid()) {
+      if (BindEnv.supportsEBForAndroid()) {
         this.$refs['fm-tab-page'].bindExp(e.element);
       }
     }
