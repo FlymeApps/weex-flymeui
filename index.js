@@ -1,4 +1,5 @@
 import Utils from './packages/utils';
+import BindEnv from './packages/utils/bind-env.js';
 import FmSwitch from './packages/fm-switch';
 import FmTag from './packages/fm-tag';
 import FmTagWall from './packages/fm-tag-wall';
@@ -44,6 +45,7 @@ import FmPopover from './packages/fm-popover';
 
 export {
   Utils,
+  BindEnv,
   FmSwitch,
   FmTag,
   FmTagWall,
