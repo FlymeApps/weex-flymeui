@@ -75,7 +75,7 @@
 <script>
 import Locale from 'weex-flymeui/lib/mixins/locale';
 import { t } from 'weex-flymeui/lib/locale';
-import STYLE from 'weex-flymeui/lib/theme/default/';
+import STYLE from 'weex-flymeui/lib/theme/default/index.js';
 import FmIcon from '../fm-icon';
 
 export default {

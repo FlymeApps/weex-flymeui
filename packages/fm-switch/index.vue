@@ -27,7 +27,7 @@
 </style>
 
 <script>
-import STYLE from 'weex-flymeui/lib/theme/default/';
+import STYLE from 'weex-flymeui/lib/theme/default/index.js';
 const animation = weex.requireModule('animation');
 
 export default {
