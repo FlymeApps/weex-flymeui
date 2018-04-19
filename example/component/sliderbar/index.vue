@@ -2,9 +2,33 @@
   <div class="mzui-demo">
     <scroller class="scroller">
       <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-slider-bar/"></title>
-      <category title="基本样式"></category>
+      <category title="基本态"></category>
       <div class="contaniner">
-        <fm-slider-bar></fm-slider-bar>
+        <text class="tip">当前值: {{ value1 }}</text>
+        <fm-slider-bar @updateValue="updateValue($event, 1)"></fm-slider-bar>
+      </div>
+      <category title="禁用态"></category>
+      <div class="contaniner">
+        <text class="tip">当前值: {{ value2 }}</text>
+        <fm-slider-bar
+          @updateValue="updateValue($event, 2)"
+          :defaultValue="value2"
+          disabled></fm-slider-bar>
+      </div>
+      <category title="带默认值"></category>
+      <div class="contaniner">
+        <text class="tip">当前值: {{ value3 }}</text>
+        <fm-slider-bar
+          :defaultValue="value3"
+          @updateValue="updateValue($event, 3)"></fm-slider-bar>
+      </div>
+      <category title="带指示器"></category>
+      <div class="contaniner">
+        <text class="tip">当前值: {{ value4 }}</text>
+        <fm-slider-bar
+          @updateValue="updateValue($event, 4)"
+          :indicator="true"
+          :defaultValue="value4"></fm-slider-bar>
       </div>
     </scroller>
   </div>
@@ -37,6 +61,11 @@
     left: 0;
     bottom: 0;
   }
+  .tip {
+    color: #666;
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
 </style>
 
 <script>
@@ -44,18 +73,19 @@ import { FmSliderBar } from 'weex-flymeui';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
 
-const modal = weex.requireModule('modal');
-
 export default {
   components: { Title, Category, FmSliderBar },
   data () {
     return {
-      levelTexts: ['弱', '偏弱', '中等', '偏强', '强']
+      value1: 0,
+      value2: 20,
+      value3: 40,
+      value4: 60
     };
   },
   methods: {
-    sel (data) {
-      modal.toast({ message: data });
+    updateValue (value, idx) {
+      this[`value${idx}`] = value;
     }
   }
 };
