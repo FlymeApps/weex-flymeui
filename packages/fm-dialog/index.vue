@@ -216,7 +216,7 @@ export default {
     dialogStyle () {
       return {
         opacity: this.dialogOpacity,
-        top: !this.isCreator ? this.top : 0
+        top: (!this.isCreator ? this.top : 0) + 'px'
       };
     },
     btnStyle () {

@@ -151,8 +151,8 @@ export default {
     wrapStyle () {
       const { paddingTop, paddingBottom, imgPosition, scene } = this;
       return {
-        paddingTop: scene.paddingTop || paddingTop,
-        paddingBottom: scene.paddingBottom || paddingBottom,
+        paddingTop: `${scene.paddingTop || paddingTop}px`,
+        paddingBottom: `${scene.paddingBottom || paddingBottom}px`,
         alignItems: (scene.imgPosition || imgPosition) === 'top' ? 'flex-start' : (scene.imgPosition || imgPosition) === 'bottom' ? 'flex-end' : 'center'
       };
     }

@@ -6,8 +6,8 @@
 
 <style scoped>
 	.text {
-		font-size: 42;
-		line-height: 63;
+		font-size: 42px;
+		line-height: 63px;
 		color: #999999;
 		font-family: "Source Han Sans CN", Roboto, sans-serif;
 	}
@@ -22,21 +22,21 @@
 		font-weight: 400;
 	}
 	.small {
-		font-size: 36;
+		font-size: 36px;
 	}
 	.large {
-		font-size: 48;
+		font-size: 48px;
 		font-weight: 500;
-		line-height: 72;
+		line-height: 72px;
 		color: #000000;
 	}
 	.huge {
-		font-size: 54;
-		line-height: 81;
+		font-size: 54px;
+		line-height: 81px;
 		color: #000000;
 	}
 	.margin-text {
-		margin-right: 9;
+		margin-right: 9px;
 	}
 </style>
 

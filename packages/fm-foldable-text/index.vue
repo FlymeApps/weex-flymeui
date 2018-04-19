@@ -148,13 +148,13 @@ export default {
     },
     planeStyle () {
       return {
-        width: this.width
+        width: this.width + 'px'
       };
     },
     moreStyle () {
       return {
-        fontSize: this.large ? 48 : this.huge ? 54 : 36,
-        lineHeight: this.large ? 72 : this.huge ? 78 : 42,
+        fontSize: `${this.large ? 48 : this.huge ? 54 : 36}px`,
+        lineHeight: `${this.large ? 72 : this.huge ? 78 : 42}px`,
         color: '#198ded',
         fontWeight: '600',
         ...this.tipStyle
