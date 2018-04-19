@@ -2,11 +2,11 @@
 
 > Flyme 底栏容器，将会定位在父元素的底部
 
-<img src="http://image.res.meizu.com/image/flyme-icon/fbedb13d73514bef8e0af45b2c179ccdz" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+<img src="http://image.res.meizu.com/image/flyme-icon/fbedb13d73514bef8e0af45b2c179ccdz" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3; border-radius: 4px;" />
 <br></br>
-<img src="http://image.res.meizu.com/image/flyme-icon/4bbc52b26c7841c98baf90e5fc1ad216z" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+<img src="http://image.res.meizu.com/image/flyme-icon/4bbc52b26c7841c98baf90e5fc1ad216z" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3; border-radius: 4px;" />
 <br></br>
-<img src="http://image.res.meizu.com/image/flyme-icon/69f06632854941c78316306edf4ef7b3z" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+<img src="http://image.res.meizu.com/image/flyme-icon/69f06632854941c78316306edf4ef7b3z" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3; border-radius: 4px;" />
 
 ## 使用方法
 

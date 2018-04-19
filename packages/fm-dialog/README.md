@@ -131,10 +131,10 @@ export default {
 
 *合理使用插槽可以组合多种弹框：*
 
-<img src="http://image.res.meizu.com/image/flyme-icon/a1110146798f4828a395348f2b43d29bz" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+<img src="http://image.res.meizu.com/image/flyme-icon/a1110146798f4828a395348f2b43d29bz" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3; border-radius: 4px;" />
 
 <br/>
-<img src="http://image.res.meizu.com/image/flyme-icon/c587190e399e4b53a2288e96212f5caaz" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+<img src="http://image.res.meizu.com/image/flyme-icon/c587190e399e4b53a2288e96212f5caaz" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3; border-radius: 4px;" />
 <br/>
 
 *例子:* 

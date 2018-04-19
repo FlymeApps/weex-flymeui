@@ -12,7 +12,7 @@
 * [ ] 自定义标签导航
 
 <br/>
-<img src="http://image.res.meizu.com/image/flyme-icon/1190194b2ef04456947a21182e99a00az" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+<img src="http://image.res.meizu.com/image/flyme-icon/1190194b2ef04456947a21182e99a00az" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3; border-radius: 4px;" />
 
 ## 使用方法
 

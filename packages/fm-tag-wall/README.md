@@ -2,7 +2,7 @@
 
 > Flyme 可自定义样式标签墙组件，可用于搜索热词
 
-<img src="http://image.res.meizu.com/image/flyme-icon/df6f43009bf94578b312a3a4f2526cecz" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+<img src="http://image.res.meizu.com/image/flyme-icon/df6f43009bf94578b312a3a4f2526cecz" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3; border-radius: 4px;" />
 
 ## 使用方法
 ```vue

@@ -2,7 +2,7 @@
 
 > Flyme 顶部导航栏组件
 
-<img src="http://image.res.meizu.com/image/flyme-icon/71dab1114fb04531b0cfe34494f77252z" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+<img src="http://image.res.meizu.com/image/flyme-icon/71dab1114fb04531b0cfe34494f77252z" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3; border-radius: 4px;" />
 
 ## 使用方法
 ```vue

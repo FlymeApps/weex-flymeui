@@ -2,7 +2,7 @@
 
 > Flyme 常用按钮
 
-<img src="http://baas.dfs.flyme.cn/group4/M03/8E/66/CgOUYFqowNiABMNzAAFlre5uGR8199.png" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+<img src="http://baas.dfs.flyme.cn/group4/M03/8E/66/CgOUYFqowNiABMNzAAFlre5uGR8199.png" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3; border-radius: 4px;" />
 
 ## 使用方法
 ```vue

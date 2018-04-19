@@ -4,15 +4,15 @@
 
 !> 底部栏将会定位在父元素的底部
 
-<img src="http://baas.dfs.flyme.cn/group5/M07/86/8B/CgOUcVqoyLGAXu4tAAAuY-FQHbg401.png" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+<img src="http://baas.dfs.flyme.cn/group5/M07/86/8B/CgOUcVqoyLGAXu4tAAAuY-FQHbg401.png" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3; border-radius: 4px;" />
 
-<img src="http://baas.dfs.flyme.cn/group6/M03/78/35/CgOUoVqoyLmAEddxAAA1_SjUSyQ129.png" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+<img src="http://baas.dfs.flyme.cn/group6/M03/78/35/CgOUoVqoyLmAEddxAAA1_SjUSyQ129.png" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3; border-radius: 4px;" />
 
-<img src="http://baas.dfs.flyme.cn/group1/M0A/30/D2/CgOUeFqoykiAEib1AABFd-qBU7k523.png" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+<img src="http://baas.dfs.flyme.cn/group1/M0A/30/D2/CgOUeFqoykiAEib1AABFd-qBU7k523.png" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3; border-radius: 4px;" />
 
-<img src="http://baas.dfs.flyme.cn/group2/M06/F8/92/CgOUdFqoyOqAbAxsAABJuOwHL6o133.png" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+<img src="http://baas.dfs.flyme.cn/group2/M06/F8/92/CgOUdFqoyOqAbAxsAABJuOwHL6o133.png" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3; border-radius: 4px;" />
 
-<img src="http://baas.dfs.flyme.cn/group7/M02/B3/DC/CgOUolqoyPSAZtpwAABY6Ym_xsY280.png" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3;    border-radius: 4px;" />
+<img src="http://baas.dfs.flyme.cn/group7/M02/B3/DC/CgOUolqoyPSAZtpwAABY6Ym_xsY280.png" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3; border-radius: 4px;" />
 
 ## 使用方法
 
