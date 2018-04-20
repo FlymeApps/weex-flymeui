@@ -30,7 +30,7 @@
   }
 
   .button-wrap:active {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.04);
   }
 
   .button-title {
