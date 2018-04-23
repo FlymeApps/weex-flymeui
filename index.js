@@ -24,7 +24,7 @@ import FmRater from './packages/fm-rater';
 import FmSnackBar from './packages/fm-snack-bar';
 import showSnackBar from './packages/module/snackbar.js';
 import FmCheckbox from './packages/fm-checkbox';
-import FmCheckListGroup from './packages/fm-check-list-group';
+import FmCheckboxList from './packages/fm-checkbox-list';
 import FmActionView from './packages/fm-action-view';
 import FmSearchbar from './packages/fm-searchbar';
 import FmTitlebar from './packages/fm-titlebar';
@@ -71,7 +71,7 @@ export {
   FmSnackBar,
   showSnackBar,
   FmCheckbox,
-  FmCheckListGroup,
+  FmCheckboxList,
   FmActionView,
   FmSearchbar,
   FmTitlebar,
