@@ -15,6 +15,7 @@
 import FmCheckbox from '../fm-checkbox/index.vue';
 
 export default {
+  name: 'FmCheckboxList',
   components: { FmCheckbox },
   props: {
     list: {

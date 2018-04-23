@@ -25,6 +25,11 @@
           @fmCheckBoxListChecked="onChecked1"></fm-checkbox-list>
         <text class="checked-text">选中项 {{(checkedList1.map(item => item.model.title)).toString()}}</text>
 
+      <category title="单选模式"></category>
+        <fm-checkbox-list
+          single
+          :list="list"></fm-checkbox-list>
+
       <category title="限制选中数量"></category>
         <fm-checkbox-list
           :list="list"
@@ -96,7 +101,8 @@ export default {
       model: {
         title: '蒸羊羔'
       },
-      value: 0
+      value: 0,
+      checked: true
     }, {
       model: {
         title: '蒸熊掌'
@@ -110,11 +116,6 @@ export default {
     }, {
       model: {
         title: '烧花鸭'
-      },
-      value: 3
-    }, {
-      model: {
-        title: '烧雏鸡'
       },
       value: 3
     }],
