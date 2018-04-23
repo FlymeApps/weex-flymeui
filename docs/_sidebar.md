@@ -19,6 +19,7 @@
   - [fm-tabbar 底部操作栏](packages/fm-tabbar/)
 
 - 数据输入
+  - [fm-checkbox 多选](packages/fm-checkbox/)
   - [fm-input 输入框](packages/fm-input/)
   - [fm-rater 星级评分](packages/fm-rater/)
   - [fm-slider-bar 滑块](packages/fm-slider-bar/)

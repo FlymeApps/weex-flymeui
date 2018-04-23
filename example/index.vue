@@ -19,15 +19,6 @@
                      @fmItemClicked="jump(component.path)"></fm-item>
           </template>
         </template>
-        <!-- <div v-for="(item, key) in category" :key="key" class="item-wrap" @click="jump(key)">
-          <div class="item">
-            <fm-image width="100" height="100" :scale="1" class="item-icon" :src="'http://weixin-res.flyme.cn/resources/weex-flymeui/assets/'+ key +'.png'"/>
-            <div>
-              <fm-text :value="item.name" title :style="{fontSize: 48, color: '#000', fontWeight: 400}" />
-              <fm-text :value="item.componentList.length + ' 个项目'" :style="{fontSize: 36, color: 'rgba(0, 0, 0, 0.4)', fontWeight: 400}"/>
-            </div>
-          </div>
-        </div> -->
       </div>
     </scroller>
   </div>
@@ -104,7 +95,13 @@ export default {
   methods: {
     jump (path) {
       if (env.platform === 'Web') {
-        window.location.href = window.location.href + path;
+        let url;
+        if (window.location.href.indexOf('index.html') !== -1) {
+          url = window.location.href.replace('index.html', `${path}/index.html`);
+        } else {
+          url = window.location.href + path;
+        }
+        window.location.href = url;
       } else {
         let target = url.replace('index.creator.js', `${path}/index.creator.js`);
         if (path.startsWith('http')) {

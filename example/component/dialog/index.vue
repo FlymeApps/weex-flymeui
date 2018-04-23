@@ -37,11 +37,11 @@
                    @fmDialogDisappeared="checkListOverlayClick"
                    :can-auto-close="true"
                    :overlayOpacity="0.1">
-          <fm-check-list-group slot="content" @fmCheckListGroupChecked="groupChecked">
-            <fm-checkbox>简体中文</fm-checkbox>
-            <fm-checkbox>繁体中文</fm-checkbox>
-            <fm-checkbox>英文</fm-checkbox>
-          </fm-check-list-group>
+          <fm-checkbox-list
+            slot="content"
+            :list="list"
+            @fmCheckBoxListChecked="groupChecked">
+          </fm-checkbox-list>
         </fm-dialog>
 
         <fm-dialog :show="inputShow"
@@ -99,7 +99,7 @@
 </style>
 
 <script>
-import { FmButton, FmDialog, FmCheckListGroup, FmCheckbox, FmInput } from 'weex-flymeui';
+import { FmButton, FmDialog, FmCheckboxList, FmCheckbox, FmInput } from 'weex-flymeui';
 import { confirm, alert } from '../../../packages/module/dialog';
 import Title from '../../_mods/title.vue';
 import Category from '../../_mods/category.vue';
@@ -107,7 +107,7 @@ import Category from '../../_mods/category.vue';
 const modal = weex.requireModule('modal');
 
 export default {
-  components: { Title, FmDialog, Category, FmButton, FmCheckListGroup, FmCheckbox, FmInput },
+  components: { Title, FmDialog, Category, FmButton, FmCheckboxList, FmCheckbox, FmInput },
   data: () => ({
     show: false,
     checkListShow: false,
@@ -116,7 +116,14 @@ export default {
     inputText: '123',
     title: '',
     content: '',
-    btns: []
+    btns: [],
+    list: [{
+      model: { title: '简体中文' }
+    }, {
+      model: { title: '繁体中文' }
+    }, {
+      model: { title: '英文' }
+    }]
   }),
   methods: {
     click1 () {
@@ -194,7 +201,7 @@ export default {
       if (btn.type === 'cancel') {
         modal.toast({ message: '点击了取消' });
       } else if (btn.type === 'confirm') {
-        modal.toast({ message: '选择了: ' + this.checkList.toString() });
+        modal.toast({ message: '选择了: ' + this.checkList.map(item => item.model.title).toString() });
       } else {
         modal.toast({ message: btn.text });
       }
@@ -203,8 +210,9 @@ export default {
     checkListOverlayClick () {
       this.checkListShow = false;
     },
-    groupChecked (arr) {
-      this.checkList = arr;
+    groupChecked (e) {
+      console.log(e);
+      this.checkList = e.checkedList;
     },
     inputClick (btn) {
       if (btn.type === 'cancel') {
