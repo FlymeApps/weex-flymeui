@@ -9,8 +9,6 @@
 <style scoped>
   .dialog-btn {
     flex: 1;
-		padding-left: 48px;
-		padding-right: 48px;
   }
 
 	.btnText {

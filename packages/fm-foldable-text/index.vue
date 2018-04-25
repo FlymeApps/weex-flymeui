@@ -79,12 +79,10 @@ export default {
       type: Boolean,
       default: true
     },
-    small: {
-      type: Boolean,
-      default: true
+    size: {
+      type: String,
+      default: 'small'
     },
-    large: Boolean,
-    huge: Boolean,
     textStyle: Object,
     tipStyle: Object,
     tipValue: {
@@ -153,8 +151,8 @@ export default {
     },
     moreStyle () {
       return {
-        fontSize: `${this.large ? 48 : this.huge ? 54 : 36}px`,
-        lineHeight: `${this.large ? 72 : this.huge ? 78 : 42}px`,
+        fontSize: `${this.size === 'large' ? 48 : this.size === 'huge' ? 54 : 36}px`,
+        lineHeight: `${this.size === 'large' ? 72 : this.size === 'huge' ? 78 : 42}px`,
         color: '#198ded',
         fontWeight: '600',
         ...this.tipStyle
@@ -162,9 +160,9 @@ export default {
     },
     textClz () {
       const clz = ['text', 'text_small'];
-      if (this.large) {
+      if (this.size === 'large') {
         clz.push('text_large');
-      } else if (this.huge) {
+      } else if (this.size === 'huge') {
         clz.push('text_huge');
       }
       return clz;

@@ -4,12 +4,12 @@
       <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-rater/"></title>
       <category title="不同大小"></category>
       <div class="container">
-        <fm-rater :starImgs="star_normal_urls" :starBgImg="star_bg_url"></fm-rater>
+        <fm-rater></fm-rater>
       </div>
       <div class="container">
-        <fm-rater :starImgs="star_normal_urls" :starBgImg="star_bg_url" size="small"></fm-rater>
+        <fm-rater size="small"></fm-rater>
       </div>
-      <category title="不同主题颜色( native 支持 base64 )"></category>
+      <category title="不同主题颜色"></category>
       <div class="container">
         <fm-rater theme="normal"></fm-rater>
       </div>
@@ -28,41 +28,22 @@
       <div class="container dark">
         <fm-rater theme="dark" size='small'></fm-rater>
       </div>
-      <category title="不同主题颜色( native 不支持 base64情况 )"></category>
       <div class="container">
-        <fm-rater theme="normal" :starImgs="star_normal_urls" :starBgImg="star_bg_url"></fm-rater>
-      </div>
-      <div class="container">
-        <fm-rater theme="normal" :starImgs="star_normal_urls" :starBgImg="star_bg_url" size='small'></fm-rater>
-      </div>
-      <div class="container">
-        <fm-rater theme="special" :starSpecialImg="star_special_url" :starBgImg="star_bg_url"></fm-rater>
-      </div>
-      <div class="container">
-        <fm-rater theme="special" :starSpecialImg="star_special_url" :starBgImg="star_bg_url" size='small'></fm-rater>
-      </div>
-      <div class="container dark">
-        <fm-rater theme="dark" :starDarkImg="star_dark_url" :starDarkBgImg="star_dark_bg"></fm-rater>
-      </div>
-      <div class="container dark">
-        <fm-rater theme="dark" :starDarkImg="star_dark_url" :starDarkBgImg="star_dark_bg" size='small'></fm-rater>
-      </div>
-      <div class="container">
-        <fm-rater :starImgs="star_normal_urls" :starBgImg="star_bg_url" size='small'></fm-rater>
+        <fm-rater size='small'></fm-rater>
       </div>
       <category title="不同的初始化分数"></category>
       <div class="container">
-        <fm-rater :score="2" :canChange="false" :starImgs="star_normal_urls" :starBgImg="star_bg_url"></fm-rater>
+        <fm-rater :score="2" :canChange="false"></fm-rater>
       </div>
       <div class="container">
-        <fm-rater :score="4" :canChange="false" :starImgs="star_normal_urls" :starBgImg="star_bg_url"></fm-rater>
+        <fm-rater :score="4" :canChange="false"></fm-rater>
       </div>
       <div class="container">
-        <fm-rater :score="6" :canChange="false" :starImgs="star_normal_urls" :starBgImg="star_bg_url"></fm-rater>
+        <fm-rater :score="6" :canChange="false"></fm-rater>
       </div>
       <category title="分数更改后回调"></category>
       <div class="container">
-        <fm-rater :starImgs="star_normal_urls" :starBgImg="star_bg_url" @fmRaterScoreChanged="scoreChanged"></fm-rater>
+        <fm-rater @fmRaterScoreChanged="scoreChanged"></fm-rater>
       </div>
     </scroller>
   </div>
@@ -103,19 +84,6 @@ const modal = weex.requireModule('modal');
 
 export default {
   components: { Title, Category, FmRater },
-  data: () => ({
-    star_normal_urls: [
-      'http://design.flyme.cn/weexui/assets/star_normal.png',
-      'http://design.flyme.cn/weexui/assets/star_normal.png',
-      'http://design.flyme.cn/weexui/assets/star_normal.png',
-      'http://design.flyme.cn/weexui/assets/star_normal.png',
-      'http://design.flyme.cn/weexui/assets/star_normal.png'
-    ],
-    star_bg_url: 'http://design.flyme.cn/weexui/assets/star_bg.png',
-    star_special_url: 'http://design.flyme.cn/weexui/assets/star_special.png',
-    star_dark_url: 'http://design.flyme.cn/weexui/assets/star_dark.png',
-    star_dark_bg: 'http://design.flyme.cn/weexui/assets/star_dark_bg.png'
-  }),
   methods: {
     scoreChanged (e) {
       modal.toast({ message: e });

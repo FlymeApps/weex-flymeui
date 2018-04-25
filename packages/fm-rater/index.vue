@@ -1,5 +1,5 @@
 <!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->
-<!-- Created and Update by Yanjiie on 2018/04/12. -->
+<!-- Created and Update by Yanjiie on 2018/04/25. -->
 <template>
   <div class="rater-wrap" ref="rater" @touchstart="raterTouchStart" @touchmove="raterTouchmove" @touchend="raterTouchend">
     <div class="rater-star-bg">
@@ -62,7 +62,10 @@
 <script>
 import FmIcon from '../fm-icon';
 import FmImage from '../fm-image';
+import STARS from './type';
+
 const dom = weex.requireModule('dom');
+
 export default {
   name: 'FmRater',
   components: { FmIcon, FmImage },
@@ -91,31 +94,13 @@ export default {
       type: Boolean,
       default: true
     },
-    starImgs: {
-      type: Array,
-      default: [
-        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star1.png',
-        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star2.png',
-        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star3.png',
-        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star4.png',
-        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star5.png'
-      ]
+    starImg: {
+      type: [Array, String],
+      default: ''
     },
-    starSpecialImg: {
+    bgImg: {
       type: String,
-      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_special.png'
-    },
-    starDarkImg: {
-      type: String,
-      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_dark.png'
-    },
-    starBgImg: {
-      type: String,
-      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_bg.png'
-    },
-    starDarkBgImg: {
-      type: String,
-      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_dark_bg.png'
+      default: ''
     }
   },
   data: () => ({
@@ -143,29 +128,31 @@ export default {
       };
     },
     getImgs () {
-      const { theme } = this;
-      if (theme === 'normal') {
-        return this.starImgs;
+      const { theme, starImg } = this;
+      let imgItem;
+      if (starImg) {
+        if (Array.isArray(starImg)) { return starImg; }
+        imgItem = starImg;
+      } else if (theme === 'normal') {
+        return STARS.NORMAL;
       } else if (theme === 'special') {
-        const arr = [];
-        for (let i = 0; i < 5; i++) {
-          arr.push(this.starSpecialImg);
-        }
-        return arr;
+        imgItem = STARS.SPECIAL;
       } else if (theme === 'dark') {
-        const arr = [];
-        for (let i = 0; i < 5; i++) {
-          arr.push(this.starDarkImg);
-        }
-        return arr;
+        imgItem = STARS.DARK;
       }
+      const arr = [];
+      for (let i = 0; i < 5; i++) {
+        arr.push(imgItem);
+      }
+      return arr;
     },
     getBgImgs () {
-      const { theme } = this;
+      const { theme, bgImg } = this;
+      if (bgImg) { return bgImg; }
       if (theme === 'normal' || theme === 'special') {
-        return this.starBgImg;
+        return STARS.BG_NORMAL;
       } else if (theme === 'dark') {
-        return this.starDarkBgImg;
+        return STARS.BG_DARK;
       }
     }
   },

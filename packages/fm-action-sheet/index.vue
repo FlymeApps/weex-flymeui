@@ -46,7 +46,7 @@ export default {
     confirmText: {
       type: String,
       default () {
-        return t('el.common.delete');
+        return t('el.common.confirm');
       }
     },
     confirmColor: {

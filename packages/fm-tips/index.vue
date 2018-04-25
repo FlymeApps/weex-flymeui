@@ -6,7 +6,7 @@
       <slot></slot>
       <text class="content">{{message}}</text>
       <text class="split"></text>
-      <fm-icon class="close" @fmIconClicked="close" name="guanbi" />
+      <fm-icon class="close" @fmIconClicked="close" name="guanbi" :icon-style="54" />
     </div>
     <text class="arrow" :style="arrowStyle"></text>
   </div>
@@ -44,12 +44,10 @@
     height: 42px;
     margin-left: 27px;
     background-color: #ffffff;
-    opacity: .4;
+    opacity: 0.4;
   }
   .close {
     color: #ffffff;
-    font-size: 54px;
-    margin-top: 9px;
     margin-left: 30px;
     margin-right: 30px;
   }
@@ -73,7 +71,7 @@ export default {
     },
     wrapStyle () {
       return {
-        'justify-content': this.right ? 'flex-end' : 'flex-start'
+        'justify-content': this.position === 'right' ? 'flex-end' : 'flex-start'
       };
     },
     arrowStyle () {
@@ -96,7 +94,10 @@ export default {
       type: String,
       default: '#198ded'
     },
-    right: Boolean
+    position: {
+      type: String,
+      default: 'left'
+    }
   },
 
   methods: {

@@ -1,7 +1,3 @@
-- 特色功能
-  - [主题切换与自定义](guide/theme)
-  - [国际化](guide/i18n)
-
 - 布局组件
   - [fm-button 按钮](packages/fm-button/)
   - [fm-item 通用列表项](packages/fm-item/)
@@ -41,6 +37,10 @@
   - [fm-dialog 弹框](packages/fm-dialog/)
   - [fm-popover 气泡弹框](packages/fm-popover/)
   - [fm-action-sheet 底部删除弹框](packages/fm-action-sheet/)
+  
+- 功能
+  - [主题化](guide/theme)
+  - [国际化](guide/i18n)
 
 - 开发方案
   - [在 Weex 中使用国际化](http://yanjiie.me/2018/%E5%9C%A8-Weex-%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%9B%BD%E9%99%85%E5%8C%96/)

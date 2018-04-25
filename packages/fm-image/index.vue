@@ -47,6 +47,7 @@ export default {
   },
   methods: {
     onLoad (e) {
+      this.$emit('fmImageLoaded', e);
       e.success && (this.loaded = true);
       if (e.success && e.size && e.size.naturalWidth > 0 && this.scale) {
         this.width = e.size.naturalWidth * this.scale;

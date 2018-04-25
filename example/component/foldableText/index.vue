@@ -14,10 +14,10 @@
         <fm-foldable-text :text="text" width="1020"></fm-foldable-text>
       </div>
       <div class="container">
-        <fm-foldable-text :text="text" large width="1020"></fm-foldable-text>
+        <fm-foldable-text :text="text" size="large" width="1020"></fm-foldable-text>
       </div>
       <div class="container">
-        <fm-foldable-text :text="text" huge width="1020"></fm-foldable-text>
+        <fm-foldable-text :text="text" size="huge" width="1020"></fm-foldable-text>
       </div>
       <category title="限制不同行数"></category>
       <div class="container">

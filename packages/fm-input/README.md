@@ -5,7 +5,7 @@
 !> 由于 `fm-input` 依赖 `weex input component`， 因为 Weex SDK 的版本差异，新版 SDK 中的 input 组件存在 bug，会导致 input 内容无法清空
 
 ## 使用方法
-```html
+```vue
 <template>
   <div class="mzui-demo">
     <category title="默认的输入框"></category>

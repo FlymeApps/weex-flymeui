@@ -71,7 +71,7 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    padding: 36px 0;
+    padding: 36px 72px;
   }
 </style>
 

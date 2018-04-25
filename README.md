@@ -6,14 +6,10 @@
 [![npm](https://img.shields.io/npm/v/weex-flymeui.svg?style=flat-square)](https://www.npmjs.com/package/weex-flymeui?_blank)
 [![license](https://img.shields.io/github/license/Yanjiie/weex-flymeui.svg?style=flat-square)](https://github.com/FlymeApps/weex-flymeui/blob/master/LICENSE)
 
+![Flyme Design](http://design.flyme.cn/images/logo.png)
+
 > 遵循 [Flyme](https://www.flyme.cn/) 系统设计风格、基于 [Weex](https://github.com/apache/incubator-weex) 的跨平台通用组件库。
 
-**技术支持**
-  - 张兴业
-  - 马鹏
-  - [@Yanjiie](https://github.com/Yanjiie)
-
-![Flyme Design](http://design.flyme.cn/images/logo.png)
 ## 安装
 ```shell
 npm i weex-flymeui -S
@@ -41,11 +37,9 @@ npm i weex-flymeui -S
 </script>
 ```
 
-## 使用前的问题
+## 使用前
 
-如果你不想打包所有的组件，可以选择分开使用。但需要使用 [babel-plugin-component](https://www.npmjs.com/package/babel-plugin-component) 来只引入需要的组件打包，同时如果没有安装 `babel-preset-stage-0`，也需要一并安装。
-
-为了不打包所有的组件，可以逐个引入所需的组件。需要需要使用 [babel-plugin-component](https://www.npmjs.com/package/babel-plugin-component) 来只引入需要的组件打包。
+如果你不想打包所有的组件，需要使用 [babel-plugin-component](https://www.npmjs.com/package/babel-plugin-component) 来只引入需要的组件打包，同时如果没有安装 `babel-preset-stage-0`，也需要一并安装。
 
 ```shell
 npm i babel-preset-stage-0 babel-plugin-component  -D
@@ -54,6 +48,7 @@ npm i babel-preset-stage-0 babel-plugin-component  -D
 ```json
 // 增加一个plugins的配置到 .babelrc 中
 {
+    "presets": ["es2015", "stage-0"],
   "plugins": [
     [
       "component",
@@ -100,7 +95,11 @@ npm i babel-preset-stage-0 babel-plugin-component -D
 
 ## 需要注意的地方
 
-!> weex-FlymeUI 组件均以 1080px 屏幕宽度作为基准尺寸，请在入口文件或者父组件设置 viewport。
+?> 目前部分组件没有进行 iOS 的适配，欢迎 [提交 Issue 或 PR](https://github.com/FlymeApps/weex-flymeui/issues/new)
+
+!> Weex-FlymeUI 组件均以 1080px 屏幕宽度作为基准尺寸，请在入口文件或者父组件设置 viewport。
+
+*index.js*
 
 ```javascript
 const meta = weex.requireModule('meta')
@@ -109,3 +108,19 @@ meta.setViewport({
   width: 1080px
 })
 ```
+
+*index.html*
+
+```html
+<!-- 添加以下 meta -->
+<meta name="weex-viewport" content="1080"/>
+```
+
+## 贡献代码
+
+我们致力于 Flyme 设计在移动领域的推广，同时在寻找志同道合的朋友。如果你在使用中发现任何问题或有更好的想法，欢迎提交 pull request，并且在提交前记得阅读一下 [贡献指南](https://github.com/FlymeApps/weex-flymeui/blob/master/CONTRIBUTING.md)。
+
+## 协议
+
+* 遵循 [MIT 协议](http://opensource.org/licenses/MIT)
+* 请自由地享受和参与开源
