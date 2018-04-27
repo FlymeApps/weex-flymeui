@@ -1,6 +1,6 @@
 {
     "name": "weex-flymeui",
-    "version": "0.1.13",
+    "version": "0.1.14",
     "description": "A Flyme Style UI library based on Weex for Creator.",
     "main": "index.js",
     "lib": "vue",
@@ -60,6 +60,6 @@
         "weex-vue-render": "^1.0.20"
     },
     "dependencies": {
-        "weex-bindingx": "0.0.17"
+        "weex-bindingx": "^0.0.24"
     }
 }

@@ -42,6 +42,7 @@ import FmFooter from './packages/fm-footer';
 import FmTextbar from './packages/fm-textbar';
 import FmSlider from './packages/fm-slider';
 import FmPopover from './packages/fm-popover';
+import FmWaiting from './packages/fm-waiting';
 
 export {
   Utils,
@@ -88,5 +89,6 @@ export {
   FmFooter,
   FmTextbar,
   FmSlider,
-  FmPopover
+  FmPopover,
+  FmWaiting
 };
