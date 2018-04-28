@@ -4,10 +4,11 @@
 <template>
   <div>
     <div v-if="show || showIn"
+         :style="wrapperStyle"
          ref="fm-waiting"
          class="fm-waiting"
-         :style="{ backgroundColor: `rgba(0, 0, 0, ${backgroundOpacity})` }"
-         @click="warpperClicked">
+         @click="warpperClicked"
+         @touchend="handleTouchEnd">
       <div class="waiting-wrapper"
           v-if="show || showIn">
           <div class="waiting-circle">
@@ -22,19 +23,12 @@
 </template>
 
 <script>
-import FmOverlay from '../fm-overlay';
 import Queue from './queue';
-
 const animation = weex.requireModule('animation');
 
 export default {
   name: 'FmWaiting',
-  components: { FmOverlay },
   props: {
-    show: {
-      type: Boolean,
-      default: false
-    },
     title: {
       type: String,
       default: ''
@@ -49,19 +43,33 @@ export default {
     }
   },
   data: () => ({
-    showIn: false
+    show: false,
+    showIn: false,
+    loadingStart: 0,
+    animating: false
   }),
-  watch: {
-    show (bool) {
-      setTimeout(() => {
-        this.appear(bool);
-        bool ? this.start() : this.stop();
-      }, 20);
+  computed: {
+    wrapperStyle () {
+      const { showIn, backgroundOpacity } = this;
+      return {
+        backgroundColor: `rgba(0, 0, 0, ${backgroundOpacity})`,
+        opacity: !showIn ? 0 : 1
+      };
     }
   },
   methods: {
+    handleTouchEnd (e) {
+      // 原生上有点击穿透问题
+      e.preventDefault && e.preventDefault();
+    },
     appear (bool) {
+      if (this.animating) { return; }
       const elm = this.$refs['fm-waiting'];
+      if (!elm) {
+        this.showIn = bool;
+        return;
+      }
+      this.animating = true;
       animation.transition(elm, {
         styles: {
           opacity: bool ? 1 : 0
@@ -70,6 +78,12 @@ export default {
         timingFunction: 'cubic-bezier(0.33, 0, 0.66, 1)'
       }, () => {
         this.showIn = bool;
+        if (bool) {
+          this.$emit('fmWaitingAppeared', false);
+        } else {
+          this.$emit('fmWaitingDisappeared', false);
+        }
+        this.animating = false;
       });
     },
     start () {
@@ -84,15 +98,15 @@ export default {
       this.dot3Queue && this.dot3Queue.stop();
     },
     warpperClicked () {
+      if (this.animating) { return; }
       if (this.canAutoClose) {
-        this.$emit('fmWaitingDisappeared', false);
-        this.appear(false);
+        this.hide();
       }
     },
     prepare () {
-      !this.dot1 && (this.dot1 = this.$refs['dot-1']);
-      !this.dot2 && (this.dot2 = this.$refs['dot-2']);
-      !this.dot3 && (this.dot3 = this.$refs['dot-3']);
+      this.dot1 = this.$refs['dot-1'];
+      this.dot2 = this.$refs['dot-2'];
+      this.dot3 = this.$refs['dot-3'];
 
       const steps1 = [{
         styles: {
@@ -198,6 +212,31 @@ export default {
         timingFunction: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)'
       }];
       this.dot3Queue = Queue(this.dot3, steps3);
+    },
+    active () {
+      if (this.show) {
+        return;
+      }
+      this.show = true;
+      this.loadingStart = new Date().getTime();
+      setTimeout(() => {
+        this.appear(true);
+        this.start();
+      }, 20);
+    },
+    hide () {
+      if (!this.show) {
+        return;
+      }
+      this.show = false;
+      let timeout = 20;
+      if (new Date().getTime() - this.loadingStart <= 500) {
+        timeout = 500;
+      }
+      setTimeout(() => {
+        this.appear(false);
+        this.stop();
+      }, timeout);
     }
   }
 };
@@ -215,7 +254,6 @@ export default {
     justify-content: center;
     /*兼容H5异常*/
     z-index: 999;
-    opacity: 0;
   }
 
   .waiting-wrapper {
@@ -251,20 +289,15 @@ export default {
   .waiting--dot-1 {
     background-color: #4da84f;
     transform: scale(0.5);
-    perspective: 500;
-    /* animation: dot1 2.112s linear infinite; */
   }
 
   .waiting--dot-2 {
     background-color: #4d79d3;
-    perspective: 300;
     transform: scale(1);
-    /* animation: dot1 2.112s linear infinite; */
   }
 
   .waiting--dot-3 {
     background-color: #de6a3c;
     transform: scale(0.5);
-    /* animation: dot1 2.112s linear infinite; */
   }
 </style>

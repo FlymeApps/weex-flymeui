@@ -45,7 +45,7 @@ class Queue {
       this._animate(next, () => {
         setTimeout(() => {
           this._excuteAll(done);
-        });
+        }, 1);
       });
     } else {
       typeof done === 'function' && done();

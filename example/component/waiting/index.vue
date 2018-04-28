@@ -5,12 +5,12 @@
 
       <div class="btn-wrap">
         <fm-button size="huge" @buttonClicked="openCanClose" color="#dc2a2a">打开可关闭 waiting</fm-button>
-        <fm-button size="huge" @buttonClicked="openLessWaiting" color="#04c0cf">最少加载 0.5s</fm-button>
+        <fm-button size="huge" @buttonClicked="openCanClose" color="#04c0cf">最少加载 0.5s</fm-button>
         <fm-button size="huge" @buttonClicked="openCantClose">打开不可关闭 waiting(慎点)</fm-button>
       </div>
 
       <fm-waiting
-        :show="show"
+        ref="fm-waiting"
         title="FlymeUI"
         :can-auto-close="canAutoClose"
         @fmWaitingDisappeared="fmWaitingDisappeared"></fm-waiting>
@@ -43,20 +43,19 @@ import Title from '../../_mods/title.vue';
 export default {
   components: { Title, FmWaiting, FmButton },
   data: () => ({
-    show: false,
     canAutoClose: true
   }),
   methods: {
     openCanClose () {
       this.canAutoClose = true;
-      this.show = true;
+      this.$refs['fm-waiting'].active();
     },
     openCantClose () {
       this.canAutoClose = false;
-      this.show = true;
-    },
-    fmWaitingDisappeared () {
-      this.show = false;
+      this.$refs['fm-waiting'].active();
+      setTimeout(() => {
+        this.$refs['fm-waiting'].hide();
+      }, 6000);
     }
   }
 };
