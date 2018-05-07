@@ -28,6 +28,10 @@ export default {
       type: Number,
       default: -1
     },
+    autoActive: {
+      type: Boolean,
+      default: true
+    },
     items: {
       type: Array,
       default: () => ([])
@@ -48,17 +52,19 @@ export default {
     renderItems () {
       this.setActiveItem();
     },
-    activeIndex () {
-      this.setActiveItem();
+    activeIndex (newVal, oldVal) {
+      if (newVal === oldVal) { return; }
+      this.setActiveItem(newVal);
     }
   },
   methods: {
-    setActiveItem () {
+    setActiveItem (idx = this.activeIndex) {
       this.renderItems.forEach((item, index) => {
-        item.active = index === this.activeIndex;
+        item.active = index === idx;
       });
     },
     onChange (index) {
+      this.autoActive && this.setActiveItem(index);
       this.$emit('fmTabbarSelected', { index });
     }
   }

@@ -4,8 +4,14 @@
   <div class="fm-tabbar-item" @click="onClick">
     <div class="icon-wrap">
       <slot name="icon" :active="active">
-        <text class="item-icon"
-              :style="{ color: !active ? iconColor : (activeIconColor || activeColor)}">{{ getIcon }}</text>
+        <text
+          class="item-icon"
+          v-if="!normalIcon || !activeIcon"
+          :style="{ color: !active ? iconColor : (activeIconColor || activeColor)}">{{ getIcon }}</text>
+        <image
+          v-else
+          class="item-icon--img"
+          :src="active ? normalIcon : activeIcon" />
       </slot>
       <div class="dot" v-if="dot"></div>
       <div class="badge" v-if="!dot && badge">
@@ -41,6 +47,12 @@
     font-size: 72px;
     height: 72px;
     font-family: flymeicon;
+  }
+
+  .item-icon--img {
+    margin-bottom: 6px;
+    height: 72px;
+    width: 72px;
   }
 
   .item-title {
@@ -109,6 +121,14 @@ export default {
       default: 'rgba(0, 0, 0, 0.6)'
     },
     activeIconColor: {
+      type: String,
+      default: ''
+    },
+    normalIcon: {
+      type: String,
+      default: ''
+    },
+    activeIcon: {
       type: String,
       default: ''
     },

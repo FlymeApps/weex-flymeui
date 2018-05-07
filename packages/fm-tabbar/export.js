@@ -23,6 +23,14 @@ export default {
               options: ['zhuye', 'wancheng', 'guanbi', 'gengduo', 'bianji', 'shanchu', 'fenxiang', 'xingxing']
             }
           },
+          normalIcon: {
+            type: VALUE.STRING,
+            desc: '自定义非选图标'
+          },
+          activeIcon: {
+            type: VALUE.STRING,
+            desc: '自定义选中图标'
+          },
           dot: {
             type: VALUE.BOOLEAN,
             desc: '显示小红点'
@@ -39,6 +47,16 @@ export default {
       type: VALUE.COLOR,
       desc: '背景颜色',
       default: '#FFFFFF'
+    },
+    activeIndex: {
+      type: VALUE.NUMBER,
+      desc: '当前选中',
+      default: -1
+    },
+    autoActive: {
+      type: VALUE.BOOLEAN,
+      desc: '开启自动选中',
+      default: true
     }
   },
   events: {
