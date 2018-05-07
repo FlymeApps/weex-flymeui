@@ -178,8 +178,8 @@ export default {
         paddingStart: 18,
         paddingEnd: 18,
         minWidth: 120,
-        textunSelectColor: tabStyles.activeTitleColor || '#198DED',
-        textSelectColor: tabStyles.titleColor || '#99000000'
+        textunSelectColor: tabStyles.activeTitleColor || '#99000000',
+        textSelectColor: tabStyles.titleColor || '#198DED'
       };
       return this.tabTitles.map(item => {
         return Object.assign({}, def, item);
