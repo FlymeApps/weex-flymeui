@@ -15,7 +15,7 @@
              icon-style="72"></fm-icon>
     <slot v-else name="title">
       <text :class="['button-text-' + size]"
-            :style="{color: (type !== 'hollow') ? titleColor : computedColor}"
+            :style="Object.assign({}, { color: (type !== 'hollow') ? titleColor : computedColor }, (titleSize ? { fontSize: titleSize } : {}))"
             class="button-text" ><slot></slot></text>
     </slot>
   </div>
@@ -120,6 +120,10 @@ export default {
     titleColor: {
       type: String,
       default: '#FFFFFF'
+    },
+    titleSize: {
+      type: Number,
+      default: 0
     },
     icon: {
       type: String,

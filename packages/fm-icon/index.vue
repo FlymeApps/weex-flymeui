@@ -49,7 +49,6 @@ export default {
       } else {
         style = Object.assign({}, style, { ...iconStyle });
       }
-      console.log(style);
       return style;
     }
   },

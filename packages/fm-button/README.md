@@ -41,7 +41,8 @@ export default {
 | type | `String` |`N`| `-` | 按钮的类型，有`circle 圆形按钮`和`hollow 空心按钮`两种 |
 | icon | `String` |`N`| `wancheng` | 按钮 Icon 的名称，只有在使用圆形按钮时生效 |
 | color | `String` |`N`| `-` | 按钮的颜色 |
-| titleColor | `String` |`N`| `#FFFFFF` | 按钮的内容颜色，当使用`hollow 空心按钮`时此属性失效 |
+| title-color | `String` |`N`| `#FFFFFF` | 按钮的内容颜色，当使用`hollow 空心按钮`时此属性失效 |
+| title-size | `Number` |`N`| `-` | 自定义按钮文字大小 |
 | animated | `Boolean` |`N`| `false` | 按钮 active 状态下是否有按下动画 |
 | disabled | `Boolean` |`N`| `false` | 按钮是否禁用 |
 | width | `Number` |`N`| `-` | 自定义按钮宽度 |
