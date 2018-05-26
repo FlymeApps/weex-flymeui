@@ -1,6 +1,6 @@
 {
     "name": "weex-flymeui",
-    "version": "0.1.16",
+    "version": "0.1.17",
     "description": "A Flyme Style UI library based on Weex for Creator.",
     "main": "index.js",
     "lib": "vue",
@@ -11,7 +11,7 @@
         "watch": "webpack --progress --watch",
         "serve": "anywhere -d dist/example/ -p 8888",
         "build:theme": "gulp build --gulpfile lib/theme-paint/gulpfile.js",
-        "public": "npm run build; npm pgitublish",
+        "public": "npm run build; npm publish",
         "start": "npm run build; (npm run serve & npm run watch)",
         "release": "npm run build; node ./depoly/pack-prod.js"
     },

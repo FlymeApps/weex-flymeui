@@ -20,10 +20,10 @@
            @touchend="handleTouchEnd">
         <div class="dialog-content">
           <slot name="title">
-            <fm-text class="content-title" font-weight="medium" size="large">{{ title }}</fm-text>
+            <fm-text class="content-title" font-weight="medium" size="large" :style="titleStyles">{{ title }}</fm-text>
           </slot>
           <slot name="content">
-            <fm-text class="content-subtext">{{ content }}</fm-text>
+            <fm-text class="content-subtext" :style="contentStyles">{{ content }}</fm-text>
           </slot>
         </div>
         <div class="dialog-footer" :style="btnStyle">
@@ -105,6 +105,18 @@ export default {
     top: {
       type: Number,
       default: 400
+    },
+    bodyStyles: {
+      type: Object,
+      default: () => ({})
+    },
+    titleStyles: {
+      type: Object,
+      default: () => ({})
+    },
+    contentStyles: {
+      type: Object,
+      default: () => ({})
     },
     cancelText: {
       type: String,
@@ -214,10 +226,10 @@ export default {
       return btns;
     },
     dialogStyle () {
-      return {
+      return Object.assign({
         opacity: this.dialogOpacity,
         top: (!this.isCreator ? this.top : 0) + 'px'
-      };
+      }, this.bodyStyles);
     },
     btnStyle () {
       const { btnDirection, btns } = this;
