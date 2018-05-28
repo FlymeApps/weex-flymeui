@@ -72,12 +72,14 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 272);
+/******/ 	return __webpack_require__(__webpack_require__.s = 271);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
 
 // this module is a runtime utility for cleaner component module output and will
 // be included in the final webpack user bundle
@@ -85,8 +87,9 @@ return /******/ (function(modules) { // webpackBootstrap
 module.exports = function normalizeComponent (
   rawScriptExports,
   compiledTemplate,
+  injectStyles,
   scopeId,
-  cssModules
+  moduleIdentifier /* server only */
 ) {
   var esModule
   var scriptExports = rawScriptExports = rawScriptExports || {}
@@ -114,14 +117,51 @@ module.exports = function normalizeComponent (
     options._scopeId = scopeId
   }
 
-  // inject cssModules
-  if (cssModules) {
-    var computed = Object.create(options.computed || null)
-    Object.keys(cssModules).forEach(function (key) {
-      var module = cssModules[key]
-      computed[key] = function () { return module }
-    })
-    options.computed = computed
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
   }
 
   return {
@@ -234,7 +274,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(4)
+var listToStyles = __webpack_require__(6)
 
 /*
 type StyleObject = {
@@ -262,13 +302,17 @@ var singletonElement = null
 var singletonCounter = 0
 var isProduction = false
 var noop = function () {}
+var options = null
+var ssrIdKey = 'data-vue-ssr-id'
 
 // Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
 // tags it will allow on a page
 var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
 
-module.exports = function (parentId, list, _isProduction) {
+module.exports = function (parentId, list, _isProduction, _options) {
   isProduction = _isProduction
+
+  options = _options || {}
 
   var styles = listToStyles(parentId, list)
   addStylesToDom(styles)
@@ -333,7 +377,7 @@ function createStyleElement () {
 
 function addStyle (obj /* StyleObjectPart */) {
   var update, remove
-  var styleElement = document.querySelector('style[data-vue-ssr-id~="' + obj.id + '"]')
+  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
 
   if (styleElement) {
     if (isProduction) {
@@ -415,6 +459,9 @@ function applyToTag (styleElement, obj) {
   if (media) {
     styleElement.setAttribute('media', media)
   }
+  if (options.ssrId) {
+    styleElement.setAttribute(ssrIdKey, obj.id)
+  }
 
   if (sourceMap) {
     // https://developer.chrome.com/devtools/docs/javascript-debugging
@@ -446,7 +493,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(7);
+var _index = __webpack_require__(8);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -459,6 +506,50 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(30);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(13);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports) {
 
 /**
@@ -491,69 +582,70 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(12);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(28);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 
-/* styles */
-__webpack_require__(8)
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.use = exports.t = undefined;
+
+var _zhCN = __webpack_require__(42);
+
+var _zhCN2 = _interopRequireDefault(_zhCN);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var lang = _zhCN2.default;
+
+var t = exports.t = function t(path, options) {
+  var value = void 0;
+
+  var array = path.split('.');
+  var current = lang;
+
+  for (var i = 0, j = array.length; i < j; i++) {
+    var property = array[i];
+    value = current[property];
+    if (i === j - 1) return value;
+    if (!value) return '';
+    current = value;
+  }
+  return '';
+};
+
+var use = exports.use = function use(l) {
+  lang = l || lang;
+};
+
+exports.default = { t: t, use: use };
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(9)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(10),
-  /* template */
   __webpack_require__(11),
+  /* template */
+  __webpack_require__(12),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-68596e9c",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-text/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -567,29 +659,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-68596e9c", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(9);
+var content = __webpack_require__(10);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("42fe6026", content, false);
+var update = __webpack_require__(2)("b4010522", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-68596e9c\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-68596e9c\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68596e9c\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68596e9c\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -599,7 +694,7 @@ if(false) {
 }
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -607,13 +702,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.text[data-v-68596e9c] {\n\tfont-size: 42;\n\tline-height: 63;\n\tcolor: #999999;\n\tfont-family: \"Source Han Sans CN\", Roboto, sans-serif;\n}\n.medium[data-v-68596e9c] {\n\tfont-family: sans-serif-medium;\n\tfont-weight: 500;\n}\n.bold[data-v-68596e9c] {\n\tfont-weight: 700;\n}\n.light[data-v-68596e9c] {\n\tfont-weight: 400;\n}\n.small[data-v-68596e9c] {\n\tfont-size: 36;\n}\n.large[data-v-68596e9c] {\n\tfont-size: 48;\n\tfont-weight: 500;\n\tline-height: 72;\n\tcolor: #000000;\n}\n.huge[data-v-68596e9c] {\n\tfont-size: 54;\n\tline-height: 81;\n\tcolor: #000000;\n}\n.margin-text[data-v-68596e9c] {\n\tmargin-right: 9;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-text/index.vue?5d6db4b5"],"names":[],"mappings":";AAOA;CACA,cAAA;CACA,gBAAA;CACA,eAAA;CACA,sDAAA;CACA;AACA;CACA,+BAAA;CACA,iBAAA;CACA;AACA;CACA,iBAAA;CACA;AACA;CACA,iBAAA;CACA;AACA;CACA,cAAA;CACA;AACA;CACA,cAAA;CACA,iBAAA;CACA,gBAAA;CACA,eAAA;CACA;AACA;CACA,cAAA;CACA,gBAAA;CACA,eAAA;CACA;AACA;CACA,gBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <text :class=\"textClz\"><slot></slot><template v-if=\"!$slots.default\">{{ value }}</template></text>\n</template>\n\n<style scoped>\n\t.text {\n\t\tfont-size: 42;\n\t\tline-height: 63;\n\t\tcolor: #999999;\n\t\tfont-family: \"Source Han Sans CN\", Roboto, sans-serif;\n\t}\n\t.medium {\n\t\tfont-family: sans-serif-medium;\n\t\tfont-weight: 500;\n\t}\n\t.bold {\n\t\tfont-weight: 700;\n\t}\n\t.light {\n\t\tfont-weight: 400;\n\t}\n\t.small {\n\t\tfont-size: 36;\n\t}\n\t.large {\n\t\tfont-size: 48;\n\t\tfont-weight: 500;\n\t\tline-height: 72;\n\t\tcolor: #000000;\n\t}\n\t.huge {\n\t\tfont-size: 54;\n\t\tline-height: 81;\n\t\tcolor: #000000;\n\t}\n\t.margin-text {\n\t\tmargin-right: 9;\n\t}\n</style>\n\n<script>\nexport default {\n  name: 'FmText',\n  props: {\n    value: String,\n    fontWeight: {\n      type: String,\n      default: 'normal'\n    },\n    size: {\n      type: String,\n      default: 'normal'\n    },\n    hasTextMargin: {\n      type: Boolean,\n      default: true\n    }\n  },\n  computed: {\n    textClz () {\n      const clz = ['text'];\n      if (this.hasTextMargin) {\n        clz.push('margin-text');\n      }\n      if (this.size !== 'normal') {\n        clz.push(`${this.size}`);\n      }\n      if (this.fontWeight !== 'normal') {\n        clz.push(`${this.fontWeight}`);\n      }\n      return clz;\n    }\n  },\n  created () {\n    this.$slots.default && (this.value = this.$slots.default[0].text);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.text[data-v-68596e9c] {\n\tfont-size: 0.38889rem;\n\tline-height: 0.58333rem;\n\tcolor: #999999;\n\tfont-family: \"Source Han Sans CN\", Roboto, sans-serif;\n}\n.medium[data-v-68596e9c] {\n\tfont-family: sans-serif-medium;\n\tfont-weight: 500;\n}\n.bold[data-v-68596e9c] {\n\tfont-weight: 700;\n}\n.light[data-v-68596e9c] {\n\tfont-weight: 400;\n}\n.small[data-v-68596e9c] {\n\tfont-size: 0.33333rem;\n}\n.large[data-v-68596e9c] {\n\tfont-size: 0.44444rem;\n\tfont-weight: 500;\n\tline-height: 0.66667rem;\n\tcolor: #000000;\n}\n.huge[data-v-68596e9c] {\n\tfont-size: 0.5rem;\n\tline-height: 0.75rem;\n\tcolor: #000000;\n}\n.margin-text[data-v-68596e9c] {\n\tmargin-right: 0.08333rem;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-text/index.vue?44bc42f7"],"names":[],"mappings":";AAOA;CACA,sBAAA;CACA,wBAAA;CACA,eAAA;CACA,sDAAA;CACA;AACA;CACA,+BAAA;CACA,iBAAA;CACA;AACA;CACA,iBAAA;CACA;AACA;CACA,iBAAA;CACA;AACA;CACA,sBAAA;CACA;AACA;CACA,sBAAA;CACA,iBAAA;CACA,wBAAA;CACA,eAAA;CACA;AACA;CACA,kBAAA;CACA,qBAAA;CACA,eAAA;CACA;AACA;CACA,yBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <text :class=\"textClz\" :style=\"textStyle\"><slot></slot><template v-if=\"!$slots.default\">{{ inValue }}</template></text>\n</template>\n\n<style scoped>\n\t.text {\n\t\tfont-size: 42px;\n\t\tline-height: 63px;\n\t\tcolor: #999999;\n\t\tfont-family: \"Source Han Sans CN\", Roboto, sans-serif;\n\t}\n\t.medium {\n\t\tfont-family: sans-serif-medium;\n\t\tfont-weight: 500;\n\t}\n\t.bold {\n\t\tfont-weight: 700;\n\t}\n\t.light {\n\t\tfont-weight: 400;\n\t}\n\t.small {\n\t\tfont-size: 36px;\n\t}\n\t.large {\n\t\tfont-size: 48px;\n\t\tfont-weight: 500;\n\t\tline-height: 72px;\n\t\tcolor: #000000;\n\t}\n\t.huge {\n\t\tfont-size: 54px;\n\t\tline-height: 81px;\n\t\tcolor: #000000;\n\t}\n\t.margin-text {\n\t\tmargin-right: 9px;\n\t}\n</style>\n\n<script>\nexport default {\n  name: 'FmText',\n  props: {\n    value: String,\n    fontWeight: {\n      type: String,\n      default: 'normal'\n    },\n    size: {\n      type: String,\n      default: 'normal'\n    },\n    textStyle: {\n      type: Object,\n      default: () => ({})\n    },\n    hasTextMargin: {\n      type: Boolean,\n      default: true\n    }\n  },\n  data: () => ({\n    inValue: ''\n  }),\n  watch: {\n    value (val) {\n      this.inValue = val;\n    }\n  },\n  computed: {\n    textClz () {\n      const clz = ['text'];\n      if (this.hasTextMargin) {\n        clz.push('margin-text');\n      }\n      if (this.size !== 'normal') {\n        clz.push(`${this.size}`);\n      }\n      if (this.fontWeight !== 'normal') {\n        clz.push(`${this.fontWeight}`);\n      }\n      return clz;\n    }\n  },\n  created () {\n    this.value && (this.inValue = this.value);\n    this.$slots.default && (this.inValue = this.$slots.default[0].text);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -677,9 +772,25 @@ exports.default = {
       type: String,
       default: 'normal'
     },
+    textStyle: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
     hasTextMargin: {
       type: Boolean,
       default: true
+    }
+  },
+  data: function data() {
+    return {
+      inValue: ''
+    };
+  },
+  watch: {
+    value: function value(val) {
+      this.inValue = val;
     }
   },
   computed: {
@@ -698,20 +809,21 @@ exports.default = {
     }
   },
   created: function created() {
-    this.$slots.default && (this.value = this.$slots.default[0].text);
+    this.value && (this.inValue = this.value);
+    this.$slots.default && (this.inValue = this.$slots.default[0].text);
   }
 };
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('text', {
     class: _vm.textClz,
     staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [_vm._t("default"), (!_vm.$slots.default) ? [_vm._v(_vm._s(_vm.value))] : _vm._e()], 2)
+    style: (_vm.$processStyle(_vm.textStyle))
+  }, [_vm._t("default"), (!_vm.$slots.default) ? [_vm._v(_vm._s(_vm.inValue))] : _vm._e()], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -722,21 +834,24 @@ if (false) {
 }
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(13),
-  /* template */
   __webpack_require__(14),
+  /* template */
+  __webpack_require__(15),
+  /* styles */
+  null,
   /* scopeId */
   null,
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-image/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -750,13 +865,16 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-120a0168", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -818,6 +936,7 @@ exports.default = {
   },
   methods: {
     onLoad: function onLoad(e) {
+      this.$emit('fmImageLoaded', e);
       e.success && (this.loaded = true);
       if (e.success && e.size && e.size.naturalWidth > 0 && this.scale) {
         this.width = e.size.naturalWidth * this.scale;
@@ -828,7 +947,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -853,59 +972,12 @@ if (false) {
 }
 
 /***/ }),
-/* 15 */,
 /* 16 */,
 /* 17 */,
 /* 18 */,
 /* 19 */,
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.use = exports.t = undefined;
-
-var _zhCN = __webpack_require__(37);
-
-var _zhCN2 = _interopRequireDefault(_zhCN);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var lang = _zhCN2.default;
-
-var t = exports.t = function t(path, options) {
-  var value = void 0;
-
-  var array = path.split('.');
-  var current = lang;
-
-  for (var i = 0, j = array.length; i < j; i++) {
-    var property = array[i];
-    value = current[property];
-    if (i === j - 1) return value;
-    if (!value) return '';
-    current = value;
-  }
-  return '';
-};
-
-var use = exports.use = function use(l) {
-  lang = l || lang;
-};
-
-exports.default = { t: t, use: use };
-
-/***/ }),
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */
+/* 20 */,
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1004,7 +1076,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 27 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {var __WEBPACK_AMD_DEFINE_RESULT__;/*! https://mths.be/he v1.1.1 by @mathias | MIT license */
@@ -1349,28 +1421,87 @@ exports.default = {
 
 }(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34)(module)))
 
 /***/ }),
+/* 23 */,
+/* 24 */,
+/* 25 */,
+/* 26 */,
+/* 27 */,
 /* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 
-/* styles */
-__webpack_require__(29)
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/**
+ * CopyRight (C) 2017-2022 Alibaba Group Holding Limited.
+ * Created by Yanjiie on 18/04/01
+ */
+exports.default = {
+  primaryColor: '#198DED',
+  disabledColor: '#BDE2FB',
+  highlightColor: '#156DC9',
+  lightColor: '#42A2F1',
+  weakColor: '#E6F8FF',
+  grayColor: '#F2F3F4',
+  fontColorLight: '#FFFFFF',
+  fontColorDark: '#3D3D3D',
+  fontColorGray: '#F2F3F4'
+};
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _locale = __webpack_require__(7);
+
+exports.default = {
+  methods: {
+    t: function t() {
+      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      return _locale.t.apply(this, args);
+    }
+  }
+};
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(31)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(31),
-  /* template */
   __webpack_require__(33),
+  /* template */
+  __webpack_require__(35),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-77aa90fe",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-icon/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -1384,29 +1515,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-77aa90fe", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(30);
+var content = __webpack_require__(32);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("db906fb8", content, false);
+var update = __webpack_require__(2)("95f1bc1c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-77aa90fe\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-77aa90fe\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-77aa90fe\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-77aa90fe\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -1416,7 +1550,7 @@ if(false) {
 }
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -1430,7 +1564,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":
 
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1442,7 +1576,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _map = __webpack_require__(26);
+var _map = __webpack_require__(21);
 
 var _map2 = _interopRequireDefault(_map);
 
@@ -1459,7 +1593,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 
 // 引入he模块，使用它解决weex-template-compiler在编译阶段进行decode
-var he = __webpack_require__(27);
+var he = __webpack_require__(22);
 var dom = weex.requireModule('dom');
 exports.default = {
   name: 'FmIcon',
@@ -1524,7 +1658,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -1552,7 +1686,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -1575,57 +1709,6 @@ if (false) {
 }
 
 /***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _locale = __webpack_require__(20);
-
-exports.default = {
-  methods: {
-    t: function t() {
-      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-
-      return _locale.t.apply(this, args);
-    }
-  }
-};
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-/**
- * CopyRight (C) 2017-2022 Alibaba Group Holding Limited.
- * Created by Yanjiie on 18/04/01
- */
-exports.default = {
-  primaryColor: '#198DED',
-  lightColor: '#269CFC',
-  highlightColor: '#0A73C9',
-  weakColor: '#E6F8FF',
-  disabledColor: '#BDE2FB',
-  grayColor: '#F2F3F4',
-  fontColorLight: '#FFFFFF',
-  fontColorDark: '#3D3D3D',
-  fontColorGray: '#F2F3F4'
-};
-
-/***/ }),
 /* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1636,7 +1719,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(38);
+var _index = __webpack_require__(37);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -1651,61 +1734,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = {
-  el: {
-    common: {
-      delete: '删除',
-      cancel: '取消',
-      confirm: '确认',
-      close: '关闭',
-      title: '标题',
-      more: '更多'
-    },
-    titlebar: {
-      title: '标题'
-    },
-    searchbar: {
-      search: '搜索'
-    },
-    foldabletext: {
-      more: '更多'
-    },
-    input: {
-      placeholder: '请输入',
-      inputError: '输入有误'
-    },
-    tag: {
-      tagName: '标签'
-    }
-  }
-};
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(39)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(38)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(41),
+  __webpack_require__(40),
   /* template */
-  __webpack_require__(42),
+  __webpack_require__(41),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-45eab412",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-button/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -1719,29 +1766,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-45eab412", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 39 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(40);
+var content = __webpack_require__(39);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("43a7c61e", content, false);
+var update = __webpack_require__(2)("7062c965", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-45eab412\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-45eab412\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-45eab412\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-45eab412\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -1751,7 +1801,7 @@ if(false) {
 }
 
 /***/ }),
-/* 40 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -1759,13 +1809,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-button[data-v-45eab412] {\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  overflow: hidden;\n  transform: scale(1);\n  transition-property: transform,backgroundColor;\n  transition-duration: 0.2s;\n  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n}\n.fm-button-hollow[data-v-45eab412] {\n  border-width: 4px;\n}\n.button-text[data-v-45eab412] {\n  flex: 1;\n  text-align: center;\n  color: #FFFFFF;\n  font-weight: 500;\n  font-family: sans-serif-medium;\n}\n.fm-button-small[data-v-45eab412] {\n  height: 72px;\n  border-radius: 36px;\n}\n.fm-button-middle[data-v-45eab412] {\n  width: 312px;\n  height: 114px;\n  border-radius: 57px;\n}\n.fm-button-large[data-v-45eab412] {\n  width: 396px;\n  height: 114px;\n  border-radius: 57px;\n}\n.fm-button-circle[data-v-45eab412] {\n  width: 168px;\n  height: 168px;\n  border-radius: 84px;\n}\n.fm-button-huge[data-v-45eab412] {\n  width: 720px;\n  height: 114px;\n  border-radius: 57px;\n}\n.button-text-small[data-v-45eab412] {\n  font-size: 36px;\n}\n.button-text-middle[data-v-45eab412],\n.button-text-large[data-v-45eab412],\n.button-text-huge[data-v-45eab412] {\n  font-size: 48px;\n}\n.overlay[data-v-45eab412] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  z-index: 30;\n  border-radius: 200px;\n}\n.overlay[data-v-45eab412]:active {\n  background-color: rgba(0, 0, 0, 0.1);\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-button/index.vue?40496a92"],"names":[],"mappings":";AAwBA;EACA,oBAAA;EACA,oBAAA;EACA,wBAAA;EACA,iBAAA;EACA,oBAAA;EACA,+CAAA;EACA,0BAAA;EACA,gEAAA;CACA;AAEA;EACA,kBAAA;CACA;AAEA;EACA,QAAA;EACA,mBAAA;EACA,eAAA;EACA,iBAAA;EACA,+BAAA;CACA;AAEA;EACA,aAAA;EACA,oBAAA;CACA;AAEA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;CACA;AAEA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;CACA;AAEA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;CACA;AAEA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;CACA;AAEA;EACA,gBAAA;CACA;AAEA;;;EAGA,gBAAA;CACA;AAEA;EACA,mBAAA;EACA,OAAA;EACA,QAAA;EACA,SAAA;EACA,UAAA;EACA,YAAA;EACA,qBAAA;CACA;AAEA;EACA,qCAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div ref=\"fm-button\"\n       class=\"fm-button\"\n       :class=\"buttonClass\"\n       @click=\"btnClick\"\n       @touchstart=\"_startHandle\"\n       @touchend=\"_endHandle\"\n       :style=\"computedStyle\">\n    <div v-if=\"!disabled\" class=\"overlay\" @click=\"btnClick\"></div>\n    <fm-icon v-if=\"type === 'circle'\"\n             :color=\"(type !== 'hollow') ? titleColor : color\"\n             :name=\"icon\"\n             icon-style=\"72\"></fm-icon>\n    <slot v-else name=\"title\">\n      <text :class=\"['button-text-' + size]\"\n            :style=\"{color: (type !== 'hollow') ? titleColor : computedColor}\"\n            class=\"button-text\" ><slot></slot></text>\n    </slot>\n  </div>\n</template>\n\n<style scoped>\n  .fm-button {\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    overflow: hidden;\n    transform: scale(1);\n    transition-property: transform,backgroundColor;\n    transition-duration: 0.2s;\n    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  .fm-button-hollow {\n    border-width: 4px;\n  }\n\n  .button-text {\n    flex: 1;\n    text-align: center;\n    color: #FFFFFF;\n    font-weight: 500;\n    font-family: sans-serif-medium;\n  }\n\n  .fm-button-small {\n    height: 72px;\n    border-radius: 36px;\n  }\n\n  .fm-button-middle {\n    width: 312px;\n    height: 114px;\n    border-radius: 57px;\n  }\n\n  .fm-button-large {\n    width: 396px;\n    height: 114px;\n    border-radius: 57px;\n  }\n\n  .fm-button-circle {\n    width: 168px;\n    height: 168px;\n    border-radius: 84px;\n  }\n\n  .fm-button-huge {\n    width: 720px;\n    height: 114px;\n    border-radius: 57px;\n  }\n\n  .button-text-small {\n    font-size: 36px;\n  }\n\n  .button-text-middle,\n  .button-text-large,\n  .button-text-huge {\n    font-size: 48px;\n  }\n\n  .overlay {\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    z-index: 30;\n    border-radius: 200px;\n  }\n\n  .overlay:active {\n    background-color: rgba(0, 0, 0, 0.1);\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nimport STYLE from 'weex-flymeui/lib/theme/default/';\nconst dom = weex.requireModule('dom');\n\nexport default {\n  name: 'FmButton',\n  components: { FmIcon },\n  props: {\n    size: {\n      type: String,\n      default: 'small'\n    },\n    type: String,\n    color: {\n      type: String,\n      default: STYLE.primaryColor\n    },\n    titleColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    icon: {\n      type: String,\n      default: 'wancheng'\n    },\n    width: Number,\n    height: Number,\n    animated: Boolean,\n    disabled: Boolean\n  },\n  data: () => ({\n    active: false,\n    padding: 36\n  }),\n  computed: {\n    buttonClass () {\n      const clz = [];\n      this.size && clz.push(`fm-button-${this.size}`);\n      this.type && clz.push(`fm-button-${this.type}`);\n      return clz;\n    },\n    computedColor () {\n      return this.color || THEME[this.theme].normal;\n    },\n    computedStyle () {\n      const { color, active, disabled, padding, animated, type, width, height } = this;\n      const transform = !animated || disabled ? 'scale(1)' : `scale(${active ? 0.95 : 1})`;\n      const style = {\n        borderColor: (type === 'hollow') ? color : '',\n        backgroundColor: (type !== 'hollow') ? color : '',\n        opacity: disabled ? 0.2 : 1,\n        transform,\n        paddingLeft: padding + 'px',\n        paddingRight: padding + 'px'\n      };\n      if (type !== 'circle') {\n        width && (style.width = `${width}px`);\n        height && (style.height = `${height}px`) && (style.borderRadius = `${Math.ceil(height * 1000 / 2000)}px`);\n      }\n      return style;\n    }\n  },\n  methods: {\n    btnClick (e) {\n      !this.disabled && this.$emit('buttonClicked', e);\n    },\n    _startHandle (e) {\n      this.active = true;\n    },\n    _endHandle (e) {\n      this.active = false;\n    }\n  },\n  mounted () {\n    setTimeout(() => {\n      dom.getComponentRect(this.$refs['fm-button'], option => {\n        if (option.size.width >= 240) {\n          this.padding = 24;\n        }\n      });\n    }, 50);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-button[data-v-45eab412] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n          align-items: center;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n          justify-content: center;\n  overflow: hidden;\n  -webkit-transform: scale(1);\n          transform: scale(1);\n  -webkit-transition-property: backgroundColor,-webkit-transform;\n  transition-property: backgroundColor,-webkit-transform;\n  transition-property: transform,backgroundColor;\n  transition-property: transform,backgroundColor,-webkit-transform;\n  -webkit-transition-duration: 0.2s;\n          transition-duration: 0.2s;\n  -webkit-transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n          transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n}\n.fm-button-hollow[data-v-45eab412] {\n  border-width: 0.03704rem;\n}\n.button-text[data-v-45eab412] {\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n          flex: 1;\n  text-align: center;\n  color: #FFFFFF;\n  font-weight: 500;\n  font-family: sans-serif-medium;\n}\n.fm-button-small[data-v-45eab412] {\n  height: 0.66667rem;\n  border-radius: 0.33333rem;\n}\n.fm-button-middle[data-v-45eab412] {\n  width: 2.88889rem;\n  height: 1.05556rem;\n  border-radius: 0.52778rem;\n}\n.fm-button-large[data-v-45eab412] {\n  width: 3.66667rem;\n  height: 1.05556rem;\n  border-radius: 0.52778rem;\n}\n.fm-button-circle[data-v-45eab412] {\n  width: 1.55556rem;\n  height: 1.55556rem;\n  border-radius: 0.77778rem;\n}\n.fm-button-huge[data-v-45eab412] {\n  width: 6.66667rem;\n  height: 1.05556rem;\n  border-radius: 0.52778rem;\n}\n.button-text-small[data-v-45eab412] {\n  font-size: 0.33333rem;\n}\n.button-text-middle[data-v-45eab412],\n.button-text-large[data-v-45eab412],\n.button-text-huge[data-v-45eab412] {\n  font-size: 0.44444rem;\n}\n.overlay[data-v-45eab412] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  z-index: 30;\n  border-radius: 1.85185rem;\n}\n.overlay[data-v-45eab412]:active {\n  background-color: rgba(0, 0, 0, 0.1);\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-button/index.vue?21952232"],"names":[],"mappings":";AAwBA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,yBAAA;EAAA,gCAAA;UAAA,wBAAA;EACA,iBAAA;EACA,4BAAA;UAAA,oBAAA;EACA,+DAAA;EAAA,uDAAA;EAAA,+CAAA;EAAA,iEAAA;EACA,kCAAA;UAAA,0BAAA;EACA,wEAAA;UAAA,gEAAA;CACA;AAEA;EACA,yBAAA;CACA;AAEA;EACA,oBAAA;EAAA,gBAAA;UAAA,QAAA;EACA,mBAAA;EACA,eAAA;EACA,iBAAA;EACA,+BAAA;CACA;AAEA;EACA,mBAAA;EACA,0BAAA;CACA;AAEA;EACA,kBAAA;EACA,mBAAA;EACA,0BAAA;CACA;AAEA;EACA,kBAAA;EACA,mBAAA;EACA,0BAAA;CACA;AAEA;EACA,kBAAA;EACA,mBAAA;EACA,0BAAA;CACA;AAEA;EACA,kBAAA;EACA,mBAAA;EACA,0BAAA;CACA;AAEA;EACA,sBAAA;CACA;AAEA;;;EAGA,sBAAA;CACA;AAEA;EACA,mBAAA;EACA,OAAA;EACA,QAAA;EACA,SAAA;EACA,UAAA;EACA,YAAA;EACA,0BAAA;CACA;AAEA;EACA,qCAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div ref=\"fm-button\"\n       class=\"fm-button\"\n       :class=\"buttonClass\"\n       @click=\"btnClick\"\n       @touchstart=\"_startHandle\"\n       @touchend=\"_endHandle\"\n       :style=\"computedStyle\">\n    <div v-if=\"!disabled\" class=\"overlay\" @click=\"btnClick\"></div>\n    <fm-icon v-if=\"type === 'circle'\"\n             :color=\"(type !== 'hollow') ? titleColor : color\"\n             :name=\"icon\"\n             icon-style=\"72\"></fm-icon>\n    <slot v-else name=\"title\">\n      <text :class=\"['button-text-' + size]\"\n            :style=\"Object.assign({}, { color: (type !== 'hollow') ? titleColor : computedColor }, (titleSize ? { fontSize: titleSize } : {}))\"\n            class=\"button-text\" ><slot></slot></text>\n    </slot>\n  </div>\n</template>\n\n<style scoped>\n  .fm-button {\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    overflow: hidden;\n    transform: scale(1);\n    transition-property: transform,backgroundColor;\n    transition-duration: 0.2s;\n    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  .fm-button-hollow {\n    border-width: 4px;\n  }\n\n  .button-text {\n    flex: 1;\n    text-align: center;\n    color: #FFFFFF;\n    font-weight: 500;\n    font-family: sans-serif-medium;\n  }\n\n  .fm-button-small {\n    height: 72px;\n    border-radius: 36px;\n  }\n\n  .fm-button-middle {\n    width: 312px;\n    height: 114px;\n    border-radius: 57px;\n  }\n\n  .fm-button-large {\n    width: 396px;\n    height: 114px;\n    border-radius: 57px;\n  }\n\n  .fm-button-circle {\n    width: 168px;\n    height: 168px;\n    border-radius: 84px;\n  }\n\n  .fm-button-huge {\n    width: 720px;\n    height: 114px;\n    border-radius: 57px;\n  }\n\n  .button-text-small {\n    font-size: 36px;\n  }\n\n  .button-text-middle,\n  .button-text-large,\n  .button-text-huge {\n    font-size: 48px;\n  }\n\n  .overlay {\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    z-index: 30;\n    border-radius: 200px;\n  }\n\n  .overlay:active {\n    background-color: rgba(0, 0, 0, 0.1);\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nimport STYLE from 'weex-flymeui/lib/theme/default/index.js';\nconst dom = weex.requireModule('dom');\n\nexport default {\n  name: 'FmButton',\n  components: { FmIcon },\n  props: {\n    size: {\n      type: String,\n      default: 'small'\n    },\n    type: String,\n    color: {\n      type: String,\n      default: STYLE.primaryColor\n    },\n    titleColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    titleSize: {\n      type: Number,\n      default: 0\n    },\n    icon: {\n      type: String,\n      default: 'wancheng'\n    },\n    width: Number,\n    height: Number,\n    animated: Boolean,\n    disabled: Boolean\n  },\n  data: () => ({\n    active: false,\n    padding: 36\n  }),\n  computed: {\n    buttonClass () {\n      const clz = [];\n      this.size && clz.push(`fm-button-${this.size}`);\n      this.type && clz.push(`fm-button-${this.type}`);\n      return clz;\n    },\n    computedColor () {\n      return this.color || THEME[this.theme].normal;\n    },\n    computedStyle () {\n      const { color, active, disabled, padding, animated, type, width, height } = this;\n      const transform = !animated || disabled ? 'scale(1)' : `scale(${active ? 0.95 : 1})`;\n      const style = {\n        borderColor: (type === 'hollow') ? color : '',\n        backgroundColor: (type !== 'hollow') ? color : '',\n        opacity: disabled ? 0.2 : 1,\n        transform,\n        paddingLeft: padding + 'px',\n        paddingRight: padding + 'px'\n      };\n      if (type !== 'circle') {\n        width && (style.width = `${width}px`);\n        height && (style.height = `${height}px`) && (style.borderRadius = `${Math.ceil(height * 1000 / 2000)}px`);\n      }\n      return style;\n    }\n  },\n  methods: {\n    btnClick (e) {\n      !this.disabled && this.$emit('buttonClicked', e);\n    },\n    _startHandle (e) {\n      this.active = true;\n    },\n    _endHandle (e) {\n      this.active = false;\n    }\n  },\n  mounted () {\n    setTimeout(() => {\n      dom.getComponentRect(this.$refs['fm-button'], option => {\n        if (option.size.width >= 240) {\n          this.padding = 24;\n        }\n      });\n    }, 50);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 41 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1775,13 +1825,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmIcon = __webpack_require__(6);
+var _index = __webpack_require__(28);
+
+var _index2 = _interopRequireDefault(_index);
+
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
-
-var _default = __webpack_require__(35);
-
-var _default2 = _interopRequireDefault(_default);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1900,11 +1950,15 @@ exports.default = {
     type: String,
     color: {
       type: String,
-      default: _default2.default.primaryColor
+      default: _index2.default.primaryColor
     },
     titleColor: {
       type: String,
       default: '#FFFFFF'
+    },
+    titleSize: {
+      type: Number,
+      default: 0
     },
     icon: {
       type: String,
@@ -1982,7 +2036,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 42 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -2016,9 +2070,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "button-text",
     class: ['button-text-' + _vm.size],
     staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
+    style: (_vm.$processStyle(Object.assign({}, {
       color: (_vm.type !== 'hollow') ? _vm.titleColor : _vm.computedColor
-    }))
+    }, (_vm.titleSize ? {
+      fontSize: _vm.titleSize
+    } : {}))))
   }, [_vm._t("default")], 2)])], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
@@ -2028,6 +2084,45 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-45eab412", module.exports)
   }
 }
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  el: {
+    common: {
+      delete: '删除',
+      cancel: '取消',
+      confirm: '确认',
+      close: '关闭',
+      title: '标题',
+      more: '更多'
+    },
+    titlebar: {
+      title: '标题'
+    },
+    searchbar: {
+      search: '搜索'
+    },
+    foldabletext: {
+      more: '更多'
+    },
+    input: {
+      placeholder: '请输入',
+      inputError: '输入有误'
+    },
+    tag: {
+      tagName: '标签'
+    }
+  }
+};
 
 /***/ }),
 /* 43 */
@@ -2040,7 +2135,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(51);
+var _index = __webpack_require__(48);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -2062,451 +2157,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(46);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 45 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(58);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(47)
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(49),
-  /* template */
-  __webpack_require__(50),
-  /* scopeId */
-  "data-v-10e45e81",
-  /* cssModules */
-  null
-)
-Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-overlay/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-10e45e81", Component.options)
-  } else {
-    hotAPI.reload("data-v-10e45e81", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(48);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("78c6b5b6", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-10e45e81\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-10e45e81\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(true);
-// imports
-
-
-// module
-exports.push([module.i, "\n.fm-overlay[data-v-10e45e81] {\n  width: 1080px;\n  position: fixed;\n  left: 0;\n  top: 0;\n  bottom: 0;\n  right: 0;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-overlay/index.vue?d95ec95a"],"names":[],"mappings":";AAeA;EACA,cAAA;EACA,gBAAA;EACA,QAAA;EACA,OAAA;EACA,UAAA;EACA,SAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Updated by Yanjiie on 2018/04/12. Fork from weex-ui. -->\n<template>\n  <div>\n    <div class=\"fm-overlay\"\n         ref=\"fm-overlay\"\n         v-if=\"show\"\n         :watch=\"shouldShow\"\n         @click=\"overlayClicked\"\n         :style=\"overlayStyle\">\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-overlay {\n    width: 1080px;\n    position: fixed;\n    left: 0;\n    top: 0;\n    bottom: 0;\n    right: 0;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nexport default {\n  name: 'FmOverlay',\n  props: {\n    show: {\n      type: Boolean,\n      default: true\n    },\n    hasAnimation: {\n      type: Boolean,\n      default: true\n    },\n    duration: {\n      type: [Number, String],\n      default: 300\n    },\n    timingFunction: {\n      type: Array,\n      default: () => (['ease-in', 'ease-out'])\n    },\n    opacity: {\n      type: [Number, String],\n      default: 0.5\n    },\n    canAutoClose: {\n      type: Boolean,\n      default: true\n    }\n  },\n  computed: {\n    overlayStyle () {\n      return {\n        opacity: this.hasAnimation ? 0 : 1,\n        backgroundColor: `rgba(0, 0, 0,${this.opacity})`\n      };\n    },\n    shouldShow () {\n      const { show, hasAnimation } = this;\n      hasAnimation && setTimeout(() => {\n        this.appearOverlay(show);\n      }, 50);\n      return show;\n    }\n  },\n  methods: {\n    overlayClicked (e) {\n      this.canAutoClose ? this.appearOverlay(false) : this.$emit('fmOverlayBodyClicked', {});\n    },\n    appearOverlay (bool, duration = this.duration) {\n      const { hasAnimation, timingFunction, canAutoClose } = this;\n      const needEmit = !bool && canAutoClose;\n      needEmit && (this.$emit('fmOverlayBodyClicking', {}));\n      const overlayEl = this.$refs['fm-overlay'];\n      if (hasAnimation && overlayEl) {\n        animation.transition(overlayEl, {\n          styles: {\n            opacity: bool ? 1 : 0\n          },\n          duration,\n          timingFunction: timingFunction[bool ? 0 : 1],\n          delay: 0\n        }, () => {\n          needEmit && (this.$emit('fmOverlayBodyClicked', {}));\n        });\n      } else {\n        needEmit && (this.$emit('fmOverlayBodyClicked', {}));\n      }\n    },\n    hide () {\n      this.appearOverlay(false);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-/* 49 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var animation = weex.requireModule('animation');
-exports.default = {
-  name: 'FmOverlay',
-  props: {
-    show: {
-      type: Boolean,
-      default: true
-    },
-    hasAnimation: {
-      type: Boolean,
-      default: true
-    },
-    duration: {
-      type: [Number, String],
-      default: 300
-    },
-    timingFunction: {
-      type: Array,
-      default: function _default() {
-        return ['ease-in', 'ease-out'];
-      }
-    },
-    opacity: {
-      type: [Number, String],
-      default: 0.5
-    },
-    canAutoClose: {
-      type: Boolean,
-      default: true
-    }
-  },
-  computed: {
-    overlayStyle: function overlayStyle() {
-      return {
-        opacity: this.hasAnimation ? 0 : 1,
-        backgroundColor: 'rgba(0, 0, 0,' + this.opacity + ')'
-      };
-    },
-    shouldShow: function shouldShow() {
-      var _this = this;
-
-      var show = this.show,
-          hasAnimation = this.hasAnimation;
-
-      hasAnimation && setTimeout(function () {
-        _this.appearOverlay(show);
-      }, 50);
-      return show;
-    }
-  },
-  methods: {
-    overlayClicked: function overlayClicked(e) {
-      this.canAutoClose ? this.appearOverlay(false) : this.$emit('fmOverlayBodyClicked', {});
-    },
-    appearOverlay: function appearOverlay(bool) {
-      var _this2 = this;
-
-      var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.duration;
-      var hasAnimation = this.hasAnimation,
-          timingFunction = this.timingFunction,
-          canAutoClose = this.canAutoClose;
-
-      var needEmit = !bool && canAutoClose;
-      needEmit && this.$emit('fmOverlayBodyClicking', {});
-      var overlayEl = this.$refs['fm-overlay'];
-      if (hasAnimation && overlayEl) {
-        animation.transition(overlayEl, {
-          styles: {
-            opacity: bool ? 1 : 0
-          },
-          duration: duration,
-          timingFunction: timingFunction[bool ? 0 : 1],
-          delay: 0
-        }, function () {
-          needEmit && _this2.$emit('fmOverlayBodyClicked', {});
-        });
-      } else {
-        needEmit && this.$emit('fmOverlayBodyClicked', {});
-      }
-    },
-    hide: function hide() {
-      this.appearOverlay(false);
-    }
-  }
-};
-
-/***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [(_vm.show) ? _c('div', {
-    ref: "fm-overlay",
-    staticClass: "fm-overlay",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(_vm.overlayStyle)),
-    attrs: {
-      "watch": _vm.shouldShow
-    },
-    on: {
-      "click": _vm.overlayClicked
-    }
-  }) : _vm._e()])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-10e45e81", module.exports)
-  }
-}
-
-/***/ }),
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(52)
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(54),
-  /* template */
-  __webpack_require__(55),
-  /* scopeId */
-  "data-v-3509f5c0",
-  /* cssModules */
-  null
-)
-Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-footer/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3509f5c0", Component.options)
-  } else {
-    hotAPI.reload("data-v-3509f5c0", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(53);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("5c007a16", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-3509f5c0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-3509f5c0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 53 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(true);
-// imports
-
-
-// module
-exports.push([module.i, "\n.fm-footer[data-v-3509f5c0] {\n  flex-direction: row;\n  position: fixed;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 144px;\n  justify-content: space-between;\n  align-items: center;\n  border-top-width: 2px;\n  border-top-color: rgba(0, 0, 0, 0.1);\n}\n.fm-footer-[data-v-3509f5c0] {\n  justify-content: center;\n}\n.fm-footer-small[data-v-3509f5c0] {\n  padding: 0 48px;\n}\n.fm-footer-middle[data-v-3509f5c0] {\n  padding:  0px 90px\n}\n.fm-footer-large[data-v-3509f5c0] {\n  padding: 0 111px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-footer/index.vue?ba88bfa2"],"names":[],"mappings":";AASA;EACA,oBAAA;EACA,gBAAA;EACA,SAAA;EACA,UAAA;EACA,QAAA;EACA,cAAA;EACA,+BAAA;EACA,oBAAA;EACA,sBAAA;EACA,qCAAA;CACA;AAEA;EACA,wBAAA;CACA;AAEA;EACA,gBAAA;CACA;AAEA;EACA,kBAAA;CACA;AAEA;EACA,iBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/03/13. -->\n<template>\n  <div class=\"fm-footer\" :class=\"['fm-footer-' + paddingSize]\" :style=\"{ backgroundColor: backgroundColor }\">\n    <slot></slot>\n  </div>\n</template>\n\n<style scoped>\n  .fm-footer {\n    flex-direction: row;\n    position: fixed;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    height: 144px;\n    justify-content: space-between;\n    align-items: center;\n    border-top-width: 2px;\n    border-top-color: rgba(0, 0, 0, 0.1);\n  }\n\n  .fm-footer- {\n    justify-content: center;\n  }\n\n  .fm-footer-small {\n    padding: 0 48px;\n  }\n\n  .fm-footer-middle {\n    padding:  0px 90px\n  }\n\n  .fm-footer-large {\n    padding: 0 111px;\n  }\n</style>\n\n<script>\nexport default {\n  name: 'FmFooter',\n  props: {\n    paddingSize: {\n      type: String,\n      default: ''\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-/* 54 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-exports.default = {
-  name: 'FmFooter',
-  props: {
-    paddingSize: {
-      type: String,
-      default: ''
-    },
-    backgroundColor: {
-      type: String,
-      default: '#FFFFFF'
-    }
-  }
-};
-
-/***/ }),
-/* 55 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "fm-footer",
-    class: ['fm-footer-' + _vm.paddingSize],
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      backgroundColor: _vm.backgroundColor
-    }))
-  }, [_vm._t("default")], 2)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-3509f5c0", module.exports)
-  }
-}
-
-/***/ }),
-/* 56 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /**
-                                                                                                                                                                                                                                                                                * Created by Yanjiie on 18/03/08. Fork from https://github.com/alibaba/weex-ui
-                                                                                                                                                                                                                                                                                */
-
-var _weexBindingx = __webpack_require__(57);
-
-var _weexBindingx2 = _interopRequireDefault(_weexBindingx);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+/**
+ * Created by Yanjiie on 18/03/08. Fork from https://github.com/alibaba/weex-ui
+ */
 
 var Utils = {
   _typeof: function _typeof(obj) {
@@ -2616,28 +2273,6 @@ var Utils = {
 
       return platform.toLowerCase() === 'android';
     },
-    supportsEB: function supportsEB() {
-      return _weexBindingx2.default.isSupportBinding && !Utils.env.isWeb();
-    },
-
-
-    /**
-     * 判断Android容器是否支持是否支持expressionBinding(处理方式很不一致)
-     * @returns {boolean}
-     */
-    supportsEBForAndroid: function supportsEBForAndroid() {
-      return Utils.env.isAndroid() && Utils.env.supportsEB();
-    },
-
-
-    /**
-     * 判断IOS容器是否支持是否支持expressionBinding
-     * @returns {boolean}
-     */
-    supportsEBForIos: function supportsEBForIos() {
-      return Utils.env.isIOS() && Utils.env.supportsEB();
-    },
-
 
     /**
      * 获取weex屏幕真实的设置高度，需要减去导航栏高度
@@ -2791,7 +2426,29 @@ var Utils = {
 exports.default = Utils;
 
 /***/ }),
-/* 57 */
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(54);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -2799,7 +2456,7 @@ exports.default = Utils;
     if (true) {
       module.exports = fn();
     } else if (typeof define === "function") {
-      define("index", function(require, exports, module){
+      define("index.weex", function(require, exports, module){
         module.exports = fn();
       });
     } else {
@@ -2814,4634 +2471,7 @@ exports.default = Utils;
         // NOTICE: In JavaScript strict mode, this is null
         root = this;
       }
-      root["index"] = fn();
-    }
-  })(function(){
-    return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- Copyright 2018 Alibaba Group
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- */
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _universalEnv = __webpack_require__(1);
-
-var _bindingxParser = __webpack_require__(3);
-
-function requireModule(moduleName) {
-  try {
-    if ((typeof weex === 'undefined' ? 'undefined' : _typeof(weex)) !== undefined && weex.requireModule) {
-      // eslint-disable-line
-      return weex.requireModule(moduleName); // eslint-disable-line
-    }
-  } catch (err) {}
-  return window.require('@weex-module/' + moduleName);
-};
-
-var isSupportNewBinding = true;
-var isSupportBinding = true;
-var WeexBinding = void 0;
-var WebBinding = {};
-if (_universalEnv.isWeb) {
-  WebBinding = __webpack_require__(5);
-} else {
-  try {
-    WeexBinding = requireModule('bindingx');
-    isSupportNewBinding = true;
-  } catch (e) {
-    isSupportNewBinding = false;
-  }
-  if (!WeexBinding || !WeexBinding.bind) {
-    try {
-      WeexBinding = requireModule('binding');
-      isSupportNewBinding = true;
-    } catch (e) {
-      isSupportNewBinding = false;
-    }
-  }
-  isSupportNewBinding = !!(WeexBinding && WeexBinding.bind && WeexBinding.unbind);
-  if (!isSupportNewBinding) {
-    try {
-      WeexBinding = requireModule('expressionBinding');
-      isSupportBinding = true;
-    } catch (err) {
-      isSupportBinding = false;
-    }
-  }
-  isSupportBinding = !!(WeexBinding && (WeexBinding.bind || WeexBinding.createBinding));
-}
-
-function formatExpression(expression) {
-  if (expression === undefined) return;
-  try {
-    expression = JSON.parse(expression);
-  } catch (err) {}
-  var resultExpression = {};
-  if (typeof expression === 'string') {
-    resultExpression.origin = expression;
-  } else if (expression) {
-    resultExpression.origin = expression.origin;
-    resultExpression.transformed = expression.transformed;
-  }
-  if (!resultExpression.transformed && !resultExpression.origin) return;
-  resultExpression.transformed = resultExpression.transformed || (0, _bindingxParser.parse)(resultExpression.origin);
-  return resultExpression;
-}
-
-// 统一回调参数
-function fixCallback(callback) {
-  return function () {
-    var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-    if (typeof callback === 'function') {
-      return callback({
-        state: params.state === 'end' ? 'exit' : params.state,
-        t: params.t !== undefined ? params.t : params.deltaT
-      });
-    }
-  };
-}
-
-exports.default = {
-  // 是否支持新版本的binding
-  isSupportNewBinding: isSupportNewBinding,
-  // 是否支持binding
-  isSupportBinding: isSupportBinding,
-  _bindingInstances: [],
-  /**
-   * 绑定
-   * @param options 参数
-   * @example
-   {
-     anchor:blockRef,
-     eventType:'pan',
-     props: [
-     {
-       element:blockRef,
-       property:'transform.translateX',
-       expression:{
-         origin:"x+1",
-         transformed:"{\"type\":\"+\",\"children\":[{\"type\":\"Identifier\",\"value\":\"x\"},{\"type\":\"NumericLiteral\",\"value\":1}]}"
-       }
-     }
-    ]
-   }
-   */
-  bind: function bind(options) {
-    var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
-
-    if (!options) {
-      throw new Error('should pass options for binding');
-    }
-
-    options.exitExpression = formatExpression(options.exitExpression);
-
-    if (options.props) {
-      options.props.forEach(function (prop) {
-        prop.expression = formatExpression(prop.expression);
-      });
-    }
-
-    if (_universalEnv.isWeex) {
-      if (WeexBinding && isSupportBinding) {
-        if (isSupportNewBinding) {
-          return WeexBinding.bind(options, options && options.eventType === 'timing' ? fixCallback(callback) : callback);
-        } else {
-          WeexBinding.enableBinding(options.anchor, options.eventType);
-          // 处理expression的参数格式
-          var expressionArgs = options.props.map(function (prop) {
-            return {
-              element: prop.element,
-              property: prop.property,
-              expression: prop.expression.transformed
-            };
-          });
-          WeexBinding.createBinding(options.anchor, options.eventType, '', expressionArgs, callback);
-        }
-      }
-    } else {
-      return WebBinding.bind(options, callback);
-    }
-  },
-
-  /**
-   *  @param {object} options
-   *  @example
-   *  {eventType:'pan',
-   *   token:self.gesToken}
-   */
-  unbind: function unbind(options) {
-    if (!options) {
-      throw new Error('should pass options for binding');
-    }
-    if (_universalEnv.isWeex) {
-      if (WeexBinding && isSupportBinding) {
-        if (isSupportNewBinding) {
-          return WeexBinding.unbind(options);
-        } else {
-          return WeexBinding.disableBinding(options.anchor, options.eventType);
-        }
-      }
-    } else {
-      return WebBinding.unbind(options);
-    }
-  },
-  unbindAll: function unbindAll() {
-    if (_universalEnv.isWeex) {
-      if (WeexBinding && isSupportBinding) {
-        if (isSupportNewBinding) {
-          return WeexBinding.unbindAll();
-        } else {
-          return WeexBinding.disableAll();
-        }
-      }
-    } else {
-      return WebBinding.unbindAll();
-    }
-  },
-  prepare: function prepare(options) {
-    if (_universalEnv.isWeex) {
-      if (WeexBinding && isSupportBinding) {
-        if (isSupportNewBinding) {
-          return WeexBinding.prepare(options);
-        } else {
-          return WeexBinding.enableBinding(options.anchor, options.eventType);
-        }
-      }
-    }
-  },
-  getComputedStyle: function getComputedStyle(el) {
-    if (_universalEnv.isWeex) {
-      if (isSupportNewBinding) {
-        return WeexBinding.getComputedStyle(el);
-      } else {
-        return {};
-      }
-    } else {
-      return WebBinding.getComputedStyle(el);
-    }
-  }
-};
-module.exports = exports['default'];
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-// https://www.w3.org/TR/html5/webappapis.html#dom-navigator-appcodename
-var isWeb = exports.isWeb = (typeof navigator === 'undefined' ? 'undefined' : _typeof(navigator)) === 'object' && (navigator.appCodeName === 'Mozilla' || navigator.product === 'Gecko');
-var isNode = exports.isNode = typeof process !== 'undefined' && !!(process.versions && process.versions.node);
-var isWeex = exports.isWeex = typeof callNative === 'function';
-var isReactNative = exports.isReactNative = typeof __fbBatchedBridgeConfig !== 'undefined';
-exports['default'] = module.exports;
-exports.default = module.exports;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = __webpack_require__(4);
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var lex = {
-  InputElementDiv: '<WhiteSpace>|<LineTerminator>|<ReservedWord>|<Identifier>|<NumericLiteral>|<Punctuator>|<StringLiteral>',
-  InputElementRegExp: '<WhiteSpace>|<LineTerminator>|<ReservedWord>|<Identifier>|<NumericLiteral>|<Punctuator>|<StringLiteral>',
-  ReservedWord: '<Keyword>|<NullLiteral>|<BooleanLiteral>',
-  WhiteSpace: /[\t\v\f\u0020\u00A0\u1680\u180E\u2000-\u200A\u202F\u205f\u3000\uFEFF]/,
-  LineTerminator: /[\n\r\u2028\u2029]/,
-  Keyword: /new(?![_$a-zA-Z0-9])|void(?![_$a-zA-Z0-9])|delete(?![_$a-zA-Z0-9])|in(?![_$a-zA-Z0-9])|instanceof(?![_$a-zA-Z0-9])|typeof(?![_$a-zA-Z0-9])/,
-  NullLiteral: /null(?![_$a-zA-Z0-9])/,
-  BooleanLiteral: /(?:true|false)(?![_$a-zA-Z0-9])/,
-  Identifier: /[_$a-zA-Z][_$a-zA-Z0-9]*/,
-  Punctuator: /\/|=>|\*\*|>>>=|>>=|<<=|===|!==|>>>|<<|%=|\*=|-=|\+=|<=|>=|==|!=|\^=|\|=|\|\||&&|&=|>>|\+\+|--|\:|}|\*|&|\||\^|!|~|-|\+|\?|%|=|>|<|,|;|\.(?![0-9])|\]|\[|\)|\(|{/,
-  DivPunctuator: /\/=|\//,
-  NumericLiteral: /(?:0[xX][0-9a-fA-F]*|\.[0-9]+|(?:[1-9]+[0-9]*|0)(?:\.[0-9]*|\.)?)(?:[eE][+-]{0,1}[0-9]+)?(?![_$a-zA-Z0-9])/,
-  StringLiteral: /"(?:[^"\n\\\r\u2028\u2029]|\\(?:['"\\bfnrtv\n\r\u2028\u2029]|\r\n)|\\x[0-9a-fA-F]{2}|\\u[0-9a-fA-F]{4}|\\[^0-9ux'"\\bfnrtv\n\\\r\u2028\u2029])*"|'(?:[^'\n\\\r\u2028\u2029]|\\(?:['"\\bfnrtv\n\r\u2028\u2029]|\r\n)|\\x[0-9a-fA-F]{2}|\\u[0-9a-fA-F]{4}|\\[^0-9ux'"\\bfnrtv\n\\\r\u2028\u2029])*'/,
-  RegularExpressionLiteral: /\/(?:\[(?:\\[\s\S]|[^\]])*\]|[^*\/\\\n\r\u2028\u2029]|\\[^\n\r\u2028\u2029])(?:\[(?:\\[\s\S]|[^\]])*\]|[^\/\\\n\r\u2028\u2029]|\\[^\n\r\u2028\u2029])*\/[0-9a-zA-Z]*/
-};
-
-function XRegExp(xregexps, rootname, flag) {
-  var expnames = [rootname];
-
-  function buildRegExp(source) {
-    var regexp = new RegExp;
-    regexp.compile(source.replace(/<([^>]+)>/g,
-      function (all, expname) {
-        if (!xregexps[expname])
-          return '';
-        expnames.push(expname);
-        if (xregexps[expname] instanceof RegExp)
-          return '(' + xregexps[expname].source + ')';
-        return '(' + buildRegExp(xregexps[expname]).source + ')';
-      }), flag);
-    return regexp;
-  }
-
-  var regexp = buildRegExp(xregexps[rootname]);
-  this.exec = function (string) {
-    var matches = regexp.exec(string);
-    if (matches == null)
-      return null;
-    var result = new String(matches[0]);
-    for (var i = 0; i < expnames.length; i++)
-      if (matches[i])
-        result[expnames[i]] = matches[i];
-    return result;
-  };
-  Object.defineProperty(this, 'lastIndex',
-    {
-      'get': function () {
-        return regexp.lastIndex;
-      },
-      'set': function (v) {
-        regexp.lastIndex = v;
-      }
-    });
-}
-
-function LexicalParser() {
-  var inputElementDiv = new XRegExp(lex, 'InputElementDiv', 'g');
-  var inputElementRegExp = new XRegExp(lex, 'InputElementRegExp', 'g');
-  var source;
-  Object.defineProperty(this, 'source', {
-    'get': function () {
-      return source;
-    },
-    'set': function (v) {
-      source = v;
-      inputElementDiv.lastIndex = 0;
-      inputElementRegExp.lastIndex = 0;
-    }
-  });
-  this.reset = function () {
-    inputElementDiv.lastIndex = 0;
-    inputElementRegExp.lastIndex = 0;
-  };
-  this.getNextToken = function (useDiv) {
-    var lastIndex = inputElementDiv.lastIndex;
-    var inputElement;
-    if (useDiv)
-      inputElement = inputElementDiv;
-    else
-      inputElement = inputElementRegExp;
-    var token = inputElement.exec(source);
-    if (token && inputElement.lastIndex - lastIndex > token.length) {
-      throw new SyntaxError('Unexpected token ILLEGAL');
-    }
-    inputElementDiv.lastIndex = inputElement.lastIndex;
-    inputElementRegExp.lastIndex = inputElement.lastIndex;
-    return token;
-  };
-}
-
-var rules = {
-  'IdentifierName': [['Identifier']],
-  'Literal': [['NullLiteral'], ['BooleanLiteral'], ['NumericLiteral'], ['StringLiteral'], ['RegularExpressionLiteral']],
-  'PrimaryExpression': [['Identifier'], ['Literal'], ['(', 'Expression', ')']],
-  'CallExpression': [['PrimaryExpression', 'Arguments'], ['CallExpression', 'Arguments']],
-  'Arguments': [['(', ')'], ['(', 'ArgumentList', ')']],
-  'ArgumentList': [['ConditionalExpression'], ['ArgumentList', ',', 'ConditionalExpression']],
-  'LeftHandSideExpression': [['PrimaryExpression'], ['CallExpression']],
-  'UnaryExpression': [['LeftHandSideExpression'], ['void', 'UnaryExpression'], ['+', 'UnaryExpression'], ['-', 'UnaryExpression'], ['~', 'UnaryExpression'], ['!', 'UnaryExpression']],
-  'ExponentiationExpression': [['UnaryExpression'], ['ExponentiationExpression', '**', 'UnaryExpression']],
-  'MultiplicativeExpression': [['MultiplicativeExpression', '/', 'ExponentiationExpression'], ['ExponentiationExpression'], ['MultiplicativeExpression', '*', 'ExponentiationExpression'], ['MultiplicativeExpression', '%', 'ExponentiationExpression']],
-  'AdditiveExpression': [['MultiplicativeExpression'], ['AdditiveExpression', '+', 'MultiplicativeExpression'], ['AdditiveExpression', '-', 'MultiplicativeExpression']],
-  'ShiftExpression': [['AdditiveExpression'], ['ShiftExpression', '<<', 'AdditiveExpression'], ['ShiftExpression', '>>', 'AdditiveExpression'], ['ShiftExpression', '>>>', 'AdditiveExpression']],
-  'RelationalExpression': [['ShiftExpression'], ['RelationalExpression', '<', 'ShiftExpression'], ['RelationalExpression', '>', 'ShiftExpression'], ['RelationalExpression', '<=', 'ShiftExpression'], ['RelationalExpression', '>=', 'ShiftExpression'], ['RelationalExpression', 'instanceof', 'ShiftExpression'], ['RelationalExpression', 'in', 'ShiftExpression']],
-  'EqualityExpression': [['RelationalExpression'], ['EqualityExpression', '==', 'RelationalExpression'], ['EqualityExpression', '!=', 'RelationalExpression'], ['EqualityExpression', '===', 'RelationalExpression'], ['EqualityExpression', '!==', 'RelationalExpression']],
-  'BitwiseANDExpression': [['EqualityExpression'], ['BitwiseANDExpression', '&', 'EqualityExpression']],
-  'BitwiseXORExpression': [['BitwiseANDExpression'], ['BitwiseXORExpression', '^', 'BitwiseANDExpression']],
-  'BitwiseORExpression': [['BitwiseXORExpression'], ['BitwiseORExpression', '|', 'BitwiseXORExpression']],
-  'LogicalANDExpression': [['BitwiseORExpression'], ['LogicalANDExpression', '&&', 'BitwiseORExpression']],
-  'LogicalORExpression': [['LogicalANDExpression'], ['LogicalORExpression', '||', 'LogicalANDExpression']],
-  'ConditionalExpression': [['LogicalORExpression'], ['LogicalORExpression', '?', 'LogicalORExpression', ':', 'LogicalORExpression']],
-  'Expression': [['ConditionalExpression'], ['Expression', ',', 'ConditionalExpression']],
-  'Program': [['Expression']]
-
-};
-
-function Symbol(symbolName, token) {
-  this.name = symbolName;
-  this.token = token;
-  this.childNodes = [];
-  this.toString = function (indent) {
-    if (!indent)
-      indent = '';
-    if (this.childNodes.length == 1)
-      return this.childNodes[0].toString(indent);
-    var str = indent + this.name + (this.token != undefined && this.name != this.token ? ':' + this.token : '') + '\n';
-    for (var i = 0; i < this.childNodes.length; i++)
-      str += this.childNodes[i].toString(indent + '    ');
-    return str;
-  };
-}
-
-function SyntacticalParser() {
-  var currentRule;
-  var root = {
-    Program: '$'
-  };
-  var hash = {};
-
-  function closureNode(node) {
-
-    hash[JSON.stringify(node)] = node;
-
-    var queue = Object.getOwnPropertyNames(node);
-    while (queue.length) {
-      var symbolName = queue.shift();
-      if (!rules[symbolName])
-        continue;
-      rules[symbolName].forEach(function (rule) {
-        if (!node[rule[0]])
-          queue.push(rule[0]);
-        var rulenode = node;
-        var lastnode = null;
-        rule.forEach(function (symbol) {
-          if (!rulenode[symbol])
-            rulenode[symbol] = {};
-          lastnode = rulenode;
-          rulenode = rulenode[symbol];
-        });
-        if (node[symbolName].$div)
-          rulenode.$div = true;
-        rulenode.$reduce = symbolName;
-        rulenode.$count = rule.length;
-      });
-    }
-
-    for (var p in node) {
-      if (typeof node[p] != 'object' || p.charAt(0) == '$' || node[p].$closure)
-        continue;
-      if (hash[JSON.stringify(node[p])])
-        node[p] = hash[JSON.stringify(node[p])];
-      else {
-        closureNode(node[p]);
-      }
-    }
-    node.$closure = true;
-  }
-
-  closureNode(root);
-  var symbolStack = [];
-  var statusStack = [root];
-  var current = root;
-  this.insertSymbol = function insertSymbol(symbol, haveLineTerminator) {
-    while (!current[symbol.name] && current.$reduce) {
-      var count = current.$count;
-      var newsymbol = new Symbol(current.$reduce);
-      while (count--)
-        newsymbol.childNodes.push(symbolStack.pop()), statusStack.pop();
-      current = statusStack[statusStack.length - 1];
-      this.insertSymbol(newsymbol);
-    }
-    current = current[symbol.name];
-    symbolStack.push(symbol), statusStack.push(current);
-    if (!current)
-      throw new Error();
-    return current.$div;
-  };
-  this.reset = function () {
-    current = root;
-    symbolStack = [];
-    statusStack = [root];
-  };
-  Object.defineProperty(this, 'grammarTree', {
-    'get': function () {
-      try {
-        while (current.$reduce) {
-          var count = current.$count;
-          var newsymbol = new Symbol(current.$reduce);
-          while (count--)
-            newsymbol.childNodes.push(symbolStack.pop()), statusStack.pop();
-          current = statusStack[statusStack.length - 1];
-          this.insertSymbol(newsymbol);
-        }
-        if (symbolStack.length > 0 && current[';']) {
-          this.insertSymbol(new Symbol(';', ';'));
-          return this.grammarTree;
-        }
-        if (symbolStack.length != 1 || symbolStack[0].name != 'Program')
-          throw new Error();
-      } catch (e) {
-        throw new SyntaxError('Unexpected end of input');
-      }
-      return symbolStack[0];
-    }
-  });
-}
-
-function Parser() {
-  this.lexicalParser = new LexicalParser();
-  this.syntacticalParser = new SyntacticalParser();
-  var terminalSymbols = ['NullLiteral', 'BooleanLiteral', 'NumericLiteral', 'StringLiteral', 'RegularExpressionLiteral', 'Identifier', '**', '=>', '{', '}', '(', ')', '[', ']', '.', ';', ',', '<', '>', '<=', '>=', '==', '!=', '===', '!==', '+', '-', '*', '%', '++', '--', '<<', '>>', '>>>', '&', '|', '^', '!', '~', '&&', '||', '?', ':', '=', '+=', '-=', '*=', '%=', '<<=', '>>=', '>>>=', '&=', '|=', '^=', '/', '/=', 'instanceof', 'typeof', 'new', 'void', 'debugger', 'this', 'delete', 'in'];
-  var terminalSymbolIndex = {};
-  terminalSymbols.forEach(function (e) {
-    Object.defineProperty(terminalSymbolIndex, e, {});
-  });
-  this.reset = function () {
-    this.lexicalParser.reset();
-    this.syntacticalParser.reset();
-  };
-  this.parse = function (source, onInputElement) {
-    var token;
-    var haveLineTerminator = false;
-    this.lexicalParser.source = source;
-    var useDiv = false;
-    while (token = this.lexicalParser.getNextToken(useDiv)) {
-      if (onInputElement)
-        onInputElement(token);
-      try {
-        if (Object.getOwnPropertyNames(token).some(
-            (e) => {
-              if (terminalSymbolIndex.hasOwnProperty(e)) {
-                useDiv = this.syntacticalParser.insertSymbol(new Symbol(e, token), haveLineTerminator);
-                haveLineTerminator = false;
-                return true;
-              } else
-                return false;
-            }))
-          continue;
-        if ((token.Keyword || token.Punctuator || token.DivPunctuator) && terminalSymbolIndex.hasOwnProperty(token.toString())) {
-          useDiv = this.syntacticalParser.insertSymbol(new Symbol(token.toString(), token), haveLineTerminator);
-        }
-      } catch (e) {
-        throw new SyntaxError('Unexpected token ' + token);
-      }
-    }
-    return this.syntacticalParser.grammarTree;
-  };
-}
-
-var parser = new Parser();
-
-function JavaScriptExpression(text) {
-  parser.reset();
-  this.tree = (parser.parse(text));
-  this.paths = [];
-  var context = Object.create(null);
-  var me = this;
-  var pathIndex = Object.create(null);
-  this.isSimple;
-  this.isConst;
-  walk(this.tree);
-  checkSimple(this.tree);
-  if (this.paths.length === 0) {
-    this.isConst = true;
-  }
-  this.setter = function (path) {
-    var curr = context;
-    for (var i = 0; i < path.length - 1; i++) {
-      if (!curr[path[i]])
-        curr[path[i]] = Object.create(null);
-      curr = curr[path[i]];
-    }
-    return {
-      isCompleted: function () {
-        for (var p in pathIndex)
-          if (!pathIndex[p])
-            return false;
-        return true;
-      },
-      set: function (value) {
-        if (!pathIndex[path.join('.')]) {
-          pathIndex[path.join('.')] = true;
-        }
-        curr[path[i]] = (value);
-        if (this.isCompleted()) {
-          return me.exec();
-        } else {
-          return undefined;
-        }
-      }
-    };
-  };
-
-  this.valueOf = this.exec = function () {
-    try {
-      return function () {
-        return eval(text);
-      }.call(context);
-    } catch (e) {
-    }
-  };
-
-  function checkSimple(symbol) {
-
-    var curr = symbol;
-    while (curr.childNodes.length <= 1 && curr.name !== 'MemberExpression') {
-      curr = curr.childNodes[0];
-    }
-    // TODO: need to point out "[……]"
-    if (curr.name === 'MemberExpression') {
-      me.isSimple = true;
-    } else {
-      me.isSimple = false;
-    }
-  }
-
-  function walk(symbol) {
-    if (symbol.name === 'CallExpression' && symbol.childNodes[symbol.childNodes.length - 1].name !== 'CallExpression') {
-      var path = getPath(symbol.childNodes[1]);
-      walk(symbol.childNodes[0]);
-    } else if (symbol.name === 'NewExpression' && symbol.childNodes.length === 1) {
-      var path = getPath(symbol.childNodes[0]);
-    } else if (symbol.name === 'MemberExpression' && symbol.childNodes.length === 1) {
-      var path = getPath(symbol);
-    } else {
-      for (var i = 0; i < symbol.childNodes.length; i++)
-        walk(symbol.childNodes[i]);
-    }
-
-  }
-
-
-  function getPath(symbol) {
-    // [["PrimaryExpression"], ["MemberExpression", "[", "Expression", "]"], ["MemberExpression", ".", "IdentifierName"], ["new", "MemberExpression", "Arguments"]],
-
-    if (symbol.childNodes[0].name === 'IdentifierName') { // MemberExpression : MemberExpression "." IdentifierName
-      var path = getPath(symbol.childNodes[2]);
-      if (path)
-        path = path.concat(symbol.childNodes[0].childNodes[0].token.toString());
-      createPath(path);
-      return path;
-
-    } else if (symbol.childNodes[0].name === 'PrimaryExpression') { // MemberExpression : PrimaryExpression
-      if (symbol.childNodes[0].childNodes[0].name === 'Identifier') {
-        var path = [symbol.childNodes[0].childNodes[0].token.toString()];
-        createPath(path);
-        return path;
-      } else {
-        return null;
-      }
-    } else if (symbol.childNodes[0].name === ']') { // MemberExpression : MemberExpression "[" Expression "]"
-      getPath(symbol.childNodes[3]);
-      walk(symbol.childNodes[1]);
-      return null;
-
-    } else if (symbol.childNodes[0].name === 'Arguments') { // MemberExpression : "new" MemberExpression Arguments
-      walk(symbol.childNodes[0]);
-      walk(symbol.childNodes[1]);
-      return null;
-    } else {
-      for (var i = 0; i < symbol.childNodes.length; i++)
-        walk(symbol.childNodes[i]);
-    }
-  }
-
-
-  function createPath(path) {
-    var curr = context;
-    for (var i = 0; i < path.length - 1; i++) {
-      if (!curr[path[i]])
-        curr[path[i]] = Object.create(null);
-      curr = curr[path[i]];
-    }
-    me.paths.push(path);
-    pathIndex[path.join('.')] = false;
-  }
-}
-
-function visit(tree) {
-  var childNodes = tree.childNodes.slice().reverse();
-  var children = childNodes.filter(e =>
-    !e.token || !e.token.Punctuator);
-  if (tree.name === 'UnaryExpression') {
-    // negative number support
-    if (childNodes.length === 2 && childNodes[0].name === '-' && children.length === 1) {
-      var res = visit(children[0]);
-      res.value = -res.value;
-      return res;
-    }
-  }
-
-  if (tree.name === 'Arguments') {
-    var argumentList = [];
-    var listNode = children[0];
-    while (listNode) {
-      if (listNode.childNodes.length === 3) {
-        argumentList.unshift(listNode.childNodes[0]);
-        listNode = listNode.childNodes[2];
-      }
-      if (listNode.childNodes.length === 1) {
-        argumentList.unshift(listNode.childNodes[0]);
-        listNode = null;
-      }
-    }
-    return {
-      type: 'Arguments',
-      children: argumentList.map(e => visit(e))
-    };
-  }
-
-
-  if (children && children.length === 1) {
-    var res = visit(children[0]);
-    return res;
-  }
-
-  if (tree.token && ['NullLiteral', 'BooleanLiteral', 'NumericLiteral', 'StringLiteral', 'Identifier'].some(e => tree.token[e])) {
-    var type = Object.keys(tree.token).filter(e => e.match(/Literal/) || e.match(/Identifier/))[0];
-    var value = {
-      'NullLiteral': null,
-      'BooleanLiteral': Boolean(tree.token),
-      'NumericLiteral': Number(tree.token),
-      'StringLiteral': tree.token,
-      'Identifier': tree.token,
-    }[type];
-
-    return {
-      type: type,
-      value: value
-    };
-  }
-
-  if (tree.name === 'CallExpression')
-    return {
-      type: 'CallExpression',
-      children: [visit(childNodes[0]), visit(childNodes[1])]
-    };
-
-  return {
-    type: childNodes.filter(e => e.token && e.token.Punctuator)[0].name,
-    children: childNodes.filter(e => !e.token || !e.token.Punctuator).map(e => visit(e))
-  };
-}
-
-function parse(originExp) {
-  let exp = new JavaScriptExpression(originExp);
-  return JSON.stringify(visit(exp.tree), null);
-}
-
-module.exports = {
-  parse: parse
-};
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(true)
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else {
-		var a = factory();
-		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
-	}
-})(typeof self !== 'undefined' ? self : this, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/
-
-
-/* eslint-disable no-unused-vars */
-var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-function toObject(val) {
-	if (val === null || val === undefined) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
-
-	return Object(val);
-}
-
-function shouldUseNative() {
-	try {
-		if (!Object.assign) {
-			return false;
-		}
-
-		// Detect buggy property enumeration order in older V8 versions.
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
-		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
-		test1[5] = 'de';
-		if (Object.getOwnPropertyNames(test1)[0] === '5') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test2 = {};
-		for (var i = 0; i < 10; i++) {
-			test2['_' + String.fromCharCode(i)] = i;
-		}
-		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-			return test2[n];
-		});
-		if (order2.join('') !== '0123456789') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test3 = {};
-		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-			test3[letter] = letter;
-		});
-		if (Object.keys(Object.assign({}, test3)).join('') !==
-				'abcdefghijklmnopqrst') {
-			return false;
-		}
-
-		return true;
-	} catch (err) {
-		// We don't expect any of the above to throw, but better to be safe.
-		return false;
-	}
-}
-
-module.exports = shouldUseNative() ? Object.assign : function (target, source) {
-	var from;
-	var to = toObject(target);
-	var symbols;
-
-	for (var s = 1; s < arguments.length; s++) {
-		from = Object(arguments[s]);
-
-		for (var key in from) {
-			if (hasOwnProperty.call(from, key)) {
-				to[key] = from[key];
-			}
-		}
-
-		if (getOwnPropertySymbols) {
-			symbols = getOwnPropertySymbols(from);
-			for (var i = 0; i < symbols.length; i++) {
-				if (propIsEnumerable.call(from, symbols[i])) {
-					to[symbols[i]] = from[symbols[i]];
-				}
-			}
-		}
-	}
-
-	return to;
-};
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(true)
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else {
-		var a = factory();
-		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
-	}
-})(typeof self !== 'undefined' ? self : this, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function findIndex(o, condition) {
-  return o.indexOf(find(o, condition));
-}
-
-function dropWhile(o, condition) {
-  var result = [];
-  map(o, function (v, k) {
-    if (!condition(v, k)) {
-      result.push(v);
-    }
-  });
-  return result;
-}
-
-function filter(o, condition) {
-  var result = [];
-  forEach(o, function (v, k) {
-    if (condition(v, k)) {
-      result.push(v);
-    }
-  });
-  return result;
-}
-
-function map(o, fn) {
-  if (o instanceof Array) {
-    return Array.prototype.map.call(o, fn);
-  } else {
-    var result = [];
-    forEach(o, function (v, k) {
-      result.push(fn(v, k));
-    });
-    return result;
-  }
-}
-
-/*
- forEach({a: 1, b: 2}, (v, k) => {
- console.log({
- v, k
- })
- })
-
- forEach([1,2,3],(v,k)=>{
- console.log({
- v,k
- })
- })
- */
-
-function forEach(o, fn) {
-  if (o instanceof Array) {
-    return Array.prototype.forEach.call(o, fn);
-  }
-  Object.keys(o).forEach(function (key) {
-    fn(o[key], key);
-  });
-}
-
-/* console.log(
- find([{name: 1}, {name: 2}], (o) => {
- return o.name === 2;
- }))
-
- console.log(find([{name: 1,age:2}, {name: 2}], {name:1}))
- */
-function find(o, condition) {
-  var result = null;
-  forEach(o, function (v, k) {
-    if (typeof condition === 'function') {
-      if (condition(v, k)) {
-        result = v;
-      }
-    } else {
-      var propName = Object.keys(condition)[0];
-      if (propName && v[propName] === condition[propName]) {
-        result = v;
-      }
-    }
-  });
-  return result;
-}
-
-module.exports = {
-  find: find,
-  forEach: forEach,
-  map: map,
-  filter: filter,
-  dropWhile: dropWhile,
-  findIndex: findIndex
-};
-
-/***/ })
-/******/ ]);
-});
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-/**
- Copyright 2018 Alibaba Group
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- */
-
-/**
- * Transforms matrix into an object
- *
- * @param string matrix
- * @return object
- */
-
-// TODO matrix4 for 3D
-var matrixToTransformObj = function matrixToTransformObj(matrix) {
-  // this happens when there was no rotation yet in CSS
-  if (matrix === 'none') {
-    matrix = 'matrix(0,0,0,0,0)';
-  }
-  var obj = {},
-      values = matrix.match(/([-+]?[\d\.]+)/g);
-
-  var _values = _slicedToArray(values, 6),
-      a = _values[0],
-      b = _values[1],
-      c = _values[2],
-      d = _values[3],
-      e = _values[4],
-      f = _values[5];
-
-  obj.rotate = obj.rotateZ = Math.round(Math.atan2(parseFloat(b), parseFloat(a)) * (180 / Math.PI)) || 0;
-  obj.translateX = e !== undefined ? pxTo750(e) : 0;
-  obj.translateY = f !== undefined ? pxTo750(f) : 0;
-  obj.scaleX = Math.sqrt(a * a + b * b);
-  obj.scaleY = Math.sqrt(c * c + d * d);
-  return obj;
-};
-
-function pxTo750(n) {
-  return n / document.body.clientWidth * 750;
-}
-
-function px(n) {
-  return n / 750 * document.body.clientWidth;
-  // return Math.round(n / 750 * document.body.clientWidth);
-}
-
-function clamp(n, min, max) {
-  return n < min ? min : n > max ? max : n;
-}
-
-var vendor = function () {
-  var el = document.createElement('div').style;
-  var vendors = ['t', 'webkitT', 'MozT', 'msT', 'OT'],
-      transform,
-      i = 0,
-      l = vendors.length;
-  for (; i < l; i++) {
-    transform = vendors[i] + 'ransform';
-    if (transform in el) return vendors[i].substr(0, vendors[i].length - 1);
-  }
-  return false;
-}();
-
-/**
- *  add vendor to attribute
- *  @memberOf Util
- *  @param {String} attrName name of attribute
- *  @return { String }
- **/
-function prefixStyle(attrName) {
-  if (vendor === false) return false;
-  if (vendor === '') return attrName;
-  return vendor + attrName.charAt(0).toUpperCase() + attrName.substr(1);
-}
-
-exports.matrixToTransformObj = matrixToTransformObj;
-exports.pxTo750 = pxTo750;
-exports.px = px;
-exports.clamp = clamp;
-exports.prefixStyle = prefixStyle;
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Copyright 2018 Alibaba Group
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Licensed under the Apache License, Version 2.0 (the "License");
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      you may not use this file except in compliance with the License.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      You may obtain a copy of the License at
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      http://www.apache.org/licenses/LICENSE-2.0
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Unless required by applicable law or agreed to in writing, software
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      distributed under the License is distributed on an "AS IS" BASIS,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      See the License for the specific language governing permissions and
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      limitations under the License.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
-
-var _simpleLodash = __webpack_require__(1);
-
-var _simpleLodash2 = _interopRequireDefault(_simpleLodash);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var TimingHandler = function () {
-  function TimingHandler(binding) {
-    _classCallCheck(this, TimingHandler);
-
-    this.binding = null;
-
-    this.binding = binding;
-    var props = binding.options.props;
-
-
-    _simpleLodash2.default.map(props, function (prop) {
-      var element = prop.element,
-          config = prop.config;
-
-      if (config && element) {
-        if (config.perspective) {
-          if (element.parentNode) {
-            element.parentNode.style[(0, _utils.prefixStyle)('transformStyle')] = 'preserve-3d';
-            element.parentNode.style[(0, _utils.prefixStyle)('perspective')] = config.perspective + 'px';
-            element.parentNode.style[(0, _utils.prefixStyle)('perspectiveOrigin')] = '0 0';
-          }
-        }
-        if (config.transformOrigin) {
-          element.style[(0, _utils.prefixStyle)('transformOrigin')] = config.transformOrigin;
-        }
-      }
-    });
-  }
-
-  _createClass(TimingHandler, [{
-    key: 'destroy',
-    value: function destroy() {}
-  }]);
-
-  return TimingHandler;
-}();
-
-exports.default = TimingHandler;
-;
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(true)
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else {
-		var a = factory();
-		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
-	}
-})(this, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var PI = Math.PI,
-    sin = Math.sin,
-    cos = Math.cos,
-    sqrt = Math.sqrt,
-    pow = Math.pow;
-
-var c1 = 1.70158;
-var c2 = c1 * 1.525;
-var c3 = c1 + 1;
-var c4 = 2 * PI / 3;
-var c5 = 2 * PI / 4.5;
-
-// x is the fraction of animation progress, in the range 0..1
-function bounceOut(x) {
-  var n1 = 7.5625,
-      d1 = 2.75;
-  if (x < 1 / d1) {
-    return n1 * x * x;
-  } else if (x < 2 / d1) {
-    return n1 * (x -= 1.5 / d1) * x + .75;
-  } else if (x < 2.5 / d1) {
-    return n1 * (x -= 2.25 / d1) * x + .9375;
-  } else {
-    return n1 * (x -= 2.625 / d1) * x + .984375;
-  }
-}
-
-var Easing = {
-  linear: function linear(x) {
-    return x;
-  },
-  easeInQuad: function easeInQuad(x) {
-    return x * x;
-  },
-  easeOutQuad: function easeOutQuad(x) {
-    return 1 - (1 - x) * (1 - x);
-  },
-  easeInOutQuad: function easeInOutQuad(x) {
-    return x < 0.5 ? 2 * x * x : 1 - pow(-2 * x + 2, 2) / 2;
-  },
-  easeInCubic: function easeInCubic(x) {
-    return x * x * x;
-  },
-  easeOutCubic: function easeOutCubic(x) {
-    return 1 - pow(1 - x, 3);
-  },
-  easeInOutCubic: function easeInOutCubic(x) {
-    return x < 0.5 ? 4 * x * x * x : 1 - pow(-2 * x + 2, 3) / 2;
-  },
-  easeInQuart: function easeInQuart(x) {
-    return x * x * x * x;
-  },
-  easeOutQuart: function easeOutQuart(x) {
-    return 1 - pow(1 - x, 4);
-  },
-  easeInOutQuart: function easeInOutQuart(x) {
-    return x < 0.5 ? 8 * x * x * x * x : 1 - pow(-2 * x + 2, 4) / 2;
-  },
-  easeInQuint: function easeInQuint(x) {
-    return x * x * x * x * x;
-  },
-  easeOutQuint: function easeOutQuint(x) {
-    return 1 - pow(1 - x, 5);
-  },
-  easeInOutQuint: function easeInOutQuint(x) {
-    return x < 0.5 ? 16 * x * x * x * x * x : 1 - pow(-2 * x + 2, 5) / 2;
-  },
-  easeInSine: function easeInSine(x) {
-    return 1 - cos(x * PI / 2);
-  },
-  easeOutSine: function easeOutSine(x) {
-    return sin(x * PI / 2);
-  },
-  easeInOutSine: function easeInOutSine(x) {
-    return -(cos(PI * x) - 1) / 2;
-  },
-  easeInExpo: function easeInExpo(x) {
-    return x === 0 ? 0 : pow(2, 10 * x - 10);
-  },
-  easeOutExpo: function easeOutExpo(x) {
-    return x === 1 ? 1 : 1 - pow(2, -10 * x);
-  },
-  easeInOutExpo: function easeInOutExpo(x) {
-    return x === 0 ? 0 : x === 1 ? 1 : x < 0.5 ? pow(2, 20 * x - 10) / 2 : (2 - pow(2, -20 * x + 10)) / 2;
-  },
-  easeInCirc: function easeInCirc(x) {
-    return 1 - sqrt(1 - pow(x, 2));
-  },
-  easeOutCirc: function easeOutCirc(x) {
-    return sqrt(1 - pow(x - 1, 2));
-  },
-  easeInOutCirc: function easeInOutCirc(x) {
-    return x < 0.5 ? (1 - sqrt(1 - pow(2 * x, 2))) / 2 : (sqrt(1 - pow(-2 * x + 2, 2)) + 1) / 2;
-  },
-  easeInElastic: function easeInElastic(x) {
-    return x === 0 ? 0 : x === 1 ? 1 : -pow(2, 10 * x - 10) * sin((x * 10 - 10.75) * c4);
-  },
-  easeOutElastic: function easeOutElastic(x) {
-    return x === 0 ? 0 : x === 1 ? 1 : pow(2, -10 * x) * sin((x * 10 - 0.75) * c4) + 1;
-  },
-  easeInOutElastic: function easeInOutElastic(x) {
-    return x === 0 ? 0 : x === 1 ? 1 : x < 0.5 ? -(pow(2, 20 * x - 10) * sin((20 * x - 11.125) * c5)) / 2 : pow(2, -20 * x + 10) * sin((20 * x - 11.125) * c5) / 2 + 1;
-  },
-  easeInBack: function easeInBack(x) {
-    return c3 * x * x * x - c1 * x * x;
-  },
-  easeOutBack: function easeOutBack(x) {
-    return 1 + c3 * pow(x - 1, 3) + c1 * pow(x - 1, 2);
-  },
-  easeInOutBack: function easeInOutBack(x) {
-    return x < 0.5 ? pow(2 * x, 2) * ((c2 + 1) * 2 * x - c2) / 2 : (pow(2 * x - 2, 2) * ((c2 + 1) * (x * 2 - 2) + c2) + 2) / 2;
-  },
-  easeInBounce: function easeInBounce(x) {
-    return 1 - bounceOut(1 - x);
-  },
-  easeOutBounce: bounceOut,
-  easeInOutBounce: function easeInOutBounce(x) {
-    return x < 0.5 ? (1 - bounceOut(1 - 2 * x)) / 2 : (1 + bounceOut(2 * x - 1)) / 2;
-  },
-  cubicBezier: function cubicBezier() {}
-};
-
-module.exports = Easing;
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function Bezier(x1, y1, x2, y2, epsilon) {
-  var curveX = function curveX(t) {
-    var v = 1 - t;
-    return 3 * v * v * t * x1 + 3 * v * t * t * x2 + t * t * t;
-  };
-
-  var curveY = function curveY(t) {
-    var v = 1 - t;
-    return 3 * v * v * t * y1 + 3 * v * t * t * y2 + t * t * t;
-  };
-
-  var derivativeCurveX = function derivativeCurveX(t) {
-    var v = 1 - t;
-    return 3 * (2 * (t - 1) * t + v * v) * x1 + 3 * (-t * t * t + 2 * v * t) * x2;
-  };
-
-  return function (t) {
-
-    var x = t,
-        t0,
-        t1,
-        t2,
-        x2,
-        d2,
-        i;
-
-    // First try a few iterations of Newton's method -- normally very fast.
-    for (t2 = x, i = 0; i < 8; i++) {
-      x2 = curveX(t2) - x;
-      if (Math.abs(x2) < epsilon) return curveY(t2);
-      d2 = derivativeCurveX(t2);
-      if (Math.abs(d2) < 1e-6) break;
-      t2 = t2 - x2 / d2;
-    }
-
-    t0 = 0, t1 = 1, t2 = x;
-
-    if (t2 < t0) return curveY(t0);
-    if (t2 > t1) return curveY(t1);
-
-    // Fallback to the bisection method for reliability.
-    while (t0 < t1) {
-      x2 = curveX(t2);
-      if (Math.abs(x2 - x) < epsilon) return curveY(t2);
-      if (x > x2) t0 = t2;else t1 = t2;
-      t2 = (t1 - t0) * .5 + t0;
-    }
-
-    // Failure
-    return curveY(t2);
-  };
-};
-
-module.exports = Bezier;
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var raf = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
-  window.setTimeout(callback, 1000 / 60);
-};
-
-var cancelRAF = window.cancelAnimationFrame || window.webkitCancelAnimationFrame || window.mozCancelAnimationFrame || window.oCancelAnimationFrame || window.msCancelAnimationFrame || window.clearTimeout;
-
-module.exports = {
-  raf: raf,
-  cancelRAF: cancelRAF
-};
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = __webpack_require__(4);
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var easing = __webpack_require__(0);
-var bezier = __webpack_require__(1);
-
-var _require = __webpack_require__(2),
-    raf = _require.raf,
-    cancelRAF = _require.cancelRAF;
-
-var assign = __webpack_require__(5);
-
-var TYPES = {
-  START: 'start',
-  END: 'end',
-  RUN: 'run',
-  STOP: 'stop'
-};
-
-var noop = function noop() {};
-
-var MIN_DURATION = 1;
-
-function Timer(cfg) {
-  this.init(cfg);
-}
-
-Timer.prototype = {
-  init: function init(cfg) {
-    this.cfg = assign({
-      easing: 'linear',
-      duration: Infinity,
-      onStart: noop,
-      onRun: noop,
-      onStop: noop,
-      onEnd: noop
-    }, cfg);
-  },
-  run: function run() {
-    var _cfg = this.cfg,
-        duration = _cfg.duration,
-        onStart = _cfg.onStart,
-        onRun = _cfg.onRun;
-
-    if (duration <= MIN_DURATION) {
-      this.isfinished = true;
-      typeof onRun === 'function' ? onRun({ percent: 1 }) : null;
-      this.stop();
-    }
-    if (this.isfinished) return;
-    this._hasFinishedPercent = this._stop && this._stop.percent || 0;
-    this._stop = null;
-    this.start = Date.now();
-    this.percent = 0;
-    typeof onStart === 'function' ? onStart({ percent: 0, type: TYPES.START }) : null;
-    // epsilon determines the precision of the solved values
-    var epsilon = 1000 / 60 / duration / 4;
-    var b = this.cfg.bezierArgs;
-    this.easingFn = b && b.length === 4 ? bezier(b[0], b[1], b[2], b[3], epsilon) : easing[this.cfg.easing];
-    this._run();
-  },
-
-  _run: function _run() {
-    var _this = this;
-
-    var _cfg2 = this.cfg,
-        onRun = _cfg2.onRun,
-        onStop = _cfg2.onStop;
-
-    cancelRAF(this._raf);
-    this._raf = raf(function () {
-      _this.now = Date.now();
-      _this.t = _this.now - _this.start;
-      _this.duration = _this.now - _this.start >= _this.cfg.duration ? _this.cfg.duration : _this.now - _this.start;
-      _this.progress = _this.easingFn(_this.duration / _this.cfg.duration);
-      _this.percent = _this.duration / _this.cfg.duration + _this._hasFinishedPercent;
-      if (_this.percent >= 1 || _this._stop) {
-        _this.percent = _this._stop && _this._stop.percent ? _this._stop.percent : 1;
-        _this.duration = _this._stop && _this._stop.duration ? _this._stop.duration : _this.duration;
-
-        typeof onRun === 'function' ? onRun({
-          percent: _this.progress,
-          originPercent: _this.percent,
-          t: _this.t,
-          type: TYPES.RUN
-        }) : null;
-
-        typeof onStop === 'function' ? onStop({
-          percent: _this.percent,
-          t: _this.t,
-          type: TYPES.STOP
-        }) : null;
-
-        if (_this.percent >= 1) {
-          _this.isfinished = true;
-          _this.stop();
-        }
-        return;
-      }
-
-      typeof onRun === 'function' ? onRun({
-        percent: _this.progress,
-        originPercent: _this.percent,
-        t: _this.t,
-        type: TYPES.RUN
-      }) : null;
-
-      _this._run();
-    });
-  },
-
-  stop: function stop() {
-    var onEnd = this.cfg.onEnd;
-
-    this._stop = {
-      percent: this.percent,
-      now: this.now
-    };
-    typeof onEnd === 'function' ? onEnd({
-      percent: 1,
-      t: this.t,
-      type: TYPES.END
-    }) : null;
-    cancelRAF(this._raf);
-  }
-};
-
-Timer.Easing = easing;
-Timer.Bezier = bezier;
-Timer.raf = raf;
-Timer.cancelRAF = cancelRAF;
-module.exports = Timer;
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/
-
-
-/* eslint-disable no-unused-vars */
-var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-function toObject(val) {
-	if (val === null || val === undefined) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
-
-	return Object(val);
-}
-
-function shouldUseNative() {
-	try {
-		if (!Object.assign) {
-			return false;
-		}
-
-		// Detect buggy property enumeration order in older V8 versions.
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
-		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
-		test1[5] = 'de';
-		if (Object.getOwnPropertyNames(test1)[0] === '5') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test2 = {};
-		for (var i = 0; i < 10; i++) {
-			test2['_' + String.fromCharCode(i)] = i;
-		}
-		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-			return test2[n];
-		});
-		if (order2.join('') !== '0123456789') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test3 = {};
-		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-			test3[letter] = letter;
-		});
-		if (Object.keys(Object.assign({}, test3)).join('') !==
-				'abcdefghijklmnopqrst') {
-			return false;
-		}
-
-		return true;
-	} catch (err) {
-		// We don't expect any of the above to throw, but better to be safe.
-		return false;
-	}
-}
-
-module.exports = shouldUseNative() ? Object.assign : function (target, source) {
-	var from;
-	var to = toObject(target);
-	var symbols;
-
-	for (var s = 1; s < arguments.length; s++) {
-		from = Object(arguments[s]);
-
-		for (var key in from) {
-			if (hasOwnProperty.call(from, key)) {
-				to[key] = from[key];
-			}
-		}
-
-		if (getOwnPropertySymbols) {
-			symbols = getOwnPropertySymbols(from);
-			for (var i = 0; i < symbols.length; i++) {
-				if (propIsEnumerable.call(from, symbols[i])) {
-					to[symbols[i]] = from[symbols[i]];
-				}
-			}
-		}
-	}
-
-	return to;
-};
-
-
-/***/ })
-/******/ ]);
-});
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- Copyright 2018 Alibaba Group
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- */
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _quaternion = __webpack_require__(6);
-
-var _quaternion2 = _interopRequireDefault(_quaternion);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function Vector3(x, y, z) {
-
-  this.x = x || 0;
-  this.y = y || 0;
-  this.z = z || 0;
-}
-
-Vector3.prototype = {
-
-  constructor: Vector3,
-
-  isVector3: true,
-
-  set: function set(x, y, z) {
-
-    this.x = x;
-    this.y = y;
-    this.z = z;
-
-    return this;
-  },
-
-  applyEuler: function () {
-
-    var quaternion;
-
-    return function applyEuler(euler) {
-
-      if ((euler && euler.isEuler) === false) {
-
-        console.error('THREE.Vector3: .applyEuler() now expects an Euler rotation rather than a Vector3 and order.');
-      }
-
-      if (quaternion === undefined) quaternion = new _quaternion2.default();
-
-      return this.applyQuaternion(quaternion.setFromEuler(euler));
-    };
-  }(),
-
-  applyQuaternion: function applyQuaternion(q) {
-
-    var x = this.x,
-        y = this.y,
-        z = this.z;
-    var qx = q.x,
-        qy = q.y,
-        qz = q.z,
-        qw = q.w;
-
-    // calculate quat * vector
-
-    var ix = qw * x + qy * z - qz * y;
-    var iy = qw * y + qz * x - qx * z;
-    var iz = qw * z + qx * y - qy * x;
-    var iw = -qx * x - qy * y - qz * z;
-
-    // calculate result * inverse quat
-
-    this.x = ix * qw + iw * -qx + iy * -qz - iz * -qy;
-    this.y = iy * qw + iw * -qy + iz * -qx - ix * -qz;
-    this.z = iz * qw + iw * -qz + ix * -qy - iy * -qx;
-
-    return this;
-  }
-
-};
-
-exports.default = Vector3;
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- Copyright 2018 Alibaba Group
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- */
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _objectAssign = __webpack_require__(0);
-
-var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function Quaternion(x, y, z, w) {
-
-  this._x = x || 0;
-  this._y = y || 0;
-  this._z = z || 0;
-  this._w = w !== undefined ? w : 1;
-}
-
-Quaternion.prototype = {
-
-  constructor: Quaternion,
-
-  get x() {
-
-    return this._x;
-  },
-
-  set x(value) {
-
-    this._x = value;
-    this.onChangeCallback();
-  },
-
-  get y() {
-
-    return this._y;
-  },
-
-  set y(value) {
-
-    this._y = value;
-    this.onChangeCallback();
-  },
-
-  get z() {
-
-    return this._z;
-  },
-
-  set z(value) {
-
-    this._z = value;
-    this.onChangeCallback();
-  },
-
-  get w() {
-
-    return this._w;
-  },
-
-  set w(value) {
-
-    this._w = value;
-    this.onChangeCallback();
-  },
-
-  set: function set(x, y, z, w) {
-
-    this._x = x;
-    this._y = y;
-    this._z = z;
-    this._w = w;
-
-    this.onChangeCallback();
-
-    return this;
-  },
-
-  clone: function clone() {
-
-    return new this.constructor(this._x, this._y, this._z, this._w);
-  },
-
-  copy: function copy(quaternion) {
-
-    this._x = quaternion.x;
-    this._y = quaternion.y;
-    this._z = quaternion.z;
-    this._w = quaternion.w;
-
-    this.onChangeCallback();
-
-    return this;
-  },
-
-  setFromEuler: function setFromEuler(euler, update) {
-
-    if ((euler && euler.isEuler) === false) {
-
-      throw new Error('THREE.Quaternion: .setFromEuler() now expects an Euler rotation rather than a Vector3 and order.');
-    }
-
-    // http://www.mathworks.com/matlabcentral/fileexchange/
-    //  20696-function-to-convert-between-dcm-euler-angles-quaternions-and-euler-vectors/
-    //  content/SpinCalc.m
-
-    var c1 = Math.cos(euler._x / 2);
-    var c2 = Math.cos(euler._y / 2);
-    var c3 = Math.cos(euler._z / 2);
-    var s1 = Math.sin(euler._x / 2);
-    var s2 = Math.sin(euler._y / 2);
-    var s3 = Math.sin(euler._z / 2);
-
-    var order = euler.order;
-
-    if (order === 'XYZ') {
-
-      this._x = s1 * c2 * c3 + c1 * s2 * s3;
-      this._y = c1 * s2 * c3 - s1 * c2 * s3;
-      this._z = c1 * c2 * s3 + s1 * s2 * c3;
-      this._w = c1 * c2 * c3 - s1 * s2 * s3;
-    } else if (order === 'YXZ') {
-
-      this._x = s1 * c2 * c3 + c1 * s2 * s3;
-      this._y = c1 * s2 * c3 - s1 * c2 * s3;
-      this._z = c1 * c2 * s3 - s1 * s2 * c3;
-      this._w = c1 * c2 * c3 + s1 * s2 * s3;
-    } else if (order === 'ZXY') {
-
-      this._x = s1 * c2 * c3 - c1 * s2 * s3;
-      this._y = c1 * s2 * c3 + s1 * c2 * s3;
-      this._z = c1 * c2 * s3 + s1 * s2 * c3;
-      this._w = c1 * c2 * c3 - s1 * s2 * s3;
-    } else if (order === 'ZYX') {
-
-      this._x = s1 * c2 * c3 - c1 * s2 * s3;
-      this._y = c1 * s2 * c3 + s1 * c2 * s3;
-      this._z = c1 * c2 * s3 - s1 * s2 * c3;
-      this._w = c1 * c2 * c3 + s1 * s2 * s3;
-    } else if (order === 'YZX') {
-
-      this._x = s1 * c2 * c3 + c1 * s2 * s3;
-      this._y = c1 * s2 * c3 + s1 * c2 * s3;
-      this._z = c1 * c2 * s3 - s1 * s2 * c3;
-      this._w = c1 * c2 * c3 - s1 * s2 * s3;
-    } else if (order === 'XZY') {
-
-      this._x = s1 * c2 * c3 - c1 * s2 * s3;
-      this._y = c1 * s2 * c3 - s1 * c2 * s3;
-      this._z = c1 * c2 * s3 + s1 * s2 * c3;
-      this._w = c1 * c2 * c3 + s1 * s2 * s3;
-    }
-
-    if (update !== false) this.onChangeCallback();
-
-    return this;
-  },
-
-  setFromAxisAngle: function setFromAxisAngle(axis, angle) {
-
-    // http://www.euclideanspace.com/maths/geometry/rotations/conversions/angleToQuaternion/index.htm
-
-    // assumes axis is normalized
-
-    var halfAngle = angle / 2,
-        s = Math.sin(halfAngle);
-
-    this._x = axis.x * s;
-    this._y = axis.y * s;
-    this._z = axis.z * s;
-    this._w = Math.cos(halfAngle);
-
-    this.onChangeCallback();
-
-    return this;
-  },
-
-  // normalize: function() {
-  //
-  //   var l = this.length();
-  //
-  //   if (l === 0) {
-  //
-  //     this._x = 0;
-  //     this._y = 0;
-  //     this._z = 0;
-  //     this._w = 1;
-  //
-  //   } else {
-  //
-  //     l = 1 / l;
-  //
-  //     this._x = this._x * l;
-  //     this._y = this._y * l;
-  //     this._z = this._z * l;
-  //     this._w = this._w * l;
-  //
-  //   }
-  //
-  //   this.onChangeCallback();
-  //
-  //   return this;
-  //
-  // },
-
-  multiply: function multiply(q, p) {
-
-    if (p !== undefined) {
-
-      console.warn('THREE.Quaternion: .multiply() now only accepts one argument. Use .multiplyQuaternions( a, b ) instead.');
-      return this.multiplyQuaternions(q, p);
-    }
-
-    return this.multiplyQuaternions(this, q);
-  },
-
-  multiplyQuaternions: function multiplyQuaternions(a, b) {
-
-    // from http://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/code/index.htm
-
-    var qax = a._x,
-        qay = a._y,
-        qaz = a._z,
-        qaw = a._w;
-    var qbx = b._x,
-        qby = b._y,
-        qbz = b._z,
-        qbw = b._w;
-
-    this._x = qax * qbw + qaw * qbx + qay * qbz - qaz * qby;
-    this._y = qay * qbw + qaw * qby + qaz * qbx - qax * qbz;
-    this._z = qaz * qbw + qaw * qbz + qax * qby - qay * qbx;
-    this._w = qaw * qbw - qax * qbx - qay * qby - qaz * qbz;
-
-    this.onChangeCallback();
-
-    return this;
-  },
-
-  slerp: function slerp(qb, t) {
-
-    if (t === 0) return this;
-    if (t === 1) return this.copy(qb);
-
-    var x = this._x,
-        y = this._y,
-        z = this._z,
-        w = this._w;
-
-    // http://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/slerp/
-
-    var cosHalfTheta = w * qb._w + x * qb._x + y * qb._y + z * qb._z;
-
-    if (cosHalfTheta < 0) {
-
-      this._w = -qb._w;
-      this._x = -qb._x;
-      this._y = -qb._y;
-      this._z = -qb._z;
-
-      cosHalfTheta = -cosHalfTheta;
-    } else {
-
-      this.copy(qb);
-    }
-
-    if (cosHalfTheta >= 1.0) {
-
-      this._w = w;
-      this._x = x;
-      this._y = y;
-      this._z = z;
-
-      return this;
-    }
-
-    var sinHalfTheta = Math.sqrt(1.0 - cosHalfTheta * cosHalfTheta);
-
-    if (Math.abs(sinHalfTheta) < 0.001) {
-
-      this._w = 0.5 * (w + this._w);
-      this._x = 0.5 * (x + this._x);
-      this._y = 0.5 * (y + this._y);
-      this._z = 0.5 * (z + this._z);
-
-      return this;
-    }
-
-    var halfTheta = Math.atan2(sinHalfTheta, cosHalfTheta);
-    var ratioA = Math.sin((1 - t) * halfTheta) / sinHalfTheta,
-        ratioB = Math.sin(t * halfTheta) / sinHalfTheta;
-
-    this._w = w * ratioA + this._w * ratioB;
-    this._x = x * ratioA + this._x * ratioB;
-    this._y = y * ratioA + this._y * ratioB;
-    this._z = z * ratioA + this._z * ratioB;
-
-    this.onChangeCallback();
-
-    return this;
-  },
-
-  onChange: function onChange(callback) {
-
-    this.onChangeCallback = callback;
-
-    return this;
-  },
-
-  onChangeCallback: function onChangeCallback() {}
-
-};
-
-(0, _objectAssign2.default)(Quaternion, {
-
-  slerp: function slerp(qa, qb, qm, t) {
-
-    return qm.copy(qa).slerp(qb, t);
-  },
-
-  slerpFlat: function slerpFlat(dst, dstOffset, src0, srcOffset0, src1, srcOffset1, t) {
-
-    // fuzz-free, array-based Quaternion SLERP operation
-
-    var x0 = src0[srcOffset0 + 0],
-        y0 = src0[srcOffset0 + 1],
-        z0 = src0[srcOffset0 + 2],
-        w0 = src0[srcOffset0 + 3],
-        x1 = src1[srcOffset1 + 0],
-        y1 = src1[srcOffset1 + 1],
-        z1 = src1[srcOffset1 + 2],
-        w1 = src1[srcOffset1 + 3];
-
-    if (w0 !== w1 || x0 !== x1 || y0 !== y1 || z0 !== z1) {
-
-      var s = 1 - t,
-          cos = x0 * x1 + y0 * y1 + z0 * z1 + w0 * w1,
-          dir = cos >= 0 ? 1 : -1,
-          sqrSin = 1 - cos * cos;
-
-      // Skip the Slerp for tiny steps to avoid numeric problems:
-      if (sqrSin > Number.EPSILON) {
-
-        var sin = Math.sqrt(sqrSin),
-            len = Math.atan2(sin, cos * dir);
-
-        s = Math.sin(s * len) / sin;
-        t = Math.sin(t * len) / sin;
-      }
-
-      var tDir = t * dir;
-
-      x0 = x0 * s + x1 * tDir;
-      y0 = y0 * s + y1 * tDir;
-      z0 = z0 * s + z1 * tDir;
-      w0 = w0 * s + w1 * tDir;
-
-      // Normalize in case we just did a lerp:
-      if (s === 1 - t) {
-
-        var f = 1 / Math.sqrt(x0 * x0 + y0 * y0 + z0 * z0 + w0 * w0);
-
-        x0 *= f;
-        y0 *= f;
-        z0 *= f;
-        w0 *= f;
-      }
-    }
-
-    dst[dstOffset] = x0;
-    dst[dstOffset + 1] = y0;
-    dst[dstOffset + 2] = z0;
-    dst[dstOffset + 3] = w0;
-  }
-
-});
-
-exports.default = Quaternion;
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-/**
- Copyright 2018 Alibaba Group
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- */
-
-var _Math = {
-  DEG2RAD: Math.PI / 180,
-  RAD2DEG: 180 / Math.PI,
-  degToRad: function degToRad(degrees) {
-    return degrees * _Math.DEG2RAD;
-  },
-  radToDeg: function radToDeg(radians) {
-    return radians * _Math.RAD2DEG;
-  }
-};
-
-exports.default = _Math;
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- Copyright 2018 Alibaba Group
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- */
-
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _simpleLodash = __webpack_require__(1);
-
-var _simpleLodash2 = _interopRequireDefault(_simpleLodash);
-
-var _expression = __webpack_require__(9);
-
-var _expression2 = _interopRequireDefault(_expression);
-
-var _handlers = __webpack_require__(10);
-
-var _utils = __webpack_require__(2);
-
-var _fn = __webpack_require__(18);
-
-var _fn2 = _interopRequireDefault(_fn);
-
-var _objectAssign = __webpack_require__(0);
-
-var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-// transform
-var vendorTransform = (0, _utils.prefixStyle)('transform');
-
-var Binding = function () {
-  function Binding(options, callback) {
-    _classCallCheck(this, Binding);
-
-    this._eventHandler = null;
-    this.elTransforms = [];
-    this.token = null;
-
-    this.options = options;
-    this.callback = callback;
-    this.token = this.genToken();
-    this._initElTransforms();
-    var eventType = options.eventType;
-
-    switch (eventType) {
-      case 'pan':
-        this._eventHandler = new _handlers.PanHandler(this);
-        break;
-      case 'orientation':
-        this._eventHandler = new _handlers.OrientationHandler(this);
-        break;
-      case 'timing':
-        this._eventHandler = new _handlers.TimingHandler(this);
-        break;
-      case 'scroll':
-        this._eventHandler = new _handlers.ScrollHandler(this);
-        break;
-    }
-  }
-
-  _createClass(Binding, [{
-    key: 'genToken',
-    value: function genToken() {
-      return parseInt(Math.random() * 10000000);
-    }
-  }, {
-    key: '_initElTransforms',
-    value: function _initElTransforms() {
-      var _options$props = this.options.props,
-          props = _options$props === undefined ? [] : _options$props;
-
-      var elTransforms = this.elTransforms;
-      props.forEach(function (prop) {
-        var element = prop.element;
-
-        if (!_simpleLodash2.default.find(elTransforms, function (o) {
-          return o.element === element;
-        })) {
-          elTransforms.push({
-            element: element,
-            transform: {
-              translateX: 0,
-              translateY: 0,
-              translateZ: 0,
-              scaleX: 1,
-              scaleY: 1,
-              scaleZ: 1,
-              rotateX: 0,
-              rotateY: 0,
-              rotateZ: 0
-            }
-          });
-        }
-      });
-    }
-  }, {
-    key: 'getValue',
-    value: function getValue(params, expression) {
-      return _expression2.default.execute(expression, (0, _objectAssign2.default)(_fn2.default, params));
-    }
-
-    // TODO scroll.contentOffset 待确认及补全
-
-  }, {
-    key: 'setProperty',
-    value: function setProperty(el, property, val) {
-      var elTransform = _simpleLodash2.default.find(this.elTransforms, function (o) {
-        return o.element === el;
-      });
-      switch (property) {
-        case 'transform.translateX':
-          elTransform.transform.translateX = (0, _utils.px)(val);
-          break;
-        case 'transform.translateY':
-          elTransform.transform.translateY = (0, _utils.px)(val);
-          break;
-        case 'transform.translateZ':
-          elTransform.transform.translateZ = (0, _utils.px)(val);
-          break;
-        case 'transform.rotateX':
-          elTransform.transform.rotateX = val;
-          break;
-        case 'transform.rotateY':
-          elTransform.transform.rotateY = val;
-          break;
-        case 'transform.rotateZ':
-          elTransform.transform.rotateZ = val;
-          break;
-        case 'transform.rotate':
-          elTransform.transform.rotateZ = val;
-          break;
-        case 'transform.scaleX':
-          elTransform.transform.scaleX = val;
-          break;
-        case 'transform.scaleY':
-          elTransform.transform.scaleY = val;
-          break;
-        case 'transform.scale':
-          elTransform.transform.scaleX = val;
-          elTransform.transform.scaleY = val;
-          break;
-        case 'width':
-          el.style.width = (0, _utils.px)(val) + 'px';
-          break;
-        case 'height':
-          el.style.height = (0, _utils.px)(val) + 'px';
-          break;
-        case 'opacity':
-          el.style.opacity = val;
-          break;
-        case 'background-color':
-          el.style['background-color'] = val;
-          break;
-        case 'color':
-          el.style.color = val;
-          break;
-        case 'border-top-left-radius':
-        case 'border-top-right-radius':
-        case 'border-bottom-left-radius':
-        case 'border-bottom-right-radius':
-        case 'border-radius':
-        case 'margin-top':
-        case 'margin-bottom':
-        case 'margin-left':
-        case 'margin-right':
-          el.style[property] = (0, _utils.px)(val) + 'px';
-          break;
-      }
-      el.style[vendorTransform] = ['translateX(' + elTransform.transform.translateX + 'px)', 'translateY(' + elTransform.transform.translateY + 'px)', 'translateZ(' + elTransform.transform.translateZ + 'px)', 'scaleX(' + elTransform.transform.scaleX + ')', 'scaleY(' + elTransform.transform.scaleY + ')', 'rotateX(' + elTransform.transform.rotateX + 'deg)', 'rotateY(' + elTransform.transform.rotateY + 'deg)', 'rotateZ(' + elTransform.transform.rotateZ + 'deg)'].join(' ');
-    }
-  }, {
-    key: 'destroy',
-    value: function destroy() {
-      this._eventHandler.destroy();
-    }
-  }]);
-
-  return Binding;
-}();
-
-module.exports = {
-  _bindingInstances: [],
-  /**
-   * 绑定
-   * @param options 参数
-   * @example
-   {
-     anchor:blockRef,
-     eventType:'pan',
-     props: [
-     {
-       element:blockRef,
-       property:'transform.translateX',
-       expression:{
-         origin:"x+1",
-         transformed:"{\"type\":\"+\",\"children\":[{\"type\":\"Identifier\",\"value\":\"x\"},{\"type\":\"NumericLiteral\",\"value\":1}]}"
-       }
-     }
-    ]
-   }
-   */
-  bind: function bind(options) {
-    var _this = this;
-
-    var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
-
-    if (!options) {
-      throw new Error('should pass options for binding');
-    }
-    var existInstances = _simpleLodash2.default.filter(this._bindingInstances, function (instance) {
-      if (options.anchor) {
-        return instance.options.anchor === options.anchor && instance.options.eventType === options.eventType;
-      }
-    });
-    // 销毁上次实例
-    if (existInstances) {
-      _simpleLodash2.default.forEach(existInstances, function (inst) {
-        inst.destroy();
-        _this._bindingInstances = _simpleLodash2.default.dropWhile(_this._bindingInstances, function (bindInst) {
-          return bindInst === inst;
-        });
-      });
-    }
-    var binding = new Binding(options, callback);
-    this._bindingInstances.push(binding);
-    return { token: binding.token };
-  },
-
-  /**
-   *  @param {object} options
-   *  @example
-   *  {eventType:'pan',
-   *   token:self.gesToken}
-   */
-  unbind: function unbind(options) {
-    if (!options) {
-      throw new Error('should pass options for binding');
-    }
-    var inst = _simpleLodash2.default.find(this._bindingInstances, function (instance) {
-      return instance.options.eventType === options.eventType && instance.token === options.token;
-    });
-    if (inst) {
-      inst.destroy();
-    }
-  },
-  unbindAll: function unbindAll() {
-    this._bindingInstances.forEach(function (inst) {
-      inst.destroy({
-        eventType: inst.options.eventType,
-        token: inst.token
-      });
-    });
-  },
-  getComputedStyle: function getComputedStyle(elRef) {
-    var computedStyle = window.getComputedStyle(elRef);
-    var style = (0, _utils.matrixToTransformObj)(computedStyle[vendorTransform]);
-    style.opacity = Number(computedStyle.opacity);
-    style['background-color'] = computedStyle['background-color'];
-    style.color = computedStyle.color;
-    style.width = (0, _utils.pxTo750)(computedStyle.width.replace('px', ''));
-    style.height = (0, _utils.pxTo750)(computedStyle.height.replace('px', ''));
-    style['border-top-left-radius'] = (0, _utils.pxTo750)(computedStyle['border-top-left-radius'].replace('px', ''));
-    style['border-top-right-radius'] = (0, _utils.pxTo750)(computedStyle['border-top-right-radius'].replace('px', ''));
-    style['border-bottom-left-radius'] = (0, _utils.pxTo750)(computedStyle['border-bottom-left-radius'].replace('px', ''));
-    style['border-bottom-right-radius'] = (0, _utils.pxTo750)(computedStyle['border-bottom-right-radius'].replace('px', ''));
-    style['margin-top'] = (0, _utils.pxTo750)(computedStyle['margin-top'].replace('px', ''));
-    style['margin-bottom'] = (0, _utils.pxTo750)(computedStyle['margin-bottom'].replace('px', ''));
-    style['margin-left'] = (0, _utils.pxTo750)(computedStyle['margin-left'].replace('px', ''));
-    style['margin-right'] = (0, _utils.pxTo750)(computedStyle['margin-right'].replace('px', ''));
-    return style;
-  }
-};
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- Copyright 2018 Alibaba Group
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- */
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-function toNumber(value) {
-  return Number(value);
-}
-
-function toBoolean(value) {
-  return !!value;
-}
-
-function equal(v1, v2) {
-  return v1 == v2;
-}
-
-function strictlyEqual(v1, v2) {
-  return v1 === v2;
-}
-
-function execute(node, scope) {
-
-  var type = node.type;
-  var children = node.children;
-  switch (type) {
-    case 'StringLiteral':
-      return String(node.value);
-    case 'NumericLiteral':
-      return parseFloat(node.value);
-    case 'BooleanLiteral':
-      return !!node.value;
-    case 'Identifier':
-      return scope[node.value];
-    case 'CallExpression':
-      var fn = execute(children[0], scope);
-      // console.log('fn:',fn)
-      var args = [];
-      var jsonArguments = children[1].children;
-      for (var i = 0; i < jsonArguments.length; i++) {
-        args.push(execute(jsonArguments[i], scope));
-      }
-      return fn.apply(null, args);
-    case '?':
-      if (execute(children[0], scope)) {
-        return execute(children[1], scope);
-      }
-      return execute(children[2], scope);
-    case '+':
-      return toNumber(execute(children[0], scope)) + toNumber(execute(children[1], scope));
-    case '-':
-      return toNumber(execute(children[0], scope)) - toNumber(execute(children[1], scope));
-    case '*':
-      return toNumber(execute(children[0], scope)) * toNumber(execute(children[1], scope));
-    case '/':
-      return toNumber(execute(children[0], scope)) / toNumber(execute(children[1], scope));
-    case '%':
-      return toNumber(execute(children[0], scope)) % toNumber(execute(children[1], scope));
-    case '**':
-      return Math.pow(toNumber(execute(children[0], scope)), toNumber(execute(children[1], scope)));
-
-    case '>':
-      return toNumber(execute(children[0], scope)) > toNumber(execute(children[1], scope));
-    case '<':
-      return toNumber(execute(children[0], scope)) < toNumber(execute(children[1], scope));
-    case '>=':
-      return toNumber(execute(children[0], scope)) >= toNumber(execute(children[1], scope));
-    case '<=':
-      return toNumber(execute(children[0], scope)) <= toNumber(execute(children[1], scope));
-
-    case '==':
-      return equal(execute(children[0], scope), execute(children[1], scope));
-    case '===':
-      return strictlyEqual(execute(children[0], scope), execute(children[1], scope));
-    case '!=':
-      return !equal(execute(children[0], scope), execute(children[1], scope));
-    case '!==':
-      return !strictlyEqual(execute(children[0], scope), execute(children[1], scope));
-
-    case '&&':
-      var result = void 0;
-      result = execute(children[0], scope);
-      if (!toBoolean(result)) return result;
-      return execute(children[1], scope);
-    case '||':
-      result = execute(children[0], scope);
-      if (toBoolean(result)) return result;
-      return execute(children[1], scope);
-    case '!':
-      return !toBoolean(execute(children[0], scope));
-
-  }
-  return null;
-}
-
-exports.default = {
-  execute: execute
-};
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- Copyright 2018 Alibaba Group
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- */
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ScrollHandler = exports.TimingHandler = exports.OrientationHandler = exports.PanHandler = undefined;
-
-var _pan = __webpack_require__(11);
-
-var _pan2 = _interopRequireDefault(_pan);
-
-var _orientation = __webpack_require__(13);
-
-var _orientation2 = _interopRequireDefault(_orientation);
-
-var _timing = __webpack_require__(16);
-
-var _timing2 = _interopRequireDefault(_timing);
-
-var _scroll = __webpack_require__(17);
-
-var _scroll2 = _interopRequireDefault(_scroll);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.PanHandler = _pan2.default;
-exports.OrientationHandler = _orientation2.default;
-exports.TimingHandler = _timing2.default;
-exports.ScrollHandler = _scroll2.default;
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- Copyright 2018 Alibaba Group
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- */
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _pan = __webpack_require__(12);
-
-var _pan2 = _interopRequireDefault(_pan);
-
-var _common = __webpack_require__(3);
-
-var _common2 = _interopRequireDefault(_common);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var PanHandler = function (_CommonHandler) {
-  _inherits(PanHandler, _CommonHandler);
-
-  function PanHandler(binding) {
-    _classCallCheck(this, PanHandler);
-
-    var _this = _possibleConstructorReturn(this, (PanHandler.__proto__ || Object.getPrototypeOf(PanHandler)).call(this, binding));
-
-    _this._onPan = function (e) {
-      var x = e.deltaX;
-      var y = e.deltaY;
-      var _this$binding$options = _this.binding.options.props,
-          props = _this$binding$options === undefined ? [] : _this$binding$options;
-
-      props.forEach(function (prop) {
-        var element = prop.element,
-            property = prop.property,
-            expression = prop.expression;
-
-        var transformed = JSON.parse(expression.transformed);
-        var val = _this.binding.getValue({ x: x, y: y }, transformed);
-        _this.binding.setProperty(element, property, val);
-      });
-    };
-
-    _this._onPanStart = function () {
-      _this.binding.callback({ deltaX: 0, state: 'start', deltaY: 0 });
-    };
-
-    _this._onPanEnd = function (e) {
-      _this.binding.callback({ deltaX: parseInt(e.deltaX), state: 'end', deltaY: parseInt(e.deltaY) });
-    };
-
-    var anchor = binding.options.anchor;
-
-    var panGesture = _this.panGesture = new _pan2.default(anchor, binding.options.options);
-    panGesture.on('pan', _this._onPan);
-    panGesture.on('panstart', _this._onPanStart);
-    panGesture.on('panend', _this._onPanEnd);
-    return _this;
-  }
-
-  _createClass(PanHandler, [{
-    key: 'destroy',
-    value: function destroy() {
-      var panGesture = this.panGesture;
-      panGesture.off('pan', this._onPan);
-      panGesture.off('panstart', this._onPanStart);
-      panGesture.off('panend', this._onPanEnd);
-      panGesture.destroy();
-    }
-  }]);
-
-  return PanHandler;
-}(_common2.default);
-
-exports.default = PanHandler;
-;
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- Copyright 2018 Alibaba Group
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- */
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _simpleLodash = __webpack_require__(1);
-
-var _simpleLodash2 = _interopRequireDefault(_simpleLodash);
-
-var _objectAssign = __webpack_require__(0);
-
-var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var abs = Math.abs;
-
-
-var DEFAULT_CONFIG = {
-  thresholdX: 10,
-  thresholdY: 10,
-  touchAction: 'auto',
-  touchActionRatio: 1 / 2
-};
-
-var PanGesture = function () {
-  function PanGesture(el, config) {
-    var _this = this;
-
-    _classCallCheck(this, PanGesture);
-
-    this.startX = null;
-    this.startY = null;
-    this.panStartX = null;
-    this.panStartY = null;
-    this.deltaX = 0;
-    this.deltaY = 0;
-    this.events = {
-      'panstart': [],
-      'pan': [],
-      'panend': [],
-      'pancancel': []
-    };
-
-    this.onTouchStart = function (e) {
-      // e.preventDefault();
-    };
-
-    this.handlePanStart = function (e) {
-      e.preventDefault();
-      if (_this.panStartX === null || _this.panStartY === null) {
-        _this.panStartX = (0, _utils.pxTo750)(e.touches[0].pageX);
-        _this.panStartY = (0, _utils.pxTo750)(e.touches[0].pageY);
-        _this.events.panstart.forEach(function (handler) {
-          handler(e);
-        });
-        return;
-      }
-    };
-
-    this.onTouchMove = function (e) {
-      var _config = _this.config,
-          thresholdX = _config.thresholdX,
-          thresholdY = _config.thresholdY,
-          touchAction = _config.touchAction,
-          touchActionRatio = _config.touchActionRatio;
-
-      if (_this.startX === null || _this.startY === null) {
-        _this.startX = e.touches[0].pageX;
-        _this.startY = e.touches[0].pageY;
-      }
-      var dx = e.touches[0].pageX - _this.startX;
-      var dy = e.touches[0].pageY - _this.startY;
-
-      switch (touchAction) {
-        case 'auto':
-          e.preventDefault();
-          if (abs(dx) >= thresholdX || abs(dy) >= thresholdY) {
-            _this.handlePanStart(e);
-          }
-          break;
-        case 'pan-x':
-          if (abs(dx) >= thresholdX && abs(dy / dx) < touchActionRatio && abs(dy) < thresholdY) {
-            _this.handlePanStart(e);
-          }
-          break;
-        case 'pan-y':
-          if (abs(dy) >= thresholdY && abs(dx / dy) < touchActionRatio && abs(dx) < thresholdX) {
-            _this.handlePanStart(e);
-          }
-          break;
-      }
-
-      if (_this.panStartX !== null && _this.panStartY !== null) {
-        switch (touchAction) {
-          case 'auto':
-            _this.deltaX = (0, _utils.pxTo750)(e.touches[0].pageX) - _this.panStartX;
-            _this.deltaY = (0, _utils.pxTo750)(e.touches[0].pageY) - _this.panStartY;
-            break;
-          case 'pan-x':
-            _this.deltaX = (0, _utils.pxTo750)(e.touches[0].pageX) - _this.panStartX;
-            _this.deltaY = 0;
-            break;
-          case 'pan-y':
-            _this.deltaX = 0;
-            _this.deltaY = (0, _utils.pxTo750)(e.touches[0].pageY) - _this.panStartY;
-            break;
-        }
-        e.deltaX = _this.deltaX;
-        e.deltaY = _this.deltaY;
-        _this.events.pan.forEach(function (handler) {
-          handler(e);
-        });
-      }
-    };
-
-    this.onTouchEnd = function (e) {
-      e.deltaX = _this.deltaX;
-      e.deltaY = _this.deltaY;
-      _this.events.panend.forEach(function (handler) {
-        handler(e);
-      });
-    };
-
-    this.onTouchCancel = function (e) {
-      e.deltaX = _this.deltaX;
-      e.deltaY = _this.deltaY;
-      _this.events.pancancel.forEach(function (handler) {
-        handler(e);
-      });
-    };
-
-    this.el = el;
-    this.config = (0, _objectAssign2.default)(DEFAULT_CONFIG, config);
-    this.el.addEventListener('touchstart', this.onTouchStart);
-    this.el.addEventListener('touchmove', this.onTouchMove);
-    this.el.addEventListener('touchend', this.onTouchEnd);
-    this.el.addEventListener('touchcancel', this.onTouchCancel);
-  }
-
-  _createClass(PanGesture, [{
-    key: 'on',
-    value: function on(fn, handler) {
-      if (!this.events[fn]) return;
-      this.events[fn].push(handler);
-    }
-  }, {
-    key: 'destroy',
-    value: function destroy() {
-      this.el.removeEventListener('touchstart', this.onTouchStart);
-      this.el.removeEventListener('touchmove', this.onTouchMove);
-      this.el.removeEventListener('touchend', this.onTouchEnd);
-      this.el.removeEventListener('touchcancel', this.onTouchCancel);
-      this.offAll();
-      this.startX = null;
-      this.startY = null;
-      this.panStartX = null;
-      this.panStartY = null;
-    }
-  }, {
-    key: 'offAll',
-    value: function offAll() {
-      var _this2 = this;
-
-      _simpleLodash2.default.map(this.events, function (handlers, fn) {
-        _simpleLodash2.default.forEach(handlers, function (handler) {
-          _this2.off(fn, handler);
-        });
-      });
-    }
-  }, {
-    key: 'off',
-    value: function off(fn, handler) {
-      if (!fn) return;
-      if (fn && this.events[fn] && this.events[fn].length) {
-        if (!handler) return;
-        var h = _simpleLodash2.default.find(this.events[fn], function (o) {
-          return o === handler;
-        });
-        var i = _simpleLodash2.default.findIndex(this.events[fn], function (o) {
-          return o === handler;
-        });
-        if (h) {
-          this.events[fn].splice(i, 1);
-        }
-      }
-    }
-  }]);
-
-  return PanGesture;
-}();
-
-exports.default = PanGesture;
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- Copyright 2018 Alibaba Group
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- */
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _vector = __webpack_require__(5);
-
-var _vector2 = _interopRequireDefault(_vector);
-
-var _orientation_controls = __webpack_require__(14);
-
-var _orientation_controls2 = _interopRequireDefault(_orientation_controls);
-
-var _math = __webpack_require__(7);
-
-var _math2 = _interopRequireDefault(_math);
-
-var _animationUtil = __webpack_require__(4);
-
-var _common = __webpack_require__(3);
-
-var _common2 = _interopRequireDefault(_common);
-
-var _objectAssign = __webpack_require__(0);
-
-var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var OrientationHandler = function (_CommonHandler) {
-  _inherits(OrientationHandler, _CommonHandler);
-
-  function OrientationHandler(binding) {
-    _classCallCheck(this, OrientationHandler);
-
-    var _this = _possibleConstructorReturn(this, (OrientationHandler.__proto__ || Object.getPrototypeOf(OrientationHandler)).call(this, binding));
-
-    _this.binding = null;
-    _this.control = null;
-    _this.start = null;
-    _this.timer = null;
-
-    _this._onOrientation = function (e) {
-      var props = _this.binding.options.props;
-
-      props.forEach(function (prop) {
-        var element = prop.element,
-            property = prop.property,
-            expression = prop.expression;
-
-        var transformed = JSON.parse(expression.transformed);
-        var val = _this.binding.getValue(e, transformed);
-        _this.binding.setProperty(element, property, val);
-      });
-    };
-
-    _this.options = (0, _objectAssign2.default)({
-      sceneType: '2d'
-    }, binding.options.options);
-    _this.binding = binding;
-    if (_this.options.sceneType.toLowerCase() === '2d') {
-      _this.controlX = new _orientation_controls2.default({ beta: 90 });
-      _this.controlY = new _orientation_controls2.default({ gamma: 90, alpha: 0 });
-    } else {
-      _this.control = new _orientation_controls2.default();
-    }
-    _this.run();
-    return _this;
-  }
-
-  _createClass(OrientationHandler, [{
-    key: 'run',
-    value: function run() {
-      var _this2 = this;
-
-      // 2d场景
-      if (this.options.sceneType.toLowerCase() === '2d') {
-        this.controlX.update();
-        this.controlY.update();
-        var _controlX$deviceOrien = this.controlX.deviceOrientation,
-            alpha = _controlX$deviceOrien.alpha,
-            beta = _controlX$deviceOrien.beta,
-            gamma = _controlX$deviceOrien.gamma,
-            dalpha = _controlX$deviceOrien.dalpha,
-            dbeta = _controlX$deviceOrien.dbeta,
-            dgamma = _controlX$deviceOrien.dgamma;
-
-        var vecX = new _vector2.default(0, 0, 1);
-        vecX.applyQuaternion(this.controlX.quaternion);
-        var vecY = new _vector2.default(0, 1, 1);
-        vecY.applyQuaternion(this.controlY.quaternion);
-        // 0,180 -> -90,90
-        var x = _math2.default.radToDeg(Math.acos(vecX.x)) - 90;
-        var y = _math2.default.radToDeg(Math.acos(vecY.y)) - 90;
-        if (!this.start && !isNaN(x) && !isNaN(y)) {
-          this.start = {
-            x: x,
-            y: y
-          };
-        }
-        if (this.start) {
-          var dx = x - this.start.x;
-          var dy = y - this.start.y;
-          this._onOrientation({
-            x: x, y: y, dx: dx, dy: dy, alpha: alpha, beta: beta, gamma: gamma, dalpha: dalpha, dbeta: dbeta, dgamma: dgamma
-          });
-        }
-      } else {
-        // 3d场景
-        this.control.update();
-        var _control$deviceOrient = this.control.deviceOrientation,
-            _alpha = _control$deviceOrient.alpha,
-            _beta = _control$deviceOrient.beta,
-            _gamma = _control$deviceOrient.gamma,
-            _dalpha = _control$deviceOrient.dalpha,
-            _dbeta = _control$deviceOrient.dbeta,
-            _dgamma = _control$deviceOrient.dgamma;
-        var _control$quaternion = this.control.quaternion,
-            _x = _control$quaternion.x,
-            _y = _control$quaternion.y,
-            z = _control$quaternion.z;
-
-        this._onOrientation({ alpha: _alpha, beta: _beta, gamma: _gamma, dalpha: _dalpha, dbeta: _dbeta, dgamma: _dgamma, x: _x, y: _y, z: z });
-      }
-      this.timer = (0, _animationUtil.raf)(function () {
-        _this2.run();
-      });
-    }
-  }, {
-    key: 'destroy',
-    value: function destroy() {
-      if (this.timer) {
-        (0, _animationUtil.cancelRAF)(this.timer);
-        this.timer = null;
-      }
-    }
-  }]);
-
-  return OrientationHandler;
-}(_common2.default);
-
-exports.default = OrientationHandler;
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- Copyright 2018 Alibaba Group
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- */
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _quaternion = __webpack_require__(6);
-
-var _quaternion2 = _interopRequireDefault(_quaternion);
-
-var _vector = __webpack_require__(5);
-
-var _vector2 = _interopRequireDefault(_vector);
-
-var _euler = __webpack_require__(15);
-
-var _euler2 = _interopRequireDefault(_euler);
-
-var _math = __webpack_require__(7);
-
-var _math2 = _interopRequireDefault(_math);
-
-var _objectAssign = __webpack_require__(0);
-
-var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function isNaNOrUndefined(n) {
-  return n === undefined || isNaN(n) || n === null;
-}
-
-function DeviceOrientationControls(object) {
-  var scope = this;
-  this.object = (0, _objectAssign2.default)({
-    alphaOffsetAngle: 0,
-    betaOffsetAngle: 0,
-    gammaOffsetAngle: 0
-  }, object);
-
-  this.alphaOffsetAngle = this.object.alphaOffsetAngle;
-  this.betaOffsetAngle = this.object.betaOffsetAngle;
-  this.gammaOffsetAngle = this.object.gammaOffsetAngle;
-
-  this.quaternion = new _quaternion2.default(0, 0, 0, 1);
-  this.enabled = true;
-  this.deviceOrientation = {};
-  this.screenOrientation = 0;
-  this.start = null;
-
-  this.recordsAlpha = [];
-
-  function formatRecords(records, threshold) {
-    var l = records.length;
-    var times = 0;
-    if (l > 1) {
-      for (var i = 0; i < l; i++) {
-        if (records[i - 1] != undefined && records[i] != undefined) {
-          if (records[i] - records[i - 1] < -threshold / 2) {
-            times = Math.floor(records[i - 1] / threshold) + 1;
-            records[i] = records[i] + times * threshold;
-          }
-          if (records[i] - records[i - 1] > threshold / 2) {
-            records[i] = records[i] - threshold;
-          }
-        }
-      }
-    }
-    return records;
-  }
-
-  var onDeviceOrientationChangeEvent = function onDeviceOrientationChangeEvent(e) {
-
-    var alpha = e.alpha;
-    var beta = e.beta;
-    var gamma = e.gamma;
-    var recordsAlpha = scope.recordsAlpha;
-
-    if (!scope.start) {
-      scope.start = {
-        alpha: alpha,
-        beta: beta,
-        gamma: gamma
-      };
-    }
-    recordsAlpha.push(alpha);
-    if (recordsAlpha.length > 5) {
-      recordsAlpha = formatRecords(recordsAlpha, 360);
-      recordsAlpha.shift();
-    }
-
-    var formatAlpha = (recordsAlpha[recordsAlpha.length - 1] - scope.start.alpha) % 360;
-    if (!isNaNOrUndefined(alpha) && !isNaNOrUndefined(beta) && !isNaNOrUndefined(gamma)) {
-      scope.enabled = true;
-    }
-
-    scope.deviceOrientation = {
-      alpha: alpha,
-      beta: beta,
-      gamma: gamma,
-      formatAlpha: formatAlpha,
-      dalpha: alpha - scope.start.alpha,
-      dbeta: beta - scope.start.beta,
-      dgamma: gamma - scope.start.gamma
-    };
-  };
-
-  var onScreenOrientationChangeEvent = function onScreenOrientationChangeEvent() {
-
-    scope.screenOrientation = window.orientation || 0;
-  };
-
-  // The angles alpha, beta and gamma form a set of intrinsic Tait-Bryan angles of type Z-X'-Y''
-
-  var setObjectQuaternion = function () {
-
-    var zee = new _vector2.default(0, 0, 1);
-
-    var euler = new _euler2.default();
-
-    var q0 = new _quaternion2.default();
-
-    var q1 = new _quaternion2.default(-Math.sqrt(0.5), 0, 0, Math.sqrt(0.5)); // - PI/2 around the x-axis
-
-    return function (quaternion, alpha, beta, gamma, orient) {
-
-      euler.set(beta, alpha, -gamma, 'YXZ'); // 'ZXY' for the device, but 'YXZ' for us
-
-      quaternion.setFromEuler(euler); // orient the device
-
-      quaternion.multiply(q1); // camera looks out the back of the device, not the top
-
-      quaternion.multiply(q0.setFromAxisAngle(zee, -orient)); // adjust for screen orientation
-    };
-  }();
-
-  this.connect = function () {
-    onScreenOrientationChangeEvent(); // run once on load
-    window.addEventListener('orientationchange', onScreenOrientationChangeEvent, false);
-    window.addEventListener('deviceorientation', onDeviceOrientationChangeEvent, false);
-  };
-
-  this.disconnect = function () {
-    window.removeEventListener('orientationchange', onScreenOrientationChangeEvent, false);
-    window.removeEventListener('deviceorientation', onDeviceOrientationChangeEvent, false);
-    scope.enabled = false;
-  };
-
-  this.update = function () {
-    if (scope.enabled === false) return;
-    var alpha = !isNaNOrUndefined(scope.deviceOrientation.formatAlpha) ? _math2.default.degToRad(!isNaNOrUndefined(scope.object.alpha) ? scope.object.alpha : scope.deviceOrientation.formatAlpha + scope.alphaOffsetAngle) : 0; // Z
-    var beta = !isNaNOrUndefined(scope.deviceOrientation.beta) ? _math2.default.degToRad(!isNaNOrUndefined(scope.object.beta) ? scope.object.beta : scope.deviceOrientation.beta + scope.betaOffsetAngle) : 0; // X'
-    var gamma = !isNaNOrUndefined(scope.deviceOrientation.gamma) ? _math2.default.degToRad(!isNaNOrUndefined(scope.object.gamma) ? scope.object.gamma : scope.deviceOrientation.gamma + scope.gammaOffsetAngle) : 0; // Y''
-    var orient = scope.screenOrientation ? _math2.default.degToRad(scope.screenOrientation) : 0; // O
-    setObjectQuaternion(scope.quaternion, alpha, beta, gamma, orient);
-  };
-
-  this.updateAlphaOffsetAngle = function (angle) {
-    this.alphaOffsetAngle = angle;
-    this.update();
-  };
-  this.updateBetaOffsetAngle = function (angle) {
-    this.betaOffsetAngle = angle;
-    this.update();
-  };
-  this.updateGammaOffsetAngle = function (angle) {
-    this.gammaOffsetAngle = angle;
-    this.update();
-  };
-
-  this.dispose = function () {
-    this.disconnect();
-  };
-
-  this.connect();
-};
-
-exports.default = DeviceOrientationControls;
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- Copyright 2018 Alibaba Group
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- */
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Euler = function () {
-  function Euler(x, y, z, order) {
-    _classCallCheck(this, Euler);
-
-    this.isEuler = true;
-    this._x = 0;
-    this._y = 0;
-    this._z = 0;
-
-    this._x = x || 0;
-    this._y = y || 0;
-    this._z = z || 0;
-    this._order = order || Euler.DefaultOrder;
-  }
-
-  _createClass(Euler, [{
-    key: 'set',
-    value: function set(x, y, z, order) {
-      this._x = x;
-      this._y = y;
-      this._z = z;
-      this._order = order || this._order;
-      this.onChangeCallback();
-      return this;
-    }
-  }, {
-    key: 'onChange',
-    value: function onChange(callback) {
-      this.onChangeCallback = callback;
-      return this;
-    }
-  }, {
-    key: 'onChangeCallback',
-    value: function onChangeCallback() {}
-  }, {
-    key: 'order',
-    get: function get() {
-      return this._order;
-    },
-    set: function set(value) {
-      this._order = value;
-      this.onChangeCallback();
-    }
-  }]);
-
-  return Euler;
-}();
-
-Euler.RotationOrders = ['XYZ', 'YZX', 'ZXY', 'XZY', 'YXZ', 'ZYX'];
-Euler.DefaultOrder = 'XYZ';
-exports.default = Euler;
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- Copyright 2018 Alibaba Group
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- */
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _animationUtil = __webpack_require__(4);
-
-var _animationUtil2 = _interopRequireDefault(_animationUtil);
-
-var _common = __webpack_require__(3);
-
-var _common2 = _interopRequireDefault(_common);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var TimingHandler = function (_CommonHandler) {
-  _inherits(TimingHandler, _CommonHandler);
-
-  function TimingHandler(binding) {
-    _classCallCheck(this, TimingHandler);
-
-    var _this = _possibleConstructorReturn(this, (TimingHandler.__proto__ || Object.getPrototypeOf(TimingHandler)).call(this, binding));
-
-    var _this$binding$options = _this.binding.options,
-        _this$binding$options2 = _this$binding$options.props,
-        props = _this$binding$options2 === undefined ? [] : _this$binding$options2,
-        exitExpression = _this$binding$options.exitExpression;
-
-
-    props.forEach(function (prop) {
-      var expression = prop.expression;
-
-      if (expression && expression.transformed && typeof expression.transformed === 'string') {
-        expression.transformed = JSON.parse(expression.transformed);
-      }
-    });
-
-    var exitTransformed = void 0;
-    if (exitExpression && exitExpression.transformed) {
-      exitTransformed = JSON.parse(exitExpression.transformed);
-    }
-
-    var animation = _this.animation = new _animationUtil2.default({
-      duration: Infinity,
-      easing: 'linear',
-      onStart: function onStart() {
-        _this.binding.callback({ state: 'start', t: 0 });
-      },
-      onRun: function onRun(e) {
-        if (exitTransformed && _this.binding.getValue({ t: e.t }, exitTransformed)) {
-          _this.animation.stop();
-        }
-        props.forEach(function (prop) {
-          _this.animate(_extends({
-            exitTransformed: exitTransformed,
-            t: e.t
-          }, prop));
-        });
-      },
-      onStop: function onStop(e) {
-        _this.binding.callback({ state: 'exit', t: e.t - 1000 / 60 });
-      }
-    });
-    animation.run();
-    return _this;
-  }
-
-  _createClass(TimingHandler, [{
-    key: 'animate',
-    value: function animate(args) {
-      var element = args.element,
-          property = args.property,
-          expression = args.expression,
-          t = args.t;
-
-      var value = this.binding.getValue({ t: t }, expression.transformed);
-      this.binding.setProperty(element, property, value);
-    }
-  }, {
-    key: 'destroy',
-    value: function destroy() {
-      if (this.animation) {
-        this.animation.stop();
-      }
-    }
-  }]);
-
-  return TimingHandler;
-}(_common2.default);
-
-exports.default = TimingHandler;
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- Copyright 2018 Alibaba Group
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- */
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _common = __webpack_require__(3);
-
-var _common2 = _interopRequireDefault(_common);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function isTurner(prev, now) {
-
-  return prev / now < 0;
-}
-
-var ScrollHandler = function (_CommonHandler) {
-  _inherits(ScrollHandler, _CommonHandler);
-
-  function ScrollHandler(binding) {
-    _classCallCheck(this, ScrollHandler);
-
-    var _this = _possibleConstructorReturn(this, (ScrollHandler.__proto__ || Object.getPrototypeOf(ScrollHandler)).call(this, binding));
-
-    _this.dx = 0;
-    _this.dy = 0;
-    _this.prevX = null;
-    _this.prevY = null;
-    _this.tx = 0;
-    _this.ty = 0;
-    _this.tdx = 0;
-    _this.tdy = 0;
-
-    _this._onScroll = function (e) {
-      var props = _this.binding.options.props;
-
-      var callback = _this.binding.callback;
-      var x = (0, _utils.pxTo750)(e.target.scrollLeft);
-      var y = (0, _utils.pxTo750)(e.target.scrollTop);
-      props.forEach(function (prop) {
-        var element = prop.element,
-            property = prop.property,
-            expression = prop.expression;
-
-        var transformed = JSON.parse(expression.transformed);
-        var val = _this.binding.getValue({
-          x: x,
-          y: y,
-          dx: _this.dx,
-          dy: _this.dy,
-          tdx: _this.tdx,
-          tdy: _this.tdy
-        }, transformed);
-
-        _this.binding.setProperty(element, property, val);
-      });
-
-      if (_this.prevX !== null && _this.prevY !== null) {
-        var dx = x - _this.prevX;
-        var dy = y - _this.prevY;
-        var cbParams = {
-          x: x,
-          y: y
-        };
-        // 拐点
-        if (isTurner(_this.dx, dx)) {
-          _this.tx = x;
-          cbParams.state = 'turn';
-        }
-        if (isTurner(_this.dy, dy)) {
-          _this.ty = y;
-          cbParams.state = 'turn';
-        }
-
-        _this.dx = cbParams.dx = x - _this.prevX;
-        _this.dy = cbParams.dy = y - _this.prevY;
-        _this.tdx = cbParams.tdx = x - _this.tx;
-        _this.tdy = cbParams.tdy = y - _this.ty;
-        if (cbParams.state) {
-          callback(cbParams);
-        }
-      }
-
-      _this.prevX = x;
-      _this.prevY = y;
-    };
-
-    var anchor = binding.options.anchor;
-
-    _this.tx = (0, _utils.pxTo750)(anchor.scrollLeft);
-    _this.ty = (0, _utils.pxTo750)(anchor.scrollTop);
-    anchor.addEventListener('scroll', _this._onScroll);
-    return _this;
-  }
-
-  _createClass(ScrollHandler, [{
-    key: 'destroy',
-    value: function destroy() {
-      var anchor = this.binding.options.anchor;
-
-      anchor.removeEventListener('scroll', this._onScroll);
-    }
-  }]);
-
-  return ScrollHandler;
-}(_common2.default);
-
-exports.default = ScrollHandler;
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- Copyright 2018 Alibaba Group
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- */
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _simpleLodash = __webpack_require__(1);
-
-var _simpleLodash2 = _interopRequireDefault(_simpleLodash);
-
-var _animationUtil = __webpack_require__(4);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// inset function
-function colorToDecimal(hexColor) {
-  var hex = hexColor.replace(/'|"|#/g, '');
-  return parseInt(hex, 16);
-}
-
-function decToHex(dec) {
-  var hex = dec.toString(16);
-  var a = [];
-  for (var i = 0; i < 6 - hex.length; i++) {
-    a.push('0');
-  }
-  return a.join('') + hex;
-}
-
-function parseColor(hexColor) {
-  var hex = hexColor.replace(/'|"|#/g, '');
-  hex = hex.length === 3 ? [hex[0], hex[0], hex[1], hex[1], hex[2], hex[2]].join('') : hex;
-  var r = '' + hex[0] + hex[1];
-  var g = '' + hex[2] + hex[3];
-  var b = '' + hex[4] + hex[5];
-  return {
-    r: r,
-    g: g,
-    b: b,
-    dr: colorToDecimal(r),
-    dg: colorToDecimal(g),
-    db: colorToDecimal(b)
-  };
-}
-
-var Fn = {
-  max: Math.max,
-  min: Math.min,
-  sin: Math.sin,
-  cos: Math.cos,
-  tan: Math.tan,
-  sqrt: Math.sqrt,
-  cbrt: Math.cbrt,
-  log: Math.log,
-  abs: Math.abs,
-  atan: Math.atan,
-  floor: Math.floor,
-  ceil: Math.ceil,
-  pow: Math.pow,
-  exp: Math.exp,
-  PI: Math.PI,
-  E: Math.E,
-  acos: Math.acos,
-  asin: Math.asin,
-  sign: Math.sign,
-  atan2: Math.atan2,
-  round: Math.round,
-  rgb: function rgb(r, g, b) {
-    return 'rgb(' + parseInt(r) + ',' + parseInt(g) + ',' + parseInt(b) + ')';
-  },
-  rgba: function rgba(r, g, b, a) {
-    return 'rgb(' + parseInt(r) + ',' + parseInt(g) + ',' + parseInt(b) + ',' + a + ')';
-  },
-  getArgs: function getArgs() {
-    return arguments;
-  },
-  evaluateColor: function evaluateColor(colorFrom, colorTo, percent) {
-    percent = percent > 1 ? 1 : percent;
-    var from = parseColor(colorFrom);
-    var to = parseColor(colorTo);
-    var dr = parseInt((to.dr - from.dr) * percent + from.dr);
-    var dg = parseInt((to.dg - from.dg) * percent + from.dg);
-    var db = parseInt((to.db - from.db) * percent + from.db);
-    var resDec = dr * 16 * 16 * 16 * 16 + dg * 16 * 16 + db;
-    return '#' + decToHex(resDec);
-  }
-};
-
-// inset all easing functions
-_simpleLodash2.default.map(_animationUtil.Easing, function (v, k) {
-  if (k !== 'cubicBezier') {
-    Fn[k] = function (t, begin, offset, duration) {
-      t = Math.max(Math.min(t / duration, 1));
-      return v(t) * offset + begin;
-    };
-  }
-});
-
-Fn.cubicBezier = function (t, begin, offset, duration, x1, y1, x2, y2) {
-  t = Math.max(Math.min(t / duration, 1));
-  var epsilon = 1000 / 60 / duration / 4;
-  return (0, _animationUtil.Bezier)(x1, y1, x2, y2, epsilon)(t) * offset + begin; // eslint-disable-line
-};
-
-exports.default = Fn;
-
-/***/ })
-/******/ ]);
-});
-
-/***/ })
-/******/ ])});;
-
-/***/ }),
-/* 58 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(59)
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(61),
-  /* template */
-  __webpack_require__(62),
-  /* scopeId */
-  "data-v-2072c04b",
-  /* cssModules */
-  null
-)
-Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2072c04b", Component.options)
-  } else {
-    hotAPI.reload("data-v-2072c04b", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 59 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(60);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("1f281ec2", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-2072c04b\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-2072c04b\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 60 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(true);
-// imports
-
-
-// module
-exports.push([module.i, "\n.fm-tag[data-v-2072c04b] {\n    align-items: center;\n\t  flex-direction: row;\n}\n.tag-item[data-v-2072c04b] {\n    padding: 9px;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n}\n.tag-border[data-v-2072c04b] {\n    border-radius: 4.5px;\n}\n.tag-huge[data-v-2072c04b] {\n    border-radius: 100px;\n    height: 72px;\n    padding: 12px 42px;\n}\n.tag-hollow[data-v-2072c04b] {\n    border-width: 3px;\n}\n.tag-text[data-v-2072c04b] {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    font-weight: bold;\n}\n.tag-font-small[data-v-2072c04b] {\n    font-size: 24px;\n}\n.tag-font-big[data-v-2072c04b] {\n    font-size: 30px;\n}\n.tag-font-huge[data-v-2072c04b] {\n    font-size: 42px;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n}\n.tag-margin-small[data-v-2072c04b] {\n    margin-right: 6px;\n    margin-bottom: 6px;\n}\n.tag-margin-big[data-v-2072c04b] {\n    margin-right: 12px;\n    margin-bottom: 12px;\n}\n.tag-margin-huge[data-v-2072c04b] {\n    margin-right: 36px;\n    margin-bottom: 36px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag/index.vue?cd9bef08"],"names":[],"mappings":";AAaA;IACA,oBAAA;GACA,oBAAA;CACA;AAEA;IACA,aAAA;IACA,wBAAA;IACA,oBAAA;IACA,iBAAA;CACA;AAEA;IACA,qBAAA;CACA;AAEA;IACA,qBAAA;IACA,aAAA;IACA,mBAAA;CACA;AAEA;IACA,kBAAA;CACA;AAEA;IACA,sDAAA;IACA,kBAAA;CACA;AAEA;IACA,gBAAA;CACA;AAEA;IACA,gBAAA;CACA;AAEA;IACA,gBAAA;IACA,+BAAA;IACA,iBAAA;CACA;AAEA;IACA,kBAAA;IACA,mBAAA;CACA;AAEA;IACA,mBAAA;IACA,oBAAA;CACA;AAEA;IACA,mBAAA;IACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div :class=\"tagClass\">\n    <div v-if=\"showSolid || showHollow\"\n        :class=\"['tag-item', 'tag-border', size === 'huge' && 'tag-huge', showHollow && 'tag-hollow']\"\n        :style=\"tagTextStyle\">\n      <text :class=\"textClass\" ref='content' :style=\"textStyle\"><slot></slot><template v-if=\"!$slots.default\">{{ value }}</template></text>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-tag {\n    align-items: center;\n\t  flex-direction: row;\n  }\n\n  .tag-item {\n    padding: 9px;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n  }\n\n  .tag-border {\n    border-radius: 4.5px;\n  }\n\n  .tag-huge {\n    border-radius: 100px;\n    height: 72px;\n    padding: 12px 42px;\n  }\n\n  .tag-hollow {\n    border-width: 3px;\n  }\n\n  .tag-text {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    font-weight: bold;\n  }\n\n  .tag-font-small {\n    font-size: 24px;\n  }\n\n  .tag-font-big {\n    font-size: 30px;\n  }\n\n  .tag-font-huge {\n    font-size: 42px;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n  }\n\n  .tag-margin-small {\n    margin-right: 6px;\n    margin-bottom: 6px;\n  }\n\n  .tag-margin-big {\n    margin-right: 12px;\n    margin-bottom: 12px;\n  }\n\n  .tag-margin-huge {\n    margin-right: 36px;\n    margin-bottom: 36px;\n  }\n</style>\n\n<script>\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmTag',\n  mixins: [Locale],\n  props: {\n    type: {\n      type: String,\n      default: 'solid'\n    },\n    size: {\n      type: String,\n      default: 'small'\n    },\n    value: {\n      type: [String, Number],\n      default () {\n        return t('el.tag.tagName');\n      }\n    },\n    color: {\n      type: String,\n      default: '#198DED'\n    },\n    fontColor: {\n      type: String,\n      default: '#FFFFFF'\n    }\n  },\n  computed: {\n    showSolid () {\n      const { type, value } = this;\n      return type === 'solid' && value !== '';\n    },\n    showHollow () {\n      const { type, value } = this;\n      return type === 'hollow' && value !== '';\n    },\n    tagTextStyle () {\n      const { color, showSolid } = this;\n      return showSolid ? { backgroundColor: color } : { borderColor: color };\n    },\n    textStyle () {\n      const { fontColor } = this;\n      return { color: fontColor };\n    },\n    textClass () {\n      const clz = ['tag-text'];\n      const { size } = this;\n      clz.push(`tag-font-${size}`);\n      return clz;\n    },\n    tagClass () {\n      const clz = ['fm-tag'];\n      const { size } = this;\n      clz.push(`tag-margin-${size}`);\n      return clz;\n    }\n  },\n  created () {\n    this.$slots.default && (this.value = this.$slots.default[0].text);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-/* 61 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _locale = __webpack_require__(34);
-
-var _locale2 = _interopRequireDefault(_locale);
-
-var _locale3 = __webpack_require__(20);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-exports.default = {
-  name: 'FmTag',
-  mixins: [_locale2.default],
-  props: {
-    type: {
-      type: String,
-      default: 'solid'
-    },
-    size: {
-      type: String,
-      default: 'small'
-    },
-    value: {
-      type: [String, Number],
-      default: function _default() {
-        return (0, _locale3.t)('el.tag.tagName');
-      }
-    },
-    color: {
-      type: String,
-      default: '#198DED'
-    },
-    fontColor: {
-      type: String,
-      default: '#FFFFFF'
-    }
-  },
-  computed: {
-    showSolid: function showSolid() {
-      var type = this.type,
-          value = this.value;
-
-      return type === 'solid' && value !== '';
-    },
-    showHollow: function showHollow() {
-      var type = this.type,
-          value = this.value;
-
-      return type === 'hollow' && value !== '';
-    },
-    tagTextStyle: function tagTextStyle() {
-      var color = this.color,
-          showSolid = this.showSolid;
-
-      return showSolid ? { backgroundColor: color } : { borderColor: color };
-    },
-    textStyle: function textStyle() {
-      var fontColor = this.fontColor;
-
-      return { color: fontColor };
-    },
-    textClass: function textClass() {
-      var clz = ['tag-text'];
-      var size = this.size;
-
-      clz.push('tag-font-' + size);
-      return clz;
-    },
-    tagClass: function tagClass() {
-      var clz = ['fm-tag'];
-      var size = this.size;
-
-      clz.push('tag-margin-' + size);
-      return clz;
-    }
-  },
-  created: function created() {
-    this.$slots.default && (this.value = this.$slots.default[0].text);
-  }
-};
-
-/***/ }),
-/* 62 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    class: _vm.tagClass,
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [(_vm.showSolid || _vm.showHollow) ? _c('div', {
-    class: ['tag-item', 'tag-border', _vm.size === 'huge' && 'tag-huge', _vm.showHollow && 'tag-hollow'],
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(_vm.tagTextStyle))
-  }, [_c('text', {
-    ref: "content",
-    class: _vm.textClass,
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(_vm.textStyle))
-  }, [_vm._t("default"), (!_vm.$slots.default) ? [_vm._v(_vm._s(_vm.value))] : _vm._e()], 2)]) : _vm._e()])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-2072c04b", module.exports)
-  }
-}
-
-/***/ }),
-/* 63 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(115);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 64 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(75);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 65 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(80);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 66 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-  ;(function(fn) {
-    if (true) {
-      module.exports = fn();
-    } else if (typeof define === "function") {
-      define("index", function(require, exports, module){
-        module.exports = fn();
-      });
-    } else {
-      var root;
-      if (typeof window !== "undefined") {
-        root = window;
-      } else if (typeof self !== "undefined") {
-        root = self;
-      } else if (typeof global !== "undefined") {
-        root = global;
-      } else {
-        // NOTICE: In JavaScript strict mode, this is null
-        root = this;
-      }
-      root["index"] = fn();
+      root["index.weex"] = fn();
     }
   })(function(){
     return /******/ (function(modules) { // webpackBootstrap
@@ -8214,7 +3244,7 @@ module.exports = {
 /******/ ])});;
 
 /***/ }),
-/* 67 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8224,7 +3254,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(68);
+var _index = __webpack_require__(60);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -8236,25 +3266,1466 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(49)
+}
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(51),
+  /* template */
+  __webpack_require__(52),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  "data-v-3509f5c0",
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-footer/index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3509f5c0", Component.options)
+  } else {
+    hotAPI.reload("data-v-3509f5c0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(50);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("6e352fa5", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3509f5c0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3509f5c0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.fm-footer[data-v-3509f5c0] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  position: fixed;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 1.33333rem;\n  -webkit-box-pack: justify;\n  -webkit-justify-content: space-between;\n          justify-content: space-between;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n          align-items: center;\n  border-top-width: 0.01852rem;\n  border-top-color: rgba(0, 0, 0, 0.1);\n}\n.fm-footer-[data-v-3509f5c0] {\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n          justify-content: center;\n}\n.fm-footer-small[data-v-3509f5c0] {\n  padding: 0 0.44444rem;\n}\n.fm-footer-middle[data-v-3509f5c0] {\n  padding:  0px 0.83333rem\n}\n.fm-footer-large[data-v-3509f5c0] {\n  padding: 0 1.02778rem;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-footer/index.vue?ba88bfa2"],"names":[],"mappings":";AASA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,gBAAA;EACA,SAAA;EACA,UAAA;EACA,QAAA;EACA,mBAAA;EACA,0BAAA;EAAA,uCAAA;UAAA,+BAAA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,6BAAA;EACA,qCAAA;CACA;AAEA;EACA,yBAAA;EAAA,gCAAA;UAAA,wBAAA;CACA;AAEA;EACA,sBAAA;CACA;AAEA;EACA,wBAAA;CACA;AAEA;EACA,sBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/03/13. -->\n<template>\n  <div class=\"fm-footer\" :class=\"['fm-footer-' + paddingSize]\" :style=\"{ backgroundColor: backgroundColor }\">\n    <slot></slot>\n  </div>\n</template>\n\n<style scoped>\n  .fm-footer {\n    flex-direction: row;\n    position: fixed;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    height: 144px;\n    justify-content: space-between;\n    align-items: center;\n    border-top-width: 2px;\n    border-top-color: rgba(0, 0, 0, 0.1);\n  }\n\n  .fm-footer- {\n    justify-content: center;\n  }\n\n  .fm-footer-small {\n    padding: 0 48px;\n  }\n\n  .fm-footer-middle {\n    padding:  0px 90px\n  }\n\n  .fm-footer-large {\n    padding: 0 111px;\n  }\n</style>\n\n<script>\nexport default {\n  name: 'FmFooter',\n  props: {\n    paddingSize: {\n      type: String,\n      default: ''\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+  name: 'FmFooter',
+  props: {
+    paddingSize: {
+      type: String,
+      default: ''
+    },
+    backgroundColor: {
+      type: String,
+      default: '#FFFFFF'
+    }
+  }
+};
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "fm-footer",
+    class: ['fm-footer-' + _vm.paddingSize],
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      backgroundColor: _vm.backgroundColor
+    }))
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-3509f5c0", module.exports)
+  }
+}
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _indexWeex = __webpack_require__(46);
+
+var _indexWeex2 = _interopRequireDefault(_indexWeex);
+
+var _index = __webpack_require__(44);
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * CopyRight (C) 2018-2022 FlymeApps Group Holding Limited.
+ * Created by Yanjiie on 2018/03/18. Fork from alibaba/weex-ui.
+ */
+var BindEnv = {
+  supportsEB: function supportsEB() {
+    return _indexWeex2.default.isSupportBinding && !_index2.default.env.isWeb();
+  },
+
+
+  /**
+   * 判断Android容器是否支持是否支持expressionBinding(处理方式很不一致)
+   * @returns {boolean}
+   */
+  supportsEBForAndroid: function supportsEBForAndroid() {
+    return _index2.default.env.isAndroid() && BindEnv.supportsEB();
+  },
+
+
+  /**
+   * 判断IOS容器是否支持是否支持expressionBinding
+   * @returns {boolean}
+   */
+  supportsEBForIos: function supportsEBForIos() {
+    return _index2.default.env.isIOS() && BindEnv.supportsEB();
+  }
+};
+
+exports.default = BindEnv;
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(55)
+}
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(57),
+  /* template */
+  __webpack_require__(58),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  "data-v-10e45e81",
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-overlay/index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-10e45e81", Component.options)
+  } else {
+    hotAPI.reload("data-v-10e45e81", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(56);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("03f1f46c", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-10e45e81\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-10e45e81\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.fm-overlay[data-v-10e45e81] {\n  width: 10rem;\n  position: fixed;\n  left: 0;\n  top: 0;\n  bottom: 0;\n  right: 0;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-overlay/index.vue?d95ec95a"],"names":[],"mappings":";AAeA;EACA,aAAA;EACA,gBAAA;EACA,QAAA;EACA,OAAA;EACA,UAAA;EACA,SAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Updated by Yanjiie on 2018/04/12. Fork from weex-ui. -->\n<template>\n  <div>\n    <div class=\"fm-overlay\"\n         ref=\"fm-overlay\"\n         v-if=\"show\"\n         :watch=\"shouldShow\"\n         @click=\"overlayClicked\"\n         :style=\"overlayStyle\">\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-overlay {\n    width: 1080px;\n    position: fixed;\n    left: 0;\n    top: 0;\n    bottom: 0;\n    right: 0;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nexport default {\n  name: 'FmOverlay',\n  props: {\n    show: {\n      type: Boolean,\n      default: true\n    },\n    hasAnimation: {\n      type: Boolean,\n      default: true\n    },\n    duration: {\n      type: [Number, String],\n      default: 300\n    },\n    timingFunction: {\n      type: Array,\n      default: () => (['ease-in', 'ease-out'])\n    },\n    opacity: {\n      type: [Number, String],\n      default: 0.5\n    },\n    canAutoClose: {\n      type: Boolean,\n      default: true\n    }\n  },\n  computed: {\n    overlayStyle () {\n      return {\n        opacity: this.hasAnimation ? 0 : 1,\n        backgroundColor: `rgba(0, 0, 0,${this.opacity})`\n      };\n    },\n    shouldShow () {\n      const { show, hasAnimation } = this;\n      hasAnimation && setTimeout(() => {\n        this.appearOverlay(show);\n      }, 50);\n      return show;\n    }\n  },\n  methods: {\n    overlayClicked (e) {\n      this.canAutoClose ? this.appearOverlay(false) : this.$emit('fmOverlayBodyClicked', {});\n    },\n    appearOverlay (bool, duration = this.duration) {\n      const { hasAnimation, timingFunction, canAutoClose } = this;\n      const needEmit = !bool && canAutoClose;\n      needEmit && (this.$emit('fmOverlayBodyClicking', {}));\n      const overlayEl = this.$refs['fm-overlay'];\n      if (hasAnimation && overlayEl) {\n        animation.transition(overlayEl, {\n          styles: {\n            opacity: bool ? 1 : 0\n          },\n          duration,\n          timingFunction: timingFunction[bool ? 0 : 1],\n          delay: 0\n        }, () => {\n          needEmit && (this.$emit('fmOverlayBodyClicked', {}));\n        });\n      } else {\n        needEmit && (this.$emit('fmOverlayBodyClicked', {}));\n      }\n    },\n    hide () {\n      this.appearOverlay(false);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var animation = weex.requireModule('animation');
+exports.default = {
+  name: 'FmOverlay',
+  props: {
+    show: {
+      type: Boolean,
+      default: true
+    },
+    hasAnimation: {
+      type: Boolean,
+      default: true
+    },
+    duration: {
+      type: [Number, String],
+      default: 300
+    },
+    timingFunction: {
+      type: Array,
+      default: function _default() {
+        return ['ease-in', 'ease-out'];
+      }
+    },
+    opacity: {
+      type: [Number, String],
+      default: 0.5
+    },
+    canAutoClose: {
+      type: Boolean,
+      default: true
+    }
+  },
+  computed: {
+    overlayStyle: function overlayStyle() {
+      return {
+        opacity: this.hasAnimation ? 0 : 1,
+        backgroundColor: 'rgba(0, 0, 0,' + this.opacity + ')'
+      };
+    },
+    shouldShow: function shouldShow() {
+      var _this = this;
+
+      var show = this.show,
+          hasAnimation = this.hasAnimation;
+
+      hasAnimation && setTimeout(function () {
+        _this.appearOverlay(show);
+      }, 50);
+      return show;
+    }
+  },
+  methods: {
+    overlayClicked: function overlayClicked(e) {
+      this.canAutoClose ? this.appearOverlay(false) : this.$emit('fmOverlayBodyClicked', {});
+    },
+    appearOverlay: function appearOverlay(bool) {
+      var _this2 = this;
+
+      var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.duration;
+      var hasAnimation = this.hasAnimation,
+          timingFunction = this.timingFunction,
+          canAutoClose = this.canAutoClose;
+
+      var needEmit = !bool && canAutoClose;
+      needEmit && this.$emit('fmOverlayBodyClicking', {});
+      var overlayEl = this.$refs['fm-overlay'];
+      if (hasAnimation && overlayEl) {
+        animation.transition(overlayEl, {
+          styles: {
+            opacity: bool ? 1 : 0
+          },
+          duration: duration,
+          timingFunction: timingFunction[bool ? 0 : 1],
+          delay: 0
+        }, function () {
+          needEmit && _this2.$emit('fmOverlayBodyClicked', {});
+        });
+      } else {
+        needEmit && this.$emit('fmOverlayBodyClicked', {});
+      }
+    },
+    hide: function hide() {
+      this.appearOverlay(false);
+    }
+  }
+};
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [(_vm.show) ? _c('div', {
+    ref: "fm-overlay",
+    staticClass: "fm-overlay",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(_vm.overlayStyle)),
+    attrs: {
+      "watch": _vm.shouldShow
+    },
+    on: {
+      "click": _vm.overlayClicked
+    }
+  }) : _vm._e()])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-10e45e81", module.exports)
+  }
+}
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(66);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(61)
+}
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(63),
+  /* template */
+  __webpack_require__(64),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  "data-v-2072c04b",
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag/index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2072c04b", Component.options)
+  } else {
+    hotAPI.reload("data-v-2072c04b", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(62);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("c45ad30e", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2072c04b\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2072c04b\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.fm-tag[data-v-2072c04b] {\n    -webkit-box-align: center;\n    -webkit-align-items: center;\n            align-items: center;\n\t  -webkit-box-orient: horizontal;\n\t  -webkit-box-direction: normal;\n\t  -webkit-flex-direction: row;\n\t          flex-direction: row;\n}\n.tag-item[data-v-2072c04b] {\n    padding: 0.08333rem;\n    -webkit-box-pack: center;\n    -webkit-justify-content: center;\n            justify-content: center;\n    -webkit-box-align: center;\n    -webkit-align-items: center;\n            align-items: center;\n    overflow: hidden;\n}\n.tag-border[data-v-2072c04b] {\n    border-radius: 0.04167rem;\n}\n.tag-huge[data-v-2072c04b] {\n    border-radius: 0.92593rem;\n    height: 0.66667rem;\n    padding: 0.11111rem 0.38889rem;\n}\n.tag-hollow[data-v-2072c04b] {\n    border-width: 0.02778rem;\n}\n.tag-text[data-v-2072c04b] {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    font-weight: bold;\n}\n.tag-font-small[data-v-2072c04b] {\n    font-size: 0.22222rem;\n}\n.tag-font-big[data-v-2072c04b] {\n    font-size: 0.27778rem;\n}\n.tag-font-huge[data-v-2072c04b] {\n    font-size: 0.38889rem;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n}\n.tag-margin-small[data-v-2072c04b] {\n    margin-right: 0.05556rem;\n    margin-bottom: 0.05556rem;\n}\n.tag-margin-big[data-v-2072c04b] {\n    margin-right: 0.11111rem;\n    margin-bottom: 0.11111rem;\n}\n.tag-margin-huge[data-v-2072c04b] {\n    margin-right: 0.33333rem;\n    margin-bottom: 0.33333rem;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag/index.vue?cd9bef08"],"names":[],"mappings":";AAaA;IACA,0BAAA;IAAA,4BAAA;YAAA,oBAAA;GACA,+BAAA;GAAA,8BAAA;GAAA,4BAAA;WAAA,oBAAA;CACA;AAEA;IACA,oBAAA;IACA,yBAAA;IAAA,gCAAA;YAAA,wBAAA;IACA,0BAAA;IAAA,4BAAA;YAAA,oBAAA;IACA,iBAAA;CACA;AAEA;IACA,0BAAA;CACA;AAEA;IACA,0BAAA;IACA,mBAAA;IACA,+BAAA;CACA;AAEA;IACA,yBAAA;CACA;AAEA;IACA,sDAAA;IACA,kBAAA;CACA;AAEA;IACA,sBAAA;CACA;AAEA;IACA,sBAAA;CACA;AAEA;IACA,sBAAA;IACA,+BAAA;IACA,iBAAA;CACA;AAEA;IACA,yBAAA;IACA,0BAAA;CACA;AAEA;IACA,yBAAA;IACA,0BAAA;CACA;AAEA;IACA,yBAAA;IACA,0BAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div :class=\"tagClass\">\n    <div v-if=\"showSolid || showHollow\"\n        :class=\"['tag-item', 'tag-border', size === 'huge' && 'tag-huge', showHollow && 'tag-hollow']\"\n        :style=\"tagTextStyle\">\n      <text :class=\"textClass\" ref='content' :style=\"textStyle\"><slot></slot><template v-if=\"!$slots.default\">{{ value }}</template></text>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-tag {\n    align-items: center;\n\t  flex-direction: row;\n  }\n\n  .tag-item {\n    padding: 9px;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n  }\n\n  .tag-border {\n    border-radius: 4.5px;\n  }\n\n  .tag-huge {\n    border-radius: 100px;\n    height: 72px;\n    padding: 12px 42px;\n  }\n\n  .tag-hollow {\n    border-width: 3px;\n  }\n\n  .tag-text {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    font-weight: bold;\n  }\n\n  .tag-font-small {\n    font-size: 24px;\n  }\n\n  .tag-font-big {\n    font-size: 30px;\n  }\n\n  .tag-font-huge {\n    font-size: 42px;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n  }\n\n  .tag-margin-small {\n    margin-right: 6px;\n    margin-bottom: 6px;\n  }\n\n  .tag-margin-big {\n    margin-right: 12px;\n    margin-bottom: 12px;\n  }\n\n  .tag-margin-huge {\n    margin-right: 36px;\n    margin-bottom: 36px;\n  }\n</style>\n\n<script>\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmTag',\n  mixins: [Locale],\n  props: {\n    type: {\n      type: String,\n      default: 'solid'\n    },\n    size: {\n      type: String,\n      default: 'small'\n    },\n    value: {\n      type: [String, Number],\n      default () {\n        return t('el.tag.tagName');\n      }\n    },\n    color: {\n      type: String,\n      default: '#198DED'\n    },\n    fontColor: {\n      type: String,\n      default: '#FFFFFF'\n    }\n  },\n  computed: {\n    showSolid () {\n      const { type, value } = this;\n      return type === 'solid' && value !== '';\n    },\n    showHollow () {\n      const { type, value } = this;\n      return type === 'hollow' && value !== '';\n    },\n    tagTextStyle () {\n      const { color, showSolid } = this;\n      return showSolid ? { backgroundColor: color } : { borderColor: color };\n    },\n    textStyle () {\n      const { fontColor } = this;\n      return { color: fontColor };\n    },\n    textClass () {\n      const clz = ['tag-text'];\n      const { size } = this;\n      clz.push(`tag-font-${size}`);\n      return clz;\n    },\n    tagClass () {\n      const clz = ['fm-tag'];\n      const { size } = this;\n      clz.push(`tag-margin-${size}`);\n      return clz;\n    }\n  },\n  created () {\n    this.$slots.default && (this.value = this.$slots.default[0].text);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _locale = __webpack_require__(29);
+
+var _locale2 = _interopRequireDefault(_locale);
+
+var _locale3 = __webpack_require__(7);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+  name: 'FmTag',
+  mixins: [_locale2.default],
+  props: {
+    type: {
+      type: String,
+      default: 'solid'
+    },
+    size: {
+      type: String,
+      default: 'small'
+    },
+    value: {
+      type: [String, Number],
+      default: function _default() {
+        return (0, _locale3.t)('el.tag.tagName');
+      }
+    },
+    color: {
+      type: String,
+      default: '#198DED'
+    },
+    fontColor: {
+      type: String,
+      default: '#FFFFFF'
+    }
+  },
+  computed: {
+    showSolid: function showSolid() {
+      var type = this.type,
+          value = this.value;
+
+      return type === 'solid' && value !== '';
+    },
+    showHollow: function showHollow() {
+      var type = this.type,
+          value = this.value;
+
+      return type === 'hollow' && value !== '';
+    },
+    tagTextStyle: function tagTextStyle() {
+      var color = this.color,
+          showSolid = this.showSolid;
+
+      return showSolid ? { backgroundColor: color } : { borderColor: color };
+    },
+    textStyle: function textStyle() {
+      var fontColor = this.fontColor;
+
+      return { color: fontColor };
+    },
+    textClass: function textClass() {
+      var clz = ['tag-text'];
+      var size = this.size;
+
+      clz.push('tag-font-' + size);
+      return clz;
+    },
+    tagClass: function tagClass() {
+      var clz = ['fm-tag'];
+      var size = this.size;
+
+      clz.push('tag-margin-' + size);
+      return clz;
+    }
+  },
+  created: function created() {
+    this.$slots.default && (this.value = this.$slots.default[0].text);
+  }
+};
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    class: _vm.tagClass,
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [(_vm.showSolid || _vm.showHollow) ? _c('div', {
+    class: ['tag-item', 'tag-border', _vm.size === 'huge' && 'tag-huge', _vm.showHollow && 'tag-hollow'],
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(_vm.tagTextStyle))
+  }, [_c('text', {
+    ref: "content",
+    class: _vm.textClass,
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(_vm.textStyle))
+  }, [_vm._t("default"), (!_vm.$slots.default) ? [_vm._v(_vm._s(_vm.value))] : _vm._e()], 2)]) : _vm._e()])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-2072c04b", module.exports)
+  }
+}
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(85);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(67)
+}
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(69),
+  /* template */
+  __webpack_require__(71),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  "data-v-6c88d718",
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-item/index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6c88d718", Component.options)
+  } else {
+    hotAPI.reload("data-v-6c88d718", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(68);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("57cb115d", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6c88d718\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6c88d718\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
 /* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
+exports = module.exports = __webpack_require__(1)(true);
+// imports
 
-/* styles */
-__webpack_require__(69)
 
+// module
+exports.push([module.i, "\n.fm-item[data-v-6c88d718] {\n  padding: 0 0.44444rem;\n}\n.fm-item[data-v-6c88d718]:active {\n  background-color: rgba(0, 0, 0, 0.04);\n}\n.item-wrapper[data-v-6c88d718] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n          align-items: center;\n}\n.item-border[data-v-6c88d718] {\n  background-color: rgba(0, 0, 0, 0.1);\n  height: 0.01852rem;\n}\n.content[data-v-6c88d718] {\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n          flex: 1;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n          align-items: center;\n}\n.content-text[data-v-6c88d718] {\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n          flex: 1;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n          justify-content: center;\n}\n.text-title[data-v-6c88d718] {\n  font-size: 0.44444rem;\n  color: #000000;\n  line-height: 0.52778rem;\n  text-overflow: ellipsis;\n  lines: 1;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  -webkit-line-clamp: 1;\n}\n.text-summary[data-v-6c88d718] {\n  margin-top: 0.08333rem;\n  font-size: 0.33333rem;\n  color: rgba(0, 0, 0, 0.4);\n  line-height: 0.38889rem;\n  text-overflow: ellipsis;\n  lines: 1;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  -webkit-line-clamp: 1;\n}\n.text-description[data-v-6c88d718] {\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n          flex: 1;\n  margin-top: 0.08333rem;\n  font-size: 0.33333rem;\n  color: rgba(0, 0, 0, 0.4);\n  line-height: 0.38889rem;\n}\n.image[data-v-6c88d718] {\n  margin-right: 0.44444rem;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-item/index.vue?2c7f4a9c","/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-item/<no source>"],"names":[],"mappings":";AA+BA;EACA,sBAAA;CACA;AAEA;EACA,sCAAA;CACA;AAEA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;CACA;AAEA;EACA,qCAAA;EACA,mBAAA;CACA;AAEA;EACA,oBAAA;EAAA,gBAAA;UAAA,QAAA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;CACA;AAEA;EACA,oBAAA;EAAA,gBAAA;UAAA,QAAA;EACA,yBAAA;EAAA,gCAAA;UAAA,wBAAA;CACA;AAEA;EACA,sBAAA;EACA,eAAA;EACA,wBAAA;EACA,wBAAA;EACA,SAAA;ECjEA,iBAAA;EAAA,wBAAA;EAAA,sBAAA;CDkEA;AAEA;EACA,uBAAA;EACA,sBAAA;EACA,0BAAA;EACA,wBAAA;EACA,wBAAA;EACA,SAAA;EC1EA,iBAAA;EAAA,wBAAA;EAAA,sBAAA;CD2EA;AAEA;EACA,oBAAA;EAAA,gBAAA;UAAA,QAAA;EACA,uBAAA;EACA,sBAAA;EACA,0BAAA;EACA,wBAAA;CACA;AAEA;EACA,yBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/3/9. -->\n<template>\n  <div class=\"fm-item\" @click=\"itemClicked\" @longpress=\"itemLongpress\">\n    <div class=\"item-wrapper\" :style=\"wrapStyle\">\n      <div v-if=\"imgSrc\" class=\"image\">\n        <fm-image :src=\"imgSrc\"\n                  :width=\"scene.imgWidth || imgWidth\"\n                  :height=\"scene.imgHeight || imgHeight\"\n                  :style=\"{ borderRadius: scene.imgRadius || imgRadius }\"\n                  :occupyingColor=\"occupyingColor\"></fm-image>\n      </div>\n      <div class=\"content\">\n        <slot name=\"left\">\n        </slot>\n        <div class=\"content-text\">\n          <slot name=\"title\">\n            <text v-if=\"title\" class=\"text-title\" :style=\"{ color: titleColor }\">{{ title }}</text>\n          </slot>\n          <text v-if=\"summary\" class=\"text-summary\" :style=\"{ color: summaryColor }\">{{ summary }}</text>\n          <text v-if=\"description\" class=\"text-description\" :style=\"{ color: descColor }\">{{ description }}</text>\n        </div>\n        <slot name=\"right\">\n        </slot>\n      </div>\n    </div>\n    <div class=\"item-border\" :style=\"{ marginLeft: imgSrc ? (scene.imgWidth || imgWidth) + 48 : 0 }\"></div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-item {\n    padding: 0 48px;\n  }\n\n  .fm-item:active {\n    background-color: rgba(0, 0, 0, 0.04);\n  }\n\n  .item-wrapper {\n    flex-direction: row;\n    align-items: center;\n  }\n\n  .item-border {\n    background-color: rgba(0, 0, 0, 0.1);\n    height: 2px;\n  }\n\n  .content {\n    flex: 1;\n    flex-direction: row;\n    align-items: center;\n  }\n\n  .content-text {\n    flex: 1;\n    justify-content: center;\n  }\n\n  .text-title {\n    font-size: 48px;\n    color: #000000;\n    line-height: 57px;\n    text-overflow: ellipsis;\n    lines: 1;\n  }\n\n  .text-summary {\n    margin-top: 9px;\n    font-size: 36px;\n    color: rgba(0, 0, 0, 0.4);\n    line-height: 42px;\n    text-overflow: ellipsis;\n    lines: 1;\n  }\n\n  .text-description {\n    flex: 1;\n    margin-top: 9px;\n    font-size: 36px;\n    color: rgba(0, 0, 0, 0.4);\n    line-height: 42px;\n  }\n\n  .image {\n    margin-right: 48px;\n  }\n</style>\n\n<script>\nimport FmImage from '../fm-image';\nimport Scene from './scene';\n\nexport default {\n  name: 'FmItem',\n  components: { FmImage },\n  props: {\n    type: {\n      type: String,\n      default: 'normal'\n    },\n    title: String,\n    summary: String,\n    description: String,\n    imgSrc: String,\n    titleColor: {\n      type: String,\n      default: '#000000'\n    },\n    summaryColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    descColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    imgWidth: {\n      type: Number,\n      default: 96\n    },\n    imgHeight: {\n      type: Number,\n      default: 96\n    },\n    imgRadius: {\n      type: Number,\n      default: 0\n    },\n    imgPosition: {\n      type: String,\n      default: 'center'\n    },\n    paddingTop: {\n      type: Number,\n      default: 54\n    },\n    paddingBottom: {\n      type: Number,\n      default: 54\n    },\n    occupyingColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.1)'\n    }\n  },\n  data: () => ({\n    scene: {}\n  }),\n  computed: {\n    wrapStyle () {\n      const { paddingTop, paddingBottom, imgPosition, scene } = this;\n      return {\n        paddingTop: `${scene.paddingTop || paddingTop}px`,\n        paddingBottom: `${scene.paddingBottom || paddingBottom}px`,\n        alignItems: (scene.imgPosition || imgPosition) === 'top' ? 'flex-start' : (scene.imgPosition || imgPosition) === 'bottom' ? 'flex-end' : 'center'\n      };\n    }\n  },\n  watch: {\n    type (val) {\n      this.scene = val;\n    }\n  },\n  created () {\n    this.scene = Scene[this.type];\n  },\n  methods: {\n    itemClicked (e) {\n      this.$emit('fmItemClicked', e);\n    },\n    itemLongpress (e) {\n      this.$emit('fmItemLongpress', e);\n    }\n  }\n};\n</script>\n\n\n",null],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _fmImage = __webpack_require__(5);
+
+var _fmImage2 = _interopRequireDefault(_fmImage);
+
+var _scene = __webpack_require__(70);
+
+var _scene2 = _interopRequireDefault(_scene);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+  name: 'FmItem',
+  components: { FmImage: _fmImage2.default },
+  props: {
+    type: {
+      type: String,
+      default: 'normal'
+    },
+    title: String,
+    summary: String,
+    description: String,
+    imgSrc: String,
+    titleColor: {
+      type: String,
+      default: '#000000'
+    },
+    summaryColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, 0.4)'
+    },
+    descColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, 0.4)'
+    },
+    imgWidth: {
+      type: Number,
+      default: 96
+    },
+    imgHeight: {
+      type: Number,
+      default: 96
+    },
+    imgRadius: {
+      type: Number,
+      default: 0
+    },
+    imgPosition: {
+      type: String,
+      default: 'center'
+    },
+    paddingTop: {
+      type: Number,
+      default: 54
+    },
+    paddingBottom: {
+      type: Number,
+      default: 54
+    },
+    occupyingColor: {
+      type: String,
+      default: 'rgba(0, 0, 0, 0.1)'
+    }
+  },
+  data: function data() {
+    return {
+      scene: {}
+    };
+  },
+  computed: {
+    wrapStyle: function wrapStyle() {
+      var paddingTop = this.paddingTop,
+          paddingBottom = this.paddingBottom,
+          imgPosition = this.imgPosition,
+          scene = this.scene;
+
+      return {
+        paddingTop: (scene.paddingTop || paddingTop) + 'px',
+        paddingBottom: (scene.paddingBottom || paddingBottom) + 'px',
+        alignItems: (scene.imgPosition || imgPosition) === 'top' ? 'flex-start' : (scene.imgPosition || imgPosition) === 'bottom' ? 'flex-end' : 'center'
+      };
+    }
+  },
+  watch: {
+    type: function type(val) {
+      this.scene = val;
+    }
+  },
+  created: function created() {
+    this.scene = _scene2.default[this.type];
+  },
+
+  methods: {
+    itemClicked: function itemClicked(e) {
+      this.$emit('fmItemClicked', e);
+    },
+    itemLongpress: function itemLongpress(e) {
+      this.$emit('fmItemLongpress', e);
+    }
+  }
+};
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  'single': {
+    paddingTop: 48,
+    paddingBottom: 48
+  },
+  'normal': {},
+  'avatar-single': {
+    imgWidth: 120,
+    imgHeight: 120,
+    imgRadius: 60,
+    paddingTop: 48,
+    paddingBottom: 48
+  },
+  'avatar-normal': {
+    imgWidth: 120,
+    imgHeight: 120,
+    imgRadius: 60,
+    paddingTop: 48,
+    paddingBottom: 48,
+    imgPosition: 'top'
+  },
+  'icon-small': {
+    imgWidth: 96,
+    imgHeight: 96,
+    paddingTop: 36,
+    paddingBottom: 36
+  },
+  'icon-middle': {
+    imgWidth: 138,
+    imgHeight: 138,
+    imgRadius: 4,
+    paddingTop: 24,
+    paddingBottom: 24
+  },
+  'icon-large': {
+    imgWidth: 192,
+    imgHeight: 192,
+    paddingTop: 36,
+    paddingBottom: 36
+  }
+};
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "fm-item",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    on: {
+      "click": _vm.itemClicked,
+      "longpress": _vm.itemLongpress
+    }
+  }, [_c('div', {
+    staticClass: "item-wrapper",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(_vm.wrapStyle))
+  }, [(_vm.imgSrc) ? _c('div', {
+    staticClass: "image",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_c('fm-image', {
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      borderRadius: _vm.scene.imgRadius || _vm.imgRadius
+    })),
+    attrs: {
+      "src": _vm.imgSrc,
+      "width": _vm.scene.imgWidth || _vm.imgWidth,
+      "height": _vm.scene.imgHeight || _vm.imgHeight,
+      "occupyingColor": _vm.occupyingColor
+    }
+  })], 1) : _vm._e(), _vm._v(" "), _c('div', {
+    staticClass: "content",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_vm._t("left"), _vm._v(" "), _c('div', {
+    staticClass: "content-text",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_vm._t("title", [(_vm.title) ? _c('text', {
+    staticClass: "text-title",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      color: _vm.titleColor
+    }))
+  }, [_vm._v(_vm._s(_vm.title))]) : _vm._e()]), _vm._v(" "), (_vm.summary) ? _c('text', {
+    staticClass: "text-summary",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      color: _vm.summaryColor
+    }))
+  }, [_vm._v(_vm._s(_vm.summary))]) : _vm._e(), _vm._v(" "), (_vm.description) ? _c('text', {
+    staticClass: "text-description",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      color: _vm.descColor
+    }))
+  }, [_vm._v(_vm._s(_vm.description))]) : _vm._e()], 2), _vm._v(" "), _vm._t("right")], 2)]), _vm._v(" "), _c('div', {
+    staticClass: "item-border",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      marginLeft: _vm.imgSrc ? (_vm.scene.imgWidth || _vm.imgWidth) + 48 : 0
+    }))
+  })])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-6c88d718", module.exports)
+  }
+}
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(96)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(71),
+  __webpack_require__(98),
   /* template */
-  __webpack_require__(72),
+  __webpack_require__(100),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  "data-v-47ee1270",
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-checkbox/index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-47ee1270", Component.options)
+  } else {
+    hotAPI.reload("data-v-47ee1270", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(116);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(90);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/**
+ * Created by Tw93 on 2017/6/26.
+ */
+var Utils = {
+  /**
+   * 对象类型
+   * @memberOf Utils
+   * @param obj
+   * @returns {string}
+   * @private
+   */
+  _typeof: function _typeof(obj) {
+    return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
+  },
+
+  /**
+   * 判断 obj 是否为 `object`
+   * @memberOf Utils
+   * @param obj
+   * @returns {boolean}
+   * @example
+   *
+   * const { Utils } = require('@ali/wxv-bridge');
+   * const { isPlainObject } = Utils;
+   * console.log(isPlainObject({})); // true
+   * console.log(isPlainObject('')); // false
+   */
+  isPlainObject: function isPlainObject(obj) {
+    return Utils._typeof(obj) === 'object';
+  },
+
+  /**
+   * 判断 obj 是否为 `string`
+   * @memberOf Utils
+   * @param obj
+   * @returns {boolean}
+   * @example
+   *
+   * const { Utils } = require('@ali/wxv-bridge');
+   * const { isString } = Utils;
+   * console.log(isString({})); // false
+   * console.log(isString('')); // true
+   */
+  isString: function isString(obj) {
+    return typeof obj === 'string';
+  },
+
+  /**
+   * 判断 obj 是否为 `非空数组`
+   * @memberOf Utils
+   * @param obj
+   * @returns {boolean}
+   * @example
+   *
+   * const { Utils } = require('@ali/wxv-bridge');
+   * const { isNonEmptyArray } = Utils;
+   * console.log(isNonEmptyArray([])); // false
+   * console.log(isNonEmptyArray([1,1,1,1])); // true
+   */
+  isNonEmptyArray: function isNonEmptyArray(obj) {
+    return obj && obj.length > 0 && Array.isArray(obj) && typeof obj !== 'undefined';
+  }
+};
+exports.default = Utils;
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(170);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(189);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(208);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(80);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(81)
+}
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(83),
+  /* template */
+  __webpack_require__(84),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-10b8a20a",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-input/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -8268,29 +4739,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-10b8a20a", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 69 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(70);
+var content = __webpack_require__(82);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("1f79d965", content, false);
+var update = __webpack_require__(2)("ac23d134", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-10b8a20a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-10b8a20a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-10b8a20a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-10b8a20a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -8300,7 +4774,7 @@ if(false) {
 }
 
 /***/ }),
-/* 70 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -8308,13 +4782,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-wrapper[data-v-10b8a20a] {\n  padding-top: 72px;\n  padding-right: 48px;\n  padding-left: 48px;\n}\n.fm-input[data-v-10b8a20a] {\n  padding-bottom: 27px;\n  padding-left: 24px;\n  border-bottom-style: solid;\n  border-bottom-width: 3px;\n  border-bottom-color: #e6e6e6;\n  font-size: 48px;\n  color: #000000;\n  placeholder-color: #dddddd;\n}\n.fm-input-wrap[data-v-10b8a20a] {\n  position: relative;\n}\n.delete[data-v-10b8a20a] {\n  position: absolute;\n  top: 69px;\n  right: 72px;\n  width: 60px;\n  height: 60px;\n  padding: 6px;\n  background-color: rgba(0, 0, 0, 0.2);\n  border-radius: 30px;\n}\n.visible[data-v-10b8a20a] {\n  position: absolute;\n  top: 63px;\n  right: 72px;\n  width: 72px;\n  height: 72px;\n}\n.error-msg[data-v-10b8a20a] {\n  font-size: 36px;\n  color: #df2b18;\n  margin-left: 24px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-input/index.vue?9f984a0c"],"names":[],"mappings":";AA2BA;EACA,kBAAA;EACA,oBAAA;EACA,mBAAA;CACA;AAEA;EACA,qBAAA;EACA,mBAAA;EACA,2BAAA;EACA,yBAAA;EACA,6BAAA;EACA,gBAAA;EACA,eAAA;EACA,2BAAA;CACA;AAEA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;EACA,UAAA;EACA,YAAA;EACA,YAAA;EACA,aAAA;EACA,aAAA;EACA,qCAAA;EACA,oBAAA;CACA;AAEA;EACA,mBAAA;EACA,UAAA;EACA,YAAA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,gBAAA;EACA,eAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div class=\"fm-wrapper\">\n    <input\n      :type=\"type\"\n      class=\"fm-input\"\n      :style=\"inputStyle\"\n      :value=\"value\"\n      :maxlength=\"maxlength\"\n      :placeholder=\"placeholder\"\n      :autofocus=\"autofocus\"\n      :disabled=\"disabled\"\n      :return-key-type=\"returnKeyType\"\n      :nightMode=\"nightMode\"\n      @input=\"input\"\n      @change=\"change\"\n      @focus=\"beFocus\"\n      @blur=\"beBlur\"\n      ref=\"input\" />\n    <fm-icon v-if=\"delShow\" class=\"delete\" name=\"guanbi\" :icon-style=\"48\" color=\"#fff\" @fmIconClicked=\"delClick\" />\n    <fm-icon v-if=\"visibleShow\" class=\"visible\" :name=\"visibleValue\" :icon-style=\"72\" color=\"#666\" @fmIconClicked=\"toggleVisible\" />\n    <text v-if=\"hasError\" class=\"error-msg\">{{inputErrorMessage}}</text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-wrapper {\n    padding-top: 72px;\n    padding-right: 48px;\n    padding-left: 48px;\n  }\n\n  .fm-input {\n    padding-bottom: 27px;\n    padding-left: 24px;\n    border-bottom-style: solid;\n    border-bottom-width: 3px;\n    border-bottom-color: #e6e6e6;\n    font-size: 48px;\n    color: #000000;\n    placeholder-color: #dddddd;\n  }\n\n  .fm-input-wrap {\n    position: relative;\n  }\n\n  .delete {\n    position: absolute;\n    top: 69px;\n    right: 72px;\n    width: 60px;\n    height: 60px;\n    padding: 6px;\n    background-color: rgba(0, 0, 0, 0.2);\n    border-radius: 30px;\n  }\n\n  .visible {\n    position: absolute;\n    top: 63px;\n    right: 72px;\n    width: 72px;\n    height: 72px;\n  }\n\n  .error-msg {\n    font-size: 36px;\n    color: #df2b18;\n    margin-left: 24px;\n  }\n</style>\n\n<script>\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\nimport STYLE from 'weex-flymeui/lib/theme/default/';\nimport FmIcon from '../fm-icon';\n\nexport default {\n  name: 'FmInput',\n  mixins: [Locale],\n  components: { FmIcon },\n  mounted () {\n    if (this.type === 'password') {\n      this.pwdModel = true;\n    }\n    this.value = this.defaultValue || '';\n  },\n  data () {\n    return {\n      value: '',\n      rows: 1,\n      isFocus: false,\n      pwdModel: false,\n      pwdVisible: false\n    };\n  },\n  watch: {\n    defaultValue (val) {\n      this.value = val;\n    }\n  },\n  props: {\n    defaultValue: {\n      type: [String, Number],\n      default: ''\n    },\n    placeholder: {\n      type: String,\n      default () {\n        return t('el.input.placeholder');\n      }\n    },\n    maxlength: [String, Number],\n    inputPattern: RegExp,\n    inputErrorMessage: {\n      type: String,\n      default: '输入有误'\n    },\n    type: String,\n    autofocus: Boolean,\n    disabled: Boolean,\n    returnKeyType: {\n      type: String,\n      default: 'default'\n    },\n    nightMode: {\n      type: Boolean,\n      default: false\n    }\n  },\n  computed: {\n    visibleValue () {\n      return this.type === 'password' ? 'chakan' : 'yinbi';\n    },\n    inputStyle () {\n      const style = { paddingRight: 24 };\n      style.borderBottomColor = !this.hasError ? this.isFocus ? STYLE.primaryColor : '#e6e6e6' : '#df2b18';\n      style.caretColor = STYLE.primaryColor;\n      if (this.delShow || this.visibleShow) {\n        style.paddingRight = 108 + 'px';\n      }\n      return style;\n    },\n    delShow () {\n      return !this.pwdModel && this.isFocus && this.value;\n    },\n    visibleShow () {\n      return this.isFocus && this.pwdModel;\n    },\n    hasError () {\n      const { inputPattern, value } = this;\n      if (inputPattern) {\n        if (!value.match(inputPattern)) {\n          return true;\n        }\n        return false;\n      }\n      return false;\n    }\n  },\n  methods: {\n    delClick (e) {\n      this.value = '';\n    },\n    toggleVisible (e) {\n      if (this.$refs.input.setType) {\n        this.pwdVisible\n          ? this.$refs.input.setType('password')\n          : this.$refs.input.setType('visible');\n        this.pwdVisible = !this.pwdVisible;\n      } else {\n        if (this.type === 'password') {\n          this.type = 'text';\n        } else {\n          this.type = 'password';\n        }\n      }\n    },\n    input (evt) {\n      this.value = evt.value;\n      this.$emit('input', evt);\n    },\n    change (evt) {\n      this.$emit('change', evt);\n    },\n    beFocus (evt) {\n      this.isFocus = true;\n      this.$emit('focus', evt);\n    },\n    beBlur (evt) {\n      this.isFocus = false;\n      this.$emit('blur', evt);\n    },\n    focus () {\n      this.$refs.input.focus();\n    },\n    blur () {\n      this.$refs.input.blur();\n    },\n    setSelectionRange (start, end) {\n      this.$refs.input.setSelectionRange(start, end);\n    },\n    getEditSelectionRange (callback) {\n      this.$refs.input.getEditSelectionRange(callback);\n    },\n    setValue (value) {\n      this.value = value;\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-wrapper[data-v-10b8a20a] {\n  padding-top: 0.66667rem;\n  padding-right: 0.44444rem;\n  padding-left: 0.44444rem;\n}\n.fm-input[data-v-10b8a20a] {\n  padding-bottom: 0.25rem;\n  padding-left: 0.22222rem;\n  border-bottom-style: solid;\n  border-bottom-width: 0.02778rem;\n  border-bottom-color: #e6e6e6;\n  font-size: 0.44444rem;\n  color: #000000;\n  placeholder-color: #dddddd;\n}\n.fm-input[data-v-10b8a20a]::-webkit-input-placeholder {\n  color: #dddddd;\n}\n.fm-input[data-v-10b8a20a]:-moz-placeholder {\n  color: #dddddd;\n}\n.fm-input[data-v-10b8a20a]::-moz-placeholder {\n  color: #dddddd;\n}\n.fm-input[data-v-10b8a20a]:-ms-input-placeholder {\n  color: #dddddd;\n}\n.fm-input[data-v-10b8a20a]:placeholder-shown {\n  color: #dddddd;\n}\n.fm-input-wrap[data-v-10b8a20a] {\n  position: relative;\n}\n.delete[data-v-10b8a20a] {\n  position: absolute;\n  top: 0.63889rem;\n  right: 0.66667rem;\n  width: 0.55556rem;\n  height: 0.55556rem;\n  padding: 0.05556rem;\n  background-color: rgba(0, 0, 0, 0.2);\n  border-radius: 0.27778rem;\n}\n.visible[data-v-10b8a20a] {\n  position: absolute;\n  top: 0.58333rem;\n  right: 0.66667rem;\n  width: 0.66667rem;\n  height: 0.66667rem;\n}\n.error-msg[data-v-10b8a20a] {\n  font-size: 0.33333rem;\n  color: #df2b18;\n  margin-left: 0.22222rem;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-input/index.vue?11250b75","/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-input/<no source>"],"names":[],"mappings":";AA2BA;EACA,wBAAA;EACA,0BAAA;EACA,yBAAA;CACA;AAEA;EACA,wBAAA;EACA,yBAAA;EACA,2BAAA;EACA,gCAAA;EACA,6BAAA;EACA,sBAAA;EACA,eAAA;EACA,2BAAA;CACA;AC1CA;EAAA,eAAA;CAAA;AAAA;EAAA,eAAA;CAAA;AAAA;EAAA,eAAA;CAAA;AAAA;EAAA,eAAA;CAAA;AAAA;EAAA,eAAA;CAAA;AD4CA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;EACA,gBAAA;EACA,kBAAA;EACA,kBAAA;EACA,mBAAA;EACA,oBAAA;EACA,qCAAA;EACA,0BAAA;CACA;AAEA;EACA,mBAAA;EACA,gBAAA;EACA,kBAAA;EACA,kBAAA;EACA,mBAAA;CACA;AAEA;EACA,sBAAA;EACA,eAAA;EACA,wBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div class=\"fm-wrapper\">\n    <input\n      :type=\"type\"\n      class=\"fm-input\"\n      :style=\"inputStyle\"\n      :value=\"value\"\n      :maxlength=\"maxlength\"\n      :placeholder=\"placeholder\"\n      :autofocus=\"autofocus\"\n      :disabled=\"disabled\"\n      :return-key-type=\"returnKeyType\"\n      :nightMode=\"nightMode\"\n      @input=\"input\"\n      @change=\"change\"\n      @focus=\"beFocus\"\n      @blur=\"beBlur\"\n      ref=\"input\" />\n    <fm-icon v-if=\"delShow\" class=\"delete\" name=\"guanbi\" :icon-style=\"48\" color=\"#fff\" @fmIconClicked=\"delClick\" />\n    <fm-icon v-if=\"visibleShow\" class=\"visible\" :name=\"visibleValue\" :icon-style=\"72\" color=\"#666\" @fmIconClicked=\"toggleVisible\" />\n    <text v-if=\"hasError\" class=\"error-msg\">{{inputErrorMessage}}</text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-wrapper {\n    padding-top: 72px;\n    padding-right: 48px;\n    padding-left: 48px;\n  }\n\n  .fm-input {\n    padding-bottom: 27px;\n    padding-left: 24px;\n    border-bottom-style: solid;\n    border-bottom-width: 3px;\n    border-bottom-color: #e6e6e6;\n    font-size: 48px;\n    color: #000000;\n    placeholder-color: #dddddd;\n  }\n\n  .fm-input-wrap {\n    position: relative;\n  }\n\n  .delete {\n    position: absolute;\n    top: 69px;\n    right: 72px;\n    width: 60px;\n    height: 60px;\n    padding: 6px;\n    background-color: rgba(0, 0, 0, 0.2);\n    border-radius: 30px;\n  }\n\n  .visible {\n    position: absolute;\n    top: 63px;\n    right: 72px;\n    width: 72px;\n    height: 72px;\n  }\n\n  .error-msg {\n    font-size: 36px;\n    color: #df2b18;\n    margin-left: 24px;\n  }\n</style>\n\n<script>\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\nimport STYLE from 'weex-flymeui/lib/theme/default/index.js';\nimport FmIcon from '../fm-icon';\n\nexport default {\n  name: 'FmInput',\n  mixins: [Locale],\n  components: { FmIcon },\n  mounted () {\n    if (this.type === 'password') {\n      this.pwdModel = true;\n    }\n    this.value = this.defaultValue || '';\n  },\n  data () {\n    return {\n      value: '',\n      rows: 1,\n      isFocus: false,\n      pwdModel: false,\n      pwdVisible: false\n    };\n  },\n  watch: {\n    defaultValue (val) {\n      this.value = val;\n    }\n  },\n  props: {\n    defaultValue: {\n      type: [String, Number],\n      default: ''\n    },\n    placeholder: {\n      type: String,\n      default () {\n        return t('el.input.placeholder');\n      }\n    },\n    maxlength: [String, Number],\n    inputPattern: RegExp,\n    inputErrorMessage: {\n      type: String,\n      default: '输入有误'\n    },\n    type: String,\n    autofocus: Boolean,\n    disabled: Boolean,\n    returnKeyType: {\n      type: String,\n      default: 'default'\n    },\n    nightMode: {\n      type: Boolean,\n      default: false\n    }\n  },\n  computed: {\n    visibleValue () {\n      return this.type === 'password' ? 'chakan' : 'yinbi';\n    },\n    inputStyle () {\n      const style = { paddingRight: 24 };\n      style.borderBottomColor = !this.hasError ? this.isFocus ? STYLE.primaryColor : '#e6e6e6' : '#df2b18';\n      style.caretColor = STYLE.primaryColor;\n      if (this.delShow || this.visibleShow) {\n        style.paddingRight = 108 + 'px';\n      }\n      return style;\n    },\n    delShow () {\n      return !this.pwdModel && this.isFocus && this.value;\n    },\n    visibleShow () {\n      return this.isFocus && this.pwdModel;\n    },\n    hasError () {\n      const { inputPattern, value } = this;\n      if (inputPattern) {\n        if (!value.match(inputPattern)) {\n          return true;\n        }\n        return false;\n      }\n      return false;\n    }\n  },\n  methods: {\n    delClick (e) {\n      this.value = '';\n    },\n    toggleVisible (e) {\n      if (this.$refs.input.setType) {\n        this.pwdVisible\n          ? this.$refs.input.setType('password')\n          : this.$refs.input.setType('visible');\n        this.pwdVisible = !this.pwdVisible;\n      } else {\n        if (this.type === 'password') {\n          this.type = 'text';\n        } else {\n          this.type = 'password';\n        }\n      }\n    },\n    input (evt) {\n      this.value = evt.value;\n      this.$emit('input', evt);\n    },\n    change (evt) {\n      this.$emit('change', evt);\n    },\n    beFocus (evt) {\n      this.isFocus = true;\n      this.$emit('focus', evt);\n    },\n    beBlur (evt) {\n      this.isFocus = false;\n      this.$emit('blur', evt);\n    },\n    focus () {\n      this.$refs.input.focus();\n    },\n    blur () {\n      this.$refs.input.blur();\n    },\n    setSelectionRange (start, end) {\n      this.$refs.input.setSelectionRange(start, end);\n    },\n    getEditSelectionRange (callback) {\n      this.$refs.input.getEditSelectionRange(callback);\n    },\n    setValue (value) {\n      this.value = value;\n    }\n  }\n};\n</script>\n",null],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 71 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8324,17 +4798,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _locale = __webpack_require__(34);
+var _index = __webpack_require__(28);
+
+var _index2 = _interopRequireDefault(_index);
+
+var _locale = __webpack_require__(29);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(20);
+var _locale3 = __webpack_require__(7);
 
-var _default2 = __webpack_require__(35);
-
-var _default3 = _interopRequireDefault(_default2);
-
-var _fmIcon = __webpack_require__(6);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
@@ -8475,8 +4949,8 @@ exports.default = {
     },
     inputStyle: function inputStyle() {
       var style = { paddingRight: 24 };
-      style.borderBottomColor = !this.hasError ? this.isFocus ? _default3.default.primaryColor : '#e6e6e6' : '#df2b18';
-      style.caretColor = _default3.default.primaryColor;
+      style.borderBottomColor = !this.hasError ? this.isFocus ? _index2.default.primaryColor : '#e6e6e6' : '#df2b18';
+      style.caretColor = _index2.default.primaryColor;
       if (this.delShow || this.visibleShow) {
         style.paddingRight = 108 + 'px';
       }
@@ -8551,7 +5025,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 72 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -8621,122 +5095,28 @@ if (false) {
 }
 
 /***/ }),
-/* 73 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-/**
- * Created by Tw93 on 2017/6/26.
- */
-var Utils = {
-  /**
-   * 对象类型
-   * @memberOf Utils
-   * @param obj
-   * @returns {string}
-   * @private
-   */
-  _typeof: function _typeof(obj) {
-    return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
-  },
-
-  /**
-   * 判断 obj 是否为 `object`
-   * @memberOf Utils
-   * @param obj
-   * @returns {boolean}
-   * @example
-   *
-   * const { Utils } = require('@ali/wxv-bridge');
-   * const { isPlainObject } = Utils;
-   * console.log(isPlainObject({})); // true
-   * console.log(isPlainObject('')); // false
-   */
-  isPlainObject: function isPlainObject(obj) {
-    return Utils._typeof(obj) === 'object';
-  },
-
-  /**
-   * 判断 obj 是否为 `string`
-   * @memberOf Utils
-   * @param obj
-   * @returns {boolean}
-   * @example
-   *
-   * const { Utils } = require('@ali/wxv-bridge');
-   * const { isString } = Utils;
-   * console.log(isString({})); // false
-   * console.log(isString('')); // true
-   */
-  isString: function isString(obj) {
-    return typeof obj === 'string';
-  },
-
-  /**
-   * 判断 obj 是否为 `非空数组`
-   * @memberOf Utils
-   * @param obj
-   * @returns {boolean}
-   * @example
-   *
-   * const { Utils } = require('@ali/wxv-bridge');
-   * const { isNonEmptyArray } = Utils;
-   * console.log(isNonEmptyArray([])); // false
-   * console.log(isNonEmptyArray([1,1,1,1])); // true
-   */
-  isNonEmptyArray: function isNonEmptyArray(obj) {
-    return obj && obj.length > 0 && Array.isArray(obj) && typeof obj !== 'undefined';
-  }
-};
-exports.default = Utils;
-
-/***/ }),
-/* 74 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(169);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 75 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(76)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(86)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(78),
+  __webpack_require__(88),
   /* template */
-  __webpack_require__(79),
+  __webpack_require__(89),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-5cb22ec6",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-simple-btn/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -8750,29 +5130,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-5cb22ec6", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 76 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(77);
+var content = __webpack_require__(87);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("4a68a452", content, false);
+var update = __webpack_require__(2)("18ab8268", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-5cb22ec6\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-5cb22ec6\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5cb22ec6\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5cb22ec6\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -8782,7 +5165,7 @@ if(false) {
 }
 
 /***/ }),
-/* 77 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -8790,13 +5173,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.dialog-btn[data-v-5cb22ec6] {\n    flex: 1;\n\t\tpadding-left: 48px;\n\t\tpadding-right: 48px;\n}\n.btnText[data-v-5cb22ec6] {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    color: #198ded;\n    text-align: center;\n}\n.dialog-btnText[data-v-5cb22ec6] {\n    padding: 36px;\n}\n.actionSheet-btnText[data-v-5cb22ec6] {\n\t\tline-height: 192px;\n\t\tborder-bottom-style: solid;\n\t\tborder-bottom-width: 1px;\n\t\tborder-bottom-color: #E6E6E6;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-simple-btn/index.vue?21b3716b"],"names":[],"mappings":";AASA;IACA,QAAA;EACA,mBAAA;EACA,oBAAA;CACA;AAEA;IACA,+BAAA;IACA,iBAAA;IACA,gBAAA;IACA,eAAA;IACA,mBAAA;CACA;AAEA;IACA,cAAA;CACA;AAEA;EACA,mBAAA;EACA,2BAAA;EACA,yBAAA;EACA,6BAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div class=\"dialog-btn\">\n    <text :class=\"btnClz\" :style=\"btnStyle\" @click=\"click()\">{{ text }}</text>\n\t</div>\n</template>\n\n<style scoped>\n  .dialog-btn {\n    flex: 1;\n\t\tpadding-left: 48px;\n\t\tpadding-right: 48px;\n  }\n\n\t.btnText {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    color: #198ded;\n    text-align: center;\n\t}\n\n  .dialog-btnText {\n    padding: 36px;\n  }\n\n\t.actionSheet-btnText {\n\t\tline-height: 192px;\n\t\tborder-bottom-style: solid;\n\t\tborder-bottom-width: 1px;\n\t\tborder-bottom-color: #E6E6E6;\n\t}\n</style>\n\n<script>\nexport default {\n  name: 'FmSimpleBtn',\n  props: {\n    text: String,\n    type: String,\n    color: String,\n    msg: [String, Number, Array, Object],\n    scene: {\n      type: String,\n      defalut: 'dialog'\n    }\n  },\n  computed: {\n    btnClz () {\n      const clz = ['btnText'];\n      if (this.scene === 'dialog') {\n        clz.push('dialog-btnText');\n      } else if (this.scene === 'actionSheet') {\n        clz.push('actionSheet-btnText');\n      }\n      return clz;\n    },\n    btnStyle () {\n      const { color } = this;\n      if (color) {\n        return {\n          color: color\n        };\n      }\n    }\n  },\n  methods: {\n    click () {\n      const { text, msg, type } = this;\n      this.$emit('click', { text: text, type: type, msg: msg });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.dialog-btn[data-v-5cb22ec6] {\n    -webkit-box-flex: 1;\n    -webkit-flex: 1;\n            flex: 1;\n}\n.btnText[data-v-5cb22ec6] {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 0.44444rem;\n    color: #198ded;\n    text-align: center;\n}\n.dialog-btnText[data-v-5cb22ec6] {\n    padding: 0.33333rem;\n}\n.actionSheet-btnText[data-v-5cb22ec6] {\n\t\tline-height: 1.77778rem;\n\t\tborder-bottom-style: solid;\n\t\tborder-bottom-width: 1px;\n\t\tborder-bottom-color: #E6E6E6;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-simple-btn/index.vue?36e57d08"],"names":[],"mappings":";AASA;IACA,oBAAA;IAAA,gBAAA;YAAA,QAAA;CACA;AAEA;IACA,+BAAA;IACA,iBAAA;IACA,sBAAA;IACA,eAAA;IACA,mBAAA;CACA;AAEA;IACA,oBAAA;CACA;AAEA;EACA,wBAAA;EACA,2BAAA;EACA,yBAAA;EACA,6BAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div class=\"dialog-btn\">\n    <text :class=\"btnClz\" :style=\"btnStyle\" @click=\"click()\">{{ text }}</text>\n\t</div>\n</template>\n\n<style scoped>\n  .dialog-btn {\n    flex: 1;\n  }\n\n\t.btnText {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    color: #198ded;\n    text-align: center;\n\t}\n\n  .dialog-btnText {\n    padding: 36px;\n  }\n\n\t.actionSheet-btnText {\n\t\tline-height: 192px;\n\t\tborder-bottom-style: solid;\n\t\tborder-bottom-width: 1px;\n\t\tborder-bottom-color: #E6E6E6;\n\t}\n</style>\n\n<script>\nexport default {\n  name: 'FmSimpleBtn',\n  props: {\n    text: String,\n    type: String,\n    color: String,\n    msg: [String, Number, Array, Object],\n    scene: {\n      type: String,\n      defalut: 'dialog'\n    }\n  },\n  computed: {\n    btnClz () {\n      const clz = ['btnText'];\n      if (this.scene === 'dialog') {\n        clz.push('dialog-btnText');\n      } else if (this.scene === 'actionSheet') {\n        clz.push('actionSheet-btnText');\n      }\n      return clz;\n    },\n    btnStyle () {\n      const { color } = this;\n      if (color) {\n        return {\n          color: color\n        };\n      }\n    }\n  },\n  methods: {\n    click () {\n      const { text, msg, type } = this;\n      this.$emit('click', { text: text, type: type, msg: msg });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 78 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8805,8 +5188,6 @@ exports.push([module.i, "\n.dialog-btn[data-v-5cb22ec6] {\n    flex: 1;\n\t\tpad
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-//
-//
 //
 //
 //
@@ -8885,7 +5266,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 79 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -8913,25 +5294,28 @@ if (false) {
 }
 
 /***/ }),
-/* 80 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(81)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(91)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(83),
+  __webpack_require__(93),
   /* template */
-  __webpack_require__(84),
+  __webpack_require__(94),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-0a22d546",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-popup/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -8945,29 +5329,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-0a22d546", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 81 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(82);
+var content = __webpack_require__(92);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("4bec9f5c", content, false);
+var update = __webpack_require__(2)("36370f0a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-0a22d546\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-0a22d546\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0a22d546\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0a22d546\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -8977,7 +5364,7 @@ if(false) {
 }
 
 /***/ }),
-/* 82 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -8985,13 +5372,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-popup[data-v-0a22d546] {\n\t\tposition: fixed;\n\t\twidth: 1080px;\n}\n.top[data-v-0a22d546] {\n    left: 0;\n    right: 0;\n}\n.bottom[data-v-0a22d546] {\n    left: 0;\n    right: 0;\n}\n.left[data-v-0a22d546] {\n    bottom: 0;\n    top: 0;\n}\n.right[data-v-0a22d546] {\n    bottom: 0;\n    top: 0;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-popup/index.vue?0910bc5f"],"names":[],"mappings":";AAwBA;EACA,gBAAA;EACA,cAAA;CACA;AAEA;IACA,QAAA;IACA,SAAA;CACA;AAEA;IACA,QAAA;IACA,SAAA;CACA;AAEA;IACA,UAAA;IACA,OAAA;CACA;AAEA;IACA,UAAA;IACA,OAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Updated by Yanjiie on 2018/04/12. Fork from weex-ui. -->\n<template>\n  <div>\n    <div @touchend=\"handleTouchEnd\">\n      <fm-overlay :show=\"haveOverlay && isOverShow\"\n                   v-if=\"show\"\n                   ref=\"overlay\"\n                   v-bind=\"overlayCfg\"\n                   @fmOverlayBodyClicking=\"fmOverlayBodyClicking\"></fm-overlay>\n    </div>\n    <div ref=\"fm-popup\"\n         v-if=\"show\"\n         :height=\"_height\"\n         :hack=\"isNeedShow\"\n         @click=\"()=>{}\"\n         :class=\"['fm-popup', pos]\"\n         :style=\"padStyle\">\n      <slot></slot>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n\t.fm-popup {\n\t\tposition: fixed;\n\t\twidth: 1080px;\n\t}\n\n  .top {\n    left: 0;\n    right: 0;\n  }\n\n  .bottom {\n    left: 0;\n    right: 0;\n  }\n\n  .left {\n    bottom: 0;\n    top: 0;\n  }\n\n  .right {\n    bottom: 0;\n    top: 0;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nconst { platform } = weex.config.env;\nconst isWeb = typeof (window) === 'object' && platform.toLowerCase() === 'web';\nimport FmOverlay from '../fm-overlay';\n\nexport default {\n  name: 'FmPopup',\n  components: { FmOverlay },\n  props: {\n    show: {\n      type: Boolean,\n      default: false\n    },\n    pos: {\n      type: String,\n      default: 'bottom'\n    },\n    popupColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    overlayCfg: {\n      type: Object,\n      default: () => ({\n        hasAnimation: true,\n        timingFunction: ['ease-in', 'ease-out'],\n        duration: 300,\n        opacity: 0.5\n      })\n    },\n    height: {\n      type: [Number, String],\n      default: 840\n    },\n    standOut: {\n      type: [Number, String],\n      default: 0\n    },\n    width: {\n      type: [Number, String],\n      default: 1080\n    },\n    animation: {\n      type: Object,\n      default: () => ({\n        timingFunction: 'ease-out'\n      })\n    }\n  },\n  data: () => ({\n    haveOverlay: true,\n    isOverShow: true\n  }),\n  computed: {\n    isNeedShow () {\n      setTimeout(() => {\n        this.appearPopup(this.show);\n      }, 50);\n      return this.show;\n    },\n    _height () {\n      this.appearPopup(this.show, 150);\n      return this.height;\n    },\n    transformValue () {\n      return this.getTransform(this.pos, this.width, this.height, true);\n    },\n    padStyle () {\n      const { pos, width, height, popupColor } = this;\n      let style = {\n        width: `${width}px`,\n        backgroundColor: popupColor\n      };\n      pos === 'top' && (style = {\n        ...style,\n        top: `${-height}px`,\n        height: `${height}px`\n      });\n      pos === 'bottom' && (style = {\n        ...style,\n        bottom: `${-height}px`,\n        height: `${height}px`\n      });\n      pos === 'left' && (style = {\n        ...style,\n        left: `${-width}px`\n      });\n      pos === 'right' && (style = {\n        ...style,\n        right: `${-width}px`\n      });\n      return style;\n    }\n  },\n  methods: {\n    handleTouchEnd (e) {\n      const { platform } = weex.config.env;\n      platform === 'Web' && e.preventDefault && e.preventDefault();\n    },\n    hide () {\n      this.appearPopup(false);\n      this.$refs.overlay.appearOverlay(false);\n    },\n    fmOverlayBodyClicking () {\n      this.isShow && this.appearPopup(false);\n    },\n    appearPopup (bool, duration = 300) {\n      this.isShow = bool;\n      const popupEl = this.$refs['fm-popup'];\n      if (!popupEl) {\n        return;\n      }\n      animation.transition(popupEl, {\n        styles: {\n          transform: this.getTransform(this.pos, this.width, this.height, !bool)\n        },\n        duration,\n        delay: 0,\n        ...this.animation\n      }, () => {\n        if (!bool) {\n          this.$emit('fmPopupOverlayClicked', { pos: this.pos });\n        }\n      });\n    },\n    getTransform (pos, width, height, bool) {\n      let _size = pos === 'top' || pos === 'bottom' ? height : width;\n      let _transform;\n      if (isWeb) {\n        _size -= this.standOut;\n      }\n      bool && (_size = 0);\n      switch (pos) {\n        case 'top':\n          _transform = `translateY(${_size}px)`;\n          break;\n        case 'bottom':\n          _transform = `translateY(-${_size}px)`;\n          break;\n        case 'left':\n          _transform = `translateX(${_size}px)`;\n          break;\n        case 'right':\n          _transform = `translateX(-${_size}px)`;\n          break;\n      }\n      return _transform;\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-popup[data-v-0a22d546] {\n\t\tposition: fixed;\n\t\twidth: 10rem;\n}\n.top[data-v-0a22d546] {\n    left: 0;\n    right: 0;\n}\n.bottom[data-v-0a22d546] {\n    left: 0;\n    right: 0;\n}\n.left[data-v-0a22d546] {\n    bottom: 0;\n    top: 0;\n}\n.right[data-v-0a22d546] {\n    bottom: 0;\n    top: 0;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-popup/index.vue?0910bc5f"],"names":[],"mappings":";AAwBA;EACA,gBAAA;EACA,aAAA;CACA;AAEA;IACA,QAAA;IACA,SAAA;CACA;AAEA;IACA,QAAA;IACA,SAAA;CACA;AAEA;IACA,UAAA;IACA,OAAA;CACA;AAEA;IACA,UAAA;IACA,OAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Updated by Yanjiie on 2018/04/12. Fork from weex-ui. -->\n<template>\n  <div>\n    <div @touchend=\"handleTouchEnd\">\n      <fm-overlay :show=\"haveOverlay && isOverShow\"\n                   v-if=\"show\"\n                   ref=\"overlay\"\n                   v-bind=\"overlayCfg\"\n                   @fmOverlayBodyClicking=\"fmOverlayBodyClicking\"></fm-overlay>\n    </div>\n    <div ref=\"fm-popup\"\n         v-if=\"show\"\n         :height=\"_height\"\n         :hack=\"isNeedShow\"\n         @click=\"()=>{}\"\n         :class=\"['fm-popup', pos]\"\n         :style=\"padStyle\">\n      <slot></slot>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n\t.fm-popup {\n\t\tposition: fixed;\n\t\twidth: 1080px;\n\t}\n\n  .top {\n    left: 0;\n    right: 0;\n  }\n\n  .bottom {\n    left: 0;\n    right: 0;\n  }\n\n  .left {\n    bottom: 0;\n    top: 0;\n  }\n\n  .right {\n    bottom: 0;\n    top: 0;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nconst { platform } = weex.config.env;\nconst isWeb = typeof (window) === 'object' && platform.toLowerCase() === 'web';\nimport FmOverlay from '../fm-overlay';\n\nexport default {\n  name: 'FmPopup',\n  components: { FmOverlay },\n  props: {\n    show: {\n      type: Boolean,\n      default: false\n    },\n    pos: {\n      type: String,\n      default: 'bottom'\n    },\n    popupColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    overlayCfg: {\n      type: Object,\n      default: () => ({\n        hasAnimation: true,\n        timingFunction: ['ease-in', 'ease-out'],\n        duration: 300,\n        opacity: 0.5\n      })\n    },\n    height: {\n      type: [Number, String],\n      default: 840\n    },\n    standOut: {\n      type: [Number, String],\n      default: 0\n    },\n    width: {\n      type: [Number, String],\n      default: 1080\n    },\n    animation: {\n      type: Object,\n      default: () => ({\n        timingFunction: 'ease-out'\n      })\n    }\n  },\n  data: () => ({\n    haveOverlay: true,\n    isOverShow: true\n  }),\n  computed: {\n    isNeedShow () {\n      setTimeout(() => {\n        this.appearPopup(this.show);\n      }, 50);\n      return this.show;\n    },\n    _height () {\n      this.appearPopup(this.show, 150);\n      return this.height;\n    },\n    transformValue () {\n      return this.getTransform(this.pos, this.width, this.height, true);\n    },\n    padStyle () {\n      const { pos, width, height, popupColor } = this;\n      let style = {\n        width: `${width}px`,\n        backgroundColor: popupColor\n      };\n      pos === 'top' && (style = {\n        ...style,\n        top: `${-height}px`,\n        height: `${height}px`\n      });\n      pos === 'bottom' && (style = {\n        ...style,\n        bottom: `${-height}px`,\n        height: `${height}px`\n      });\n      pos === 'left' && (style = {\n        ...style,\n        left: `${-width}px`\n      });\n      pos === 'right' && (style = {\n        ...style,\n        right: `${-width}px`\n      });\n      return style;\n    }\n  },\n  methods: {\n    handleTouchEnd (e) {\n      const { platform } = weex.config.env;\n      platform === 'Web' && e.preventDefault && e.preventDefault();\n    },\n    hide () {\n      this.appearPopup(false);\n      this.$refs.overlay.appearOverlay(false);\n    },\n    fmOverlayBodyClicking () {\n      this.isShow && this.appearPopup(false);\n    },\n    appearPopup (bool, duration = 300) {\n      this.isShow = bool;\n      const popupEl = this.$refs['fm-popup'];\n      if (!popupEl) {\n        return;\n      }\n      animation.transition(popupEl, {\n        styles: {\n          transform: this.getTransform(this.pos, this.width, this.height, !bool)\n        },\n        duration,\n        delay: 0,\n        ...this.animation\n      }, () => {\n        if (!bool) {\n          this.$emit('fmPopupOverlayClicked', { pos: this.pos });\n        }\n      });\n    },\n    getTransform (pos, width, height, bool) {\n      let _size = pos === 'top' || pos === 'bottom' ? height : width;\n      let _transform;\n      if (isWeb) {\n        _size -= this.standOut;\n      }\n      bool && (_size = 0);\n      switch (pos) {\n        case 'top':\n          _transform = `translateY(${_size}px)`;\n          break;\n        case 'bottom':\n          _transform = `translateY(-${_size}px)`;\n          break;\n        case 'left':\n          _transform = `translateX(${_size}px)`;\n          break;\n        case 'right':\n          _transform = `translateX(-${_size}px)`;\n          break;\n      }\n      return _transform;\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 83 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9005,7 +5392,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _fmOverlay = __webpack_require__(44);
+var _fmOverlay = __webpack_require__(45);
 
 var _fmOverlay2 = _interopRequireDefault(_fmOverlay);
 
@@ -9225,7 +5612,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 84 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -9268,557 +5655,69 @@ if (false) {
 }
 
 /***/ }),
-/* 85 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(86);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 86 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(87)
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(89),
-  /* template */
-  __webpack_require__(91),
-  /* scopeId */
-  "data-v-6c88d718",
-  /* cssModules */
-  null
-)
-Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-item/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6c88d718", Component.options)
-  } else {
-    hotAPI.reload("data-v-6c88d718", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 87 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(88);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("c2621516", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-6c88d718\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-6c88d718\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 88 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(true);
-// imports
-
-
-// module
-exports.push([module.i, "\n.fm-item[data-v-6c88d718] {\n  padding: 0 48px;\n}\n.fm-item[data-v-6c88d718]:active {\n  background-color: rgba(0, 0, 0, 0.05);\n}\n.item-wrapper[data-v-6c88d718] {\n  flex-direction: row;\n  align-items: center;\n}\n.item-border[data-v-6c88d718] {\n  background-color: rgba(0, 0, 0, 0.1);\n  height: 2px;\n}\n.content[data-v-6c88d718] {\n  flex: 1;\n  flex-direction: row;\n}\n.content-text[data-v-6c88d718] {\n  flex: 1;\n  justify-content: center;\n}\n.text-title[data-v-6c88d718] {\n  font-size: 48px;\n  color: #000000;\n  line-height: 57px;\n  text-overflow: ellipsis;\n  lines: 1;\n}\n.text-summary[data-v-6c88d718] {\n  margin-top: 9px;\n  font-size: 36px;\n  color: rgba(0, 0, 0, 0.4);\n  line-height: 42px;\n  text-overflow: ellipsis;\n  lines: 1;\n}\n.text-description[data-v-6c88d718] {\n  flex: 1;\n  margin-top: 9px;\n  font-size: 36px;\n  color: rgba(0, 0, 0, 0.4);\n  line-height: 42px;\n}\n.image[data-v-6c88d718] {\n  margin-right: 48px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-item/index.vue?15cde195"],"names":[],"mappings":";AA+BA;EACA,gBAAA;CACA;AAEA;EACA,sCAAA;CACA;AAEA;EACA,oBAAA;EACA,oBAAA;CACA;AAEA;EACA,qCAAA;EACA,YAAA;CACA;AAEA;EACA,QAAA;EACA,oBAAA;CACA;AAEA;EACA,QAAA;EACA,wBAAA;CACA;AAEA;EACA,gBAAA;EACA,eAAA;EACA,kBAAA;EACA,wBAAA;EACA,SAAA;CACA;AAEA;EACA,gBAAA;EACA,gBAAA;EACA,0BAAA;EACA,kBAAA;EACA,wBAAA;EACA,SAAA;CACA;AAEA;EACA,QAAA;EACA,gBAAA;EACA,gBAAA;EACA,0BAAA;EACA,kBAAA;CACA;AAEA;EACA,mBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/3/9. -->\n<template>\n  <div class=\"fm-item\" @click=\"itemClicked\" @longpress=\"itemLongpress\">\n    <div class=\"item-wrapper\" :style=\"wrapStyle\">\n      <div v-if=\"imgSrc\" class=\"image\">\n        <fm-image :src=\"imgSrc\"\n                  :width=\"scene.imgWidth || imgWidth\"\n                  :height=\"scene.imgHeight || imgHeight\"\n                  :style=\"{ borderRadius: scene.imgRadius || imgRadius }\"\n                  :occupyingColor=\"occupyingColor\"></fm-image>\n      </div>\n      <div class=\"content\">\n        <slot name=\"left\">\n        </slot>\n        <div class=\"content-text\">\n          <slot name=\"title\">\n            <text v-if=\"title\" class=\"text-title\" :style=\"{ color: titleColor }\">{{ title }}</text>\n          </slot>\n          <text v-if=\"summary\" class=\"text-summary\" :style=\"{ color: summaryColor }\">{{ summary }}</text>\n          <text v-if=\"description\" class=\"text-description\" :style=\"{ color: descColor }\">{{ description }}</text>\n        </div>\n        <slot name=\"right\">\n        </slot>\n      </div>\n    </div>\n    <div class=\"item-border\" :style=\"{ marginLeft: imgSrc ? (scene.imgWidth || imgWidth) + 48 : 0 }\"></div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-item {\n    padding: 0 48px;\n  }\n\n  .fm-item:active {\n    background-color: rgba(0, 0, 0, 0.05);\n  }\n\n  .item-wrapper {\n    flex-direction: row;\n    align-items: center;\n  }\n\n  .item-border {\n    background-color: rgba(0, 0, 0, 0.1);\n    height: 2px;\n  }\n\n  .content {\n    flex: 1;\n    flex-direction: row;\n  }\n\n  .content-text {\n    flex: 1;\n    justify-content: center;\n  }\n\n  .text-title {\n    font-size: 48px;\n    color: #000000;\n    line-height: 57px;\n    text-overflow: ellipsis;\n    lines: 1;\n  }\n\n  .text-summary {\n    margin-top: 9px;\n    font-size: 36px;\n    color: rgba(0, 0, 0, 0.4);\n    line-height: 42px;\n    text-overflow: ellipsis;\n    lines: 1;\n  }\n\n  .text-description {\n    flex: 1;\n    margin-top: 9px;\n    font-size: 36px;\n    color: rgba(0, 0, 0, 0.4);\n    line-height: 42px;\n  }\n\n  .image {\n    margin-right: 48px;\n  }\n</style>\n\n<script>\nimport FmImage from '../fm-image';\nimport Scene from './scene';\n\nexport default {\n  name: 'FmItem',\n  components: { FmImage },\n  props: {\n    type: {\n      type: String,\n      default: 'normal'\n    },\n    title: String,\n    summary: String,\n    description: String,\n    imgSrc: String,\n    titleColor: {\n      type: String,\n      default: '#000000'\n    },\n    summaryColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    descColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    imgWidth: {\n      type: Number,\n      default: 96\n    },\n    imgHeight: {\n      type: Number,\n      default: 96\n    },\n    imgRadius: {\n      type: Number,\n      default: 0\n    },\n    imgPosition: {\n      type: String,\n      default: 'center'\n    },\n    paddingTop: {\n      type: Number,\n      default: 54\n    },\n    paddingBottom: {\n      type: Number,\n      default: 54\n    },\n    occupyingColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.1)'\n    }\n  },\n  data: () => ({\n    scene: {}\n  }),\n  computed: {\n    wrapStyle () {\n      const { paddingTop, paddingBottom, imgPosition, scene } = this;\n      return {\n        paddingTop: scene.paddingTop || paddingTop,\n        paddingBottom: scene.paddingBottom || paddingBottom,\n        alignItems: (scene.imgPosition || imgPosition) === 'top' ? 'flex-start' : (scene.imgPosition || imgPosition) === 'bottom' ? 'flex-end' : 'center'\n      };\n    }\n  },\n  watch: {\n    type (val) {\n      this.scene = val;\n    }\n  },\n  created () {\n    this.scene = Scene[this.type];\n  },\n  methods: {\n    itemClicked (e) {\n      this.$emit('fmItemClicked', e);\n    },\n    itemLongpress (e) {\n      this.$emit('fmItemLongpress', e);\n    }\n  }\n};\n</script>\n\n\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-/* 89 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _fmImage = __webpack_require__(5);
-
-var _fmImage2 = _interopRequireDefault(_fmImage);
-
-var _scene = __webpack_require__(90);
-
-var _scene2 = _interopRequireDefault(_scene);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-exports.default = {
-  name: 'FmItem',
-  components: { FmImage: _fmImage2.default },
-  props: {
-    type: {
-      type: String,
-      default: 'normal'
-    },
-    title: String,
-    summary: String,
-    description: String,
-    imgSrc: String,
-    titleColor: {
-      type: String,
-      default: '#000000'
-    },
-    summaryColor: {
-      type: String,
-      default: 'rgba(0, 0, 0, 0.4)'
-    },
-    descColor: {
-      type: String,
-      default: 'rgba(0, 0, 0, 0.4)'
-    },
-    imgWidth: {
-      type: Number,
-      default: 96
-    },
-    imgHeight: {
-      type: Number,
-      default: 96
-    },
-    imgRadius: {
-      type: Number,
-      default: 0
-    },
-    imgPosition: {
-      type: String,
-      default: 'center'
-    },
-    paddingTop: {
-      type: Number,
-      default: 54
-    },
-    paddingBottom: {
-      type: Number,
-      default: 54
-    },
-    occupyingColor: {
-      type: String,
-      default: 'rgba(0, 0, 0, 0.1)'
-    }
-  },
-  data: function data() {
-    return {
-      scene: {}
-    };
-  },
-  computed: {
-    wrapStyle: function wrapStyle() {
-      var paddingTop = this.paddingTop,
-          paddingBottom = this.paddingBottom,
-          imgPosition = this.imgPosition,
-          scene = this.scene;
-
-      return {
-        paddingTop: scene.paddingTop || paddingTop,
-        paddingBottom: scene.paddingBottom || paddingBottom,
-        alignItems: (scene.imgPosition || imgPosition) === 'top' ? 'flex-start' : (scene.imgPosition || imgPosition) === 'bottom' ? 'flex-end' : 'center'
-      };
-    }
-  },
-  watch: {
-    type: function type(val) {
-      this.scene = val;
-    }
-  },
-  created: function created() {
-    this.scene = _scene2.default[this.type];
-  },
-
-  methods: {
-    itemClicked: function itemClicked(e) {
-      this.$emit('fmItemClicked', e);
-    },
-    itemLongpress: function itemLongpress(e) {
-      this.$emit('fmItemLongpress', e);
-    }
-  }
-};
-
-/***/ }),
-/* 90 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = {
-  'single': {
-    paddingTop: 48,
-    paddingBottom: 48
-  },
-  'normal': {},
-  'avatar-single': {
-    imgWidth: 120,
-    imgHeight: 120,
-    imgRadius: 60,
-    paddingTop: 48,
-    paddingBottom: 48
-  },
-  'avatar-normal': {
-    imgWidth: 120,
-    imgHeight: 120,
-    imgRadius: 60,
-    paddingTop: 48,
-    paddingBottom: 48,
-    imgPosition: 'top'
-  },
-  'icon-small': {
-    imgWidth: 96,
-    imgHeight: 96,
-    paddingTop: 36,
-    paddingBottom: 36
-  },
-  'icon-middle': {
-    imgWidth: 138,
-    imgHeight: 138,
-    imgRadius: 4,
-    paddingTop: 24,
-    paddingBottom: 24
-  },
-  'icon-large': {
-    imgWidth: 192,
-    imgHeight: 192,
-    paddingTop: 36,
-    paddingBottom: 36
-  }
-};
-
-/***/ }),
-/* 91 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "fm-item",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    on: {
-      "click": _vm.itemClicked,
-      "longpress": _vm.itemLongpress
-    }
-  }, [_c('div', {
-    staticClass: "item-wrapper",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(_vm.wrapStyle))
-  }, [(_vm.imgSrc) ? _c('div', {
-    staticClass: "image",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [_c('fm-image', {
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      borderRadius: _vm.scene.imgRadius || _vm.imgRadius
-    })),
-    attrs: {
-      "src": _vm.imgSrc,
-      "width": _vm.scene.imgWidth || _vm.imgWidth,
-      "height": _vm.scene.imgHeight || _vm.imgHeight,
-      "occupyingColor": _vm.occupyingColor
-    }
-  })], 1) : _vm._e(), _vm._v(" "), _c('div', {
-    staticClass: "content",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [_vm._t("left"), _vm._v(" "), _c('div', {
-    staticClass: "content-text",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [_vm._t("title", [(_vm.title) ? _c('text', {
-    staticClass: "text-title",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      color: _vm.titleColor
-    }))
-  }, [_vm._v(_vm._s(_vm.title))]) : _vm._e()]), _vm._v(" "), (_vm.summary) ? _c('text', {
-    staticClass: "text-summary",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      color: _vm.summaryColor
-    }))
-  }, [_vm._v(_vm._s(_vm.summary))]) : _vm._e(), _vm._v(" "), (_vm.description) ? _c('text', {
-    staticClass: "text-description",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      color: _vm.descColor
-    }))
-  }, [_vm._v(_vm._s(_vm.description))]) : _vm._e()], 2), _vm._v(" "), _vm._t("right")], 2)]), _vm._v(" "), _c('div', {
-    staticClass: "item-border",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      marginLeft: _vm.imgSrc ? (_vm.scene.imgWidth || _vm.imgWidth) + 48 : 0
-    }))
-  })])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-6c88d718", module.exports)
-  }
-}
-
-/***/ }),
-/* 92 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(187);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 93 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(94);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 94 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(95)
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(97),
-  /* template */
-  __webpack_require__(98),
-  /* scopeId */
-  "data-v-47ee1270",
-  /* cssModules */
-  null
-)
-Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-checkbox/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-47ee1270", Component.options)
-  } else {
-    hotAPI.reload("data-v-47ee1270", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
 /* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
+"use strict";
 
-// load the styles
-var content = __webpack_require__(96);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("016767aa", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-47ee1270\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-47ee1270\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(72);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 /* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(97);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("e8758b7a", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-47ee1270\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-47ee1270\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 97 */
+/***/ (function(module, exports, __webpack_require__) {
+
 exports = module.exports = __webpack_require__(1)(true);
 // imports
 
 
 // module
-exports.push([module.i, "\n.fm-checkbox[data-v-47ee1270] {\n}\n.border[data-v-47ee1270] {\n  margin: 0 48px;\n  background-color: #e6e6e6;\n  height: 1px;\n}\n.checkbox-content[data-v-47ee1270] {\n  position: relative;\n  flex: 1;\n  flex-direction: row;\n  padding: 51px 96px;\n  align-items: center;\n  justify-content: space-between;\n}\n.checkbox-content[data-v-47ee1270]:active {\n  background-color: #eeeeee;\n}\n.label[data-v-47ee1270] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 48px;\n  line-height: 54px;\n  justify-content: center;\n}\n.checked[data-v-47ee1270] {\n  color: #198ded;\n}\n.icon-wrap[data-v-47ee1270] {\n  position: absolute;\n  right: 102px;\n  top: 0px;\n  bottom: 0px;\n  opacity: 1;\n  overflow: hidden;\n  padding: 40px 0;\n  width: 72px;\n}\n.icon[data-v-47ee1270] {\n  font-size: 72px;\n  color: #198ded;\n  font-weight: bold;\n  width: 72px;\n  height: 64px;\n  justify-content: center;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-checkbox/index.vue?3497f420"],"names":[],"mappings":";AAkBA;CACA;AAEA;EACA,eAAA;EACA,0BAAA;EACA,YAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,oBAAA;EACA,mBAAA;EACA,oBAAA;EACA,+BAAA;CACA;AAEA;EACA,0BAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;EACA,wBAAA;CACA;AAEA;EACA,eAAA;CACA;AAEA;EACA,mBAAA;EACA,aAAA;EACA,SAAA;EACA,YAAA;EACA,WAAA;EACA,iBAAA;EACA,gBAAA;EACA,YAAA;CACA;AAEA;EACA,gBAAA;EACA,eAAA;EACA,kBAAA;EACA,YAAA;EACA,aAAA;EACA,wBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Updated by Yanjiie on 2018/04/12. -->\n<template>\n  <div class=\"fm-checkbox\">\n    <div class=\"checkbox-content\" @click=\"toggleChecked\">\n      <text class=\"label\"  v-if=\"$slots.default || value\" :style=\"{ color: _checked ? '#198DED': '#000000' }\">\n        <slot></slot>\n      <template v-if=\"!$slots.default\">{{ value }}</template>\n      </text>\n      <div class=\"icon-wrap\">\n        <fm-icon class=\"icon\" ref=\"fm-icon\" :style=\"{ width: isChecked ? 72 : 1 }\" name=\"wancheng\" :icon-style=\"48\" color=\"#0A73C9\" />\n      </div>\n    </div>\n    <div class=\"border\"></div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-checkbox {\n  }\n\n  .border {\n    margin: 0 48px;\n    background-color: #e6e6e6;\n    height: 1px;\n  }\n\n  .checkbox-content {\n    position: relative;\n    flex: 1;\n    flex-direction: row;\n    padding: 51px 96px;\n    align-items: center;\n    justify-content: space-between;\n  }\n\n  .checkbox-content:active {\n    background-color: #eeeeee;\n  }\n\n  .label {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 54px;\n    justify-content: center;\n  }\n\n  .checked {\n    color: #198ded;\n  }\n\n  .icon-wrap {\n    position: absolute;\n    right: 102px;\n    top: 0px;\n    bottom: 0px;\n    opacity: 1;\n    overflow: hidden;\n    padding: 40px 0;\n    width: 72px;\n  }\n\n  .icon {\n    font-size: 72px;\n    color: #198ded;\n    font-weight: bold;\n    width: 72px;\n    height: 64px;\n    justify-content: center;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nimport FmIcon from '../fm-icon';\nexport default {\n  name: 'FmCheckbox',\n  components: { FmIcon },\n  props: {\n    value: {\n      type: String,\n      default: ''\n    },\n    checked: Boolean,\n    disabled: Boolean\n  },\n  data: () => ({\n    isChecked: false,\n    selfChecked: false\n  }),\n  computed: {\n    _checked: {\n      get () {\n        return this.isGroup\n          ? this.store.indexOf(this.value) !== -1\n          : this.selfChecked;\n      },\n      set (val) {\n        if (this.isGroup) {\n          if (val) {\n            this.isLimitExceeded = false;\n            this._checkboxGroup.max !== undefined &&\n                this.store.length >= this._checkboxGroup.max &&\n                (this.isLimitExceeded = true);\n\n            this.isLimitExceeded === false &&\n                (this.addToStore() || this.appearIcon(val));\n          } else {\n            this.isLimitExceeded = false;\n            this._checkboxGroup.min !== undefined &&\n                this.store.length <= this._checkboxGroup.min &&\n                (this.isLimitExceeded = true);\n\n            this.isLimitExceeded === false &&\n                (this.deleteFromStore() || this.appearIcon(val));\n          }\n        } else {\n          this.selfChecked = val;\n          this.appearIcon(val);\n        }\n        this.$emit('fmCheckboxChecked', { value: this.value, checked: val });\n      }\n    },\n    isGroup () {\n      let parent = this.$parent;\n      while (parent) {\n        if (parent.$options.componentName !== 'FmCheckListGroup') {\n          parent = parent.$parent;\n        } else {\n          this._checkboxGroup = parent;\n          return true;\n        }\n      }\n      return false;\n    },\n    store () {\n      return this._checkboxGroup ? this._checkboxGroup.value : this.value;\n    }\n  },\n  methods: {\n    toggleChecked () {\n      !this.disabled && (this._checked = !this._checked);\n    },\n    appearIcon (bool, duration = 150) {\n      const iconEl = this.$refs['fm-icon'];\n      if (!iconEl) {\n        return;\n      }\n      const style = bool\n        ? {\n          opacity: 1,\n          width: 72\n        }\n        : {\n          opacity: 0\n        };\n      animation.transition(\n        iconEl,\n        {\n          styles: style,\n          duration,\n          delay: 0,\n          timingFunction: 'ease-out'\n        },\n        () => {\n          this.isChecked = bool;\n        }\n      );\n    },\n    addToStore () {\n      if (Array.isArray(this.store) && this.store.indexOf(this.value) === -1) {\n        this.store.push(this.value);\n      }\n    },\n    deleteFromStore () {\n      if (Array.isArray(this.store) && this.store.indexOf(this.value) !== -1) {\n        this.store.splice(this.store.indexOf(this.value), 1);\n      }\n    }\n  },\n  created () {\n    this.isGroup;\n    this.$slots.default && (this.value = this.$slots.default[0].text);\n    this.checked &&\n        (this.addToStore() ||\n          ((this.selfChecked = true) && (this.isChecked = true)));\n    this._checked && ((this.selfChecked = true) && (this.isChecked = true));\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.icon-wrap[data-v-47ee1270] {\n  opacity: 1;\n  overflow: hidden;\n  height: 0.66667rem;\n  width: 0.66667rem;\n}\n.icon-outer[data-v-47ee1270] {\n  width: 0.66667rem;\n  height: 0.66667rem;\n  overflow: hidden;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-checkbox/index.vue?07fe703e"],"names":[],"mappings":";AA4GA;EACA,WAAA;EACA,iBAAA;EACA,mBAAA;EACA,kBAAA;CACA;AAEA;EACA,kBAAA;EACA,mBAAA;EACA,iBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Updated by Yanjiie on 2018/04/12. -->\n<template>\n  <fm-item\n    v-bind=\"Object.assign({}, model)\"\n    @fmItemClicked=\"itemClicked\"\n    :titleColor=\"innerChecked ? !disabled ? STYLE.primaryColor : STYLE.lightColor : '#000000'\">\n    <div class=\"icon-wrap\" slot=\"right\">\n      <div\n        class=\"icon-outer\"\n        ref=\"icon\"\n        :style=\"{ width: (isChecked ? 72 : 1) + 'px' }\">\n        <image class=\"icon\"\n               :style=\"{ width: '72px', height: '72px' }\"\n               resize=\"cover\"\n               :src=\"!disabled ? checkedIcon : disabledIcon\" />\n      </div>\n    </div>\n  </fm-item>\n</template>\n\n<script>\nimport STYLE from 'weex-flymeui/lib/theme/fm-checkbox.js';\nimport FmItem from '../fm-item';\n\nconst animation = weex.requireModule('animation');\nexport default {\n  name: 'FmCheckbox',\n  components: { FmItem },\n  props: {\n    model: {\n      type: Object,\n      default: () => ({})\n    },\n    value: {\n      type: [String, Number, Object],\n      require: true\n    },\n    checked: Boolean,\n    disabled: Boolean,\n    checkedIcon: {\n      type: String,\n      default: STYLE.CHECKED\n    },\n    disabledIcon: {\n      type: String,\n      default: STYLE.CHECKED_DISABLED\n    },\n    listModel: Boolean\n  },\n  data: () => ({\n    isChecked: false,\n    innerChecked: false\n  }),\n  watch: {\n    checked (val) {\n      this.innerChecked = val;\n      this.appearIcon(this.innerChecked);\n    }\n  },\n  methods: {\n    itemClicked () {\n      if (this.listModel) {\n        this.$emit('fmCheckBoxItemChecked', { value, checked: this.innerChecked });\n        return;\n      }\n      const { disabled, innerChecked, value } = this;\n      if (!disabled) {\n        this.innerChecked = !innerChecked;\n        this.appearIcon(this.innerChecked);\n        this.$emit('fmCheckBoxItemChecked', { value, checked: this.innerChecked });\n      }\n    },\n    appearIcon (bool, duration = 150) {\n      const iconEl = this.$refs['icon'];\n      if (!iconEl) {\n        return;\n      }\n      const style = bool\n        ? {\n          opacity: 1,\n          width: 72\n        }\n        : {\n          opacity: 0\n        };\n      animation.transition(\n        iconEl,\n        {\n          styles: style,\n          duration,\n          delay: 0,\n          timingFunction: 'ease-out'\n        },\n        () => {\n          this.isChecked = bool;\n        }\n      );\n    }\n  },\n  created () {\n    this.checked && (this.innerChecked = true) && (this.isChecked = true);\n    this.STYLE = STYLE;\n  }\n};\n</script>\n\n<style scoped>\n  .icon-wrap {\n    opacity: 1;\n    overflow: hidden;\n    height: 72px;\n    width: 72px;\n  }\n\n  .icon-outer {\n    width: 72px;\n    height: 72px;\n    overflow: hidden;\n  }\n</style>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9828,64 +5727,16 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmIcon = __webpack_require__(6);
+var _fmCheckbox = __webpack_require__(99);
 
-var _fmIcon2 = _interopRequireDefault(_fmIcon);
+var _fmCheckbox2 = _interopRequireDefault(_fmCheckbox);
+
+var _fmItem = __webpack_require__(59);
+
+var _fmItem2 = _interopRequireDefault(_fmItem);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -9911,72 +5762,64 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var animation = weex.requireModule('animation');
 exports.default = {
   name: 'FmCheckbox',
-  components: { FmIcon: _fmIcon2.default },
+  components: { FmItem: _fmItem2.default },
   props: {
+    model: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
     value: {
-      type: String,
-      default: ''
+      type: [String, Number, Object],
+      require: true
     },
     checked: Boolean,
-    disabled: Boolean
+    disabled: Boolean,
+    checkedIcon: {
+      type: String,
+      default: _fmCheckbox2.default.CHECKED
+    },
+    disabledIcon: {
+      type: String,
+      default: _fmCheckbox2.default.CHECKED_DISABLED
+    },
+    listModel: Boolean
   },
   data: function data() {
     return {
       isChecked: false,
-      selfChecked: false
+      innerChecked: false
     };
   },
-  computed: {
-    _checked: {
-      get: function get() {
-        return this.isGroup ? this.store.indexOf(this.value) !== -1 : this.selfChecked;
-      },
-      set: function set(val) {
-        if (this.isGroup) {
-          if (val) {
-            this.isLimitExceeded = false;
-            this._checkboxGroup.max !== undefined && this.store.length >= this._checkboxGroup.max && (this.isLimitExceeded = true);
-
-            this.isLimitExceeded === false && (this.addToStore() || this.appearIcon(val));
-          } else {
-            this.isLimitExceeded = false;
-            this._checkboxGroup.min !== undefined && this.store.length <= this._checkboxGroup.min && (this.isLimitExceeded = true);
-
-            this.isLimitExceeded === false && (this.deleteFromStore() || this.appearIcon(val));
-          }
-        } else {
-          this.selfChecked = val;
-          this.appearIcon(val);
-        }
-        this.$emit('fmCheckboxChecked', { value: this.value, checked: val });
-      }
-    },
-    isGroup: function isGroup() {
-      var parent = this.$parent;
-      while (parent) {
-        if (parent.$options.componentName !== 'FmCheckListGroup') {
-          parent = parent.$parent;
-        } else {
-          this._checkboxGroup = parent;
-          return true;
-        }
-      }
-      return false;
-    },
-    store: function store() {
-      return this._checkboxGroup ? this._checkboxGroup.value : this.value;
+  watch: {
+    checked: function checked(val) {
+      this.innerChecked = val;
+      this.appearIcon(this.innerChecked);
     }
   },
   methods: {
-    toggleChecked: function toggleChecked() {
-      !this.disabled && (this._checked = !this._checked);
+    itemClicked: function itemClicked() {
+      if (this.listModel) {
+        this.$emit('fmCheckBoxItemChecked', { value: value, checked: this.innerChecked });
+        return;
+      }
+      var disabled = this.disabled,
+          innerChecked = this.innerChecked,
+          value = this.value;
+
+      if (!disabled) {
+        this.innerChecked = !innerChecked;
+        this.appearIcon(this.innerChecked);
+        this.$emit('fmCheckBoxItemChecked', { value: value, checked: this.innerChecked });
+      }
     },
     appearIcon: function appearIcon(bool) {
       var _this = this;
 
       var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 150;
 
-      var iconEl = this.$refs['fm-icon'];
+      var iconEl = this.$refs['icon'];
       if (!iconEl) {
         return;
       }
@@ -9994,77 +5837,13 @@ exports.default = {
       }, function () {
         _this.isChecked = bool;
       });
-    },
-    addToStore: function addToStore() {
-      if (Array.isArray(this.store) && this.store.indexOf(this.value) === -1) {
-        this.store.push(this.value);
-      }
-    },
-    deleteFromStore: function deleteFromStore() {
-      if (Array.isArray(this.store) && this.store.indexOf(this.value) !== -1) {
-        this.store.splice(this.store.indexOf(this.value), 1);
-      }
     }
   },
   created: function created() {
-    this.isGroup;
-    this.$slots.default && (this.value = this.$slots.default[0].text);
-    this.checked && (this.addToStore() || (this.selfChecked = true) && (this.isChecked = true));
-    this._checked && (this.selfChecked = true) && (this.isChecked = true);
+    this.checked && (this.innerChecked = true) && (this.isChecked = true);
+    this.STYLE = _fmCheckbox2.default;
   }
 };
-
-/***/ }),
-/* 98 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "fm-checkbox",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [_c('div', {
-    staticClass: "checkbox-content",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    on: {
-      "click": _vm.toggleChecked
-    }
-  }, [(_vm.$slots.default || _vm.value) ? _c('text', {
-    staticClass: "label",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      color: _vm._checked ? '#198DED' : '#000000'
-    }))
-  }, [_vm._t("default"), _vm._v(" "), (!_vm.$slots.default) ? [_vm._v(_vm._s(_vm.value))] : _vm._e()], 2) : _vm._e(), _vm._v(" "), _c('div', {
-    staticClass: "icon-wrap",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [_c('fm-icon', {
-    ref: "fm-icon",
-    staticClass: "icon",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      width: _vm.isChecked ? 72 : 1
-    })),
-    attrs: {
-      "name": "wancheng",
-      "icon-style": 48,
-      "color": "#0A73C9"
-    }
-  })], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "border",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  })])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-47ee1270", module.exports)
-  }
-}
 
 /***/ }),
 /* 99 */
@@ -10077,50 +5856,69 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(100);
+var _index = __webpack_require__(28);
 
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
+var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = Object.assign({}, _index2.default, {
+  CHECKED: 'http://p1nq9peby.bkt.clouddn.com/weex-flymeui/check_blue.png',
+  CHECKED_DISABLED: 'http://p1nq9peby.bkt.clouddn.com/weex-flymeui/check_disabled_blue.png'
+}); /**
+     * CopyRight (C) 2017-2022 Alibaba Group Holding Limited.
+     * Created by Yanjiie on 18/04/20
+     */
 
 /***/ }),
 /* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(101),
-  /* template */
-  __webpack_require__(102),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-check-list-group/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('fm-item', _vm._b({
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "titleColor": _vm.innerChecked ? !_vm.disabled ? _vm.STYLE.primaryColor : _vm.STYLE.lightColor : '#000000'
+    },
+    on: {
+      "fmItemClicked": _vm.itemClicked
+    }
+  }, 'fm-item', Object.assign({}, _vm.model), false), [_c('div', {
+    staticClass: "icon-wrap",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "slot": "right"
+    },
+    slot: "right"
+  }, [_c('div', {
+    ref: "icon",
+    staticClass: "icon-outer",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      width: (_vm.isChecked ? 72 : 1) + 'px'
+    }))
+  }, [_c('image', {
+    staticClass: "icon",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      width: '72px',
+      height: '72px'
+    })),
+    attrs: {
+      "resize": "cover",
+      "src": !_vm.disabled ? _vm.checkedIcon : _vm.disabledIcon
+    }
+  })])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
   module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-417c38fa", Component.options)
-  } else {
-    hotAPI.reload("data-v-417c38fa", Component.options)
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-47ee1270", module.exports)
   }
-})()}
-
-module.exports = Component.exports
-
+}
 
 /***/ }),
 /* 101 */
@@ -10132,54 +5930,57 @@ module.exports = Component.exports
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-//
-//
-//
-//
-//
-//
-//
-//
 
-exports.default = {
-  componentName: 'FmCheckListGroup',
-  props: {
-    value: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    disabled: Boolean,
-    min: Number,
-    max: Number,
-    textColor: String
-  },
-  watch: {
-    value: function value(_value) {
-      this.$emit('fmCheckListGroupChecked', _value);
-    }
+var _index = __webpack_require__(102);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
   }
-};
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 /* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "fm-check-list-group",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [_vm._t("default")], 2)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
+var disposed = false
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(103),
+  /* template */
+  __webpack_require__(104),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-checkbox-list/index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
   module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-417c38fa", module.exports)
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-788167ce", Component.options)
+  } else {
+    hotAPI.reload("data-v-788167ce", Component.options)
   }
-}
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
 
 /***/ }),
 /* 103 */
@@ -10192,7 +5993,165 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(104);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var _index = __webpack_require__(72);
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  name: 'FmCheckboxList',
+  components: { FmCheckbox: _index2.default },
+  props: {
+    list: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    // 是否单选
+    single: {
+      type: Boolean,
+      default: false
+    },
+    // 选择个数限制
+    limit: {
+      type: Number
+    }
+  },
+  data: function data() {
+    return {
+      checkedList: [],
+      inList: this.initList()
+    };
+  },
+
+  watch: {
+    list: function list() {
+      this.inList = this.initList();
+    }
+  },
+  created: function created() {
+    var _this = this;
+
+    var list = this.list;
+
+    if (list && list.length > 0) {
+      list.forEach(function (item, i) {
+        item.checked && _this.checkedList.push(item.value);
+      });
+    }
+  },
+
+  methods: {
+    onSelect: function onSelect(index) {
+      var checked = this.inList[index].checked;
+      if (this.limit <= this.checkedCount && !checked) {
+        this.$emit('overLimit', this.limit);
+      } else {
+        this.updateList(index);
+        this.$emit('fmCheckBoxListChecked', {
+          selectIndex: index,
+          checked: !checked,
+          checkedList: this.inList.filter(function (item) {
+            return item.checked;
+          })
+        });
+      }
+    },
+    initList: function initList() {
+      var single = this.single;
+      var checkedCount = 0;
+
+      var newList = this.list.map(function (item, i) {
+        var checked = item.checked,
+            disabled = item.disabled;
+
+        disabled = !!disabled;
+        // disabled 为 true 时认为 checked 无效，同时单选模式下只认为第一个 checked 为 true 的为有效值
+        checked = !disabled && !!checked && (!single || checkedCount === 0);
+        if (item.checked) checkedCount += 1;
+        return _extends({}, item, {
+          checked: checked,
+          disabled: disabled
+        });
+      });
+
+      this.checkedCount = checkedCount;
+      return newList;
+    },
+    updateList: function updateList(index) {
+      var single = this.single;
+      var checkedCount = 0;
+      this.inList = this.inList.map(function (item, i) {
+        if (single) {
+          item.checked = index === i && !item.checked;
+        } else {
+          if (i === index) item.checked = !item.checked;
+        }
+        if (item.checked) checkedCount += 1;
+        return item;
+      });
+      this.checkedCount = checkedCount;
+    }
+  }
+};
+
+/***/ }),
+/* 104 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', _vm._l((_vm.inList), function(item, idx) {
+    return _c('fm-checkbox', _vm._b({
+      key: idx,
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(undefined)),
+      attrs: {
+        "list-model": true
+      },
+      on: {
+        "fmCheckBoxItemChecked": function($event) {
+          _vm.onSelect(idx)
+        }
+      }
+    }, 'fm-checkbox', item, false))
+  }))
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-788167ce", module.exports)
+  }
+}
+
+/***/ }),
+/* 105 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(106);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -10204,25 +6163,28 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 104 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(105)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(107)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(107),
+  __webpack_require__(109),
   /* template */
-  __webpack_require__(108),
+  __webpack_require__(110),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-665f9fc0",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-titlebar/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -10236,29 +6198,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-665f9fc0", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 105 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(106);
+var content = __webpack_require__(108);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("430b124e", content, false);
+var update = __webpack_require__(2)("5b0ecee9", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-665f9fc0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-665f9fc0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-665f9fc0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-665f9fc0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -10268,7 +6233,7 @@ if(false) {
 }
 
 /***/ }),
-/* 106 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -10276,13 +6241,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-status-bar[data-v-665f9fc0] {\n  height: 66px;\n  width: 1080px;\n}\n.fm-title-bar[data-v-665f9fc0] {\n  padding-left: 48px;\n  width: 1080px;\n  height: 144px;\n  flex-direction: row;\n  align-items: center;\n  justify-content: space-between;\n}\n.title-bar-back[data-v-665f9fc0] {\n  margin-left: -18px;\n  margin-right: 45px;\n  line-height: 72px;\n  height: 72px;\n  font-weight: 700;\n}\n.title-wrap[data-v-665f9fc0] {\n  flex: 1;\n}\n.title-text[data-v-665f9fc0] {\n  flex: 1;\n  text-overflow: ellipsis;\n  lines: 1;\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 48px;\n  line-height: 57px;\n  color: rgba(0, 0, 0, 0.6);\n}\n.btn-icon[data-v-665f9fc0] {\n  margin-right: 48px;\n  color: #198DED;\n  line-height: 72px;\n  height: 72px;\n}\n.btn-text[data-v-665f9fc0] {\n  margin-right: 48px;\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 48px;\n  line-height: 57px;\n  color: #198DED;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-titlebar/index.vue?70579d02"],"names":[],"mappings":";AAyBA;EACA,aAAA;EACA,cAAA;CACA;AAEA;EACA,mBAAA;EACA,cAAA;EACA,cAAA;EACA,oBAAA;EACA,oBAAA;EACA,+BAAA;CACA;AAEA;EACA,mBAAA;EACA,mBAAA;EACA,kBAAA;EACA,aAAA;EACA,iBAAA;CACA;AAEA;EACA,QAAA;CACA;AAEA;EACA,QAAA;EACA,wBAAA;EACA,SAAA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;EACA,0BAAA;CACA;AAEA;EACA,mBAAA;EACA,eAAA;EACA,kBAAA;EACA,aAAA;CACA;AAEA;EACA,mBAAA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;EACA,eAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div v-if=\"show\">\n    <div class=\"fm-status-bar\" v-if=\"statusbar\" :style=\"{ backgroundColor: backgroundColor }\"></div>\n    <div class=\"fm-title-bar\" :style=\"barStyle\">\n      <slot name=\"left\" v-if=\"hasPrev\">\n        <fm-icon @fmIconClicked=\"onBack\" class=\"title-bar-back\" name=\"fanhui\" :icon-style=\"72\" :color=\"leftColor\" />\n      </slot>\n      <div class=\"title-wrap\">\n        <slot name=\"middle\">\n          <text class=\"title-text\" :style=\"{ color: titleColor }\">{{ title }}</text>\n        </slot>\n      </div>\n      <slot name=\"right\">\n        <div v-for=\"(item, idx) in btns\" :key=\"idx\">\n          <fm-icon class=\"btn-icon\" v-if=\"item.type === 'icon'\" :name=\"item.value\" :style=\"item.color ? { color:item.color } : {}\" :icon-style=\"72\" @fmIconClicked=\"rightBtnClick(idx, item)\"/>\n          <text class=\"btn-text\" v-else :style=\"item.color ? { color:item.color } : {}\" @click=\"rightBtnClick(idx, item)\">{{ item.value }}</text>\n        </div>\n      </slot>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-status-bar {\n    height: 66px;\n    width: 1080px;\n  }\n\n  .fm-title-bar {\n    padding-left: 48px;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n  }\n\n  .title-bar-back {\n    margin-left: -18px;\n    margin-right: 45px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n  }\n\n  .title-wrap {\n    flex: 1;\n  }\n\n  .title-text {\n    flex: 1;\n    text-overflow: ellipsis;\n    lines: 1;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 57px;\n    color: rgba(0, 0, 0, 0.6);\n  }\n\n  .btn-icon {\n    margin-right: 48px;\n    color: #198DED;\n    line-height: 72px;\n    height: 72px;\n  }\n\n  .btn-text {\n    margin-right: 48px;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 57px;\n    color: #198DED;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\nconst Navigator = weex.requireModule('navigator');\n\nexport default {\n  name: 'FmTitlebar',\n  mixins: [Locale],\n  components: { FmIcon },\n  props: {\n    title: {\n      type: String,\n      default () {\n        return t('el.titlebar.title');\n      }\n    },\n    titleColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.6)'\n    },\n    statusbar: {\n      type: Boolean,\n      default: false\n    },\n    useDefaultReturn: {\n      type: Boolean,\n      default: true\n    },\n    hasPrev: {\n      type: Boolean,\n      default: true\n    },\n    borderStyle: {\n      type: Object,\n      default: () => ({})\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    leftColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.6)'\n    },\n    rightBtns: [Object, Array],\n    rightText: String,\n    show: {\n      type: Boolean,\n      default: true\n    }\n  },\n  computed: {\n    btns () {\n      const { rightBtns, rightText } = this;\n      let btns = [];\n      if (Array.isArray(rightBtns)) {\n        btns = btns.concat(rightBtns.slice(0, 3));\n      } else if (Object.prototype.toString.call(rightBtns).slice(8, -1).toLowerCase() === 'object') {\n        btns.push(rightBtns);\n      } else if (rightText) {\n        btns.push({ type: 'text', value: rightText });\n      }\n      return btns;\n    },\n    barStyle () {\n      const style = {\n        borderBottomStyle: 'solid',\n        borderBottomWidth: `${2}px`,\n        borderBottomColor: 'rgba(0, 0, 0, 0.1)',\n        paddingRight: `${this.rightBtns ? 0 : 48}px`\n      };\n      Object.assign(style, this.borderStyle);\n      style.backgroundColor = this.backgroundColor;\n      return style;\n    }\n  },\n  methods: {\n    onBack (e) {\n      const self = this;\n      if (self.useDefaultReturn) {\n        Navigator.pop({}, e => {\n        });\n      }\n      self.$emit('fmTitlebarLeftBtnClicked', {});\n    },\n    rightBtnClick (idx, item) {\n      this.$emit('fmTitlebarRightBtnClicked', { idx: idx, value: item });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-status-bar[data-v-665f9fc0] {\n  height: 0.61111rem;\n  width: 10rem;\n}\n.fm-title-bar[data-v-665f9fc0] {\n  padding-left: 0.44444rem;\n  width: 10rem;\n  height: 1.33333rem;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n          align-items: center;\n  -webkit-box-pack: justify;\n  -webkit-justify-content: space-between;\n          justify-content: space-between;\n}\n.title-bar-back[data-v-665f9fc0] {\n  margin-left: -0.16667rem;\n  margin-right: 0.41667rem;\n  line-height: 0.66667rem;\n  height: 0.66667rem;\n  font-weight: 700;\n}\n.title-wrap[data-v-665f9fc0] {\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n          flex: 1;\n}\n.title-text[data-v-665f9fc0] {\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n          flex: 1;\n  text-overflow: ellipsis;\n  lines: 1;\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 0.44444rem;\n  line-height: 0.52778rem;\n  color: rgba(0, 0, 0, 0.6);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  -webkit-line-clamp: 1;\n}\n.btn-icon[data-v-665f9fc0] {\n  margin-right: 0.44444rem;\n  color: #198DED;\n  line-height: 0.66667rem;\n  height: 0.66667rem;\n}\n.btn-text[data-v-665f9fc0] {\n  margin-right: 0.44444rem;\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 0.44444rem;\n  line-height: 0.52778rem;\n  color: #198DED;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-titlebar/index.vue?70579d02","/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-titlebar/<no source>"],"names":[],"mappings":";AAyBA;EACA,mBAAA;EACA,aAAA;CACA;AAEA;EACA,yBAAA;EACA,aAAA;EACA,mBAAA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,0BAAA;EAAA,uCAAA;UAAA,+BAAA;CACA;AAEA;EACA,yBAAA;EACA,yBAAA;EACA,wBAAA;EACA,mBAAA;EACA,iBAAA;CACA;AAEA;EACA,oBAAA;EAAA,gBAAA;UAAA,QAAA;CACA;AAEA;EACA,oBAAA;EAAA,gBAAA;UAAA,QAAA;EACA,wBAAA;EACA,SAAA;EACA,+BAAA;EACA,iBAAA;EACA,sBAAA;EACA,wBAAA;EACA,0BAAA;EC3DA,iBAAA;EAAA,wBAAA;EAAA,sBAAA;CD4DA;AAEA;EACA,yBAAA;EACA,eAAA;EACA,wBAAA;EACA,mBAAA;CACA;AAEA;EACA,yBAAA;EACA,+BAAA;EACA,iBAAA;EACA,sBAAA;EACA,wBAAA;EACA,eAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div v-if=\"show\">\n    <div class=\"fm-status-bar\" v-if=\"statusbar\" :style=\"{ backgroundColor: backgroundColor }\"></div>\n    <div class=\"fm-title-bar\" :style=\"barStyle\">\n      <slot name=\"left\" v-if=\"hasPrev\">\n        <fm-icon @fmIconClicked=\"onBack\" class=\"title-bar-back\" name=\"fanhui\" :icon-style=\"72\" :color=\"leftColor\" />\n      </slot>\n      <div class=\"title-wrap\">\n        <slot name=\"middle\">\n          <text class=\"title-text\" :style=\"{ color: titleColor }\">{{ title }}</text>\n        </slot>\n      </div>\n      <slot name=\"right\">\n        <div v-for=\"(item, idx) in btns\" :key=\"idx\">\n          <fm-icon class=\"btn-icon\" v-if=\"item.type === 'icon'\" :name=\"item.value\" :style=\"item.color ? { color:item.color } : {}\" :icon-style=\"72\" @fmIconClicked=\"rightBtnClick(idx, item)\"/>\n          <text class=\"btn-text\" v-else :style=\"item.color ? { color:item.color } : {}\" @click=\"rightBtnClick(idx, item)\">{{ item.value }}</text>\n        </div>\n      </slot>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-status-bar {\n    height: 66px;\n    width: 1080px;\n  }\n\n  .fm-title-bar {\n    padding-left: 48px;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n  }\n\n  .title-bar-back {\n    margin-left: -18px;\n    margin-right: 45px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n  }\n\n  .title-wrap {\n    flex: 1;\n  }\n\n  .title-text {\n    flex: 1;\n    text-overflow: ellipsis;\n    lines: 1;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 57px;\n    color: rgba(0, 0, 0, 0.6);\n  }\n\n  .btn-icon {\n    margin-right: 48px;\n    color: #198DED;\n    line-height: 72px;\n    height: 72px;\n  }\n\n  .btn-text {\n    margin-right: 48px;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 57px;\n    color: #198DED;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\nconst Navigator = weex.requireModule('navigator');\n\nexport default {\n  name: 'FmTitlebar',\n  mixins: [Locale],\n  components: { FmIcon },\n  props: {\n    title: {\n      type: String,\n      default () {\n        return t('el.titlebar.title');\n      }\n    },\n    titleColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.6)'\n    },\n    statusbar: {\n      type: Boolean,\n      default: false\n    },\n    useDefaultReturn: {\n      type: Boolean,\n      default: true\n    },\n    hasPrev: {\n      type: Boolean,\n      default: true\n    },\n    borderStyle: {\n      type: Object,\n      default: () => ({})\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    leftColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.6)'\n    },\n    rightBtns: [Object, Array],\n    rightText: String,\n    show: {\n      type: Boolean,\n      default: true\n    }\n  },\n  computed: {\n    btns () {\n      const { rightBtns, rightText } = this;\n      let btns = [];\n      if (Array.isArray(rightBtns)) {\n        btns = btns.concat(rightBtns.slice(0, 3));\n      } else if (Object.prototype.toString.call(rightBtns).slice(8, -1).toLowerCase() === 'object') {\n        btns.push(rightBtns);\n      } else if (rightText) {\n        btns.push({ type: 'text', value: rightText });\n      }\n      return btns;\n    },\n    barStyle () {\n      const style = {\n        borderBottomStyle: 'solid',\n        borderBottomWidth: `${2}px`,\n        borderBottomColor: 'rgba(0, 0, 0, 0.1)',\n        paddingRight: `${this.rightBtns ? 0 : 48}px`\n      };\n      Object.assign(style, this.borderStyle);\n      style.backgroundColor = this.backgroundColor;\n      return style;\n    }\n  },\n  methods: {\n    onBack (e) {\n      const self = this;\n      if (self.useDefaultReturn) {\n        Navigator.pop({}, e => {\n        });\n      }\n      self.$emit('fmTitlebarLeftBtnClicked', {});\n    },\n    rightBtnClick (idx, item) {\n      this.$emit('fmTitlebarRightBtnClicked', { idx: idx, value: item });\n    }\n  }\n};\n</script>\n",null],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 107 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10292,15 +6257,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmIcon = __webpack_require__(6);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
-var _locale = __webpack_require__(34);
+var _locale = __webpack_require__(29);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(20);
+var _locale3 = __webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10474,7 +6439,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 108 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10553,69 +6518,50 @@ if (false) {
 }
 
 /***/ }),
-/* 109 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(206);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 110 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(111);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
 /* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 
-/* styles */
-__webpack_require__(112)
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(112);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 112 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(113)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(114),
+  __webpack_require__(115),
   /* template */
-  __webpack_require__(120),
+  __webpack_require__(121),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-1595dfba",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tabbar/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -10629,29 +6575,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-1595dfba", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(113);
+var content = __webpack_require__(114);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("142f750f", content, false);
+var update = __webpack_require__(2)("c894337c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-1595dfba\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-1595dfba\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1595dfba\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1595dfba\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -10661,7 +6610,7 @@ if(false) {
 }
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -10669,13 +6618,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.tabbar-item[data-v-1595dfba] {\n  flex: 1;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tabbar/index.vue?226da3a2"],"names":[],"mappings":";AAcA;EACA,QAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/03/12. -->\n<template>\n  <fm-footer class=\"fm-tabbar\" :background-color=\"backgroundColor\" padding-size=\"middle\">\n    <fm-tabbar-item class=\"tabbar-item\"\n                    v-if=\"!$slots.default\"\n                    v-for=\"(item, index) in items\"\n                    :key=\"index\"\n                    v-bind=\"Object.assign({}, customStyles, item)\"></fm-tabbar-item>\n    <slot />\n  </fm-footer>\n</template>\n\n<style scoped>\n  .tabbar-item {\n    flex: 1;\n  }\n</style>\n\n<script>\nimport FmFooter from '../fm-footer';\nimport FmTabbarItem from '../fm-tabbar-item';\nexport default {\n  name: 'FmTabbar',\n  components: { FmFooter, FmTabbarItem },\n  props: {\n    activeIndex: {\n      type: Number,\n      default: -1\n    },\n    items: {\n      type: Array,\n      default: () => ([])\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    customStyles: {\n      type: Object,\n      default: () => ({})\n    }\n  },\n  data: () => ({\n    renderItems: []\n  }),\n  watch: {\n    renderItems () {\n      this.setActiveItem();\n    },\n    activeIndex () {\n      this.setActiveItem();\n    }\n  },\n  methods: {\n    setActiveItem () {\n      this.renderItems.forEach((item, index) => {\n        item.active = index === this.activeIndex;\n      });\n    },\n    onChange (index) {\n      this.$emit('fmTabbarSelected', { index });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.tabbar-item[data-v-1595dfba] {\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n          flex: 1;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tabbar/index.vue?72735bf4"],"names":[],"mappings":";AAcA;EACA,oBAAA;EAAA,gBAAA;UAAA,QAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/03/12. -->\n<template>\n  <fm-footer class=\"fm-tabbar\" :background-color=\"backgroundColor\" padding-size=\"middle\">\n    <fm-tabbar-item class=\"tabbar-item\"\n                    v-if=\"!$slots.default\"\n                    v-for=\"(item, index) in items\"\n                    :key=\"index\"\n                    v-bind=\"Object.assign({}, customStyles, item)\"></fm-tabbar-item>\n    <slot />\n  </fm-footer>\n</template>\n\n<style scoped>\n  .tabbar-item {\n    flex: 1;\n  }\n</style>\n\n<script>\nimport FmFooter from '../fm-footer';\nimport FmTabbarItem from '../fm-tabbar-item';\nexport default {\n  name: 'FmTabbar',\n  components: { FmFooter, FmTabbarItem },\n  props: {\n    activeIndex: {\n      type: Number,\n      default: -1\n    },\n    autoActive: {\n      type: Boolean,\n      default: true\n    },\n    items: {\n      type: Array,\n      default: () => ([])\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    customStyles: {\n      type: Object,\n      default: () => ({})\n    }\n  },\n  data: () => ({\n    renderItems: []\n  }),\n  watch: {\n    renderItems () {\n      this.setActiveItem();\n    },\n    activeIndex (newVal, oldVal) {\n      if (newVal === oldVal) { return; }\n      this.setActiveItem(newVal);\n    }\n  },\n  methods: {\n    setActiveItem (idx = this.activeIndex) {\n      this.renderItems.forEach((item, index) => {\n        item.active = index === idx;\n      });\n    },\n    onChange (index) {\n      this.autoActive && this.setActiveItem(index);\n      this.$emit('fmTabbarSelected', { index });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10689,7 +6638,7 @@ var _fmFooter = __webpack_require__(43);
 
 var _fmFooter2 = _interopRequireDefault(_fmFooter);
 
-var _fmTabbarItem = __webpack_require__(63);
+var _fmTabbarItem = __webpack_require__(73);
 
 var _fmTabbarItem2 = _interopRequireDefault(_fmTabbarItem);
 
@@ -10723,6 +6672,10 @@ exports.default = {
       type: Number,
       default: -1
     },
+    autoActive: {
+      type: Boolean,
+      default: true
+    },
     items: {
       type: Array,
       default: function _default() {
@@ -10749,44 +6702,51 @@ exports.default = {
     renderItems: function renderItems() {
       this.setActiveItem();
     },
-    activeIndex: function activeIndex() {
-      this.setActiveItem();
+    activeIndex: function activeIndex(newVal, oldVal) {
+      if (newVal === oldVal) {
+        return;
+      }
+      this.setActiveItem(newVal);
     }
   },
   methods: {
     setActiveItem: function setActiveItem() {
-      var _this = this;
+      var idx = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.activeIndex;
 
       this.renderItems.forEach(function (item, index) {
-        item.active = index === _this.activeIndex;
+        item.active = index === idx;
       });
     },
     onChange: function onChange(index) {
+      this.autoActive && this.setActiveItem(index);
       this.$emit('fmTabbarSelected', { index: index });
     }
   }
 };
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(116)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(117)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(118),
-  /* template */
   __webpack_require__(119),
+  /* template */
+  __webpack_require__(120),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-32d8605a",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tabbar-item/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -10800,29 +6760,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-32d8605a", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(117);
+var content = __webpack_require__(118);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("00916df2", content, false);
+var update = __webpack_require__(2)("7f311a1c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-32d8605a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-32d8605a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-32d8605a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-32d8605a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -10832,7 +6795,7 @@ if(false) {
 }
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -10840,13 +6803,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-tabbar-item[data-v-32d8605a] {\n  height: 144px;\n  align-items: center;\n  justify-content: center;\n}\n.fm-tabbar-item[data-v-32d8605a]:active {\n  background-color: rgba(0, 0, 0, 0.05);\n}\n.icon-wrap[data-v-32d8605a] {\n  padding-top: 8px;\n  padding-left: 30px;\n  padding-right: 30px;\n  margin-top: -8px;\n}\n.item-icon[data-v-32d8605a] {\n  margin-bottom: 6px;\n  font-size: 72px;\n  height: 72px;\n  font-family: flymeicon;\n}\n.item-title[data-v-32d8605a] {\n  font-size: 30px;\n  line-height: 36px;\n}\n.dot[data-v-32d8605a] {\n  position: absolute;\n  top: 8px;\n  right: 30px;\n  width: 18px;\n  height: 18px;\n  border-radius: 9px;\n  background-color: #EF2828;\n  box-shadow: 0 0 0 3px #FFFFFF;\n}\n.badge[data-v-32d8605a] {\n  position: absolute;\n  justify-content: center;\n  top: 0;\n  left: 69px;\n  border-width: 3px;\n  border-color: #FFFFFF;\n  border-radius: 24px;\n}\n.badge-msg[data-v-32d8605a] {\n  line-height: 36px;\n  padding: 0 6px;\n  font-size: 24px;\n  color: #FFFFFF;\n  background-color: #EF2828;\n  border-radius: 24px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tabbar-item/index.vue?2d4c5709"],"names":[],"mappings":";AAqBA;EACA,cAAA;EACA,oBAAA;EACA,wBAAA;CACA;AAEA;EACA,sCAAA;CACA;AAEA;EACA,iBAAA;EACA,mBAAA;EACA,oBAAA;EACA,iBAAA;CACA;AAEA;EACA,mBAAA;EACA,gBAAA;EACA,aAAA;EACA,uBAAA;CACA;AAEA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,mBAAA;EACA,SAAA;EACA,YAAA;EACA,YAAA;EACA,aAAA;EACA,mBAAA;EACA,0BAAA;EACA,8BAAA;CACA;AAEA;EACA,mBAAA;EACA,wBAAA;EACA,OAAA;EACA,WAAA;EACA,kBAAA;EACA,sBAAA;EACA,oBAAA;CACA;AAEA;EACA,kBAAA;EACA,eAAA;EACA,gBAAA;EACA,eAAA;EACA,0BAAA;EACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/03/12. -->\n<template>\n  <div class=\"fm-tabbar-item\" @click=\"onClick\">\n    <div class=\"icon-wrap\">\n      <slot name=\"icon\" :active=\"active\">\n        <text class=\"item-icon\"\n              :style=\"{ color: !active ? iconColor : (activeIconColor || activeColor)}\">{{ getIcon }}</text>\n      </slot>\n      <div class=\"dot\" v-if=\"dot\"></div>\n      <div class=\"badge\" v-if=\"!dot && badge\">\n        <text class=\"badge-msg\">{{ badge }}</text>\n      </div>\n    </div>\n    <slot name=\"title\" :active=\"active\">\n      <text class=\"item-title\" :style=\"{ color: !active ? titleColor : activeColor }\"><slot></slot><template v-if=\"!$slots.default\">{{ title }}</template></text>\n    </slot>\n  </div>\n</template>\n\n<style scoped>\n  .fm-tabbar-item {\n    height: 144px;\n    align-items: center;\n    justify-content: center;\n  }\n\n  .fm-tabbar-item:active {\n    background-color: rgba(0, 0, 0, 0.05);\n  }\n\n  .icon-wrap {\n    padding-top: 8px;\n    padding-left: 30px;\n    padding-right: 30px;\n    margin-top: -8px;\n  }\n\n  .item-icon {\n    margin-bottom: 6px;\n    font-size: 72px;\n    height: 72px;\n    font-family: flymeicon;\n  }\n\n  .item-title {\n    font-size: 30px;\n    line-height: 36px;\n  }\n\n  .dot {\n    position: absolute;\n    top: 8px;\n    right: 30px;\n    width: 18px;\n    height: 18px;\n    border-radius: 9px;\n    background-color: #EF2828;\n    box-shadow: 0 0 0 3px #FFFFFF;\n  }\n\n  .badge {\n    position: absolute;\n    justify-content: center;\n    top: 0;\n    left: 69px;\n    border-width: 3px;\n    border-color: #FFFFFF;\n    border-radius: 24px;\n  }\n\n  .badge-msg {\n    line-height: 36px;\n    padding: 0 6px;\n    font-size: 24px;\n    color: #FFFFFF;\n    background-color: #EF2828;\n    border-radius: 24px;\n  }\n</style>\n\n<script>\nconst he = require('he');\nconst dom = weex.requireModule('dom');\nimport Icon from '../fm-icon/map';\nimport FmIcon from '../fm-icon';\nexport default {\n  name: 'FmTabbarItem',\n  components: { FmIcon },\n  props: {\n    title: {\n      type: String,\n      default: ''\n    },\n    titleColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.75)'\n    },\n    activeColor: {\n      type: String,\n      default: '#198DED'\n    },\n    icon: {\n      type: String,\n      default: ''\n    },\n    iconColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.6)'\n    },\n    activeIconColor: {\n      type: String,\n      default: ''\n    },\n    badge: {\n      type: [Number, String],\n      default: ''\n    },\n    dot: Boolean\n  },\n  computed: {\n    getIcon () {\n      const { Icon, icon } = this;\n      return he.decode(Icon[icon] || Icon['wancheng']);\n    }\n  },\n  data: () => ({\n    active: false,\n    Icon\n  }),\n  beforeCreate () {\n    dom.addRule('fontFace', {\n      'fontFamily': 'flymeicon',\n      'src': \"url('http://design.flyme.cn/weexui/assets/iconfont.ttf')\"\n    });\n\n    let parent = this.$parent;\n    while (parent) {\n      if (parent.$options.name !== 'FmTabbar') {\n        parent = parent.$parent;\n      } else {\n        this._parent = parent;\n        break;\n      }\n    }\n    this._parent.renderItems.push(this);\n  },\n  created () {\n    this.$slots.default && (this.title = this.$slots.default[0].text);\n  },\n  destroyed () {\n    this._parent.renderItems.splice(this._parent.items.indexOf(this), 1);\n  },\n  methods: {\n    onClick (e) {\n      this._parent.onChange(this._parent.renderItems.indexOf(this));\n      this.$emit('select', this.index);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-tabbar-item[data-v-32d8605a] {\n  height: 1.33333rem;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n          align-items: center;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n          justify-content: center;\n}\n.fm-tabbar-item[data-v-32d8605a]:active {\n  background-color: rgba(0, 0, 0, 0.04);\n}\n.icon-wrap[data-v-32d8605a] {\n  padding-top: 0.07407rem;\n  padding-left: 0.27778rem;\n  padding-right: 0.27778rem;\n  margin-top: -0.07407rem;\n}\n.item-icon[data-v-32d8605a] {\n  margin-bottom: 0.05556rem;\n  font-size: 0.66667rem;\n  height: 0.66667rem;\n  font-family: flymeicon;\n}\n.item-icon--img[data-v-32d8605a] {\n  margin-bottom: 0.05556rem;\n  height: 0.66667rem;\n  width: 0.66667rem;\n}\n.item-title[data-v-32d8605a] {\n  font-size: 0.27778rem;\n  line-height: 0.33333rem;\n}\n.dot[data-v-32d8605a] {\n  position: absolute;\n  top: 0.07407rem;\n  right: 0.27778rem;\n  width: 0.16667rem;\n  height: 0.16667rem;\n  border-radius: 0.08333rem;\n  background-color: #EF2828;\n  box-shadow: 0 0 0 0.02778rem #FFFFFF;\n}\n.badge[data-v-32d8605a] {\n  position: absolute;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n          justify-content: center;\n  top: 0;\n  left: 0.63889rem;\n  border-width: 0.02778rem;\n  border-color: #FFFFFF;\n  border-radius: 0.22222rem;\n}\n.badge-msg[data-v-32d8605a] {\n  line-height: 0.33333rem;\n  padding: 0 0.05556rem;\n  font-size: 0.22222rem;\n  color: #FFFFFF;\n  background-color: #EF2828;\n  border-radius: 0.22222rem;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tabbar-item/index.vue?1d682cee"],"names":[],"mappings":";AA2BA;EACA,mBAAA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,yBAAA;EAAA,gCAAA;UAAA,wBAAA;CACA;AAEA;EACA,sCAAA;CACA;AAEA;EACA,wBAAA;EACA,yBAAA;EACA,0BAAA;EACA,wBAAA;CACA;AAEA;EACA,0BAAA;EACA,sBAAA;EACA,mBAAA;EACA,uBAAA;CACA;AAEA;EACA,0BAAA;EACA,mBAAA;EACA,kBAAA;CACA;AAEA;EACA,sBAAA;EACA,wBAAA;CACA;AAEA;EACA,mBAAA;EACA,gBAAA;EACA,kBAAA;EACA,kBAAA;EACA,mBAAA;EACA,0BAAA;EACA,0BAAA;EACA,qCAAA;CACA;AAEA;EACA,mBAAA;EACA,yBAAA;EAAA,gCAAA;UAAA,wBAAA;EACA,OAAA;EACA,iBAAA;EACA,yBAAA;EACA,sBAAA;EACA,0BAAA;CACA;AAEA;EACA,wBAAA;EACA,sBAAA;EACA,sBAAA;EACA,eAAA;EACA,0BAAA;EACA,0BAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/03/12. -->\n<template>\n  <div class=\"fm-tabbar-item\" @click=\"onClick\">\n    <div class=\"icon-wrap\">\n      <slot name=\"icon\" :active=\"active\">\n        <text\n          class=\"item-icon\"\n          v-if=\"!normalIcon || !activeIcon\"\n          :style=\"{ color: !active ? iconColor : (activeIconColor || activeColor)}\">{{ getIcon }}</text>\n        <image\n          v-else\n          class=\"item-icon--img\"\n          :src=\"active ? normalIcon : activeIcon\" />\n      </slot>\n      <div class=\"dot\" v-if=\"dot\"></div>\n      <div class=\"badge\" v-if=\"!dot && badge\">\n        <text class=\"badge-msg\">{{ badge }}</text>\n      </div>\n    </div>\n    <slot name=\"title\" :active=\"active\">\n      <text class=\"item-title\" :style=\"{ color: !active ? titleColor : activeColor }\"><slot></slot><template v-if=\"!$slots.default\">{{ title }}</template></text>\n    </slot>\n  </div>\n</template>\n\n<style scoped>\n  .fm-tabbar-item {\n    height: 144px;\n    align-items: center;\n    justify-content: center;\n  }\n\n  .fm-tabbar-item:active {\n    background-color: rgba(0, 0, 0, 0.04);\n  }\n\n  .icon-wrap {\n    padding-top: 8px;\n    padding-left: 30px;\n    padding-right: 30px;\n    margin-top: -8px;\n  }\n\n  .item-icon {\n    margin-bottom: 6px;\n    font-size: 72px;\n    height: 72px;\n    font-family: flymeicon;\n  }\n\n  .item-icon--img {\n    margin-bottom: 6px;\n    height: 72px;\n    width: 72px;\n  }\n\n  .item-title {\n    font-size: 30px;\n    line-height: 36px;\n  }\n\n  .dot {\n    position: absolute;\n    top: 8px;\n    right: 30px;\n    width: 18px;\n    height: 18px;\n    border-radius: 9px;\n    background-color: #EF2828;\n    box-shadow: 0 0 0 3px #FFFFFF;\n  }\n\n  .badge {\n    position: absolute;\n    justify-content: center;\n    top: 0;\n    left: 69px;\n    border-width: 3px;\n    border-color: #FFFFFF;\n    border-radius: 24px;\n  }\n\n  .badge-msg {\n    line-height: 36px;\n    padding: 0 6px;\n    font-size: 24px;\n    color: #FFFFFF;\n    background-color: #EF2828;\n    border-radius: 24px;\n  }\n</style>\n\n<script>\nconst he = require('he');\nconst dom = weex.requireModule('dom');\nimport Icon from '../fm-icon/map';\nimport FmIcon from '../fm-icon';\nexport default {\n  name: 'FmTabbarItem',\n  components: { FmIcon },\n  props: {\n    title: {\n      type: String,\n      default: ''\n    },\n    titleColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.75)'\n    },\n    activeColor: {\n      type: String,\n      default: '#198DED'\n    },\n    icon: {\n      type: String,\n      default: ''\n    },\n    iconColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.6)'\n    },\n    activeIconColor: {\n      type: String,\n      default: ''\n    },\n    normalIcon: {\n      type: String,\n      default: ''\n    },\n    activeIcon: {\n      type: String,\n      default: ''\n    },\n    badge: {\n      type: [Number, String],\n      default: ''\n    },\n    dot: Boolean\n  },\n  computed: {\n    getIcon () {\n      const { Icon, icon } = this;\n      return he.decode(Icon[icon] || Icon['wancheng']);\n    }\n  },\n  data: () => ({\n    active: false,\n    Icon\n  }),\n  beforeCreate () {\n    dom.addRule('fontFace', {\n      'fontFamily': 'flymeicon',\n      'src': \"url('http://design.flyme.cn/weexui/assets/iconfont.ttf')\"\n    });\n\n    let parent = this.$parent;\n    while (parent) {\n      if (parent.$options.name !== 'FmTabbar') {\n        parent = parent.$parent;\n      } else {\n        this._parent = parent;\n        break;\n      }\n    }\n    this._parent.renderItems.push(this);\n  },\n  created () {\n    this.$slots.default && (this.title = this.$slots.default[0].text);\n  },\n  destroyed () {\n    this._parent.renderItems.splice(this._parent.items.indexOf(this), 1);\n  },\n  methods: {\n    onClick (e) {\n      this._parent.onChange(this._parent.renderItems.indexOf(this));\n      this.$emit('select', this.index);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10856,11 +6819,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _map = __webpack_require__(26);
+var _map = __webpack_require__(21);
 
 var _map2 = _interopRequireDefault(_map);
 
-var _fmIcon = __webpack_require__(6);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
@@ -10947,8 +6910,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-var he = __webpack_require__(27);
+var he = __webpack_require__(22);
 var dom = weex.requireModule('dom');
 exports.default = {
   name: 'FmTabbarItem',
@@ -10975,6 +6950,14 @@ exports.default = {
       default: 'rgba(0, 0, 0, 0.6)'
     },
     activeIconColor: {
+      type: String,
+      default: ''
+    },
+    normalIcon: {
+      type: String,
+      default: ''
+    },
+    activeIcon: {
       type: String,
       default: ''
     },
@@ -11031,7 +7014,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11046,13 +7029,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "icon-wrap",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))
-  }, [_vm._t("icon", [_c('text', {
+  }, [_vm._t("icon", [(!_vm.normalIcon || !_vm.activeIcon) ? _c('text', {
     staticClass: "item-icon",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle({
       color: !_vm.active ? _vm.iconColor : (_vm.activeIconColor || _vm.activeColor)
     }))
-  }, [_vm._v(_vm._s(_vm.getIcon))])], {
+  }, [_vm._v(_vm._s(_vm.getIcon))]) : _c('image', {
+    staticClass: "item-icon--img",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "src": _vm.active ? _vm.normalIcon : _vm.activeIcon
+    }
+  })], {
     active: _vm.active
   }), _vm._v(" "), (_vm.dot) ? _c('div', {
     staticClass: "dot",
@@ -11085,7 +7075,7 @@ if (false) {
 }
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11115,7 +7105,7 @@ if (false) {
 }
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11125,7 +7115,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(122);
+var _index = __webpack_require__(123);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -11137,25 +7127,28 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(123)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(124)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(125),
-  /* template */
   __webpack_require__(126),
+  /* template */
+  __webpack_require__(127),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-058cc90e",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-switch/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -11169,29 +7162,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-058cc90e", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(124);
+var content = __webpack_require__(125);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("67eb2269", content, false);
+var update = __webpack_require__(2)("2b036f1c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-058cc90e\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-058cc90e\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-058cc90e\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-058cc90e\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -11201,7 +7197,7 @@ if(false) {
 }
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -11209,13 +7205,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-switch[data-v-058cc90e] {\n  flex-direction: row;\n  align-items: center;\n  width: 144px;\n  height: 72px;\n  border-radius: 72px;\n  border-width: 5px;\n}\n.ctr-ball[data-v-058cc90e] {\n  width: 42px;\n  height: 42px;\n  border-radius: 21px;\n  margin-left: 10px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-switch/index.vue?4daa901e"],"names":[],"mappings":";AAWA;EACA,oBAAA;EACA,oBAAA;EACA,aAAA;EACA,aAAA;EACA,oBAAA;EACA,kBAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;EACA,oBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and updated by Yanjiie on 2018/4/12. -->\n<template>\n  <div class=\"fm-switch\" @click=\"changeState\" :style=\"getBgStyle\">\n    <div class=\"ctr-ball\"\n         :style=\"ballStyle\"\n         ref=\"ctrBall\"></div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-switch {\n    flex-direction: row;\n    align-items: center;\n    width: 144px;\n    height: 72px;\n    border-radius: 72px;\n    border-width: 5px;\n  }\n\n  .ctr-ball {\n    width: 42px;\n    height: 42px;\n    border-radius: 21px;\n    margin-left: 10px;\n  }\n</style>\n\n<script>\nimport STYLE from 'weex-flymeui/lib/theme/default/';\nconst animation = weex.requireModule('animation');\n\nexport default {\n  name: 'FmSwitch',\n  props: {\n    checked: {\n      type: Boolean,\n      default: false\n    },\n    solid: Boolean,\n    disabled: {\n      type: Boolean,\n      default: false\n    },\n    blurColor: String,\n    focusColor: String,\n    borderColor: {\n      type: String,\n      default: '#D9D9D9'\n    },\n    backgroundColor: {\n      type: String,\n      default: STYLE.primaryColor\n    }\n  },\n  data () {\n    return {\n      isAnimate: false,\n      _checked: false,\n      ballStyle: {}\n    };\n  },\n  computed: {\n    getBgStyle () {\n      const { solid, borderColor, backgroundColor, disabled } = this;\n      const style =\n          !solid\n            ? {\n              borderWidth: '5px',\n              borderColor: borderColor,\n              backgroundColor: 'transparent'\n            }\n            : {\n              borderWidth: '5px',\n              borderColor: backgroundColor,\n              backgroundColor: backgroundColor\n            };\n      if (disabled) {\n        style.opacity = 0.3;\n      } else {\n        style.opacity = 1;\n      }\n      return style;\n    }\n  },\n  watch: {\n    checked (bool) {\n      this._checked = bool;\n      this.toggleState(bool);\n    }\n  },\n  methods: {\n    changeState (e) {\n      if (this.disabled) return;\n      this._checked = !this._checked;\n      this.toggleState(this._checked);\n      this.$emit('fmSwitchStateChange', this._checked);\n    },\n    toggleState (bool, animated = true) {\n      const style = bool\n        ? {\n          backgroundColor: this.focusColor || (this.solid ? '#FFFFFF' : this.backgroundColor),\n          transform: 'scale(1) translate(72px, 0)',\n          transformOrigin: 'center center'\n        }\n        : {\n          backgroundColor: this.blurColor || (this.solid ? '#FFFFFF' : this.borderColor),\n          transform: 'scale(0.429)',\n          transformOrigin: 'center center'\n        };\n      const ctrBall = this.$refs.ctrBall;\n      if (!ctrBall) {\n        return;\n      }\n      animation.transition(\n        ctrBall,\n        {\n          styles: style,\n          timingFunction: 'ease',\n          duration: animated ? 260 : 0.00001\n        }\n      );\n    }\n  },\n  created () {\n    this.checked\n      ? (this.ballStyle = {\n        backgroundColor: this.focusColor || (this.solid ? '#FFFFFF' : this.backgroundColor),\n        transform: 'scale(1.0) translate(72px, 0)'\n      })\n      : (this.ballStyle = {\n        backgroundColor: this.blurColor || (this.solid ? '#FFFFFF' : this.borderColor),\n        transform: 'scale(0.429)'\n      });\n\n    this._checked = this.checked;\n    this.toggleState(this._checked, false);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-switch[data-v-058cc90e] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n          align-items: center;\n  width: 1.33333rem;\n  height: 0.66667rem;\n  border-radius: 0.66667rem;\n  border-width: 0.0463rem;\n}\n.ctr-ball[data-v-058cc90e] {\n  width: 0.38889rem;\n  height: 0.38889rem;\n  border-radius: 0.19444rem;\n  margin-left: 0.09259rem;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-switch/index.vue?4c4329ce"],"names":[],"mappings":";AAWA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,kBAAA;EACA,mBAAA;EACA,0BAAA;EACA,wBAAA;CACA;AAEA;EACA,kBAAA;EACA,mBAAA;EACA,0BAAA;EACA,wBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and updated by Yanjiie on 2018/4/12. -->\n<template>\n  <div class=\"fm-switch\" @click=\"changeState\" :style=\"getBgStyle\">\n    <div class=\"ctr-ball\"\n         :style=\"ballStyle\"\n         ref=\"ctrBall\"></div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-switch {\n    flex-direction: row;\n    align-items: center;\n    width: 144px;\n    height: 72px;\n    border-radius: 72px;\n    border-width: 5px;\n  }\n\n  .ctr-ball {\n    width: 42px;\n    height: 42px;\n    border-radius: 21px;\n    margin-left: 10px;\n  }\n</style>\n\n<script>\nimport STYLE from 'weex-flymeui/lib/theme/default/index.js';\nconst animation = weex.requireModule('animation');\n\nexport default {\n  name: 'FmSwitch',\n  props: {\n    checked: {\n      type: Boolean,\n      default: false\n    },\n    solid: Boolean,\n    disabled: {\n      type: Boolean,\n      default: false\n    },\n    blurColor: String,\n    focusColor: String,\n    borderColor: {\n      type: String,\n      default: '#D9D9D9'\n    },\n    backgroundColor: {\n      type: String,\n      default: STYLE.primaryColor\n    }\n  },\n  data () {\n    return {\n      isAnimate: false,\n      _checked: false,\n      ballStyle: {}\n    };\n  },\n  computed: {\n    getBgStyle () {\n      const { solid, borderColor, backgroundColor, disabled } = this;\n      const style =\n          !solid\n            ? {\n              borderWidth: '5px',\n              borderColor: borderColor,\n              backgroundColor: 'transparent'\n            }\n            : {\n              borderWidth: '5px',\n              borderColor: backgroundColor,\n              backgroundColor: backgroundColor\n            };\n      if (disabled) {\n        style.opacity = 0.3;\n      } else {\n        style.opacity = 1;\n      }\n      return style;\n    }\n  },\n  watch: {\n    checked (bool) {\n      this._checked = bool;\n      this.toggleState(bool);\n    }\n  },\n  methods: {\n    changeState (e) {\n      if (this.disabled) return;\n      this._checked = !this._checked;\n      this.toggleState(this._checked);\n      this.$emit('fmSwitchStateChange', this._checked);\n    },\n    toggleState (bool, animated = true) {\n      const style = bool\n        ? {\n          backgroundColor: this.focusColor || (this.solid ? '#FFFFFF' : this.backgroundColor),\n          transform: 'scale(1) translate(72px, 0)',\n          transformOrigin: 'center center'\n        }\n        : {\n          backgroundColor: this.blurColor || (this.solid ? '#FFFFFF' : this.borderColor),\n          transform: 'scale(0.429)',\n          transformOrigin: 'center center'\n        };\n      const ctrBall = this.$refs.ctrBall;\n      if (!ctrBall) {\n        return;\n      }\n      animation.transition(\n        ctrBall,\n        {\n          styles: style,\n          timingFunction: 'ease',\n          duration: animated ? 260 : 0.00001\n        }\n      );\n    }\n  },\n  created () {\n    this.checked\n      ? (this.ballStyle = {\n        backgroundColor: this.focusColor || (this.solid ? '#FFFFFF' : this.backgroundColor),\n        transform: 'scale(1.0) translate(72px, 0)'\n      })\n      : (this.ballStyle = {\n        backgroundColor: this.blurColor || (this.solid ? '#FFFFFF' : this.borderColor),\n        transform: 'scale(0.429)'\n      });\n\n    this._checked = this.checked;\n    this.toggleState(this._checked, false);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11225,9 +7221,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _default = __webpack_require__(35);
+var _index = __webpack_require__(28);
 
-var _default2 = _interopRequireDefault(_default);
+var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11280,7 +7276,7 @@ exports.default = {
     },
     backgroundColor: {
       type: String,
-      default: _default2.default.primaryColor
+      default: _index2.default.primaryColor
     }
   },
   data: function data() {
@@ -11366,7 +7362,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11393,7 +7389,7 @@ if (false) {
 }
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11403,7 +7399,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(128);
+var _index = __webpack_require__(129);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -11415,25 +7411,28 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(129)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(130)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(131),
+  __webpack_require__(132),
   /* template */
-  __webpack_require__(135),
+  __webpack_require__(136),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-1a0456a2",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag-wall/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -11447,29 +7446,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-1a0456a2", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(130);
+var content = __webpack_require__(131);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("3c0e67b4", content, false);
+var update = __webpack_require__(2)("f4bd35b4", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-1a0456a2\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-1a0456a2\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1a0456a2\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1a0456a2\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -11479,7 +7481,7 @@ if(false) {
 }
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -11487,13 +7489,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.wall-wrap[data-v-1a0456a2] {\n  width: 1080px;\n}\n.title-wrap[data-v-1a0456a2] {\n  flex-direction: row;\n  padding: 27px 49px;\n  justify-content: space-between;\n}\n.title-text[data-v-1a0456a2] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 36px;\n  line-height: 54px;\n}\n.title-rightBtn[data-v-1a0456a2] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 36px;\n  line-height: 54px;\n}\n.tags-wrap[data-v-1a0456a2] {\n  flex-direction: row;\n  flex-wrap: wrap;\n  padding: 0 24px 0 48px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag-wall/index.vue?6697c608"],"names":[],"mappings":";AAuBA;EACA,cAAA;CACA;AAEA;EACA,oBAAA;EACA,mBAAA;EACA,+BAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,oBAAA;EACA,gBAAA;EACA,uBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/3/2. -->\n<template>\n  <div class=\"wall-wrap\">\n    <div class=\"title-wrap\">\n      <slot name=\"left\">\n        <text class=\"title-text\" :style=\"{ color: titleColor }\">{{ title }}</text>\n      </slot>\n      <slot name=\"right\">\n        <text class=\"title-rightBtn\" :style=\"{ color: rightColor }\" @click=\"btnClicked\">{{ rightText }}</text>\n      </slot>\n    </div>\n    <div class=\"tags-wrap\">\n      <item v-for=\"(item, index) in list\"\n            v-bind=\"Object.assign({}, customStyles, item)\"\n            :key=\"index\"\n            :index=\"index\"\n            @select=\"onSelect(index)\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .wall-wrap {\n    width: 1080px;\n  }\n\n  .title-wrap {\n    flex-direction: row;\n    padding: 27px 49px;\n    justify-content: space-between;\n  }\n\n  .title-text {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 36px;\n    line-height: 54px;\n  }\n\n  .title-rightBtn {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 36px;\n    line-height: 54px;\n  }\n\n  .tags-wrap {\n    flex-direction: row;\n    flex-wrap: wrap;\n    padding: 0 24px 0 48px;\n  }\n</style>\n\n<script>\nimport Item from './item.vue';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmTagWall',\n  mixins: [Locale],\n  components: { Item },\n  props: {\n    list: {\n      type: Array,\n      default: () => ([])\n    },\n    title: {\n      type: String,\n      default () {\n        return t('el.common.title');\n      }\n    },\n    titleColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    rightText: {\n      type: String,\n      default: ''\n    },\n    rightColor: {\n      type: String,\n      default: '#198DED'\n    },\n    customStyles: {\n      type: Object,\n      default: () => ({})\n    }\n  },\n  methods: {\n    onSelect (index) {\n      this.$emit('fmTagWallSelected', { title: this.list[index].title, index });\n    },\n    btnClicked () {\n      this.$emit('fmTagWallRightBtnClicked');\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.wall-wrap[data-v-1a0456a2] {\n  width: 10rem;\n}\n.title-wrap[data-v-1a0456a2] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  padding: 0.25rem 0.4537rem;\n  -webkit-box-pack: justify;\n  -webkit-justify-content: space-between;\n          justify-content: space-between;\n}\n.title-text[data-v-1a0456a2] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 0.33333rem;\n  line-height: 0.5rem;\n}\n.title-rightBtn[data-v-1a0456a2] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 0.33333rem;\n  line-height: 0.5rem;\n}\n.tags-wrap[data-v-1a0456a2] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  -webkit-flex-wrap: wrap;\n          flex-wrap: wrap;\n  padding: 0 0.22222rem 0 0.44444rem;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag-wall/index.vue?6697c608"],"names":[],"mappings":";AAuBA;EACA,aAAA;CACA;AAEA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,2BAAA;EACA,0BAAA;EAAA,uCAAA;UAAA,+BAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,sBAAA;EACA,oBAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,sBAAA;EACA,oBAAA;CACA;AAEA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,wBAAA;UAAA,gBAAA;EACA,mCAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/3/2. -->\n<template>\n  <div class=\"wall-wrap\">\n    <div class=\"title-wrap\">\n      <slot name=\"left\">\n        <text class=\"title-text\" :style=\"{ color: titleColor }\">{{ title }}</text>\n      </slot>\n      <slot name=\"right\">\n        <text class=\"title-rightBtn\" :style=\"{ color: rightColor }\" @click=\"btnClicked\">{{ rightText }}</text>\n      </slot>\n    </div>\n    <div class=\"tags-wrap\">\n      <item v-for=\"(item, index) in list\"\n            v-bind=\"Object.assign({}, customStyles, item)\"\n            :key=\"index\"\n            :index=\"index\"\n            @select=\"onSelect(index)\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .wall-wrap {\n    width: 1080px;\n  }\n\n  .title-wrap {\n    flex-direction: row;\n    padding: 27px 49px;\n    justify-content: space-between;\n  }\n\n  .title-text {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 36px;\n    line-height: 54px;\n  }\n\n  .title-rightBtn {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 36px;\n    line-height: 54px;\n  }\n\n  .tags-wrap {\n    flex-direction: row;\n    flex-wrap: wrap;\n    padding: 0 24px 0 48px;\n  }\n</style>\n\n<script>\nimport Item from './item.vue';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmTagWall',\n  mixins: [Locale],\n  components: { Item },\n  props: {\n    list: {\n      type: Array,\n      default: () => ([])\n    },\n    title: {\n      type: String,\n      default () {\n        return t('el.common.title');\n      }\n    },\n    titleColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    rightText: {\n      type: String,\n      default: ''\n    },\n    rightColor: {\n      type: String,\n      default: '#198DED'\n    },\n    customStyles: {\n      type: Object,\n      default: () => ({})\n    }\n  },\n  methods: {\n    onSelect (index) {\n      this.$emit('fmTagWallSelected', { title: this.list[index].title, index });\n    },\n    btnClicked () {\n      this.$emit('fmTagWallRightBtnClicked');\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11503,15 +7505,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _item = __webpack_require__(132);
+var _item = __webpack_require__(133);
 
 var _item2 = _interopRequireDefault(_item);
 
-var _locale = __webpack_require__(34);
+var _locale = __webpack_require__(29);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(20);
+var _locale3 = __webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11615,21 +7617,24 @@ exports.default = {
 //
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(133),
-  /* template */
   __webpack_require__(134),
+  /* template */
+  __webpack_require__(135),
+  /* styles */
+  null,
   /* scopeId */
   null,
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tag-wall/item.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] item.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -11643,13 +7648,16 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-ead85e1a", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11776,7 +7784,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11802,7 +7810,7 @@ if (false) {
 }
 
 /***/ }),
-/* 135 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11858,7 +7866,7 @@ if (false) {
 }
 
 /***/ }),
-/* 136 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11868,7 +7876,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(137);
+var _index = __webpack_require__(138);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -11880,25 +7888,28 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 137 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(138)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(139)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(140),
-  /* template */
   __webpack_require__(141),
+  /* template */
+  __webpack_require__(142),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-11fe3cac",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-slider-bar/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -11912,29 +7923,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-11fe3cac", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 138 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(139);
+var content = __webpack_require__(140);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("1c3a0ac2", content, false);
+var update = __webpack_require__(2)("5b68764a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-11fe3cac\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-11fe3cac\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-11fe3cac\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-11fe3cac\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -11944,7 +7958,7 @@ if(false) {
 }
 
 /***/ }),
-/* 139 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -11952,13 +7966,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.slider-wrap[data-v-11fe3cac] {\n  padding-right: 22.5px;\n  padding-left: 22.5px;\n}\n.level-text-wrap[data-v-11fe3cac] {\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  margin-bottom: -21.6px;\n}\n.level-text[data-v-11fe3cac] {\n  flex: 1;\n  font-size: 42px;\n  padding-top: 7.2px;\n  padding-bottom: 7.2px;\n  text-align: center;\n}\n.all[data-v-11fe3cac] {\n  height: 9px;\n  margin-top: 43.2px;\n  background-color: #e6e6e6;\n}\n.selected[data-v-11fe3cac] {\n  margin-top: -9px;\n  height: 9px;\n  background-color: #198ded;\n}\n.dot-wrap[data-v-11fe3cac] {\n  height: 86.4px;\n  width: 116.4px;\n  margin-top: -47.52px;\n  margin-left: -57.6px;\n  align-items: center;\n  justify-content: center;\n}\n.dot[data-v-11fe3cac] {\n  height: 45px;\n  width: 45px;\n  background-color: #198ded;\n  border-radius: 43.2px;\n}\n.num[data-v-11fe3cac] {\n  width: 78px;\n  height: 78px;\n  margin-left: -39px;\n  border-radius: 79.2px;\n  background-color: #198ded;\n  color: #ffffff;\n  font-size: 42px;\n  font-weight: 700;\n  text-align: center;\n  line-height: 78px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-slider-bar/index.vue?bce00f48"],"names":[],"mappings":";AAiBA;EACA,sBAAA;EACA,qBAAA;CACA;AACA;EACA,oBAAA;EACA,oBAAA;EACA,wBAAA;EACA,uBAAA;CACA;AACA;EACA,QAAA;EACA,gBAAA;EACA,mBAAA;EACA,sBAAA;EACA,mBAAA;CACA;AACA;EACA,YAAA;EACA,mBAAA;EACA,0BAAA;CACA;AACA;EACA,iBAAA;EACA,YAAA;EACA,0BAAA;CACA;AACA;EACA,eAAA;EACA,eAAA;EACA,qBAAA;EACA,qBAAA;EACA,oBAAA;EACA,wBAAA;CACA;AACA;EACA,aAAA;EACA,YAAA;EACA,0BAAA;EACA,sBAAA;CACA;AACA;EACA,YAAA;EACA,aAAA;EACA,mBAAA;EACA,sBAAA;EACA,0BAAA;EACA,eAAA;EACA,gBAAA;EACA,iBAAA;EACA,mBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div class=\"slider-wrap\">\n    <div v-if=\"!!levelTexts && this.per\" class=\"level-text-wrap\" :style=\"textStyle\">\n      <text class=\"level-text\" v-for=\"(text, idx) in levelTexts\" @click=\"levelClick(idx)\" :key=\"idx\">{{text}}</text>\n    </div>\n    <text v-else-if=\"showProgress\" class=\"num\" :style=\"progressStyle\">{{progressText}}</text>\n    <div class=\"all\" ref=\"bg\"></div>\n    <div class=\"selected\" :style=\"selStyle\"></div>\n    <div class=\"dot-wrap\" :style=\"dotStyle\" @touchmove=\"move\" @touchstart=\"start\" @touchend=\"end\">\n      <div class=\"dot\"></div>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .slider-wrap {\n    padding-right: 22.5px;\n    padding-left: 22.5px;\n  }\n  .level-text-wrap {\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    margin-bottom: -21.6px;\n  }\n  .level-text {\n    flex: 1;\n    font-size: 42px;\n    padding-top: 7.2px;\n    padding-bottom: 7.2px;\n    text-align: center;\n  }\n  .all {\n    height: 9px;\n    margin-top: 43.2px;\n    background-color: #e6e6e6;\n  }\n  .selected {\n    margin-top: -9px;\n    height: 9px;\n    background-color: #198ded;\n  }\n  .dot-wrap {\n    height: 86.4px;\n    width: 116.4px;\n    margin-top: -47.52px;\n    margin-left: -57.6px;\n    align-items: center;\n    justify-content: center;\n  }\n  .dot {\n    height: 45px;\n    width: 45px;\n    background-color: #198ded;\n    border-radius: 43.2px;\n  }\n  .num {\n    width: 78px;\n    height: 78px;\n    margin-left: -39px;\n    border-radius: 79.2px;\n    background-color: #198ded;\n    color: #ffffff;\n    font-size: 42px;\n    font-weight: 700;\n    text-align: center;\n    line-height: 78px;\n  }\n</style>\n\n<script>\nconst dom = weex.requireModule('dom');\n\nexport default {\n  name: 'FmSlider',\n  data () {\n    return {\n      transX: 0,\n      startX: 0,\n      max: 0,\n      per: 0,\n      comparePer: 0,\n      progressOpacity: 0,\n      progressText: null,\n      levelAlias: 0\n    };\n  },\n\n  props: {\n    level: [String, Number],\n    levelTexts: Array,\n    showProgress: Boolean,\n    vertical: Boolean,\n    value: {\n      type: [String, Number],\n      default: 0\n    }\n  },\n\n  computed: {\n    textStyle () {\n      return {\n        width: `${this.max + this.per}px`,\n        'margin-left': `${-this.per / 2}px`\n      };\n    },\n    dotStyle () {\n      return {\n        transform: `translateX(${this.transX}px)`\n      };\n    },\n    selStyle () {\n      return {\n        width: `${this.transX}px`\n      };\n    },\n    progressStyle () {\n      return {\n        transform: `translateX(${this.transX}px)`,\n        opacity: this.progressOpacity\n      };\n    }\n  },\n\n  created () {\n    this.screen = 'screenY';// this.vertical ? 'screenY' : 'screenX'\n  },\n\n  mounted () {\n    setTimeout(() => {\n      dom.getComponentRect(this.$refs.bg, opt => {\n        this.max = opt.size.width;\n\n        if (this.levelTexts) {\n          this.levelAlias = Math.max(this.levelTexts.length - 1, 0);\n        } else {\n          this.levelAlias = this.level;\n        }\n\n        if (this.levelAlias && this.levelAlias > 0) {\n          this.per = this.max / this.levelAlias;\n          this.comparePer = this.per / 2;\n        }\n\n        this.transX = this.per ? (this.per * this.value) : (this.max * this.value / 100);\n      });\n    }, 100);\n  },\n\n  methods: {\n    levelClick (idx) {\n      this.transX = Math.min(this.per * idx, this.max);\n      this.end();\n    },\n    start (event) {\n      this.startX = event.changedTouches[0].screenX;\n      this.progressOpacity = 1;\n    },\n    move (event) {\n      const x = +event.changedTouches[0].screenX;\n      const sub = x - this.startX;\n      let target;\n\n      if (this.per) {\n        if (Math.abs(sub) >= this.comparePer) {\n          target = this.transX + (sub > 0 ? this.per : -this.per);\n          this.startX = target;\n        }\n      } else {\n        target = this.transX + sub;\n        this.startX = x;\n      }\n\n      if (target !== undefined) {\n        this.transX = Math.min(Math.max(target, 0), this.max);\n      }\n\n      this.progressText = this.per\n        ? Math.round(this.transX / this.per)\n        : Math.floor(this.transX / this.max * 100);\n    },\n    end (event) {\n      this.progressOpacity = 0;\n      this.$emit('selected', {\n        rate: this.transX / this.max,\n        level: this.per ? Math.round(this.transX / this.per) : 0\n      });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.container[data-v-11fe3cac] {\n  height: 0.42593rem;\n}\n.container-indicator[data-v-11fe3cac] {\n  height: 1.33333rem;\n  padding: 0 0.14815rem;\n  -webkit-box-pack: end;\n  -webkit-justify-content: flex-end;\n          justify-content: flex-end;\n}\n.container-haslevels[data-v-11fe3cac] {\n  height: 1.33333rem;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n          align-items: center;\n  -webkit-box-pack: end;\n  -webkit-justify-content: flex-end;\n          justify-content: flex-end;\n}\n.slider-bar[data-v-11fe3cac] {\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n          justify-content: center;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n          align-items: center;\n}\n.slider-bar-wrap[data-v-11fe3cac] {\n  height: 0.42593rem;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n          justify-content: center;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n          align-items: center;\n  overflow: hidden;\n}\n.range-bar[data-v-11fe3cac] {\n  background-color: rgba(0, 0, 0, 0.1);\n  height: 0.05556rem;\n  overflow: hidden;\n}\n.value-bar[data-v-11fe3cac] {\n  height: 0.05556rem;\n  position: absolute;\n  left: 0;\n  top: 0;\n  /* overflow: hidden; */\n}\n.slide-circle[data-v-11fe3cac] {\n  width: 0.42593rem;\n  height: 0.42593rem;\n  border-radius: 0.21296rem;\n  position: absolute;\n  left: 0px;\n  bottom: 0;\n}\n.indicator[data-v-11fe3cac] {\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n          justify-content: center;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n          align-items: center;\n  width: 0.72222rem;\n  height: 0.72222rem;\n  position: absolute;\n  border-radius: 0.36111rem;\n  left: 0px;\n  top: 0.92593rem;\n  opacity: 0;\n  -webkit-transition-property: top, opacity;\n  transition-property: top, opacity;\n  -webkit-transition-duration: 0.2s;\n          transition-duration: 0.2s;\n  -webkit-transition-timing-function: ease-out;\n          transition-timing-function: ease-out;\n}\n.indicator-text[data-v-11fe3cac] {\n  font-weight: 700;\n  font-size: 0.38889rem;\n  color: #FFFFFF;\n}\n.levels-wrap[data-v-11fe3cac] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n  -webkit-justify-content: space-between;\n          justify-content: space-between;\n  margin-bottom: 0.13889rem;\n}\n.level-item[data-v-11fe3cac] {\n  width: 0.66667rem;\n  text-align: center;\n  color: rgba(0, 0, 0, 0.4);\n  font-size: 0.33333rem;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-slider-bar/index.vue?806c7cce"],"names":[],"mappings":";AA2XA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;EACA,sBAAA;EACA,sBAAA;EAAA,kCAAA;UAAA,0BAAA;CACA;AAEA;EACA,mBAAA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,sBAAA;EAAA,kCAAA;UAAA,0BAAA;CACA;AAEA;EACA,yBAAA;EAAA,gCAAA;UAAA,wBAAA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;CACA;AAEA;EACA,mBAAA;EACA,yBAAA;EAAA,gCAAA;UAAA,wBAAA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,iBAAA;CACA;AAEA;EACA,qCAAA;EACA,mBAAA;EACA,iBAAA;CACA;AAEA;EACA,mBAAA;EACA,mBAAA;EACA,QAAA;EACA,OAAA;EACA,uBAAA;CACA;AAEA;EACA,kBAAA;EACA,mBAAA;EACA,0BAAA;EACA,mBAAA;EACA,UAAA;EACA,UAAA;CACA;AAEA;EACA,yBAAA;EAAA,gCAAA;UAAA,wBAAA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,kBAAA;EACA,mBAAA;EACA,mBAAA;EACA,0BAAA;EACA,UAAA;EACA,gBAAA;EACA,WAAA;EACA,0CAAA;EAAA,kCAAA;EACA,kCAAA;UAAA,0BAAA;EACA,6CAAA;UAAA,qCAAA;CACA;AAEA;EACA,iBAAA;EACA,sBAAA;EACA,eAAA;CACA;AAEA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,0BAAA;EAAA,uCAAA;UAAA,+BAAA;EACA,0BAAA;CACA;AAEA;EACA,kBAAA;EACA,mBAAA;EACA,0BAAA;EACA,sBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. Just a beta version! -->\n<template>\n  <div\n    class=\"container\"\n    :class=\"[`container-${(indicator && 'indicator') || (levels.length > 0 && 'haslevels')}`]\"\n    :style=\"containerStyle\">\n    <div\n      v-if=\"indicator\"\n      class=\"indicator\"\n      ref=\"indicator\"\n      :style=\"indicatorStyle\">\n      <text class=\"indicator-text\">{{ inValue }}</text>\n    </div>\n    <div\n      v-else-if=\"levels.length > 0\"\n      class=\"levels-wrap\"\n      :style=\"{ width: length + 64 }\">\n      <text\n        class=\"level-item\"\n        v-for=\"(item, idx) in levels\"\n        :style=\"{ color: inLevel === idx ? '#000000' : 'rgba(0, 0, 0, 0.4)' }\"\n        :key=\"idx\">{{ item.text }}</text>\n    </div>\n    <div\n      ref=\"bar-wrap\"\n      class=\"slider-bar-wrap\"\n      :style=\"barWrapStyle\">\n      <div\n        class=\"range-bar\"\n        :style=\"rangeBarStyle\">\n        <div\n          ref=\"value-bar\"\n          class=\"value-bar\"\n          :style=\"valueBarStyle\">\n          <div></div>\n        </div>\n      </div>\n      <div\n        ref=\"slide-circle\"\n        class=\"slide-circle\"\n        :style=\"circleStyle\"\n        @touchstart=\"onPanstart\"\n        @touchmove=\"onPanmove\"\n        @touchend=\"onPanEnd\"\n        @horizontalpan=\"startHandle\"\n        :prevent-move-event=\"true\">\n        <div></div>\n      </div>\n    </div>\n  </div>\n</template>\n\n<script>\nimport Binding from 'weex-bindingx/lib/index.weex.js';\nimport STYLE from 'weex-flymeui/lib/theme/default/index.js';\nimport Utils from '../utils';\nimport BindEnv from '../utils/bind-env';\n\nconst animation = weex.requireModule('animation');\nconst dom = weex.requireModule('dom');\n\nexport default {\n  name: 'FmSliderBar',\n  props: {\n    length: {\n      type: Number,\n      default: 800\n    },\n    height: {\n      type: Number,\n      default: 6\n    },\n    // 最小值\n    min: {\n      type: Number,\n      default: 0\n    },\n    // 最大值\n    max: {\n      type: Number,\n      default: 100\n    },\n    indicator: {\n      type: Boolean,\n      default: false\n    },\n    levels: {\n      type: Array,\n      default: () => ([])\n    },\n    defaultValue: {\n      type: Number,\n      default: 0\n    },\n    disabled: {\n      type: Boolean,\n      default: false\n    },\n    invalidColor: {\n      type: String,\n      default: '#E0E0E0'\n    },\n    validColor: {\n      type: String,\n      default: STYLE.primaryColor\n    },\n    disabledColor: {\n      type: String,\n      default: STYLE.disabledColor\n    }\n  },\n  data: () => ({\n    env: 'weex',\n    gesToken: 0,\n    scaleValue: 0,\n    circleLeft: 0,\n    indicatorShow: false,\n    inValue: 0,\n    isAndroid: Utils.env.isAndroid(),\n    timeout: 100,\n    inLevel: 0,\n    lock: false,\n    loaded: false\n  }),\n  computed: {\n    barWrapStyle () {\n      return {\n        width: `${this.length + 46}px`,\n        height: '46px'\n      };\n    },\n    rangeBarStyle () {\n      return {\n        width: `${this.length}px`,\n        height: `${this.height}px`,\n        flexDirection: 'row'\n      };\n    },\n    valueBarStyle () {\n      return {\n        width: this.length + 'px',\n        height: this.height + 'px',\n        transform: `translateX(${this.circleLeft - this.length}px)`,\n        backgroundColor: this.disabled ? this.disabledColor : this.validColor\n      };\n    },\n    containerStyle () {\n      const { indicator, levels, length, loaded } = this;\n      const baseWidth = length + 46;\n      const styles = {\n        width: (indicator && baseWidth + 32) || (levels.length > 0 && baseWidth + 32) || baseWidth,\n        justifyContent: (indicator || levels.length > 0) ? 'flex-end' : 'center',\n        opacity: loaded ? 1 : 0\n      };\n      return styles;\n    },\n    circleStyle () {\n      return {\n        backgroundColor: this.disabled ? this.disabledColor : this.validColor,\n        transform: `translateX(${this.circleLeft}px)`\n      };\n    },\n    indicatorStyle () {\n      const defaultStyle = {\n        backgroundColor: this.validColor,\n        transform: `translateX(${this.circleLeft}px)`\n      };\n      return this.indicatorShow ? {\n        opacity: 1,\n        top: 0,\n        ...defaultStyle\n      } : {\n        opacity: 0,\n        top: '100px',\n        ...defaultStyle\n      };\n    }\n  },\n  methods: {\n    onWrapPanstart (e) {\n      if (this.lock || this.env === 'web') { return; }\n      this.circleLeft = this._restrictValue(e.changedTouches[0].pageX);\n      animation.transition(this.circleEl, {\n        styles: {\n          transform: `translateX(${this.circleLeft}px)`\n        },\n        duration: 0.0001\n      });\n      this.indicatorEl && animation.transition(this.indicatorEl, {\n        styles: {\n          transform: `translateX(${this.circleLeft}px)`\n        },\n        duration: 0.0001\n      });\n    },\n    onPanstart (e) {\n      if (this.lock || this.disabled) { return; }\n      this.lock = true;\n\n      if (this.env === 'web') {\n        this.indicatorShow = true;\n        this.startX = e.changedTouches[0].pageX;\n        this.startLeft = this.circleLeft;\n        return;\n      } else if (!this.isAndroid) {\n        return;\n      }\n\n      // 由于 android 端不支持 horizontalpan 的move事件，使用setInterval hack方案\n      this.interval = setInterval(() => {\n        this.indicatorShow = true;\n        dom.getComponentRect(this.circleEl, option => {\n          const { left } = option.size;\n          this.inValue = this._getValue(left - this.leftDiffX);\n          this.$emit('updateValue', this.inValue);\n        });\n      }, this.timeout);\n    },\n    onPanmove (e) {\n      if (this.env === 'weex' || this.disabled) {\n        return;\n      }\n\n      const deltaX = (e.changedTouches[0].pageX - this.startX) * this.DPR;\n      const diffX = Math.min(this.length, Math.max(this.startLeft + deltaX, 0));\n      const diff = Math.floor(diffX / this.scaleValue) * this.scaleValue;\n      const max = this.length;\n\n      if (diff >= 0 && diff <= max) {\n        this.circleLeft = diff;\n        animation.transition(this.circleEl, {\n          styles: {\n            transform: `translateX(${this.circleLeft}px)`\n          }\n        }, () => {});\n        this.indicatorEl && animation.transition(this.indicatorEl, {\n          styles: {\n            transform: `translateX(${this.circleLeft}px)`\n          }\n        }, () => {});\n        this.inValue = this._getValue(this.circleLeft);\n        this.$emit('updateValue', this.inValue);\n      }\n    },\n    onPanEnd (e) {\n      setTimeout(() => { this.indicatorShow = false; }, 40);\n      this.lock = false;\n      if (!this.isAndroid) {\n        return;\n      }\n      this.interval && clearInterval(this.interval);\n    },\n    startHandle (e) {\n      this.bindExp();\n    },\n    bindExp () {\n      if (this.gesToken || this.disabled) {\n        Binding.unbind({\n          eventType: 'pan',\n          token: this.gesToken\n        });\n        this.gesToken = 0;\n        return;\n      }\n\n      const { circleEl, indicatorEl, valueBarEl, circleLeft, length, scaleValue } = this;\n\n      const props = [{\n        element: circleEl.ref,\n        property: 'transform.translateX',\n        expression: `min(${this.length}, floor(max(x + ${this.circleLeft}, 0) / ${scaleValue}) * ${scaleValue})`\n      }, {\n        element: valueBarEl.ref,\n        property: 'transform.translateX',\n        expression: `min(0, x + floor(${circleLeft - length} / ${scaleValue}) * ${scaleValue})`\n      }];\n\n      if (indicatorEl) {\n        props.push({\n          element: indicatorEl.ref,\n          property: 'transform.translateX',\n          expression: `min(${this.length}, floor(max(x + ${this.circleLeft}, 0) / ${scaleValue}) * ${scaleValue})`\n        });\n      }\n\n      const gesTokenObj = Binding.bind({\n        anchor: circleEl.ref,\n        eventType: 'pan',\n        props\n      }, (e) => {\n        if (e.state === 'end' || e.state === 'cancel' || e.state === 'exit') {\n          this.lock = false;\n          // 限制 circleLeft 范围\n          this.circleLeft = this._restrictValue(Math.max(0, Math.floor((this.circleLeft + e.deltaX) / this.scaleValue) * this.scaleValue));\n          setTimeout(() => { this.indicatorShow = false; }, 40);\n        }\n      });\n\n      this.gesToken = gesTokenObj.token;\n    },\n    _restrictValue (value) {\n      const range = this.length;\n      if (value >= range) {\n        return range;\n      } else {\n        return value;\n      }\n    },\n    // 根据x方向偏移量计算value\n    _getValue (diffX) {\n      return Math.round((diffX / this.length) * (this.max - this.min) + this.min);\n    },\n    // 根据 value 和 length 计算 x 方向偏移值\n    _getLeftDiff (value) {\n      return ((value - this.min) / (this.max - this.min)) * this.length;\n    }\n  },\n  created () {\n    if (Utils.env.isWeb()) {\n      this.env = 'web';\n      this.DPR = window.devicePixelRatio ? window.devicePixelRatio : 1;\n    } else {\n      this.DPR = weex.config.env.scale;\n    }\n  },\n  mounted () {\n    this.wrapEl = this.$refs['bar-wrap'];\n    this.circleEl = this.$refs['slide-circle'];\n    this.valueBarEl = this.$refs['value-bar'];\n    this.indicatorEl = this.$refs['indicator'];\n\n    this.circleLeft = this._getLeftDiff(this.inValue || this.defaultValue);\n    this.indicatorEl && animation.transition(this.indicatorEl, {\n      styles: {\n        transform: `translateX(${this.circleLeft}px)`\n      },\n      duration: 0.0001\n    });\n\n    // 是否支持expresstionBinding\n    if (BindEnv.supportsEB() && Binding.prepare) {\n      this.wrapEl && Binding.prepare({\n        anchor: this.wrapEl.ref,\n        eventType: 'pan'\n      });\n      this.circleEl && Binding.prepare({\n        anchor: this.circleEl.ref,\n        eventType: 'pan'\n      });\n      this.valueBarEl && Binding.prepare({\n        anchor: this.valueBarEl.ref,\n        eventType: 'pan'\n      });\n      this.indicatorEl && Binding.prepare({\n        anchor: this.indicatorEl.ref,\n        eventType: 'pan'\n      });\n    }\n\n    // 由于weex在mounted后渲染是异步的不能确保元素渲染完成，需要异步执行\n    setTimeout(() => {\n      dom.getComponentRect(this.wrapEl, option => {\n        const { left } = option.size;\n        this.leftDiffX = left;\n      });\n    }, 100);\n\n    // 算出刻度值，手指移动时会以刻度值整数移动\n    this.scaleValue = this.length / (this.max - this.min);\n\n    this.$nextTick(() => {\n      this.loaded = true;\n    });\n  }\n};\n</script>\n\n<style scoped>\n  .container {\n    height: 46px;\n  }\n\n  .container-indicator {\n    height: 144px;\n    padding: 0 16px;\n    justify-content: flex-end;\n  }\n\n  .container-haslevels {\n    height: 144px;\n    align-items: center;\n    justify-content: flex-end;\n  }\n\n  .slider-bar {\n    justify-content: center;\n    align-items: center;\n  }\n\n  .slider-bar-wrap {\n    height: 46px;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n  }\n\n  .range-bar {\n    background-color: rgba(0, 0, 0, 0.1);\n    height: 6px;\n    overflow: hidden;\n  }\n\n  .value-bar {\n    height: 6px;\n    position: absolute;\n    left: 0;\n    top: 0;\n    /* overflow: hidden; */\n  }\n\n  .slide-circle {\n    width: 46px;\n    height: 46px;\n    border-radius: 23px;\n    position: absolute;\n    left: 0px;\n    bottom: 0;\n  }\n\n  .indicator {\n    justify-content: center;\n    align-items: center;\n    width: 78px;\n    height: 78px;\n    position: absolute;\n    border-radius: 39px;\n    left: 0px;\n    top: 100px;\n    opacity: 0;\n    transition-property: top, opacity;\n    transition-duration: 0.2s;\n    transition-timing-function: ease-out;\n  }\n\n  .indicator-text {\n    font-weight: 700;\n    font-size: 42px;\n    color: #FFFFFF;\n  }\n\n  .levels-wrap {\n    flex-direction: row;\n    justify-content: space-between;\n    margin-bottom: 15px;\n  }\n\n  .level-item {\n    width: 72px;\n    text-align: center;\n    color: rgba(0, 0, 0, 0.4);\n    font-size: 36px;\n  }\n</style>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 140 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11967,26 +7981,12 @@ exports.push([module.i, "\n.slider-wrap[data-v-11fe3cac] {\n  padding-right: 22.
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+var _index = __webpack_require__(28);
+
+var _index2 = _interopRequireDefault(_index);
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; //
 //
 //
 //
@@ -12040,179 +8040,433 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 
+var _indexWeex = __webpack_require__(46);
+
+var _indexWeex2 = _interopRequireDefault(_indexWeex);
+
+var _utils = __webpack_require__(44);
+
+var _utils2 = _interopRequireDefault(_utils);
+
+var _bindEnv = __webpack_require__(53);
+
+var _bindEnv2 = _interopRequireDefault(_bindEnv);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var animation = weex.requireModule('animation');
 var dom = weex.requireModule('dom');
 
 exports.default = {
-  name: 'FmSlider',
+  name: 'FmSliderBar',
+  props: {
+    length: {
+      type: Number,
+      default: 800
+    },
+    height: {
+      type: Number,
+      default: 6
+    },
+    // 最小值
+    min: {
+      type: Number,
+      default: 0
+    },
+    // 最大值
+    max: {
+      type: Number,
+      default: 100
+    },
+    indicator: {
+      type: Boolean,
+      default: false
+    },
+    levels: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    defaultValue: {
+      type: Number,
+      default: 0
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    invalidColor: {
+      type: String,
+      default: '#E0E0E0'
+    },
+    validColor: {
+      type: String,
+      default: _index2.default.primaryColor
+    },
+    disabledColor: {
+      type: String,
+      default: _index2.default.disabledColor
+    }
+  },
   data: function data() {
     return {
-      transX: 0,
-      startX: 0,
-      max: 0,
-      per: 0,
-      comparePer: 0,
-      progressOpacity: 0,
-      progressText: null,
-      levelAlias: 0
+      env: 'weex',
+      gesToken: 0,
+      scaleValue: 0,
+      circleLeft: 0,
+      indicatorShow: false,
+      inValue: 0,
+      isAndroid: _utils2.default.env.isAndroid(),
+      timeout: 100,
+      inLevel: 0,
+      lock: false,
+      loaded: false
     };
   },
-
-
-  props: {
-    level: [String, Number],
-    levelTexts: Array,
-    showProgress: Boolean,
-    vertical: Boolean,
-    value: {
-      type: [String, Number],
-      default: 0
-    }
-  },
-
   computed: {
-    textStyle: function textStyle() {
+    barWrapStyle: function barWrapStyle() {
       return {
-        width: this.max + this.per + 'px',
-        'margin-left': -this.per / 2 + 'px'
+        width: this.length + 46 + 'px',
+        height: '46px'
       };
     },
-    dotStyle: function dotStyle() {
+    rangeBarStyle: function rangeBarStyle() {
       return {
-        transform: 'translateX(' + this.transX + 'px)'
+        width: this.length + 'px',
+        height: this.height + 'px',
+        flexDirection: 'row'
       };
     },
-    selStyle: function selStyle() {
+    valueBarStyle: function valueBarStyle() {
       return {
-        width: this.transX + 'px'
+        width: this.length + 'px',
+        height: this.height + 'px',
+        transform: 'translateX(' + (this.circleLeft - this.length) + 'px)',
+        backgroundColor: this.disabled ? this.disabledColor : this.validColor
       };
     },
-    progressStyle: function progressStyle() {
-      return {
-        transform: 'translateX(' + this.transX + 'px)',
-        opacity: this.progressOpacity
+    containerStyle: function containerStyle() {
+      var indicator = this.indicator,
+          levels = this.levels,
+          length = this.length,
+          loaded = this.loaded;
+
+      var baseWidth = length + 46;
+      var styles = {
+        width: indicator && baseWidth + 32 || levels.length > 0 && baseWidth + 32 || baseWidth,
+        justifyContent: indicator || levels.length > 0 ? 'flex-end' : 'center',
+        opacity: loaded ? 1 : 0
       };
+      return styles;
+    },
+    circleStyle: function circleStyle() {
+      return {
+        backgroundColor: this.disabled ? this.disabledColor : this.validColor,
+        transform: 'translateX(' + this.circleLeft + 'px)'
+      };
+    },
+    indicatorStyle: function indicatorStyle() {
+      var defaultStyle = {
+        backgroundColor: this.validColor,
+        transform: 'translateX(' + this.circleLeft + 'px)'
+      };
+      return this.indicatorShow ? _extends({
+        opacity: 1,
+        top: 0
+      }, defaultStyle) : _extends({
+        opacity: 0,
+        top: '100px'
+      }, defaultStyle);
     }
   },
+  methods: {
+    onWrapPanstart: function onWrapPanstart(e) {
+      if (this.lock || this.env === 'web') {
+        return;
+      }
+      this.circleLeft = this._restrictValue(e.changedTouches[0].pageX);
+      animation.transition(this.circleEl, {
+        styles: {
+          transform: 'translateX(' + this.circleLeft + 'px)'
+        },
+        duration: 0.0001
+      });
+      this.indicatorEl && animation.transition(this.indicatorEl, {
+        styles: {
+          transform: 'translateX(' + this.circleLeft + 'px)'
+        },
+        duration: 0.0001
+      });
+    },
+    onPanstart: function onPanstart(e) {
+      var _this = this;
 
+      if (this.lock || this.disabled) {
+        return;
+      }
+      this.lock = true;
+
+      if (this.env === 'web') {
+        this.indicatorShow = true;
+        this.startX = e.changedTouches[0].pageX;
+        this.startLeft = this.circleLeft;
+        return;
+      } else if (!this.isAndroid) {
+        return;
+      }
+
+      // 由于 android 端不支持 horizontalpan 的move事件，使用setInterval hack方案
+      this.interval = setInterval(function () {
+        _this.indicatorShow = true;
+        dom.getComponentRect(_this.circleEl, function (option) {
+          var left = option.size.left;
+
+          _this.inValue = _this._getValue(left - _this.leftDiffX);
+          _this.$emit('updateValue', _this.inValue);
+        });
+      }, this.timeout);
+    },
+    onPanmove: function onPanmove(e) {
+      if (this.env === 'weex' || this.disabled) {
+        return;
+      }
+
+      var deltaX = (e.changedTouches[0].pageX - this.startX) * this.DPR;
+      var diffX = Math.min(this.length, Math.max(this.startLeft + deltaX, 0));
+      var diff = Math.floor(diffX / this.scaleValue) * this.scaleValue;
+      var max = this.length;
+
+      if (diff >= 0 && diff <= max) {
+        this.circleLeft = diff;
+        animation.transition(this.circleEl, {
+          styles: {
+            transform: 'translateX(' + this.circleLeft + 'px)'
+          }
+        }, function () {});
+        this.indicatorEl && animation.transition(this.indicatorEl, {
+          styles: {
+            transform: 'translateX(' + this.circleLeft + 'px)'
+          }
+        }, function () {});
+        this.inValue = this._getValue(this.circleLeft);
+        this.$emit('updateValue', this.inValue);
+      }
+    },
+    onPanEnd: function onPanEnd(e) {
+      var _this2 = this;
+
+      setTimeout(function () {
+        _this2.indicatorShow = false;
+      }, 40);
+      this.lock = false;
+      if (!this.isAndroid) {
+        return;
+      }
+      this.interval && clearInterval(this.interval);
+    },
+    startHandle: function startHandle(e) {
+      this.bindExp();
+    },
+    bindExp: function bindExp() {
+      var _this3 = this;
+
+      if (this.gesToken || this.disabled) {
+        _indexWeex2.default.unbind({
+          eventType: 'pan',
+          token: this.gesToken
+        });
+        this.gesToken = 0;
+        return;
+      }
+
+      var circleEl = this.circleEl,
+          indicatorEl = this.indicatorEl,
+          valueBarEl = this.valueBarEl,
+          circleLeft = this.circleLeft,
+          length = this.length,
+          scaleValue = this.scaleValue;
+
+
+      var props = [{
+        element: circleEl.ref,
+        property: 'transform.translateX',
+        expression: 'min(' + this.length + ', floor(max(x + ' + this.circleLeft + ', 0) / ' + scaleValue + ') * ' + scaleValue + ')'
+      }, {
+        element: valueBarEl.ref,
+        property: 'transform.translateX',
+        expression: 'min(0, x + floor(' + (circleLeft - length) + ' / ' + scaleValue + ') * ' + scaleValue + ')'
+      }];
+
+      if (indicatorEl) {
+        props.push({
+          element: indicatorEl.ref,
+          property: 'transform.translateX',
+          expression: 'min(' + this.length + ', floor(max(x + ' + this.circleLeft + ', 0) / ' + scaleValue + ') * ' + scaleValue + ')'
+        });
+      }
+
+      var gesTokenObj = _indexWeex2.default.bind({
+        anchor: circleEl.ref,
+        eventType: 'pan',
+        props: props
+      }, function (e) {
+        if (e.state === 'end' || e.state === 'cancel' || e.state === 'exit') {
+          _this3.lock = false;
+          // 限制 circleLeft 范围
+          _this3.circleLeft = _this3._restrictValue(Math.max(0, Math.floor((_this3.circleLeft + e.deltaX) / _this3.scaleValue) * _this3.scaleValue));
+          setTimeout(function () {
+            _this3.indicatorShow = false;
+          }, 40);
+        }
+      });
+
+      this.gesToken = gesTokenObj.token;
+    },
+    _restrictValue: function _restrictValue(value) {
+      var range = this.length;
+      if (value >= range) {
+        return range;
+      } else {
+        return value;
+      }
+    },
+
+    // 根据x方向偏移量计算value
+    _getValue: function _getValue(diffX) {
+      return Math.round(diffX / this.length * (this.max - this.min) + this.min);
+    },
+
+    // 根据 value 和 length 计算 x 方向偏移值
+    _getLeftDiff: function _getLeftDiff(value) {
+      return (value - this.min) / (this.max - this.min) * this.length;
+    }
+  },
   created: function created() {
-    this.screen = 'screenY'; // this.vertical ? 'screenY' : 'screenX'
+    if (_utils2.default.env.isWeb()) {
+      this.env = 'web';
+      this.DPR = window.devicePixelRatio ? window.devicePixelRatio : 1;
+    } else {
+      this.DPR = weex.config.env.scale;
+    }
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this4 = this;
 
-    setTimeout(function () {
-      dom.getComponentRect(_this.$refs.bg, function (opt) {
-        _this.max = opt.size.width;
+    this.wrapEl = this.$refs['bar-wrap'];
+    this.circleEl = this.$refs['slide-circle'];
+    this.valueBarEl = this.$refs['value-bar'];
+    this.indicatorEl = this.$refs['indicator'];
 
-        if (_this.levelTexts) {
-          _this.levelAlias = Math.max(_this.levelTexts.length - 1, 0);
-        } else {
-          _this.levelAlias = _this.level;
-        }
+    this.circleLeft = this._getLeftDiff(this.inValue || this.defaultValue);
+    this.indicatorEl && animation.transition(this.indicatorEl, {
+      styles: {
+        transform: 'translateX(' + this.circleLeft + 'px)'
+      },
+      duration: 0.0001
+    });
 
-        if (_this.levelAlias && _this.levelAlias > 0) {
-          _this.per = _this.max / _this.levelAlias;
-          _this.comparePer = _this.per / 2;
-        }
-
-        _this.transX = _this.per ? _this.per * _this.value : _this.max * _this.value / 100;
+    // 是否支持expresstionBinding
+    if (_bindEnv2.default.supportsEB() && _indexWeex2.default.prepare) {
+      this.wrapEl && _indexWeex2.default.prepare({
+        anchor: this.wrapEl.ref,
+        eventType: 'pan'
       });
-    }, 100);
-  },
-
-
-  methods: {
-    levelClick: function levelClick(idx) {
-      this.transX = Math.min(this.per * idx, this.max);
-      this.end();
-    },
-    start: function start(event) {
-      this.startX = event.changedTouches[0].screenX;
-      this.progressOpacity = 1;
-    },
-    move: function move(event) {
-      var x = +event.changedTouches[0].screenX;
-      var sub = x - this.startX;
-      var target = void 0;
-
-      if (this.per) {
-        if (Math.abs(sub) >= this.comparePer) {
-          target = this.transX + (sub > 0 ? this.per : -this.per);
-          this.startX = target;
-        }
-      } else {
-        target = this.transX + sub;
-        this.startX = x;
-      }
-
-      if (target !== undefined) {
-        this.transX = Math.min(Math.max(target, 0), this.max);
-      }
-
-      this.progressText = this.per ? Math.round(this.transX / this.per) : Math.floor(this.transX / this.max * 100);
-    },
-    end: function end(event) {
-      this.progressOpacity = 0;
-      this.$emit('selected', {
-        rate: this.transX / this.max,
-        level: this.per ? Math.round(this.transX / this.per) : 0
+      this.circleEl && _indexWeex2.default.prepare({
+        anchor: this.circleEl.ref,
+        eventType: 'pan'
+      });
+      this.valueBarEl && _indexWeex2.default.prepare({
+        anchor: this.valueBarEl.ref,
+        eventType: 'pan'
+      });
+      this.indicatorEl && _indexWeex2.default.prepare({
+        anchor: this.indicatorEl.ref,
+        eventType: 'pan'
       });
     }
+
+    // 由于weex在mounted后渲染是异步的不能确保元素渲染完成，需要异步执行
+    setTimeout(function () {
+      dom.getComponentRect(_this4.wrapEl, function (option) {
+        var left = option.size.left;
+
+        _this4.leftDiffX = left;
+      });
+    }, 100);
+
+    // 算出刻度值，手指移动时会以刻度值整数移动
+    this.scaleValue = this.length / (this.max - this.min);
+
+    this.$nextTick(function () {
+      _this4.loaded = true;
+    });
   }
 };
 
 /***/ }),
-/* 141 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "slider-wrap",
+    staticClass: "container",
+    class: [("container-" + ((_vm.indicator && 'indicator') || (_vm.levels.length > 0 && 'haslevels')))],
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(_vm.containerStyle))
+  }, [(_vm.indicator) ? _c('div', {
+    ref: "indicator",
+    staticClass: "indicator",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(_vm.indicatorStyle))
+  }, [_c('text', {
+    staticClass: "indicator-text",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))
-  }, [(!!_vm.levelTexts && this.per) ? _c('div', {
-    staticClass: "level-text-wrap",
+  }, [_vm._v(_vm._s(_vm.inValue))])]) : (_vm.levels.length > 0) ? _c('div', {
+    staticClass: "levels-wrap",
     staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(_vm.textStyle))
-  }, _vm._l((_vm.levelTexts), function(text, idx) {
+    style: (_vm.$processStyle({
+      width: _vm.length + 64
+    }))
+  }, _vm._l((_vm.levels), function(item, idx) {
     return _c('text', {
       key: idx,
-      staticClass: "level-text",
+      staticClass: "level-item",
       staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle(undefined)),
-      on: {
-        "click": function($event) {
-          _vm.levelClick(idx)
-        }
-      }
-    }, [_vm._v(_vm._s(text))])
-  })) : (_vm.showProgress) ? _c('text', {
-    staticClass: "num",
+      style: (_vm.$processStyle({
+        color: _vm.inLevel === idx ? '#000000' : 'rgba(0, 0, 0, 0.4)'
+      }))
+    }, [_vm._v(_vm._s(item.text))])
+  })) : _vm._e(), _vm._v(" "), _c('div', {
+    ref: "bar-wrap",
+    staticClass: "slider-bar-wrap",
     staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(_vm.progressStyle))
-  }, [_vm._v(_vm._s(_vm.progressText))]) : _vm._e(), _vm._v(" "), _c('div', {
-    ref: "bg",
-    staticClass: "all",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }), _vm._v(" "), _c('div', {
-    staticClass: "selected",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(_vm.selStyle))
-  }), _vm._v(" "), _c('div', {
-    staticClass: "dot-wrap",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(_vm.dotStyle)),
-    on: {
-      "touchmove": _vm.move,
-      "touchstart": _vm.start,
-      "touchend": _vm.end
-    }
+    style: (_vm.$processStyle(_vm.barWrapStyle))
   }, [_c('div', {
-    staticClass: "dot",
+    staticClass: "range-bar",
     staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  })])])
+    style: (_vm.$processStyle(_vm.rangeBarStyle))
+  }, [_c('div', {
+    ref: "value-bar",
+    staticClass: "value-bar",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(_vm.valueBarStyle))
+  }, [_c('div')])]), _vm._v(" "), _c('div', {
+    ref: "slide-circle",
+    staticClass: "slide-circle",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(_vm.circleStyle)),
+    attrs: {
+      "prevent-move-event": true
+    },
+    on: {
+      "touchstart": _vm.onPanstart,
+      "touchmove": _vm.onPanmove,
+      "touchend": _vm.onPanEnd,
+      "horizontalpan": _vm.startHandle
+    }
+  }, [_c('div')])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -12223,7 +8477,7 @@ if (false) {
 }
 
 /***/ }),
-/* 142 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12233,7 +8487,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(143);
+var _index = __webpack_require__(144);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -12245,25 +8499,28 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 143 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(144)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(145)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(146),
-  /* template */
   __webpack_require__(147),
+  /* template */
+  __webpack_require__(148),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-9924f606",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tips/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -12277,29 +8534,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-9924f606", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 144 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(145);
+var content = __webpack_require__(146);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("081951f4", content, false);
+var update = __webpack_require__(2)("71419cd3", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-9924f606\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-9924f606\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-9924f606\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-9924f606\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -12309,7 +8569,7 @@ if(false) {
 }
 
 /***/ }),
-/* 145 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -12317,13 +8577,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.tip-wrap[data-v-9924f606] {\n  flex-direction: row;\n  height: 120px;\n  padding-top: 21.6px;\n}\n.arrow[data-v-9924f606] {\n  position: absolute;\n  top: 10.8px;\n  width: 21.6px;\n  height: 21.6px;\n  transform: rotate(45deg);\n}\n.content-wrap[data-v-9924f606] {\n  flex-direction: row;\n  align-items: center;\n  padding-top: 27px;\n  padding-bottom: 27px;\n  padding-left: 30px;\n  border-radius: 6px;\n}\n.content[data-v-9924f606] {\n  height: 51px;\n  max-width: 678px;\n  font-size: 42px;\n  color: #ffffff;\n}\n.split[data-v-9924f606] {\n  width: 3px;\n  height: 42px;\n  margin-left: 27px;\n  background-color: #ffffff;\n  opacity: .4;\n}\n.close[data-v-9924f606] {\n  color: #ffffff;\n  font-size: 54px;\n  margin-top: 9px;\n  margin-left: 30px;\n  margin-right: 30px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tips/index.vue?697e41cd"],"names":[],"mappings":";AAeA;EACA,oBAAA;EACA,cAAA;EACA,oBAAA;CACA;AACA;EACA,mBAAA;EACA,YAAA;EACA,cAAA;EACA,eAAA;EACA,yBAAA;CACA;AACA;EACA,oBAAA;EACA,oBAAA;EACA,kBAAA;EACA,qBAAA;EACA,mBAAA;EACA,mBAAA;CACA;AACA;EACA,aAAA;EACA,iBAAA;EACA,gBAAA;EACA,eAAA;CACA;AACA;EACA,WAAA;EACA,aAAA;EACA,kBAAA;EACA,0BAAA;EACA,YAAA;CACA;AACA;EACA,eAAA;EACA,gBAAA;EACA,gBAAA;EACA,kBAAA;EACA,mBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div v-if=\"show\" class=\"tip-wrap\" :style=\"wrapStyle\">\n    <div class=\"content-wrap\" :style=\"background\">\n      <slot></slot>\n      <text class=\"content\">{{message}}</text>\n      <text class=\"split\"></text>\n      <fm-icon class=\"close\" @fmIconClicked=\"close\" name=\"guanbi\" />\n    </div>\n    <text class=\"arrow\" :style=\"arrowStyle\"></text>\n  </div>\n</template>\n\n<style scoped>\n  .tip-wrap {\n    flex-direction: row;\n    height: 120px;\n    padding-top: 21.6px;\n  }\n  .arrow {\n    position: absolute;\n    top: 10.8px;\n    width: 21.6px;\n    height: 21.6px;\n    transform: rotate(45deg);\n  }\n  .content-wrap {\n    flex-direction: row;\n    align-items: center;\n    padding-top: 27px;\n    padding-bottom: 27px;\n    padding-left: 30px;\n    border-radius: 6px;\n  }\n  .content {\n    height: 51px;\n    max-width: 678px;\n    font-size: 42px;\n    color: #ffffff;\n  }\n  .split {\n    width: 3px;\n    height: 42px;\n    margin-left: 27px;\n    background-color: #ffffff;\n    opacity: .4;\n  }\n  .close {\n    color: #ffffff;\n    font-size: 54px;\n    margin-top: 9px;\n    margin-left: 30px;\n    margin-right: 30px;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nexport default {\n  name: 'FmTips',\n  data () {\n    return {\n      show: true\n    };\n  },\n  components: { FmIcon },\n  computed: {\n    background () {\n      return {\n        backgroundColor: this.bgColor\n      };\n    },\n    wrapStyle () {\n      return {\n        'justify-content': this.right ? 'flex-end' : 'flex-start'\n      };\n    },\n    arrowStyle () {\n      const sty = {\n        backgroundColor: this.bgColor\n      };\n      if (this.right) {\n        sty.right = '18px';\n      } else {\n        sty.left = '18px';\n      }\n\n      return sty;\n    }\n  },\n\n  props: {\n    message: String,\n    bgColor: {\n      type: String,\n      default: '#198ded'\n    },\n    right: Boolean\n  },\n\n  methods: {\n    close () {\n      this.show = false;\n      this.$emit('close');\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.tip-wrap[data-v-9924f606] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  height: 1.11111rem;\n  padding-top: 0.2rem;\n}\n.arrow[data-v-9924f606] {\n  position: absolute;\n  top: 0.1rem;\n  width: 0.2rem;\n  height: 0.2rem;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n}\n.content-wrap[data-v-9924f606] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n          align-items: center;\n  padding-top: 0.25rem;\n  padding-bottom: 0.25rem;\n  padding-left: 0.27778rem;\n  border-radius: 0.05556rem;\n}\n.content[data-v-9924f606] {\n  height: 0.47222rem;\n  max-width: 6.27778rem;\n  font-size: 0.38889rem;\n  color: #ffffff;\n}\n.split[data-v-9924f606] {\n  width: 0.02778rem;\n  height: 0.38889rem;\n  margin-left: 0.25rem;\n  background-color: #ffffff;\n  opacity: 0.4;\n}\n.close[data-v-9924f606] {\n  color: #ffffff;\n  margin-left: 0.27778rem;\n  margin-right: 0.27778rem;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tips/index.vue?eb10a0b2"],"names":[],"mappings":";AAeA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,mBAAA;EACA,oBAAA;CACA;AACA;EACA,mBAAA;EACA,YAAA;EACA,cAAA;EACA,eAAA;EACA,iCAAA;UAAA,yBAAA;CACA;AACA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,qBAAA;EACA,wBAAA;EACA,yBAAA;EACA,0BAAA;CACA;AACA;EACA,mBAAA;EACA,sBAAA;EACA,sBAAA;EACA,eAAA;CACA;AACA;EACA,kBAAA;EACA,mBAAA;EACA,qBAAA;EACA,0BAAA;EACA,aAAA;CACA;AACA;EACA,eAAA;EACA,wBAAA;EACA,yBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div v-if=\"show\" class=\"tip-wrap\" :style=\"wrapStyle\">\n    <div class=\"content-wrap\" :style=\"background\">\n      <slot></slot>\n      <text class=\"content\">{{message}}</text>\n      <text class=\"split\"></text>\n      <fm-icon class=\"close\" @fmIconClicked=\"close\" name=\"guanbi\" :icon-style=\"54\" />\n    </div>\n    <text class=\"arrow\" :style=\"arrowStyle\"></text>\n  </div>\n</template>\n\n<style scoped>\n  .tip-wrap {\n    flex-direction: row;\n    height: 120px;\n    padding-top: 21.6px;\n  }\n  .arrow {\n    position: absolute;\n    top: 10.8px;\n    width: 21.6px;\n    height: 21.6px;\n    transform: rotate(45deg);\n  }\n  .content-wrap {\n    flex-direction: row;\n    align-items: center;\n    padding-top: 27px;\n    padding-bottom: 27px;\n    padding-left: 30px;\n    border-radius: 6px;\n  }\n  .content {\n    height: 51px;\n    max-width: 678px;\n    font-size: 42px;\n    color: #ffffff;\n  }\n  .split {\n    width: 3px;\n    height: 42px;\n    margin-left: 27px;\n    background-color: #ffffff;\n    opacity: 0.4;\n  }\n  .close {\n    color: #ffffff;\n    margin-left: 30px;\n    margin-right: 30px;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nexport default {\n  name: 'FmTips',\n  data () {\n    return {\n      show: true\n    };\n  },\n  components: { FmIcon },\n  computed: {\n    background () {\n      return {\n        backgroundColor: this.bgColor\n      };\n    },\n    wrapStyle () {\n      return {\n        'justify-content': this.position === 'right' ? 'flex-end' : 'flex-start'\n      };\n    },\n    arrowStyle () {\n      const sty = {\n        backgroundColor: this.bgColor\n      };\n      if (this.right) {\n        sty.right = '18px';\n      } else {\n        sty.left = '18px';\n      }\n\n      return sty;\n    }\n  },\n\n  props: {\n    message: String,\n    bgColor: {\n      type: String,\n      default: '#198ded'\n    },\n    position: {\n      type: String,\n      default: 'left'\n    }\n  },\n\n  methods: {\n    close () {\n      this.show = false;\n      this.$emit('close');\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 146 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12333,7 +8593,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmIcon = __webpack_require__(6);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
@@ -12356,7 +8616,7 @@ exports.default = {
     },
     wrapStyle: function wrapStyle() {
       return {
-        'justify-content': this.right ? 'flex-end' : 'flex-start'
+        'justify-content': this.position === 'right' ? 'flex-end' : 'flex-start'
       };
     },
     arrowStyle: function arrowStyle() {
@@ -12379,7 +8639,10 @@ exports.default = {
       type: String,
       default: '#198ded'
     },
-    right: Boolean
+    position: {
+      type: String,
+      default: 'left'
+    }
   },
 
   methods: {
@@ -12443,11 +8706,9 @@ exports.default = {
 //
 //
 //
-//
-//
 
 /***/ }),
-/* 147 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12472,7 +8733,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined)),
     attrs: {
-      "name": "guanbi"
+      "name": "guanbi",
+      "icon-style": 54
     },
     on: {
       "fmIconClicked": _vm.close
@@ -12492,7 +8754,7 @@ if (false) {
 }
 
 /***/ }),
-/* 148 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12502,7 +8764,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(149);
+var _index = __webpack_require__(150);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -12514,25 +8776,28 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(150)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(151)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(152),
+  __webpack_require__(153),
   /* template */
-  __webpack_require__(156),
+  __webpack_require__(157),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-a8d59aa2",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rich-text/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -12546,29 +8811,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-a8d59aa2", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 150 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(151);
+var content = __webpack_require__(152);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("7a84f44f", content, false);
+var update = __webpack_require__(2)("fce08620", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-a8d59aa2\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-a8d59aa2\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a8d59aa2\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a8d59aa2\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -12578,7 +8846,7 @@ if(false) {
 }
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -12586,13 +8854,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-rich-text[data-v-a8d59aa2] {\n  justify-content: flex-start;\n  align-items: center;\n  flex-wrap: wrap;\n  flex-direction: row;\n  flex-shrink: 1;\n}\n.default-text[data-v-a8d59aa2] {\n  color: #A5A5A5;\n  font-size: 36px;\n  line-height: 48px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rich-text/index.vue?78aa833a"],"names":[],"mappings":";AAmCA;EACA,4BAAA;EACA,oBAAA;EACA,gBAAA;EACA,oBAAA;EACA,eAAA;CACA;AAEA;EACA,eAAA;EACA,gBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div>\n    <div class=\"fm-rich-text\" v-if=\"isNotEmptyArray\">\n      <div v-for=\"(v, idx) in configList\" :key=\"idx\">\n        <fm-text v-if=\"v.type=='text' && v.text\"\n                            :value=\"v.text\"\n                            :has-text-margin=\"hasTextMargin\"></fm-text>\n\n        <fm-rich-text-link v-if=\"v.type=='link' && v.href && v.text\"\n                            :link-value=\"v.text\"\n                            :link-style=\"v.style\"\n                            :link-href=\"v.href\"\n                            :has-text-margin=\"hasTextMargin\"\n                            @fmRichTextLinkClick=\"linkBeClick\"></fm-rich-text-link>\n\n        <fm-icon v-if=\"v.type=='icon'\"\n                            :color=\"v.color\"\n                            :name=\"v.value\"\n                            :iconStyle=\"v.style\"></fm-icon>\n\n        <fm-tag v-if=\"v.type=='tag'\"\n                           :type=\"v.tagType\"\n                           :size=\"v.size\"\n                           :value=\"v.value\"\n                           :color=\"v.color\"\n                           :fontColor=\"v.fontColor\"></fm-tag>\n      </div>\n    </div>\n    <fm-text :value=\"configList\" v-if=\"isString\"></fm-text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-rich-text {\n    justify-content: flex-start;\n    align-items: center;\n    flex-wrap: wrap;\n    flex-direction: row;\n    flex-shrink: 1;\n  }\n\n  .default-text {\n    color: #A5A5A5;\n    font-size: 36px;\n    line-height: 48px;\n  }\n</style>\n\n<script>\nimport Utils from './utils';\nimport FmText from '../fm-text';\nimport FmIcon from '../fm-icon';\nimport FmTag from '../fm-tag';\nimport FmRichTextLink from './fm-rich-text-link.vue';\nexport default {\n  name: 'FmRichText',\n  components: {\n    FmText, FmIcon, FmTag, FmRichTextLink\n  },\n  props: {\n    configList: {\n      type: [Array, String],\n      default: function () {\n        return [];\n      }\n    },\n    hasTextMargin: {\n      type: Boolean,\n      default: true\n    }\n  },\n  data: () => ({}),\n  computed: {\n    isNotEmptyArray () {\n      return Utils.isNonEmptyArray(this.configList);\n    },\n    isString () {\n      return Utils.isString(this.configList);\n    }\n  },\n  methods: {\n    linkBeClick (obj) {\n      this.$emit('linkBeClick', obj);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-rich-text[data-v-a8d59aa2] {\n  -webkit-box-pack: start;\n  -webkit-justify-content: flex-start;\n          justify-content: flex-start;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n          align-items: center;\n  -webkit-flex-wrap: wrap;\n          flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  -webkit-flex-shrink: 1;\n          flex-shrink: 1;\n}\n.default-text[data-v-a8d59aa2] {\n  color: #A5A5A5;\n  font-size: 0.33333rem;\n  line-height: 0.44444rem;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rich-text/index.vue?78aa833a"],"names":[],"mappings":";AAmCA;EACA,wBAAA;EAAA,oCAAA;UAAA,4BAAA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,wBAAA;UAAA,gBAAA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,uBAAA;UAAA,eAAA;CACA;AAEA;EACA,eAAA;EACA,sBAAA;EACA,wBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div>\n    <div class=\"fm-rich-text\" v-if=\"isNotEmptyArray\">\n      <div v-for=\"(v, idx) in configList\" :key=\"idx\">\n        <fm-text v-if=\"v.type=='text' && v.text\"\n                            :value=\"v.text\"\n                            :has-text-margin=\"hasTextMargin\"></fm-text>\n\n        <fm-rich-text-link v-if=\"v.type=='link' && v.href && v.text\"\n                            :link-value=\"v.text\"\n                            :link-style=\"v.style\"\n                            :link-href=\"v.href\"\n                            :has-text-margin=\"hasTextMargin\"\n                            @fmRichTextLinkClick=\"linkBeClick\"></fm-rich-text-link>\n\n        <fm-icon v-if=\"v.type=='icon'\"\n                            :color=\"v.color\"\n                            :name=\"v.value\"\n                            :iconStyle=\"v.style\"></fm-icon>\n\n        <fm-tag v-if=\"v.type=='tag'\"\n                           :type=\"v.tagType\"\n                           :size=\"v.size\"\n                           :value=\"v.value\"\n                           :color=\"v.color\"\n                           :fontColor=\"v.fontColor\"></fm-tag>\n      </div>\n    </div>\n    <fm-text :value=\"configList\" v-if=\"isString\"></fm-text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-rich-text {\n    justify-content: flex-start;\n    align-items: center;\n    flex-wrap: wrap;\n    flex-direction: row;\n    flex-shrink: 1;\n  }\n\n  .default-text {\n    color: #A5A5A5;\n    font-size: 36px;\n    line-height: 48px;\n  }\n</style>\n\n<script>\nimport Utils from './utils';\nimport FmText from '../fm-text';\nimport FmIcon from '../fm-icon';\nimport FmTag from '../fm-tag';\nimport FmRichTextLink from './fm-rich-text-link.vue';\nexport default {\n  name: 'FmRichText',\n  components: {\n    FmText, FmIcon, FmTag, FmRichTextLink\n  },\n  props: {\n    configList: {\n      type: [Array, String],\n      default: function () {\n        return [];\n      }\n    },\n    hasTextMargin: {\n      type: Boolean,\n      default: true\n    }\n  },\n  data: () => ({}),\n  computed: {\n    isNotEmptyArray () {\n      return Utils.isNonEmptyArray(this.configList);\n    },\n    isString () {\n      return Utils.isString(this.configList);\n    }\n  },\n  methods: {\n    linkBeClick (obj) {\n      this.$emit('linkBeClick', obj);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12602,7 +8870,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _utils = __webpack_require__(73);
+var _utils = __webpack_require__(75);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -12610,15 +8878,15 @@ var _fmText = __webpack_require__(3);
 
 var _fmText2 = _interopRequireDefault(_fmText);
 
-var _fmIcon = __webpack_require__(6);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
-var _fmTag = __webpack_require__(45);
+var _fmTag = __webpack_require__(47);
 
 var _fmTag2 = _interopRequireDefault(_fmTag);
 
-var _fmRichTextLink = __webpack_require__(153);
+var _fmRichTextLink = __webpack_require__(154);
 
 var _fmRichTextLink2 = _interopRequireDefault(_fmRichTextLink);
 
@@ -12709,21 +8977,24 @@ exports.default = {
 //
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(154),
-  /* template */
   __webpack_require__(155),
+  /* template */
+  __webpack_require__(156),
+  /* styles */
+  null,
   /* scopeId */
   null,
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rich-text/fm-rich-text-link.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] fm-rich-text-link.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -12737,13 +9008,16 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-96e452e8", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12800,7 +9074,7 @@ exports.default = {
 //
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12828,7 +9102,7 @@ if (false) {
 }
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -12896,7 +9170,7 @@ if (false) {
 }
 
 /***/ }),
-/* 157 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12906,7 +9180,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(158);
+var _index = __webpack_require__(159);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -12918,25 +9192,28 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(159)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(160)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(161),
-  /* template */
   __webpack_require__(162),
+  /* template */
+  __webpack_require__(163),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-584ad4ca",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-special-rich-text/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -12950,29 +9227,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-584ad4ca", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(160);
+var content = __webpack_require__(161);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("7e75f768", content, false);
+var update = __webpack_require__(2)("7182d402", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-584ad4ca\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-584ad4ca\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-584ad4ca\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-584ad4ca\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -12982,7 +9262,7 @@ if(false) {
 }
 
 /***/ }),
-/* 160 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -12990,13 +9270,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-special-rich-text[data-v-584ad4ca] {\n  position: relative;\n}\n.tag-div[data-v-584ad4ca] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  color: #A5A5A5;\n  font-size: 36px;\n  line-height: 48px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-special-rich-text/index.vue?3d052ea2"],"names":[],"mappings":";AAqBA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;EACA,OAAA;EACA,QAAA;EACA,eAAA;EACA,gBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div class=\"fm-special-rich-text\">\n    <div class=\"tag-div\"\n         :style=\"{top:top+'px'}\">\n      <fm-icon v-if=\"newList[0].type == 'icon' && newList[0].value\"\n                          :name=\"newList[0].value\"\n                          :iconStyle=\"newList[0].style\"></fm-icon>\n      <fm-tag v-if=\"newList[0].type=='tag'\"\n                          :type=\"newList[0].tagType\"\n                          :size=\"newList[0].size\"\n                          :value=\"newList[0].value\"\n                          :color=\"newList[0].color\"\n                          :fontColor=\"newList[0].fontColor\"></fm-tag>\n    </div>\n    <fm-text :value=\"newList[1].value\" v-if=\"newList[1].value\"></fm-text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-special-rich-text {\n    position: relative;\n  }\n\n  .tag-div {\n    position: absolute;\n    top: 0;\n    left: 0;\n    color: #A5A5A5;\n    font-size: 36px;\n    line-height: 48px;\n  }\n</style>\n\n<script>\nimport Utils from '../fm-rich-text/utils';\nimport FmText from '../fm-text';\nimport FmIcon from '../fm-icon';\nimport FmTag from '../fm-tag';\nexport default {\n  name: 'FmSpecialRichText',\n  components: {\n    FmText, FmIcon, FmTag\n  },\n  props: {\n    configList: {\n      type: [Array, String],\n      default: () => ({})\n    }\n  },\n  computed: {\n    newList () {\n      const { configList } = this;\n      if (Utils.isNonEmptyArray(configList) && configList.length === 2) {\n        let r1 = configList[0];\n        let r2 = configList[1];\n        const iconStyle = r1.style;\n        const textStyle = r2.style;\n        let style = {};\n        let fontSize = 36;\n        const tagWidth = iconStyle && iconStyle.width ? iconStyle.width : 36;\n\n        if (textStyle && textStyle.fontSize) {\n          fontSize = textStyle.fontSize;\n          style = {\n            fontSize: textStyle.fontSize,\n            lineHeight: textStyle.fontSize * 1.4\n          };\n        }\n\n        if (textStyle && textStyle.color) {\n          style = {\n            ...style,\n            color: textStyle.color\n          };\n        }\n\n        if (r1.type === 'tag' && iconStyle && iconStyle.width) {\n          r1 = {\n            ...r1,\n            style: { ...iconStyle, width: null }\n          };\n        }\n        const newValue = r2.value ? new Array(Math.ceil(tagWidth / fontSize) + 1).join('   ') + `  ${r2.value}` : '';\n        r2 = {\n          ...r2,\n          style,\n          value: newValue\n        };\n        return [r1, r2];\n      } else {\n        return [];\n      }\n    },\n    top () {\n      const { configList } = this;\n      if (configList[0].type === 'tag') return 0;\n      if (Utils.isNonEmptyArray(configList) && configList.length === 2) {\n        const iconStyle = configList[0].style;\n        const textStyle = configList[1].style;\n        let fontSize = 36;\n        const tagHeight = iconStyle && iconStyle.height ? iconStyle.height : 39;\n        if (textStyle && textStyle.fontSize) {\n          fontSize = textStyle.fontSize;\n        }\n        return Math.ceil((fontSize * 1.3 - tagHeight) / 2);\n      } else {\n        return 0;\n      }\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-special-rich-text[data-v-584ad4ca] {\n  position: relative;\n}\n.tag-div[data-v-584ad4ca] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  color: #A5A5A5;\n  font-size: 0.33333rem;\n  line-height: 0.44444rem;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-special-rich-text/index.vue?3d052ea2"],"names":[],"mappings":";AAqBA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;EACA,OAAA;EACA,QAAA;EACA,eAAA;EACA,sBAAA;EACA,wBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div class=\"fm-special-rich-text\">\n    <div class=\"tag-div\"\n         :style=\"{top:top+'px'}\">\n      <fm-icon v-if=\"newList[0].type == 'icon' && newList[0].value\"\n                          :name=\"newList[0].value\"\n                          :iconStyle=\"newList[0].style\"></fm-icon>\n      <fm-tag v-if=\"newList[0].type=='tag'\"\n                          :type=\"newList[0].tagType\"\n                          :size=\"newList[0].size\"\n                          :value=\"newList[0].value\"\n                          :color=\"newList[0].color\"\n                          :fontColor=\"newList[0].fontColor\"></fm-tag>\n    </div>\n    <fm-text :value=\"newList[1].value\" v-if=\"newList[1].value\"></fm-text>\n  </div>\n</template>\n\n<style scoped>\n  .fm-special-rich-text {\n    position: relative;\n  }\n\n  .tag-div {\n    position: absolute;\n    top: 0;\n    left: 0;\n    color: #A5A5A5;\n    font-size: 36px;\n    line-height: 48px;\n  }\n</style>\n\n<script>\nimport Utils from '../fm-rich-text/utils';\nimport FmText from '../fm-text';\nimport FmIcon from '../fm-icon';\nimport FmTag from '../fm-tag';\nexport default {\n  name: 'FmSpecialRichText',\n  components: {\n    FmText, FmIcon, FmTag\n  },\n  props: {\n    configList: {\n      type: [Array, String],\n      default: () => ({})\n    }\n  },\n  computed: {\n    newList () {\n      const { configList } = this;\n      if (Utils.isNonEmptyArray(configList) && configList.length === 2) {\n        let r1 = configList[0];\n        let r2 = configList[1];\n        const iconStyle = r1.style;\n        const textStyle = r2.style;\n        let style = {};\n        let fontSize = 36;\n        const tagWidth = iconStyle && iconStyle.width ? iconStyle.width : 36;\n\n        if (textStyle && textStyle.fontSize) {\n          fontSize = textStyle.fontSize;\n          style = {\n            fontSize: textStyle.fontSize,\n            lineHeight: textStyle.fontSize * 1.4\n          };\n        }\n\n        if (textStyle && textStyle.color) {\n          style = {\n            ...style,\n            color: textStyle.color\n          };\n        }\n\n        if (r1.type === 'tag' && iconStyle && iconStyle.width) {\n          r1 = {\n            ...r1,\n            style: { ...iconStyle, width: null }\n          };\n        }\n        const newValue = r2.value ? new Array(Math.ceil(tagWidth / fontSize) + 1).join('   ') + `  ${r2.value}` : '';\n        r2 = {\n          ...r2,\n          style,\n          value: newValue\n        };\n        return [r1, r2];\n      } else {\n        return [];\n      }\n    },\n    top () {\n      const { configList } = this;\n      if (configList[0].type === 'tag') return 0;\n      if (Utils.isNonEmptyArray(configList) && configList.length === 2) {\n        const iconStyle = configList[0].style;\n        const textStyle = configList[1].style;\n        let fontSize = 36;\n        const tagHeight = iconStyle && iconStyle.height ? iconStyle.height : 39;\n        if (textStyle && textStyle.fontSize) {\n          fontSize = textStyle.fontSize;\n        }\n        return Math.ceil((fontSize * 1.3 - tagHeight) / 2);\n      } else {\n        return 0;\n      }\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 161 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13042,7 +9322,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 
-var _utils = __webpack_require__(73);
+var _utils = __webpack_require__(75);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -13050,11 +9330,11 @@ var _fmText = __webpack_require__(3);
 
 var _fmText2 = _interopRequireDefault(_fmText);
 
-var _fmIcon = __webpack_require__(6);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
-var _fmTag = __webpack_require__(45);
+var _fmTag = __webpack_require__(47);
 
 var _fmTag2 = _interopRequireDefault(_fmTag);
 
@@ -13136,7 +9416,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 162 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13184,7 +9464,7 @@ if (false) {
 }
 
 /***/ }),
-/* 163 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13194,7 +9474,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(164);
+var _index = __webpack_require__(165);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -13206,25 +9486,28 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 164 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(165)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(166)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(167),
-  /* template */
   __webpack_require__(168),
+  /* template */
+  __webpack_require__(169),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-52ae49d0",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-foldable-text/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -13238,29 +9521,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-52ae49d0", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 165 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(166);
+var content = __webpack_require__(167);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("8d1044c0", content, false);
+var update = __webpack_require__(2)("6594d160", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-52ae49d0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-52ae49d0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-52ae49d0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-52ae49d0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -13270,7 +9556,7 @@ if(false) {
 }
 
 /***/ }),
-/* 166 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -13278,13 +9564,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.container[data-v-52ae49d0] {\n  position: relative;\n}\n.text[data-v-52ae49d0] {\n  font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n  color: #999999;\n}\n.text_small[data-v-52ae49d0] {\n  font-size: 36px;\n  line-height: 42px;\n}\n.text_large[data-v-52ae49d0] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 48px;\n  font-weight: 500;\n  line-height: 72px;\n}\n.text_huge[data-v-52ae49d0] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 54px;\n  line-height: 78px;\n}\n.more[data-v-52ae49d0] {\n  position: absolute;\n  right: 18px;\n  bottom: 0;\n  font-family: sans-serif-medium;\n  font-weight: 500;\n}\n.test[data-v-52ae49d0] {\n  flex-direction: row;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-foldable-text/index.vue?88cc6f38"],"names":[],"mappings":";AAYA;EACA,mBAAA;CACA;AACA;EACA,sDAAA;EACA,eAAA;CACA;AACA;EACA,gBAAA;EACA,kBAAA;CACA;AACA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,iBAAA;EACA,kBAAA;CACA;AACA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AACA;EACA,mBAAA;EACA,YAAA;EACA,UAAA;EACA,+BAAA;EACA,iBAAA;CACA;AACA;EACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. [!] Just a beta version! -->\n<template>\n  <div class=\"wrapper\" @click=\"fold\">\n    <div class=\"container\" ref=\"plane\" :style=\"planeStyle\">\n      <text :class=\"textClz\" ref=\"text\" :style=\"textStyle\">{{ getText }}</text>\n      <text class=\"more\" v-if=\"foldable && folded\" ref=\"more\" :style=\"moreStyle\">{{ tipValue }}</text>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .container {\n    position: relative;\n  }\n  .text {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    color: #999999;\n  }\n  .text_small {\n    font-size: 36px;\n    line-height: 42px;\n  }\n  .text_large {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    font-weight: 500;\n    line-height: 72px;\n  }\n  .text_huge {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 54px;\n    line-height: 78px;\n  }\n  .more {\n    position: absolute;\n    right: 18px;\n    bottom: 0;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n  }\n  .test {\n    flex-direction: row;\n  }\n</style>\n\n<script>\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmFoldableText',\n  mixins: [Locale],\n  data () {\n    return {\n      expandHeight: '',\n      unexpandHeight: '',\n      animationHeight: '',\n      foldText: '',\n      foldable: true\n    };\n  },\n  props: {\n    width: {\n      type: Number,\n      default: 1020\n    },\n    text: {\n      type: String,\n      default: ''\n    },\n    lines: {\n      type: Number,\n      default: 2\n    },\n    folded: {\n      type: Boolean,\n      default: true\n    },\n    small: {\n      type: Boolean,\n      default: true\n    },\n    large: Boolean,\n    huge: Boolean,\n    textStyle: Object,\n    tipStyle: Object,\n    tipValue: {\n      type: String,\n      default () {\n        return t('el.foldabletext.more');\n      }\n    }\n  },\n  mounted () {\n    if (this.foldText === '') {\n      const { textStyle } = this;\n      const fontSize = (textStyle && textStyle.fontSize) ? textStyle.fontSize : this.large ? 48 : this.huge ? 54 : 36;\n      // 计算折叠后的文本\n      const size1 = fontSize + 36 * 0.04; // 汉字\n      const size2 = fontSize * 0.56; // 英文\n      const size3 = fontSize * 0.556; // 数字\n      const size4 = fontSize * 0.80; // 全角\n      const size5 = fontSize * 0.2; // 半角\n      let tSize = 0;\n      let tmpStr = '';\n      const hideWidth = this.width * this.lines + fontSize; // 不显示“更多”情况下所能容纳最大的字体宽度\n      const maxWith = this.width * this.lines - size1 * this.tipValue.length; // 显示“更多”情况下所能容纳最大的字体宽度\n      for (const c of this.text) {\n        if (/^[\\u4e00-\\u9fa5]/.test(c)) {\n          // 汉字\n          tSize += size1;\n        } else if (/^[a-zA-Z]/.test(c)) {\n          // 英文\n          tSize += size2;\n        } else if (/^[0-9]/.test(c)) {\n          // 数字\n          tSize += size3;\n        } else if (/^[·《》，。？、：；“”‘’——【】]/.test(c)) {\n          // 全角\n          tSize += size4;\n        } else if (/^[`~!@#\\$%\\^&\\*\\(\\)_\\-\\+=\\{\\}\\[\\]|\\\\:;\"'<>,.\\?\\/\\s]/.test(c)) {\n          // 半角\n          tSize += size5;\n        } else {\n          // 其他\n          tSize += size1;\n        }\n        if (tSize >= maxWith) {\n          if (tSize >= hideWidth) {\n            tmpStr += '..';\n            break;\n          }\n        } else {\n          tmpStr += c;\n        }\n      }\n      // 文字不超过范围 不折叠\n      (tSize < hideWidth) && (this.foldable = false) && (this.folded = false);\n      this.foldText = tmpStr;\n    }\n  },\n  computed: {\n    getText () {\n      return this.folded && this.foldable ? this.foldText : this.text;\n    },\n    planeStyle () {\n      return {\n        width: this.width\n      };\n    },\n    moreStyle () {\n      return {\n        fontSize: this.large ? 48 : this.huge ? 54 : 36,\n        lineHeight: this.large ? 72 : this.huge ? 78 : 42,\n        color: '#198ded',\n        fontWeight: '600',\n        ...this.tipStyle\n      };\n    },\n    textClz () {\n      const clz = ['text', 'text_small'];\n      if (this.large) {\n        clz.push('text_large');\n      } else if (this.huge) {\n        clz.push('text_huge');\n      }\n      return clz;\n    }\n  },\n  methods: {\n    fold () {\n      this.foldable && (this.folded = !this.folded);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.container[data-v-52ae49d0] {\n  position: relative;\n}\n.text[data-v-52ae49d0] {\n  font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n  color: #999999;\n}\n.text_small[data-v-52ae49d0] {\n  font-size: 0.33333rem;\n  line-height: 0.38889rem;\n}\n.text_large[data-v-52ae49d0] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 0.44444rem;\n  font-weight: 500;\n  line-height: 0.66667rem;\n}\n.text_huge[data-v-52ae49d0] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 0.5rem;\n  line-height: 0.72222rem;\n}\n.more[data-v-52ae49d0] {\n  position: absolute;\n  right: 0.16667rem;\n  bottom: 0;\n  font-family: sans-serif-medium;\n  font-weight: 500;\n}\n.test[data-v-52ae49d0] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-foldable-text/index.vue?11dffd77"],"names":[],"mappings":";AAYA;EACA,mBAAA;CACA;AACA;EACA,sDAAA;EACA,eAAA;CACA;AACA;EACA,sBAAA;EACA,wBAAA;CACA;AACA;EACA,+BAAA;EACA,iBAAA;EACA,sBAAA;EACA,iBAAA;EACA,wBAAA;CACA;AACA;EACA,+BAAA;EACA,iBAAA;EACA,kBAAA;EACA,wBAAA;CACA;AACA;EACA,mBAAA;EACA,kBAAA;EACA,UAAA;EACA,+BAAA;EACA,iBAAA;CACA;AACA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. [!] Just a beta version! -->\n<template>\n  <div class=\"wrapper\" @click=\"fold\">\n    <div class=\"container\" ref=\"plane\" :style=\"planeStyle\">\n      <text :class=\"textClz\" ref=\"text\" :style=\"textStyle\">{{ getText }}</text>\n      <text class=\"more\" v-if=\"foldable && folded\" ref=\"more\" :style=\"moreStyle\">{{ tipValue }}</text>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .container {\n    position: relative;\n  }\n  .text {\n    font-family: \"Source Han Sans CN\", Roboto, sans-serif;\n    color: #999999;\n  }\n  .text_small {\n    font-size: 36px;\n    line-height: 42px;\n  }\n  .text_large {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    font-weight: 500;\n    line-height: 72px;\n  }\n  .text_huge {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 54px;\n    line-height: 78px;\n  }\n  .more {\n    position: absolute;\n    right: 18px;\n    bottom: 0;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n  }\n  .test {\n    flex-direction: row;\n  }\n</style>\n\n<script>\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmFoldableText',\n  mixins: [Locale],\n  data () {\n    return {\n      expandHeight: '',\n      unexpandHeight: '',\n      animationHeight: '',\n      foldText: '',\n      foldable: true\n    };\n  },\n  props: {\n    width: {\n      type: Number,\n      default: 1020\n    },\n    text: {\n      type: String,\n      default: ''\n    },\n    lines: {\n      type: Number,\n      default: 2\n    },\n    folded: {\n      type: Boolean,\n      default: true\n    },\n    size: {\n      type: String,\n      default: 'small'\n    },\n    textStyle: Object,\n    tipStyle: Object,\n    tipValue: {\n      type: String,\n      default () {\n        return t('el.foldabletext.more');\n      }\n    }\n  },\n  mounted () {\n    if (this.foldText === '') {\n      const { textStyle } = this;\n      const fontSize = (textStyle && textStyle.fontSize) ? textStyle.fontSize : this.large ? 48 : this.huge ? 54 : 36;\n      // 计算折叠后的文本\n      const size1 = fontSize + 36 * 0.04; // 汉字\n      const size2 = fontSize * 0.56; // 英文\n      const size3 = fontSize * 0.556; // 数字\n      const size4 = fontSize * 0.80; // 全角\n      const size5 = fontSize * 0.2; // 半角\n      let tSize = 0;\n      let tmpStr = '';\n      const hideWidth = this.width * this.lines + fontSize; // 不显示“更多”情况下所能容纳最大的字体宽度\n      const maxWith = this.width * this.lines - size1 * this.tipValue.length; // 显示“更多”情况下所能容纳最大的字体宽度\n      for (const c of this.text) {\n        if (/^[\\u4e00-\\u9fa5]/.test(c)) {\n          // 汉字\n          tSize += size1;\n        } else if (/^[a-zA-Z]/.test(c)) {\n          // 英文\n          tSize += size2;\n        } else if (/^[0-9]/.test(c)) {\n          // 数字\n          tSize += size3;\n        } else if (/^[·《》，。？、：；“”‘’——【】]/.test(c)) {\n          // 全角\n          tSize += size4;\n        } else if (/^[`~!@#\\$%\\^&\\*\\(\\)_\\-\\+=\\{\\}\\[\\]|\\\\:;\"'<>,.\\?\\/\\s]/.test(c)) {\n          // 半角\n          tSize += size5;\n        } else {\n          // 其他\n          tSize += size1;\n        }\n        if (tSize >= maxWith) {\n          if (tSize >= hideWidth) {\n            tmpStr += '..';\n            break;\n          }\n        } else {\n          tmpStr += c;\n        }\n      }\n      // 文字不超过范围 不折叠\n      (tSize < hideWidth) && (this.foldable = false) && (this.folded = false);\n      this.foldText = tmpStr;\n    }\n  },\n  computed: {\n    getText () {\n      return this.folded && this.foldable ? this.foldText : this.text;\n    },\n    planeStyle () {\n      return {\n        width: this.width + 'px'\n      };\n    },\n    moreStyle () {\n      return {\n        fontSize: `${this.size === 'large' ? 48 : this.size === 'huge' ? 54 : 36}px`,\n        lineHeight: `${this.size === 'large' ? 72 : this.size === 'huge' ? 78 : 42}px`,\n        color: '#198ded',\n        fontWeight: '600',\n        ...this.tipStyle\n      };\n    },\n    textClz () {\n      const clz = ['text', 'text_small'];\n      if (this.size === 'large') {\n        clz.push('text_large');\n      } else if (this.size === 'huge') {\n        clz.push('text_huge');\n      }\n      return clz;\n    }\n  },\n  methods: {\n    fold () {\n      this.foldable && (this.folded = !this.folded);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 167 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13343,11 +9629,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 
-var _locale = __webpack_require__(34);
+var _locale = __webpack_require__(29);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(20);
+var _locale3 = __webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13381,12 +9667,10 @@ exports.default = {
       type: Boolean,
       default: true
     },
-    small: {
-      type: Boolean,
-      default: true
+    size: {
+      type: String,
+      default: 'small'
     },
-    large: Boolean,
-    huge: Boolean,
     textStyle: Object,
     tipStyle: Object,
     tipValue: {
@@ -13474,22 +9758,22 @@ exports.default = {
     },
     planeStyle: function planeStyle() {
       return {
-        width: this.width
+        width: this.width + 'px'
       };
     },
     moreStyle: function moreStyle() {
       return _extends({
-        fontSize: this.large ? 48 : this.huge ? 54 : 36,
-        lineHeight: this.large ? 72 : this.huge ? 78 : 42,
+        fontSize: (this.size === 'large' ? 48 : this.size === 'huge' ? 54 : 36) + 'px',
+        lineHeight: (this.size === 'large' ? 72 : this.size === 'huge' ? 78 : 42) + 'px',
         color: '#198ded',
         fontWeight: '600'
       }, this.tipStyle);
     },
     textClz: function textClz() {
       var clz = ['text', 'text_small'];
-      if (this.large) {
+      if (this.size === 'large') {
         clz.push('text_large');
-      } else if (this.huge) {
+      } else if (this.size === 'huge') {
         clz.push('text_huge');
       }
       return clz;
@@ -13503,7 +9787,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 168 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13540,25 +9824,28 @@ if (false) {
 }
 
 /***/ }),
-/* 169 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(170)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(171)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(172),
-  /* template */
   __webpack_require__(173),
+  /* template */
+  __webpack_require__(174),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-2016588d",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-dialog/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -13572,29 +9859,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-2016588d", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 170 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(171);
+var content = __webpack_require__(172);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("dbb36500", content, false);
+var update = __webpack_require__(2)("e2f6aa46", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-2016588d\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-2016588d\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2016588d\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2016588d\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -13604,7 +9894,7 @@ if(false) {
 }
 
 /***/ }),
-/* 171 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -13612,13 +9902,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.container[data-v-2016588d] {\n  position: fixed;\n  width: 1080px;\n  /*兼容H5异常*/\n  z-index: 99999;\n}\n.dialog-box[data-v-2016588d] {\n  width: 936px;\n  background-color: #FFFFFF;\n  border-radius: 10px;\n  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);\n}\n.dialog-box-H5[data-v-2016588d] {\n  position: fixed;\n  left: 72px;\n}\n.content-title[data-v-2016588d] {\n  margin-top: 63px;\n  padding-left: 72px;\n  padding-right: 72px;\n  margin-bottom: 18px;\n}\n.content-subtext[data-v-2016588d] {\n  padding-left: 72px;\n  padding-right: 72px;\n}\n.dialog-footer[data-v-2016588d] {\n  justify-content: center;\n  align-items: center;\n  flex-wrap: wrap;\n  padding: 36px 0;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-dialog/index.vue?09157c5a"],"names":[],"mappings":";AAsCA;EACA,gBAAA;EACA,cAAA;EACA,UAAA;EACA,eAAA;CACA;AAEA;EACA,aAAA;EACA,0BAAA;EACA,oBAAA;EACA,0CAAA;CACA;AAEA;EACA,gBAAA;EACA,WAAA;CACA;AAEA;EACA,iBAAA;EACA,mBAAA;EACA,oBAAA;EACA,oBAAA;CACA;AAEA;EACA,mBAAA;EACA,oBAAA;CACA;AAEA;EACA,wBAAA;EACA,oBAAA;EACA,gBAAA;EACA,gBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/03/14. [!] Just a beta version! -->\n<template>\n  <component class=\"container\"\n             :is=\"isCreator ? 'FmOverlayNative' : 'div'\"\n             :visible=\"self_show\"\n             @onDismiss=\"overlayClicked\"\n             :touchable='canAutoClose'>\n      <fm-overlay v-if=\"self_show && !isCreator\"\n                  :hasAnimation=\"true\"\n                  :canAutoClose=\"false\"\n                  :opacity=\"overlayOpacity\"\n                  @fmOverlayBodyClicked=\"overlayClicked\"\n                  ref=\"fm-overlay\"></fm-overlay>\n      <div class=\"dialog-box\"\n           :class=\"!isCreator && ['dialog-box-H5']\"\n           ref=\"dialog-box\"\n           v-if=\"self_show || isCreator\"\n           :style=\"dialogStyle\"\n           @touchend=\"handleTouchEnd\">\n        <div class=\"dialog-content\">\n          <slot name=\"title\">\n            <fm-text class=\"content-title\" font-weight=\"medium\" size=\"large\">{{ title }}</fm-text>\n          </slot>\n          <slot name=\"content\">\n            <fm-text class=\"content-subtext\">{{ content }}</fm-text>\n          </slot>\n        </div>\n        <div class=\"dialog-footer\" :style=\"btnStyle\">\n          <slot name=\"btn-group\">\n            <fm-simple-btn v-for=\"(btn, index) in dialogBtns\" scene=\"dialog\" v-bind=\"btn\" @click=\"btnClick\" :key=\"index\"></fm-simple-btn>\n          </slot>\n        </div>\n      </div>\n  </component>\n</template>\n\n<style scoped>\n  .container {\n    position: fixed;\n    width: 1080px;\n    /*兼容H5异常*/\n    z-index: 99999;\n  }\n\n  .dialog-box {\n    width: 936px;\n    background-color: #FFFFFF;\n    border-radius: 10px;\n    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);\n  }\n\n  .dialog-box-H5 {\n    position: fixed;\n    left: 72px;\n  }\n\n  .content-title {\n    margin-top: 63px;\n    padding-left: 72px;\n    padding-right: 72px;\n    margin-bottom: 18px;\n  }\n\n  .content-subtext {\n    padding-left: 72px;\n    padding-right: 72px;\n  }\n\n  .dialog-footer {\n    justify-content: center;\n    align-items: center;\n    flex-wrap: wrap;\n    padding: 36px 0;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nconst type_alert = 'alert';\nconst type_confirm = 'confirm';\nimport FmOverlay from '../fm-overlay';\nimport FmText from '../fm-text';\nimport FmSimpleBtn from '../fm-simple-btn';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmDialog',\n  mixins: [Locale],\n  components: { FmOverlay, FmText, FmSimpleBtn },\n  props: {\n    show: {\n      type: Boolean,\n      default: false\n    },\n    title: {\n      type: String,\n      default: ''\n    },\n    content: {\n      type: String,\n      default: ''\n    },\n    top: {\n      type: Number,\n      default: 400\n    },\n    cancelText: {\n      type: String,\n      default () {\n        return t('el.common.cancel');\n      }\n    },\n    confirmText: {\n      type: String,\n      default () {\n        return t('el.common.confirm');\n      }\n    },\n    confirmColor: {\n      type: String,\n      default: '#198DED'\n    },\n    cancelColor: {\n      type: String,\n      default: '#198DED'\n    },\n    hasAnimation: {\n      type: Boolean,\n      default: true\n    },\n    duration: {\n      type: Number,\n      default: 300\n    },\n    timingFunction: {\n      type: Array,\n      default: () => (['ease-out', 'ease-out'])\n    },\n    canAutoClose: {\n      type: Boolean,\n      default: true\n    },\n    btns: {\n      type: Array,\n      default: () => ([])\n    },\n    btnDirection: {\n      type: String,\n      default: 'row'\n    },\n    cancelCb: Function,\n    confirmCb: Function,\n    type: {\n      type: String,\n      default: type_confirm\n    },\n    overlayOpacity: {\n      type: Number,\n      default: 0.5\n    }\n  },\n  data: () => ({\n    pageHeight: 1334,\n    self_show: false,\n    dialogOpacity: 0\n  }),\n  created () {\n    const { env: { deviceHeight, deviceWidth }} = weex.config;\n    this.pageHeight = deviceHeight / deviceWidth * 1080;\n    this.self_show = this.show;\n  },\n  watch: {\n    show: function (val, oldVal) {\n      if (val) {\n        this.self_show = true;\n        setTimeout(() => {\n          this.appearDialog(true);\n        }, 50);\n      } else {\n        !this.isCreator && this.$refs['fm-overlay'].hide();\n        this.appearDialog(false);\n      }\n    }\n  },\n  computed: {\n    isCreator () {\n      return weex.supports && weex.supports('@component/FmOverlayNative');\n    },\n    dialogBtns () {\n      let btns = [];\n      if (!this.btns || !this.btns.length) {\n        if (this.type === type_alert) {\n          btns = [{\n            text: this.confirmText,\n            color: this.confirmColor,\n            type: 'confirm'\n          }];\n        } else if (this.type === type_confirm) {\n          btns = [{\n            text: this.cancelText,\n            color: this.cancelColor,\n            type: 'cancel'\n          }, {\n            text: this.confirmText,\n            color: this.confirmColor,\n            type: 'confirm'\n          }];\n        }\n      } else {\n        btns = btns.concat(this.btns);\n      }\n      return btns;\n    },\n    dialogStyle () {\n      return {\n        opacity: this.dialogOpacity,\n        top: !this.isCreator ? this.top : 0\n      };\n    },\n    btnStyle () {\n      const { btnDirection, btns } = this;\n      return {\n        flexDirection: btns.length > 2 ? 'column' : btnDirection\n      };\n    }\n  },\n  methods: {\n    handleTouchEnd (e) {\n      // 原生上有点击穿透问题\n      e.preventDefault && e.preventDefault();\n    },\n    overlayClicked () {\n      this.canAutoClose && (this.appearDialog(false) || this.$emit('fmDialogDisappeared', {}));\n      this.cancelCb && this.cancelCb();\n    },\n    btnClick (btn) {\n      if (btn.type && btn.type === 'cancel') {\n        this.$emit('fmDialogBtnClicked', { type: 'cancel' });\n        this.cancelCb && this.cancelCb();\n      } else if (btn.type && btn.type === 'confirm') {\n        this.$emit('fmDialogBtnClicked', { type: 'confirm' });\n        this.confirmCb && this.confirmCb();\n      } else {\n        this.$emit('fmDialogBtnClicked', btn);\n      }\n    },\n    appearDialog (bool, duration = this.duration) {\n      const { hasAnimation, timingFunction, isCreator } = this;\n      if (isCreator) {\n        this.self_show = bool;\n        this.dialogOpacity = bool ? 1 : 0;\n        return;\n      }\n      const dialogEl = this.$refs['dialog-box'];\n      this.dialogOpacity = bool ? 0 : 1;\n      if (hasAnimation && dialogEl) {\n        animation.transition(dialogEl, {\n          styles: {\n            opacity: bool ? 1 : 0\n          },\n          duration,\n          timingFunction: timingFunction[bool ? 0 : 1],\n          delay: 0\n        }, () => {\n          this.self_show = bool;\n          this.dialogOpacity = bool ? 1 : 0;\n        });\n      } else {\n        this.self_show = bool;\n        this.dialogOpacity = bool ? 1 : 0;\n      }\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.container[data-v-2016588d] {\n  position: fixed;\n  width: 10rem;\n  /*兼容H5异常*/\n  z-index: 99999;\n}\n.dialog-box[data-v-2016588d] {\n  width: 8.66667rem;\n  background-color: #FFFFFF;\n  border-radius: 0.09259rem;\n  box-shadow: 0 0 0.27778rem 0 rgba(0, 0, 0, 0.3);\n}\n.dialog-box-H5[data-v-2016588d] {\n  position: fixed;\n  left: 0.66667rem;\n}\n.content-title[data-v-2016588d] {\n  margin-top: 0.58333rem;\n  padding-left: 0.66667rem;\n  padding-right: 0.66667rem;\n  margin-bottom: 0.16667rem;\n}\n.content-subtext[data-v-2016588d] {\n  padding-left: 0.66667rem;\n  padding-right: 0.66667rem;\n}\n.dialog-footer[data-v-2016588d] {\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n          justify-content: center;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n          align-items: center;\n  -webkit-flex-wrap: wrap;\n          flex-wrap: wrap;\n  padding: 0.33333rem 0.66667rem;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-dialog/index.vue?55dc7fe1"],"names":[],"mappings":";AAsCA;EACA,gBAAA;EACA,aAAA;EACA,UAAA;EACA,eAAA;CACA;AAEA;EACA,kBAAA;EACA,0BAAA;EACA,0BAAA;EACA,gDAAA;CACA;AAEA;EACA,gBAAA;EACA,iBAAA;CACA;AAEA;EACA,uBAAA;EACA,yBAAA;EACA,0BAAA;EACA,0BAAA;CACA;AAEA;EACA,yBAAA;EACA,0BAAA;CACA;AAEA;EACA,yBAAA;EAAA,gCAAA;UAAA,wBAAA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,wBAAA;UAAA,gBAAA;EACA,+BAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/03/14. [!] Just a beta version! -->\n<template>\n  <component class=\"container\"\n             :is=\"isCreator ? 'FmOverlayNative' : 'div'\"\n             :visible=\"self_show\"\n             @onDismiss=\"overlayClicked\"\n             :touchable='canAutoClose'>\n      <fm-overlay v-if=\"self_show && !isCreator\"\n                  :hasAnimation=\"true\"\n                  :canAutoClose=\"false\"\n                  :opacity=\"overlayOpacity\"\n                  @fmOverlayBodyClicked=\"overlayClicked\"\n                  ref=\"fm-overlay\"></fm-overlay>\n      <div class=\"dialog-box\"\n           :class=\"!isCreator && ['dialog-box-H5']\"\n           ref=\"dialog-box\"\n           v-if=\"self_show || isCreator\"\n           :style=\"dialogStyle\"\n           @touchend=\"handleTouchEnd\">\n        <div class=\"dialog-content\">\n          <slot name=\"title\">\n            <fm-text class=\"content-title\" font-weight=\"medium\" size=\"large\" :style=\"titleStyles\" :value=\"title\"></fm-text>\n          </slot>\n          <slot name=\"content\">\n            <fm-text class=\"content-subtext\" :style=\"contentStyles\" :value=\"content\"></fm-text>\n          </slot>\n        </div>\n        <div class=\"dialog-footer\" :style=\"btnStyle\">\n          <slot name=\"btn-group\">\n            <fm-simple-btn v-for=\"(btn, index) in dialogBtns\" scene=\"dialog\" v-bind=\"btn\" @click=\"btnClick\" :key=\"index\"></fm-simple-btn>\n          </slot>\n        </div>\n      </div>\n  </component>\n</template>\n\n<style scoped>\n  .container {\n    position: fixed;\n    width: 1080px;\n    /*兼容H5异常*/\n    z-index: 99999;\n  }\n\n  .dialog-box {\n    width: 936px;\n    background-color: #FFFFFF;\n    border-radius: 10px;\n    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);\n  }\n\n  .dialog-box-H5 {\n    position: fixed;\n    left: 72px;\n  }\n\n  .content-title {\n    margin-top: 63px;\n    padding-left: 72px;\n    padding-right: 72px;\n    margin-bottom: 18px;\n  }\n\n  .content-subtext {\n    padding-left: 72px;\n    padding-right: 72px;\n  }\n\n  .dialog-footer {\n    justify-content: center;\n    align-items: center;\n    flex-wrap: wrap;\n    padding: 36px 72px;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nconst type_alert = 'alert';\nconst type_confirm = 'confirm';\nimport FmOverlay from '../fm-overlay';\nimport FmText from '../fm-text';\nimport FmSimpleBtn from '../fm-simple-btn';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmDialog',\n  mixins: [Locale],\n  components: { FmOverlay, FmText, FmSimpleBtn },\n  props: {\n    show: {\n      type: Boolean,\n      default: false\n    },\n    title: {\n      type: String,\n      default: ''\n    },\n    content: {\n      type: String,\n      default: ''\n    },\n    top: {\n      type: Number,\n      default: 400\n    },\n    bodyStyles: {\n      type: Object,\n      default: () => ({})\n    },\n    titleStyles: {\n      type: Object,\n      default: () => ({})\n    },\n    contentStyles: {\n      type: Object,\n      default: () => ({})\n    },\n    cancelText: {\n      type: String,\n      default () {\n        return t('el.common.cancel');\n      }\n    },\n    confirmText: {\n      type: String,\n      default () {\n        return t('el.common.confirm');\n      }\n    },\n    confirmColor: {\n      type: String,\n      default: '#198DED'\n    },\n    cancelColor: {\n      type: String,\n      default: '#198DED'\n    },\n    hasAnimation: {\n      type: Boolean,\n      default: true\n    },\n    duration: {\n      type: Number,\n      default: 300\n    },\n    timingFunction: {\n      type: Array,\n      default: () => (['ease-out', 'ease-out'])\n    },\n    canAutoClose: {\n      type: Boolean,\n      default: true\n    },\n    btns: {\n      type: Array,\n      default: () => ([])\n    },\n    btnDirection: {\n      type: String,\n      default: 'row'\n    },\n    cancelCb: Function,\n    confirmCb: Function,\n    type: {\n      type: String,\n      default: type_confirm\n    },\n    overlayOpacity: {\n      type: Number,\n      default: 0.5\n    }\n  },\n  data: () => ({\n    pageHeight: 1334,\n    self_show: false,\n    dialogOpacity: 0\n  }),\n  created () {\n    const { env: { deviceHeight, deviceWidth }} = weex.config;\n    this.pageHeight = deviceHeight / deviceWidth * 1080;\n    this.self_show = this.show;\n  },\n  watch: {\n    show: function (val, oldVal) {\n      if (val) {\n        this.self_show = true;\n        setTimeout(() => {\n          this.appearDialog(true);\n        }, 50);\n      } else {\n        !this.isCreator && this.$refs['fm-overlay'].hide();\n        this.appearDialog(false);\n      }\n    }\n  },\n  computed: {\n    isCreator () {\n      return weex.supports && weex.supports('@component/FmOverlayNative');\n    },\n    dialogBtns () {\n      let btns = [];\n      if (!this.btns || !this.btns.length) {\n        if (this.type === type_alert) {\n          btns = [{\n            text: this.confirmText,\n            color: this.confirmColor,\n            type: 'confirm'\n          }];\n        } else if (this.type === type_confirm) {\n          btns = [{\n            text: this.cancelText,\n            color: this.cancelColor,\n            type: 'cancel'\n          }, {\n            text: this.confirmText,\n            color: this.confirmColor,\n            type: 'confirm'\n          }];\n        }\n      } else {\n        btns = btns.concat(this.btns);\n      }\n      return btns;\n    },\n    dialogStyle () {\n      return Object.assign({\n        opacity: this.dialogOpacity,\n        top: (!this.isCreator ? this.top : 0) + 'px'\n      }, this.bodyStyles);\n    },\n    btnStyle () {\n      const { btnDirection, btns } = this;\n      return {\n        flexDirection: btns.length > 2 ? 'column' : btnDirection\n      };\n    }\n  },\n  methods: {\n    handleTouchEnd (e) {\n      // 原生上有点击穿透问题\n      e.preventDefault && e.preventDefault();\n    },\n    overlayClicked () {\n      this.canAutoClose && (this.appearDialog(false) || this.$emit('fmDialogDisappeared', {}));\n      this.cancelCb && this.cancelCb();\n    },\n    btnClick (btn) {\n      if (btn.type && btn.type === 'cancel') {\n        this.$emit('fmDialogBtnClicked', { type: 'cancel' });\n        this.cancelCb && this.cancelCb();\n      } else if (btn.type && btn.type === 'confirm') {\n        this.$emit('fmDialogBtnClicked', { type: 'confirm' });\n        this.confirmCb && this.confirmCb();\n      } else {\n        this.$emit('fmDialogBtnClicked', btn);\n      }\n    },\n    appearDialog (bool, duration = this.duration) {\n      const { hasAnimation, timingFunction, isCreator } = this;\n      if (isCreator) {\n        this.self_show = bool;\n        this.dialogOpacity = bool ? 1 : 0;\n        return;\n      }\n      const dialogEl = this.$refs['dialog-box'];\n      this.dialogOpacity = bool ? 0 : 1;\n      if (hasAnimation && dialogEl) {\n        animation.transition(dialogEl, {\n          styles: {\n            opacity: bool ? 1 : 0\n          },\n          duration,\n          timingFunction: timingFunction[bool ? 0 : 1],\n          delay: 0\n        }, () => {\n          this.self_show = bool;\n          this.dialogOpacity = bool ? 1 : 0;\n        });\n      } else {\n        this.self_show = bool;\n        this.dialogOpacity = bool ? 1 : 0;\n      }\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 172 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13628,7 +9918,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmOverlay = __webpack_require__(44);
+var _fmOverlay = __webpack_require__(45);
 
 var _fmOverlay2 = _interopRequireDefault(_fmOverlay);
 
@@ -13636,15 +9926,15 @@ var _fmText = __webpack_require__(3);
 
 var _fmText2 = _interopRequireDefault(_fmText);
 
-var _fmSimpleBtn = __webpack_require__(64);
+var _fmSimpleBtn = __webpack_require__(65);
 
 var _fmSimpleBtn2 = _interopRequireDefault(_fmSimpleBtn);
 
-var _locale = __webpack_require__(34);
+var _locale = __webpack_require__(29);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(20);
+var _locale3 = __webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13749,6 +10039,24 @@ exports.default = {
     top: {
       type: Number,
       default: 400
+    },
+    bodyStyles: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
+    titleStyles: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
+    contentStyles: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
     },
     cancelText: {
       type: String,
@@ -13870,10 +10178,10 @@ exports.default = {
       return btns;
     },
     dialogStyle: function dialogStyle() {
-      return {
+      return Object.assign({
         opacity: this.dialogOpacity,
-        top: !this.isCreator ? this.top : 0
-      };
+        top: (!this.isCreator ? this.top : 0) + 'px'
+      }, this.bodyStyles);
     },
     btnStyle: function btnStyle() {
       var btnDirection = this.btnDirection,
@@ -13940,7 +10248,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 173 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -13984,16 +10292,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._t("title", [_c('fm-text', {
     staticClass: "content-title",
     staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
+    style: (_vm.$processStyle(_vm.titleStyles)),
     attrs: {
       "font-weight": "medium",
-      "size": "large"
+      "size": "large",
+      "value": _vm.title
     }
-  }, [_vm._v(_vm._s(_vm.title))])]), _vm._v(" "), _vm._t("content", [_c('fm-text', {
+  })]), _vm._v(" "), _vm._t("content", [_c('fm-text', {
     staticClass: "content-subtext",
     staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [_vm._v(_vm._s(_vm.content))])])], 2), _vm._v(" "), _c('div', {
+    style: (_vm.$processStyle(_vm.contentStyles)),
+    attrs: {
+      "value": _vm.content
+    }
+  })])], 2), _vm._v(" "), _c('div', {
     staticClass: "dialog-footer",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(_vm.btnStyle))
@@ -14020,7 +10332,7 @@ if (false) {
 }
 
 /***/ }),
-/* 174 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14031,11 +10343,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.alert = exports.confirm = undefined;
 
-var _fmDialog = __webpack_require__(74);
+var _fmDialog = __webpack_require__(76);
 
 var _fmDialog2 = _interopRequireDefault(_fmDialog);
 
-var _locale = __webpack_require__(20);
+var _locale = __webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14126,7 +10438,7 @@ exports.confirm = confirm;
 exports.alert = alert;
 
 /***/ }),
-/* 175 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14136,7 +10448,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(176);
+var _index = __webpack_require__(177);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -14148,25 +10460,28 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 176 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(177)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(178)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(179),
-  /* template */
   __webpack_require__(180),
+  /* template */
+  __webpack_require__(181),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-81855a66",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-action-sheet/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -14180,29 +10495,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-81855a66", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 177 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(178);
+var content = __webpack_require__(179);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("2e06ec50", content, false);
+var update = __webpack_require__(2)("7ab39026", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-81855a66\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-81855a66\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-81855a66\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-81855a66\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -14212,7 +10530,7 @@ if(false) {
 }
 
 /***/ }),
-/* 178 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -14226,7 +10544,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", 
 
 
 /***/ }),
-/* 179 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14236,19 +10554,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmPopup = __webpack_require__(65);
+var _fmPopup = __webpack_require__(74);
 
 var _fmPopup2 = _interopRequireDefault(_fmPopup);
 
-var _fmSimpleBtn = __webpack_require__(64);
+var _fmSimpleBtn = __webpack_require__(65);
 
 var _fmSimpleBtn2 = _interopRequireDefault(_fmSimpleBtn);
 
-var _locale = __webpack_require__(34);
+var _locale = __webpack_require__(29);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(20);
+var _locale3 = __webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14295,7 +10613,7 @@ exports.default = {
     confirmText: {
       type: String,
       default: function _default() {
-        return (0, _locale3.t)('el.common.delete');
+        return (0, _locale3.t)('el.common.confirm');
       }
     },
     confirmColor: {
@@ -14365,7 +10683,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 180 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -14411,7 +10729,7 @@ if (false) {
 }
 
 /***/ }),
-/* 181 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14421,7 +10739,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(182);
+var _index = __webpack_require__(183);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -14433,25 +10751,28 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 182 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(183)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(184)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(185),
-  /* template */
   __webpack_require__(186),
+  /* template */
+  __webpack_require__(188),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-8580e67a",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rater/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -14465,29 +10786,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-8580e67a", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 183 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(184);
+var content = __webpack_require__(185);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("67560904", content, false);
+var update = __webpack_require__(2)("3a353a35", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-8580e67a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-8580e67a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-8580e67a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-8580e67a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -14497,7 +10821,7 @@ if(false) {
 }
 
 /***/ }),
-/* 184 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -14505,13 +10829,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.rater-wrap[data-v-8580e67a] {\n  position: relative;\n  flex-direction: row;\n}\n.rater-star[data-v-8580e67a] {\n  flex-direction: row;\n  position: absolute;\n  overflow: hidden;\n  left: 0;\n  top: 0;\n}\n.rater-star-bg[data-v-8580e67a] {\n  flex-direction: row;\n}\n.rater-star-cover[data-v-8580e67a] {\n  position: absolute;\n  overflow: hidden;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n}\n.star[data-v-8580e67a] {\n}\n.star_small[data-v-8580e67a] {\n  width: 30px;\n  height: 30px;\n  margin: 0 3px;\n}\n.star_big[data-v-8580e67a] {\n  width: 60px;\n  height: 60px;\n  margin: 0 13px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rater/index.vue?5ca4e196"],"names":[],"mappings":";AAkBA;EACA,mBAAA;EACA,oBAAA;CACA;AAEA;EACA,oBAAA;EACA,mBAAA;EACA,iBAAA;EACA,QAAA;EACA,OAAA;CACA;AAEA;EACA,oBAAA;CACA;AAEA;EACA,mBAAA;EACA,iBAAA;EACA,OAAA;EACA,UAAA;EACA,QAAA;EACA,SAAA;CACA;AAEA;CAEA;AAEA;EACA,YAAA;EACA,aAAA;EACA,cAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;EACA,eAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div class=\"rater-wrap\" ref=\"rater\" @touchstart=\"raterTouchStart\" @touchmove=\"raterTouchmove\" @touchend=\"raterTouchend\">\n    <div class=\"rater-star-bg\">\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n    </div>\n    <div class=\"rater-star\" :style=\"wraperWidth\">\n      <image :class=\"starClz\" v-for=\"(item, index) in getImgs\" :key=\"index\" :src=\"item\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .rater-wrap {\n    position: relative;\n    flex-direction: row;\n  }\n\n  .rater-star {\n    flex-direction: row;\n    position: absolute;\n    overflow: hidden;\n    left: 0;\n    top: 0;\n  }\n\n  .rater-star-bg {\n    flex-direction: row;\n  }\n\n  .rater-star-cover {\n    position: absolute;\n    overflow: hidden;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n  }\n\n  .star {\n\n  }\n\n  .star_small {\n    width: 30px;\n    height: 30px;\n    margin: 0 3px;\n  }\n\n  .star_big {\n    width: 60px;\n    height: 60px;\n    margin: 0 13px;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nimport FmImage from '../fm-image';\nconst dom = weex.requireModule('dom');\nexport default {\n  name: 'FmRater',\n  components: { FmIcon, FmImage },\n  props: {\n    score: {\n      type: Number,\n      default: 5\n    },\n    fullScore: {\n      type: Number,\n      default: 10\n    },\n    size: {\n      type: String,\n      default: 'big'\n    },\n    theme: {\n      type: String,\n      default: 'normal'\n    },\n    canChange: {\n      type: Boolean,\n      default: true\n    },\n    canSlide: {\n      type: Boolean,\n      default: true\n    },\n    starImgs: {\n      type: Array,\n      default: [\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star1.png',\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star2.png',\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star3.png',\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star4.png',\n        'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star5.png'\n      ]\n    },\n    starSpecialImg: {\n      type: String,\n      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_special.png'\n    },\n    starDarkImg: {\n      type: String,\n      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_dark.png'\n    },\n    starBgImg: {\n      type: String,\n      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_bg.png'\n    },\n    starDarkBgImg: {\n      type: String,\n      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_dark_bg.png'\n    }\n  },\n  data: () => ({\n    offset_left: 0,\n    starCount: 5\n  }),\n  computed: {\n    starClz () {\n      const clz = ['star'];\n      this.size === 'big' ? clz.push('star_big') : clz.push('star_small');\n      return clz;\n    },\n    wraperWidth () {\n      const { score, fullScore, size } = this;\n      const half_star_width = size === 'big' ? 43 : 18;\n      const percent = score / fullScore;\n      let length = score <= 0 ? 0 : percent >= 1 ? 10 : percent.toFixed(1) * 10;\n      length = isNaN(length) ? 0 : length;\n      return !length ? {\n        width: 1,\n        opacity: 0\n      } : {\n        width: length * half_star_width,\n        opacity: 1\n      };\n    },\n    getImgs () {\n      const { theme } = this;\n      if (theme === 'normal') {\n        return this.starImgs;\n      } else if (theme === 'special') {\n        const arr = [];\n        for (let i = 0; i < 5; i++) {\n          arr.push(this.starSpecialImg);\n        }\n        return arr;\n      } else if (theme === 'dark') {\n        const arr = [];\n        for (let i = 0; i < 5; i++) {\n          arr.push(this.starDarkImg);\n        }\n        return arr;\n      }\n    },\n    getBgImgs () {\n      const { theme } = this;\n      if (theme === 'normal' || theme === 'special') {\n        return this.starBgImg;\n      } else if (theme === 'dark') {\n        return this.starDarkBgImg;\n      }\n    }\n  },\n  methods: {\n    raterTouchStart (e) {\n      const { canChange, canSlide } = this;\n      if (!canChange || !canSlide) return;\n      this.calculateScore(e.changedTouches[0].pageX, true);\n    },\n    raterTouchmove (e) {\n      const { canChange, canSlide } = this;\n      if (!canChange || !canSlide) return;\n      this.calculateScore(e.changedTouches[0].pageX, true);\n    },\n    raterTouchend (e) {\n      const { canChange } = this;\n      if (!canChange) return;\n      this.calculateScore(e.changedTouches[0].pageX, true);\n    },\n    calculateScore (pageX, needEmit) {\n      const { size, fullScore } = this;\n      if (weex.config.env.platform === 'Web') {\n        pageX = pageX * 2 / 750 * 1080 - this.offset_left;\n      } else if (weex.config.env.platform === 'iOS') {\n        pageX = pageX - this.offset_left;\n      }\n      const half_star_width = size === 'big' ? 43 : 18;\n      const half_star_score = fullScore / 10;\n      const star_num = (pageX / half_star_width).toFixed(0);\n      const score_percent = star_num <= 0 ? 0 : star_num >= 10 ? 10 : star_num;\n      this.score = score_percent * half_star_score;\n      needEmit && this.$emit('fmRaterScoreChanged', { score: this.score });\n    }\n  },\n  mounted () {\n    if (weex.config.env.platform !== 'Android') {\n      setTimeout(() => {\n        dom.getComponentRect(this.$refs.rater, option => {\n          this.offset_left = option.size.left;\n        });\n      }, 50);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.rater-wrap[data-v-8580e67a] {\n  position: relative;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n}\n.rater-star[data-v-8580e67a] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  position: absolute;\n  overflow: hidden;\n  left: 0;\n  top: 0;\n}\n.rater-star-bg[data-v-8580e67a] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n}\n.rater-star-cover[data-v-8580e67a] {\n  position: absolute;\n  overflow: hidden;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n}\n.star[data-v-8580e67a] {\n}\n.star_small[data-v-8580e67a] {\n  width: 0.27778rem;\n  height: 0.27778rem;\n  margin: 0 0.02778rem;\n}\n.star_big[data-v-8580e67a] {\n  width: 0.55556rem;\n  height: 0.55556rem;\n  margin: 0 0.12037rem;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rater/index.vue?3e56ea78"],"names":[],"mappings":";AAkBA;EACA,mBAAA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;CACA;AAEA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,mBAAA;EACA,iBAAA;EACA,QAAA;EACA,OAAA;CACA;AAEA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;CACA;AAEA;EACA,mBAAA;EACA,iBAAA;EACA,OAAA;EACA,UAAA;EACA,QAAA;EACA,SAAA;CACA;AAEA;CAEA;AAEA;EACA,kBAAA;EACA,mBAAA;EACA,qBAAA;CACA;AAEA;EACA,kBAAA;EACA,mBAAA;EACA,qBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/25. -->\n<template>\n  <div class=\"rater-wrap\" ref=\"rater\" @touchstart=\"raterTouchStart\" @touchmove=\"raterTouchmove\" @touchend=\"raterTouchend\">\n    <div class=\"rater-star-bg\">\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n      <image :class=\"starClz\" :src=\"getBgImgs\" />\n    </div>\n    <div class=\"rater-star\" :style=\"wraperWidth\">\n      <image :class=\"starClz\" v-for=\"(item, index) in getImgs\" :key=\"index\" :src=\"item\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .rater-wrap {\n    position: relative;\n    flex-direction: row;\n  }\n\n  .rater-star {\n    flex-direction: row;\n    position: absolute;\n    overflow: hidden;\n    left: 0;\n    top: 0;\n  }\n\n  .rater-star-bg {\n    flex-direction: row;\n  }\n\n  .rater-star-cover {\n    position: absolute;\n    overflow: hidden;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n  }\n\n  .star {\n\n  }\n\n  .star_small {\n    width: 30px;\n    height: 30px;\n    margin: 0 3px;\n  }\n\n  .star_big {\n    width: 60px;\n    height: 60px;\n    margin: 0 13px;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nimport FmImage from '../fm-image';\nimport STARS from './type';\n\nconst dom = weex.requireModule('dom');\n\nexport default {\n  name: 'FmRater',\n  components: { FmIcon, FmImage },\n  props: {\n    score: {\n      type: Number,\n      default: 5\n    },\n    fullScore: {\n      type: Number,\n      default: 10\n    },\n    size: {\n      type: String,\n      default: 'big'\n    },\n    theme: {\n      type: String,\n      default: 'normal'\n    },\n    canChange: {\n      type: Boolean,\n      default: true\n    },\n    canSlide: {\n      type: Boolean,\n      default: true\n    },\n    starImg: {\n      type: [Array, String],\n      default: ''\n    },\n    bgImg: {\n      type: String,\n      default: ''\n    }\n  },\n  data: () => ({\n    offset_left: 0,\n    starCount: 5\n  }),\n  computed: {\n    starClz () {\n      const clz = ['star'];\n      this.size === 'big' ? clz.push('star_big') : clz.push('star_small');\n      return clz;\n    },\n    wraperWidth () {\n      const { score, fullScore, size } = this;\n      const half_star_width = size === 'big' ? 43 : 18;\n      const percent = score / fullScore;\n      let length = score <= 0 ? 0 : percent >= 1 ? 10 : percent.toFixed(1) * 10;\n      length = isNaN(length) ? 0 : length;\n      return !length ? {\n        width: 1,\n        opacity: 0\n      } : {\n        width: length * half_star_width,\n        opacity: 1\n      };\n    },\n    getImgs () {\n      const { theme, starImg } = this;\n      let imgItem;\n      if (starImg) {\n        if (Array.isArray(starImg)) { return starImg; }\n        imgItem = starImg;\n      } else if (theme === 'normal') {\n        return STARS.NORMAL;\n      } else if (theme === 'special') {\n        imgItem = STARS.SPECIAL;\n      } else if (theme === 'dark') {\n        imgItem = STARS.DARK;\n      }\n      const arr = [];\n      for (let i = 0; i < 5; i++) {\n        arr.push(imgItem);\n      }\n      return arr;\n    },\n    getBgImgs () {\n      const { theme, bgImg } = this;\n      if (bgImg) { return bgImg; }\n      if (theme === 'normal' || theme === 'special') {\n        return STARS.BG_NORMAL;\n      } else if (theme === 'dark') {\n        return STARS.BG_DARK;\n      }\n    }\n  },\n  methods: {\n    raterTouchStart (e) {\n      const { canChange, canSlide } = this;\n      if (!canChange || !canSlide) return;\n      this.calculateScore(e.changedTouches[0].pageX, true);\n    },\n    raterTouchmove (e) {\n      const { canChange, canSlide } = this;\n      if (!canChange || !canSlide) return;\n      this.calculateScore(e.changedTouches[0].pageX, true);\n    },\n    raterTouchend (e) {\n      const { canChange } = this;\n      if (!canChange) return;\n      this.calculateScore(e.changedTouches[0].pageX, true);\n    },\n    calculateScore (pageX, needEmit) {\n      const { size, fullScore } = this;\n      if (weex.config.env.platform === 'Web') {\n        pageX = pageX * 2 / 750 * 1080 - this.offset_left;\n      } else if (weex.config.env.platform === 'iOS') {\n        pageX = pageX - this.offset_left;\n      }\n      const half_star_width = size === 'big' ? 43 : 18;\n      const half_star_score = fullScore / 10;\n      const star_num = (pageX / half_star_width).toFixed(0);\n      const score_percent = star_num <= 0 ? 0 : star_num >= 10 ? 10 : star_num;\n      this.score = score_percent * half_star_score;\n      needEmit && this.$emit('fmRaterScoreChanged', { score: this.score });\n    }\n  },\n  mounted () {\n    if (weex.config.env.platform !== 'Android') {\n      setTimeout(() => {\n        dom.getComponentRect(this.$refs.rater, option => {\n          this.offset_left = option.size.left;\n        });\n      }, 50);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 185 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14521,7 +10845,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmIcon = __webpack_require__(6);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
@@ -14529,9 +10853,13 @@ var _fmImage = __webpack_require__(5);
 
 var _fmImage2 = _interopRequireDefault(_fmImage);
 
+var _type = __webpack_require__(187);
+
+var _type2 = _interopRequireDefault(_type);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
+var dom = weex.requireModule('dom'); //
 //
 //
 //
@@ -14593,7 +10921,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 
-var dom = weex.requireModule('dom');
 exports.default = {
   name: 'FmRater',
   components: { FmIcon: _fmIcon2.default, FmImage: _fmImage2.default },
@@ -14622,25 +10949,13 @@ exports.default = {
       type: Boolean,
       default: true
     },
-    starImgs: {
-      type: Array,
-      default: ['https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star1.png', 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star2.png', 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star3.png', 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star4.png', 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star5.png']
+    starImg: {
+      type: [Array, String],
+      default: ''
     },
-    starSpecialImg: {
+    bgImg: {
       type: String,
-      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_special.png'
-    },
-    starDarkImg: {
-      type: String,
-      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_dark.png'
-    },
-    starBgImg: {
-      type: String,
-      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_bg.png'
-    },
-    starDarkBgImg: {
-      type: String,
-      default: 'https://raw.githubusercontent.com/Yanjiie/weex-flymeui/master/assets/star_dark_bg.png'
+      default: ''
     }
   },
   data: function data() {
@@ -14673,31 +10988,39 @@ exports.default = {
       };
     },
     getImgs: function getImgs() {
-      var theme = this.theme;
+      var theme = this.theme,
+          starImg = this.starImg;
 
-      if (theme === 'normal') {
-        return this.starImgs;
+      var imgItem = void 0;
+      if (starImg) {
+        if (Array.isArray(starImg)) {
+          return starImg;
+        }
+        imgItem = starImg;
+      } else if (theme === 'normal') {
+        return _type2.default.NORMAL;
       } else if (theme === 'special') {
-        var arr = [];
-        for (var i = 0; i < 5; i++) {
-          arr.push(this.starSpecialImg);
-        }
-        return arr;
+        imgItem = _type2.default.SPECIAL;
       } else if (theme === 'dark') {
-        var _arr = [];
-        for (var _i = 0; _i < 5; _i++) {
-          _arr.push(this.starDarkImg);
-        }
-        return _arr;
+        imgItem = _type2.default.DARK;
       }
+      var arr = [];
+      for (var i = 0; i < 5; i++) {
+        arr.push(imgItem);
+      }
+      return arr;
     },
     getBgImgs: function getBgImgs() {
-      var theme = this.theme;
+      var theme = this.theme,
+          bgImg = this.bgImg;
 
+      if (bgImg) {
+        return bgImg;
+      }
       if (theme === 'normal' || theme === 'special') {
-        return this.starBgImg;
+        return _type2.default.BG_NORMAL;
       } else if (theme === 'dark') {
-        return this.starDarkBgImg;
+        return _type2.default.BG_DARK;
       }
     }
   },
@@ -14753,7 +11076,29 @@ exports.default = {
 };
 
 /***/ }),
-/* 186 */
+/* 187 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/**
+ * CopyRight (C) 2017-2022 Alibaba Group Holding Limited.
+ * Created by Yanjiie on 18/04/25
+ */
+exports.default = {
+  NORMAL: ['https://weixin-res.flyme.cn/resources/weex-flymeui/assets/star1.png', 'https://weixin-res.flyme.cn/resources/weex-flymeui/assets/star2.png', 'https://weixin-res.flyme.cn/resources/weex-flymeui/assets/star3.png', 'https://weixin-res.flyme.cn/resources/weex-flymeui/assets/star4.png', 'https://weixin-res.flyme.cn/resources/weex-flymeui/assets/star5.png'],
+  SPECIAL: 'https://weixin-res.flyme.cn/resources/weex-flymeui/assets/star_special.png',
+  DARK: 'https://weixin-res.flyme.cn/resources/weex-flymeui/assets/star_dark.png',
+  BG_NORMAL: 'https://weixin-res.flyme.cn/resources/weex-flymeui/assets/star_bg.png',
+  BG_DARK: 'https://weixin-res.flyme.cn/resources/weex-flymeui/assets/star_dark_bg.png'
+};
+
+/***/ }),
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -14831,25 +11176,28 @@ if (false) {
 }
 
 /***/ }),
-/* 187 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(188)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(190)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(190),
+  __webpack_require__(192),
   /* template */
-  __webpack_require__(191),
+  __webpack_require__(193),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-81772c76",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-snack-bar/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -14863,29 +11211,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-81772c76", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 188 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(189);
+var content = __webpack_require__(191);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("6efa08b7", content, false);
+var update = __webpack_require__(2)("9893fec4", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-81772c76\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-81772c76\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-81772c76\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-81772c76\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -14895,7 +11246,7 @@ if(false) {
 }
 
 /***/ }),
-/* 189 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -14903,13 +11254,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-snack-bar[data-v-81772c76] {\n\t\tposition: fixed;\n\t\tleft: 0;\n\t\tright: 0;\n\t\tbackground-color: #FFFFFF;\n\t\tflex-direction: row;\n\t\tpadding: 0 72px;\n\t\tjustify-content: space-between;\n\t\talign-items: center;\n\t\tmin-height: 0;\n}\n.title[data-v-81772c76], .closeText[data-v-81772c76] {\n\t\tfont-size: 42px;\n\t\tfont-family: sans-serif-medium;\n\t\tfont-weight: 500;\n}\n.rotate[data-v-81772c76] {\n\t\tfont-size: 54px;\n    height: 54px;\n\t\tfont-weight: 700;\n\t\ttransform: rotate(180deg);\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-snack-bar/index.vue?4191eea0"],"names":[],"mappings":";AAoBA;EACA,gBAAA;EACA,QAAA;EACA,SAAA;EACA,0BAAA;EACA,oBAAA;EACA,gBAAA;EACA,+BAAA;EACA,oBAAA;EACA,cAAA;CACA;AAEA;EACA,gBAAA;EACA,+BAAA;EACA,iBAAA;CACA;AAEA;EACA,gBAAA;IACA,aAAA;EACA,iBAAA;EACA,0BAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n\t<div ref=\"fm-snack-bar\"\n\t\tv-if=\"show\"\n\t\t:hack=\"isNeedShow\"\n\t\tclass=\"fm-snack-bar\"\n\t\t:style=\"barStyle\"\n\t\t@click=\"snackClick\">\n\t\t<slot name=\"title\">\n\t\t\t<text class=\"title\" :style=\"{ color: titleColor }\">{{ title }}</text>\n\t\t</slot>\n\t\t<slot name=\"right\">\n\t\t\t<fm-icon v-if=\"type === 'jump'\" name=\"fanhui\" class=\"rotate\" :style=\"{ color: titleColor }\" />\n\t\t\t<text v-else-if=\"type === 'normal'\" class=\"closeText\" :style=\"{ color: closeColor }\" @click=\"ctrClick\">{{ closeText }}</text>\n\t\t</slot>\n\t</div>\n</template>\n\n<style scoped>\n\t.fm-snack-bar {\n\t\tposition: fixed;\n\t\tleft: 0;\n\t\tright: 0;\n\t\tbackground-color: #FFFFFF;\n\t\tflex-direction: row;\n\t\tpadding: 0 72px;\n\t\tjustify-content: space-between;\n\t\talign-items: center;\n\t\tmin-height: 0;\n\t}\n\n\t.title, .closeText {\n\t\tfont-size: 42px;\n\t\tfont-family: sans-serif-medium;\n\t\tfont-weight: 500;\n\t}\n\n\t.rotate {\n\t\tfont-size: 54px;\n    height: 54px;\n\t\tfont-weight: 700;\n\t\ttransform: rotate(180deg);\n\t}\n\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nimport FmIcon from '../fm-icon';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\nexport default {\n  name: 'FmSnackBar',\n  mixins: [Locale],\n  components: { FmIcon },\n  props: {\n    show: {\n      type: Boolean,\n      default: false\n    },\n    backgroundColor: {\n      type: String,\n      default: '#323232'\n    },\n    title: String,\n    titleColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    closeText: {\n      type: String,\n      default () {\n        return t('el.common.close');\n      }\n    },\n    closeColor: {\n      type: String,\n      default: '#198DED'\n    },\n    height: {\n      type: Number,\n      default: 144\n    },\n    animation: {\n      type: Object,\n      default: () => ({\n        timingFunction: 'ease-out'\n      })\n    },\n    autoClose: {\n      type: Boolean,\n      default: true\n    },\n    stayTime: {\n      type: Number,\n      default: 3000\n    },\n    type: {\n      type: String,\n      default: 'normal'\n    },\n    clickCb: Function,\n    dismissCb: Function\n  },\n  computed: {\n    barStyle () {\n      const { height, backgroundColor } = this;\n      return {\n        backgroundColor: backgroundColor,\n        bottom: `${-height}px`,\n        height: `${height}px`\n      };\n    },\n    isNeedShow () {\n      setTimeout(() => {\n        this.appearBar(this.show);\n      }, 50);\n      return this.show;\n    }\n  },\n  data: () => ({\n    timer: null\n  }),\n  methods: {\n    appearBar (bool, duration = 150) {\n      this.isShow = bool;\n      const popupEl = this.$refs['fm-snack-bar'];\n      if (!popupEl) {\n        return;\n      }\n      animation.transition(popupEl, {\n        styles: {\n          transform: this.getTransform(this.height, bool)\n        },\n        duration,\n        delay: 0,\n        ...this.animation\n      }, () => {\n        const { autoClose, stayTime } = this;\n        if (bool && autoClose) {\n          this.timer = setTimeout(() => {\n            this.appearBar(false);\n          }, stayTime);\n        } else if (!bool) {\n          this.dismissCb && this.dismissCb();\n          this.$emit('fmSnackBarDismissed', { pos: this.pos });\n        }\n      });\n    },\n    getTransform (height, bool) {\n      bool || (height = 0);\n      return `translateY(-${height}px)`;\n    },\n    hide () {\n      if (this.timer) {\n        clearTimeout(this.timer);\n        this.timer = null;\n      }\n      this.appearBar(false);\n    },\n    ctrClick () {\n      this.clickCb && this.clickCb();\n      this.hide();\n    },\n    snackClick () {\n      const { type } = this;\n      if (type === 'jump') {\n        this.clickCb && this.clickCb();\n        this.hide();\n      }\n      this.$emit('fmSnackBarBeClicked', {});\n    }\n  }\n};\n</script>\n\n\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-snack-bar[data-v-81772c76] {\n\t\tposition: fixed;\n\t\tleft: 0;\n\t\tright: 0;\n\t\tbackground-color: #FFFFFF;\n\t\t-webkit-box-orient: horizontal;\n\t\t-webkit-box-direction: normal;\n\t\t-webkit-flex-direction: row;\n\t\t        flex-direction: row;\n\t\tpadding: 0 0.66667rem;\n\t\t-webkit-box-pack: justify;\n\t\t-webkit-justify-content: space-between;\n\t\t        justify-content: space-between;\n\t\t-webkit-box-align: center;\n\t\t-webkit-align-items: center;\n\t\t        align-items: center;\n\t\tmin-height: 0;\n}\n.title[data-v-81772c76], .closeText[data-v-81772c76] {\n\t\tfont-size: 0.38889rem;\n\t\tfont-family: sans-serif-medium;\n\t\tfont-weight: 500;\n}\n.rotate[data-v-81772c76] {\n\t\tfont-size: 0.5rem;\n    height: 0.5rem;\n\t\tfont-weight: 700;\n\t\t-webkit-transform: rotate(180deg);\n\t\t        transform: rotate(180deg);\n}\n\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-snack-bar/index.vue?4191eea0"],"names":[],"mappings":";AAoBA;EACA,gBAAA;EACA,QAAA;EACA,SAAA;EACA,0BAAA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,sBAAA;EACA,0BAAA;EAAA,uCAAA;UAAA,+BAAA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,cAAA;CACA;AAEA;EACA,sBAAA;EACA,+BAAA;EACA,iBAAA;CACA;AAEA;EACA,kBAAA;IACA,eAAA;EACA,iBAAA;EACA,kCAAA;UAAA,0BAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n\t<div ref=\"fm-snack-bar\"\n\t\tv-if=\"show\"\n\t\t:hack=\"isNeedShow\"\n\t\tclass=\"fm-snack-bar\"\n\t\t:style=\"barStyle\"\n\t\t@click=\"snackClick\">\n\t\t<slot name=\"title\">\n\t\t\t<text class=\"title\" :style=\"{ color: titleColor }\">{{ title }}</text>\n\t\t</slot>\n\t\t<slot name=\"right\">\n\t\t\t<fm-icon v-if=\"type === 'jump'\" name=\"fanhui\" class=\"rotate\" :style=\"{ color: titleColor }\" />\n\t\t\t<text v-else-if=\"type === 'normal'\" class=\"closeText\" :style=\"{ color: closeColor }\" @click=\"ctrClick\">{{ closeText }}</text>\n\t\t</slot>\n\t</div>\n</template>\n\n<style scoped>\n\t.fm-snack-bar {\n\t\tposition: fixed;\n\t\tleft: 0;\n\t\tright: 0;\n\t\tbackground-color: #FFFFFF;\n\t\tflex-direction: row;\n\t\tpadding: 0 72px;\n\t\tjustify-content: space-between;\n\t\talign-items: center;\n\t\tmin-height: 0;\n\t}\n\n\t.title, .closeText {\n\t\tfont-size: 42px;\n\t\tfont-family: sans-serif-medium;\n\t\tfont-weight: 500;\n\t}\n\n\t.rotate {\n\t\tfont-size: 54px;\n    height: 54px;\n\t\tfont-weight: 700;\n\t\ttransform: rotate(180deg);\n\t}\n\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nimport FmIcon from '../fm-icon';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\nexport default {\n  name: 'FmSnackBar',\n  mixins: [Locale],\n  components: { FmIcon },\n  props: {\n    show: {\n      type: Boolean,\n      default: false\n    },\n    backgroundColor: {\n      type: String,\n      default: '#323232'\n    },\n    title: String,\n    titleColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    closeText: {\n      type: String,\n      default () {\n        return t('el.common.close');\n      }\n    },\n    closeColor: {\n      type: String,\n      default: '#198DED'\n    },\n    height: {\n      type: Number,\n      default: 144\n    },\n    animation: {\n      type: Object,\n      default: () => ({\n        timingFunction: 'ease-out'\n      })\n    },\n    autoClose: {\n      type: Boolean,\n      default: true\n    },\n    stayTime: {\n      type: Number,\n      default: 3000\n    },\n    type: {\n      type: String,\n      default: 'normal'\n    },\n    clickCb: Function,\n    dismissCb: Function\n  },\n  computed: {\n    barStyle () {\n      const { height, backgroundColor } = this;\n      return {\n        backgroundColor: backgroundColor,\n        bottom: `${-height}px`,\n        height: `${height}px`\n      };\n    },\n    isNeedShow () {\n      setTimeout(() => {\n        this.appearBar(this.show);\n      }, 50);\n      return this.show;\n    }\n  },\n  data: () => ({\n    timer: null\n  }),\n  methods: {\n    appearBar (bool, duration = 150) {\n      this.isShow = bool;\n      const popupEl = this.$refs['fm-snack-bar'];\n      if (!popupEl) {\n        return;\n      }\n      animation.transition(popupEl, {\n        styles: {\n          transform: this.getTransform(this.height, bool)\n        },\n        duration,\n        delay: 0,\n        ...this.animation\n      }, () => {\n        const { autoClose, stayTime } = this;\n        if (bool && autoClose) {\n          this.timer = setTimeout(() => {\n            this.appearBar(false);\n          }, stayTime);\n        } else if (!bool) {\n          this.dismissCb && this.dismissCb();\n          this.$emit('fmSnackBarDismissed', { pos: this.pos });\n        }\n      });\n    },\n    getTransform (height, bool) {\n      bool || (height = 0);\n      return `translateY(-${height}px)`;\n    },\n    hide () {\n      if (this.timer) {\n        clearTimeout(this.timer);\n        this.timer = null;\n      }\n      this.appearBar(false);\n    },\n    ctrClick () {\n      this.clickCb && this.clickCb();\n      this.hide();\n    },\n    snackClick () {\n      const { type } = this;\n      if (type === 'jump') {\n        this.clickCb && this.clickCb();\n        this.hide();\n      }\n      this.$emit('fmSnackBarBeClicked', {});\n    }\n  }\n};\n</script>\n\n\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 190 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14921,15 +11272,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _fmIcon = __webpack_require__(6);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
-var _locale = __webpack_require__(34);
+var _locale = __webpack_require__(29);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(20);
+var _locale3 = __webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15121,7 +11472,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 191 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -15171,7 +11522,7 @@ if (false) {
 }
 
 /***/ }),
-/* 192 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15181,11 +11532,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmSnackBar = __webpack_require__(92);
+var _fmSnackBar = __webpack_require__(77);
 
 var _fmSnackBar2 = _interopRequireDefault(_fmSnackBar);
 
-var _locale = __webpack_require__(20);
+var _locale = __webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15256,7 +11607,7 @@ function showSnackBar(options) {
 exports.default = showSnackBar;
 
 /***/ }),
-/* 193 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15266,7 +11617,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(194);
+var _index = __webpack_require__(196);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -15278,21 +11629,24 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 194 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(195),
+  __webpack_require__(197),
   /* template */
-  __webpack_require__(196),
+  __webpack_require__(198),
+  /* styles */
+  null,
   /* scopeId */
   null,
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-action-view/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -15306,13 +11660,16 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-edee1fe6", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 195 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15335,7 +11692,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 196 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -15356,7 +11713,7 @@ if (false) {
 }
 
 /***/ }),
-/* 197 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15366,7 +11723,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(198);
+var _index = __webpack_require__(200);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -15378,25 +11735,28 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 198 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(199)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(201)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(201),
+  __webpack_require__(203),
   /* template */
-  __webpack_require__(202),
+  __webpack_require__(204),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-4cf19c5c",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-searchbar/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -15410,29 +11770,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-4cf19c5c", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 199 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(200);
+var content = __webpack_require__(202);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("67d91b20", content, false);
+var update = __webpack_require__(2)("71c99e6c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-4cf19c5c\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-4cf19c5c\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4cf19c5c\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4cf19c5c\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -15442,7 +11805,7 @@ if(false) {
 }
 
 /***/ }),
-/* 200 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -15450,13 +11813,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-status-bar[data-v-4cf19c5c] {\n    height: 66px;\n    width: 1080px;\n    background-color: #ffffff;\n}\n.fm-search-bar[data-v-4cf19c5c] {\n    padding: 0 48px;\n    background-color: #ffffff;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom-style: solid;\n    border-bottom-width: 2px;\n    border-bottom-color: rgba(0, 0, 0, 0.1);\n}\n.search-input-wrap[data-v-4cf19c5c] {\n    flex: 1;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    padding-left: 35px;\n    height: 90px;\n    background-color: rgba(0, 0, 0, 0.05);\n    outline: none;\n    border-radius: 45px;\n}\n.search-bar-input[data-v-4cf19c5c] {\n    flex: 1;\n    height: 90px;\n    margin-left: 24px;\n    margin-right: 9px;\n    line-height: 90px;\n    font-size: 42px;\n    background-color: transparent;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    color: #616161;\n}\n.search-bar-icon[data-v-4cf19c5c] {\n    line-height: 42px;\n    height: 42px;\n    font-weight: 700;\n}\n.search-bar-back[data-v-4cf19c5c] {\n\t\tmargin-left: -18px;\n\t\tmargin-right: 30px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n}\n.search-bar-delete[data-v-4cf19c5c] {\n    width: 60px;\n    height: 60px;\n    margin-right: 15px;\n    font-weight: 700;\n    padding: 6px 5px;\n    background-color: rgba(77, 77, 77, 0.5);\n    border-radius: 30px;\n}\n.search-enter[data-v-4cf19c5c] {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 96px;\n    margin-left: 48px;\n    color: rgba(0, 0, 0, 0.4);\n    text-align: center;\n}\n.right-btn[data-v-4cf19c5c] {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    right: 24px;\n    justify-content: center;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-searchbar/index.vue?137553ea"],"names":[],"mappings":";AAqCA;IACA,aAAA;IACA,cAAA;IACA,0BAAA;CACA;AAEA;IACA,gBAAA;IACA,0BAAA;IACA,cAAA;IACA,cAAA;IACA,oBAAA;IACA,oBAAA;IACA,+BAAA;IACA,2BAAA;IACA,yBAAA;IACA,wCAAA;CACA;AAEA;IACA,QAAA;IACA,oBAAA;IACA,oBAAA;IACA,wBAAA;IACA,mBAAA;IACA,aAAA;IACA,sCAAA;IACA,cAAA;IACA,oBAAA;CACA;AAEA;IACA,QAAA;IACA,aAAA;IACA,kBAAA;IACA,kBAAA;IACA,kBAAA;IACA,gBAAA;IACA,8BAAA;IACA,+BAAA;IACA,iBAAA;IACA,eAAA;CACA;AAEA;IACA,kBAAA;IACA,aAAA;IACA,iBAAA;CACA;AAEA;EACA,mBAAA;EACA,mBAAA;IACA,kBAAA;IACA,aAAA;IACA,iBAAA;CACA;AAEA;IACA,YAAA;IACA,aAAA;IACA,mBAAA;IACA,iBAAA;IACA,iBAAA;IACA,wCAAA;IACA,oBAAA;CACA;AAEA;IACA,+BAAA;IACA,iBAAA;IACA,gBAAA;IACA,kBAAA;IACA,kBAAA;IACA,0BAAA;IACA,mBAAA;CACA;AAEA;IACA,mBAAA;IACA,OAAA;IACA,UAAA;IACA,YAAA;IACA,wBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 18/02/26-->\n<template>\n  <div v-if=\"show\">\n    <div class=\"fm-status-bar\" v-if=\"statusbar\" :style=\"{ backgroundColor: backgroundColor }\"></div>\n    <div class=\"fm-search-bar\" :style=\"barStyle\">\n      <slot name=\"left\" v-if=\"hasPrev\">\n        <fm-icon @fmIconClicked=\"onBack\" class=\"search-bar-back\" name=\"fanhui\" :icon-style=\"72\" :color=\"leftColor\"/>\n      </slot>\n        <div class=\"search-input-wrap\" :style=\"inputBackground ? { backgroundColor: inputBackground} : {}\">\n          <fm-icon class=\"search-bar-icon\" name=\"sousuo\" :icon-style=\"42\" :color=\"iconColor\" />\n          <input @blur=\"onBlur\"\n                @focus=\"onFocus\"\n                @input=\"onInput\"\n                @return=\"onSubmit\"\n                :autofocus=\"autofocus\"\n                :disabled=\"disabled\"\n                :value=\"value\"\n                ref=\"input\"\n                :type=\"inputType\"\n                :return-key-type=\"returnKeyType\"\n                :placeholder=\"placeholder\"\n                :style=\"{color: inputColor, 'placeholder-color': placeholderColor}\"\n                class=\"search-bar-input\"/>\n          <fm-icon :style=\"{ opacity: delShow ? 1 : 0 }\" class=\"search-bar-delete\" name=\"guanbi\" :icon-style=\"48\" color=\"#FFFFFF\" @fmIconClicked=\"delClick\" />\n          <div :style=\"{ opacity: !delShow ? 1 : 0 }\" class=\"right-btn\">\n            <slot name=\"input-right\"></slot>\n          </div>\n        </div>\n      <slot name=\"right\">\n        <text v-if=\"searchText\" class=\"search-enter\" @click=\"onSearch\" :style=\"searchTextStyle\">{{ searchText }}</text>\n      </slot>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-status-bar {\n    height: 66px;\n    width: 1080px;\n    background-color: #ffffff;\n  }\n\n  .fm-search-bar {\n    padding: 0 48px;\n    background-color: #ffffff;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom-style: solid;\n    border-bottom-width: 2px;\n    border-bottom-color: rgba(0, 0, 0, 0.1);\n  }\n\n  .search-input-wrap {\n    flex: 1;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    padding-left: 35px;\n    height: 90px;\n    background-color: rgba(0, 0, 0, 0.05);\n    outline: none;\n    border-radius: 45px;\n  }\n\n  .search-bar-input {\n    flex: 1;\n    height: 90px;\n    margin-left: 24px;\n    margin-right: 9px;\n    line-height: 90px;\n    font-size: 42px;\n    background-color: transparent;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    color: #616161;\n  }\n\n  .search-bar-icon {\n    line-height: 42px;\n    height: 42px;\n    font-weight: 700;\n  }\n\n  .search-bar-back {\n\t\tmargin-left: -18px;\n\t\tmargin-right: 30px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n  }\n\n  .search-bar-delete {\n    width: 60px;\n    height: 60px;\n    margin-right: 15px;\n    font-weight: 700;\n    padding: 6px 5px;\n    background-color: rgba(77, 77, 77, 0.5);\n    border-radius: 30px;\n  }\n\n  .search-enter {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 96px;\n    margin-left: 48px;\n    color: rgba(0, 0, 0, 0.4);\n    text-align: center;\n  }\n\n  .right-btn {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    right: 24px;\n    justify-content: center;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\nconst Navigator = weex.requireModule('navigator');\n\nexport default {\n  name: 'FmSearchbar',\n  mixins: [Locale],\n  components: { FmIcon },\n  props: {\n    statusbar: {\n      type: Boolean,\n      default: false\n    },\n    inputValue: {\n      type: [String, Number],\n      default: ''\n    },\n    useDefaultReturn: {\n      type: Boolean,\n      default: true\n    },\n    hasPrev: {\n      type: Boolean,\n      default: true\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    iconColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    leftColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.6)'\n    },\n    inputBackground: String,\n    borderStyle: {\n      type: Object,\n      default: () => ({})\n    },\n    placeholder: String,\n    autofocus: Boolean,\n    disabled: Boolean,\n    inputType: {\n      type: String,\n      default: 'text'\n    },\n    searchText: {\n      type: String,\n      default () {\n        return t('el.searchbar.search');\n      }\n    },\n    searchColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    searchHighlightColor: {\n      type: String,\n      default: '#198DED'\n    },\n    searchTextSize: {\n      type: Number,\n      default: 48\n    },\n    returnKeyType: {\n      type: String,\n      default: 'search'\n    },\n    placeholderColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    inputColor: {\n      type: String,\n      default: '#616161'\n    },\n    show: {\n      type: Boolean,\n      default: true\n    }\n  },\n  watch: {\n    inputValue (val) {\n      this.value = val;\n    }\n  },\n  data: () => ({\n    isFocus: false,\n    value: ''\n  }),\n  computed: {\n    delShow () {\n      return this.isFocus && this.value;\n    },\n    barStyle () {\n      const style = {\n        borderBottomStyle: 'solid',\n        borderBottomWidth: 2 + 'px',\n        borderBottomColor: 'rgba(0, 0, 0, 0.1)'\n      };\n      Object.assign(style, this.borderStyle);\n      style.backgroundColor = this.backgroundColor;\n      return style;\n    },\n    searchTextStyle () {\n      const { value, searchColor, searchHighlightColor, searchTextSize } = this;\n      return {\n        color: value ? searchHighlightColor : searchColor,\n        fontSize: searchTextSize + 'px'\n      };\n    }\n  },\n  methods: {\n    onBack (e) {\n      const self = this;\n      if (self.useDefaultReturn) {\n        Navigator.pop({}, e => {\n        });\n      }\n      self.$emit('fmSearchbarleftBtnClicked', {});\n    },\n    delClick (e) {\n      this.value = '';\n    },\n    onInput (e) {\n      this.value = e.value;\n      this.$emit('input', e);\n    },\n    onFocus (e) {\n      this.isFocus = true;\n      this.$emit('focus', e);\n    },\n    onBlur (e) {\n      this.isFocus = false;\n      this.$emit('blur', e);\n    },\n    focus () {\n      this.$refs.input.focus();\n    },\n    blur () {\n      this.$refs.input.blur();\n    },\n    onSubmit (e) {\n      this.$emit('fmSearchbarSubmit', { value: this.value });\n    },\n    onSearch (e) {\n      this.$emit('fmSearchbarSubmit', { value: this.value });\n    },\n    setSelectionRange (start, end) {\n      this.$refs.input.setSelectionRange(start, end);\n    },\n    getEditSelectionRange (callback) {\n      this.$refs.input.getEditSelectionRange(callback);\n    },\n    setValue (value) {\n      this.value = value;\n    }\n  },\n  mounted () {\n    this.value = this.inputValue || '';\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-status-bar[data-v-4cf19c5c] {\n    height: 0.61111rem;\n    width: 10rem;\n    background-color: #ffffff;\n}\n.fm-search-bar[data-v-4cf19c5c] {\n    padding: 0 0.44444rem;\n    background-color: #ffffff;\n    width: 10rem;\n    height: 1.33333rem;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n    -webkit-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-align: center;\n    -webkit-align-items: center;\n            align-items: center;\n    -webkit-box-pack: justify;\n    -webkit-justify-content: space-between;\n            justify-content: space-between;\n    border-bottom-style: solid;\n    border-bottom-width: 0.01852rem;\n    border-bottom-color: rgba(0, 0, 0, 0.1);\n}\n.search-input-wrap[data-v-4cf19c5c] {\n    -webkit-box-flex: 1;\n    -webkit-flex: 1;\n            flex: 1;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n    -webkit-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-align: center;\n    -webkit-align-items: center;\n            align-items: center;\n    -webkit-box-pack: center;\n    -webkit-justify-content: center;\n            justify-content: center;\n    padding-left: 0.32407rem;\n    height: 0.83333rem;\n    background-color: rgba(0, 0, 0, 0.05);\n    outline: none;\n    border-radius: 0.41667rem;\n}\n.search-bar-input[data-v-4cf19c5c] {\n    -webkit-box-flex: 1;\n    -webkit-flex: 1;\n            flex: 1;\n    height: 0.83333rem;\n    margin-left: 0.22222rem;\n    margin-right: 0.08333rem;\n    line-height: 0.83333rem;\n    font-size: 0.38889rem;\n    background-color: transparent;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    color: #616161;\n}\n.search-bar-icon[data-v-4cf19c5c] {\n    line-height: 0.38889rem;\n    height: 0.38889rem;\n    font-weight: 700;\n}\n.search-bar-back[data-v-4cf19c5c] {\n\t\tmargin-left: -0.16667rem;\n\t\tmargin-right: 0.27778rem;\n    line-height: 0.66667rem;\n    height: 0.66667rem;\n    font-weight: 700;\n}\n.search-bar-delete[data-v-4cf19c5c] {\n    width: 0.55556rem;\n    height: 0.55556rem;\n    margin-right: 0.13889rem;\n    font-weight: 700;\n    padding: 0.05556rem 0.0463rem;\n    background-color: rgba(77, 77, 77, 0.5);\n    border-radius: 0.27778rem;\n}\n.search-enter[data-v-4cf19c5c] {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 0.44444rem;\n    line-height: 0.88889rem;\n    margin-left: 0.44444rem;\n    color: rgba(0, 0, 0, 0.4);\n    text-align: center;\n}\n.right-btn[data-v-4cf19c5c] {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    right: 0.22222rem;\n    -webkit-box-pack: center;\n    -webkit-justify-content: center;\n            justify-content: center;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-searchbar/index.vue?137553ea"],"names":[],"mappings":";AAqCA;IACA,mBAAA;IACA,aAAA;IACA,0BAAA;CACA;AAEA;IACA,sBAAA;IACA,0BAAA;IACA,aAAA;IACA,mBAAA;IACA,+BAAA;IAAA,8BAAA;IAAA,4BAAA;YAAA,oBAAA;IACA,0BAAA;IAAA,4BAAA;YAAA,oBAAA;IACA,0BAAA;IAAA,uCAAA;YAAA,+BAAA;IACA,2BAAA;IACA,gCAAA;IACA,wCAAA;CACA;AAEA;IACA,oBAAA;IAAA,gBAAA;YAAA,QAAA;IACA,+BAAA;IAAA,8BAAA;IAAA,4BAAA;YAAA,oBAAA;IACA,0BAAA;IAAA,4BAAA;YAAA,oBAAA;IACA,yBAAA;IAAA,gCAAA;YAAA,wBAAA;IACA,yBAAA;IACA,mBAAA;IACA,sCAAA;IACA,cAAA;IACA,0BAAA;CACA;AAEA;IACA,oBAAA;IAAA,gBAAA;YAAA,QAAA;IACA,mBAAA;IACA,wBAAA;IACA,yBAAA;IACA,wBAAA;IACA,sBAAA;IACA,8BAAA;IACA,+BAAA;IACA,iBAAA;IACA,eAAA;CACA;AAEA;IACA,wBAAA;IACA,mBAAA;IACA,iBAAA;CACA;AAEA;EACA,yBAAA;EACA,yBAAA;IACA,wBAAA;IACA,mBAAA;IACA,iBAAA;CACA;AAEA;IACA,kBAAA;IACA,mBAAA;IACA,yBAAA;IACA,iBAAA;IACA,8BAAA;IACA,wCAAA;IACA,0BAAA;CACA;AAEA;IACA,+BAAA;IACA,iBAAA;IACA,sBAAA;IACA,wBAAA;IACA,wBAAA;IACA,0BAAA;IACA,mBAAA;CACA;AAEA;IACA,mBAAA;IACA,OAAA;IACA,UAAA;IACA,kBAAA;IACA,yBAAA;IAAA,gCAAA;YAAA,wBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 18/02/26-->\n<template>\n  <div v-if=\"show\">\n    <div class=\"fm-status-bar\" v-if=\"statusbar\" :style=\"{ backgroundColor: backgroundColor }\"></div>\n    <div class=\"fm-search-bar\" :style=\"barStyle\">\n      <slot name=\"left\" v-if=\"hasPrev\">\n        <fm-icon @fmIconClicked=\"onBack\" class=\"search-bar-back\" name=\"fanhui\" :icon-style=\"72\" :color=\"leftColor\"/>\n      </slot>\n        <div class=\"search-input-wrap\" :style=\"inputBackground ? { backgroundColor: inputBackground} : {}\">\n          <fm-icon class=\"search-bar-icon\" name=\"sousuo\" :icon-style=\"42\" :color=\"iconColor\" />\n          <input @blur=\"onBlur\"\n                @focus=\"onFocus\"\n                @input=\"onInput\"\n                @return=\"onSubmit\"\n                :autofocus=\"autofocus\"\n                :disabled=\"disabled\"\n                :value=\"value\"\n                ref=\"input\"\n                :type=\"inputType\"\n                :return-key-type=\"returnKeyType\"\n                :placeholder=\"placeholder\"\n                :style=\"{color: inputColor, 'placeholder-color': placeholderColor}\"\n                class=\"search-bar-input\"/>\n          <fm-icon :style=\"{ opacity: delShow ? 1 : 0 }\" class=\"search-bar-delete\" name=\"guanbi\" :icon-style=\"48\" color=\"#FFFFFF\" @fmIconClicked=\"delClick\" />\n          <div :style=\"{ opacity: !delShow ? 1 : 0 }\" class=\"right-btn\">\n            <slot name=\"input-right\"></slot>\n          </div>\n        </div>\n      <slot name=\"right\">\n        <text v-if=\"searchText\" class=\"search-enter\" @click=\"onSearch\" :style=\"searchTextStyle\">{{ searchText }}</text>\n      </slot>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-status-bar {\n    height: 66px;\n    width: 1080px;\n    background-color: #ffffff;\n  }\n\n  .fm-search-bar {\n    padding: 0 48px;\n    background-color: #ffffff;\n    width: 1080px;\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom-style: solid;\n    border-bottom-width: 2px;\n    border-bottom-color: rgba(0, 0, 0, 0.1);\n  }\n\n  .search-input-wrap {\n    flex: 1;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    padding-left: 35px;\n    height: 90px;\n    background-color: rgba(0, 0, 0, 0.05);\n    outline: none;\n    border-radius: 45px;\n  }\n\n  .search-bar-input {\n    flex: 1;\n    height: 90px;\n    margin-left: 24px;\n    margin-right: 9px;\n    line-height: 90px;\n    font-size: 42px;\n    background-color: transparent;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    color: #616161;\n  }\n\n  .search-bar-icon {\n    line-height: 42px;\n    height: 42px;\n    font-weight: 700;\n  }\n\n  .search-bar-back {\n\t\tmargin-left: -18px;\n\t\tmargin-right: 30px;\n    line-height: 72px;\n    height: 72px;\n    font-weight: 700;\n  }\n\n  .search-bar-delete {\n    width: 60px;\n    height: 60px;\n    margin-right: 15px;\n    font-weight: 700;\n    padding: 6px 5px;\n    background-color: rgba(77, 77, 77, 0.5);\n    border-radius: 30px;\n  }\n\n  .search-enter {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 48px;\n    line-height: 96px;\n    margin-left: 48px;\n    color: rgba(0, 0, 0, 0.4);\n    text-align: center;\n  }\n\n  .right-btn {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    right: 24px;\n    justify-content: center;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\nconst Navigator = weex.requireModule('navigator');\n\nexport default {\n  name: 'FmSearchbar',\n  mixins: [Locale],\n  components: { FmIcon },\n  props: {\n    statusbar: {\n      type: Boolean,\n      default: false\n    },\n    inputValue: {\n      type: [String, Number],\n      default: ''\n    },\n    useDefaultReturn: {\n      type: Boolean,\n      default: true\n    },\n    hasPrev: {\n      type: Boolean,\n      default: true\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    },\n    iconColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    leftColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.6)'\n    },\n    inputBackground: String,\n    borderStyle: {\n      type: Object,\n      default: () => ({})\n    },\n    placeholder: String,\n    autofocus: Boolean,\n    disabled: Boolean,\n    inputType: {\n      type: String,\n      default: 'text'\n    },\n    searchText: {\n      type: String,\n      default () {\n        return t('el.searchbar.search');\n      }\n    },\n    searchColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    searchHighlightColor: {\n      type: String,\n      default: '#198DED'\n    },\n    searchTextSize: {\n      type: Number,\n      default: 48\n    },\n    returnKeyType: {\n      type: String,\n      default: 'search'\n    },\n    placeholderColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    inputColor: {\n      type: String,\n      default: '#616161'\n    },\n    show: {\n      type: Boolean,\n      default: true\n    }\n  },\n  watch: {\n    inputValue (val) {\n      this.value = val;\n    }\n  },\n  data: () => ({\n    isFocus: false,\n    value: ''\n  }),\n  computed: {\n    delShow () {\n      return this.isFocus && this.value;\n    },\n    barStyle () {\n      const style = {\n        borderBottomStyle: 'solid',\n        borderBottomWidth: 2 + 'px',\n        borderBottomColor: 'rgba(0, 0, 0, 0.1)'\n      };\n      Object.assign(style, this.borderStyle);\n      style.backgroundColor = this.backgroundColor;\n      return style;\n    },\n    searchTextStyle () {\n      const { value, searchColor, searchHighlightColor, searchTextSize } = this;\n      return {\n        color: value ? searchHighlightColor : searchColor,\n        fontSize: searchTextSize + 'px'\n      };\n    }\n  },\n  methods: {\n    onBack (e) {\n      const self = this;\n      if (self.useDefaultReturn) {\n        Navigator.pop({}, e => {\n        });\n      }\n      self.$emit('fmSearchbarleftBtnClicked', {});\n    },\n    delClick (e) {\n      this.value = '';\n    },\n    onInput (e) {\n      this.value = e.value;\n      this.$emit('input', e);\n    },\n    onFocus (e) {\n      this.isFocus = true;\n      this.$emit('focus', e);\n    },\n    onBlur (e) {\n      this.isFocus = false;\n      this.$emit('blur', e);\n    },\n    focus () {\n      this.$refs.input.focus();\n    },\n    blur () {\n      this.$refs.input.blur();\n    },\n    onSubmit (e) {\n      this.$emit('fmSearchbarSubmit', { value: this.value });\n    },\n    onSearch (e) {\n      this.$emit('fmSearchbarSubmit', { value: this.value });\n    },\n    setSelectionRange (start, end) {\n      this.$refs.input.setSelectionRange(start, end);\n    },\n    getEditSelectionRange (callback) {\n      this.$refs.input.getEditSelectionRange(callback);\n    },\n    setValue (value) {\n      this.value = value;\n    }\n  },\n  mounted () {\n    this.value = this.inputValue || '';\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 201 */
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15466,15 +11829,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmIcon = __webpack_require__(6);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
-var _locale = __webpack_require__(34);
+var _locale = __webpack_require__(29);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(20);
+var _locale3 = __webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15773,7 +12136,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 202 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -15876,7 +12239,7 @@ if (false) {
 }
 
 /***/ }),
-/* 203 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15886,7 +12249,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(204);
+var _index = __webpack_require__(206);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -15898,21 +12261,24 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 204 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(205),
+  __webpack_require__(207),
   /* template */
-  __webpack_require__(216),
+  __webpack_require__(218),
+  /* styles */
+  null,
   /* scopeId */
   null,
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-multi-check-group/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -15926,13 +12292,16 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-7670d617", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 205 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15942,7 +12311,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmMultiCheckCell = __webpack_require__(109);
+var _fmMultiCheckCell = __webpack_require__(78);
 
 var _fmMultiCheckCell2 = _interopRequireDefault(_fmMultiCheckCell);
 
@@ -15989,25 +12358,28 @@ exports.default = {
 //
 
 /***/ }),
-/* 206 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(207)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(209)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(209),
+  __webpack_require__(211),
   /* template */
-  __webpack_require__(215),
+  __webpack_require__(217),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-3e6c11c0",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-multi-check-cell/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -16021,29 +12393,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-3e6c11c0", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 207 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(208);
+var content = __webpack_require__(210);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("6c1051da", content, false);
+var update = __webpack_require__(2)("68ea0aca", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-3e6c11c0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-3e6c11c0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3e6c11c0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3e6c11c0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -16053,7 +12428,7 @@ if(false) {
 }
 
 /***/ }),
-/* 208 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -16061,13 +12436,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.check-cell-wrap[data-v-3e6c11c0] {\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 20px;\n}\n.check-cell-wrap[data-v-3e6c11c0]:active {\n  background-color: #eeeeee;\n}\n.right[data-v-3e6c11c0] {\n  width: 24px;\n  height: 24px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-multi-check-cell/index.vue?10802bd5"],"names":[],"mappings":";AAcA;EACA,oBAAA;EACA,+BAAA;EACA,oBAAA;EACA,gBAAA;CACA;AAEA;EACA,0BAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <cell class=\"check-cell-wrap\" @longpress=\"onLongpress\" @click=\"onClick\" ripple=\"normal\">\n    <div class=\"wrapper\" ref=\"wrapper\">\n      <slot></slot>\n    </div>\n    <div class=\"right\">\n      <check-icon :show=\"checking\" :checked=\"_selected\" :disabled=\"disabled\"></check-icon>\n    </div>\n  </cell>\n</template>\n\n<style scoped>\n  .check-cell-wrap {\n    flex-direction: row;\n    justify-content: space-between;\n    align-items: center;\n    padding: 0 20px;\n  }\n\n  .check-cell-wrap:active {\n    background-color: #eeeeee;\n  }\n\n  .right {\n    width: 24px;\n    height: 24px;\n  }\n</style>\n\n<script>\nconst dom = weex.requireModule('dom');\nimport CheckIcon from './check-icon.vue';\n\nexport default {\n  name: 'FmMultiCheckCell',\n  components: { CheckIcon },\n  props: {\n    identity: {\n      type: [String, Object, Number, Array],\n      required: true\n    },\n    disabled: {\n      type: Boolean,\n      default: false\n    }\n  },\n  computed: {\n    _selected: {\n      get () {\n        return this.store.indexOf(this.identity) !== -1;\n      },\n      set (val) {\n        if (val) {\n          this.addToStore();\n        } else {\n          this.deleteFromStore();\n        }\n      }\n    },\n    isGroup () {\n      let parent = this.$parent;\n      while (parent) {\n        if (parent.$options.componentName !== 'FmM\bultiCheckGroup') {\n          parent = parent.$parent;\n        } else {\n          this._group = parent;\n          return true;\n        }\n      }\n      return false;\n    },\n    checking () {\n      return this._group.checking;\n    },\n    store () {\n      return this._group.value;\n    }\n  },\n  methods: {\n    onClick (e) {\n      if (this._group.checking && !this.disabled) {\n        this.toggleSelected();\n      }\n    },\n    toggleSelected () {\n      !this.disabled && (this._selected = !this._selected);\n    },\n    onLongpress (e) {\n      !this._group.checking &&\n          (this._group.checking = true) &&\n          !this.disabled &&\n          (this._selected = true);\n    },\n    addToStore () {\n      const { identity } = this;\n      if (Array.isArray(this.store) && this.store.indexOf(identity) === -1) {\n        this.store.push(identity);\n      }\n    },\n    deleteFromStore () {\n      const { identity } = this;\n      if (Array.isArray(this.store) && this.store.indexOf(identity) !== -1) {\n        this.store.splice(this.store.indexOf(identity), 1);\n      }\n    }\n  },\n  created () {\n    if (!this.isGroup) {\n      throw Error('fm-multi-check-cell must be used in fm-multi-check-group !');\n    }\n  }\n};\n</script>\n\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.check-cell-wrap[data-v-3e6c11c0] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n  -webkit-justify-content: space-between;\n          justify-content: space-between;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n          align-items: center;\n  padding: 0 0.18519rem;\n}\n.check-cell-wrap[data-v-3e6c11c0]:active {\n  background-color: #eeeeee;\n}\n.right[data-v-3e6c11c0] {\n  width: 0.22222rem;\n  height: 0.22222rem;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-multi-check-cell/index.vue?10802bd5"],"names":[],"mappings":";AAcA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,0BAAA;EAAA,uCAAA;UAAA,+BAAA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,sBAAA;CACA;AAEA;EACA,0BAAA;CACA;AAEA;EACA,kBAAA;EACA,mBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <cell class=\"check-cell-wrap\" @longpress=\"onLongpress\" @click=\"onClick\" ripple=\"normal\">\n    <div class=\"wrapper\" ref=\"wrapper\">\n      <slot></slot>\n    </div>\n    <div class=\"right\">\n      <check-icon :show=\"checking\" :checked=\"_selected\" :disabled=\"disabled\"></check-icon>\n    </div>\n  </cell>\n</template>\n\n<style scoped>\n  .check-cell-wrap {\n    flex-direction: row;\n    justify-content: space-between;\n    align-items: center;\n    padding: 0 20px;\n  }\n\n  .check-cell-wrap:active {\n    background-color: #eeeeee;\n  }\n\n  .right {\n    width: 24px;\n    height: 24px;\n  }\n</style>\n\n<script>\nconst dom = weex.requireModule('dom');\nimport CheckIcon from './check-icon.vue';\n\nexport default {\n  name: 'FmMultiCheckCell',\n  components: { CheckIcon },\n  props: {\n    identity: {\n      type: [String, Object, Number, Array],\n      required: true\n    },\n    disabled: {\n      type: Boolean,\n      default: false\n    }\n  },\n  computed: {\n    _selected: {\n      get () {\n        return this.store.indexOf(this.identity) !== -1;\n      },\n      set (val) {\n        if (val) {\n          this.addToStore();\n        } else {\n          this.deleteFromStore();\n        }\n      }\n    },\n    isGroup () {\n      let parent = this.$parent;\n      while (parent) {\n        if (parent.$options.componentName !== 'FmM\bultiCheckGroup') {\n          parent = parent.$parent;\n        } else {\n          this._group = parent;\n          return true;\n        }\n      }\n      return false;\n    },\n    checking () {\n      return this._group.checking;\n    },\n    store () {\n      return this._group.value;\n    }\n  },\n  methods: {\n    onClick (e) {\n      if (this._group.checking && !this.disabled) {\n        this.toggleSelected();\n      }\n    },\n    toggleSelected () {\n      !this.disabled && (this._selected = !this._selected);\n    },\n    onLongpress (e) {\n      !this._group.checking &&\n          (this._group.checking = true) &&\n          !this.disabled &&\n          (this._selected = true);\n    },\n    addToStore () {\n      const { identity } = this;\n      if (Array.isArray(this.store) && this.store.indexOf(identity) === -1) {\n        this.store.push(identity);\n      }\n    },\n    deleteFromStore () {\n      const { identity } = this;\n      if (Array.isArray(this.store) && this.store.indexOf(identity) !== -1) {\n        this.store.splice(this.store.indexOf(identity), 1);\n      }\n    }\n  },\n  created () {\n    if (!this.isGroup) {\n      throw Error('fm-multi-check-cell must be used in fm-multi-check-group !');\n    }\n  }\n};\n</script>\n\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 209 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16077,7 +12452,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _checkIcon = __webpack_require__(210);
+var _checkIcon = __webpack_require__(212);
 
 var _checkIcon2 = _interopRequireDefault(_checkIcon);
 
@@ -16196,25 +12571,28 @@ exports.default = {
 };
 
 /***/ }),
-/* 210 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(211)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(213)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(213),
+  __webpack_require__(215),
   /* template */
-  __webpack_require__(214),
+  __webpack_require__(216),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-00ad7ec0",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-multi-check-cell/check-icon.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] check-icon.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -16228,29 +12606,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-00ad7ec0", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 211 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(212);
+var content = __webpack_require__(214);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("93567d90", content, false);
+var update = __webpack_require__(2)("8ede4838", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-00ad7ec0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./check-icon.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-00ad7ec0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./check-icon.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-00ad7ec0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./check-icon.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-00ad7ec0\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./check-icon.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -16260,7 +12641,7 @@ if(false) {
 }
 
 /***/ }),
-/* 212 */
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -16268,13 +12649,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.animate-wrap[data-v-00ad7ec0] {\n  width: 24px;\n  height: 24px;\n}\n.unchecked[data-v-00ad7ec0] {\n  width: 24px;\n  height: 24px;\n}\n.checked[data-v-00ad7ec0] {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 24px;\n  height: 24px;\n  transform: scale(0);\n  background-color: #ffffff;\n  border-radius: 12px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-multi-check-cell/check-icon.vue?28999800"],"names":[],"mappings":";AAkBA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,OAAA;EACA,YAAA;EACA,aAAA;EACA,oBAAA;EACA,0BAAA;EACA,oBAAA;CACA","file":"check-icon.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div class=\"check-icon\">\n    <div class=\"animate-wrap\" :hack=\"isNeedShow\" ref=\"animate-wrap\" :style=\"wrapStyle\">\n      <image\n        class=\"unchecked\"\n        :src=\"bgImg\" />\n      <image\n        class=\"checked\"\n        :src=\"getCheckedImg\"\n        ref=\"check-icon\"\n        :watch=\"isNeedChecked\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .animate-wrap {\n    width: 24px;\n    height: 24px;\n  }\n\n  .unchecked {\n    width: 24px;\n    height: 24px;\n  }\n\n  .checked {\n    position: absolute;\n    left: 0;\n    top: 0;\n    width: 24px;\n    height: 24px;\n    transform: scale(0);\n    background-color: #ffffff;\n    border-radius: 12px;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nconst animation = weex.requireModule('animation');\nexport default {\n  components: { FmIcon },\n  props: {\n    show: {\n      type: Boolean,\n      default: false\n    },\n    checked: {\n      type: Boolean,\n      default: false\n    },\n    bgImg: {\n      type: String,\n      default:\n          'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_off.png'\n    },\n    checkedImg: {\n      type: String,\n      default:\n          'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on.png'\n    },\n    checkedDisableImg: {\n      type: String,\n      default:\n          'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on_disable.png'\n    },\n    disabled: {\n      type: Boolean,\n      default: false\n    }\n  },\n  watch: {\n    checked (bool) {\n      this.appearChecked(bool);\n    }\n  },\n  data: () => ({}),\n  computed: {\n    getCheckedImg () {\n      const { disabled, checkedImg, checkedDisableImg } = this;\n      return disabled ? checkedDisableImg : checkedImg;\n    },\n    wrapStyle () {\n      return this.show\n        ? {\n          opacity: 1\n        }\n        : {\n          opacity: 0,\n          transform: 'rotateX(90deg)'\n        };\n    },\n    checkedStyle () {\n      return this.checked\n        ? {\n          opacity: 1\n        }\n        : {\n          opacity: 0\n        };\n    },\n    isNeedShow () {\n      this.appear(this.show);\n    },\n    isNeedChecked () {\n      setTimeout(() => {\n        this.appearChecked(this.checked);\n      }, 50);\n    }\n  },\n  methods: {\n    appear (bool, duration = 200) {\n      const animateEl = this.$refs['animate-wrap'];\n      if (!animateEl || !bool) {\n        return;\n      }\n      const style = {\n        transform: 'rotateX(0deg)'\n      };\n      animation.transition(\n        animateEl,\n        {\n          styles: style,\n          duration,\n          delay: 0,\n          timingFunction: 'ease-out'\n        },\n        () => {}\n      );\n    },\n    appearChecked (bool, duration = 30) {\n      const animateEl = this.$refs['check-icon'];\n      if (!animateEl) {\n        return;\n      }\n      const style = bool\n        ? {\n          transform: 'scale(1)'\n        }\n        : {\n          transform: 'scale(0)'\n        };\n      animation.transition(\n        animateEl,\n        {\n          styles: style,\n          duration,\n          delay: 0,\n          timingFunction: 'ease-out'\n        },\n        () => {}\n      );\n    }\n  }\n};\n</script>\n\n\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.animate-wrap[data-v-00ad7ec0] {\n  width: 0.22222rem;\n  height: 0.22222rem;\n}\n.unchecked[data-v-00ad7ec0] {\n  width: 0.22222rem;\n  height: 0.22222rem;\n}\n.checked[data-v-00ad7ec0] {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 0.22222rem;\n  height: 0.22222rem;\n  -webkit-transform: scale(0);\n          transform: scale(0);\n  background-color: #ffffff;\n  border-radius: 0.11111rem;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-multi-check-cell/check-icon.vue?28999800"],"names":[],"mappings":";AAkBA;EACA,kBAAA;EACA,mBAAA;CACA;AAEA;EACA,kBAAA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,OAAA;EACA,kBAAA;EACA,mBAAA;EACA,4BAAA;UAAA,oBAAA;EACA,0BAAA;EACA,0BAAA;CACA","file":"check-icon.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <div class=\"check-icon\">\n    <div class=\"animate-wrap\" :hack=\"isNeedShow\" ref=\"animate-wrap\" :style=\"wrapStyle\">\n      <image\n        class=\"unchecked\"\n        :src=\"bgImg\" />\n      <image\n        class=\"checked\"\n        :src=\"getCheckedImg\"\n        ref=\"check-icon\"\n        :watch=\"isNeedChecked\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .animate-wrap {\n    width: 24px;\n    height: 24px;\n  }\n\n  .unchecked {\n    width: 24px;\n    height: 24px;\n  }\n\n  .checked {\n    position: absolute;\n    left: 0;\n    top: 0;\n    width: 24px;\n    height: 24px;\n    transform: scale(0);\n    background-color: #ffffff;\n    border-radius: 12px;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nconst animation = weex.requireModule('animation');\nexport default {\n  components: { FmIcon },\n  props: {\n    show: {\n      type: Boolean,\n      default: false\n    },\n    checked: {\n      type: Boolean,\n      default: false\n    },\n    bgImg: {\n      type: String,\n      default:\n          'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_off.png'\n    },\n    checkedImg: {\n      type: String,\n      default:\n          'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on.png'\n    },\n    checkedDisableImg: {\n      type: String,\n      default:\n          'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on_disable.png'\n    },\n    disabled: {\n      type: Boolean,\n      default: false\n    }\n  },\n  watch: {\n    checked (bool) {\n      this.appearChecked(bool);\n    }\n  },\n  data: () => ({}),\n  computed: {\n    getCheckedImg () {\n      const { disabled, checkedImg, checkedDisableImg } = this;\n      return disabled ? checkedDisableImg : checkedImg;\n    },\n    wrapStyle () {\n      return this.show\n        ? {\n          opacity: 1\n        }\n        : {\n          opacity: 0,\n          transform: 'rotateX(90deg)'\n        };\n    },\n    checkedStyle () {\n      return this.checked\n        ? {\n          opacity: 1\n        }\n        : {\n          opacity: 0\n        };\n    },\n    isNeedShow () {\n      this.appear(this.show);\n    },\n    isNeedChecked () {\n      setTimeout(() => {\n        this.appearChecked(this.checked);\n      }, 50);\n    }\n  },\n  methods: {\n    appear (bool, duration = 200) {\n      const animateEl = this.$refs['animate-wrap'];\n      if (!animateEl || !bool) {\n        return;\n      }\n      const style = {\n        transform: 'rotateX(0deg)'\n      };\n      animation.transition(\n        animateEl,\n        {\n          styles: style,\n          duration,\n          delay: 0,\n          timingFunction: 'ease-out'\n        },\n        () => {}\n      );\n    },\n    appearChecked (bool, duration = 30) {\n      const animateEl = this.$refs['check-icon'];\n      if (!animateEl) {\n        return;\n      }\n      const style = bool\n        ? {\n          transform: 'scale(1)'\n        }\n        : {\n          transform: 'scale(0)'\n        };\n      animation.transition(\n        animateEl,\n        {\n          styles: style,\n          duration,\n          delay: 0,\n          timingFunction: 'ease-out'\n        },\n        () => {}\n      );\n    }\n  }\n};\n</script>\n\n\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 213 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16284,7 +12665,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmIcon = __webpack_require__(6);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
@@ -16442,7 +12823,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 214 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -16485,7 +12866,7 @@ if (false) {
 }
 
 /***/ }),
-/* 215 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -16528,7 +12909,7 @@ if (false) {
 }
 
 /***/ }),
-/* 216 */
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -16547,7 +12928,7 @@ if (false) {
 }
 
 /***/ }),
-/* 217 */
+/* 219 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16557,7 +12938,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(218);
+var _index = __webpack_require__(220);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -16569,25 +12950,28 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 218 */
+/* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(219)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(221)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(221),
+  __webpack_require__(223),
   /* template */
-  __webpack_require__(222),
+  __webpack_require__(224),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-fb2a1758",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rcy-check/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -16601,29 +12985,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-fb2a1758", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 219 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(220);
+var content = __webpack_require__(222);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("dab637fc", content, false);
+var update = __webpack_require__(2)("64a272c2", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-fb2a1758\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-fb2a1758\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-fb2a1758\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-fb2a1758\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -16633,7 +13020,7 @@ if(false) {
 }
 
 /***/ }),
-/* 220 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -16641,13 +13028,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.cell[data-v-fb2a1758] {\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 20px;\n  width: 360px;\n  height: 92px;\n}\n.check-wrap[data-v-fb2a1758] {\n  width: 24px;\n  height: 24px;\n}\n.unchecked[data-v-fb2a1758] {\n  width: 24px;\n  height: 24px;\n}\n.checked[data-v-fb2a1758] {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 24px;\n  height: 24px;\n  transform: scale(0);\n  border-radius: 12px;\n}\n.loading[data-v-fb2a1758] {\n  justify-content: center;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rcy-check/index.vue?21f080d4"],"names":[],"mappings":";AAgDA;EACA,oBAAA;EACA,+BAAA;EACA,oBAAA;EACA,gBAAA;EACA,aAAA;EACA,aAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,OAAA;EACA,YAAA;EACA,aAAA;EACA,oBAAA;EACA,oBAAA;CACA;AAEA;EACA,wBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <recycle-list\n    ref=\"rcy\"\n    template-key=\"type\"\n    alias=\"item\"\n    index=\"i\"\n    append='tree'\n    @loadmore=\"$onLoadMore()\"\n    showScrollbar=\"true\" style='width:360px'\n    @mlongclick=\"$onCellLongpress\"\n    for=\"(item, i) in dataSource\">\n\n    <cell-slot template-type=\"check-cell\" :itemId=\"item.itemId\" @click=\"$onCellCheck(item, i)\" ripple=\"normal\">\n      <div>\n        <div class=\"cell\">\n          <!-- Content start -->\n          <div class=\"content\">\n            <text>{{ item.itemId }}</text>\n            <text v-once :a=\"i\">{{ i }}</text>\n          </div>\n          <!-- Content end -->\n\n          <!-- Right circle start -->\n          <div class=\"check-wrap\" v-if=\"item.checking\">\n            <image\n              class=\"unchecked\"\n              src=\"http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_off.png\" />\n            <image\n              class=\"checked\"\n              v-if=\"item.checked\"\n              :src=\"item.disabled ? 'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on_disable.png' : 'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on.png'\"\n            />\n          </div>\n          <!-- Right circle end -->\n        </div>\n      </div>\n    </cell-slot>\n\n    <loading class=\"loading\" @loading=\"onloading\" display=\"hide\">\n      <text class=\"indicator\" ref=\"loadText\">正在加载中 ..</text>\n    </loading>\n\n  </recycle-list>\n</template>\n\n<style scoped>\n  .cell {\n    flex-direction: row;\n    justify-content: space-between;\n    align-items: center;\n    padding: 0 20px;\n    width: 360px;\n    height: 92px;\n  }\n\n  .check-wrap {\n    width: 24px;\n    height: 24px;\n  }\n\n  .unchecked {\n    width: 24px;\n    height: 24px;\n  }\n\n  .checked {\n    position: absolute;\n    left: 0;\n    top: 0;\n    width: 24px;\n    height: 24px;\n    transform: scale(0);\n    border-radius: 12px;\n  }\n\n  .loading {\n    justify-content: center;\n  }\n</style>\n\n<script>\nexport default {\n  props: {\n    // List dataSource\n    dataSource: {\n      type: Array,\n      default: () => []\n    },\n    // Custom load data function\n    loadData: Function\n  },\n  data () {\n    return {\n      // Is checkind state\n      checking: false,\n      // Is load end\n      end: false\n    };\n  },\n  computed: {\n    recycleList () {\n      return this.$refs.rcy;\n    }\n  },\n  methods: {\n    /*\n       * InSide Function\n       */\n    // Handle cell be longpress\n    $onCellLongpress (e) {\n      if (!this.checking) {\n        const index = e.index;\n        const tmp = [];\n        this.recycleList.getListDataSize(res => {\n          this.checking = true;\n          this.recycleList.resetLoadmore();\n          this.recycleList.setPullLoadEnable(false);\n          for (let i = 0; i < res; i++) {\n            this.dataSource[i].checking = this.checking;\n            tmp.push(this.dataSource[i]);\n          }\n          tmp[index].checked = true;\n          this.dataSource = tmp;\n          this.recycleList.setListData(this.dataSource);\n          this.$emit('fmRcyCheckStateChange', true);\n        });\n      }\n    },\n    // Handle cell be click\n    $onCellCheck (item, i) {\n      if (item.checking) {\n        item.checked = !item.checked;\n        this.dataSource[i] = item;\n        this.recycleList.updateData(this.dataSource[i], i);\n        this.$emit('fmRcyCheckValueChange', this.dataSource);\n      } else {\n        this.$emit('fmRcyCheckCellBeClick', { value: item, index: i });\n      }\n    },\n    // Handle list loadmore, is a js hook\n    $onLoadMore () {\n      if (!this.checking && !this.end) {\n        if (this.loadData && typeof this.loadData === 'function') { this.loadData(); }\n      }\n      if (!this.checked) {\n        this.recycleList.setLoadingDisplay('hide');\n        this.recycleList.setPullLoadEnable(false);\n      } else if (!this.end) {\n        setTimeout(() => {\n          this.recycleList.setLoadingDisplay('hide');\n          this.recycleList.setPullLoadEnable(true);\n          this.recycleList.resetLoadmore();\n        }, 400);\n      }\n    },\n\n    /*\n       * OutSide Function\n       */\n    // Quit checking model if this.checking is true, will emit @fmRcyCheckFinish Event.\n    finish () {\n      if (this.checking) {\n        this.recycleList.getListDataSize(res => {\n          const tmp = [];\n          const checkList = [];\n          const checkIndex = [];\n          this.checking = false;\n          this.recycleList.setPullLoadEnable(true);\n          this.recycleList.resetLoadmore();\n          for (let i = 0; i < res; i++) {\n            this.dataSource[i].checking = this.checking;\n            this.dataSource[i].checked && (checkList.push(this.dataSource[i])) && (checkIndex.push(i));\n            tmp.push(this.dataSource[i]);\n          }\n          this.dataSource = tmp;\n          this.recycleList.setListData(this.dataSource);\n          this.$emit('fmRcyCheckFinish', { indexs: checkIndex, values: checkList });\n          this.$emit('fmRcyCheckStateChange', false);\n        });\n      }\n    },\n    // Toggle all item's checked state when in checking Model, will emit @fmRcyCheckValueChange Event.\n    toggleAll (bool) {\n      if (this.checking) {\n        const tmp = [];\n        this.recycleList.getListDataSize(res => {\n          for (let i = 0; i < res; i++) {\n            this.dataSource[i].checked = bool;\n            tmp.push(this.dataSource[i]);\n          }\n          this.dataSource = tmp;\n          this.recycleList.setListData(this.dataSource);\n          this.$emit('fmRcyCheckValueChange', this.dataSource);\n        });\n      }\n    },\n    // Append data at this.dataSource and append item at recycle-list.\n    appendData (data) {\n      this.dataSource = this.dataSource.concat(data);\n      this.recycleList.appendData(data);\n    },\n    // Remove data from this.dataSource and remove item from recycle-list.\n    removeData (array) {\n      this.dataSource = this.dataSource.filter((value, index) => {\n        return array.indexOf(index) < 0;\n      });\n      this.recycleList.removeData(array);\n      this.$emit('fmRcyCheckValueChange', this.dataSource);\n    },\n    // When this.loadData function complete, call this function to reset loading state.\n    resetLoading () {\n      this.recycleList.setLoadingDisplay('hide');\n    },\n    // Set loading no more data Tip and change loading state.\n    loadingEnd (tipStr) {\n      this.end = true;\n      this.$refs.loadText.setAttr('value', tipStr, false);\n      setTimeout(() => {\n        this.recycleList.setLoadingDisplay('hide');\n        this.recycleList.setPullLoadEnable(true);\n        this.recycleList.resetLoadmore();\n      }, 400);\n    },\n    // Reset loding, make it can load more again.\n    resetLoadMore () {\n      this.end = true;\n      this.recycleList.setPullLoadEnable(true);\n      this.recycleList.resetLoadmore();\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.cell[data-v-fb2a1758] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n  -webkit-justify-content: space-between;\n          justify-content: space-between;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n          align-items: center;\n  padding: 0 0.18519rem;\n  width: 3.33333rem;\n  height: 0.85185rem;\n}\n.check-wrap[data-v-fb2a1758] {\n  width: 0.22222rem;\n  height: 0.22222rem;\n}\n.unchecked[data-v-fb2a1758] {\n  width: 0.22222rem;\n  height: 0.22222rem;\n}\n.checked[data-v-fb2a1758] {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 0.22222rem;\n  height: 0.22222rem;\n  -webkit-transform: scale(0);\n          transform: scale(0);\n  border-radius: 0.11111rem;\n}\n.loading[data-v-fb2a1758] {\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n          justify-content: center;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-rcy-check/index.vue?21f080d4"],"names":[],"mappings":";AAgDA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,0BAAA;EAAA,uCAAA;UAAA,+BAAA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,sBAAA;EACA,kBAAA;EACA,mBAAA;CACA;AAEA;EACA,kBAAA;EACA,mBAAA;CACA;AAEA;EACA,kBAAA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,OAAA;EACA,kBAAA;EACA,mBAAA;EACA,4BAAA;UAAA,oBAAA;EACA,0BAAA;CACA;AAEA;EACA,yBAAA;EAAA,gCAAA;UAAA,wBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created and Update by Yanjiie on 2018/04/12. -->\n<template>\n  <recycle-list\n    ref=\"rcy\"\n    template-key=\"type\"\n    alias=\"item\"\n    index=\"i\"\n    append='tree'\n    @loadmore=\"$onLoadMore()\"\n    showScrollbar=\"true\" style='width:360px'\n    @mlongclick=\"$onCellLongpress\"\n    for=\"(item, i) in dataSource\">\n\n    <cell-slot template-type=\"check-cell\" :itemId=\"item.itemId\" @click=\"$onCellCheck(item, i)\" ripple=\"normal\">\n      <div>\n        <div class=\"cell\">\n          <!-- Content start -->\n          <div class=\"content\">\n            <text>{{ item.itemId }}</text>\n            <text v-once :a=\"i\">{{ i }}</text>\n          </div>\n          <!-- Content end -->\n\n          <!-- Right circle start -->\n          <div class=\"check-wrap\" v-if=\"item.checking\">\n            <image\n              class=\"unchecked\"\n              src=\"http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_off.png\" />\n            <image\n              class=\"checked\"\n              v-if=\"item.checked\"\n              :src=\"item.disabled ? 'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on_disable.png' : 'http://design.flyme.cn/weexui/assets/mz_btn_check_button_square_on.png'\"\n            />\n          </div>\n          <!-- Right circle end -->\n        </div>\n      </div>\n    </cell-slot>\n\n    <loading class=\"loading\" @loading=\"onloading\" display=\"hide\">\n      <text class=\"indicator\" ref=\"loadText\">正在加载中 ..</text>\n    </loading>\n\n  </recycle-list>\n</template>\n\n<style scoped>\n  .cell {\n    flex-direction: row;\n    justify-content: space-between;\n    align-items: center;\n    padding: 0 20px;\n    width: 360px;\n    height: 92px;\n  }\n\n  .check-wrap {\n    width: 24px;\n    height: 24px;\n  }\n\n  .unchecked {\n    width: 24px;\n    height: 24px;\n  }\n\n  .checked {\n    position: absolute;\n    left: 0;\n    top: 0;\n    width: 24px;\n    height: 24px;\n    transform: scale(0);\n    border-radius: 12px;\n  }\n\n  .loading {\n    justify-content: center;\n  }\n</style>\n\n<script>\nexport default {\n  props: {\n    // List dataSource\n    dataSource: {\n      type: Array,\n      default: () => []\n    },\n    // Custom load data function\n    loadData: Function\n  },\n  data () {\n    return {\n      // Is checkind state\n      checking: false,\n      // Is load end\n      end: false\n    };\n  },\n  computed: {\n    recycleList () {\n      return this.$refs.rcy;\n    }\n  },\n  methods: {\n    /*\n       * InSide Function\n       */\n    // Handle cell be longpress\n    $onCellLongpress (e) {\n      if (!this.checking) {\n        const index = e.index;\n        const tmp = [];\n        this.recycleList.getListDataSize(res => {\n          this.checking = true;\n          this.recycleList.resetLoadmore();\n          this.recycleList.setPullLoadEnable(false);\n          for (let i = 0; i < res; i++) {\n            this.dataSource[i].checking = this.checking;\n            tmp.push(this.dataSource[i]);\n          }\n          tmp[index].checked = true;\n          this.dataSource = tmp;\n          this.recycleList.setListData(this.dataSource);\n          this.$emit('fmRcyCheckStateChange', true);\n        });\n      }\n    },\n    // Handle cell be click\n    $onCellCheck (item, i) {\n      if (item.checking) {\n        item.checked = !item.checked;\n        this.dataSource[i] = item;\n        this.recycleList.updateData(this.dataSource[i], i);\n        this.$emit('fmRcyCheckValueChange', this.dataSource);\n      } else {\n        this.$emit('fmRcyCheckCellBeClick', { value: item, index: i });\n      }\n    },\n    // Handle list loadmore, is a js hook\n    $onLoadMore () {\n      if (!this.checking && !this.end) {\n        if (this.loadData && typeof this.loadData === 'function') { this.loadData(); }\n      }\n      if (!this.checked) {\n        this.recycleList.setLoadingDisplay('hide');\n        this.recycleList.setPullLoadEnable(false);\n      } else if (!this.end) {\n        setTimeout(() => {\n          this.recycleList.setLoadingDisplay('hide');\n          this.recycleList.setPullLoadEnable(true);\n          this.recycleList.resetLoadmore();\n        }, 400);\n      }\n    },\n\n    /*\n       * OutSide Function\n       */\n    // Quit checking model if this.checking is true, will emit @fmRcyCheckFinish Event.\n    finish () {\n      if (this.checking) {\n        this.recycleList.getListDataSize(res => {\n          const tmp = [];\n          const checkList = [];\n          const checkIndex = [];\n          this.checking = false;\n          this.recycleList.setPullLoadEnable(true);\n          this.recycleList.resetLoadmore();\n          for (let i = 0; i < res; i++) {\n            this.dataSource[i].checking = this.checking;\n            this.dataSource[i].checked && (checkList.push(this.dataSource[i])) && (checkIndex.push(i));\n            tmp.push(this.dataSource[i]);\n          }\n          this.dataSource = tmp;\n          this.recycleList.setListData(this.dataSource);\n          this.$emit('fmRcyCheckFinish', { indexs: checkIndex, values: checkList });\n          this.$emit('fmRcyCheckStateChange', false);\n        });\n      }\n    },\n    // Toggle all item's checked state when in checking Model, will emit @fmRcyCheckValueChange Event.\n    toggleAll (bool) {\n      if (this.checking) {\n        const tmp = [];\n        this.recycleList.getListDataSize(res => {\n          for (let i = 0; i < res; i++) {\n            this.dataSource[i].checked = bool;\n            tmp.push(this.dataSource[i]);\n          }\n          this.dataSource = tmp;\n          this.recycleList.setListData(this.dataSource);\n          this.$emit('fmRcyCheckValueChange', this.dataSource);\n        });\n      }\n    },\n    // Append data at this.dataSource and append item at recycle-list.\n    appendData (data) {\n      this.dataSource = this.dataSource.concat(data);\n      this.recycleList.appendData(data);\n    },\n    // Remove data from this.dataSource and remove item from recycle-list.\n    removeData (array) {\n      this.dataSource = this.dataSource.filter((value, index) => {\n        return array.indexOf(index) < 0;\n      });\n      this.recycleList.removeData(array);\n      this.$emit('fmRcyCheckValueChange', this.dataSource);\n    },\n    // When this.loadData function complete, call this function to reset loading state.\n    resetLoading () {\n      this.recycleList.setLoadingDisplay('hide');\n    },\n    // Set loading no more data Tip and change loading state.\n    loadingEnd (tipStr) {\n      this.end = true;\n      this.$refs.loadText.setAttr('value', tipStr, false);\n      setTimeout(() => {\n        this.recycleList.setLoadingDisplay('hide');\n        this.recycleList.setPullLoadEnable(true);\n        this.recycleList.resetLoadmore();\n      }, 400);\n    },\n    // Reset loding, make it can load more again.\n    resetLoadMore () {\n      this.end = true;\n      this.recycleList.setPullLoadEnable(true);\n      this.recycleList.resetLoadmore();\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 221 */
+/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16915,7 +13302,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 222 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -17012,7 +13399,7 @@ if (false) {
 }
 
 /***/ }),
-/* 223 */
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17022,7 +13409,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(224);
+var _index = __webpack_require__(226);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -17034,25 +13421,28 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 224 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(225)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(227)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(227),
+  __webpack_require__(229),
   /* template */
-  __webpack_require__(233),
+  __webpack_require__(235),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-d7ab306c",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-simple-list/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -17066,29 +13456,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-d7ab306c", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 225 */
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(226);
+var content = __webpack_require__(228);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("1ac5d268", content, false);
+var update = __webpack_require__(2)("762fa0ae", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-d7ab306c\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-d7ab306c\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d7ab306c\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d7ab306c\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -17098,7 +13491,7 @@ if(false) {
 }
 
 /***/ }),
-/* 226 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -17106,13 +13499,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.list-wrap[data-v-d7ab306c] {\n  width: 1080px;\n}\n.title-wrap[data-v-d7ab306c] {\n  flex-direction: row;\n  padding: 27px 49px;\n  justify-content: space-between;\n}\n.title-text[data-v-d7ab306c] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 36px;\n  line-height: 54px;\n}\n.title-rightBtn[data-v-d7ab306c] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 36px;\n  line-height: 54px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-simple-list/index.vue?5299ae85"],"names":[],"mappings":";AAyBA;EACA,cAAA;CACA;AAEA;EACA,oBAAA;EACA,mBAAA;EACA,+BAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/3/5. -->\n<template>\n  <div class=\"list-wrap\">\n    <div class=\"title-wrap\">\n      <slot name=\"left\">\n        <text class=\"title-text\" :style=\"{ color: titleColor }\">{{ title }}</text>\n      </slot>\n      <slot name=\"right\">\n        <text class=\"title-rightBtn\" :style=\"{ color: rightColor }\" @click=\"btnClicked\">{{ rightText }}</text>\n      </slot>\n    </div>\n    <div class=\"item-wrap\">\n      <item v-for=\"(item, index) in list\"\n            v-bind=\"Object.assign({}, customStyles, item)\"\n            :key=\"index\"\n            :index=\"index\"\n            @select=\"onSelect(index)\"\n            @leftClicked=\"leftIconClicked(index)\"\n            @rightClicked=\"rightIconClicked(index)\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .list-wrap {\n    width: 1080px;\n  }\n\n  .title-wrap {\n    flex-direction: row;\n    padding: 27px 49px;\n    justify-content: space-between;\n  }\n\n  .title-text {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 36px;\n    line-height: 54px;\n  }\n\n  .title-rightBtn {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 36px;\n    line-height: 54px;\n  }\n</style>\n\n<script>\nimport Item from './item.vue';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmSimpleList',\n  mixins: [Locale],\n  components: { Item },\n  props: {\n    list: {\n      type: Array,\n      default: () => ([])\n    },\n    title: {\n      type: String,\n      default () {\n        return t('el.common.title');\n      }\n    },\n    titleColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    rightText: {\n      type: String,\n      default: ''\n    },\n    rightColor: {\n      type: String,\n      default: '#198DED'\n    },\n    customStyles: {\n      type: Object,\n      default: () => ({})\n    }\n  },\n  methods: {\n    onSelect (index) {\n      this.$emit('fmSimpleListSelected', { model: this.list[index], index });\n    },\n    btnClicked () {\n      this.$emit('fmSimpleListRightBtnClicked');\n    },\n    leftIconClicked (index) {\n      this.$emit('fmSimpleListLeftIconClicked', { model: this.list[index], index });\n    },\n    rightIconClicked (index) {\n      this.$emit('fmSimpleListRightIconClicked', { model: this.list[index], index });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.list-wrap[data-v-d7ab306c] {\n  width: 10rem;\n}\n.title-wrap[data-v-d7ab306c] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  padding: 0.25rem 0.4537rem;\n  -webkit-box-pack: justify;\n  -webkit-justify-content: space-between;\n          justify-content: space-between;\n}\n.title-text[data-v-d7ab306c] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 0.33333rem;\n  line-height: 0.5rem;\n}\n.title-rightBtn[data-v-d7ab306c] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 0.33333rem;\n  line-height: 0.5rem;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-simple-list/index.vue?5299ae85"],"names":[],"mappings":";AAyBA;EACA,aAAA;CACA;AAEA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,2BAAA;EACA,0BAAA;EAAA,uCAAA;UAAA,+BAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,sBAAA;EACA,oBAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,sBAAA;EACA,oBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/3/5. -->\n<template>\n  <div class=\"list-wrap\">\n    <div class=\"title-wrap\">\n      <slot name=\"left\">\n        <text class=\"title-text\" :style=\"{ color: titleColor }\">{{ title }}</text>\n      </slot>\n      <slot name=\"right\">\n        <text class=\"title-rightBtn\" :style=\"{ color: rightColor }\" @click=\"btnClicked\">{{ rightText }}</text>\n      </slot>\n    </div>\n    <div class=\"item-wrap\">\n      <item v-for=\"(item, index) in list\"\n            v-bind=\"Object.assign({}, customStyles, item)\"\n            :key=\"index\"\n            :index=\"index\"\n            @select=\"onSelect(index)\"\n            @leftClicked=\"leftIconClicked(index)\"\n            @rightClicked=\"rightIconClicked(index)\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .list-wrap {\n    width: 1080px;\n  }\n\n  .title-wrap {\n    flex-direction: row;\n    padding: 27px 49px;\n    justify-content: space-between;\n  }\n\n  .title-text {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 36px;\n    line-height: 54px;\n  }\n\n  .title-rightBtn {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 36px;\n    line-height: 54px;\n  }\n</style>\n\n<script>\nimport Item from './item.vue';\nimport Locale from 'weex-flymeui/lib/mixins/locale';\nimport { t } from 'weex-flymeui/lib/locale';\n\nexport default {\n  name: 'FmSimpleList',\n  mixins: [Locale],\n  components: { Item },\n  props: {\n    list: {\n      type: Array,\n      default: () => ([])\n    },\n    title: {\n      type: String,\n      default () {\n        return t('el.common.title');\n      }\n    },\n    titleColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.4)'\n    },\n    rightText: {\n      type: String,\n      default: ''\n    },\n    rightColor: {\n      type: String,\n      default: '#198DED'\n    },\n    customStyles: {\n      type: Object,\n      default: () => ({})\n    }\n  },\n  methods: {\n    onSelect (index) {\n      this.$emit('fmSimpleListSelected', { model: this.list[index], index });\n    },\n    btnClicked () {\n      this.$emit('fmSimpleListRightBtnClicked');\n    },\n    leftIconClicked (index) {\n      this.$emit('fmSimpleListLeftIconClicked', { model: this.list[index], index });\n    },\n    rightIconClicked (index) {\n      this.$emit('fmSimpleListRightIconClicked', { model: this.list[index], index });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 227 */
+/* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17122,15 +13515,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _item = __webpack_require__(228);
+var _item = __webpack_require__(230);
 
 var _item2 = _interopRequireDefault(_item);
 
-var _locale = __webpack_require__(34);
+var _locale = __webpack_require__(29);
 
 var _locale2 = _interopRequireDefault(_locale);
 
-var _locale3 = __webpack_require__(20);
+var _locale3 = __webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17236,25 +13629,28 @@ exports.default = {
 //
 
 /***/ }),
-/* 228 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(229)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(231)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(231),
+  __webpack_require__(233),
   /* template */
-  __webpack_require__(232),
+  __webpack_require__(234),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-6f5a0a6a",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-simple-list/item.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] item.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -17268,29 +13664,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-6f5a0a6a", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 229 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(230);
+var content = __webpack_require__(232);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("2d9189e9", content, false);
+var update = __webpack_require__(2)("53971798", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-6f5a0a6a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./item.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-6f5a0a6a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./item.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6f5a0a6a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./item.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6f5a0a6a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./item.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -17300,7 +13699,7 @@ if(false) {
 }
 
 /***/ }),
-/* 230 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -17308,13 +13707,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.list-item[data-v-6f5a0a6a] {\n  padding: 0 48px;\n}\n.list-item[data-v-6f5a0a6a]:active {\n  background-color: rgba(0, 0, 0, 0.05);\n}\n.item-wrap[data-v-6f5a0a6a] {\n  height: 144px;\n  flex-direction: row;\n  align-items: center;\n  justify-content: space-between;\n}\n.text-title[data-v-6f5a0a6a] {\n  flex: 1;\n  text-overflow: ellipsis;\n  font-size: 42px;\n  margin-right: 26px;\n  lines: 1;\n}\n.icon[data-v-6f5a0a6a] {\n  margin: 12px;\n  font-size: 48px;\n  height: 48px;\n  font-weight: 700;\n}\n.icon-left[data-v-6f5a0a6a] {\n  margin-right: 38px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-simple-list/item.vue?653e9d10"],"names":[],"mappings":";AAiBA;EACA,gBAAA;CACA;AAEA;EACA,sCAAA;CACA;AAEA;EACA,cAAA;EACA,oBAAA;EACA,oBAAA;EACA,+BAAA;CACA;AAEA;EACA,QAAA;EACA,wBAAA;EACA,gBAAA;EACA,mBAAA;EACA,SAAA;CACA;AAEA;EACA,aAAA;EACA,gBAAA;EACA,aAAA;EACA,iBAAA;CACA;AAEA;EACA,mBAAA;CACA","file":"item.vue","sourcesContent":["<!-- Created by Yanjiie on 2018/3/5. -->\n<template>\n  <div class=\"list-item\" @click=\"onClick\">\n    <div class=\"item-wrap\" :style=\"wrapStyle\">\n      <fm-icon class=\"icon icon-left\" v-if=\"leftIcon || originLeftIcon\"\n                                      :name=\"leftIcon || originLeftIcon\"\n                                      :color='leftColor || originIconColor'\n                                      @fmIconClicked=\"onLeftClick\" />\n      <text class=\"text-title\" :style=\"titleStyle\">{{ title }}</text>\n      <fm-icon class=\"icon\" :name=\"rightIcon || originRightIcon\"\n                            :color='rightColor || originIconColor'\n                            @fmIconClicked=\"onRightClick\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .list-item {\n    padding: 0 48px;\n  }\n\n  .list-item:active {\n    background-color: rgba(0, 0, 0, 0.05);\n  }\n\n  .item-wrap {\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n  }\n\n  .text-title {\n    flex: 1;\n    text-overflow: ellipsis;\n    font-size: 42px;\n    margin-right: 26px;\n    lines: 1;\n  }\n\n  .icon {\n    margin: 12px;\n    font-size: 48px;\n    height: 48px;\n    font-weight: 700;\n  }\n\n  .icon-left {\n    margin-right: 38px;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nexport default {\n  components: { FmIcon },\n  props: {\n    index: {\n      type: Number,\n      default: -1\n    },\n    title: {\n      type: String,\n      default: ''\n    },\n    color: {\n      type: String,\n      default: ''\n    },\n    fontSize: {\n      type: Number,\n      default: 42\n    },\n    borderWidth: {\n      type: Number,\n      default: 2\n    },\n    borderColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.1)'\n    },\n    leftIcon: {\n      type: String,\n      default: ''\n    },\n    leftColor: {\n      type: String,\n      default: ''\n    },\n    rightIcon: {\n      type: String,\n      default: ''\n    },\n    rightColor: {\n      type: String,\n      default: ''\n    },\n    originTitleColor: {\n      type: String,\n      default: '#000000'\n    },\n    originLeftIcon: {\n      type: String,\n      default: 'shizhong'\n    },\n    originRightIcon: {\n      type: String,\n      default: 'guanbi'\n    },\n    originIconColor: {\n      type: String,\n      default: '#999999'\n    }\n  },\n  computed: {\n    wrapStyle () {\n      const { borderWidth, borderColor } = this;\n      return {\n        borderBottomWidth: borderWidth + 'px',\n        borderColor\n      };\n    },\n    titleStyle () {\n      const { color, originTitleColor, fontSize } = this;\n      return {\n        fontSize: fontSize + 'px',\n        color: color || originTitleColor\n      };\n    }\n  },\n  methods: {\n    onClick () {\n      this.$emit('select', this.index);\n    },\n    onLeftClick () {\n      this.$emit('leftClicked', this.index);\n    },\n    onRightClick () {\n      this.$emit('rightClicked', this.index);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.list-item[data-v-6f5a0a6a] {\n  padding: 0 0.44444rem;\n}\n.list-item[data-v-6f5a0a6a]:active {\n  background-color: rgba(0, 0, 0, 0.04);\n}\n.item-wrap[data-v-6f5a0a6a] {\n  height: 1.33333rem;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n          align-items: center;\n  -webkit-box-pack: justify;\n  -webkit-justify-content: space-between;\n          justify-content: space-between;\n}\n.text-title[data-v-6f5a0a6a] {\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n          flex: 1;\n  text-overflow: ellipsis;\n  font-size: 0.38889rem;\n  margin-right: 0.24074rem;\n  lines: 1;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  -webkit-line-clamp: 1;\n}\n.icon[data-v-6f5a0a6a] {\n  margin: 0.11111rem;\n  font-size: 0.44444rem;\n  height: 0.44444rem;\n  font-weight: 700;\n}\n.icon-left[data-v-6f5a0a6a] {\n  margin-right: 0.35185rem;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-simple-list/item.vue?0d730c0f","/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-simple-list/<no source>"],"names":[],"mappings":";AAiBA;EACA,sBAAA;CACA;AAEA;EACA,sCAAA;CACA;AAEA;EACA,mBAAA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,0BAAA;EAAA,uCAAA;UAAA,+BAAA;CACA;AAEA;EACA,oBAAA;EAAA,gBAAA;UAAA,QAAA;EACA,wBAAA;EACA,sBAAA;EACA,yBAAA;EACA,SAAA;ECrCA,iBAAA;EAAA,wBAAA;EAAA,sBAAA;CDsCA;AAEA;EACA,mBAAA;EACA,sBAAA;EACA,mBAAA;EACA,iBAAA;CACA;AAEA;EACA,yBAAA;CACA","file":"item.vue","sourcesContent":["<!-- Created by Yanjiie on 2018/3/5. -->\n<template>\n  <div class=\"list-item\" @click=\"onClick\">\n    <div class=\"item-wrap\" :style=\"wrapStyle\">\n      <fm-icon class=\"icon icon-left\" v-if=\"leftIcon || originLeftIcon\"\n                                      :name=\"leftIcon || originLeftIcon\"\n                                      :color='leftColor || originIconColor'\n                                      @fmIconClicked=\"onLeftClick\" />\n      <text class=\"text-title\" :style=\"titleStyle\">{{ title }}</text>\n      <fm-icon class=\"icon\" :name=\"rightIcon || originRightIcon\"\n                            :color='rightColor || originIconColor'\n                            @fmIconClicked=\"onRightClick\" />\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .list-item {\n    padding: 0 48px;\n  }\n\n  .list-item:active {\n    background-color: rgba(0, 0, 0, 0.04);\n  }\n\n  .item-wrap {\n    height: 144px;\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n  }\n\n  .text-title {\n    flex: 1;\n    text-overflow: ellipsis;\n    font-size: 42px;\n    margin-right: 26px;\n    lines: 1;\n  }\n\n  .icon {\n    margin: 12px;\n    font-size: 48px;\n    height: 48px;\n    font-weight: 700;\n  }\n\n  .icon-left {\n    margin-right: 38px;\n  }\n</style>\n\n<script>\nimport FmIcon from '../fm-icon';\nexport default {\n  components: { FmIcon },\n  props: {\n    index: {\n      type: Number,\n      default: -1\n    },\n    title: {\n      type: String,\n      default: ''\n    },\n    color: {\n      type: String,\n      default: ''\n    },\n    fontSize: {\n      type: Number,\n      default: 42\n    },\n    borderWidth: {\n      type: Number,\n      default: 2\n    },\n    borderColor: {\n      type: String,\n      default: 'rgba(0, 0, 0, 0.1)'\n    },\n    leftIcon: {\n      type: String,\n      default: ''\n    },\n    leftColor: {\n      type: String,\n      default: ''\n    },\n    rightIcon: {\n      type: String,\n      default: ''\n    },\n    rightColor: {\n      type: String,\n      default: ''\n    },\n    originTitleColor: {\n      type: String,\n      default: '#000000'\n    },\n    originLeftIcon: {\n      type: String,\n      default: 'shizhong'\n    },\n    originRightIcon: {\n      type: String,\n      default: 'guanbi'\n    },\n    originIconColor: {\n      type: String,\n      default: '#999999'\n    }\n  },\n  computed: {\n    wrapStyle () {\n      const { borderWidth, borderColor } = this;\n      return {\n        borderBottomWidth: borderWidth + 'px',\n        borderColor\n      };\n    },\n    titleStyle () {\n      const { color, originTitleColor, fontSize } = this;\n      return {\n        fontSize: fontSize + 'px',\n        color: color || originTitleColor\n      };\n    }\n  },\n  methods: {\n    onClick () {\n      this.$emit('select', this.index);\n    },\n    onLeftClick () {\n      this.$emit('leftClicked', this.index);\n    },\n    onRightClick () {\n      this.$emit('rightClicked', this.index);\n    }\n  }\n};\n</script>\n",null],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 231 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17324,7 +13723,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _fmIcon = __webpack_require__(6);
+var _fmIcon = __webpack_require__(4);
 
 var _fmIcon2 = _interopRequireDefault(_fmIcon);
 
@@ -17476,7 +13875,7 @@ exports.default = {
 //
 
 /***/ }),
-/* 232 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -17528,7 +13927,7 @@ if (false) {
 }
 
 /***/ }),
-/* 233 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -17590,7 +13989,7 @@ if (false) {
 }
 
 /***/ }),
-/* 234 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17600,7 +13999,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(235);
+var _index = __webpack_require__(237);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -17612,25 +14011,2870 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 235 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(236)
-
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(238)
+}
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(238),
+  __webpack_require__(240),
   /* template */
-  __webpack_require__(239),
+  __webpack_require__(241),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  "data-v-c6e0f338",
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-native-tab/index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c6e0f338", Component.options)
+  } else {
+    hotAPI.reload("data-v-c6e0f338", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 238 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(239);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("707f6952", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c6e0f338\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c6e0f338\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 239 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.fm-tab-page[data-v-c6e0f338] {\n  width: 10rem;\n}\n.tab-title-list[data-v-c6e0f338] {\n  width: 10rem;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  border-bottom-width: 0.01852rem;\n  border-color: rgba(0,0,0,0.10);\n}\n.tab-title-wrap[data-v-c6e0f338] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  -webkit-justify-content: space-around;\n          justify-content: space-around;\n  padding: 0 0.44444rem;\n}\n.title-item[data-v-c6e0f338] {\n  border-color: #198DED;\n  padding: 0.25rem 0.16667rem;\n  margin-right: 0.38889rem;\n}\n.item-title[data-v-c6e0f338] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 0.38889rem;\n  line-height: 0.52778rem;\n}\n.border-bottom[data-v-c6e0f338] {\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  height: 0.02778rem;\n  width: 1.22222rem;\n}\n.tab-page-wrap[data-v-c6e0f338] {\n  width: 10rem;\n  overflow: hidden;\n}\n.tab-container[data-v-c6e0f338] {\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n          flex: 1;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  position: absolute;\n}\n.tab-item[data-v-c6e0f338] {\n  width: 10rem;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-native-tab/index.vue?6e0e9d5a"],"names":[],"mappings":";AAqEA;EACA,aAAA;CACA;AAEA;EACA,aAAA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,gCAAA;EACA,+BAAA;CACA;AAEA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,sCAAA;UAAA,8BAAA;EACA,sBAAA;CACA;AAEA;EACA,sBAAA;EACA,4BAAA;EACA,yBAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,sBAAA;EACA,wBAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,UAAA;EACA,mBAAA;EACA,kBAAA;CACA;AAEA;EACA,aAAA;EACA,iBAAA;CACA;AAEA;EACA,oBAAA;EAAA,gBAAA;UAAA,QAAA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,mBAAA;CACA;AAEA;EACA,aAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 18/04/03. -->\n<template>\n  <div v-if=\"!isCreator\" class=\"fm-tab-page\"\n       :style=\"{ height: (tabPageHeight) + 'px', opacity: loaded ? 1 : 0}\">\n    <scroller class=\"tab-title-list\"\n              ref=\"tab-title-list\"\n              :show-scrollbar=\"false\"\n              scroll-direction=\"horizontal\"\n              :style=\"{ height: (cTabStyles.height) + 'px'}\">\n\n      <div class=\"tab-title-wrap\"\n           ref=\"tab-title-wrap\">\n        <div class=\"title-item\"\n             v-for=\"(v, idx) in tabTitles\"\n             :key=\"idx\"\n             @click=\"setPage(idx)\"\n             :ref=\"'fm-tab-title-'+idx\"\n             :style=\"{ borderBottomWidth: currentPage === idx ? '3px' : '0px' }\">\n          <text class=\"item-title\"\n                :style=\"{ fontSize: cTabStyles.fontSize + 'px',\n                          color: currentPage === idx ? cTabStyles.activeTitleColor : cTabStyles.titleColor,\n                          paddingLeft: cTabStyles.padding + 'px',\n                          paddingRight: cTabStyles.padding + 'px' }\">{{ v.text }}</text>\n        </div>\n      </div>\n    </scroller>\n    <div class=\"tab-page-wrap\"\n         ref=\"tab-page-wrap\"\n         @panstart=\"_onTouchStart\"\n         @panmove=\"_onTouchMove\"\n         @panend=\"_onTouchEnd\"\n         :style=\"{ height: (tabPageHeight-cTabStyles.height) + 'px' }\">\n      <div class=\"tab-container\"\n           ref=\"tab-container\">\n        <div class=\"tab-item\"\n             v-for=\"(v, idx) in tabTitles\"\n             :key=\"idx\"\n             :style=\"{ height: (tabPageHeight-cTabStyles.height) + 'px' }\">\n          <slot :name=\"`tab-item-${idx}`\"></slot>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <FmTab v-else\n         :style=\"{ height: (tabPageHeight) + 'px' }\"\n         :container=\"{\n            viewpagepaddingLeft: 0,\n            viewpagepaddingRight: 0,\n            viewpagepaddingTop: cTabStyles.height + 12,\n            viewpagepaddingBottom: 0,\n            tabpaddingLeft: 48,\n            tabpaddingRight: 48,\n            tabpaddingTop: 0,\n            tabpaddingBottom: 0\n         }\"\n         :tab=\"cTabTitles\"\n         @tabPosition=\"nativeTabSlided\">\n    <div class=\"tab-item\"\n         v-for=\"(v, idx) in tabTitles\"\n         :key=\"idx\"\n         :style=\"{ height: (tabPageHeight-cTabStyles.height-12) + 'px' }\">\n      <slot :name=\"`tab-item-${idx}`\"></slot>\n    </div>\n  </FmTab>\n</template>\n\n<style scoped>\n  .fm-tab-page {\n    width: 1080px;\n  }\n\n  .tab-title-list {\n    width: 1080px;\n    flex-direction: row;\n    border-bottom-width: 2px;\n    border-color: rgba(0,0,0,0.10);\n  }\n\n  .tab-title-wrap {\n    flex-direction: row;\n    justify-content: space-around;\n    padding: 0 48px;\n  }\n\n  .title-item {\n    border-color: #198DED;\n    padding: 27px 18px;\n    margin-right: 42px;\n  }\n\n  .item-title {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 42px;\n    line-height: 57px;\n  }\n\n  .border-bottom {\n    position: absolute;\n    left: 0;\n    bottom: 0;\n    height: 3px;\n    width: 132px;\n  }\n\n  .tab-page-wrap {\n    width: 1080px;\n    overflow: hidden;\n  }\n\n  .tab-container {\n    flex: 1;\n    flex-direction: row;\n    position: absolute;\n  }\n\n  .tab-item {\n    width: 1080px;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nconst dom = weex.requireModule('dom');\nconst isH5 = weex.config.env.platform === 'Web';\n\nexport default {\n  name: 'FmNativeTab',\n  props: {\n    tabTitles: {\n      type: Array,\n      default: () => ([])\n    },\n    panDist: {\n      type: Number,\n      default: 200\n    },\n    duration: {\n      type: [Number, String],\n      default: 300\n    },\n    tabPageHeight: {\n      type: [String, Number],\n      default: 1854\n    },\n    tabStyles: {\n      type: Object,\n      default: () => ({})\n    },\n    timingFunction: {\n      type: String,\n      default: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'\n    },\n    selectIndex: {\n      type: Number,\n      default: 0\n    }\n  },\n  watch: {\n    selectIndex (val) {\n      if (this.loaded) {\n        this.setPage(this.selectIndex, false);\n      }\n    }\n  },\n  computed: {\n    isCreator () {\n      return weex.supports && weex.supports('@component/FmTab');\n    },\n    maxPage () {\n      return this.tabTitles.length - 1;\n    },\n    cTabTitles () {\n      const { tabStyles } = this;\n      const def = {\n        paddingStart: 18,\n        paddingEnd: 18,\n        minWidth: 120,\n        textunSelectColor: tabStyles.activeTitleColor || '#99000000',\n        textSelectColor: tabStyles.titleColor || '#198DED'\n      };\n      return this.tabTitles.map(item => {\n        return Object.assign({}, def, item);\n      });\n    },\n    cTabStyles () {\n      const defaultStyle = {\n        titleColor: 'rgba(0, 0, 0, 0.6)',\n        activeTitleColor: '#198DED',\n        height: 102,\n        padding: 18,\n        fontSize: 42,\n        activeBottomColor: '#198DED'\n      };\n      return Object.assign({}, defaultStyle, this.tabStyles);\n    }\n  },\n  data: () => ({\n    loaded: false,\n    currentPage: 0,\n    gesToken: 0,\n    isMoving: false,\n    startTime: 0,\n    deltaX: 0,\n    translateX: 0,\n    startPosX: 0,\n    startPosY: 0,\n    judge: 'INITIAL'\n  }),\n  methods: {\n    next () {\n      let page = this.currentPage;\n      if (page < this.maxPage) {\n        page++;\n      }\n      this.setPage(page);\n    },\n    prev () {\n      let page = this.currentPage;\n      if (page > 0) {\n        page--;\n      }\n      this.setPage(page);\n    },\n    _onTouchStart (e) {\n      if (isH5) {\n        this.startPosX = this._getTouchXPos(e);\n        this.startPosY = this._getTouchYPos(e);\n        this.deltaX = 0;\n        this.startTime = new Date().getTime();\n      }\n    },\n    _onTouchMove (e) {\n      if (isH5) {\n        this.deltaX = this._getTouchXPos(e) - this.startPosX;\n        this.deltaY = Math.abs(this._getTouchYPos(e) - this.startPosY + 1);\n        if (this.judge === 'INITIAL' && Math.abs(this.deltaX) / this.deltaY > 1.73) {\n          this.judge = 'SLIDE_ING';\n        }\n      }\n    },\n    _onTouchEnd (e) {\n      if (isH5) {\n        if (this.judge === 'SLIDE_ING') {\n          if (this.deltaX < -50) {\n            this.next();\n          } else if (this.deltaX > 50) {\n            this.prev();\n          }\n        }\n        this.judge = 'INITIAL';\n      }\n    },\n    setPage (page, animated = true) {\n      if (this.isMoving === true || this.tabTitles.length <= 0) {\n        return;\n      }\n      this.isMoving = true;\n      const currentTabEl = this.$refs[`fm-tab-title-${page}`][0];\n      const tabWidth = this.$refs[`fm-tab-title-${page}`][0].$el.clientWidth;\n      const tabOffset = this.$refs[`fm-tab-title-${page}`][0].$el.offsetLeft;\n\n      if (tabOffset >= 1080 / 2) {\n        dom.scrollToElement(currentTabEl, {\n          offset: -1080 / 2 + tabWidth / 2,\n          animated\n        });\n      } else {\n        dom.scrollToElement(currentTabEl, {\n          offset: -tabOffset,\n          animated\n        });\n      }\n\n      this.currentPage = page;\n      this._animateTransformX(page, animated);\n      this.$emit('fmTabPageTabSelected', { page });\n    },\n    nativeTabSlided (e) {\n      this.$emit('fmTabPageTabSelected', { page: e.position });\n    },\n    _animateTransformX (page, animated = true) {\n      const { duration, timingFunction } = this;\n      const containerEl = this.$refs[`tab-container`];\n      const dist = page * 1080;\n      animation.transition(containerEl, {\n        styles: {\n          transform: `translateX(${-dist}px)`\n        },\n        duration: animated ? duration : 0.00001,\n        timingFunction,\n        delay: 0\n      }, () => {\n        this.isMoving = false;\n      });\n    },\n    _getTouchXPos (e) {\n      return e.changedTouches[0]['pageX'];\n    },\n    _getTouchYPos (e) {\n      return e.changedTouches[0]['pageY'];\n    }\n  },\n  mounted () {\n    if (this.isCreator) { return; }\n    this.setPage(this.selectIndex, false);\n    setTimeout(() => {\n      this.loaded = true;\n    }, 50);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+/* 240 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var animation = weex.requireModule('animation');
+var dom = weex.requireModule('dom');
+var isH5 = weex.config.env.platform === 'Web';
+
+exports.default = {
+  name: 'FmNativeTab',
+  props: {
+    tabTitles: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    panDist: {
+      type: Number,
+      default: 200
+    },
+    duration: {
+      type: [Number, String],
+      default: 300
+    },
+    tabPageHeight: {
+      type: [String, Number],
+      default: 1854
+    },
+    tabStyles: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
+    timingFunction: {
+      type: String,
+      default: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+    },
+    selectIndex: {
+      type: Number,
+      default: 0
+    }
+  },
+  watch: {
+    selectIndex: function selectIndex(val) {
+      if (this.loaded) {
+        this.setPage(this.selectIndex, false);
+      }
+    }
+  },
+  computed: {
+    isCreator: function isCreator() {
+      return weex.supports && weex.supports('@component/FmTab');
+    },
+    maxPage: function maxPage() {
+      return this.tabTitles.length - 1;
+    },
+    cTabTitles: function cTabTitles() {
+      var tabStyles = this.tabStyles;
+
+      var def = {
+        paddingStart: 18,
+        paddingEnd: 18,
+        minWidth: 120,
+        textunSelectColor: tabStyles.activeTitleColor || '#99000000',
+        textSelectColor: tabStyles.titleColor || '#198DED'
+      };
+      return this.tabTitles.map(function (item) {
+        return Object.assign({}, def, item);
+      });
+    },
+    cTabStyles: function cTabStyles() {
+      var defaultStyle = {
+        titleColor: 'rgba(0, 0, 0, 0.6)',
+        activeTitleColor: '#198DED',
+        height: 102,
+        padding: 18,
+        fontSize: 42,
+        activeBottomColor: '#198DED'
+      };
+      return Object.assign({}, defaultStyle, this.tabStyles);
+    }
+  },
+  data: function data() {
+    return {
+      loaded: false,
+      currentPage: 0,
+      gesToken: 0,
+      isMoving: false,
+      startTime: 0,
+      deltaX: 0,
+      translateX: 0,
+      startPosX: 0,
+      startPosY: 0,
+      judge: 'INITIAL'
+    };
+  },
+  methods: {
+    next: function next() {
+      var page = this.currentPage;
+      if (page < this.maxPage) {
+        page++;
+      }
+      this.setPage(page);
+    },
+    prev: function prev() {
+      var page = this.currentPage;
+      if (page > 0) {
+        page--;
+      }
+      this.setPage(page);
+    },
+    _onTouchStart: function _onTouchStart(e) {
+      if (isH5) {
+        this.startPosX = this._getTouchXPos(e);
+        this.startPosY = this._getTouchYPos(e);
+        this.deltaX = 0;
+        this.startTime = new Date().getTime();
+      }
+    },
+    _onTouchMove: function _onTouchMove(e) {
+      if (isH5) {
+        this.deltaX = this._getTouchXPos(e) - this.startPosX;
+        this.deltaY = Math.abs(this._getTouchYPos(e) - this.startPosY + 1);
+        if (this.judge === 'INITIAL' && Math.abs(this.deltaX) / this.deltaY > 1.73) {
+          this.judge = 'SLIDE_ING';
+        }
+      }
+    },
+    _onTouchEnd: function _onTouchEnd(e) {
+      if (isH5) {
+        if (this.judge === 'SLIDE_ING') {
+          if (this.deltaX < -50) {
+            this.next();
+          } else if (this.deltaX > 50) {
+            this.prev();
+          }
+        }
+        this.judge = 'INITIAL';
+      }
+    },
+    setPage: function setPage(page) {
+      var animated = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+      if (this.isMoving === true || this.tabTitles.length <= 0) {
+        return;
+      }
+      this.isMoving = true;
+      var currentTabEl = this.$refs['fm-tab-title-' + page][0];
+      var tabWidth = this.$refs['fm-tab-title-' + page][0].$el.clientWidth;
+      var tabOffset = this.$refs['fm-tab-title-' + page][0].$el.offsetLeft;
+
+      if (tabOffset >= 1080 / 2) {
+        dom.scrollToElement(currentTabEl, {
+          offset: -1080 / 2 + tabWidth / 2,
+          animated: animated
+        });
+      } else {
+        dom.scrollToElement(currentTabEl, {
+          offset: -tabOffset,
+          animated: animated
+        });
+      }
+
+      this.currentPage = page;
+      this._animateTransformX(page, animated);
+      this.$emit('fmTabPageTabSelected', { page: page });
+    },
+    nativeTabSlided: function nativeTabSlided(e) {
+      this.$emit('fmTabPageTabSelected', { page: e.position });
+    },
+    _animateTransformX: function _animateTransformX(page) {
+      var _this = this;
+
+      var animated = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      var duration = this.duration,
+          timingFunction = this.timingFunction;
+
+      var containerEl = this.$refs['tab-container'];
+      var dist = page * 1080;
+      animation.transition(containerEl, {
+        styles: {
+          transform: 'translateX(' + -dist + 'px)'
+        },
+        duration: animated ? duration : 0.00001,
+        timingFunction: timingFunction,
+        delay: 0
+      }, function () {
+        _this.isMoving = false;
+      });
+    },
+    _getTouchXPos: function _getTouchXPos(e) {
+      return e.changedTouches[0]['pageX'];
+    },
+    _getTouchYPos: function _getTouchYPos(e) {
+      return e.changedTouches[0]['pageY'];
+    }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    if (this.isCreator) {
+      return;
+    }
+    this.setPage(this.selectIndex, false);
+    setTimeout(function () {
+      _this2.loaded = true;
+    }, 50);
+  }
+};
+
+/***/ }),
+/* 241 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return (!_vm.isCreator) ? _c('div', {
+    staticClass: "fm-tab-page",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      height: (_vm.tabPageHeight) + 'px',
+      opacity: _vm.loaded ? 1 : 0
+    }))
+  }, [_c('scroller', {
+    ref: "tab-title-list",
+    staticClass: "tab-title-list",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      height: (_vm.cTabStyles.height) + 'px'
+    })),
+    attrs: {
+      "show-scrollbar": false,
+      "scroll-direction": "horizontal"
+    }
+  }, [_c('div', {
+    ref: "tab-title-wrap",
+    staticClass: "tab-title-wrap",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, _vm._l((_vm.tabTitles), function(v, idx) {
+    return _c('div', {
+      key: idx,
+      ref: 'fm-tab-title-' + idx,
+      refInFor: true,
+      staticClass: "title-item",
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle({
+        borderBottomWidth: _vm.currentPage === idx ? '3px' : '0px'
+      })),
+      on: {
+        "click": function($event) {
+          _vm.setPage(idx)
+        }
+      }
+    }, [_c('text', {
+      staticClass: "item-title",
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle({
+        fontSize: _vm.cTabStyles.fontSize + 'px',
+        color: _vm.currentPage === idx ? _vm.cTabStyles.activeTitleColor : _vm.cTabStyles.titleColor,
+        paddingLeft: _vm.cTabStyles.padding + 'px',
+        paddingRight: _vm.cTabStyles.padding + 'px'
+      }))
+    }, [_vm._v(_vm._s(v.text))])])
+  }))]), _vm._v(" "), _c('div', {
+    ref: "tab-page-wrap",
+    staticClass: "tab-page-wrap",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      height: (_vm.tabPageHeight - _vm.cTabStyles.height) + 'px'
+    })),
+    on: {
+      "panstart": _vm._onTouchStart,
+      "panmove": _vm._onTouchMove,
+      "panend": _vm._onTouchEnd
+    }
+  }, [_c('div', {
+    ref: "tab-container",
+    staticClass: "tab-container",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, _vm._l((_vm.tabTitles), function(v, idx) {
+    return _c('div', {
+      key: idx,
+      staticClass: "tab-item",
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle({
+        height: (_vm.tabPageHeight - _vm.cTabStyles.height) + 'px'
+      }))
+    }, [_vm._t(("tab-item-" + idx))], 2)
+  }))])], 1) : _c('FmTab', {
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      height: (_vm.tabPageHeight) + 'px'
+    })),
+    attrs: {
+      "container": {
+        viewpagepaddingLeft: 0,
+        viewpagepaddingRight: 0,
+        viewpagepaddingTop: _vm.cTabStyles.height + 12,
+        viewpagepaddingBottom: 0,
+        tabpaddingLeft: 48,
+        tabpaddingRight: 48,
+        tabpaddingTop: 0,
+        tabpaddingBottom: 0
+      },
+      "tab": _vm.cTabTitles
+    },
+    on: {
+      "tabPosition": _vm.nativeTabSlided
+    }
+  }, _vm._l((_vm.tabTitles), function(v, idx) {
+    return _c('div', {
+      key: idx,
+      staticClass: "tab-item",
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle({
+        height: (_vm.tabPageHeight - _vm.cTabStyles.height - 12) + 'px'
+      }))
+    }, [_vm._t(("tab-item-" + idx))], 2)
+  }))
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-c6e0f338", module.exports)
+  }
+}
+
+/***/ }),
+/* 242 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(243);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 243 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(244),
+  /* template */
+  __webpack_require__(245),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-btnbar/index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5aa1ccbc", Component.options)
+  } else {
+    hotAPI.reload("data-v-5aa1ccbc", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 244 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _fmFooter = __webpack_require__(43);
+
+var _fmFooter2 = _interopRequireDefault(_fmFooter);
+
+var _fmButton = __webpack_require__(36);
+
+var _fmButton2 = _interopRequireDefault(_fmButton);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+  name: 'FmBtnbar',
+  components: { FmButton: _fmButton2.default, FmFooter: _fmFooter2.default },
+  props: {
+    items: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    backgroundColor: {
+      type: String,
+      default: '#FFFFFF'
+    }
+  },
+  data: function data() {
+    return {
+      paddingSize: '',
+      buttonSize: ''
+    };
+  },
+  watch: {
+    items: function items() {
+      this.checkPadding();
+    }
+  },
+  created: function created() {
+    this.checkPadding();
+  },
+
+  methods: {
+    checkPadding: function checkPadding() {
+      if (this.items.length >= 2 || this.$slots.default && this.$slots.default.length >= 2) {
+        this.paddingSize = 'large';
+        this.buttonSize = 'large';
+      } else {
+        this.paddingSize = '';
+        this.buttonSize = 'huge';
+      }
+    },
+    btnClicked: function btnClicked(index) {
+      this.$emit('fmBtnbarBtnClicked', { index: index });
+    }
+  }
+};
+
+/***/ }),
+/* 245 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('fm-footer', {
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "padding-size": _vm.paddingSize,
+      "backgroundColor": _vm.backgroundColor
+    }
+  }, [_vm._l((_vm.items), function(item, index) {
+    return (!_vm.$slots.default) ? _c('fm-button', _vm._b({
+      key: index,
+      staticClass: "tabbar-item",
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(undefined)),
+      attrs: {
+        "animated": true,
+        "size": _vm.buttonSize
+      },
+      on: {
+        "buttonClicked": function($event) {
+          _vm.btnClicked(index)
+        }
+      }
+    }, 'fm-button', Object.assign({}, item), false), [_vm._v(_vm._s(item.title))]) : _vm._e()
+  }), _vm._v(" "), _vm._t("default")], 2)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-5aa1ccbc", module.exports)
+  }
+}
+
+/***/ }),
+/* 246 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(247);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 247 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(248)
+}
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(250),
+  /* template */
+  __webpack_require__(251),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  "data-v-95a96b12",
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-textbar/index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-95a96b12", Component.options)
+  } else {
+    hotAPI.reload("data-v-95a96b12", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 248 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(249);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("2844a498", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-95a96b12\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-95a96b12\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 249 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.button-wrap[data-v-95a96b12] {\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n          flex: 1;\n  height: 1.33333rem;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n          align-items: center;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n          justify-content: center;\n}\n.border[data-v-95a96b12] {\n  width: 0.01852rem;\n  height: 0.66667rem;\n  background-color: rgba(0, 0, 0, 0.1);\n}\n.button-wrap[data-v-95a96b12]:active {\n  background-color: rgba(0, 0, 0, 0.04);\n}\n.button-title[data-v-95a96b12] {\n  font-size: 0.44444rem;\n  color: #198DED;\n  font-weight: 500;\n  font-family: sans-serif-medium;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-textbar/index.vue?42c108df"],"names":[],"mappings":";AAkBA;EACA,oBAAA;EAAA,gBAAA;UAAA,QAAA;EACA,mBAAA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,yBAAA;EAAA,gCAAA;UAAA,wBAAA;CACA;AAEA;EACA,kBAAA;EACA,mBAAA;EACA,qCAAA;CACA;AAEA;EACA,sCAAA;CACA;AAEA;EACA,sBAAA;EACA,eAAA;EACA,iBAAA;EACA,+BAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/03/13. -->\n<template>\n  <fm-footer :backgroundColor=\"backgroundColor\">\n    <template v-for=\"(item, index) in items\">\n      <div class=\"button-wrap\"\n           :key=\"index\"\n           @click=\"onClick(index)\">\n        <text class=\"button-title\" :style=\"item.color && { color: item.color }\">{{ item.title }}</text>\n      </div>\n      <template v-if=\"items.length >= 2 && index != items.length - 1\">\n        <div class=\"border\" :key=\"index\"></div>\n      </template>\n    </template>\n  </fm-footer>\n</template>\n\n<style scoped>\n  .button-wrap {\n    flex: 1;\n    height: 144px;\n    align-items: center;\n    justify-content: center;\n  }\n\n  .border {\n    width: 2px;\n    height: 72px;\n    background-color: rgba(0, 0, 0, 0.1);\n  }\n\n  .button-wrap:active {\n    background-color: rgba(0, 0, 0, 0.04);\n  }\n\n  .button-title {\n    font-size: 48px;\n    color: #198DED;\n    font-weight: 500;\n    font-family: sans-serif-medium;\n  }\n</style>\n\n<script>\nimport FmFooter from '../fm-footer';\nexport default {\n  name: 'FmTextbar',\n  components: { FmFooter },\n  props: {\n    items: {\n      type: Array,\n      default: () => ([])\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    }\n  },\n  methods: {\n    onClick (index) {\n      this.$emit('fmTextbarBtnClicked', { index });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+/* 250 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _fmFooter = __webpack_require__(43);
+
+var _fmFooter2 = _interopRequireDefault(_fmFooter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  name: 'FmTextbar',
+  components: { FmFooter: _fmFooter2.default },
+  props: {
+    items: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    backgroundColor: {
+      type: String,
+      default: '#FFFFFF'
+    }
+  },
+  methods: {
+    onClick: function onClick(index) {
+      this.$emit('fmTextbarBtnClicked', { index: index });
+    }
+  }
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/***/ }),
+/* 251 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('fm-footer', {
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "backgroundColor": _vm.backgroundColor
+    }
+  }, [_vm._l((_vm.items), function(item, index) {
+    return [_c('div', {
+      key: index,
+      staticClass: "button-wrap",
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(undefined)),
+      on: {
+        "click": function($event) {
+          _vm.onClick(index)
+        }
+      }
+    }, [_c('text', {
+      staticClass: "button-title",
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(item.color && {
+        color: item.color
+      }))
+    }, [_vm._v(_vm._s(item.title))])]), _vm._v(" "), (_vm.items.length >= 2 && index != _vm.items.length - 1) ? [_c('div', {
+      key: index,
+      staticClass: "border",
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(undefined))
+    })] : _vm._e()]
+  })], 2)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-95a96b12", module.exports)
+  }
+}
+
+/***/ }),
+/* 252 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(253);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 253 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(254)
+}
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(256),
+  /* template */
+  __webpack_require__(257),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  "data-v-18ede8e6",
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-slider/index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-18ede8e6", Component.options)
+  } else {
+    hotAPI.reload("data-v-18ede8e6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 254 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(255);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("673aa6ee", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-18ede8e6\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-18ede8e6\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 255 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.fm-banner-wrap[data-v-18ede8e6] {\n  width: 10rem;\n  padding: 0.22222rem 0 0.22222rem 0.22222rem;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  height: 3.57407rem;\n  overflow: hidden;\n}\n.banner-wrap--1[data-v-18ede8e6] {\n  width: 10rem;\n  height: 4.77778rem;\n  padding: 0.44444rem 0.44444rem;\n}\n.fm-nativeBanner-wrap[data-v-18ede8e6] {\n  width: 10rem;\n  height: 3.57407rem;\n  padding: 0.22222rem 0;\n}\n.nativeBanner-wrap--1[data-v-18ede8e6] {\n  width: 10rem;\n  height: 4.77778rem;\n  padding: 0.44444rem 0.22222rem;\n}\n.card-list[data-v-18ede8e6] {\n  position: absolute;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  height: 3.12963rem;\n}\n.card-item[data-v-18ede8e6] {\n  width: 7.33333rem;\n  height: 3.12963rem;\n  margin-right: 0.11111rem;\n  border-radius: 0.05556rem;\n  overflow: hidden;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-slider/index.vue?54f05307"],"names":[],"mappings":";AAkDA;EACA,aAAA;EACA,4CAAA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,mBAAA;EACA,iBAAA;CACA;AAEA;EACA,aAAA;EACA,mBAAA;EACA,+BAAA;CACA;AAEA;EACA,aAAA;EACA,mBAAA;EACA,sBAAA;CACA;AAEA;EACA,aAAA;EACA,mBAAA;EACA,+BAAA;CACA;AAEA;EACA,mBAAA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,mBAAA;CACA;AAEA;EACA,kBAAA;EACA,mBAAA;EACA,yBAAA;EACA,0BAAA;EACA,iBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/03/18. [!] Just a beta version! -->\n<template>\n  <div v-if=\"!isCreator\"\n       class=\"fm-banner-wrap\"\n       :class=\"['banner-wrap--' + items.length]\"\n       ref=\"sliderCtn\"\n       @panstart=\"onPanStart\"\n       @panmove=\"onPanMove\"\n       @panend=\"onPanEnd\"\n       @horizontalpan=\"startHandle\">\n    <div class=\"card-list\"\n         v-if=\"items.length > 1\"\n         ref=\"card-list\"\n         :style=\"{ left: -(cardS.width * 2) + 'px' }\">\n      <div class=\"card-item\"\n           v-for=\"(item, index) in cItems\"\n           :key=\"index\"\n           :ref=\"`card${index-2}`\"\n           :style=\"(index-2) === -1 && { transform: `translateX(-12px)` }\">\n        <slot :name=\"`card${index-2}`\">\n          <image :style=\"{ width: `${cardS.width}px`, height: `${cardS.height}px` }\"\n                 :src=\"item.src\"\n                 @click=\"itemClicked(index-2 < 0 ? index-2+items.length : index-2 >= items.length ? index-2-items.length : index-2 )\" />\n        </slot>\n      </div>\n    </div>\n    <div class=\"card-list\"\n         v-else>\n      <div v-for=\"(item, index) in items\"\n           :key=\"index\"\n           :ref=\"`card${index}`\">\n        <slot :name=\"`card${index}`\">\n          <image :style=\"{ width: `${cardS.width*1.2425}px`, height: `${cardS.height*1.2425}px` }\"\n                 :src=\"item.src\"\n                 @click=\"itemClicked(index)\" />\n        </slot>\n      </div>\n    </div>\n  </div>\n  <FmSliderNative v-else\n                  class=\"fm-nativeBanner-wrap\"\n                  :class=\"['nativeBanner-wrap--' + items.length]\"\n                  :autoplay=\"autoPlay\"\n                  @itemclick=\"itemClicked\"\n                  :data=\"cNativeItems\">\n  </FmSliderNative>\n</template>\n\n<style scoped>\n  .fm-banner-wrap {\n    width: 1080px;\n    padding: 24px 0 24px 24px;\n    flex-direction: row;\n    height: 386px;\n    overflow: hidden;\n  }\n\n  .banner-wrap--1 {\n    width: 1080px;\n    height: 516px;\n    padding: 48px 48px;\n  }\n\n  .fm-nativeBanner-wrap {\n    width: 1080px;\n    height: 386px;\n    padding: 24px 0;\n  }\n\n  .nativeBanner-wrap--1 {\n    width: 1080px;\n    height: 516px;\n    padding: 48px 24px;\n  }\n\n  .card-list {\n    position: absolute;\n    flex-direction: row;\n    height: 338px;\n  }\n\n  .card-item {\n    width: 792px;\n    height: 338px;\n    margin-right: 12px;\n    border-radius: 6px;\n    overflow: hidden;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nimport Utils from '../utils';\nimport BindEnv from '../utils/bind-env';\nimport Binding from 'weex-bindingx/lib/index.weex.js';\n\nexport default {\n  name: 'FmSlider',\n  props: {\n    items: {\n      type: Array,\n      default: () => ([])\n    },\n    panOffset: {\n      type: Number,\n      default: 30\n    },\n    cardS: {\n      type: Object,\n      default: () => ({\n        width: 792,\n        height: 338\n      })\n    },\n    autoPlay: {\n      type: Boolean,\n      default: false\n    },\n    interval: {\n      type: [Number, String],\n      default: 4000\n    },\n    timingFunction: {\n      type: String,\n      default: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'\n    }\n  },\n  data: () => ({\n    selectIndex: 0,\n    gesToken: 0,\n    isMoving: false,\n    startX: 0,\n    startTime: 0,\n    currentIndex: 0,\n    autoPlayTimer: null\n  }),\n  computed: {\n    isCreator () {\n      return weex.supports && weex.supports('@component/FmSliderNative');\n    },\n    cItems () {\n      const { items } = this;\n      let cItems = [];\n      if (items.length >= 2) {\n        cItems = cItems.concat(items.slice(-2), items, items.slice(0, 2));\n      }\n      return cItems;\n    },\n    cNativeItems () {\n      const { items } = this;\n      return items.map((item) => {\n        return item.src;\n      });\n    },\n    cardLength () {\n      return this.items.length;\n    }\n  },\n  methods: {\n    startHandle (e) {\n      if (BindEnv.supportsEB() && e.state === 'start') {\n        this.clearAutoPlay();\n        setTimeout(() => {\n          const sliderCtn = this.$refs[`sliderCtn`];\n          this.bindExp(sliderCtn);\n        }, 0);\n      }\n    },\n    onPanStart (e) {\n      if (BindEnv.supportsEB()) {\n        return;\n      }\n      this.clearAutoPlay();\n      this.startX = e.changedTouches[0].clientX;\n      this.startTime = Date.now();\n    },\n    onPanMove (e) {\n      if (BindEnv.supportsEB() || this.isMoving) {\n        return;\n      }\n      const moveX = e.changedTouches[0].clientX - this.startX;\n      const currentCardLeft = this.currentIndex * (this.cardS.width + 12);\n\n      const listEl = this.$refs['card-list'];\n      if (!listEl) { return; }\n      listEl && animation.transition(listEl, {\n        styles: {\n          transform: `translateX(${moveX - currentCardLeft}px)`\n        },\n        timingFunction: 'ease',\n        delay: 0,\n        duration: 0\n      }, () => {\n      });\n    },\n    onPanEnd (e) {\n      if (BindEnv.supportsEB()) {\n        return;\n      }\n      this.panEnd(e);\n    },\n    panEnd (e) {\n      this.isMoving = true;\n      let moveX = e.deltaX;\n\n      if (Utils.env.isWeb()) {\n        moveX = e.changedTouches[0].clientX - this.startX;\n      }\n\n      const originIndex = this.currentIndex;\n      let selectIndex = originIndex;\n      const duration = Date.now() - this.startTime;\n      const panOffset = this.panOffset || (this.cardS.width / 2);\n\n      if (moveX < -panOffset || (moveX < -10 && duration < 200)) {\n        // 允许向右越界\n        if (selectIndex !== this.cardLength) {\n          selectIndex++;\n        }\n      } else if (moveX > panOffset || (moveX > 10 && duration < 500)) {\n        // 允许向左越界\n        if (selectIndex !== -2) {\n          selectIndex--;\n        }\n      }\n\n      this.slideTo(originIndex, selectIndex);\n      setTimeout(() => { this.checkNeedAutoPlay(); }, 4000);\n    },\n    bindExp (element) {\n      if (element && element.ref) {\n        if (this.isMoving) {\n          Binding.unbind({\n            eventType: 'pan',\n            token: this.gesToken\n          });\n          this.gesToken = 0;\n          return;\n        }\n\n        const { currentIndex, cardS } = this;\n        const dist = currentIndex * (cardS.width + 12);\n        const listEl = this.$refs['card-list'];\n\n        // 卡片容器\n        const props = [{\n          element: listEl.ref,\n          property: 'transform.translateX',\n          expression: `${-dist}+x`\n        }];\n\n        // 当前卡片\n        const currCardEl = this.$refs[`card${currentIndex}`][0];\n        props.push({\n          element: currCardEl.ref,\n          property: 'transform.translateX',\n          expression: `x <= 0 ? (x / 792 * 12) : 0`\n        });\n        // 上一张卡片\n        const lastCardEl = this.$refs[`card${currentIndex - 1}`][0];\n        props.push({\n          element: lastCardEl.ref,\n          property: 'transform.translateX',\n          expression: `x > 0 ? (1 - (x / 792)) * -12 : -12`\n        });\n\n        const gesTokenObj = Binding.bind({\n          eventType: 'pan',\n          anchor: element.ref,\n          props\n        }, (e) => {\n          if (!this.isMoving && (e.state === 'end' || e.state === 'cancel' || e.state === 'exit')) {\n            this.panEnd(e);\n          }\n        });\n\n        this.gesToken = gesTokenObj.token;\n      }\n    },\n    slideTo (originIndex, selectIndex) {\n      const { cardS, timingFunction } = this;\n      const listEl = this.$refs['card-list'];\n      if (!listEl) { return; }\n      const dist = selectIndex * (cardS.width + 12);\n      // 卡片容器\n      listEl && animation.transition(listEl, {\n        styles: {\n          transform: `translateX(${-dist}px)`\n        },\n        duration: 500,\n        timingFunction\n      }, (e) => {\n        this.isMoving = false;\n        if (originIndex !== selectIndex) {\n          this.currentIndex = selectIndex;\n        }\n        this.checkNeedReset();\n      });\n\n      // 下一页\n      if (originIndex < selectIndex) {\n        // 当前卡片\n        const currCard = this.$refs[`card${this.currentIndex}`];\n        currCard && animation.transition(currCard[0], {\n          styles: {\n            transform: `translateX(-12px)`\n          },\n          duration: 500,\n          timingFunction\n        });\n        // 上一张卡片\n        const lastCard = this.$refs[`card${this.currentIndex - 1}`];\n        lastCard && animation.transition(lastCard[0], {\n          styles: {\n            transform: `translateX(0px)`\n          },\n          duration: 500,\n          timingFunction\n        });\n      // 上一页\n      } else if (originIndex > selectIndex) {\n        // 上一张卡片\n        const lastCard = this.$refs[`card${this.currentIndex - 1}`];\n        lastCard && animation.transition(lastCard[0], {\n          styles: {\n            transform: `translateX(0px)`\n          },\n          duration: 500,\n          timingFunction\n        });\n        // 上上张卡片\n        const llastCard = this.$refs[`card${this.currentIndex - 2}`];\n        llastCard && animation.transition(llastCard[0], {\n          styles: {\n            transform: `translateX(-12px)`\n          },\n          duration: 500,\n          timingFunction\n        });\n      }\n    },\n    // 检查页数是否达到临界条件进行重置处理，临界值 -2 ~ cardLength\n    checkNeedReset () {\n      const { cardS, timingFunction } = this;\n      const listEl = this.$refs['card-list'];\n      if (!listEl) { return; }\n      // 向右越界 重置为第一页\n      if (this.currentIndex >= this.cardLength) {\n        this.currentIndex = 0;\n        animation.transition(this.$refs[`card${this.cardLength - 1}`][0], {\n          styles: {\n            transform: `translateX(0px)`\n          },\n          duration: 0.00001,\n          timingFunction\n        });\n        animation.transition(this.$refs[`card-1`][0], {\n          styles: {\n            transform: `translateX(-12px)`\n          },\n          duration: 0.00001,\n          timingFunction\n        });\n      // 向左越界 重置为倒数第二页\n      } else if (this.currentIndex === -2) {\n        this.currentIndex = this.cardLength - 2;\n        animation.transition(this.$refs[`card${this.cardLength - 3}`][0], {\n          styles: {\n            transform: `translateX(-12px)`\n          },\n          duration: 0.00001,\n          timingFunction\n        });\n      } else {\n        return;\n      }\n      listEl && animation.transition(listEl, {\n        styles: {\n          transform: `translateX(${-this.currentIndex * (cardS.width + 12)}px)`\n        },\n        duration: 0.00001,\n        timingFunction\n      });\n    },\n    checkNeedAutoPlay () {\n      if (this.autoPlay && this.items.length >= 1) {\n        this.clearAutoPlay();\n        this.autoPlayTimer = setInterval(() => {\n          this.slideTo(this.currentIndex, this.currentIndex + 1);\n        }, parseInt(this.interval));\n      }\n    },\n    clearAutoPlay () {\n      this.autoPlayTimer && clearInterval(this.autoPlayTimer);\n    },\n    itemClicked (e) {\n      const idx = this.isCreator ? e.position : e;\n      this.$emit('fmSliderItemClicked', idx);\n    }\n  },\n  mounted () {\n    setTimeout(() => {\n      const sliderCtn = this.$refs[`sliderCtn`];\n      if (BindEnv.supportsEB() && sliderCtn && sliderCtn.ref) {\n        Binding.prepare && Binding.prepare({\n          anchor: sliderCtn.ref,\n          eventType: 'pan'\n        });\n      }\n    }, 20);\n    this.checkNeedAutoPlay();\n  },\n  beforeDestroy () {\n    this.clearAutoPlay();\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+/* 256 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _utils = __webpack_require__(44);
+
+var _utils2 = _interopRequireDefault(_utils);
+
+var _bindEnv = __webpack_require__(53);
+
+var _bindEnv2 = _interopRequireDefault(_bindEnv);
+
+var _indexWeex = __webpack_require__(46);
+
+var _indexWeex2 = _interopRequireDefault(_indexWeex);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var animation = weex.requireModule('animation');
+exports.default = {
+  name: 'FmSlider',
+  props: {
+    items: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    panOffset: {
+      type: Number,
+      default: 30
+    },
+    cardS: {
+      type: Object,
+      default: function _default() {
+        return {
+          width: 792,
+          height: 338
+        };
+      }
+    },
+    autoPlay: {
+      type: Boolean,
+      default: false
+    },
+    interval: {
+      type: [Number, String],
+      default: 4000
+    },
+    timingFunction: {
+      type: String,
+      default: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+    }
+  },
+  data: function data() {
+    return {
+      selectIndex: 0,
+      gesToken: 0,
+      isMoving: false,
+      startX: 0,
+      startTime: 0,
+      currentIndex: 0,
+      autoPlayTimer: null
+    };
+  },
+  computed: {
+    isCreator: function isCreator() {
+      return weex.supports && weex.supports('@component/FmSliderNative');
+    },
+    cItems: function cItems() {
+      var items = this.items;
+
+      var cItems = [];
+      if (items.length >= 2) {
+        cItems = cItems.concat(items.slice(-2), items, items.slice(0, 2));
+      }
+      return cItems;
+    },
+    cNativeItems: function cNativeItems() {
+      var items = this.items;
+
+      return items.map(function (item) {
+        return item.src;
+      });
+    },
+    cardLength: function cardLength() {
+      return this.items.length;
+    }
+  },
+  methods: {
+    startHandle: function startHandle(e) {
+      var _this = this;
+
+      if (_bindEnv2.default.supportsEB() && e.state === 'start') {
+        this.clearAutoPlay();
+        setTimeout(function () {
+          var sliderCtn = _this.$refs['sliderCtn'];
+          _this.bindExp(sliderCtn);
+        }, 0);
+      }
+    },
+    onPanStart: function onPanStart(e) {
+      if (_bindEnv2.default.supportsEB()) {
+        return;
+      }
+      this.clearAutoPlay();
+      this.startX = e.changedTouches[0].clientX;
+      this.startTime = Date.now();
+    },
+    onPanMove: function onPanMove(e) {
+      if (_bindEnv2.default.supportsEB() || this.isMoving) {
+        return;
+      }
+      var moveX = e.changedTouches[0].clientX - this.startX;
+      var currentCardLeft = this.currentIndex * (this.cardS.width + 12);
+
+      var listEl = this.$refs['card-list'];
+      if (!listEl) {
+        return;
+      }
+      listEl && animation.transition(listEl, {
+        styles: {
+          transform: 'translateX(' + (moveX - currentCardLeft) + 'px)'
+        },
+        timingFunction: 'ease',
+        delay: 0,
+        duration: 0
+      }, function () {});
+    },
+    onPanEnd: function onPanEnd(e) {
+      if (_bindEnv2.default.supportsEB()) {
+        return;
+      }
+      this.panEnd(e);
+    },
+    panEnd: function panEnd(e) {
+      var _this2 = this;
+
+      this.isMoving = true;
+      var moveX = e.deltaX;
+
+      if (_utils2.default.env.isWeb()) {
+        moveX = e.changedTouches[0].clientX - this.startX;
+      }
+
+      var originIndex = this.currentIndex;
+      var selectIndex = originIndex;
+      var duration = Date.now() - this.startTime;
+      var panOffset = this.panOffset || this.cardS.width / 2;
+
+      if (moveX < -panOffset || moveX < -10 && duration < 200) {
+        // 允许向右越界
+        if (selectIndex !== this.cardLength) {
+          selectIndex++;
+        }
+      } else if (moveX > panOffset || moveX > 10 && duration < 500) {
+        // 允许向左越界
+        if (selectIndex !== -2) {
+          selectIndex--;
+        }
+      }
+
+      this.slideTo(originIndex, selectIndex);
+      setTimeout(function () {
+        _this2.checkNeedAutoPlay();
+      }, 4000);
+    },
+    bindExp: function bindExp(element) {
+      var _this3 = this;
+
+      if (element && element.ref) {
+        if (this.isMoving) {
+          _indexWeex2.default.unbind({
+            eventType: 'pan',
+            token: this.gesToken
+          });
+          this.gesToken = 0;
+          return;
+        }
+
+        var currentIndex = this.currentIndex,
+            cardS = this.cardS;
+
+        var dist = currentIndex * (cardS.width + 12);
+        var listEl = this.$refs['card-list'];
+
+        // 卡片容器
+        var props = [{
+          element: listEl.ref,
+          property: 'transform.translateX',
+          expression: -dist + '+x'
+        }];
+
+        // 当前卡片
+        var currCardEl = this.$refs['card' + currentIndex][0];
+        props.push({
+          element: currCardEl.ref,
+          property: 'transform.translateX',
+          expression: 'x <= 0 ? (x / 792 * 12) : 0'
+        });
+        // 上一张卡片
+        var lastCardEl = this.$refs['card' + (currentIndex - 1)][0];
+        props.push({
+          element: lastCardEl.ref,
+          property: 'transform.translateX',
+          expression: 'x > 0 ? (1 - (x / 792)) * -12 : -12'
+        });
+
+        var gesTokenObj = _indexWeex2.default.bind({
+          eventType: 'pan',
+          anchor: element.ref,
+          props: props
+        }, function (e) {
+          if (!_this3.isMoving && (e.state === 'end' || e.state === 'cancel' || e.state === 'exit')) {
+            _this3.panEnd(e);
+          }
+        });
+
+        this.gesToken = gesTokenObj.token;
+      }
+    },
+    slideTo: function slideTo(originIndex, selectIndex) {
+      var _this4 = this;
+
+      var cardS = this.cardS,
+          timingFunction = this.timingFunction;
+
+      var listEl = this.$refs['card-list'];
+      if (!listEl) {
+        return;
+      }
+      var dist = selectIndex * (cardS.width + 12);
+      // 卡片容器
+      listEl && animation.transition(listEl, {
+        styles: {
+          transform: 'translateX(' + -dist + 'px)'
+        },
+        duration: 500,
+        timingFunction: timingFunction
+      }, function (e) {
+        _this4.isMoving = false;
+        if (originIndex !== selectIndex) {
+          _this4.currentIndex = selectIndex;
+        }
+        _this4.checkNeedReset();
+      });
+
+      // 下一页
+      if (originIndex < selectIndex) {
+        // 当前卡片
+        var currCard = this.$refs['card' + this.currentIndex];
+        currCard && animation.transition(currCard[0], {
+          styles: {
+            transform: 'translateX(-12px)'
+          },
+          duration: 500,
+          timingFunction: timingFunction
+        });
+        // 上一张卡片
+        var lastCard = this.$refs['card' + (this.currentIndex - 1)];
+        lastCard && animation.transition(lastCard[0], {
+          styles: {
+            transform: 'translateX(0px)'
+          },
+          duration: 500,
+          timingFunction: timingFunction
+        });
+        // 上一页
+      } else if (originIndex > selectIndex) {
+        // 上一张卡片
+        var _lastCard = this.$refs['card' + (this.currentIndex - 1)];
+        _lastCard && animation.transition(_lastCard[0], {
+          styles: {
+            transform: 'translateX(0px)'
+          },
+          duration: 500,
+          timingFunction: timingFunction
+        });
+        // 上上张卡片
+        var llastCard = this.$refs['card' + (this.currentIndex - 2)];
+        llastCard && animation.transition(llastCard[0], {
+          styles: {
+            transform: 'translateX(-12px)'
+          },
+          duration: 500,
+          timingFunction: timingFunction
+        });
+      }
+    },
+
+    // 检查页数是否达到临界条件进行重置处理，临界值 -2 ~ cardLength
+    checkNeedReset: function checkNeedReset() {
+      var cardS = this.cardS,
+          timingFunction = this.timingFunction;
+
+      var listEl = this.$refs['card-list'];
+      if (!listEl) {
+        return;
+      }
+      // 向右越界 重置为第一页
+      if (this.currentIndex >= this.cardLength) {
+        this.currentIndex = 0;
+        animation.transition(this.$refs['card' + (this.cardLength - 1)][0], {
+          styles: {
+            transform: 'translateX(0px)'
+          },
+          duration: 0.00001,
+          timingFunction: timingFunction
+        });
+        animation.transition(this.$refs['card-1'][0], {
+          styles: {
+            transform: 'translateX(-12px)'
+          },
+          duration: 0.00001,
+          timingFunction: timingFunction
+        });
+        // 向左越界 重置为倒数第二页
+      } else if (this.currentIndex === -2) {
+        this.currentIndex = this.cardLength - 2;
+        animation.transition(this.$refs['card' + (this.cardLength - 3)][0], {
+          styles: {
+            transform: 'translateX(-12px)'
+          },
+          duration: 0.00001,
+          timingFunction: timingFunction
+        });
+      } else {
+        return;
+      }
+      listEl && animation.transition(listEl, {
+        styles: {
+          transform: 'translateX(' + -this.currentIndex * (cardS.width + 12) + 'px)'
+        },
+        duration: 0.00001,
+        timingFunction: timingFunction
+      });
+    },
+    checkNeedAutoPlay: function checkNeedAutoPlay() {
+      var _this5 = this;
+
+      if (this.autoPlay && this.items.length >= 1) {
+        this.clearAutoPlay();
+        this.autoPlayTimer = setInterval(function () {
+          _this5.slideTo(_this5.currentIndex, _this5.currentIndex + 1);
+        }, parseInt(this.interval));
+      }
+    },
+    clearAutoPlay: function clearAutoPlay() {
+      this.autoPlayTimer && clearInterval(this.autoPlayTimer);
+    },
+    itemClicked: function itemClicked(e) {
+      var idx = this.isCreator ? e.position : e;
+      this.$emit('fmSliderItemClicked', idx);
+    }
+  },
+  mounted: function mounted() {
+    var _this6 = this;
+
+    setTimeout(function () {
+      var sliderCtn = _this6.$refs['sliderCtn'];
+      if (_bindEnv2.default.supportsEB() && sliderCtn && sliderCtn.ref) {
+        _indexWeex2.default.prepare && _indexWeex2.default.prepare({
+          anchor: sliderCtn.ref,
+          eventType: 'pan'
+        });
+      }
+    }, 20);
+    this.checkNeedAutoPlay();
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.clearAutoPlay();
+  }
+};
+
+/***/ }),
+/* 257 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return (!_vm.isCreator) ? _c('div', {
+    ref: "sliderCtn",
+    staticClass: "fm-banner-wrap",
+    class: ['banner-wrap--' + _vm.items.length],
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    on: {
+      "panstart": _vm.onPanStart,
+      "panmove": _vm.onPanMove,
+      "panend": _vm.onPanEnd,
+      "horizontalpan": _vm.startHandle
+    }
+  }, [(_vm.items.length > 1) ? _c('div', {
+    ref: "card-list",
+    staticClass: "card-list",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      left: -(_vm.cardS.width * 2) + 'px'
+    }))
+  }, _vm._l((_vm.cItems), function(item, index) {
+    return _c('div', {
+      key: index,
+      ref: ("card" + (index-2)),
+      refInFor: true,
+      staticClass: "card-item",
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle((index - 2) === -1 && {
+        transform: "translateX(-12px)"
+      }))
+    }, [_vm._t(("card" + (index-2)), [_c('image', {
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle({
+        width: ((_vm.cardS.width) + "px"),
+        height: ((_vm.cardS.height) + "px")
+      })),
+      attrs: {
+        "src": item.src
+      },
+      on: {
+        "click": function($event) {
+          _vm.itemClicked(index - 2 < 0 ? index - 2 + _vm.items.length : index - 2 >= _vm.items.length ? index - 2 - _vm.items.length : index - 2)
+        }
+      }
+    })])], 2)
+  })) : _c('div', {
+    staticClass: "card-list",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, _vm._l((_vm.items), function(item, index) {
+    return _c('div', {
+      key: index,
+      ref: ("card" + index),
+      refInFor: true,
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(undefined))
+    }, [_vm._t(("card" + index), [_c('image', {
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle({
+        width: ((_vm.cardS.width*1.2425) + "px"),
+        height: ((_vm.cardS.height*1.2425) + "px")
+      })),
+      attrs: {
+        "src": item.src
+      },
+      on: {
+        "click": function($event) {
+          _vm.itemClicked(index)
+        }
+      }
+    })])], 2)
+  }))]) : _c('FmSliderNative', {
+    staticClass: "fm-nativeBanner-wrap",
+    class: ['nativeBanner-wrap--' + _vm.items.length],
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "autoplay": _vm.autoPlay,
+      "data": _vm.cNativeItems
+    },
+    on: {
+      "itemclick": _vm.itemClicked
+    }
+  })
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-18ede8e6", module.exports)
+  }
+}
+
+/***/ }),
+/* 258 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(259);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 259 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(260)
+}
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(262),
+  /* template */
+  __webpack_require__(263),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  "data-v-69ed5ad4",
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-popover/index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-69ed5ad4", Component.options)
+  } else {
+    hotAPI.reload("data-v-69ed5ad4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 260 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(261);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("785b3f7a", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-69ed5ad4\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-69ed5ad4\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 261 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.popover-wrap[data-v-69ed5ad4]{\n  position: fixed;\n  width: 10rem;\n  /*兼容H5异常*/\n  z-index: 99999;\n}\n.popover[data-v-69ed5ad4] {\n  position: fixed;\n  z-index: 99;\n  width: 5.81481rem;\n  padding: 0.18519rem;\n  border-radius: 0.09259rem;\n}\n.content[data-v-69ed5ad4] {\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n          flex: 1;\n  box-shadow: 0 0 0.13889rem 0 rgba(0, 0, 0, 0.2);\n  background-color: #FFFFFF;\n  border-radius: 0.09259rem;\n  overflow: hidden;\n}\n.item[data-v-69ed5ad4] {\n  height: 1.55556rem;\n  padding: 0 0.44444rem;\n}\n.item-content[data-v-69ed5ad4] {\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n          flex: 1;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  border-bottom-width: 0.01852rem;\n  border-color: rgba(0,0,0,0.10);\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n          align-items: center;\n}\n.item-text[data-v-69ed5ad4] {\n  font-size: 0.44444rem;\n}\n.item-icon[data-v-69ed5ad4] {\n  margin-right: 0.13889rem;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-popover/index.vue?67f87e2b"],"names":[],"mappings":";AAgCA;EACA,gBAAA;EACA,aAAA;EACA,UAAA;EACA,eAAA;CACA;AAEA;EACA,gBAAA;EACA,YAAA;EACA,kBAAA;EACA,oBAAA;EACA,0BAAA;CACA;AAEA;EACA,oBAAA;EAAA,gBAAA;UAAA,QAAA;EACA,gDAAA;EACA,0BAAA;EACA,0BAAA;EACA,iBAAA;CACA;AAEA;EACA,mBAAA;EACA,sBAAA;CACA;AAEA;EACA,oBAAA;EAAA,gBAAA;UAAA,QAAA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,gCAAA;EACA,+BAAA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;CACA;AAEA;EACA,sBAAA;CACA;AAEA;EACA,yBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/04/12. -->\n<template>\n  <div class=\"popover-wrap\">\n    <fm-overlay v-if=\"show || showIn\"\n                :hasAnimation=\"true\"\n                :canAutoClose=\"true\"\n                :opacity=\"overlayOpacity\"\n                @fmOverlayBodyClicking=\"visible(false)\"\n                ref=\"fm-overlay\"></fm-overlay>\n    <div ref=\"fm-popover\"\n         class=\"popover\"\n         v-if=\"show || showIn\"\n         :style=\"popoverStyle\"\n         @touchend=\"handleTouchEnd\">\n      <div class=\"content\"\n           :style=\"{ height: buttons.length * 168 - 2 + 'px' }\">\n        <div v-for=\"(item, index) in buttons\"\n             :key=\"index\"\n             class=\"item\"\n             @click=\"onClicked(index)\">\n          <div class=\"item-content\">\n            <fm-icon class=\"item-icon\" v-if=\"item.icon\" :name=\"item.icon\" :icon-style=\"67\" />\n            <text class=\"item-text\">{{ item.text }}</text>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .popover-wrap{\n    position: fixed;\n    width: 1080px;\n    /*兼容H5异常*/\n    z-index: 99999;\n  }\n\n  .popover {\n    position: fixed;\n    z-index: 99;\n    width: 628px;\n    padding: 20px;\n    border-radius: 10px;\n  }\n\n  .content {\n    flex: 1;\n    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);\n    background-color: #FFFFFF;\n    border-radius: 10px;\n    overflow: hidden;\n  }\n\n  .item {\n    height: 168px;\n    padding: 0 48px;\n  }\n\n  .item-content {\n    flex: 1;\n    flex-direction: row;\n    border-bottom-width: 2px;\n    border-color: rgba(0,0,0,0.10);\n    align-items: center;\n  }\n\n  .item-text {\n    font-size: 48px;\n  }\n\n  .item-icon {\n    margin-right: 15px;\n  }\n</style>\n\n<script>\nimport FmOverlay from '../fm-overlay';\nimport FmIcon from '../fm-icon';\nconst animation = weex.requireModule('animation');\n\nexport default {\n  name: 'FmPopover',\n  components: { FmOverlay, FmIcon },\n  props: {\n    buttons: {\n      type: Array,\n      default: () => ([])\n    },\n    position: {\n      type: Object,\n      default: () => ({\n        pos: 'top',\n        x: 0,\n        y: 0\n      })\n    },\n    hasAnimation: {\n      type: Boolean,\n      default: true\n    },\n    overlayOpacity: {\n      type: Number,\n      default: 0.0\n    }\n  },\n  data: () => ({\n    show: false,\n    showIn: false\n  }),\n  computed: {\n    popoverStyle () {\n      const { x = 0, y = 0, pos = 'top' } = this.position;\n      const style = {};\n      x < 0 ? (style.right = `${-x}px`) : (style.left = `${x}px`);\n      y < 0 ? (style.bottom = `${-y}px`) : (style.top = `${y}px`);\n      switch (pos) {\n        case 'top':\n          style.transform = `translateY(${this.showIn ? 0 : -20}px)`;\n          break;\n        case 'bottom':\n          style.transform = `translateY(${this.showIn ? 0 : 20}px)`;\n          break;\n        case 'left':\n          style.transform = `translateX(${this.showIn ? 0 : -20}px)`;\n          break;\n        case 'right':\n          style.transform = `translateX(${this.showIn ? 0 : 20}px)`;\n          break;\n      }\n      style.opacity = !this.showIn ? 0 : 1;\n      return style;\n    }\n  },\n  methods: {\n    handleTouchEnd (e) {\n      // 原生上有点击穿透问题\n      e.preventDefault && e.preventDefault();\n    },\n    appearPopover (bool) {\n      const { hasAnimation } = this;\n      const { pos = 'top' } = this.position;\n      const popoverEl = this.$refs['fm-popover'];\n      if (!popoverEl) {\n        return;\n      }\n      let hideTransform;\n      switch (pos) {\n        case 'top':\n          hideTransform = 'translateY(-20px)';\n          break;\n        case 'bottom':\n          hideTransform = 'translateY(20px)';\n          break;\n        case 'left':\n          hideTransform = 'translateX(-20px)';\n          break;\n        case 'right':\n          hideTransform = 'translateX(20px)';\n          break;\n      }\n      const styles = bool ? {\n        transform: 'translateX(0px) translateY(0px)',\n        opacity: 1\n      } : {\n        transform: hideTransform,\n        opacity: 0\n      };\n      animation.transition(popoverEl, {\n        styles,\n        duration: hasAnimation ? 150 : 0.0001,\n        timingFunction: 'ease-out'\n      }, e => {\n        this.showIn = bool;\n      });\n    },\n    onClicked (index) {\n      this.visible(false);\n      this.$emit('fmPopoverBtnClicked', { index });\n    },\n    visible (bool) {\n      this.show = bool;\n      setTimeout(() => {\n        this.appearPopover(bool);\n      }, 40);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+/* 262 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _fmOverlay = __webpack_require__(45);
+
+var _fmOverlay2 = _interopRequireDefault(_fmOverlay);
+
+var _fmIcon = __webpack_require__(4);
+
+var _fmIcon2 = _interopRequireDefault(_fmIcon);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var animation = weex.requireModule('animation');
+
+exports.default = {
+  name: 'FmPopover',
+  components: { FmOverlay: _fmOverlay2.default, FmIcon: _fmIcon2.default },
+  props: {
+    buttons: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    position: {
+      type: Object,
+      default: function _default() {
+        return {
+          pos: 'top',
+          x: 0,
+          y: 0
+        };
+      }
+    },
+    hasAnimation: {
+      type: Boolean,
+      default: true
+    },
+    overlayOpacity: {
+      type: Number,
+      default: 0.0
+    }
+  },
+  data: function data() {
+    return {
+      show: false,
+      showIn: false
+    };
+  },
+  computed: {
+    popoverStyle: function popoverStyle() {
+      var _position = this.position,
+          _position$x = _position.x,
+          x = _position$x === undefined ? 0 : _position$x,
+          _position$y = _position.y,
+          y = _position$y === undefined ? 0 : _position$y,
+          _position$pos = _position.pos,
+          pos = _position$pos === undefined ? 'top' : _position$pos;
+
+      var style = {};
+      x < 0 ? style.right = -x + 'px' : style.left = x + 'px';
+      y < 0 ? style.bottom = -y + 'px' : style.top = y + 'px';
+      switch (pos) {
+        case 'top':
+          style.transform = 'translateY(' + (this.showIn ? 0 : -20) + 'px)';
+          break;
+        case 'bottom':
+          style.transform = 'translateY(' + (this.showIn ? 0 : 20) + 'px)';
+          break;
+        case 'left':
+          style.transform = 'translateX(' + (this.showIn ? 0 : -20) + 'px)';
+          break;
+        case 'right':
+          style.transform = 'translateX(' + (this.showIn ? 0 : 20) + 'px)';
+          break;
+      }
+      style.opacity = !this.showIn ? 0 : 1;
+      return style;
+    }
+  },
+  methods: {
+    handleTouchEnd: function handleTouchEnd(e) {
+      // 原生上有点击穿透问题
+      e.preventDefault && e.preventDefault();
+    },
+    appearPopover: function appearPopover(bool) {
+      var _this = this;
+
+      var hasAnimation = this.hasAnimation;
+      var _position$pos2 = this.position.pos,
+          pos = _position$pos2 === undefined ? 'top' : _position$pos2;
+
+      var popoverEl = this.$refs['fm-popover'];
+      if (!popoverEl) {
+        return;
+      }
+      var hideTransform = void 0;
+      switch (pos) {
+        case 'top':
+          hideTransform = 'translateY(-20px)';
+          break;
+        case 'bottom':
+          hideTransform = 'translateY(20px)';
+          break;
+        case 'left':
+          hideTransform = 'translateX(-20px)';
+          break;
+        case 'right':
+          hideTransform = 'translateX(20px)';
+          break;
+      }
+      var styles = bool ? {
+        transform: 'translateX(0px) translateY(0px)',
+        opacity: 1
+      } : {
+        transform: hideTransform,
+        opacity: 0
+      };
+      animation.transition(popoverEl, {
+        styles: styles,
+        duration: hasAnimation ? 150 : 0.0001,
+        timingFunction: 'ease-out'
+      }, function (e) {
+        _this.showIn = bool;
+      });
+    },
+    onClicked: function onClicked(index) {
+      this.visible(false);
+      this.$emit('fmPopoverBtnClicked', { index: index });
+    },
+    visible: function visible(bool) {
+      var _this2 = this;
+
+      this.show = bool;
+      setTimeout(function () {
+        _this2.appearPopover(bool);
+      }, 40);
+    }
+  }
+};
+
+/***/ }),
+/* 263 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "popover-wrap",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [(_vm.show || _vm.showIn) ? _c('fm-overlay', {
+    ref: "fm-overlay",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "hasAnimation": true,
+      "canAutoClose": true,
+      "opacity": _vm.overlayOpacity
+    },
+    on: {
+      "fmOverlayBodyClicking": function($event) {
+        _vm.visible(false)
+      }
+    }
+  }) : _vm._e(), _vm._v(" "), (_vm.show || _vm.showIn) ? _c('div', {
+    ref: "fm-popover",
+    staticClass: "popover",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(_vm.popoverStyle)),
+    on: {
+      "touchend": _vm.handleTouchEnd
+    }
+  }, [_c('div', {
+    staticClass: "content",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle({
+      height: _vm.buttons.length * 168 - 2 + 'px'
+    }))
+  }, _vm._l((_vm.buttons), function(item, index) {
+    return _c('div', {
+      key: index,
+      staticClass: "item",
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(undefined)),
+      on: {
+        "click": function($event) {
+          _vm.onClicked(index)
+        }
+      }
+    }, [_c('div', {
+      staticClass: "item-content",
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(undefined))
+    }, [(item.icon) ? _c('fm-icon', {
+      staticClass: "item-icon",
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(undefined)),
+      attrs: {
+        "name": item.icon,
+        "icon-style": 67
+      }
+    }) : _vm._e(), _vm._v(" "), _c('text', {
+      staticClass: "item-text",
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(undefined))
+    }, [_vm._v(_vm._s(item.text))])], 1)])
+  }))]) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-69ed5ad4", module.exports)
+  }
+}
+
+/***/ }),
+/* 264 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(265);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 265 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(266)
+}
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(268),
+  /* template */
+  __webpack_require__(270),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  "data-v-60cd183e",
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-waiting/index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-60cd183e", Component.options)
+  } else {
+    hotAPI.reload("data-v-60cd183e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 266 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(267);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("f3b1dbe8", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-60cd183e\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-60cd183e\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 267 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n.fm-waiting[data-v-60cd183e] {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n          align-items: center;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n          justify-content: center;\n  /*兼容H5异常*/\n  z-index: 999;\n}\n.waiting-wrapper[data-v-60cd183e] {\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n          align-items: center;\n  height: 2.22222rem;\n  border-radius: 0.16667rem;\n  padding: 0 0.66667rem;\n  background-color: rgba(255, 255, 255, 0.9);\n}\n.waiting--text[data-v-60cd183e] {\n  font-size: 0.38889rem;\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  text-align: center;\n}\n.waiting-circle[data-v-60cd183e] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n          justify-content: center;\n  margin: 0.55556rem 0;\n}\n.waiting--dot[data-v-60cd183e] {\n  z-index: 1;\n  width: 0.38889rem;\n  height: 0.38889rem;\n  margin: 0 0.02778rem;\n  border-radius: 0.19444rem;\n  opacity: 1;\n}\n.waiting--dot-1[data-v-60cd183e] {\n  background-color: #4da84f;\n  -webkit-transform: scale(0.5);\n          transform: scale(0.5);\n}\n.waiting--dot-2[data-v-60cd183e] {\n  background-color: #4d79d3;\n  -webkit-transform: scale(1);\n          transform: scale(1);\n}\n.waiting--dot-3[data-v-60cd183e] {\n  background-color: #de6a3c;\n  -webkit-transform: scale(0.5);\n          transform: scale(0.5);\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-waiting/index.vue?0ca6c9e6"],"names":[],"mappings":";AAqPA;EACA,gBAAA;EACA,OAAA;EACA,SAAA;EACA,UAAA;EACA,QAAA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,yBAAA;EAAA,gCAAA;UAAA,wBAAA;EACA,UAAA;EACA,aAAA;CACA;AAEA;EACA,0BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,mBAAA;EACA,0BAAA;EACA,sBAAA;EACA,2CAAA;CACA;AAEA;EACA,sBAAA;EACA,+BAAA;EACA,iBAAA;EACA,mBAAA;CACA;AAEA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,yBAAA;EAAA,gCAAA;UAAA,wBAAA;EACA,qBAAA;CACA;AAEA;EACA,WAAA;EACA,kBAAA;EACA,mBAAA;EACA,qBAAA;EACA,0BAAA;EACA,WAAA;CACA;AAEA;EACA,0BAAA;EACA,8BAAA;UAAA,sBAAA;CACA;AAEA;EACA,0BAAA;EACA,4BAAA;UAAA,oBAAA;CACA;AAEA;EACA,0BAAA;EACA,8BAAA;UAAA,sBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/4/26. -->\n\n<template>\n  <div>\n    <div v-if=\"show || showIn\"\n         :style=\"wrapperStyle\"\n         ref=\"fm-waiting\"\n         class=\"fm-waiting\"\n         @click=\"warpperClicked\"\n         @touchend=\"handleTouchEnd\">\n      <div class=\"waiting-wrapper\"\n          v-if=\"show || showIn\">\n          <div class=\"waiting-circle\">\n              <div class=\"waiting--dot waiting--dot-1\" ref=\"dot-1\"></div>\n              <div class=\"waiting--dot waiting--dot-2\" ref=\"dot-2\"></div>\n              <div class=\"waiting--dot waiting--dot-3\" ref=\"dot-3\"></div>\n          </div>\n          <text class=\"waiting--text\">{{ title }}</text>\n      </div>\n    </div>\n  </div>\n</template>\n\n<script>\nimport Queue from './queue';\nconst animation = weex.requireModule('animation');\n\nexport default {\n  name: 'FmWaiting',\n  props: {\n    title: {\n      type: String,\n      default: ''\n    },\n    backgroundOpacity: {\n      type: Number,\n      default: 0.7\n    },\n    canAutoClose: {\n      type: Boolean,\n      default: true\n    }\n  },\n  data: () => ({\n    show: false,\n    showIn: false,\n    loadingStart: 0,\n    animating: false\n  }),\n  computed: {\n    wrapperStyle () {\n      const { showIn, backgroundOpacity } = this;\n      return {\n        backgroundColor: `rgba(0, 0, 0, ${backgroundOpacity})`,\n        opacity: !showIn ? 0 : 1\n      };\n    }\n  },\n  methods: {\n    handleTouchEnd (e) {\n      // 原生上有点击穿透问题\n      e.preventDefault && e.preventDefault();\n    },\n    appear (bool) {\n      if (this.animating) { return; }\n      const elm = this.$refs['fm-waiting'];\n      if (!elm) {\n        this.showIn = bool;\n        return;\n      }\n      this.animating = true;\n      animation.transition(elm, {\n        styles: {\n          opacity: bool ? 1 : 0\n        },\n        duration: 320,\n        timingFunction: 'cubic-bezier(0.33, 0, 0.66, 1)'\n      }, () => {\n        this.showIn = bool;\n        if (bool) {\n          this.$emit('fmWaitingAppeared', false);\n        } else {\n          this.$emit('fmWaitingDisappeared', false);\n        }\n        this.animating = false;\n      });\n    },\n    start () {\n      this.prepare();\n      this.dot1Queue.loop();\n      this.dot2Queue.loop();\n      this.dot3Queue.loop();\n    },\n    stop () {\n      this.dot1Queue && this.dot1Queue.stop();\n      this.dot2Queue && this.dot2Queue.stop();\n      this.dot3Queue && this.dot3Queue.stop();\n    },\n    warpperClicked () {\n      if (this.animating) { return; }\n      if (this.canAutoClose) {\n        this.hide();\n      }\n    },\n    prepare () {\n      this.dot1 = this.$refs['dot-1'];\n      this.dot2 = this.$refs['dot-2'];\n      this.dot3 = this.$refs['dot-3'];\n\n      const steps1 = [{\n        styles: {\n          transform: 'translateX(48px) scale(1)',\n          opacity: 1,\n          perspective: 0\n        },\n        duration: 700, // ms\n        timingFunction: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)'\n      }, {\n        styles: {\n          transform: 'translateX(96px) scale(0.5)',\n          opacity: 1,\n          perspective: 0\n        },\n        duration: 700, // ms\n        timingFunction: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)'\n      }, {\n        styles: {\n          transform: 'translateX(90px) scale(0.3)',\n          opacity: 0,\n          perspective: 0\n        },\n        duration: 200, // ms\n        timingFunction: 'linear'\n      }, {\n        styles: {\n          transform: 'translateX(0px) scale(0.5)',\n          opacity: 1,\n          perspective: 0\n        },\n        duration: 500, // ms\n        timingFunction: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)'\n      }];\n      this.dot1Queue = Queue(this.dot1, steps1);\n\n      const steps2 = [{\n        styles: {\n          transform: 'translateX(48px) scale(0.5)',\n          opacity: 1,\n          perspective: 0\n        },\n        duration: 700, // ms\n        timingFunction: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)'\n      }, {\n        styles: {\n          transform: 'translateX(40px) scale(0.3)',\n          opacity: 0,\n          perspective: 0\n        },\n        duration: 200, // ms\n        timingFunction: 'linear'\n      }, {\n        styles: {\n          transform: 'translateX(-48px) scale(0.5)',\n          opacity: 1,\n          perspective: 0\n        },\n        duration: 500, // ms\n        timingFunction: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)'\n      }, {\n        styles: {\n          transform: 'translateX(0px) scale(1)',\n          opacity: 1,\n          perspective: 0\n        },\n        duration: 700, // ms\n        timingFunction: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)'\n      }];\n      this.dot2Queue = Queue(this.dot2, steps2);\n\n      const steps3 = [{\n        styles: {\n          transform: 'translateX(-6px) scale(0.3)',\n          opacity: 0,\n          perspective: 0\n        },\n        duration: 200, // ms\n        timingFunction: 'linear'\n      }, {\n        styles: {\n          transform: 'translateX(-96px) scale(0.5)',\n          opacity: 1,\n          perspective: 0\n        },\n        duration: 500, // ms\n        timingFunction: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)'\n      }, {\n        styles: {\n          transform: 'translateX(-48px) scale(1)',\n          opacity: 1,\n          perspective: 0\n        },\n        duration: 700, // ms\n        timingFunction: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)'\n      }, {\n        styles: {\n          transform: 'translateX(0px) scale(0.5)',\n          opacity: 1,\n          perspective: 0\n        },\n        duration: 700, // ms\n        timingFunction: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)'\n      }];\n      this.dot3Queue = Queue(this.dot3, steps3);\n    },\n    active () {\n      if (this.show) {\n        return;\n      }\n      this.show = true;\n      this.loadingStart = new Date().getTime();\n      setTimeout(() => {\n        this.appear(true);\n        this.start();\n      }, 20);\n    },\n    hide () {\n      if (!this.show) {\n        return;\n      }\n      this.show = false;\n      let timeout = 20;\n      if (new Date().getTime() - this.loadingStart <= 500) {\n        timeout = 500;\n      }\n      setTimeout(() => {\n        this.appear(false);\n        this.stop();\n      }, timeout);\n    }\n  }\n};\n</script>\n\n<style scoped>\n  .fm-waiting {\n    position: fixed;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    flex-direction: row;\n    align-items: center;\n    justify-content: center;\n    /*兼容H5异常*/\n    z-index: 999;\n  }\n\n  .waiting-wrapper {\n    align-items: center;\n    height: 240px;\n    border-radius: 18px;\n    padding: 0 72px;\n    background-color: rgba(255, 255, 255, 0.9);\n  }\n\n  .waiting--text {\n    font-size: 42px;\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    text-align: center;\n  }\n\n  .waiting-circle {\n    flex-direction: row;\n    justify-content: center;\n    margin: 60px 0;\n  }\n\n  .waiting--dot {\n    z-index: 1;\n    width: 42px;\n    height: 42px;\n    margin: 0 3px;\n    border-radius: 21px;\n    opacity: 1;\n  }\n\n  .waiting--dot-1 {\n    background-color: #4da84f;\n    transform: scale(0.5);\n  }\n\n  .waiting--dot-2 {\n    background-color: #4d79d3;\n    transform: scale(1);\n  }\n\n  .waiting--dot-3 {\n    background-color: #de6a3c;\n    transform: scale(0.5);\n  }\n</style>\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+/* 268 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _queue = __webpack_require__(269);
+
+var _queue2 = _interopRequireDefault(_queue);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var animation = weex.requireModule('animation'); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+  name: 'FmWaiting',
+  props: {
+    title: {
+      type: String,
+      default: ''
+    },
+    backgroundOpacity: {
+      type: Number,
+      default: 0.7
+    },
+    canAutoClose: {
+      type: Boolean,
+      default: true
+    }
+  },
+  data: function data() {
+    return {
+      show: false,
+      showIn: false,
+      loadingStart: 0,
+      animating: false
+    };
+  },
+  computed: {
+    wrapperStyle: function wrapperStyle() {
+      var showIn = this.showIn,
+          backgroundOpacity = this.backgroundOpacity;
+
+      return {
+        backgroundColor: 'rgba(0, 0, 0, ' + backgroundOpacity + ')',
+        opacity: !showIn ? 0 : 1
+      };
+    }
+  },
+  methods: {
+    handleTouchEnd: function handleTouchEnd(e) {
+      // 原生上有点击穿透问题
+      e.preventDefault && e.preventDefault();
+    },
+    appear: function appear(bool) {
+      var _this = this;
+
+      if (this.animating) {
+        return;
+      }
+      var elm = this.$refs['fm-waiting'];
+      if (!elm) {
+        this.showIn = bool;
+        return;
+      }
+      this.animating = true;
+      animation.transition(elm, {
+        styles: {
+          opacity: bool ? 1 : 0
+        },
+        duration: 320,
+        timingFunction: 'cubic-bezier(0.33, 0, 0.66, 1)'
+      }, function () {
+        _this.showIn = bool;
+        if (bool) {
+          _this.$emit('fmWaitingAppeared', false);
+        } else {
+          _this.$emit('fmWaitingDisappeared', false);
+        }
+        _this.animating = false;
+      });
+    },
+    start: function start() {
+      this.prepare();
+      this.dot1Queue.loop();
+      this.dot2Queue.loop();
+      this.dot3Queue.loop();
+    },
+    stop: function stop() {
+      this.dot1Queue && this.dot1Queue.stop();
+      this.dot2Queue && this.dot2Queue.stop();
+      this.dot3Queue && this.dot3Queue.stop();
+    },
+    warpperClicked: function warpperClicked() {
+      if (this.animating) {
+        return;
+      }
+      if (this.canAutoClose) {
+        this.hide();
+      }
+    },
+    prepare: function prepare() {
+      this.dot1 = this.$refs['dot-1'];
+      this.dot2 = this.$refs['dot-2'];
+      this.dot3 = this.$refs['dot-3'];
+
+      var steps1 = [{
+        styles: {
+          transform: 'translateX(48px) scale(1)',
+          opacity: 1,
+          perspective: 0
+        },
+        duration: 700, // ms
+        timingFunction: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)'
+      }, {
+        styles: {
+          transform: 'translateX(96px) scale(0.5)',
+          opacity: 1,
+          perspective: 0
+        },
+        duration: 700, // ms
+        timingFunction: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)'
+      }, {
+        styles: {
+          transform: 'translateX(90px) scale(0.3)',
+          opacity: 0,
+          perspective: 0
+        },
+        duration: 200, // ms
+        timingFunction: 'linear'
+      }, {
+        styles: {
+          transform: 'translateX(0px) scale(0.5)',
+          opacity: 1,
+          perspective: 0
+        },
+        duration: 500, // ms
+        timingFunction: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)'
+      }];
+      this.dot1Queue = (0, _queue2.default)(this.dot1, steps1);
+
+      var steps2 = [{
+        styles: {
+          transform: 'translateX(48px) scale(0.5)',
+          opacity: 1,
+          perspective: 0
+        },
+        duration: 700, // ms
+        timingFunction: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)'
+      }, {
+        styles: {
+          transform: 'translateX(40px) scale(0.3)',
+          opacity: 0,
+          perspective: 0
+        },
+        duration: 200, // ms
+        timingFunction: 'linear'
+      }, {
+        styles: {
+          transform: 'translateX(-48px) scale(0.5)',
+          opacity: 1,
+          perspective: 0
+        },
+        duration: 500, // ms
+        timingFunction: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)'
+      }, {
+        styles: {
+          transform: 'translateX(0px) scale(1)',
+          opacity: 1,
+          perspective: 0
+        },
+        duration: 700, // ms
+        timingFunction: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)'
+      }];
+      this.dot2Queue = (0, _queue2.default)(this.dot2, steps2);
+
+      var steps3 = [{
+        styles: {
+          transform: 'translateX(-6px) scale(0.3)',
+          opacity: 0,
+          perspective: 0
+        },
+        duration: 200, // ms
+        timingFunction: 'linear'
+      }, {
+        styles: {
+          transform: 'translateX(-96px) scale(0.5)',
+          opacity: 1,
+          perspective: 0
+        },
+        duration: 500, // ms
+        timingFunction: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)'
+      }, {
+        styles: {
+          transform: 'translateX(-48px) scale(1)',
+          opacity: 1,
+          perspective: 0
+        },
+        duration: 700, // ms
+        timingFunction: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)'
+      }, {
+        styles: {
+          transform: 'translateX(0px) scale(0.5)',
+          opacity: 1,
+          perspective: 0
+        },
+        duration: 700, // ms
+        timingFunction: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)'
+      }];
+      this.dot3Queue = (0, _queue2.default)(this.dot3, steps3);
+    },
+    active: function active() {
+      var _this2 = this;
+
+      if (this.show) {
+        return;
+      }
+      this.show = true;
+      this.loadingStart = new Date().getTime();
+      setTimeout(function () {
+        _this2.appear(true);
+        _this2.start();
+      }, 20);
+    },
+    hide: function hide() {
+      var _this3 = this;
+
+      if (!this.show) {
+        return;
+      }
+      this.show = false;
+      var timeout = 20;
+      if (new Date().getTime() - this.loadingStart <= 500) {
+        timeout = 500;
+      }
+      setTimeout(function () {
+        _this3.appear(false);
+        _this3.stop();
+      }, timeout);
+    }
+  }
+};
+
+/***/ }),
+/* 269 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+exports.default = function (element) {
+  var steps = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+
+  return new Queue(element, steps);
+};
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var animation = weex.requireModule('animation');
+
+;
+
+var Queue = function () {
+  function Queue(element) {
+    var steps = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+
+    _classCallCheck(this, Queue);
+
+    this.element = element;
+    this.steps = steps;
+    this.currStep = -1;
+    this.looping = false;
+  }
+
+  _createClass(Queue, [{
+    key: 'start',
+    value: function start() {
+      this._excuteAll();
+    }
+  }, {
+    key: 'reset',
+    value: function reset() {
+      this.currStep = -1;
+    }
+  }, {
+    key: 'loop',
+    value: function loop() {
+      var _this = this;
+
+      this.looping = true;
+      var infinite = function infinite() {
+        if (_this.looping) {
+          _this._excuteAll(function () {
+            _this.reset();
+            infinite();
+          });
+        } else {
+          return;
+        }
+      };
+      infinite();
+    }
+  }, {
+    key: 'stop',
+    value: function stop() {
+      this.looping = false;
+    }
+  }, {
+    key: '_excuteAll',
+    value: function _excuteAll(done) {
+      var _this2 = this;
+
+      var next = this._next();
+      if (next) {
+        this._animate(next, function () {
+          setTimeout(function () {
+            _this2._excuteAll(done);
+          }, 1);
+        });
+      } else {
+        typeof done === 'function' && done();
+      }
+    }
+  }, {
+    key: '_animate',
+    value: function _animate(obj, done) {
+      animation.transition(this.element, obj, function () {
+        typeof done === 'function' && done();
+      });
+    }
+  }, {
+    key: '_next',
+    value: function _next(done) {
+      if (this.currStep < this.steps.length) {
+        this.currStep++;
+        return this.steps[this.currStep];
+      } else {
+        return false;
+      }
+    }
+  }]);
+
+  return Queue;
+}();
+
+/***/ }),
+/* 270 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [(_vm.show || _vm.showIn) ? _c('div', {
+    ref: "fm-waiting",
+    staticClass: "fm-waiting",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(_vm.wrapperStyle)),
+    on: {
+      "click": _vm.warpperClicked,
+      "touchend": _vm.handleTouchEnd
+    }
+  }, [(_vm.show || _vm.showIn) ? _c('div', {
+    staticClass: "waiting-wrapper",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_c('div', {
+    staticClass: "waiting-circle",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_c('div', {
+    ref: "dot-1",
+    staticClass: "waiting--dot waiting--dot-1",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }), _vm._v(" "), _c('div', {
+    ref: "dot-2",
+    staticClass: "waiting--dot waiting--dot-2",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }), _vm._v(" "), _c('div', {
+    ref: "dot-3",
+    staticClass: "waiting--dot waiting--dot-3",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  })]), _vm._v(" "), _c('text', {
+    staticClass: "waiting--text",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_vm._v(_vm._s(_vm.title))])]) : _vm._e()]) : _vm._e()])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-60cd183e", module.exports)
+  }
+}
+
+/***/ }),
+/* 271 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.FmWaiting = exports.FmPopover = exports.FmSlider = exports.FmTextbar = exports.FmFooter = exports.FmBtnbar = exports.FmTabbarItem = exports.FmTabbar = exports.FmPanItem = exports.FmNativeTab = exports.FmTabPage = exports.FmSimpleList = exports.FmRcyCheck = exports.FmMultiCheckCell = exports.FmMultiCheckGroup = exports.FmTitlebar = exports.FmSearchbar = exports.FmActionView = exports.FmCheckboxList = exports.FmCheckbox = exports.showSnackBar = exports.FmSnackBar = exports.FmRater = exports.FmItem = exports.FmActionSheet = exports.FmPopup = exports.alert = exports.confirm = exports.FmSimpleBtn = exports.FmDialog = exports.FmOverlay = exports.FmImage = exports.FmFoldableText = exports.FmSpecialRichText = exports.FmRichText = exports.FmTips = exports.FmInput = exports.FmButton = exports.FmSliderBar = exports.FmIcon = exports.FmText = exports.FmTagWall = exports.FmTag = exports.FmSwitch = exports.BindEnv = exports.Utils = undefined;
+
+var _utils = __webpack_require__(44);
+
+var _utils2 = _interopRequireDefault(_utils);
+
+var _bindEnv = __webpack_require__(53);
+
+var _bindEnv2 = _interopRequireDefault(_bindEnv);
+
+var _fmSwitch = __webpack_require__(122);
+
+var _fmSwitch2 = _interopRequireDefault(_fmSwitch);
+
+var _fmTag = __webpack_require__(47);
+
+var _fmTag2 = _interopRequireDefault(_fmTag);
+
+var _fmTagWall = __webpack_require__(128);
+
+var _fmTagWall2 = _interopRequireDefault(_fmTagWall);
+
+var _fmText = __webpack_require__(3);
+
+var _fmText2 = _interopRequireDefault(_fmText);
+
+var _fmIcon = __webpack_require__(4);
+
+var _fmIcon2 = _interopRequireDefault(_fmIcon);
+
+var _fmSliderBar = __webpack_require__(137);
+
+var _fmSliderBar2 = _interopRequireDefault(_fmSliderBar);
+
+var _fmButton = __webpack_require__(36);
+
+var _fmButton2 = _interopRequireDefault(_fmButton);
+
+var _fmInput = __webpack_require__(79);
+
+var _fmInput2 = _interopRequireDefault(_fmInput);
+
+var _fmTips = __webpack_require__(143);
+
+var _fmTips2 = _interopRequireDefault(_fmTips);
+
+var _fmRichText = __webpack_require__(149);
+
+var _fmRichText2 = _interopRequireDefault(_fmRichText);
+
+var _fmSpecialRichText = __webpack_require__(158);
+
+var _fmSpecialRichText2 = _interopRequireDefault(_fmSpecialRichText);
+
+var _fmFoldableText = __webpack_require__(164);
+
+var _fmFoldableText2 = _interopRequireDefault(_fmFoldableText);
+
+var _fmImage = __webpack_require__(5);
+
+var _fmImage2 = _interopRequireDefault(_fmImage);
+
+var _fmOverlay = __webpack_require__(45);
+
+var _fmOverlay2 = _interopRequireDefault(_fmOverlay);
+
+var _fmDialog = __webpack_require__(76);
+
+var _fmDialog2 = _interopRequireDefault(_fmDialog);
+
+var _fmSimpleBtn = __webpack_require__(65);
+
+var _fmSimpleBtn2 = _interopRequireDefault(_fmSimpleBtn);
+
+var _dialog = __webpack_require__(175);
+
+var _fmPopup = __webpack_require__(74);
+
+var _fmPopup2 = _interopRequireDefault(_fmPopup);
+
+var _fmActionSheet = __webpack_require__(176);
+
+var _fmActionSheet2 = _interopRequireDefault(_fmActionSheet);
+
+var _fmItem = __webpack_require__(59);
+
+var _fmItem2 = _interopRequireDefault(_fmItem);
+
+var _fmRater = __webpack_require__(182);
+
+var _fmRater2 = _interopRequireDefault(_fmRater);
+
+var _fmSnackBar = __webpack_require__(77);
+
+var _fmSnackBar2 = _interopRequireDefault(_fmSnackBar);
+
+var _snackbar = __webpack_require__(194);
+
+var _snackbar2 = _interopRequireDefault(_snackbar);
+
+var _fmCheckbox = __webpack_require__(95);
+
+var _fmCheckbox2 = _interopRequireDefault(_fmCheckbox);
+
+var _fmCheckboxList = __webpack_require__(101);
+
+var _fmCheckboxList2 = _interopRequireDefault(_fmCheckboxList);
+
+var _fmActionView = __webpack_require__(195);
+
+var _fmActionView2 = _interopRequireDefault(_fmActionView);
+
+var _fmSearchbar = __webpack_require__(199);
+
+var _fmSearchbar2 = _interopRequireDefault(_fmSearchbar);
+
+var _fmTitlebar = __webpack_require__(105);
+
+var _fmTitlebar2 = _interopRequireDefault(_fmTitlebar);
+
+var _fmMultiCheckGroup = __webpack_require__(205);
+
+var _fmMultiCheckGroup2 = _interopRequireDefault(_fmMultiCheckGroup);
+
+var _fmMultiCheckCell = __webpack_require__(78);
+
+var _fmMultiCheckCell2 = _interopRequireDefault(_fmMultiCheckCell);
+
+var _fmRcyCheck = __webpack_require__(219);
+
+var _fmRcyCheck2 = _interopRequireDefault(_fmRcyCheck);
+
+var _fmSimpleList = __webpack_require__(225);
+
+var _fmSimpleList2 = _interopRequireDefault(_fmSimpleList);
+
+var _fmTabPage = __webpack_require__(272);
+
+var _fmTabPage2 = _interopRequireDefault(_fmTabPage);
+
+var _fmNativeTab = __webpack_require__(236);
+
+var _fmNativeTab2 = _interopRequireDefault(_fmNativeTab);
+
+var _fmPanItem = __webpack_require__(278);
+
+var _fmPanItem2 = _interopRequireDefault(_fmPanItem);
+
+var _fmTabbar = __webpack_require__(111);
+
+var _fmTabbar2 = _interopRequireDefault(_fmTabbar);
+
+var _fmTabbarItem = __webpack_require__(73);
+
+var _fmTabbarItem2 = _interopRequireDefault(_fmTabbarItem);
+
+var _fmBtnbar = __webpack_require__(242);
+
+var _fmBtnbar2 = _interopRequireDefault(_fmBtnbar);
+
+var _fmFooter = __webpack_require__(43);
+
+var _fmFooter2 = _interopRequireDefault(_fmFooter);
+
+var _fmTextbar = __webpack_require__(246);
+
+var _fmTextbar2 = _interopRequireDefault(_fmTextbar);
+
+var _fmSlider = __webpack_require__(252);
+
+var _fmSlider2 = _interopRequireDefault(_fmSlider);
+
+var _fmPopover = __webpack_require__(258);
+
+var _fmPopover2 = _interopRequireDefault(_fmPopover);
+
+var _fmWaiting = __webpack_require__(264);
+
+var _fmWaiting2 = _interopRequireDefault(_fmWaiting);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.Utils = _utils2.default;
+exports.BindEnv = _bindEnv2.default;
+exports.FmSwitch = _fmSwitch2.default;
+exports.FmTag = _fmTag2.default;
+exports.FmTagWall = _fmTagWall2.default;
+exports.FmText = _fmText2.default;
+exports.FmIcon = _fmIcon2.default;
+exports.FmSliderBar = _fmSliderBar2.default;
+exports.FmButton = _fmButton2.default;
+exports.FmInput = _fmInput2.default;
+exports.FmTips = _fmTips2.default;
+exports.FmRichText = _fmRichText2.default;
+exports.FmSpecialRichText = _fmSpecialRichText2.default;
+exports.FmFoldableText = _fmFoldableText2.default;
+exports.FmImage = _fmImage2.default;
+exports.FmOverlay = _fmOverlay2.default;
+exports.FmDialog = _fmDialog2.default;
+exports.FmSimpleBtn = _fmSimpleBtn2.default;
+exports.confirm = _dialog.confirm;
+exports.alert = _dialog.alert;
+exports.FmPopup = _fmPopup2.default;
+exports.FmActionSheet = _fmActionSheet2.default;
+exports.FmItem = _fmItem2.default;
+exports.FmRater = _fmRater2.default;
+exports.FmSnackBar = _fmSnackBar2.default;
+exports.showSnackBar = _snackbar2.default;
+exports.FmCheckbox = _fmCheckbox2.default;
+exports.FmCheckboxList = _fmCheckboxList2.default;
+exports.FmActionView = _fmActionView2.default;
+exports.FmSearchbar = _fmSearchbar2.default;
+exports.FmTitlebar = _fmTitlebar2.default;
+exports.FmMultiCheckGroup = _fmMultiCheckGroup2.default;
+exports.FmMultiCheckCell = _fmMultiCheckCell2.default;
+exports.FmRcyCheck = _fmRcyCheck2.default;
+exports.FmSimpleList = _fmSimpleList2.default;
+exports.FmTabPage = _fmTabPage2.default;
+exports.FmNativeTab = _fmNativeTab2.default;
+exports.FmPanItem = _fmPanItem2.default;
+exports.FmTabbar = _fmTabbar2.default;
+exports.FmTabbarItem = _fmTabbarItem2.default;
+exports.FmBtnbar = _fmBtnbar2.default;
+exports.FmFooter = _fmFooter2.default;
+exports.FmTextbar = _fmTextbar2.default;
+exports.FmSlider = _fmSlider2.default;
+exports.FmPopover = _fmPopover2.default;
+exports.FmWaiting = _fmWaiting2.default;
+
+/***/ }),
+/* 272 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = __webpack_require__(273);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_index).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 273 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(274)
+}
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(276),
+  /* template */
+  __webpack_require__(277),
+  /* styles */
+  injectStyle,
   /* scopeId */
   "data-v-4c615fcc",
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tab-page/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -17644,29 +16888,32 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-4c615fcc", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 236 */
+/* 274 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(237);
+var content = __webpack_require__(275);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("18454dae", content, false);
+var update = __webpack_require__(2)("1a9c8945", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-4c615fcc\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-4c615fcc\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4c615fcc\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4c615fcc\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -17676,7 +16923,7 @@ if(false) {
 }
 
 /***/ }),
-/* 237 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(true);
@@ -17684,13 +16931,13 @@ exports = module.exports = __webpack_require__(1)(true);
 
 
 // module
-exports.push([module.i, "\n.fm-tab-page[data-v-4c615fcc] {\n  width: 1080px;\n}\n.tab-title-list[data-v-4c615fcc] {\n  width: 1080px;\n  flex-direction: row;\n  border-bottom-width: 2px;\n  border-color: rgba(0,0,0,0.10);\n}\n.tab-title-wrap[data-v-4c615fcc] {\n  flex-direction: row;\n  justify-content: space-around;\n  padding: 0 48px;\n}\n.title-item[data-v-4c615fcc] {\n  padding: 27px 18px;\n  margin-right: 42px;\n}\n.item-title[data-v-4c615fcc] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 42px;\n  line-height: 57px;\n}\n.border-bottom[data-v-4c615fcc] {\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  height: 3px;\n  width: 132px;\n}\n.tab-page-wrap[data-v-4c615fcc] {\n  width: 1080px;\n  overflow: hidden;\n}\n.tab-container[data-v-4c615fcc] {\n  flex: 1;\n  flex-direction: row;\n  position: absolute;\n}\n.tab-item[data-v-4c615fcc] {\n  width: 1080px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tab-page/index.vue?fd23c670"],"names":[],"mappings":";AA+CA;EACA,cAAA;CACA;AAEA;EACA,cAAA;EACA,oBAAA;EACA,yBAAA;EACA,+BAAA;CACA;AAEA;EACA,oBAAA;EACA,8BAAA;EACA,gBAAA;CACA;AAEA;EACA,mBAAA;EACA,mBAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,UAAA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,cAAA;EACA,iBAAA;CACA;AAEA;EACA,QAAA;EACA,oBAAA;EACA,mBAAA;CACA;AAEA;EACA,cAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 18/03/06. -->\n<template>\n  <div class=\"fm-tab-page\"\n       :style=\"{ height: (tabPageHeight) + 'px', opacity: loaded ? 1 : 0}\">\n    <scroller class=\"tab-title-list\"\n              ref=\"tab-title-list\"\n              :show-scrollbar=\"false\"\n              scroll-direction=\"horizontal\"\n              :style=\"{ height: (cTabStyles.height) + 'px'}\">\n\n      <div class=\"tab-title-wrap\"\n           ref=\"tab-title-wrap\">\n        <div class=\"title-item\"\n             v-for=\"(v, idx) in tabTitles\"\n             :key=\"idx\"\n             @click=\"setPage(idx)\"\n             :ref=\"'fm-tab-title-'+idx\">\n          <text class=\"item-title\"\n                :style=\"{ fontSize: cTabStyles.fontSize + 'px', color: currentPage === idx ? cTabStyles.activeTitleColor : cTabStyles.titleColor, paddingLeft: cTabStyles.padding + 'px', paddingRight: cTabStyles.padding + 'px' }\">{{ v.title }}</text>\n        </div>\n        <div class=\"border-bottom\"\n             ref=\"tab-border\"\n             :style=\"{ width: bottomInitWidth + 'px', backgroundColor: cTabStyles.activeBottomColor }\"></div>\n      </div>\n    </scroller>\n    <div class=\"tab-page-wrap\"\n         ref=\"tab-page-wrap\"\n         @panstart=\"_onTouchStart\"\n         @panmove=\"_onTouchMove\"\n         @panend=\"_onTouchEnd\"\n         @horizontalpan=\"startHandler\"\n         :style=\"{ height: (tabPageHeight-cTabStyles.height) + 'px' }\">\n      <div class=\"tab-container\"\n           ref=\"tab-container\">\n        <div class=\"tab-item\"\n             v-for=\"(v, idx) in tabTitles\"\n             :key=\"idx\"\n             :style=\"{ height: (tabPageHeight-cTabStyles.height) + 'px' }\">\n          <slot :name=\"`tab-item-${idx}`\"></slot>\n        </div>\n      </div>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-tab-page {\n    width: 1080px;\n  }\n\n  .tab-title-list {\n    width: 1080px;\n    flex-direction: row;\n    border-bottom-width: 2px;\n    border-color: rgba(0,0,0,0.10);\n  }\n\n  .tab-title-wrap {\n    flex-direction: row;\n    justify-content: space-around;\n    padding: 0 48px;\n  }\n\n  .title-item {\n    padding: 27px 18px;\n    margin-right: 42px;\n  }\n\n  .item-title {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 42px;\n    line-height: 57px;\n  }\n\n  .border-bottom {\n    position: absolute;\n    left: 0;\n    bottom: 0;\n    height: 3px;\n    width: 132px;\n  }\n\n  .tab-page-wrap {\n    width: 1080px;\n    overflow: hidden;\n  }\n\n  .tab-container {\n    flex: 1;\n    flex-direction: row;\n    position: absolute;\n  }\n\n  .tab-item {\n    width: 1080px;\n  }\n</style>\n\n<script>\nimport Binding from 'weex-bindingx/lib/index.weex.js';\nconst animation = weex.requireModule('animation');\nconst dom = weex.requireModule('dom');\nconst isH5 = weex.config.env.platform === 'Web';\n\nexport default {\n  name: 'FmTabPage',\n  props: {\n    tabTitles: {\n      type: Array,\n      default: () => ([])\n    },\n    panDist: {\n      type: Number,\n      default: 200\n    },\n    duration: {\n      type: [Number, String],\n      default: 300\n    },\n    tabPageHeight: {\n      type: [String, Number],\n      default: 1854\n    },\n    tabStyles: {\n      type: Object,\n      default: () => ({})\n    },\n    timingFunction: {\n      type: String,\n      default: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'\n    },\n    selectIndex: {\n      type: Number,\n      default: 0\n    }\n  },\n  watch: {\n    selectIndex (val) {\n      if (this.loaded) {\n        this.setPage(this.selectIndex, false);\n      }\n    }\n  },\n  computed: {\n    maxPage () {\n      return this.tabTitles.length - 1;\n    },\n    cTabStyles () {\n      const defaultStyle = {\n        titleColor: 'rgba(0, 0, 0, 0.6)',\n        activeTitleColor: '#198DED',\n        height: 102,\n        padding: 18,\n        fontSize: 42,\n        activeBottomColor: '#198DED'\n      };\n      return Object.assign({}, defaultStyle, this.tabStyles);\n    }\n  },\n  data: () => ({\n    loaded: false,\n    currentPage: 0,\n    gesToken: 0,\n    isMoving: false,\n    startTime: 0,\n    deltaX: 0,\n    translateX: 0,\n    startPosX: 0,\n    startPosY: 0,\n    judge: 'INITIAL',\n    bottomInitWidth: 0,\n    bottomInitOffset: 0,\n    tabPositions: []\n  }),\n  methods: {\n    next () {\n      let page = this.currentPage;\n      if (page < this.maxPage) {\n        page++;\n      }\n      this.setPage(page);\n    },\n    prev () {\n      let page = this.currentPage;\n      if (page > 0) {\n        page--;\n      }\n      this.setPage(page);\n    },\n    startHandler () {\n      this.bindExp(this.$refs['tab-page-wrap']);\n    },\n    _onTouchStart (e) {\n      if (isH5) {\n        this.startPosX = this._getTouchXPos(e);\n        this.startPosY = this._getTouchYPos(e);\n        this.deltaX = 0;\n        this.startTime = new Date().getTime();\n      }\n    },\n    _onTouchMove (e) {\n      if (isH5) {\n        this.deltaX = this._getTouchXPos(e) - this.startPosX;\n        this.deltaY = Math.abs(this._getTouchYPos(e) - this.startPosY + 1);\n        if (this.judge === 'INITIAL' && Math.abs(this.deltaX) / this.deltaY > 1.73) {\n          this.judge = 'SLIDE_ING';\n        }\n      }\n    },\n    _onTouchEnd (e) {\n      if (isH5) {\n        if (this.judge === 'SLIDE_ING') {\n          if (this.deltaX < -50) {\n            this.next();\n          } else if (this.deltaX > 50) {\n            this.prev();\n          }\n        }\n        this.judge = 'INITIAL';\n      }\n    },\n    bindExp (element) {\n      if (element && element.ref) {\n        if (this.isMoving && this.gesToken !== 0) {\n          Binding.unbind({\n            eventType: 'pan',\n            token: this.gesToken\n          });\n          this.gesToken = 0;\n          return;\n        }\n\n        const tabPageEl = this.$refs['tab-container'];\n        const tabBorderEl = this.$refs['tab-border'];\n        const tabScrollEl = this.$refs['tab-title-list'];\n        const { currentPage, panDist, maxPage } = this;\n        const dist = currentPage * 1080; // tab 页偏移距离\n\n        const currOffset = this.tabPositions[currentPage].offset; // 当前 title 偏移量\n        const currWidth = this.tabPositions[currentPage].width; // 当前 title 宽度\n        const prevOffset = this.tabPositions[currentPage <= 0 ? 0 : currentPage - 1].offset; // 上一页 title 偏移量\n        const prevWidth = this.tabPositions[currentPage <= 0 ? 0 : currentPage - 1].width; // 上一页 title 宽度\n        const nextOffset = this.tabPositions[currentPage >= maxPage ? maxPage : currentPage + 1].offset; // 下一页 title 偏移量\n        const nextWidth = this.tabPositions[currentPage >= maxPage ? maxPage : currentPage + 1].width; // 上一页 title 宽度\n\n        // binding props\n        let tabExp = `x + ${-dist}`; // tab 页插值表达式\n\n        // bottom border 偏移动画插值表达式\n        const borderMoveExp = `x / 1080 * (x > 0 ? -${currOffset - prevOffset} : -${nextOffset - currOffset}) + ${currOffset}`;\n\n        /**\n         * bottom border 宽度动画变化规则描述\n         * @param currWidth 当前 tab 宽度(起始宽度)\n         * @param peakWidth 峰值宽度\n         * @param toWidth 最终宽度\n         * 变化描述：\n         *  当 currWidth === toWidth 时:\n         *    动画公式：currWidth -> toWidth (currWidth 递增至 toWidth)\n         *  当 currWidth !== toWidth 时:\n         *    动画公式：currWidth -> peakWidth -> toWidth (currWidth 先递增至 peakWidth 然后递减至 toWidth)\n         * peakWidth 峰值计算公式：peakWidth = currWidth / 2 + currWidth\n         */\n        // 滑向下一页的宽度变化动画插值表达式\n        const peakValue = currWidth / 2;\n        // 滑向下一页的宽度变化动画插值器\n        const nextInterpolator = nextWidth === currWidth ? `(abs(x) <= 540 ? (abs(x)/540 * ${peakValue}) : (2-abs(x)/540) * ${peakValue})` : `(abs(x)/1080 * ${nextWidth - currWidth})`;\n        // 滑向上一页的宽度变化动画插值器\n        const prevInterpolator = prevWidth === currWidth ? `(abs(x) <= 540 ? (abs(x)/540 * ${peakValue}) : (2-abs(x)/540) * ${peakValue})` : `(abs(x)/1080 * ${prevWidth - currWidth})`;\n        // bottom border 宽度变化动画插值器\n        let borderWidthExp = `${currWidth} + (x > 0 ? ${prevInterpolator} : ${nextInterpolator})`;\n\n        // tab scroller 滑动动画插值表达式\n        const tabScrollExp = `${(currOffset - 540 + currWidth / 2)} - x / 1080 * ${(nextOffset - 540 + nextWidth / 2) - (currOffset - 540 + currWidth / 2)} - ${(currOffset - 540) < 0 ? 48 : 0}`;\n\n        // 当页数为 0 或 max 时去除尽头动画\n        if (currentPage === 0) {\n          tabExp = `x >= 0 ? 0 : x`;\n          borderWidthExp = `x >= 0 ? ${currWidth} : ${borderWidthExp}`;\n        } else if (currentPage === maxPage) {\n          tabExp = `x <= 0 ? ${-maxPage * 1080} : x + ${-dist}`;\n          borderWidthExp = `x <= 0 ? ${currWidth} : ${borderWidthExp}`;\n        }\n\n        const props = [{\n          element: tabPageEl.ref,\n          property: 'transform.translateX',\n          expression: tabExp\n        }, {\n          element: tabBorderEl.ref,\n          property: 'transform.translateX',\n          expression: borderMoveExp\n        }, {\n          element: tabBorderEl.ref,\n          property: 'width',\n          expression: borderWidthExp\n        }, {\n          element: tabScrollEl.ref,\n          property: 'scroll.contentOffset',\n          expression: tabScrollExp\n        }];\n\n        const gesTokenObj = Binding.bind({\n          anchor: element.ref,\n          eventType: 'pan',\n          props\n        }, (e) => {\n          const { deltaX, state } = e;\n          if (state === 'end') {\n            if (deltaX < -panDist) {\n              this.next();\n            } else if (deltaX > panDist) {\n              this.prev();\n            } else {\n              this.setPage(currentPage);\n            }\n          }\n        });\n\n        this.gesToken = gesTokenObj.token;\n      }\n    },\n    setPage (page, animated = true) {\n      if (this.isMoving === true) {\n        return;\n      }\n      this.isMoving = true;\n      const currentTabEl = this.$refs[`fm-tab-title-${page}`][0];\n      const tabWidth = this.tabPositions[page].width;\n      const tabOffset = this.tabPositions[page].offset;\n\n      if (tabOffset >= 1080 / 2) {\n        dom.scrollToElement(currentTabEl, {\n          offset: -1080 / 2 + tabWidth / 2,\n          animated\n        });\n      } else {\n        dom.scrollToElement(currentTabEl, {\n          offset: -tabOffset,\n          animated\n        });\n      }\n\n      this.currentPage = page;\n      this._animateTransformX(page, animated);\n      this._animateBorder(page, animated);\n      this.$emit('fmTabPageTabSelected', { page });\n    },\n    _animateTransformX (page, animated = true) {\n      const { duration, timingFunction } = this;\n      const containerEl = this.$refs[`tab-container`];\n      const dist = page * 1080;\n      animation.transition(containerEl, {\n        styles: {\n          transform: `translateX(${-dist}px)`\n        },\n        duration: animated ? duration : 0.00001,\n        timingFunction,\n        delay: 0\n      }, () => {\n        this.isMoving = false;\n      });\n    },\n    _animateBorder (page, animated = true) {\n      const { duration, timingFunction, tabPositions } = this;\n      const borderEl = this.$refs[`tab-border`];\n      const dist = tabPositions[page].offset;\n      animation.transition(borderEl, {\n        styles: {\n          transform: `translateX(${dist}px)`,\n          width: tabPositions[page].width\n        },\n        duration: animated ? duration : 0.00001,\n        timingFunction,\n        needLayout: false\n      }, () => {\n        this.isMoving = false;\n      });\n    },\n    _getTouchXPos (e) {\n      return e.changedTouches[0]['pageX'];\n    },\n    _getTouchYPos (e) {\n      return e.changedTouches[0]['pageY'];\n    },\n    _calculatePositions () {\n      const { tabTitles } = this;\n      tabTitles.map((item, i) => {\n        dom.getComponentRect(this.$refs['fm-tab-title-' + i][0], rect => {\n          this.tabPositions[i] = {\n            width: rect.size.width,\n            offset: rect.size.left\n          };\n          if (i === this.selectIndex) {\n            this.bottomInitWidth = rect.size.width;\n            this.bottomInitOffset = rect.size.left;\n            this.setPage(this.selectIndex, false);\n            setTimeout(() => {\n              this.loaded = true;\n            }, 50);\n          }\n        });\n      });\n    }\n  },\n  mounted () {\n    const tabPageEl = this.$refs['tab-page-wrap'];\n    Binding.prepare && Binding.prepare({\n      anchor: tabPageEl.ref,\n      eventType: 'pan'\n    });\n    setTimeout(() => {\n      this._calculatePositions();\n    }, 50);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.fm-tab-page[data-v-4c615fcc] {\n  width: 10rem;\n}\n.tab-title-list[data-v-4c615fcc] {\n  width: 10rem;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  border-bottom-width: 0.01852rem;\n  border-color: rgba(0,0,0,0.10);\n}\n.tab-title-wrap[data-v-4c615fcc] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  -webkit-justify-content: space-around;\n          justify-content: space-around;\n  padding: 0 0.44444rem;\n}\n.title-item[data-v-4c615fcc] {\n  padding: 0.25rem 0.16667rem;\n  margin-right: 0.38889rem;\n}\n.item-title[data-v-4c615fcc] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 0.38889rem;\n  line-height: 0.52778rem;\n}\n.border-bottom[data-v-4c615fcc] {\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  height: 0.02778rem;\n  width: 1.22222rem;\n}\n.tab-page-wrap[data-v-4c615fcc] {\n  width: 10rem;\n  overflow: hidden;\n}\n.tab-container[data-v-4c615fcc] {\n  -webkit-box-flex: 1;\n  -webkit-flex: 1;\n          flex: 1;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n          flex-direction: row;\n  position: absolute;\n}\n.tab-item[data-v-4c615fcc] {\n  width: 10rem;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-tab-page/index.vue?fd23c670"],"names":[],"mappings":";AA+CA;EACA,aAAA;CACA;AAEA;EACA,aAAA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,gCAAA;EACA,+BAAA;CACA;AAEA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,sCAAA;UAAA,8BAAA;EACA,sBAAA;CACA;AAEA;EACA,4BAAA;EACA,yBAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,sBAAA;EACA,wBAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,UAAA;EACA,mBAAA;EACA,kBAAA;CACA;AAEA;EACA,aAAA;EACA,iBAAA;CACA;AAEA;EACA,oBAAA;EAAA,gBAAA;UAAA,QAAA;EACA,+BAAA;EAAA,8BAAA;EAAA,4BAAA;UAAA,oBAAA;EACA,mBAAA;CACA;AAEA;EACA,aAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 18/03/06. -->\n<template>\n  <div class=\"fm-tab-page\"\n       :style=\"{ height: (tabPageHeight) + 'px', opacity: loaded ? 1 : 0}\">\n    <scroller class=\"tab-title-list\"\n              ref=\"tab-title-list\"\n              :show-scrollbar=\"false\"\n              scroll-direction=\"horizontal\"\n              :style=\"{ height: (cTabStyles.height) + 'px'}\">\n\n      <div class=\"tab-title-wrap\"\n           ref=\"tab-title-wrap\">\n        <div class=\"title-item\"\n             v-for=\"(v, idx) in tabTitles\"\n             :key=\"idx\"\n             @click=\"setPage(idx)\"\n             :ref=\"'fm-tab-title-'+idx\">\n          <text class=\"item-title\"\n                :style=\"{ fontSize: cTabStyles.fontSize + 'px', color: currentPage === idx ? cTabStyles.activeTitleColor : cTabStyles.titleColor, paddingLeft: cTabStyles.padding + 'px', paddingRight: cTabStyles.padding + 'px' }\">{{ v.title }}</text>\n        </div>\n        <div class=\"border-bottom\"\n             ref=\"tab-border\"\n             :style=\"{ width: bottomInitWidth + 'px', backgroundColor: cTabStyles.activeBottomColor }\"></div>\n      </div>\n    </scroller>\n    <div class=\"tab-page-wrap\"\n         ref=\"tab-page-wrap\"\n         @panstart=\"_onTouchStart\"\n         @panmove=\"_onTouchMove\"\n         @panend=\"_onTouchEnd\"\n         @horizontalpan=\"startHandler\"\n         :style=\"{ height: (tabPageHeight-cTabStyles.height) + 'px' }\">\n      <div class=\"tab-container\"\n           ref=\"tab-container\">\n        <div class=\"tab-item\"\n             v-for=\"(v, idx) in tabTitles\"\n             :key=\"idx\"\n             :style=\"{ height: (tabPageHeight-cTabStyles.height) + 'px' }\">\n          <slot :name=\"`tab-item-${idx}`\"></slot>\n        </div>\n      </div>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .fm-tab-page {\n    width: 1080px;\n  }\n\n  .tab-title-list {\n    width: 1080px;\n    flex-direction: row;\n    border-bottom-width: 2px;\n    border-color: rgba(0,0,0,0.10);\n  }\n\n  .tab-title-wrap {\n    flex-direction: row;\n    justify-content: space-around;\n    padding: 0 48px;\n  }\n\n  .title-item {\n    padding: 27px 18px;\n    margin-right: 42px;\n  }\n\n  .item-title {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 42px;\n    line-height: 57px;\n  }\n\n  .border-bottom {\n    position: absolute;\n    left: 0;\n    bottom: 0;\n    height: 3px;\n    width: 132px;\n  }\n\n  .tab-page-wrap {\n    width: 1080px;\n    overflow: hidden;\n  }\n\n  .tab-container {\n    flex: 1;\n    flex-direction: row;\n    position: absolute;\n  }\n\n  .tab-item {\n    width: 1080px;\n  }\n</style>\n\n<script>\nimport Binding from 'weex-bindingx/lib/index.weex.js';\nconst animation = weex.requireModule('animation');\nconst dom = weex.requireModule('dom');\nconst isH5 = weex.config.env.platform === 'Web';\n\nexport default {\n  name: 'FmTabPage',\n  props: {\n    tabTitles: {\n      type: Array,\n      default: () => ([])\n    },\n    panDist: {\n      type: Number,\n      default: 200\n    },\n    duration: {\n      type: [Number, String],\n      default: 300\n    },\n    tabPageHeight: {\n      type: [String, Number],\n      default: 1854\n    },\n    tabStyles: {\n      type: Object,\n      default: () => ({})\n    },\n    timingFunction: {\n      type: String,\n      default: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'\n    },\n    selectIndex: {\n      type: Number,\n      default: 0\n    }\n  },\n  watch: {\n    selectIndex (val) {\n      if (this.loaded) {\n        this.setPage(this.selectIndex, false);\n      }\n    }\n  },\n  computed: {\n    maxPage () {\n      return this.tabTitles.length - 1;\n    },\n    cTabStyles () {\n      const defaultStyle = {\n        titleColor: 'rgba(0, 0, 0, 0.6)',\n        activeTitleColor: '#198DED',\n        height: 102,\n        padding: 18,\n        fontSize: 42,\n        activeBottomColor: '#198DED'\n      };\n      return Object.assign({}, defaultStyle, this.tabStyles);\n    }\n  },\n  data: () => ({\n    loaded: false,\n    currentPage: 0,\n    gesToken: 0,\n    isMoving: false,\n    startTime: 0,\n    deltaX: 0,\n    translateX: 0,\n    startPosX: 0,\n    startPosY: 0,\n    judge: 'INITIAL',\n    bottomInitWidth: 0,\n    bottomInitOffset: 0,\n    tabPositions: []\n  }),\n  methods: {\n    next () {\n      let page = this.currentPage;\n      if (page < this.maxPage) {\n        page++;\n      }\n      this.setPage(page);\n    },\n    prev () {\n      let page = this.currentPage;\n      if (page > 0) {\n        page--;\n      }\n      this.setPage(page);\n    },\n    startHandler () {\n      this.bindExp(this.$refs['tab-page-wrap']);\n    },\n    _onTouchStart (e) {\n      if (isH5) {\n        this.startPosX = this._getTouchXPos(e);\n        this.startPosY = this._getTouchYPos(e);\n        this.deltaX = 0;\n        this.startTime = new Date().getTime();\n      }\n    },\n    _onTouchMove (e) {\n      if (isH5) {\n        this.deltaX = this._getTouchXPos(e) - this.startPosX;\n        this.deltaY = Math.abs(this._getTouchYPos(e) - this.startPosY + 1);\n        if (this.judge === 'INITIAL' && Math.abs(this.deltaX) / this.deltaY > 1.73) {\n          this.judge = 'SLIDE_ING';\n        }\n      }\n    },\n    _onTouchEnd (e) {\n      if (isH5) {\n        if (this.judge === 'SLIDE_ING') {\n          if (this.deltaX < -50) {\n            this.next();\n          } else if (this.deltaX > 50) {\n            this.prev();\n          }\n        }\n        this.judge = 'INITIAL';\n      }\n    },\n    bindExp (element) {\n      if (element && element.ref) {\n        if (this.isMoving && this.gesToken !== 0) {\n          Binding.unbind({\n            eventType: 'pan',\n            token: this.gesToken\n          });\n          this.gesToken = 0;\n          return;\n        }\n\n        const tabPageEl = this.$refs['tab-container'];\n        const tabBorderEl = this.$refs['tab-border'];\n        const tabScrollEl = this.$refs['tab-title-list'];\n        const { currentPage, panDist, maxPage } = this;\n        const dist = currentPage * 1080; // tab 页偏移距离\n\n        const currOffset = this.tabPositions[currentPage].offset; // 当前 title 偏移量\n        const currWidth = this.tabPositions[currentPage].width; // 当前 title 宽度\n        const prevOffset = this.tabPositions[currentPage <= 0 ? 0 : currentPage - 1].offset; // 上一页 title 偏移量\n        const prevWidth = this.tabPositions[currentPage <= 0 ? 0 : currentPage - 1].width; // 上一页 title 宽度\n        const nextOffset = this.tabPositions[currentPage >= maxPage ? maxPage : currentPage + 1].offset; // 下一页 title 偏移量\n        const nextWidth = this.tabPositions[currentPage >= maxPage ? maxPage : currentPage + 1].width; // 上一页 title 宽度\n\n        // binding props\n        let tabExp = `x + ${-dist}`; // tab 页插值表达式\n\n        // bottom border 偏移动画插值表达式\n        const borderMoveExp = `x / 1080 * (x > 0 ? -${currOffset - prevOffset} : -${nextOffset - currOffset}) + ${currOffset}`;\n\n        /**\n         * bottom border 宽度动画变化规则描述\n         * @param currWidth 当前 tab 宽度(起始宽度)\n         * @param peakWidth 峰值宽度\n         * @param toWidth 最终宽度\n         * 变化描述：\n         *  当 currWidth === toWidth 时:\n         *    动画公式：currWidth -> toWidth (currWidth 递增至 toWidth)\n         *  当 currWidth !== toWidth 时:\n         *    动画公式：currWidth -> peakWidth -> toWidth (currWidth 先递增至 peakWidth 然后递减至 toWidth)\n         * peakWidth 峰值计算公式：peakWidth = currWidth / 2 + currWidth\n         */\n        // 滑向下一页的宽度变化动画插值表达式\n        const peakValue = currWidth / 2;\n        // 滑向下一页的宽度变化动画插值器\n        const nextInterpolator = nextWidth === currWidth ? `(abs(x) <= 540 ? (abs(x)/540 * ${peakValue}) : (2-abs(x)/540) * ${peakValue})` : `(abs(x)/1080 * ${nextWidth - currWidth})`;\n        // 滑向上一页的宽度变化动画插值器\n        const prevInterpolator = prevWidth === currWidth ? `(abs(x) <= 540 ? (abs(x)/540 * ${peakValue}) : (2-abs(x)/540) * ${peakValue})` : `(abs(x)/1080 * ${prevWidth - currWidth})`;\n        // bottom border 宽度变化动画插值器\n        let borderWidthExp = `${currWidth} + (x > 0 ? ${prevInterpolator} : ${nextInterpolator})`;\n\n        // tab scroller 滑动动画插值表达式\n        const tabScrollExp = `${(currOffset - 540 + currWidth / 2)} - x / 1080 * ${(nextOffset - 540 + nextWidth / 2) - (currOffset - 540 + currWidth / 2)} - ${(currOffset - 540) < 0 ? 48 : 0}`;\n\n        // 当页数为 0 或 max 时去除尽头动画\n        if (currentPage === 0) {\n          tabExp = `x >= 0 ? 0 : x`;\n          borderWidthExp = `x >= 0 ? ${currWidth} : ${borderWidthExp}`;\n        } else if (currentPage === maxPage) {\n          tabExp = `x <= 0 ? ${-maxPage * 1080} : x + ${-dist}`;\n          borderWidthExp = `x <= 0 ? ${currWidth} : ${borderWidthExp}`;\n        }\n\n        const props = [{\n          element: tabPageEl.ref,\n          property: 'transform.translateX',\n          expression: tabExp\n        }, {\n          element: tabBorderEl.ref,\n          property: 'transform.translateX',\n          expression: borderMoveExp\n        }, {\n          element: tabBorderEl.ref,\n          property: 'width',\n          expression: borderWidthExp\n        }, {\n          element: tabScrollEl.ref,\n          property: 'scroll.contentOffset',\n          expression: tabScrollExp\n        }];\n\n        const gesTokenObj = Binding.bind({\n          anchor: element.ref,\n          eventType: 'pan',\n          props\n        }, (e) => {\n          const { deltaX, state } = e;\n          if (state === 'end') {\n            if (deltaX < -panDist) {\n              this.next();\n            } else if (deltaX > panDist) {\n              this.prev();\n            } else {\n              this.setPage(currentPage);\n            }\n          }\n        });\n\n        this.gesToken = gesTokenObj.token;\n      }\n    },\n    setPage (page, animated = true) {\n      if (this.isMoving === true) {\n        return;\n      }\n      this.isMoving = true;\n      const currentTabEl = this.$refs[`fm-tab-title-${page}`][0];\n      const tabWidth = this.tabPositions[page].width;\n      const tabOffset = this.tabPositions[page].offset;\n\n      if (tabOffset >= 1080 / 2) {\n        dom.scrollToElement(currentTabEl, {\n          offset: -1080 / 2 + tabWidth / 2,\n          animated\n        });\n      } else {\n        dom.scrollToElement(currentTabEl, {\n          offset: -tabOffset,\n          animated\n        });\n      }\n\n      this.currentPage = page;\n      this._animateTransformX(page, animated);\n      this._animateBorder(page, animated);\n      this.$emit('fmTabPageTabSelected', { page });\n    },\n    _animateTransformX (page, animated = true) {\n      const { duration, timingFunction } = this;\n      const containerEl = this.$refs[`tab-container`];\n      const dist = page * 1080;\n      animation.transition(containerEl, {\n        styles: {\n          transform: `translateX(${-dist}px)`\n        },\n        duration: animated ? duration : 0.00001,\n        timingFunction,\n        delay: 0\n      }, () => {\n        this.isMoving = false;\n      });\n    },\n    _animateBorder (page, animated = true) {\n      const { duration, timingFunction, tabPositions } = this;\n      const borderEl = this.$refs[`tab-border`];\n      const dist = tabPositions[page].offset;\n      animation.transition(borderEl, {\n        styles: {\n          transform: `translateX(${dist}px)`,\n          width: tabPositions[page].width\n        },\n        duration: animated ? duration : 0.00001,\n        timingFunction,\n        needLayout: false\n      }, () => {\n        this.isMoving = false;\n      });\n    },\n    _getTouchXPos (e) {\n      return e.changedTouches[0]['pageX'];\n    },\n    _getTouchYPos (e) {\n      return e.changedTouches[0]['pageY'];\n    },\n    _calculatePositions () {\n      const { tabTitles } = this;\n      tabTitles.map((item, i) => {\n        dom.getComponentRect(this.$refs['fm-tab-title-' + i][0], rect => {\n          this.tabPositions[i] = {\n            width: rect.size.width,\n            offset: rect.size.left\n          };\n          if (i === this.selectIndex) {\n            this.bottomInitWidth = rect.size.width;\n            this.bottomInitOffset = rect.size.left;\n            this.setPage(this.selectIndex, false);\n            setTimeout(() => {\n              this.loaded = true;\n            }, 50);\n          }\n        });\n      });\n    }\n  },\n  mounted () {\n    const tabPageEl = this.$refs['tab-page-wrap'];\n    Binding.prepare && Binding.prepare({\n      anchor: tabPageEl.ref,\n      eventType: 'pan'\n    });\n    setTimeout(() => {\n      this._calculatePositions();\n    }, 50);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 238 */
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17700,7 +16947,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _indexWeex = __webpack_require__(66);
+var _indexWeex = __webpack_require__(46);
 
 var _indexWeex2 = _interopRequireDefault(_indexWeex);
 
@@ -18155,7 +17402,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 239 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -18251,7 +17498,7 @@ if (false) {
 }
 
 /***/ }),
-/* 240 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18261,7 +17508,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(241);
+var _index = __webpack_require__(279);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -18273,582 +17520,24 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 241 */
+/* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(242)
-
+var disposed = false
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(244),
+  __webpack_require__(280),
   /* template */
-  __webpack_require__(245),
-  /* scopeId */
-  "data-v-c6e0f338",
-  /* cssModules */
-  null
-)
-Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-native-tab/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c6e0f338", Component.options)
-  } else {
-    hotAPI.reload("data-v-c6e0f338", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 242 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(243);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("409866c4", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-c6e0f338\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-c6e0f338\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 243 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(true);
-// imports
-
-
-// module
-exports.push([module.i, "\n.fm-tab-page[data-v-c6e0f338] {\n  width: 1080px;\n}\n.tab-title-list[data-v-c6e0f338] {\n  width: 1080px;\n  flex-direction: row;\n  border-bottom-width: 2px;\n  border-color: rgba(0,0,0,0.10);\n}\n.tab-title-wrap[data-v-c6e0f338] {\n  flex-direction: row;\n  justify-content: space-around;\n  padding: 0 48px;\n}\n.title-item[data-v-c6e0f338] {\n  border-color: #198DED;\n  padding: 27px 18px;\n  margin-right: 42px;\n}\n.item-title[data-v-c6e0f338] {\n  font-family: sans-serif-medium;\n  font-weight: 500;\n  font-size: 42px;\n  line-height: 57px;\n}\n.border-bottom[data-v-c6e0f338] {\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  height: 3px;\n  width: 132px;\n}\n.tab-page-wrap[data-v-c6e0f338] {\n  width: 1080px;\n  overflow: hidden;\n}\n.tab-container[data-v-c6e0f338] {\n  flex: 1;\n  flex-direction: row;\n  position: absolute;\n}\n.tab-item[data-v-c6e0f338] {\n  width: 1080px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-native-tab/index.vue?41235fd3"],"names":[],"mappings":";AAqEA;EACA,cAAA;CACA;AAEA;EACA,cAAA;EACA,oBAAA;EACA,yBAAA;EACA,+BAAA;CACA;AAEA;EACA,oBAAA;EACA,8BAAA;EACA,gBAAA;CACA;AAEA;EACA,sBAAA;EACA,mBAAA;EACA,mBAAA;CACA;AAEA;EACA,+BAAA;EACA,iBAAA;EACA,gBAAA;EACA,kBAAA;CACA;AAEA;EACA,mBAAA;EACA,QAAA;EACA,UAAA;EACA,YAAA;EACA,aAAA;CACA;AAEA;EACA,cAAA;EACA,iBAAA;CACA;AAEA;EACA,QAAA;EACA,oBAAA;EACA,mBAAA;CACA;AAEA;EACA,cAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 18/04/03. -->\n<template>\n  <div v-if=\"!isCreator\" class=\"fm-tab-page\"\n       :style=\"{ height: (tabPageHeight) + 'px', opacity: loaded ? 1 : 0}\">\n    <scroller class=\"tab-title-list\"\n              ref=\"tab-title-list\"\n              :show-scrollbar=\"false\"\n              scroll-direction=\"horizontal\"\n              :style=\"{ height: (cTabStyles.height) + 'px'}\">\n\n      <div class=\"tab-title-wrap\"\n           ref=\"tab-title-wrap\">\n        <div class=\"title-item\"\n             v-for=\"(v, idx) in tabTitles\"\n             :key=\"idx\"\n             @click=\"setPage(idx)\"\n             :ref=\"'fm-tab-title-'+idx\"\n             :style=\"{ borderBottomWidth: currentPage === idx ? '3px' : '0px' }\">\n          <text class=\"item-title\"\n                :style=\"{ fontSize: cTabStyles.fontSize + 'px',\n                          color: currentPage === idx ? cTabStyles.activeTitleColor : cTabStyles.titleColor,\n                          paddingLeft: cTabStyles.padding + 'px',\n                          paddingRight: cTabStyles.padding + 'px' }\">{{ v.text }}</text>\n        </div>\n      </div>\n    </scroller>\n    <div class=\"tab-page-wrap\"\n         ref=\"tab-page-wrap\"\n         @panstart=\"_onTouchStart\"\n         @panmove=\"_onTouchMove\"\n         @panend=\"_onTouchEnd\"\n         :style=\"{ height: (tabPageHeight-cTabStyles.height) + 'px' }\">\n      <div class=\"tab-container\"\n           ref=\"tab-container\">\n        <div class=\"tab-item\"\n             v-for=\"(v, idx) in tabTitles\"\n             :key=\"idx\"\n             :style=\"{ height: (tabPageHeight-cTabStyles.height) + 'px' }\">\n          <slot :name=\"`tab-item-${idx}`\"></slot>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <FmTab v-else\n         :style=\"{ height: (tabPageHeight) + 'px' }\"\n         :container=\"{\n            viewpagepaddingLeft: 0,\n            viewpagepaddingRight: 0,\n            viewpagepaddingTop: cTabStyles.height + 12,\n            viewpagepaddingBottom: 0,\n            tabpaddingLeft: 48,\n            tabpaddingRight: 48,\n            tabpaddingTop: 0,\n            tabpaddingBottom: 0\n         }\"\n         :tab=\"cTabTitles\"\n         @tabPosition=\"nativeTabSlided\">\n    <div class=\"tab-item\"\n         v-for=\"(v, idx) in tabTitles\"\n         :key=\"idx\"\n         :style=\"{ height: (tabPageHeight-cTabStyles.height-12) + 'px' }\">\n      <slot :name=\"`tab-item-${idx}`\"></slot>\n    </div>\n  </FmTab>\n</template>\n\n<style scoped>\n  .fm-tab-page {\n    width: 1080px;\n  }\n\n  .tab-title-list {\n    width: 1080px;\n    flex-direction: row;\n    border-bottom-width: 2px;\n    border-color: rgba(0,0,0,0.10);\n  }\n\n  .tab-title-wrap {\n    flex-direction: row;\n    justify-content: space-around;\n    padding: 0 48px;\n  }\n\n  .title-item {\n    border-color: #198DED;\n    padding: 27px 18px;\n    margin-right: 42px;\n  }\n\n  .item-title {\n    font-family: sans-serif-medium;\n    font-weight: 500;\n    font-size: 42px;\n    line-height: 57px;\n  }\n\n  .border-bottom {\n    position: absolute;\n    left: 0;\n    bottom: 0;\n    height: 3px;\n    width: 132px;\n  }\n\n  .tab-page-wrap {\n    width: 1080px;\n    overflow: hidden;\n  }\n\n  .tab-container {\n    flex: 1;\n    flex-direction: row;\n    position: absolute;\n  }\n\n  .tab-item {\n    width: 1080px;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nconst dom = weex.requireModule('dom');\nconst isH5 = weex.config.env.platform === 'Web';\n\nexport default {\n  name: 'FmNativeTab',\n  props: {\n    tabTitles: {\n      type: Array,\n      default: () => ([])\n    },\n    panDist: {\n      type: Number,\n      default: 200\n    },\n    duration: {\n      type: [Number, String],\n      default: 300\n    },\n    tabPageHeight: {\n      type: [String, Number],\n      default: 1854\n    },\n    tabStyles: {\n      type: Object,\n      default: () => ({})\n    },\n    timingFunction: {\n      type: String,\n      default: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'\n    },\n    selectIndex: {\n      type: Number,\n      default: 0\n    }\n  },\n  watch: {\n    selectIndex (val) {\n      if (this.loaded) {\n        this.setPage(this.selectIndex, false);\n      }\n    }\n  },\n  computed: {\n    isCreator () {\n      return weex.supports && weex.supports('@component/FmTab');\n    },\n    maxPage () {\n      return this.tabTitles.length - 1;\n    },\n    cTabTitles () {\n      const { tabStyles } = this;\n      const def = {\n        paddingStart: 18,\n        paddingEnd: 18,\n        minWidth: 120,\n        textunSelectColor: tabStyles.activeTitleColor || '#198DED',\n        textSelectColor: tabStyles.titleColor || '#99000000'\n      };\n      return this.tabTitles.map(item => {\n        return Object.assign({}, def, item);\n      });\n    },\n    cTabStyles () {\n      const defaultStyle = {\n        titleColor: 'rgba(0, 0, 0, 0.6)',\n        activeTitleColor: '#198DED',\n        height: 102,\n        padding: 18,\n        fontSize: 42,\n        activeBottomColor: '#198DED'\n      };\n      return Object.assign({}, defaultStyle, this.tabStyles);\n    }\n  },\n  data: () => ({\n    loaded: false,\n    currentPage: 0,\n    gesToken: 0,\n    isMoving: false,\n    startTime: 0,\n    deltaX: 0,\n    translateX: 0,\n    startPosX: 0,\n    startPosY: 0,\n    judge: 'INITIAL'\n  }),\n  methods: {\n    next () {\n      let page = this.currentPage;\n      if (page < this.maxPage) {\n        page++;\n      }\n      this.setPage(page);\n    },\n    prev () {\n      let page = this.currentPage;\n      if (page > 0) {\n        page--;\n      }\n      this.setPage(page);\n    },\n    _onTouchStart (e) {\n      if (isH5) {\n        this.startPosX = this._getTouchXPos(e);\n        this.startPosY = this._getTouchYPos(e);\n        this.deltaX = 0;\n        this.startTime = new Date().getTime();\n      }\n    },\n    _onTouchMove (e) {\n      if (isH5) {\n        this.deltaX = this._getTouchXPos(e) - this.startPosX;\n        this.deltaY = Math.abs(this._getTouchYPos(e) - this.startPosY + 1);\n        if (this.judge === 'INITIAL' && Math.abs(this.deltaX) / this.deltaY > 1.73) {\n          this.judge = 'SLIDE_ING';\n        }\n      }\n    },\n    _onTouchEnd (e) {\n      if (isH5) {\n        if (this.judge === 'SLIDE_ING') {\n          if (this.deltaX < -50) {\n            this.next();\n          } else if (this.deltaX > 50) {\n            this.prev();\n          }\n        }\n        this.judge = 'INITIAL';\n      }\n    },\n    setPage (page, animated = true) {\n      if (this.isMoving === true || this.tabTitles.length <= 0) {\n        return;\n      }\n      this.isMoving = true;\n      const currentTabEl = this.$refs[`fm-tab-title-${page}`][0];\n      const tabWidth = this.$refs[`fm-tab-title-${page}`][0].$el.clientWidth;\n      const tabOffset = this.$refs[`fm-tab-title-${page}`][0].$el.offsetLeft;\n\n      if (tabOffset >= 1080 / 2) {\n        dom.scrollToElement(currentTabEl, {\n          offset: -1080 / 2 + tabWidth / 2,\n          animated\n        });\n      } else {\n        dom.scrollToElement(currentTabEl, {\n          offset: -tabOffset,\n          animated\n        });\n      }\n\n      this.currentPage = page;\n      this._animateTransformX(page, animated);\n      this.$emit('fmTabPageTabSelected', { page });\n    },\n    nativeTabSlided (e) {\n      this.$emit('fmTabPageTabSelected', { page: e.position });\n    },\n    _animateTransformX (page, animated = true) {\n      const { duration, timingFunction } = this;\n      const containerEl = this.$refs[`tab-container`];\n      const dist = page * 1080;\n      animation.transition(containerEl, {\n        styles: {\n          transform: `translateX(${-dist}px)`\n        },\n        duration: animated ? duration : 0.00001,\n        timingFunction,\n        delay: 0\n      }, () => {\n        this.isMoving = false;\n      });\n    },\n    _getTouchXPos (e) {\n      return e.changedTouches[0]['pageX'];\n    },\n    _getTouchYPos (e) {\n      return e.changedTouches[0]['pageY'];\n    }\n  },\n  mounted () {\n    if (this.isCreator) { return; }\n    this.setPage(this.selectIndex, false);\n    setTimeout(() => {\n      this.loaded = true;\n    }, 50);\n  }\n};\n</script>\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-/* 244 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var animation = weex.requireModule('animation');
-var dom = weex.requireModule('dom');
-var isH5 = weex.config.env.platform === 'Web';
-
-exports.default = {
-  name: 'FmNativeTab',
-  props: {
-    tabTitles: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    panDist: {
-      type: Number,
-      default: 200
-    },
-    duration: {
-      type: [Number, String],
-      default: 300
-    },
-    tabPageHeight: {
-      type: [String, Number],
-      default: 1854
-    },
-    tabStyles: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
-    },
-    timingFunction: {
-      type: String,
-      default: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-    },
-    selectIndex: {
-      type: Number,
-      default: 0
-    }
-  },
-  watch: {
-    selectIndex: function selectIndex(val) {
-      if (this.loaded) {
-        this.setPage(this.selectIndex, false);
-      }
-    }
-  },
-  computed: {
-    isCreator: function isCreator() {
-      return weex.supports && weex.supports('@component/FmTab');
-    },
-    maxPage: function maxPage() {
-      return this.tabTitles.length - 1;
-    },
-    cTabTitles: function cTabTitles() {
-      var tabStyles = this.tabStyles;
-
-      var def = {
-        paddingStart: 18,
-        paddingEnd: 18,
-        minWidth: 120,
-        textunSelectColor: tabStyles.activeTitleColor || '#198DED',
-        textSelectColor: tabStyles.titleColor || '#99000000'
-      };
-      return this.tabTitles.map(function (item) {
-        return Object.assign({}, def, item);
-      });
-    },
-    cTabStyles: function cTabStyles() {
-      var defaultStyle = {
-        titleColor: 'rgba(0, 0, 0, 0.6)',
-        activeTitleColor: '#198DED',
-        height: 102,
-        padding: 18,
-        fontSize: 42,
-        activeBottomColor: '#198DED'
-      };
-      return Object.assign({}, defaultStyle, this.tabStyles);
-    }
-  },
-  data: function data() {
-    return {
-      loaded: false,
-      currentPage: 0,
-      gesToken: 0,
-      isMoving: false,
-      startTime: 0,
-      deltaX: 0,
-      translateX: 0,
-      startPosX: 0,
-      startPosY: 0,
-      judge: 'INITIAL'
-    };
-  },
-  methods: {
-    next: function next() {
-      var page = this.currentPage;
-      if (page < this.maxPage) {
-        page++;
-      }
-      this.setPage(page);
-    },
-    prev: function prev() {
-      var page = this.currentPage;
-      if (page > 0) {
-        page--;
-      }
-      this.setPage(page);
-    },
-    _onTouchStart: function _onTouchStart(e) {
-      if (isH5) {
-        this.startPosX = this._getTouchXPos(e);
-        this.startPosY = this._getTouchYPos(e);
-        this.deltaX = 0;
-        this.startTime = new Date().getTime();
-      }
-    },
-    _onTouchMove: function _onTouchMove(e) {
-      if (isH5) {
-        this.deltaX = this._getTouchXPos(e) - this.startPosX;
-        this.deltaY = Math.abs(this._getTouchYPos(e) - this.startPosY + 1);
-        if (this.judge === 'INITIAL' && Math.abs(this.deltaX) / this.deltaY > 1.73) {
-          this.judge = 'SLIDE_ING';
-        }
-      }
-    },
-    _onTouchEnd: function _onTouchEnd(e) {
-      if (isH5) {
-        if (this.judge === 'SLIDE_ING') {
-          if (this.deltaX < -50) {
-            this.next();
-          } else if (this.deltaX > 50) {
-            this.prev();
-          }
-        }
-        this.judge = 'INITIAL';
-      }
-    },
-    setPage: function setPage(page) {
-      var animated = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-
-      if (this.isMoving === true || this.tabTitles.length <= 0) {
-        return;
-      }
-      this.isMoving = true;
-      var currentTabEl = this.$refs['fm-tab-title-' + page][0];
-      var tabWidth = this.$refs['fm-tab-title-' + page][0].$el.clientWidth;
-      var tabOffset = this.$refs['fm-tab-title-' + page][0].$el.offsetLeft;
-
-      if (tabOffset >= 1080 / 2) {
-        dom.scrollToElement(currentTabEl, {
-          offset: -1080 / 2 + tabWidth / 2,
-          animated: animated
-        });
-      } else {
-        dom.scrollToElement(currentTabEl, {
-          offset: -tabOffset,
-          animated: animated
-        });
-      }
-
-      this.currentPage = page;
-      this._animateTransformX(page, animated);
-      this.$emit('fmTabPageTabSelected', { page: page });
-    },
-    nativeTabSlided: function nativeTabSlided(e) {
-      this.$emit('fmTabPageTabSelected', { page: e.position });
-    },
-    _animateTransformX: function _animateTransformX(page) {
-      var _this = this;
-
-      var animated = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-      var duration = this.duration,
-          timingFunction = this.timingFunction;
-
-      var containerEl = this.$refs['tab-container'];
-      var dist = page * 1080;
-      animation.transition(containerEl, {
-        styles: {
-          transform: 'translateX(' + -dist + 'px)'
-        },
-        duration: animated ? duration : 0.00001,
-        timingFunction: timingFunction,
-        delay: 0
-      }, function () {
-        _this.isMoving = false;
-      });
-    },
-    _getTouchXPos: function _getTouchXPos(e) {
-      return e.changedTouches[0]['pageX'];
-    },
-    _getTouchYPos: function _getTouchYPos(e) {
-      return e.changedTouches[0]['pageY'];
-    }
-  },
-  mounted: function mounted() {
-    var _this2 = this;
-
-    if (this.isCreator) {
-      return;
-    }
-    this.setPage(this.selectIndex, false);
-    setTimeout(function () {
-      _this2.loaded = true;
-    }, 50);
-  }
-};
-
-/***/ }),
-/* 245 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (!_vm.isCreator) ? _c('div', {
-    staticClass: "fm-tab-page",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      height: (_vm.tabPageHeight) + 'px',
-      opacity: _vm.loaded ? 1 : 0
-    }))
-  }, [_c('scroller', {
-    ref: "tab-title-list",
-    staticClass: "tab-title-list",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      height: (_vm.cTabStyles.height) + 'px'
-    })),
-    attrs: {
-      "show-scrollbar": false,
-      "scroll-direction": "horizontal"
-    }
-  }, [_c('div', {
-    ref: "tab-title-wrap",
-    staticClass: "tab-title-wrap",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, _vm._l((_vm.tabTitles), function(v, idx) {
-    return _c('div', {
-      key: idx,
-      ref: 'fm-tab-title-' + idx,
-      refInFor: true,
-      staticClass: "title-item",
-      staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle({
-        borderBottomWidth: _vm.currentPage === idx ? '3px' : '0px'
-      })),
-      on: {
-        "click": function($event) {
-          _vm.setPage(idx)
-        }
-      }
-    }, [_c('text', {
-      staticClass: "item-title",
-      staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle({
-        fontSize: _vm.cTabStyles.fontSize + 'px',
-        color: _vm.currentPage === idx ? _vm.cTabStyles.activeTitleColor : _vm.cTabStyles.titleColor,
-        paddingLeft: _vm.cTabStyles.padding + 'px',
-        paddingRight: _vm.cTabStyles.padding + 'px'
-      }))
-    }, [_vm._v(_vm._s(v.text))])])
-  }))]), _vm._v(" "), _c('div', {
-    ref: "tab-page-wrap",
-    staticClass: "tab-page-wrap",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      height: (_vm.tabPageHeight - _vm.cTabStyles.height) + 'px'
-    })),
-    on: {
-      "panstart": _vm._onTouchStart,
-      "panmove": _vm._onTouchMove,
-      "panend": _vm._onTouchEnd
-    }
-  }, [_c('div', {
-    ref: "tab-container",
-    staticClass: "tab-container",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, _vm._l((_vm.tabTitles), function(v, idx) {
-    return _c('div', {
-      key: idx,
-      staticClass: "tab-item",
-      staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle({
-        height: (_vm.tabPageHeight - _vm.cTabStyles.height) + 'px'
-      }))
-    }, [_vm._t(("tab-item-" + idx))], 2)
-  }))])], 1) : _c('FmTab', {
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      height: (_vm.tabPageHeight) + 'px'
-    })),
-    attrs: {
-      "container": {
-        viewpagepaddingLeft: 0,
-        viewpagepaddingRight: 0,
-        viewpagepaddingTop: _vm.cTabStyles.height + 12,
-        viewpagepaddingBottom: 0,
-        tabpaddingLeft: 48,
-        tabpaddingRight: 48,
-        tabpaddingTop: 0,
-        tabpaddingBottom: 0
-      },
-      "tab": _vm.cTabTitles
-    },
-    on: {
-      "tabPosition": _vm.nativeTabSlided
-    }
-  }, _vm._l((_vm.tabTitles), function(v, idx) {
-    return _c('div', {
-      key: idx,
-      staticClass: "tab-item",
-      staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle({
-        height: (_vm.tabPageHeight - _vm.cTabStyles.height - 12) + 'px'
-      }))
-    }, [_vm._t(("tab-item-" + idx))], 2)
-  }))
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-c6e0f338", module.exports)
-  }
-}
-
-/***/ }),
-/* 246 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(247);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 247 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(248),
-  /* template */
-  __webpack_require__(249),
+  __webpack_require__(281),
+  /* styles */
+  null,
   /* scopeId */
   null,
-  /* cssModules */
+  /* moduleIdentifier (server only) */
   null
 )
 Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-pan-item/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
@@ -18862,13 +17551,16 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-2948fd70", Component.options)
   }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
 })()}
 
 module.exports = Component.exports
 
 
 /***/ }),
-/* 248 */
+/* 280 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18878,39 +17570,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _weexBindingx = __webpack_require__(57);
+var _indexWeex = __webpack_require__(46);
 
-var _weexBindingx2 = _interopRequireDefault(_weexBindingx);
+var _indexWeex2 = _interopRequireDefault(_indexWeex);
 
-var _utils = __webpack_require__(56);
+var _utils = __webpack_require__(44);
 
 var _utils2 = _interopRequireDefault(_utils);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _bindEnv = __webpack_require__(53);
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+var _bindEnv2 = _interopRequireDefault(_bindEnv);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
   props: {
@@ -18923,7 +17595,7 @@ exports.default = {
     return {
       isPanning: false,
       appearMap: [],
-      supportAndroid: _utils2.default.env.supportsEBForAndroid()
+      supportAndroid: _bindEnv2.default.supportsEBForAndroid()
     };
   },
   mounted: function mounted() {
@@ -18932,7 +17604,7 @@ exports.default = {
     setTimeout(function () {
       if (_this.supportAndroid) {
         var element = _this.$refs['fm-pan-item'];
-        _weexBindingx2.default.prepare && _weexBindingx2.default.prepare({
+        _indexWeex2.default.prepare && _indexWeex2.default.prepare({
           anchor: element.ref,
           eventType: 'pan'
         });
@@ -18964,10 +17636,32 @@ exports.default = {
       }
     }
   }
-};
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
-/* 249 */
+/* 281 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -18997,1706 +17691,6 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-2948fd70", module.exports)
   }
 }
-
-/***/ }),
-/* 250 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(251);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 251 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(252),
-  /* template */
-  __webpack_require__(253),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-btnbar/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5aa1ccbc", Component.options)
-  } else {
-    hotAPI.reload("data-v-5aa1ccbc", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 252 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _fmFooter = __webpack_require__(43);
-
-var _fmFooter2 = _interopRequireDefault(_fmFooter);
-
-var _fmButton = __webpack_require__(36);
-
-var _fmButton2 = _interopRequireDefault(_fmButton);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-exports.default = {
-  name: 'FmBtnbar',
-  components: { FmButton: _fmButton2.default, FmFooter: _fmFooter2.default },
-  props: {
-    items: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    backgroundColor: {
-      type: String,
-      default: '#FFFFFF'
-    }
-  },
-  data: function data() {
-    return {
-      paddingSize: '',
-      buttonSize: ''
-    };
-  },
-  watch: {
-    items: function items() {
-      this.checkPadding();
-    }
-  },
-  created: function created() {
-    this.checkPadding();
-  },
-
-  methods: {
-    checkPadding: function checkPadding() {
-      if (this.items.length >= 2 || this.$slots.default && this.$slots.default.length >= 2) {
-        this.paddingSize = 'large';
-        this.buttonSize = 'large';
-      } else {
-        this.paddingSize = '';
-        this.buttonSize = 'huge';
-      }
-    },
-    btnClicked: function btnClicked(index) {
-      this.$emit('fmBtnbarBtnClicked', { index: index });
-    }
-  }
-};
-
-/***/ }),
-/* 253 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('fm-footer', {
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    attrs: {
-      "padding-size": _vm.paddingSize,
-      "backgroundColor": _vm.backgroundColor
-    }
-  }, [_vm._l((_vm.items), function(item, index) {
-    return (!_vm.$slots.default) ? _c('fm-button', _vm._b({
-      key: index,
-      staticClass: "tabbar-item",
-      staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle(undefined)),
-      attrs: {
-        "animated": true,
-        "size": _vm.buttonSize
-      },
-      on: {
-        "buttonClicked": function($event) {
-          _vm.btnClicked(index)
-        }
-      }
-    }, 'fm-button', Object.assign({}, item), false), [_vm._v(_vm._s(item.title))]) : _vm._e()
-  }), _vm._v(" "), _vm._t("default")], 2)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-5aa1ccbc", module.exports)
-  }
-}
-
-/***/ }),
-/* 254 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(255);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 255 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(256)
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(258),
-  /* template */
-  __webpack_require__(259),
-  /* scopeId */
-  "data-v-95a96b12",
-  /* cssModules */
-  null
-)
-Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-textbar/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-95a96b12", Component.options)
-  } else {
-    hotAPI.reload("data-v-95a96b12", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 256 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(257);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("3384e4af", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-95a96b12\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-95a96b12\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 257 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(true);
-// imports
-
-
-// module
-exports.push([module.i, "\n.button-wrap[data-v-95a96b12] {\n  flex: 1;\n  height: 144px;\n  align-items: center;\n  justify-content: center;\n}\n.border[data-v-95a96b12] {\n  width: 2px;\n  height: 72px;\n  background-color: rgba(0, 0, 0, 0.1);\n}\n.button-wrap[data-v-95a96b12]:active {\n  background-color: rgba(0, 0, 0, 0.05);\n}\n.button-title[data-v-95a96b12] {\n  font-size: 48px;\n  color: #198DED;\n  font-weight: 500;\n  font-family: sans-serif-medium;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-textbar/index.vue?33eae060"],"names":[],"mappings":";AAkBA;EACA,QAAA;EACA,cAAA;EACA,oBAAA;EACA,wBAAA;CACA;AAEA;EACA,WAAA;EACA,aAAA;EACA,qCAAA;CACA;AAEA;EACA,sCAAA;CACA;AAEA;EACA,gBAAA;EACA,eAAA;EACA,iBAAA;EACA,+BAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/03/13. -->\n<template>\n  <fm-footer :backgroundColor=\"backgroundColor\">\n    <template v-for=\"(item, index) in items\">\n      <div class=\"button-wrap\"\n           :key=\"index\"\n           @click=\"onClick(index)\">\n        <text class=\"button-title\" :style=\"item.color && { color: item.color }\">{{ item.title }}</text>\n      </div>\n      <template v-if=\"items.length >= 2 && index != items.length - 1\">\n        <div class=\"border\" :key=\"index\"></div>\n      </template>\n    </template>\n  </fm-footer>\n</template>\n\n<style scoped>\n  .button-wrap {\n    flex: 1;\n    height: 144px;\n    align-items: center;\n    justify-content: center;\n  }\n\n  .border {\n    width: 2px;\n    height: 72px;\n    background-color: rgba(0, 0, 0, 0.1);\n  }\n\n  .button-wrap:active {\n    background-color: rgba(0, 0, 0, 0.05);\n  }\n\n  .button-title {\n    font-size: 48px;\n    color: #198DED;\n    font-weight: 500;\n    font-family: sans-serif-medium;\n  }\n</style>\n\n<script>\nimport FmFooter from '../fm-footer';\nexport default {\n  name: 'FmTextbar',\n  components: { FmFooter },\n  props: {\n    items: {\n      type: Array,\n      default: () => ([])\n    },\n    backgroundColor: {\n      type: String,\n      default: '#FFFFFF'\n    }\n  },\n  methods: {\n    onClick (index) {\n      this.$emit('fmTextbarBtnClicked', { index });\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-/* 258 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _fmFooter = __webpack_require__(43);
-
-var _fmFooter2 = _interopRequireDefault(_fmFooter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-  name: 'FmTextbar',
-  components: { FmFooter: _fmFooter2.default },
-  props: {
-    items: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    backgroundColor: {
-      type: String,
-      default: '#FFFFFF'
-    }
-  },
-  methods: {
-    onClick: function onClick(index) {
-      this.$emit('fmTextbarBtnClicked', { index: index });
-    }
-  }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/***/ }),
-/* 259 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('fm-footer', {
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    attrs: {
-      "backgroundColor": _vm.backgroundColor
-    }
-  }, [_vm._l((_vm.items), function(item, index) {
-    return [_c('div', {
-      key: index,
-      staticClass: "button-wrap",
-      staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle(undefined)),
-      on: {
-        "click": function($event) {
-          _vm.onClick(index)
-        }
-      }
-    }, [_c('text', {
-      staticClass: "button-title",
-      staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle(item.color && {
-        color: item.color
-      }))
-    }, [_vm._v(_vm._s(item.title))])]), _vm._v(" "), (_vm.items.length >= 2 && index != _vm.items.length - 1) ? [_c('div', {
-      key: index,
-      staticClass: "border",
-      staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle(undefined))
-    })] : _vm._e()]
-  })], 2)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-95a96b12", module.exports)
-  }
-}
-
-/***/ }),
-/* 260 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(261);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 261 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(262)
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(264),
-  /* template */
-  __webpack_require__(265),
-  /* scopeId */
-  "data-v-18ede8e6",
-  /* cssModules */
-  null
-)
-Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-slider/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-18ede8e6", Component.options)
-  } else {
-    hotAPI.reload("data-v-18ede8e6", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 262 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(263);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("4e312738", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-18ede8e6\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-18ede8e6\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 263 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(true);
-// imports
-
-
-// module
-exports.push([module.i, "\n.fm-banner-wrap[data-v-18ede8e6] {\n  width: 1080px;\n  padding: 24px 0 24px 24px;\n  flex-direction: row;\n  height: 386px;\n  overflow: hidden;\n}\n.banner-wrap--1[data-v-18ede8e6] {\n  width: 1080px;\n  height: 516px;\n  padding: 48px 48px;\n}\n.fm-nativeBanner-wrap[data-v-18ede8e6] {\n  width: 1080px;\n  height: 386px;\n  padding: 24px 0;\n}\n.nativeBanner-wrap--1[data-v-18ede8e6] {\n  width: 1080px;\n  height: 516px;\n  padding: 48px 24px;\n}\n.card-list[data-v-18ede8e6] {\n  position: absolute;\n  flex-direction: row;\n  height: 338px;\n}\n.card-item[data-v-18ede8e6] {\n  width: 792px;\n  height: 338px;\n  margin-right: 12px;\n  border-radius: 6px;\n  overflow: hidden;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-slider/index.vue?2a0230e6"],"names":[],"mappings":";AAkDA;EACA,cAAA;EACA,0BAAA;EACA,oBAAA;EACA,cAAA;EACA,iBAAA;CACA;AAEA;EACA,cAAA;EACA,cAAA;EACA,mBAAA;CACA;AAEA;EACA,cAAA;EACA,cAAA;EACA,gBAAA;CACA;AAEA;EACA,cAAA;EACA,cAAA;EACA,mBAAA;CACA;AAEA;EACA,mBAAA;EACA,oBAAA;EACA,cAAA;CACA;AAEA;EACA,aAAA;EACA,cAAA;EACA,mBAAA;EACA,mBAAA;EACA,iBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/03/18. [!] Just a beta version! -->\n<template>\n  <div v-if=\"!isCreator\"\n       class=\"fm-banner-wrap\"\n       :class=\"['banner-wrap--' + items.length]\"\n       ref=\"sliderCtn\"\n       @panstart=\"onPanStart\"\n       @panmove=\"onPanMove\"\n       @panend=\"onPanEnd\"\n       @horizontalpan=\"startHandle\">\n    <div class=\"card-list\"\n         v-if=\"items.length > 1\"\n         ref=\"card-list\"\n         :style=\"{ left: -(cardS.width * 2) + 'px' }\">\n      <div class=\"card-item\"\n           v-for=\"(item, index) in cItems\"\n           :key=\"index\"\n           :ref=\"`card${index-2}`\"\n           :style=\"(index-2) === -1 && { transform: `translateX(-12px)` }\">\n        <slot :name=\"`card${index-2}`\">\n          <image :style=\"{ width: `${cardS.width}px`, height: `${cardS.height}px` }\"\n                 :src=\"item.src\"\n                 @click=\"itemClicked(index-2 < 0 ? index-2+items.length : index-2 >= items.length ? index-2-items.length : index-2 )\" />\n        </slot>\n      </div>\n    </div>\n    <div class=\"card-list\"\n         v-else>\n      <div v-for=\"(item, index) in items\"\n           :key=\"index\"\n           :ref=\"`card${index}`\">\n        <slot :name=\"`card${index}`\">\n          <image :style=\"{ width: `${cardS.width*1.2425}px`, height: `${cardS.height*1.2425}px` }\"\n                 :src=\"item.src\"\n                 @click=\"itemClicked(index)\" />\n        </slot>\n      </div>\n    </div>\n  </div>\n  <FmSliderNative v-else\n                  class=\"fm-nativeBanner-wrap\"\n                  :class=\"['nativeBanner-wrap--' + items.length]\"\n                  :autoplay=\"autoPlay\"\n                  @itemclick=\"itemClicked\"\n                  :data=\"cNativeItems\">\n  </FmSliderNative>\n</template>\n\n<style scoped>\n  .fm-banner-wrap {\n    width: 1080px;\n    padding: 24px 0 24px 24px;\n    flex-direction: row;\n    height: 386px;\n    overflow: hidden;\n  }\n\n  .banner-wrap--1 {\n    width: 1080px;\n    height: 516px;\n    padding: 48px 48px;\n  }\n\n  .fm-nativeBanner-wrap {\n    width: 1080px;\n    height: 386px;\n    padding: 24px 0;\n  }\n\n  .nativeBanner-wrap--1 {\n    width: 1080px;\n    height: 516px;\n    padding: 48px 24px;\n  }\n\n  .card-list {\n    position: absolute;\n    flex-direction: row;\n    height: 338px;\n  }\n\n  .card-item {\n    width: 792px;\n    height: 338px;\n    margin-right: 12px;\n    border-radius: 6px;\n    overflow: hidden;\n  }\n</style>\n\n<script>\nconst animation = weex.requireModule('animation');\nimport Utils from '../utils';\nimport Binding from 'weex-bindingx/lib/index.weex.js';\n\nexport default {\n  props: {\n    items: {\n      type: Array,\n      default: () => ([])\n    },\n    panOffset: {\n      type: Number,\n      default: 30\n    },\n    cardS: {\n      type: Object,\n      default: () => ({\n        width: 792,\n        height: 338\n      })\n    },\n    autoPlay: {\n      type: Boolean,\n      default: false\n    },\n    interval: {\n      type: [Number, String],\n      default: 4000\n    },\n    timingFunction: {\n      type: String,\n      default: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'\n    }\n  },\n  data: () => ({\n    selectIndex: 0,\n    gesToken: 0,\n    isMoving: false,\n    startX: 0,\n    startTime: 0,\n    currentIndex: 0,\n    autoPlayTimer: null\n  }),\n  computed: {\n    isCreator () {\n      return weex.supports && weex.supports('@component/FmSliderNative');\n    },\n    cItems () {\n      const { items } = this;\n      let cItems = [];\n      if (items.length >= 2) {\n        cItems = cItems.concat(items.slice(-2), items, items.slice(0, 2));\n      }\n      return cItems;\n    },\n    cNativeItems () {\n      const { items } = this;\n      return items.map((item) => {\n        return item.src;\n      });\n    },\n    cardLength () {\n      return this.items.length;\n    }\n  },\n  methods: {\n    startHandle (e) {\n      if (Utils.env.supportsEB() && e.state === 'start') {\n        this.clearAutoPlay();\n        setTimeout(() => {\n          const sliderCtn = this.$refs[`sliderCtn`];\n          this.bindExp(sliderCtn);\n        }, 0);\n      }\n    },\n    onPanStart (e) {\n      if (Utils.env.supportsEB()) {\n        return;\n      }\n      this.clearAutoPlay();\n      this.startX = e.changedTouches[0].clientX;\n      this.startTime = Date.now();\n    },\n    onPanMove (e) {\n      if (Utils.env.supportsEB() || this.isMoving) {\n        return;\n      }\n      const moveX = e.changedTouches[0].clientX - this.startX;\n      const currentCardLeft = this.currentIndex * (this.cardS.width + 12);\n\n      const listEl = this.$refs['card-list'];\n      if (!listEl) { return; }\n      listEl && animation.transition(listEl, {\n        styles: {\n          transform: `translateX(${moveX - currentCardLeft}px)`\n        },\n        timingFunction: 'ease',\n        delay: 0,\n        duration: 0\n      }, () => {\n      });\n    },\n    onPanEnd (e) {\n      if (Utils.env.supportsEB()) {\n        return;\n      }\n      this.panEnd(e);\n    },\n    panEnd (e) {\n      this.isMoving = true;\n      let moveX = e.deltaX;\n\n      if (Utils.env.isWeb()) {\n        moveX = e.changedTouches[0].clientX - this.startX;\n      }\n\n      const originIndex = this.currentIndex;\n      let selectIndex = originIndex;\n      const duration = Date.now() - this.startTime;\n      const panOffset = this.panOffset || (this.cardS.width / 2);\n\n      if (moveX < -panOffset || (moveX < -10 && duration < 200)) {\n        // 允许向右越界\n        if (selectIndex !== this.cardLength) {\n          selectIndex++;\n        }\n      } else if (moveX > panOffset || (moveX > 10 && duration < 500)) {\n        // 允许向左越界\n        if (selectIndex !== -2) {\n          selectIndex--;\n        }\n      }\n\n      this.slideTo(originIndex, selectIndex);\n      setTimeout(() => { this.checkNeedAutoPlay(); }, 4000);\n    },\n    bindExp (element) {\n      if (element && element.ref) {\n        if (this.isMoving) {\n          Binding.unbind({\n            eventType: 'pan',\n            token: this.gesToken\n          });\n          this.gesToken = 0;\n          return;\n        }\n\n        const { currentIndex, cardS } = this;\n        const dist = currentIndex * (cardS.width + 12);\n        const listEl = this.$refs['card-list'];\n\n        // 卡片容器\n        const props = [{\n          element: listEl.ref,\n          property: 'transform.translateX',\n          expression: `${-dist}+x`\n        }];\n\n        // 当前卡片\n        const currCardEl = this.$refs[`card${currentIndex}`][0];\n        props.push({\n          element: currCardEl.ref,\n          property: 'transform.translateX',\n          expression: `x <= 0 ? (x / 792 * 12) : 0`\n        });\n        // 上一张卡片\n        const lastCardEl = this.$refs[`card${currentIndex - 1}`][0];\n        props.push({\n          element: lastCardEl.ref,\n          property: 'transform.translateX',\n          expression: `x > 0 ? (1 - (x / 792)) * -12 : -12`\n        });\n\n        const gesTokenObj = Binding.bind({\n          eventType: 'pan',\n          anchor: element.ref,\n          props\n        }, (e) => {\n          if (!this.isMoving && (e.state === 'end' || e.state === 'cancel' || e.state === 'exit')) {\n            this.panEnd(e);\n          }\n        });\n\n        this.gesToken = gesTokenObj.token;\n      }\n    },\n    slideTo (originIndex, selectIndex) {\n      const { cardS, timingFunction } = this;\n      const listEl = this.$refs['card-list'];\n      if (!listEl) { return; }\n      const dist = selectIndex * (cardS.width + 12);\n      // 卡片容器\n      listEl && animation.transition(listEl, {\n        styles: {\n          transform: `translateX(${-dist}px)`\n        },\n        duration: 500,\n        timingFunction\n      }, (e) => {\n        this.isMoving = false;\n        if (originIndex !== selectIndex) {\n          this.currentIndex = selectIndex;\n        }\n        this.checkNeedReset();\n      });\n\n      // 下一页\n      if (originIndex < selectIndex) {\n        // 当前卡片\n        const currCard = this.$refs[`card${this.currentIndex}`];\n        currCard && animation.transition(currCard[0], {\n          styles: {\n            transform: `translateX(-12px)`\n          },\n          duration: 500,\n          timingFunction\n        });\n        // 上一张卡片\n        const lastCard = this.$refs[`card${this.currentIndex - 1}`];\n        lastCard && animation.transition(lastCard[0], {\n          styles: {\n            transform: `translateX(0px)`\n          },\n          duration: 500,\n          timingFunction\n        });\n      // 上一页\n      } else if (originIndex > selectIndex) {\n        // 上一张卡片\n        const lastCard = this.$refs[`card${this.currentIndex - 1}`];\n        lastCard && animation.transition(lastCard[0], {\n          styles: {\n            transform: `translateX(0px)`\n          },\n          duration: 500,\n          timingFunction\n        });\n        // 上上张卡片\n        const llastCard = this.$refs[`card${this.currentIndex - 2}`];\n        llastCard && animation.transition(llastCard[0], {\n          styles: {\n            transform: `translateX(-12px)`\n          },\n          duration: 500,\n          timingFunction\n        });\n      }\n    },\n    // 检查页数是否达到临界条件进行重置处理，临界值 -2 ~ cardLength\n    checkNeedReset () {\n      const { cardS, timingFunction } = this;\n      const listEl = this.$refs['card-list'];\n      if (!listEl) { return; }\n      // 向右越界 重置为第一页\n      if (this.currentIndex >= this.cardLength) {\n        this.currentIndex = 0;\n        animation.transition(this.$refs[`card${this.cardLength - 1}`][0], {\n          styles: {\n            transform: `translateX(0px)`\n          },\n          duration: 0.00001,\n          timingFunction\n        });\n        animation.transition(this.$refs[`card-1`][0], {\n          styles: {\n            transform: `translateX(-12px)`\n          },\n          duration: 0.00001,\n          timingFunction\n        });\n      // 向左越界 重置为倒数第二页\n      } else if (this.currentIndex === -2) {\n        this.currentIndex = this.cardLength - 2;\n        animation.transition(this.$refs[`card${this.cardLength - 3}`][0], {\n          styles: {\n            transform: `translateX(-12px)`\n          },\n          duration: 0.00001,\n          timingFunction\n        });\n      } else {\n        return;\n      }\n      listEl && animation.transition(listEl, {\n        styles: {\n          transform: `translateX(${-this.currentIndex * (cardS.width + 12)}px)`\n        },\n        duration: 0.00001,\n        timingFunction\n      });\n    },\n    checkNeedAutoPlay () {\n      if (this.autoPlay && this.items.length >= 1) {\n        this.clearAutoPlay();\n        this.autoPlayTimer = setInterval(() => {\n          this.slideTo(this.currentIndex, this.currentIndex + 1);\n        }, parseInt(this.interval));\n      }\n    },\n    clearAutoPlay () {\n      this.autoPlayTimer && clearInterval(this.autoPlayTimer);\n    },\n    itemClicked (e) {\n      const idx = this.isCreator ? e.position : e;\n      this.$emit('fmSliderItemClicked', idx);\n    }\n  },\n  mounted () {\n    setTimeout(() => {\n      const sliderCtn = this.$refs[`sliderCtn`];\n      if (Utils.env.supportsEB() && sliderCtn && sliderCtn.ref) {\n        Binding.prepare && Binding.prepare({\n          anchor: sliderCtn.ref,\n          eventType: 'pan'\n        });\n      }\n    }, 20);\n    this.checkNeedAutoPlay();\n  },\n  beforeDestroy () {\n    this.clearAutoPlay();\n  }\n};\n</script>\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-/* 264 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _utils = __webpack_require__(56);
-
-var _utils2 = _interopRequireDefault(_utils);
-
-var _indexWeex = __webpack_require__(66);
-
-var _indexWeex2 = _interopRequireDefault(_indexWeex);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var animation = weex.requireModule('animation');
-exports.default = {
-  props: {
-    items: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    panOffset: {
-      type: Number,
-      default: 30
-    },
-    cardS: {
-      type: Object,
-      default: function _default() {
-        return {
-          width: 792,
-          height: 338
-        };
-      }
-    },
-    autoPlay: {
-      type: Boolean,
-      default: false
-    },
-    interval: {
-      type: [Number, String],
-      default: 4000
-    },
-    timingFunction: {
-      type: String,
-      default: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-    }
-  },
-  data: function data() {
-    return {
-      selectIndex: 0,
-      gesToken: 0,
-      isMoving: false,
-      startX: 0,
-      startTime: 0,
-      currentIndex: 0,
-      autoPlayTimer: null
-    };
-  },
-  computed: {
-    isCreator: function isCreator() {
-      return weex.supports && weex.supports('@component/FmSliderNative');
-    },
-    cItems: function cItems() {
-      var items = this.items;
-
-      var cItems = [];
-      if (items.length >= 2) {
-        cItems = cItems.concat(items.slice(-2), items, items.slice(0, 2));
-      }
-      return cItems;
-    },
-    cNativeItems: function cNativeItems() {
-      var items = this.items;
-
-      return items.map(function (item) {
-        return item.src;
-      });
-    },
-    cardLength: function cardLength() {
-      return this.items.length;
-    }
-  },
-  methods: {
-    startHandle: function startHandle(e) {
-      var _this = this;
-
-      if (_utils2.default.env.supportsEB() && e.state === 'start') {
-        this.clearAutoPlay();
-        setTimeout(function () {
-          var sliderCtn = _this.$refs['sliderCtn'];
-          _this.bindExp(sliderCtn);
-        }, 0);
-      }
-    },
-    onPanStart: function onPanStart(e) {
-      if (_utils2.default.env.supportsEB()) {
-        return;
-      }
-      this.clearAutoPlay();
-      this.startX = e.changedTouches[0].clientX;
-      this.startTime = Date.now();
-    },
-    onPanMove: function onPanMove(e) {
-      if (_utils2.default.env.supportsEB() || this.isMoving) {
-        return;
-      }
-      var moveX = e.changedTouches[0].clientX - this.startX;
-      var currentCardLeft = this.currentIndex * (this.cardS.width + 12);
-
-      var listEl = this.$refs['card-list'];
-      if (!listEl) {
-        return;
-      }
-      listEl && animation.transition(listEl, {
-        styles: {
-          transform: 'translateX(' + (moveX - currentCardLeft) + 'px)'
-        },
-        timingFunction: 'ease',
-        delay: 0,
-        duration: 0
-      }, function () {});
-    },
-    onPanEnd: function onPanEnd(e) {
-      if (_utils2.default.env.supportsEB()) {
-        return;
-      }
-      this.panEnd(e);
-    },
-    panEnd: function panEnd(e) {
-      var _this2 = this;
-
-      this.isMoving = true;
-      var moveX = e.deltaX;
-
-      if (_utils2.default.env.isWeb()) {
-        moveX = e.changedTouches[0].clientX - this.startX;
-      }
-
-      var originIndex = this.currentIndex;
-      var selectIndex = originIndex;
-      var duration = Date.now() - this.startTime;
-      var panOffset = this.panOffset || this.cardS.width / 2;
-
-      if (moveX < -panOffset || moveX < -10 && duration < 200) {
-        // 允许向右越界
-        if (selectIndex !== this.cardLength) {
-          selectIndex++;
-        }
-      } else if (moveX > panOffset || moveX > 10 && duration < 500) {
-        // 允许向左越界
-        if (selectIndex !== -2) {
-          selectIndex--;
-        }
-      }
-
-      this.slideTo(originIndex, selectIndex);
-      setTimeout(function () {
-        _this2.checkNeedAutoPlay();
-      }, 4000);
-    },
-    bindExp: function bindExp(element) {
-      var _this3 = this;
-
-      if (element && element.ref) {
-        if (this.isMoving) {
-          _indexWeex2.default.unbind({
-            eventType: 'pan',
-            token: this.gesToken
-          });
-          this.gesToken = 0;
-          return;
-        }
-
-        var currentIndex = this.currentIndex,
-            cardS = this.cardS;
-
-        var dist = currentIndex * (cardS.width + 12);
-        var listEl = this.$refs['card-list'];
-
-        // 卡片容器
-        var props = [{
-          element: listEl.ref,
-          property: 'transform.translateX',
-          expression: -dist + '+x'
-        }];
-
-        // 当前卡片
-        var currCardEl = this.$refs['card' + currentIndex][0];
-        props.push({
-          element: currCardEl.ref,
-          property: 'transform.translateX',
-          expression: 'x <= 0 ? (x / 792 * 12) : 0'
-        });
-        // 上一张卡片
-        var lastCardEl = this.$refs['card' + (currentIndex - 1)][0];
-        props.push({
-          element: lastCardEl.ref,
-          property: 'transform.translateX',
-          expression: 'x > 0 ? (1 - (x / 792)) * -12 : -12'
-        });
-
-        var gesTokenObj = _indexWeex2.default.bind({
-          eventType: 'pan',
-          anchor: element.ref,
-          props: props
-        }, function (e) {
-          if (!_this3.isMoving && (e.state === 'end' || e.state === 'cancel' || e.state === 'exit')) {
-            _this3.panEnd(e);
-          }
-        });
-
-        this.gesToken = gesTokenObj.token;
-      }
-    },
-    slideTo: function slideTo(originIndex, selectIndex) {
-      var _this4 = this;
-
-      var cardS = this.cardS,
-          timingFunction = this.timingFunction;
-
-      var listEl = this.$refs['card-list'];
-      if (!listEl) {
-        return;
-      }
-      var dist = selectIndex * (cardS.width + 12);
-      // 卡片容器
-      listEl && animation.transition(listEl, {
-        styles: {
-          transform: 'translateX(' + -dist + 'px)'
-        },
-        duration: 500,
-        timingFunction: timingFunction
-      }, function (e) {
-        _this4.isMoving = false;
-        if (originIndex !== selectIndex) {
-          _this4.currentIndex = selectIndex;
-        }
-        _this4.checkNeedReset();
-      });
-
-      // 下一页
-      if (originIndex < selectIndex) {
-        // 当前卡片
-        var currCard = this.$refs['card' + this.currentIndex];
-        currCard && animation.transition(currCard[0], {
-          styles: {
-            transform: 'translateX(-12px)'
-          },
-          duration: 500,
-          timingFunction: timingFunction
-        });
-        // 上一张卡片
-        var lastCard = this.$refs['card' + (this.currentIndex - 1)];
-        lastCard && animation.transition(lastCard[0], {
-          styles: {
-            transform: 'translateX(0px)'
-          },
-          duration: 500,
-          timingFunction: timingFunction
-        });
-        // 上一页
-      } else if (originIndex > selectIndex) {
-        // 上一张卡片
-        var _lastCard = this.$refs['card' + (this.currentIndex - 1)];
-        _lastCard && animation.transition(_lastCard[0], {
-          styles: {
-            transform: 'translateX(0px)'
-          },
-          duration: 500,
-          timingFunction: timingFunction
-        });
-        // 上上张卡片
-        var llastCard = this.$refs['card' + (this.currentIndex - 2)];
-        llastCard && animation.transition(llastCard[0], {
-          styles: {
-            transform: 'translateX(-12px)'
-          },
-          duration: 500,
-          timingFunction: timingFunction
-        });
-      }
-    },
-
-    // 检查页数是否达到临界条件进行重置处理，临界值 -2 ~ cardLength
-    checkNeedReset: function checkNeedReset() {
-      var cardS = this.cardS,
-          timingFunction = this.timingFunction;
-
-      var listEl = this.$refs['card-list'];
-      if (!listEl) {
-        return;
-      }
-      // 向右越界 重置为第一页
-      if (this.currentIndex >= this.cardLength) {
-        this.currentIndex = 0;
-        animation.transition(this.$refs['card' + (this.cardLength - 1)][0], {
-          styles: {
-            transform: 'translateX(0px)'
-          },
-          duration: 0.00001,
-          timingFunction: timingFunction
-        });
-        animation.transition(this.$refs['card-1'][0], {
-          styles: {
-            transform: 'translateX(-12px)'
-          },
-          duration: 0.00001,
-          timingFunction: timingFunction
-        });
-        // 向左越界 重置为倒数第二页
-      } else if (this.currentIndex === -2) {
-        this.currentIndex = this.cardLength - 2;
-        animation.transition(this.$refs['card' + (this.cardLength - 3)][0], {
-          styles: {
-            transform: 'translateX(-12px)'
-          },
-          duration: 0.00001,
-          timingFunction: timingFunction
-        });
-      } else {
-        return;
-      }
-      listEl && animation.transition(listEl, {
-        styles: {
-          transform: 'translateX(' + -this.currentIndex * (cardS.width + 12) + 'px)'
-        },
-        duration: 0.00001,
-        timingFunction: timingFunction
-      });
-    },
-    checkNeedAutoPlay: function checkNeedAutoPlay() {
-      var _this5 = this;
-
-      if (this.autoPlay && this.items.length >= 1) {
-        this.clearAutoPlay();
-        this.autoPlayTimer = setInterval(function () {
-          _this5.slideTo(_this5.currentIndex, _this5.currentIndex + 1);
-        }, parseInt(this.interval));
-      }
-    },
-    clearAutoPlay: function clearAutoPlay() {
-      this.autoPlayTimer && clearInterval(this.autoPlayTimer);
-    },
-    itemClicked: function itemClicked(e) {
-      var idx = this.isCreator ? e.position : e;
-      this.$emit('fmSliderItemClicked', idx);
-    }
-  },
-  mounted: function mounted() {
-    var _this6 = this;
-
-    setTimeout(function () {
-      var sliderCtn = _this6.$refs['sliderCtn'];
-      if (_utils2.default.env.supportsEB() && sliderCtn && sliderCtn.ref) {
-        _indexWeex2.default.prepare && _indexWeex2.default.prepare({
-          anchor: sliderCtn.ref,
-          eventType: 'pan'
-        });
-      }
-    }, 20);
-    this.checkNeedAutoPlay();
-  },
-  beforeDestroy: function beforeDestroy() {
-    this.clearAutoPlay();
-  }
-};
-
-/***/ }),
-/* 265 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (!_vm.isCreator) ? _c('div', {
-    ref: "sliderCtn",
-    staticClass: "fm-banner-wrap",
-    class: ['banner-wrap--' + _vm.items.length],
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    on: {
-      "panstart": _vm.onPanStart,
-      "panmove": _vm.onPanMove,
-      "panend": _vm.onPanEnd,
-      "horizontalpan": _vm.startHandle
-    }
-  }, [(_vm.items.length > 1) ? _c('div', {
-    ref: "card-list",
-    staticClass: "card-list",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      left: -(_vm.cardS.width * 2) + 'px'
-    }))
-  }, _vm._l((_vm.cItems), function(item, index) {
-    return _c('div', {
-      key: index,
-      ref: ("card" + (index-2)),
-      refInFor: true,
-      staticClass: "card-item",
-      staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle((index - 2) === -1 && {
-        transform: "translateX(-12px)"
-      }))
-    }, [_vm._t(("card" + (index-2)), [_c('image', {
-      staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle({
-        width: ((_vm.cardS.width) + "px"),
-        height: ((_vm.cardS.height) + "px")
-      })),
-      attrs: {
-        "src": item.src
-      },
-      on: {
-        "click": function($event) {
-          _vm.itemClicked(index - 2 < 0 ? index - 2 + _vm.items.length : index - 2 >= _vm.items.length ? index - 2 - _vm.items.length : index - 2)
-        }
-      }
-    })])], 2)
-  })) : _c('div', {
-    staticClass: "card-list",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, _vm._l((_vm.items), function(item, index) {
-    return _c('div', {
-      key: index,
-      ref: ("card" + index),
-      refInFor: true,
-      staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle(undefined))
-    }, [_vm._t(("card" + index), [_c('image', {
-      staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle({
-        width: ((_vm.cardS.width*1.2425) + "px"),
-        height: ((_vm.cardS.height*1.2425) + "px")
-      })),
-      attrs: {
-        "src": item.src
-      },
-      on: {
-        "click": function($event) {
-          _vm.itemClicked(index)
-        }
-      }
-    })])], 2)
-  }))]) : _c('FmSliderNative', {
-    staticClass: "fm-nativeBanner-wrap",
-    class: ['nativeBanner-wrap--' + _vm.items.length],
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    attrs: {
-      "autoplay": _vm.autoPlay,
-      "data": _vm.cNativeItems
-    },
-    on: {
-      "itemclick": _vm.itemClicked
-    }
-  })
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-18ede8e6", module.exports)
-  }
-}
-
-/***/ }),
-/* 266 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(267);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 267 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(268)
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(270),
-  /* template */
-  __webpack_require__(271),
-  /* scopeId */
-  "data-v-69ed5ad4",
-  /* cssModules */
-  null
-)
-Component.options.__file = "/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-popover/index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-69ed5ad4", Component.options)
-  } else {
-    hotAPI.reload("data-v-69ed5ad4", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 268 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(269);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("5183b4cc", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-69ed5ad4\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?sourceMap!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-69ed5ad4\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 269 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(true);
-// imports
-
-
-// module
-exports.push([module.i, "\n.popover-wrap[data-v-69ed5ad4]{\n  position: fixed;\n  width: 1080px;\n  /*兼容H5异常*/\n  z-index: 99999;\n}\n.popover[data-v-69ed5ad4] {\n  position: fixed;\n  z-index: 99;\n  width: 628px;\n  padding: 20px;\n  border-radius: 10px;\n}\n.content[data-v-69ed5ad4] {\n  flex: 1;\n  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);\n  background-color: #FFFFFF;\n  border-radius: 10px;\n  overflow: hidden;\n}\n.item[data-v-69ed5ad4] {\n  height: 168px;\n  padding: 0 48px;\n}\n.item-content[data-v-69ed5ad4] {\n  flex: 1;\n  flex-direction: row;\n  border-bottom-width: 2px;\n  border-color: rgba(0,0,0,0.10);\n  align-items: center;\n}\n.item-text[data-v-69ed5ad4] {\n  font-size: 48px;\n}\n.item-icon[data-v-69ed5ad4] {\n  margin-right: 15px;\n}\n", "", {"version":3,"sources":["/Users/suen/Documents/develop/project/weex-flymeui/packages/fm-popover/index.vue?67f87e2b"],"names":[],"mappings":";AAgCA;EACA,gBAAA;EACA,cAAA;EACA,UAAA;EACA,eAAA;CACA;AAEA;EACA,gBAAA;EACA,YAAA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;CACA;AAEA;EACA,QAAA;EACA,0CAAA;EACA,0BAAA;EACA,oBAAA;EACA,iBAAA;CACA;AAEA;EACA,cAAA;EACA,gBAAA;CACA;AAEA;EACA,QAAA;EACA,oBAAA;EACA,yBAAA;EACA,+BAAA;EACA,oBAAA;CACA;AAEA;EACA,gBAAA;CACA;AAEA;EACA,mBAAA;CACA","file":"index.vue","sourcesContent":["<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->\n<!-- Created by Yanjiie on 2018/04/12. -->\n<template>\n  <div class=\"popover-wrap\">\n    <fm-overlay v-if=\"show || showIn\"\n                :hasAnimation=\"true\"\n                :canAutoClose=\"true\"\n                :opacity=\"overlayOpacity\"\n                @fmOverlayBodyClicking=\"visible(false)\"\n                ref=\"fm-overlay\"></fm-overlay>\n    <div ref=\"fm-popover\"\n         class=\"popover\"\n         v-if=\"show || showIn\"\n         :style=\"popoverStyle\"\n         @touchend=\"handleTouchEnd\">\n      <div class=\"content\"\n           :style=\"{ height: buttons.length * 168 - 2 + 'px' }\">\n        <div v-for=\"(item, index) in buttons\"\n             :key=\"index\"\n             class=\"item\"\n             @click=\"onClicked(index)\">\n          <div class=\"item-content\">\n            <fm-icon class=\"item-icon\" v-if=\"item.icon\" :name=\"item.icon\" :icon-style=\"67\" />\n            <text class=\"item-text\">{{ item.text }}</text>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  .popover-wrap{\n    position: fixed;\n    width: 1080px;\n    /*兼容H5异常*/\n    z-index: 99999;\n  }\n\n  .popover {\n    position: fixed;\n    z-index: 99;\n    width: 628px;\n    padding: 20px;\n    border-radius: 10px;\n  }\n\n  .content {\n    flex: 1;\n    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);\n    background-color: #FFFFFF;\n    border-radius: 10px;\n    overflow: hidden;\n  }\n\n  .item {\n    height: 168px;\n    padding: 0 48px;\n  }\n\n  .item-content {\n    flex: 1;\n    flex-direction: row;\n    border-bottom-width: 2px;\n    border-color: rgba(0,0,0,0.10);\n    align-items: center;\n  }\n\n  .item-text {\n    font-size: 48px;\n  }\n\n  .item-icon {\n    margin-right: 15px;\n  }\n</style>\n\n<script>\nimport FmOverlay from '../fm-overlay';\nimport FmIcon from '../fm-icon';\nconst animation = weex.requireModule('animation');\n\nexport default {\n  name: 'FmPopover',\n  components: { FmOverlay, FmIcon },\n  props: {\n    buttons: {\n      type: Array,\n      default: () => ([])\n    },\n    position: {\n      type: Object,\n      default: () => ({\n        pos: 'top',\n        x: 0,\n        y: 0\n      })\n    },\n    hasAnimation: {\n      type: Boolean,\n      default: true\n    },\n    overlayOpacity: {\n      type: Number,\n      default: 0.0\n    }\n  },\n  data: () => ({\n    show: false,\n    showIn: false\n  }),\n  computed: {\n    popoverStyle () {\n      const { x = 0, y = 0, pos = 'top' } = this.position;\n      const style = {};\n      x < 0 ? (style.right = `${-x}px`) : (style.left = `${x}px`);\n      y < 0 ? (style.bottom = `${-y}px`) : (style.top = `${y}px`);\n      switch (pos) {\n        case 'top':\n          style.transform = `translateY(${this.showIn ? 0 : -20}px)`;\n          break;\n        case 'bottom':\n          style.transform = `translateY(${this.showIn ? 0 : 20}px)`;\n          break;\n        case 'left':\n          style.transform = `translateX(${this.showIn ? 0 : -20}px)`;\n          break;\n        case 'right':\n          style.transform = `translateX(${this.showIn ? 0 : 20}px)`;\n          break;\n      }\n      style.opacity = !this.showIn ? 0 : 1;\n      return style;\n    }\n  },\n  methods: {\n    handleTouchEnd (e) {\n      // 原生上有点击穿透问题\n      e.preventDefault && e.preventDefault();\n    },\n    appearPopover (bool) {\n      const { hasAnimation } = this;\n      const { pos = 'top' } = this.position;\n      const popoverEl = this.$refs['fm-popover'];\n      if (!popoverEl) {\n        return;\n      }\n      let hideTransform;\n      switch (pos) {\n        case 'top':\n          hideTransform = 'translateY(-20px)';\n          break;\n        case 'bottom':\n          hideTransform = 'translateY(20px)';\n          break;\n        case 'left':\n          hideTransform = 'translateX(-20px)';\n          break;\n        case 'right':\n          hideTransform = 'translateX(20px)';\n          break;\n      }\n      const styles = bool ? {\n        transform: 'translateX(0px) translateY(0px)',\n        opacity: 1\n      } : {\n        transform: hideTransform,\n        opacity: 0\n      };\n      animation.transition(popoverEl, {\n        styles,\n        duration: hasAnimation ? 150 : 0.0001,\n        timingFunction: 'ease-out'\n      }, e => {\n        this.showIn = bool;\n      });\n    },\n    onClicked (index) {\n      this.visible(false);\n      this.$emit('fmPopoverBtnClicked', { index });\n    },\n    visible (bool) {\n      this.show = bool;\n      setTimeout(() => {\n        this.appearPopover(bool);\n      }, 40);\n    }\n  }\n};\n</script>\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-/* 270 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _fmOverlay = __webpack_require__(44);
-
-var _fmOverlay2 = _interopRequireDefault(_fmOverlay);
-
-var _fmIcon = __webpack_require__(6);
-
-var _fmIcon2 = _interopRequireDefault(_fmIcon);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var animation = weex.requireModule('animation');
-
-exports.default = {
-  name: 'FmPopover',
-  components: { FmOverlay: _fmOverlay2.default, FmIcon: _fmIcon2.default },
-  props: {
-    buttons: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    position: {
-      type: Object,
-      default: function _default() {
-        return {
-          pos: 'top',
-          x: 0,
-          y: 0
-        };
-      }
-    },
-    hasAnimation: {
-      type: Boolean,
-      default: true
-    },
-    overlayOpacity: {
-      type: Number,
-      default: 0.0
-    }
-  },
-  data: function data() {
-    return {
-      show: false,
-      showIn: false
-    };
-  },
-  computed: {
-    popoverStyle: function popoverStyle() {
-      var _position = this.position,
-          _position$x = _position.x,
-          x = _position$x === undefined ? 0 : _position$x,
-          _position$y = _position.y,
-          y = _position$y === undefined ? 0 : _position$y,
-          _position$pos = _position.pos,
-          pos = _position$pos === undefined ? 'top' : _position$pos;
-
-      var style = {};
-      x < 0 ? style.right = -x + 'px' : style.left = x + 'px';
-      y < 0 ? style.bottom = -y + 'px' : style.top = y + 'px';
-      switch (pos) {
-        case 'top':
-          style.transform = 'translateY(' + (this.showIn ? 0 : -20) + 'px)';
-          break;
-        case 'bottom':
-          style.transform = 'translateY(' + (this.showIn ? 0 : 20) + 'px)';
-          break;
-        case 'left':
-          style.transform = 'translateX(' + (this.showIn ? 0 : -20) + 'px)';
-          break;
-        case 'right':
-          style.transform = 'translateX(' + (this.showIn ? 0 : 20) + 'px)';
-          break;
-      }
-      style.opacity = !this.showIn ? 0 : 1;
-      return style;
-    }
-  },
-  methods: {
-    handleTouchEnd: function handleTouchEnd(e) {
-      // 原生上有点击穿透问题
-      e.preventDefault && e.preventDefault();
-    },
-    appearPopover: function appearPopover(bool) {
-      var _this = this;
-
-      var hasAnimation = this.hasAnimation;
-      var _position$pos2 = this.position.pos,
-          pos = _position$pos2 === undefined ? 'top' : _position$pos2;
-
-      var popoverEl = this.$refs['fm-popover'];
-      if (!popoverEl) {
-        return;
-      }
-      var hideTransform = void 0;
-      switch (pos) {
-        case 'top':
-          hideTransform = 'translateY(-20px)';
-          break;
-        case 'bottom':
-          hideTransform = 'translateY(20px)';
-          break;
-        case 'left':
-          hideTransform = 'translateX(-20px)';
-          break;
-        case 'right':
-          hideTransform = 'translateX(20px)';
-          break;
-      }
-      var styles = bool ? {
-        transform: 'translateX(0px) translateY(0px)',
-        opacity: 1
-      } : {
-        transform: hideTransform,
-        opacity: 0
-      };
-      animation.transition(popoverEl, {
-        styles: styles,
-        duration: hasAnimation ? 150 : 0.0001,
-        timingFunction: 'ease-out'
-      }, function (e) {
-        _this.showIn = bool;
-      });
-    },
-    onClicked: function onClicked(index) {
-      this.visible(false);
-      this.$emit('fmPopoverBtnClicked', { index: index });
-    },
-    visible: function visible(bool) {
-      var _this2 = this;
-
-      this.show = bool;
-      setTimeout(function () {
-        _this2.appearPopover(bool);
-      }, 40);
-    }
-  }
-};
-
-/***/ }),
-/* 271 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "popover-wrap",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [(_vm.show || _vm.showIn) ? _c('fm-overlay', {
-    ref: "fm-overlay",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    attrs: {
-      "hasAnimation": true,
-      "canAutoClose": true,
-      "opacity": _vm.overlayOpacity
-    },
-    on: {
-      "fmOverlayBodyClicking": function($event) {
-        _vm.visible(false)
-      }
-    }
-  }) : _vm._e(), _vm._v(" "), (_vm.show || _vm.showIn) ? _c('div', {
-    ref: "fm-popover",
-    staticClass: "popover",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(_vm.popoverStyle)),
-    on: {
-      "touchend": _vm.handleTouchEnd
-    }
-  }, [_c('div', {
-    staticClass: "content",
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle({
-      height: _vm.buttons.length * 168 - 2 + 'px'
-    }))
-  }, _vm._l((_vm.buttons), function(item, index) {
-    return _c('div', {
-      key: index,
-      staticClass: "item",
-      staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle(undefined)),
-      on: {
-        "click": function($event) {
-          _vm.onClicked(index)
-        }
-      }
-    }, [_c('div', {
-      staticClass: "item-content",
-      staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle(undefined))
-    }, [(item.icon) ? _c('fm-icon', {
-      staticClass: "item-icon",
-      staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle(undefined)),
-      attrs: {
-        "name": item.icon,
-        "icon-style": 67
-      }
-    }) : _vm._e(), _vm._v(" "), _c('text', {
-      staticClass: "item-text",
-      staticStyle: _vm.$processStyle(undefined),
-      style: (_vm.$processStyle(undefined))
-    }, [_vm._v(_vm._s(item.text))])], 1)])
-  }))]) : _vm._e()], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-69ed5ad4", module.exports)
-  }
-}
-
-/***/ }),
-/* 272 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.FmPopover = exports.FmSlider = exports.FmTextbar = exports.FmFooter = exports.FmBtnbar = exports.FmTabbarItem = exports.FmTabbar = exports.FmPanItem = exports.FmNativeTab = exports.FmTabPage = exports.FmSimpleList = exports.FmRcyCheck = exports.FmMultiCheckCell = exports.FmMultiCheckGroup = exports.FmTitlebar = exports.FmSearchbar = exports.FmActionView = exports.FmCheckListGroup = exports.FmCheckbox = exports.showSnackBar = exports.FmSnackBar = exports.FmRater = exports.FmItem = exports.FmActionSheet = exports.FmPopup = exports.alert = exports.confirm = exports.FmSimpleBtn = exports.FmDialog = exports.FmOverlay = exports.FmImage = exports.FmFoldableText = exports.FmSpecialRichText = exports.FmRichText = exports.FmTips = exports.FmInput = exports.FmButton = exports.FmSliderBar = exports.FmIcon = exports.FmText = exports.FmTagWall = exports.FmTag = exports.FmSwitch = exports.Utils = undefined;
-
-var _utils = __webpack_require__(56);
-
-var _utils2 = _interopRequireDefault(_utils);
-
-var _fmSwitch = __webpack_require__(121);
-
-var _fmSwitch2 = _interopRequireDefault(_fmSwitch);
-
-var _fmTag = __webpack_require__(45);
-
-var _fmTag2 = _interopRequireDefault(_fmTag);
-
-var _fmTagWall = __webpack_require__(127);
-
-var _fmTagWall2 = _interopRequireDefault(_fmTagWall);
-
-var _fmText = __webpack_require__(3);
-
-var _fmText2 = _interopRequireDefault(_fmText);
-
-var _fmIcon = __webpack_require__(6);
-
-var _fmIcon2 = _interopRequireDefault(_fmIcon);
-
-var _fmSliderBar = __webpack_require__(136);
-
-var _fmSliderBar2 = _interopRequireDefault(_fmSliderBar);
-
-var _fmButton = __webpack_require__(36);
-
-var _fmButton2 = _interopRequireDefault(_fmButton);
-
-var _fmInput = __webpack_require__(67);
-
-var _fmInput2 = _interopRequireDefault(_fmInput);
-
-var _fmTips = __webpack_require__(142);
-
-var _fmTips2 = _interopRequireDefault(_fmTips);
-
-var _fmRichText = __webpack_require__(148);
-
-var _fmRichText2 = _interopRequireDefault(_fmRichText);
-
-var _fmSpecialRichText = __webpack_require__(157);
-
-var _fmSpecialRichText2 = _interopRequireDefault(_fmSpecialRichText);
-
-var _fmFoldableText = __webpack_require__(163);
-
-var _fmFoldableText2 = _interopRequireDefault(_fmFoldableText);
-
-var _fmImage = __webpack_require__(5);
-
-var _fmImage2 = _interopRequireDefault(_fmImage);
-
-var _fmOverlay = __webpack_require__(44);
-
-var _fmOverlay2 = _interopRequireDefault(_fmOverlay);
-
-var _fmDialog = __webpack_require__(74);
-
-var _fmDialog2 = _interopRequireDefault(_fmDialog);
-
-var _fmSimpleBtn = __webpack_require__(64);
-
-var _fmSimpleBtn2 = _interopRequireDefault(_fmSimpleBtn);
-
-var _dialog = __webpack_require__(174);
-
-var _fmPopup = __webpack_require__(65);
-
-var _fmPopup2 = _interopRequireDefault(_fmPopup);
-
-var _fmActionSheet = __webpack_require__(175);
-
-var _fmActionSheet2 = _interopRequireDefault(_fmActionSheet);
-
-var _fmItem = __webpack_require__(85);
-
-var _fmItem2 = _interopRequireDefault(_fmItem);
-
-var _fmRater = __webpack_require__(181);
-
-var _fmRater2 = _interopRequireDefault(_fmRater);
-
-var _fmSnackBar = __webpack_require__(92);
-
-var _fmSnackBar2 = _interopRequireDefault(_fmSnackBar);
-
-var _snackbar = __webpack_require__(192);
-
-var _snackbar2 = _interopRequireDefault(_snackbar);
-
-var _fmCheckbox = __webpack_require__(93);
-
-var _fmCheckbox2 = _interopRequireDefault(_fmCheckbox);
-
-var _fmCheckListGroup = __webpack_require__(99);
-
-var _fmCheckListGroup2 = _interopRequireDefault(_fmCheckListGroup);
-
-var _fmActionView = __webpack_require__(193);
-
-var _fmActionView2 = _interopRequireDefault(_fmActionView);
-
-var _fmSearchbar = __webpack_require__(197);
-
-var _fmSearchbar2 = _interopRequireDefault(_fmSearchbar);
-
-var _fmTitlebar = __webpack_require__(103);
-
-var _fmTitlebar2 = _interopRequireDefault(_fmTitlebar);
-
-var _fmMultiCheckGroup = __webpack_require__(203);
-
-var _fmMultiCheckGroup2 = _interopRequireDefault(_fmMultiCheckGroup);
-
-var _fmMultiCheckCell = __webpack_require__(109);
-
-var _fmMultiCheckCell2 = _interopRequireDefault(_fmMultiCheckCell);
-
-var _fmRcyCheck = __webpack_require__(217);
-
-var _fmRcyCheck2 = _interopRequireDefault(_fmRcyCheck);
-
-var _fmSimpleList = __webpack_require__(223);
-
-var _fmSimpleList2 = _interopRequireDefault(_fmSimpleList);
-
-var _fmTabPage = __webpack_require__(234);
-
-var _fmTabPage2 = _interopRequireDefault(_fmTabPage);
-
-var _fmNativeTab = __webpack_require__(240);
-
-var _fmNativeTab2 = _interopRequireDefault(_fmNativeTab);
-
-var _fmPanItem = __webpack_require__(246);
-
-var _fmPanItem2 = _interopRequireDefault(_fmPanItem);
-
-var _fmTabbar = __webpack_require__(110);
-
-var _fmTabbar2 = _interopRequireDefault(_fmTabbar);
-
-var _fmTabbarItem = __webpack_require__(63);
-
-var _fmTabbarItem2 = _interopRequireDefault(_fmTabbarItem);
-
-var _fmBtnbar = __webpack_require__(250);
-
-var _fmBtnbar2 = _interopRequireDefault(_fmBtnbar);
-
-var _fmFooter = __webpack_require__(43);
-
-var _fmFooter2 = _interopRequireDefault(_fmFooter);
-
-var _fmTextbar = __webpack_require__(254);
-
-var _fmTextbar2 = _interopRequireDefault(_fmTextbar);
-
-var _fmSlider = __webpack_require__(260);
-
-var _fmSlider2 = _interopRequireDefault(_fmSlider);
-
-var _fmPopover = __webpack_require__(266);
-
-var _fmPopover2 = _interopRequireDefault(_fmPopover);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.Utils = _utils2.default;
-exports.FmSwitch = _fmSwitch2.default;
-exports.FmTag = _fmTag2.default;
-exports.FmTagWall = _fmTagWall2.default;
-exports.FmText = _fmText2.default;
-exports.FmIcon = _fmIcon2.default;
-exports.FmSliderBar = _fmSliderBar2.default;
-exports.FmButton = _fmButton2.default;
-exports.FmInput = _fmInput2.default;
-exports.FmTips = _fmTips2.default;
-exports.FmRichText = _fmRichText2.default;
-exports.FmSpecialRichText = _fmSpecialRichText2.default;
-exports.FmFoldableText = _fmFoldableText2.default;
-exports.FmImage = _fmImage2.default;
-exports.FmOverlay = _fmOverlay2.default;
-exports.FmDialog = _fmDialog2.default;
-exports.FmSimpleBtn = _fmSimpleBtn2.default;
-exports.confirm = _dialog.confirm;
-exports.alert = _dialog.alert;
-exports.FmPopup = _fmPopup2.default;
-exports.FmActionSheet = _fmActionSheet2.default;
-exports.FmItem = _fmItem2.default;
-exports.FmRater = _fmRater2.default;
-exports.FmSnackBar = _fmSnackBar2.default;
-exports.showSnackBar = _snackbar2.default;
-exports.FmCheckbox = _fmCheckbox2.default;
-exports.FmCheckListGroup = _fmCheckListGroup2.default;
-exports.FmActionView = _fmActionView2.default;
-exports.FmSearchbar = _fmSearchbar2.default;
-exports.FmTitlebar = _fmTitlebar2.default;
-exports.FmMultiCheckGroup = _fmMultiCheckGroup2.default;
-exports.FmMultiCheckCell = _fmMultiCheckCell2.default;
-exports.FmRcyCheck = _fmRcyCheck2.default;
-exports.FmSimpleList = _fmSimpleList2.default;
-exports.FmTabPage = _fmTabPage2.default;
-exports.FmNativeTab = _fmNativeTab2.default;
-exports.FmPanItem = _fmPanItem2.default;
-exports.FmTabbar = _fmTabbar2.default;
-exports.FmTabbarItem = _fmTabbarItem2.default;
-exports.FmBtnbar = _fmBtnbar2.default;
-exports.FmFooter = _fmFooter2.default;
-exports.FmTextbar = _fmTextbar2.default;
-exports.FmSlider = _fmSlider2.default;
-exports.FmPopover = _fmPopover2.default;
 
 /***/ })
 /******/ ]);
