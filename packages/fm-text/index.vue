@@ -1,7 +1,7 @@
 <!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->
 <!-- Created and Update by Yanjiie on 2018/04/12. -->
 <template>
-  <text :class="textClz"><slot></slot><template v-if="!$slots.default">{{ value }}</template></text>
+  <text :class="textClz" :style="textStyle"><slot></slot><template v-if="!$slots.default">{{ inValue }}</template></text>
 </template>
 
 <style scoped>
@@ -53,9 +53,21 @@ export default {
       type: String,
       default: 'normal'
     },
+    textStyle: {
+      type: Object,
+      default: () => ({})
+    },
     hasTextMargin: {
       type: Boolean,
       default: true
+    }
+  },
+  data: () => ({
+    inValue: ''
+  }),
+  watch: {
+    value (val) {
+      this.inValue = val;
     }
   },
   computed: {
@@ -74,7 +86,8 @@ export default {
     }
   },
   created () {
-    this.$slots.default && (this.value = this.$slots.default[0].text);
+    this.value && (this.inValue = this.value);
+    this.$slots.default && (this.inValue = this.$slots.default[0].text);
   }
 };
 </script>

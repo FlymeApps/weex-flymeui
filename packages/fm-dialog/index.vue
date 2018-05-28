@@ -20,10 +20,10 @@
            @touchend="handleTouchEnd">
         <div class="dialog-content">
           <slot name="title">
-            <fm-text class="content-title" font-weight="medium" size="large" :style="titleStyles">{{ title }}</fm-text>
+            <fm-text class="content-title" font-weight="medium" size="large" :style="titleStyles" :value="title"></fm-text>
           </slot>
           <slot name="content">
-            <fm-text class="content-subtext" :style="contentStyles">{{ content }}</fm-text>
+            <fm-text class="content-subtext" :style="contentStyles" :value="content"></fm-text>
           </slot>
         </div>
         <div class="dialog-footer" :style="btnStyle">
