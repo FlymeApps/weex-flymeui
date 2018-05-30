@@ -20,7 +20,7 @@
       ref="input" />
     <fm-icon v-if="delShow" class="delete" name="guanbi" :icon-style="48" color="#fff" @fmIconClicked="delClick" />
     <fm-icon v-if="visibleShow" class="visible" :name="visibleValue" :icon-style="72" color="#666" @fmIconClicked="toggleVisible" />
-    <text v-if="hasError" class="error-msg">{{inputErrorMessage}}</text>
+    <text v-if="hasError && autoError" class="error-msg">{{inputErrorMessage}}</text>
   </div>
 </template>
 
@@ -32,12 +32,13 @@
   }
 
   .fm-input {
-    padding-bottom: 27px;
+    padding-bottom: 17px;
     padding-left: 24px;
     border-bottom-style: solid;
     border-bottom-width: 3px;
     border-bottom-color: #e6e6e6;
     font-size: 48px;
+    height: 85px;
     color: #000000;
     placeholder-color: #dddddd;
   }
@@ -113,6 +114,10 @@ export default {
         return t('el.input.placeholder');
       }
     },
+    autoError: {
+      type: String,
+      default: true
+    },
     maxlength: [String, Number],
     inputPattern: RegExp,
     inputErrorMessage: {
@@ -137,7 +142,7 @@ export default {
     },
     inputStyle () {
       const style = { paddingRight: 24 };
-      style.borderBottomColor = !this.hasError ? this.isFocus ? STYLE.primaryColor : '#e6e6e6' : '#df2b18';
+      style.borderBottomColor = (!this.hasError || !this.autoError) ? this.isFocus ? STYLE.primaryColor : '#e6e6e6' : '#df2b18';
       style.caretColor = STYLE.primaryColor;
       if (this.delShow || this.visibleShow) {
         style.paddingRight = 108 + 'px';
