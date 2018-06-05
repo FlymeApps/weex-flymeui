@@ -53,10 +53,12 @@ export default {
     }
   },
   beforeCreate () {
-    dom.addRule('fontFace', {
-      'fontFamily': 'flymeicon',
-      'src': "url('http://weixin-res.flyme.cn/resources/weex-flymeui/assets/iconfont.ttf')"
-    });
+    if (!this.isCreator) {
+      dom.addRule('fontFace', {
+        'fontFamily': 'flymeicon',
+        'src': "url('http://weixin-res.flyme.cn/resources/weex-flymeui/assets/iconfont.ttf')"
+      });
+    }
   },
   methods: {
     itemClicked (name) {
