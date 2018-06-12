@@ -125,7 +125,10 @@ export default {
       default: '输入有误'
     },
     type: String,
-    autofocus: Boolean,
+    autofocus: {
+      type: Boolean,
+      default: false
+    },
     disabled: Boolean,
     returnKeyType: {
       type: String,

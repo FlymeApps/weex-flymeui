@@ -8,10 +8,9 @@
 </style>
 
 <script>
-// 引入he模块，使用它解决weex-template-compiler在编译阶段进行decode
-const he = require('he');
-const dom = weex.requireModule('dom');
 import Icon from './map';
+const dom = weex.requireModule('dom');
+
 export default {
   name: 'FmIcon',
   props: {
@@ -38,7 +37,7 @@ export default {
   computed: {
     getIcon () {
       const { Icon, name, value } = this;
-      return he.decode(value === '' ? Icon[name] || 'wancheng' : value);
+      return decode(value === '' ? Icon[name] || 'wancheng' : value);
     },
     mergeStyle () {
       const { iconStyle } = this;
@@ -67,5 +66,24 @@ export default {
       });
     }
   }
+};
+
+const reg = /&([^;]{2,});?/g;
+const decode = html => {
+  html = html.replace(reg, (match, entity) => {
+    if (entity.charAt(0) === '#') {
+      let num = 0;
+      if (entity.charAt(1).toLowerCase() === 'x') {
+        num = parseInt(entity.slice(2), 16);
+      } else {
+        num = parseInt(entity.slice(1), 10);
+      }
+      if (!isNaN(num) && num >= -32768 && num <= 65535) {
+        return String.fromCharCode(num);
+      }
+    }
+    return match;
+  });
+  return html;
 };
 </script>
