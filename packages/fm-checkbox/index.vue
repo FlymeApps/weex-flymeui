@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import STYLE from 'weex-flymeui/lib/theme/fm-checkbox.js';
+import STYLE from 'weex-flymeui/lib/theme/default/fm-checkbox.js';
 import FmItem from '../fm-item';
 
 const animation = weex.requireModule('animation');
