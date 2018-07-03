@@ -71,6 +71,7 @@ export default {
 | padding-top | `Number` | `N` | `54px` | 列表上边距 |
 | padding-bottom | `Number` | `N` | `54px` | 列表下边距 |
 | occupying-color | `String` | `N` | `rgba(0, 0, 0, 0.1)` | 图片加载时的占位颜色 |
+| border | `Boolean` | `N` | `true` | 显示底部分割线 |
 
 ## 常用场景
 

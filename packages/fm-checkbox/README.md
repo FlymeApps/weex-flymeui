@@ -84,6 +84,7 @@
 | disabled | `Boolean` | `N` | `false` | checkbox 是否不可选 |
 | checkedIcon | `String` | `N` | `-` | 选中的 icon |
 | disabledIcon | `String` | `N` | `-` | 不可选的 icon |
+| border | `Boolean` | `N` | `false` | 显示底部分割线 |
 
 - 事件回调
  - `fmCheckBoxItemChecked`: 被点击时触发，将返回 `e.value`(checkbox 的值) 和 `e.checked`(是否选中)
@@ -94,6 +95,7 @@
 | list | `Array` | `Y` | `[]` | 列表数组 (*1) |
 | single | `Boolean` | `N` | `false` | 是否启用单选模式 |
 | limit | `Number` | `N` | `0` | 限制选中的数量，0 为不限制 |
+| last-border-hidden | `Boolean` | `N` | `false` | 最后一行是否隐藏分割线 |
 
 - 注1：list
     ```javascript

@@ -4,23 +4,21 @@
 
 !> 注意：组件仅为未完成的 beta 版本，使用方法有可能会变更。
 
-## TODO
+## 规则
 
-* [ ] 修复 Creator 上无法通过 JS 使用弹框的问题
+- 支持 alert / confirm 弹框
+- 支持 
 
 <br/>
 <img src="http://image.res.meizu.com/image/flyme-icon/dd5cd5bebc414beb8cf385b528131fb2z" width=400 style="box-shadow: 0 5px 10px 0 #d9dce3; border-radius: 4px;" />
 
 ## 使用方法
 
-```vue
+```html
 <template>
   <div class="mzui-demo">
     <fm-button class="btn" @buttonClicked="click1">确认弹框</fm-button>
     <fm-button class="btn" @buttonClicked="click2">警告弹框</fm-button>
-    <!-- 使用 JS 弹出弹框，在 Creator 中暂不支持 -->
-    <fm-button class="btn" @buttonClicked="click3">js 弹出对话框</fm-button>
-    <fm-button class="btn" @buttonClicked="click3">js 弹出警告框</fm-button>
 
     <!-- 确认弹框 -->
     <fm-dialog :show="confirmShow"
@@ -28,7 +26,7 @@
                content="退出浏览器并清空历史记录弹框内容区域此处展示描述"
                @fmDialogBtnClicked="btnClick"
                @fmDialogDisappeared="dialogOverlayClick"
-               :can-auto-close="true"></fm-dialog>
+               :can-auto-close="true" />
 
     <!-- 警告弹框 -->
     <fm-dialog :show="alertShow"
@@ -36,7 +34,26 @@
                content="退出浏览器并清空历史记录弹框内容区域此处展示描述"
                @fmDialogBtnClicked="btnClick"
                @fmDialogDisappeared="dialogOverlayClick"
-               :can-auto-close="true"></fm-dialog>
+               :can-auto-close="true" />
+
+    <!-- 输入弹框 -->
+    <fm-dialog :show="inputShow"
+                title="弹出输入"
+                content-type="input"
+                placeholder="提示文本"
+                @fmDialogBtnClicked="inputClick"
+                @fmDialogDisappeared="dialogOverlayClick"
+                :can-auto-close="true"
+                :inputDefaultText="inputText">
+
+    <!-- 选择弹框 -->
+    <fm-dialog :show="selectShow"
+                title="选择语言"
+                content-type="select"
+                @fmDialogDisappeared="dialogOverlayClick"
+                @fmDialogSingleSelected="selectClick"
+                :can-auto-close="true"
+                :selectData="list" />
   </div>
 </template>
 
@@ -49,34 +66,29 @@ export default {
   data: () => ({
     confirmShow: false,
     alertShow: false,
+    inputShow: false,
+    selectShow: false,
+    list: [{
+      model: { title: '简体中文' }
+    }, {
+      model: { title: '繁体中文' }
+    }, {
+      model: { title: '英文' }
+    }]
   }),
   methods: {
     click1 () {
-        this.confirmShow = true;
+      this.confirmShow = true;
     },
     click2 () {
-        this.alertShow = true;
+      this.alertShow = true;
     },
     click3 () {
-      confirm({
-        title: '这是 js 调用弹出的弹框',
-        message: '用户操作后返回的是一个 Promise 对象，可自行做处理。弹框的取消以及确定字体可以通过 cancelText 以及 confirmText 属性进行更改'
-      }).then(() => {
-        modal.toast({ message: '确定' });
-      }, () => {
-        modal.toast({ message: '取消' });
-      });
+      this.inputShow = true;
     },
-    click4() {
-      alert({
-        title: '这是 js 调用弹出的提示框',
-        message: '用户操作后返回的是一个 Promise 对象，可自行做处理。弹框的确定按钮可以通过 confirmText 属性进行更改'
-      }).then(() => {
-        modal.toast({ message: '提示框消失了' });
-      }, () => {
-        modal.toast({ message: '点击蒙层消失了' });
-      });
-    }
+    click4 () {
+      this.selectShow = true;
+    },
     btnClick (btn) {
       if (btn.type === 'cancel') {
         modal.toast({ message: '取消' });
@@ -87,8 +99,25 @@ export default {
       }
       this.show = false;
     },
+    selectClick (e) {
+      modal.toast({ message: '选择了: ' + e.selectList.map(item => item.model.title).toString() });
+      this.selectShow = false;
+    },
+    inputClick (e) {
+      if (e.type === 'cancel') {
+        modal.toast({ message: '取消' });
+      } else if (e.type === 'confirm') {
+        modal.toast({ message: '输入的是: ' + e.inputValue });
+      } else {
+        modal.toast({ message: e.text });
+      }
+      this.inputShow = false;
+    },
     dialogOverlayClick () {
-      this.show = false;
+      this.confirmShow = false;
+      this.alertShow = false;
+      this.inputShow = false;
+      this.selectShow = false;
     }
   }
 };
@@ -102,6 +131,7 @@ export default {
 |-------------|------------|--------|-----|-----|
 | show | `Boolean` |`Y`| `false` | 弹出框是否显示 |
 | type | `String` |`N`| `confirm` | 弹框类型：`confirm 确认弹框`、`alert 确认弹框` |
+| content-type | `String` |`N`| `default` | 内容类型：`default 文字弹框` `input 输入弹框`、`select 选择弹框` |
 | title | `String` |`Y`| `''` | 标题 |
 | content | `String` |`Y`| `''` | 内容 |
 | cancel-text | `String` |`N`| `取消` | 取消按钮文案 |
@@ -119,6 +149,25 @@ export default {
 | btns[{`color`}] | `String` |`N`| `#198DED` | 按钮颜色 |
 | btns[{`type`}] | `String` |`N`| `-` | 按钮类型 |
 | btns[{`msg`}] | `AnyType` |`N`| `-` | 附带信息，会在按钮点击回调中返回 |
+
+## 输入弹框配置
+
+当 `content-type` 为 `input` 时有效。
+
+| Prop | Type | Required | Default | Description |
+|-------------|------------|--------|-----|-----|
+| placeholder | `String` |`N`| `''` | 输入框提示文案 |
+| input-default-text | `String` |`N`| `''` | 输入框默认内容 |
+
+## 选择弹框配置
+
+当 `content-type` 为 `select` 时有效。
+
+| Prop | Type | Required | Default | Description |
+|-------------|------------|--------|-----|-----|
+| select-data | `String` |`N`| `''` | 输入项数据 |
+| select-model | `String` |`N`| `'single'` | 选择模式：`single 单选` 和 `multiple 多选` |
+| select-limit | `String` |`N`| `0` | 多选模式下的选中限制数量，0 为不限制 |
 
 
 ## Slot
@@ -145,11 +194,11 @@ export default {
            @fmDialogDisappeared="checkListOverlayClick"
            :can-auto-close="true"
            :overlayOpacity="0.1">
-	<fm-check-list-group slot="content" @fmCheckListGroupChecked="groupChecked">
-	<fm-checkbox>简体中文</fm-checkbox>
-	<fm-checkbox>繁体中文</fm-checkbox>
-	<fm-checkbox>英文</fm-checkbox>
-	</fm-check-list-group>
+  <fm-check-list-group slot="content" @fmCheckListGroupChecked="groupChecked">
+  <fm-checkbox>简体中文</fm-checkbox>
+  <fm-checkbox>繁体中文</fm-checkbox>
+  <fm-checkbox>英文</fm-checkbox>
+  </fm-check-list-group>
 </fm-dialog>
 
 <fm-dialog :show="inputShow"
@@ -157,7 +206,7 @@ export default {
            @fmDialogBtnClicked="inputClick"
            @fmDialogDisappeared="inputOverlayClick"
            :can-auto-close="true">
-	<fm-input :value="inputText" slot="content" type="text" placeholder="输入点什么.." :autofocus="true" @input="inputing" />
+  <fm-input :value="inputText" slot="content" type="text" placeholder="输入点什么.." :autofocus="true" @input="inputing" />
 </fm-dialog>
 ```
 
@@ -166,5 +215,16 @@ export default {
 
 - `fmDialogBtnClicked` 按钮被点击时触发
     - `event.type` 按钮类型
+    - `event.selectList` 选中的值
+    - `event.inputValue` 输入的值
 - `fmDialogDisappeared` 按钮消失时触发，通常是蒙层被点击后触发弹框消失。请监听此事件并将 `show` 属性重置
+- `fmDialogSingleSelected` 单选弹框下选中值之后触发
+    - `event.selectList` 选中的值
+
+## refs
+
+在 `select` 和 `input` 类型下的弹框可以通过 `$refs` 来获取框内的子组件，以便进行方法调用。对应关系如下:
+
+- `select 模式`: `selecEl` --- 对应 [fm-checkbox-list](/packages/fm-checkbox-list/) 组件
+- `input 模式`: `inputEl` --- 对应 [fm-input](/packages/fm-input/) 组件
 

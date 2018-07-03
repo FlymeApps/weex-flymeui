@@ -37,7 +37,7 @@
               <!-- Select Dialog -->
               <template v-if="contentType === 'select'">
                 <fm-checkbox-list
-                  ref="checkboxEl"
+                  ref="selectEl"
                   :list="selectDataIn"
                   :single="selectModel === 'single'"
                   :limit="selectLimit"
@@ -266,7 +266,7 @@ export default {
         });
       } else {
         !this.isCreator && this.$refs['fm-overlay'].hide();
-        this.$refs.checkboxEl && this.$refs.checkboxEl.reset(); // 重置选择
+        this.$refs.selectEl && this.$refs.selectEl.reset(); // 重置选择
         this.selectList = [];
         this.appearDialog(false);
       }
