@@ -27,7 +27,7 @@
           </slot>
             <slot name="content">
               <!-- Normal Dialog -->
-              <template v-if="contentType === 'alert' || type === 'confirm'">
+              <template v-if="contentType === 'default'">
                 <fm-text class="content-subtext" :style="contentStyles" :value="content"></fm-text>
               </template>
               <!-- Input Dialog -->
@@ -234,7 +234,7 @@ export default {
     },
     contentType: {
       type: String,
-      default: type_confirm
+      default: 'default'
     },
     overlayOpacity: {
       type: Number,

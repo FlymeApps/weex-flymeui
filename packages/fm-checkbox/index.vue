@@ -29,13 +29,9 @@ export default {
   name: 'FmCheckbox',
   components: { FmItem },
   props: {
-    model: {
-      type: Object,
-      default: () => ({})
-    },
     value: {
-      type: [String, Number, Object],
-      require: true
+      type: [String, Number, Object, Boolean],
+      default: ''
     },
     checked: Boolean,
     disabled: Boolean,
@@ -54,6 +50,7 @@ export default {
     }
   },
   data: () => ({
+    model: {},
     isChecked: false,
     innerChecked: false
   }),
@@ -106,6 +103,7 @@ export default {
   created () {
     this.checked && (this.innerChecked = true) && (this.isChecked = true);
     this.STYLE = STYLE;
+    this.model = this.$attrs;
   }
 };
 </script>

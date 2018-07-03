@@ -69,11 +69,11 @@ export default {
     inputShow: false,
     selectShow: false,
     list: [{
-      model: { title: '简体中文' }
+      title: '简体中文'
     }, {
-      model: { title: '繁体中文' }
+      title: '英文'
     }, {
-      model: { title: '英文' }
+      title: '西班牙语'
     }]
   }),
   methods: {
@@ -100,7 +100,7 @@ export default {
       this.show = false;
     },
     selectClick (e) {
-      modal.toast({ message: '选择了: ' + e.selectList.map(item => item.model.title).toString() });
+      modal.toast({ message: '选择了: ' + e.selectList.map(item => item.title).toString() });
       this.selectShow = false;
     },
     inputClick (e) {

@@ -78,7 +78,7 @@
 #### Checkbox
 | Prop | Type | Required | Default | Description |
 |-------------|------------|--------|-----|-----|
-| model | `Object` | `Y` | `{}` | 选项的数据，依赖于 `fm-item`，请参照 [fm-item 文档](https://flymeapps.github.io/weex-flymeui/#/packages/fm-item/) |
+| `额外参数` | `Object` | `Y` | `{}` | 选项的数据，，依赖于 `fm-item`，请参照 [fm-item 文档](https://flymeapps.github.io/weex-flymeui/#/packages/fm-item/) |
 | value | `[String、Number、Object]` | `Y` | `-` | checkbox 的 value |
 | checked | `Boolean` | `N` | `false` | checkbox 是否选中 |
 | disabled | `Boolean` | `N` | `false` | checkbox 是否不可选 |
@@ -100,17 +100,17 @@
 - 注1：list
     ```javascript
     const list = [{
-      model: { title: '蒸羊羔' },
+      title: '蒸羊羔',
       value: 0,
       checked: true
     }, {
-      model: { title: '蒸熊掌' },
+      title: '蒸熊掌',
       value: 1
     }, {
-      model: { title: '蒸鹿尾儿' },
+      title: '蒸鹿尾儿',
       value: 2
     }, {
-      model: { title: '烧花鸭' },
+      title: '烧花鸭',
       value: 3
     }];
     ```
