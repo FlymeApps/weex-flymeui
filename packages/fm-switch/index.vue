@@ -1,4 +1,4 @@
-<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->
+<!-- CopyRight (C) 2018-2022 FlymeApps Team Holding Limited. -->
 <!-- Created and updated by Yanjiie on 2018/4/12. -->
 <template>
   <div class="fm-switch" @click="changeState" :style="getBgStyle">

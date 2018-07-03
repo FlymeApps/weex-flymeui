@@ -1,5 +1,5 @@
 /**
- * CopyRight (C) 2018-2022 FlymeApps Group Holding Limited.
+ * CopyRight (C) 2018-2022 FlymeApps Team Holding Limited.
  * Created by Yanjiie on 2018/03/18. Fork from alibaba/weex-ui.
  */
 import Binding from 'weex-bindingx/lib/index.weex.js';

@@ -1,4 +1,4 @@
-<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->
+<!-- CopyRight (C) 2018-2022 FlymeApps Team Holding Limited. -->
 <!-- Created by Yanjiie on 2018/3/9. -->
 <template>
   <div class="fm-item" @click="itemClicked" @longpress="itemLongpress">
@@ -24,7 +24,7 @@
         </slot>
       </div>
     </div>
-    <div class="item-border" :style="{ marginLeft: imgSrc ? (scene.imgWidth || imgWidth) + 48 : 0 }"></div>
+    <div v-if="border" class="item-border" :style="{ marginLeft: imgSrc ? (scene.imgWidth || imgWidth) + 48 : 0 }"></div>
   </div>
 </template>
 
@@ -143,6 +143,10 @@ export default {
     occupyingColor: {
       type: String,
       default: 'rgba(0, 0, 0, 0.1)'
+    },
+    border: {
+      type: Boolean,
+      default: true
     }
   },
   data: () => ({

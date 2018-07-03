@@ -1,4 +1,4 @@
-<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->
+<!-- CopyRight (C) 2018-2022 FlymeApps Team Holding Limited. -->
 <!-- Created and Updated by Yanjiie on 2018/04/12. -->
 <template>
   <fm-popup :have-overlay="true"

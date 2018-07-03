@@ -1,10 +1,11 @@
-<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->
+<!-- CopyRight (C) 2018-2022 FlymeApps Team Holding Limited. -->
 <!-- Created and Updated by Yanjiie on 2018/04/12. -->
 
 <template>
   <div>
     <fm-checkbox v-for="(item, idx) in inList"
                  v-bind="item"
+                 :border="!lastBorderHidden || idx !== inList.length - 1"
                  :list-model="true"
                  @fmCheckBoxItemChecked="onSelect(idx)"
                  :key="idx"></fm-checkbox>
@@ -24,6 +25,10 @@ export default {
     },
     // 是否单选
     single: {
+      type: Boolean,
+      default: false
+    },
+    lastBorderHidden: {
       type: Boolean,
       default: false
     },
@@ -54,7 +59,7 @@ export default {
   methods: {
     onSelect (index) {
       const checked = this.inList[index].checked;
-      if (this.limit <= this.checkedCount && !checked) {
+      if (this.limit > 0 && (this.limit <= this.checkedCount && !checked)) {
         this.$emit('overLimit', this.limit);
       } else {
         this.updateList(index);
@@ -98,6 +103,18 @@ export default {
         return item;
       });
       this.checkedCount = checkedCount;
+    },
+    reset () {
+      this.inList = this.list.map((item, i) => {
+        let { checked, disabled } = item;
+        disabled = !!disabled;
+        checked = false;
+        return {
+          ...item,
+          checked,
+          disabled
+        };
+      });
     }
   }
 };

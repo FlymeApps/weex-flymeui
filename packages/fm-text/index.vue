@@ -1,4 +1,4 @@
-<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->
+<!-- CopyRight (C) 2018-2022 FlymeApps Team Holding Limited. -->
 <!-- Created and Update by Yanjiie on 2018/04/12. -->
 <template>
   <text :class="textClz" :style="textStyle"><slot></slot><template v-if="!$slots.default">{{ inValue }}</template></text>

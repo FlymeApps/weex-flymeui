@@ -1,9 +1,10 @@
-<!-- CopyRight (C) 2018-2022 FlymeApps Group Holding Limited. -->
+<!-- CopyRight (C) 2018-2022 FlymeApps Team Holding Limited. -->
 <!-- Created and Updated by Yanjiie on 2018/04/12. -->
 <template>
   <fm-item
     v-bind="Object.assign({}, model)"
     @fmItemClicked="itemClicked"
+    :border="border"
     :titleColor="innerChecked ? !disabled ? STYLE.primaryColor : STYLE.lightColor : '#000000'">
     <div class="icon-wrap" slot="right">
       <div
@@ -46,7 +47,11 @@ export default {
       type: String,
       default: STYLE.CHECKED_DISABLED
     },
-    listModel: Boolean
+    listModel: Boolean,
+    border: {
+      type: Boolean,
+      default: true
+    }
   },
   data: () => ({
     isChecked: false,
