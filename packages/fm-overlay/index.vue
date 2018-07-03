@@ -1,15 +1,22 @@
 <!-- CopyRight (C) 2018-2022 FlymeApps Team Holding Limited. -->
 <!-- Created and Updated by Yanjiie on 2018/04/12. Fork from weex-ui. -->
 <template>
-  <div>
+  <component :is="isCreator ? 'FmOverlayNative' : 'div'"
+             :visible="show"
+             @onDismiss="overlayClicked"
+             :touchable='canAutoClose'>
     <div class="fm-overlay"
          ref="fm-overlay"
-         v-if="show"
+         v-if="show && !isCreator"
          :watch="shouldShow"
          @click="overlayClicked"
          :style="overlayStyle">
+      <slot></slot>
     </div>
-  </div>
+    <div v-if="isCreator">
+      <slot></slot>
+    </div>
+  </component>
 </template>
 
 <style scoped>
@@ -61,11 +68,15 @@ export default {
       };
     },
     shouldShow () {
+      if (this.isCreator) { return; }
       const { show, hasAnimation } = this;
       hasAnimation && setTimeout(() => {
         this.appearOverlay(show);
       }, 50);
       return show;
+    },
+    isCreator () {
+      return weex.supports && weex.supports('@component/FmOverlayNative');
     }
   },
   methods: {

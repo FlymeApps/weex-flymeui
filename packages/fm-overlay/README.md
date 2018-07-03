@@ -47,6 +47,10 @@
 | opacity | `Number` |`N`| `0.5` | 蒙层的透明度 |
 | can-auto-close | `Boolean` |`N`| `true` | 是否可以点击自动关闭 |
 
+## Slot
+
+- 默认插槽
+
 ## 事件回调
 
 - `fmOverlayBodyClicked` 消失后触发
