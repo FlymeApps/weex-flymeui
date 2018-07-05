@@ -14,6 +14,9 @@ import FmTextbar from './fm-textbar/export';
 import FmInput from './fm-input/export';
 import FmSlider from './fm-slider/export';
 import FmDialog from './fm-dialog/export';
+import FmCheckboxList from './fm-checkbox-list/export';
+import FmButton from './fm-button/export';
+import FmOverlay from './fm-overlay/export';
 
 export default {
   FmSwitch,
@@ -31,5 +34,8 @@ export default {
   FmTextbar,
   FmInput,
   FmSlider,
-  FmDialog
+  FmDialog,
+  FmCheckboxList,
+  FmButton,
+  FmOverlay
 };

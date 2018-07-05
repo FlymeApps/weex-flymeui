@@ -16,7 +16,7 @@
     <slot v-else name="title">
       <text :class="['button-text-' + size]"
             :style="Object.assign({}, { color: (type !== 'hollow') ? titleColor : computedColor }, (titleSize ? { fontSize: titleSize } : {}))"
-            class="button-text" ><slot></slot></text>
+            class="button-text" ><slot></slot><template v-if="!$slots.default">{{ title }}</template></text>
     </slot>
   </div>
 </template>
@@ -132,7 +132,8 @@ export default {
     width: Number,
     height: Number,
     animated: Boolean,
-    disabled: Boolean
+    disabled: Boolean,
+    title: String
   },
   data: () => ({
     active: false,

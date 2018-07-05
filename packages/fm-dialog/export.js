@@ -2,7 +2,6 @@ import VALUE from 'weex-flymeui/lib/common/variable-type';
 export default {
   name: 'FmTabPage',
   desc: '弹出框组件',
-  slots: null,
   props: {
     show: {
       type: VALUE.BOOLEAN,
@@ -146,5 +145,15 @@ export default {
   size: {
     width: 1080,
     height: 1920
-  }
+  },
+  slots: [{
+    name: 'title',
+    desc: '自定义标题'
+  }, {
+    name: 'content',
+    desc: '自定义内容'
+  }, {
+    name: 'btn-group',
+    desc: '自定义底部'
+  }]
 };
