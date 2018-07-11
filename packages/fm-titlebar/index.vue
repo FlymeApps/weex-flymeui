@@ -171,7 +171,7 @@ export default {
       this.$emit('fmTitlebarRightBtnClicked', { idx: idx, value: item });
     }
   },
-  created() {
+  created () {
     if (weex.supports && weex.supports('@module/view.getStatusBarHeight')) {
       this.statusHeight = weex.requireModule('view').getStatusBarHeight() * 3;
       this.height = this.statusHeight + 144;

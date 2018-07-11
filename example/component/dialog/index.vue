@@ -8,18 +8,14 @@
           <fm-button class="btn" @buttonClicked="click2">多个按钮</fm-button>
           <fm-button class="btn" @buttonClicked="click3">多行弹框</fm-button>
         </div>
-      <category title="与其他组件混用"></category>
+      <category title="其他类型"></category>
         <div class="container row">
-          <fm-button class="btn" @buttonClicked="click6">弹出选择</fm-button>
+          <fm-button class="btn" @buttonClicked="click6">弹出单选</fm-button>
+          <fm-button class="btn" @buttonClicked="click8">弹出多选</fm-button>
           <fm-button class="btn" @buttonClicked="click7">弹出输入</fm-button>
         </div>
-      <category title="js 调用弹框"></category>
-        <div class="container row">
-          <fm-button class="btn" @buttonClicked="click4">对话框</fm-button>
-          <fm-button class="btn" @buttonClicked="click5">提示框</fm-button>
-        </div>
 
-        <!-- <fm-dialog :show="show"
+        <fm-dialog :show="show"
                    title="退出浏览器并清空历史记录"
                    content="弹框内容区域此处展示各种描述弹框内容区域此处展示各种"
                    @fmDialogBtnClicked="btnClick"
@@ -29,34 +25,45 @@
                       <fm-dialog-btn type="2" text="12321"></fm-dialog-btn>
                       <fm-dialog-btn type="3" text="12321"></fm-dialog-btn>
                    </div>
-                   </fm-dialog> -->
+                   </fm-dialog>
 
         <fm-dialog :show="checkListShow"
                    title="选择语言"
-                   @fmDialogBtnClicked="checkListClick"
-                   @fmDialogDisappeared="checkListOverlayClick"
+                   content-type="select"
+                   @fmDialogDisappeared="overlayClick"
+                   @fmDialogSingleSelected="checkListClick"
                    :can-auto-close="true"
+                   :selectData="list"
                    :overlayOpacity="0.1">
-          <fm-checkbox-list
-            slot="content"
-            :list="list"
-            @fmCheckBoxListChecked="groupChecked">
-          </fm-checkbox-list>
+        </fm-dialog>
+
+        <fm-dialog :show="checkListShow1"
+                   title="选择语言"
+                   content-type="select"
+                   @fmDialogDisappeared="overlayClick"
+                   @fmDialogBtnClicked="checkListClick"
+                   :can-auto-close="true"
+                   :selectData="list"
+                   selectModel="multiple"
+                   type="alert"
+                   :overlayOpacity="0.1">
         </fm-dialog>
 
         <fm-dialog :show="inputShow"
                    title="弹出输入"
+                   content-type="input"
+                   placeholder="提示文本"
                    @fmDialogBtnClicked="inputClick"
-                   @fmDialogDisappeared="inputOverlayClick"
-                   :can-auto-close="true">
-          <fm-input ref="input" :default-value="inputText" slot="content" type="text" placeholder="输入点什么.." :autofocus="true" @input="inputing" />
+                   @fmDialogDisappeared="overlayClick"
+                   :can-auto-close="true"
+                   :inputDefaultText="inputText">
         </fm-dialog>
 
         <fm-dialog :show="show"
                    :title="title"
                    :content="content"
                    @fmDialogBtnClicked="btnClick"
-                   @fmDialogDisappeared="dialogOverlayClick"
+                   @fmDialogDisappeared="overlayClick"
                    :can-auto-close="true"
                    :btns="btns">
                    </fm-dialog>
@@ -111,18 +118,19 @@ export default {
   data: () => ({
     show: false,
     checkListShow: false,
+    checkListShow1: false,
     inputShow: false,
     checkList: [],
-    inputText: '123',
+    inputText: '',
     title: '',
     content: '',
     btns: [],
     list: [{
-      model: { title: '简体中文' }
+      title: '简体中文'
     }, {
-      model: { title: '繁体中文' }
+      title: '英文'
     }, {
-      model: { title: '英文' }
+      title: '西班牙语'
     }]
   }),
   methods: {
@@ -180,9 +188,10 @@ export default {
       this.checkList = [];
     },
     click7 () {
-      // this.$refs.input.blur()
       this.inputShow = true;
-      // this.inputText = ''
+    },
+    click8 () {
+      this.checkListShow1 = true;
     },
     btnClick (btn) {
       if (btn.type === 'cancel') {
@@ -194,37 +203,29 @@ export default {
       }
       this.show = false;
     },
-    dialogOverlayClick () {
+    overlayClick () {
       this.show = false;
-    },
-    checkListClick (btn) {
-      if (btn.type === 'cancel') {
-        modal.toast({ message: '点击了取消' });
-      } else if (btn.type === 'confirm') {
-        modal.toast({ message: '选择了: ' + this.checkList.map(item => item.model.title).toString() });
-      } else {
-        modal.toast({ message: btn.text });
-      }
+      this.inputShow = false;
       this.checkListShow = false;
+      this.checkListShow1 = false;
+    },
+    checkListClick (e) {
+      modal.toast({ message: '选择了: ' + e.selectList.map(item => item.title).toString() });
+      this.checkListShow = false;
+      this.checkListShow1 = false;
     },
     checkListOverlayClick () {
-      this.checkListShow = false;
+      this.checkListShow = true;
+      this.checkListShow1 = true;
     },
-    groupChecked (e) {
-      console.log(e);
-      this.checkList = e.checkedList;
-    },
-    inputClick (btn) {
-      if (btn.type === 'cancel') {
+    inputClick (e) {
+      if (e.type === 'cancel') {
         modal.toast({ message: '取消' });
-      } else if (btn.type === 'confirm') {
-        modal.toast({ message: '输入的是: ' + this.inputText });
+      } else if (e.type === 'confirm') {
+        modal.toast({ message: '输入的是: ' + e.inputValue });
       } else {
-        modal.toast({ message: btn.text });
+        modal.toast({ message: e.text });
       }
-      this.inputShow = false;
-    },
-    inputOverlayClick () {
       this.inputShow = false;
     },
     inputing (e) {
