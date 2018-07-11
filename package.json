@@ -1,6 +1,6 @@
 {
     "name": "weex-flymeui",
-    "version": "0.1.22",
+    "version": "0.1.23",
     "description": "A Flyme Style UI library based on Weex for Creator.",
     "main": "index.js",
     "lib": "vue",
@@ -10,10 +10,10 @@
         "build": "webpack --progress",
         "watch": "webpack --progress --watch",
         "serve": "anywhere -d dist/example/ -p 8888",
-        "build:theme": "gulp build --gulpfile lib/theme-paint/gulpfile.js",
         "public": "npm run build; npm publish",
         "start": "npm run build; (npm run serve & npm run watch)",
-        "release": "npm run build; node ./depoly/pack-prod.js"
+        "release": "npm run build; node ./depoly/pack-prod.js",
+        "build:component": "webpack --config component.config.js"
     },
     "keywords": [
         "Flyme",
@@ -25,6 +25,7 @@
     "license": "MIT",
     "devDependencies": {
         "anywhere": "^1.4.0",
+        "archiver": "^2.1.1",
         "babel-core": "~6.26.0",
         "babel-eslint": "~8.0.1",
         "babel-loader": "~7.1.2",
@@ -47,14 +48,15 @@
         "postcss-plugin-px2rem": "^0.7.0",
         "postcss-plugin-weex": "^0.1.6",
         "postcss-px2rem": "^0.3.0",
+        "uglifyjs-webpack-plugin": "^1.2.7",
         "url-loader": "^0.6.2",
         "url-parse": "^1.1.9",
         "vue": "^2.5.3",
         "vue-loader": "^12.2.2",
         "vue-template-compiler": "^2.5.3",
-        "webpack": "~3.6.0",
-        "archiver": "^2.1.1",
-        "weex-loader": "^0.6.0",
+        "webpack": "^3.10.0",
+        "webpack-uglify-parallel": "^0.1.4",
+        "weex-loader": "^0.7.2",
         "weex-vue-loader": "^0.5.0",
         "weex-vue-precompiler": "^0.1.17",
         "weex-vue-render": "^1.0.20"
