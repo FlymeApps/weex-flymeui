@@ -24,6 +24,14 @@ export default {
         options: ['normal', 'hollow', 'circle']
       }
     },
+    icon: {
+      type: VALUE.SELECT,
+      desc: '圆形按钮 Icon',
+      default: 'small',
+      props: {
+        options: ['zhuye', 'wancheng', 'guanbi', 'gengduo', 'bianji', 'shanchu', 'fenxiang', 'xingxing', 'fanhui']
+      }
+    },
     color: {
       type: VALUE.COLOR,
       desc: '按钮颜色',
@@ -46,8 +54,13 @@ export default {
     }
   },
   size: {
-    width: 720,
-    height: 114
+    width: 160,
+    height: 72
   },
-  slots: null
+  slots: null,
+  mockData: {
+    title: '按钮',
+    size: 'small'
+  },
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/f910d917068e4ece92dea6b6af63e15bz'
 };

@@ -67,5 +67,17 @@ export default {
   }, {
     name: 'right',
     desc: '自定义右边按钮'
-  }]
+  }],
+  mockData: {
+    list: [{
+      title: '微信',
+      color: '#3BC06B'
+    }, {
+      title: '摩拜单车',
+      color: '#FC5B23'
+    }, {
+      title: '小睡眠'
+    }]
+  },
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/78d3991818654099a1f2f491e848c0b6z'
 };

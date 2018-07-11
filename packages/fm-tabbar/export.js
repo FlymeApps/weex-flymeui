@@ -67,5 +67,18 @@ export default {
   size: {
     width: 1080,
     height: 144
-  }
+  },
+  mockData: {
+    items: [{
+      title: '信息',
+      icon: 'xinxi1'
+    }, {
+      title: '下载',
+      icon: 'xiazai'
+    }, {
+      title: '删除',
+      icon: 'shanchu'
+    }]
+  },
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/51aecd3e7bd44a1ab7ca6bcb12c73fa2z'
 };

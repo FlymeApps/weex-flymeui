@@ -147,7 +147,7 @@ export default {
       return clz;
     },
     computedColor () {
-      return this.color || THEME[this.theme].normal;
+      return this.color || STYLE.primaryColor;
     },
     computedStyle () {
       const { color, active, disabled, padding, animated, type, width, height } = this;

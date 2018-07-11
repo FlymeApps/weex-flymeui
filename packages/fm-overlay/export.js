@@ -6,7 +6,7 @@ export default {
     show: {
       type: VALUE.BOOLEAN,
       desc: '是否显示',
-      default: false
+      default: true
     },
     canAutoClose: {
       type: VALUE.BOOLEAN,
@@ -28,5 +28,7 @@ export default {
   },
   slots: [{
     desc: '内容填充'
-  }]
+  }],
+  mockData: null,
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/e5c2a31e38474c338f3a3b8967a5d522z'
 };

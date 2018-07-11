@@ -155,5 +155,7 @@ export default {
   }, {
     name: 'btn-group',
     desc: '自定义底部'
-  }]
+  }],
+  mockData: null,
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/dd5cd5bebc414beb8cf385b528131fb2z'
 };

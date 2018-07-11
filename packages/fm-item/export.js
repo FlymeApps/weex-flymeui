@@ -58,5 +58,7 @@ export default {
   }, {
     name: 'right',
     desc: '自定义标题右边'
-  }]
+  }],
+  mockData: null,
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/c734fae3d4a94c43af644ffce519423az'
 };

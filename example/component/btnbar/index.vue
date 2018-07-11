@@ -48,7 +48,7 @@ export default {
   data: () => ({
     btns: [{
       title: '开始',
-      theme: 'limegreen'
+      color: '#3bc06b'
     }]
   }),
   methods: {
@@ -58,7 +58,7 @@ export default {
     onClick1 (e) {
       this.btns = [{
         title: '开始',
-        theme: 'limegreen'
+        color: '#3bc06b'
       }];
     },
     onClick2 (e) {
@@ -67,7 +67,7 @@ export default {
         disabled: true
       }, {
         title: '提交订单',
-        theme: 'firebrick'
+        color: '#dc2a2a'
       }];
     }
   }

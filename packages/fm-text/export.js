@@ -7,7 +7,7 @@ export default {
     value: {
       type: VALUE.STRING,
       desc: '内容',
-      default: '文本'
+      default: ''
     },
     fontWeight: {
       type: VALUE.SELECT,
@@ -30,5 +30,11 @@ export default {
   size: {
     width: 200,
     height: 63
-  }
+  },
+  mockData: {
+    value: '文本',
+    fontWeight: 'normal',
+    size: 'normal'
+  },
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/cac2f6baaebc4509a0a1edb472ab87a3z'
 };

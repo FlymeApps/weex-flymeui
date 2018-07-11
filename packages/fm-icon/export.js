@@ -9,7 +9,7 @@ export default {
       desc: 'Icon 名称',
       default: 'zhuye',
       props: {
-        options: ['zhuye', 'wancheng', 'guanbi', 'gengduo', 'bianji', 'shanchu', 'fenxiang', 'xingxing']
+        options: ['zhuye', 'wancheng', 'guanbi', 'gengduo', 'bianji', 'shanchu', 'fenxiang', 'xingxing', 'fanhui']
       }
     },
     iconStyle: {
@@ -34,5 +34,11 @@ export default {
   size: {
     width: 42,
     height: 42
-  }
+  },
+  mockData: {
+    name: 'zhuye',
+    iconStyle: 42,
+    color: '#000000'
+  },
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/63bb2ac1a15c4d729f8adbc14392866az'
 };

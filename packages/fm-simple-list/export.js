@@ -39,10 +39,6 @@ export default {
           rightColor: {
             type: VALUE.COLOR,
             desc: '右 Icon 颜色'
-          },
-          backgroundColor: {
-            type: VALUE.COLOR,
-            desc: '背景颜色'
           }
         }
       },
@@ -93,5 +89,22 @@ export default {
   }, {
     name: 'right',
     desc: '自定义右边按钮'
-  }]
+  }],
+  mockData: {
+    list: [{
+      title: '王者荣耀',
+      color: '#198DED',
+      leftIcon: 'biaoqing',
+      leftColor: '#DC2A2A'
+    }, {
+      title: '绝地求生',
+      color: '#3BC06B',
+      leftIcon: 'gongjuxiang'
+    }, {
+      title: '我的世界',
+      color: '#DC2A2A',
+      leftIcon: 'hongxin'
+    }]
+  },
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/8aab183106b0478ab6f5341ec3834e85z'
 };

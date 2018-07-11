@@ -46,9 +46,21 @@ export default {
     dynamicParams: ['tabTitles'],
     template (tabTitlesFiled) {
       return `<template v-for="(item, idx) in ${tabTitlesFiled}" :slot="\`tab-item-\$\{idx\}\`">
-        <component v-for="s in allPages" :item="item" :is="s.name" v-if="item.type === s.type"></component>
-      </template>`;
+                <component v-for="s in allPages" :item="item" :is="s.name" v-if="item.type === s.type"></component>
+              </template>`;
     },
     templateParams: ['tabTitles']
-  }]
+  }],
+  mockData: {
+    tabTitles: [{
+      text: '标签1'
+    }, {
+      text: '标签2'
+    }, {
+      text: '标签3'
+    }],
+    tabPageHeight: 1854,
+    selectIndex: 0
+  },
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/1190194b2ef04456947a21182e99a00az'
 };

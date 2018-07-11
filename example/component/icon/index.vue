@@ -4,10 +4,10 @@
       <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-icon/"></title>
       <category title="默认 icon"></category>
       <div class="row">
-        <fm-icon class="icon" name="biaoqing"/>
-        <fm-icon class="icon" name="wengao"/>
-        <fm-icon class="icon" value="&#xe6a3;"/>
-        <fm-icon class="icon" name="Wi-Fi" />
+        <fm-icon class="icon" name="fanhui"/>
+        <fm-icon class="icon" name="guanbi" color='#198ded'/>
+        <fm-icon class="icon" name="shanchu" color='#ffaf00'/>
+        <fm-icon class="icon" name="Wi-Fi" color='#7e97ac'/>
       </div>
       <category title="自定义大小颜色 icon"></category>
       <div class="example">

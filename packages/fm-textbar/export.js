@@ -45,5 +45,13 @@ export default {
   size: {
     width: 1080,
     height: 144
-  }
+  },
+  mockData: {
+    items: [{
+      title: '取消'
+    }, {
+      title: '确定'
+    }]
+  },
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/c16481053f7f4ad1adca32480a678368z'
 };

@@ -87,5 +87,21 @@ export default {
     width: 1080,
     height: 600
   },
-  slots: null
+  slots: null,
+  mockData: {
+    list: [{
+      title: '选项1',
+      value: 0
+    }, {
+      title: '选项2',
+      value: 1,
+      summary: '描述'
+    }, {
+      title: '选项3',
+      value: 2,
+      summary: '描述',
+      description: '段落描述'
+    }]
+  },
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/5c936c30cd014e40b99d6dbd9274312az'
 };

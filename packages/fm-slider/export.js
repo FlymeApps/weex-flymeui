@@ -37,5 +37,19 @@ export default {
   size: {
     width: 1080,
     height: 516
-  }
+  },
+  mockData: {
+    items: [{
+      src: 'http://gw.alicdn.com/imgextra/i4/169/TB2TlW1aLuSBuNkHFqDXXXfhVXa_!!169-0-lubanu.jpg_q50.jpg'
+    }, {
+      src: 'http://gw.alicdn.com/imgextra/TB2nu8oev5TBuNjSspcXXbnGFXa_!!103-0-lubanu.jpg_q50.jpg'
+    }, {
+      src: 'http://gw.alicdn.com/imgextra/TB2dprKdFuWBuNjSszbXXcS7FXa_!!124-0-luban.jpg_q50.jpg'
+    }, {
+      src: 'http://img.alicdn.com/imgextra/i4/18/TB28vYEdL9TBuNjy0FcXXbeiFXa_!!18-0-luban.jpg_q50.jpg'
+    }, {
+      src: 'http://aecpm.alicdn.com/simba/img/TB14ab1KpXXXXclXFXXSutbFXXX.jpg_q50.jpg'
+    }]
+  },
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/931c7561cc5e43618d20278c173dde59z'
 };

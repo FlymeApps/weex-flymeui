@@ -50,5 +50,7 @@ export default {
   }, {
     name: 'right',
     desc: '自定义右边按钮'
-  }]
+  }],
+  mockData: null,
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/d4b2e6d139c745f9b4b0d9b24900df2cz'
 };

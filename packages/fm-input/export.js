@@ -40,5 +40,9 @@ export default {
   size: {
     width: 1080,
     height: 158
-  }
+  },
+  mockData: {
+    placeholder: 'Text'
+  },
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/49fd1272a5f649eba6c74639f68b8e87z'
 };

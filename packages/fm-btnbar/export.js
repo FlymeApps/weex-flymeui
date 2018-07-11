@@ -13,19 +13,39 @@ export default {
         inner: {
           title: {
             type: VALUE.STRING,
-            desc: '标题'
+            desc: '按钮文案',
+            default: '按钮'
           },
-          theme: {
+          size: {
             type: VALUE.SELECT,
-            desc: '颜色主题',
-            default: 'blue',
+            desc: '大小',
+            default: 'small',
             props: {
-              options: ['blue', 'limegreen', 'seagreen', 'gray', 'crimson', 'firebrick', 'tomato', 'coral']
+              options: ['small', 'middle', 'large', 'huge']
             }
+          },
+          type: {
+            type: VALUE.SELECT,
+            desc: '按钮类型',
+            default: 'normal',
+            props: {
+              options: ['normal', 'hollow']
+            }
+          },
+          color: {
+            type: VALUE.COLOR,
+            desc: '按钮颜色',
+            default: '#198DED'
+          },
+          titleColor: {
+            type: VALUE.COLOR,
+            desc: '按钮内容颜色',
+            default: '#FFFFFF'
           },
           disabled: {
             type: VALUE.BOOLEAN,
-            desc: '是否禁用'
+            desc: '是否禁用',
+            default: false
           }
         }
       },
@@ -45,5 +65,14 @@ export default {
   size: {
     width: 1080,
     height: 144
-  }
+  },
+  mockData: {
+    items: [{
+      title: '取消'
+    }, {
+      title: '确定',
+      color: '#dc2a2a'
+    }]
+  },
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/4bbc52b26c7841c98baf90e5fc1ad216z'
 };
