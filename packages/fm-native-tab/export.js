@@ -62,5 +62,5 @@ export default {
     tabPageHeight: 1854,
     selectIndex: 0
   },
-  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/1190194b2ef04456947a21182e99a00az'
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/133b9680fcef447d8b5200ee5fca41e3z'
 };

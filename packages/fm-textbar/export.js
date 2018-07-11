@@ -53,5 +53,5 @@ export default {
       title: '确定'
     }]
   },
-  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/c16481053f7f4ad1adca32480a678368z'
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/8ba846010a624739812cf2da10737e13z'
 };

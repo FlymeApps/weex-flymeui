@@ -94,5 +94,5 @@ export default {
     desc: '自定义搜索按钮'
   }],
   mockData: null,
-  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/273747b369d64efb851cae68dea58b55z'
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/a849dc3ed5714146b5c70a7e22666c5fz'
 };

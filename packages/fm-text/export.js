@@ -28,7 +28,7 @@ export default {
   },
   events: {},
   size: {
-    width: 200,
+    width: 155,
     height: 63
   },
   mockData: {
@@ -36,5 +36,5 @@ export default {
     fontWeight: 'normal',
     size: 'normal'
   },
-  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/cac2f6baaebc4509a0a1edb472ab87a3z'
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/3798ebc7fd1f45e8985d45d642549bcdz'
 };

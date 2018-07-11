@@ -59,7 +59,7 @@ export default {
   },
   size: {
     width: 1080,
-    height: 300
+    height: 204
   },
   slots: [{
     name: 'left',
@@ -79,5 +79,5 @@ export default {
       title: '小睡眠'
     }]
   },
-  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/78d3991818654099a1f2f491e848c0b6z'
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/5eddc64f41f143c8b28f965e3c890ad0z'
 };

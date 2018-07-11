@@ -51,5 +51,5 @@ export default {
       src: 'http://aecpm.alicdn.com/simba/img/TB14ab1KpXXXXclXFXXSutbFXXX.jpg_q50.jpg'
     }]
   },
-  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/931c7561cc5e43618d20278c173dde59z'
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/b6d95a8e362b4587b22228bc6f68b5a9z'
 };

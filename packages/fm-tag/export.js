@@ -45,5 +45,5 @@ export default {
     size: 'small',
     value: '标签'
   },
-  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/9b6cae8cc866469cae67a7114ebb3b4bz'
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/e4547a584e2e4d33af017f67a98b282dz'
 };

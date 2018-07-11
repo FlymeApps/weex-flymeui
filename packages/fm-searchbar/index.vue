@@ -98,7 +98,7 @@
     height: 60px;
     margin-right: 15px;
     font-weight: 700;
-    padding: 6px 5px;
+    padding: 4px 0 0 6px;
     background-color: rgba(77, 77, 77, 0.5);
     border-radius: 30px;
   }

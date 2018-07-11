@@ -30,5 +30,5 @@ export default {
     desc: '内容填充'
   }],
   mockData: null,
-  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/e5c2a31e38474c338f3a3b8967a5d522z'
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/9e447deb1abd4ff09c2de8609e293da9z'
 };

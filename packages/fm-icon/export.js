@@ -32,13 +32,13 @@ export default {
     }
   },
   size: {
-    width: 42,
-    height: 42
+    width: 72,
+    height: 72
   },
   mockData: {
     name: 'zhuye',
-    iconStyle: 42,
+    iconStyle: 72,
     color: '#000000'
   },
-  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/63bb2ac1a15c4d729f8adbc14392866az'
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/52710e0c44bf44ebabe628d0e43cf0edz'
 };

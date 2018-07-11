@@ -85,7 +85,7 @@ export default {
   },
   size: {
     width: 1080,
-    height: 600
+    height: 670
   },
   slots: null,
   mockData: {
@@ -103,5 +103,5 @@ export default {
       description: '段落描述'
     }]
   },
-  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/5c936c30cd014e40b99d6dbd9274312az'
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/a145b26bf93143ac926dd33f9a2f6f09z'
 };

@@ -81,7 +81,7 @@ export default {
   },
   size: {
     width: 1080,
-    height: 396
+    height: 540
   },
   slots: [{
     name: 'left',
@@ -92,19 +92,19 @@ export default {
   }],
   mockData: {
     list: [{
-      title: '王者荣耀',
+      title: '王者荣耀 -- 决战到底',
       color: '#198DED',
       leftIcon: 'biaoqing',
       leftColor: '#DC2A2A'
     }, {
-      title: '绝地求生',
+      title: '绝地求生 -- 刺激战场',
       color: '#3BC06B',
       leftIcon: 'gongjuxiang'
     }, {
-      title: '我的世界',
+      title: '逆水寒 -- 会呼吸的江湖',
       color: '#DC2A2A',
       leftIcon: 'hongxin'
     }]
   },
-  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/8aab183106b0478ab6f5341ec3834e85z'
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/2062a1a8b17d4fe396d0c7dd44f60038z'
 };

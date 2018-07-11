@@ -52,5 +52,5 @@ export default {
   mockData: {
     solid: false
   },
-  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/05e54747070a44ba915575b7b96946a5z'
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/cd999618bc794dfc986bab6cd429857ez'
 };

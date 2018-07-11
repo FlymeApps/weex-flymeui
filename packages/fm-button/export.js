@@ -54,7 +54,7 @@ export default {
     }
   },
   size: {
-    width: 160,
+    width: 150,
     height: 72
   },
   slots: null,
@@ -62,5 +62,5 @@ export default {
     title: '按钮',
     size: 'small'
   },
-  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/f910d917068e4ece92dea6b6af63e15bz'
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/8ee7cab776c741b382917c309ac0ce41z'
 };

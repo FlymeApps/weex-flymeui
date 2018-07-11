@@ -80,5 +80,5 @@ export default {
       icon: 'shanchu'
     }]
   },
-  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/51aecd3e7bd44a1ab7ca6bcb12c73fa2z'
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/fd28a04d2c4044d1993f9951a4a55972z'
 };
