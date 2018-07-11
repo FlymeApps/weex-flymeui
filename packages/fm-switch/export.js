@@ -9,6 +9,11 @@ export default {
       desc: '是否选中',
       default: false
     },
+    solid: {
+      type: VALUE.BOOLEAN,
+      desc: '是否实心',
+      default: false
+    },
     disabled: {
       type: VALUE.BOOLEAN,
       desc: '是否禁用',
@@ -43,5 +48,9 @@ export default {
   size: {
     width: 144,
     height: 72
-  }
+  },
+  mockData: {
+    solid: false
+  },
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/05e54747070a44ba915575b7b96946a5z'
 };
