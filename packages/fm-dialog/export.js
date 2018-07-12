@@ -1,6 +1,6 @@
 import VALUE from 'weex-flymeui/lib/common/variable-type';
 export default {
-  name: 'FmTabPage',
+  name: 'FmDialog',
   desc: '弹出框组件',
   props: {
     show: {

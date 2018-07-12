@@ -5,6 +5,7 @@
     <fm-overlay v-if="show || showIn"
                 :hasAnimation="true"
                 :canAutoClose="true"
+                :use-native="false"
                 :opacity="overlayOpacity"
                 @fmOverlayBodyClicking="visible(false)"
                 ref="fm-overlay"></fm-overlay>

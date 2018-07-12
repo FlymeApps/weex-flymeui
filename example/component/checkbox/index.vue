@@ -98,18 +98,17 @@ export default {
   components: { Title, Category, FmCheckbox, FmCheckboxList },
   data: () => ({
     list: [{
-      title: '蒸羊羔',
-      value: 0,
-      checked: true
+      title: '选项1',
+      value: 0
     }, {
-      title: '蒸熊掌',
-      value: 1
+      title: '选项2',
+      value: 1,
+      summary: '描述'
     }, {
-      title: '蒸鹿尾儿',
-      value: 2
-    }, {
-      title: '烧花鸭',
-      value: 3
+      title: '选项3',
+      value: 2,
+      summary: '描述',
+      description: '段落描述'
     }],
     checkedList1: [],
     checkedList2: []

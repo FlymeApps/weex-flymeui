@@ -7,6 +7,7 @@
                    v-if="show"
                    ref="overlay"
                    v-bind="overlayCfg"
+                   :use-native="false"
                    @fmOverlayBodyClicking="fmOverlayBodyClicking"></fm-overlay>
     </div>
     <div ref="fm-popup"

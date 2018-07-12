@@ -60,6 +60,10 @@ export default {
     canAutoClose: {
       type: Boolean,
       default: true
+    },
+    useNative: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
@@ -78,7 +82,7 @@ export default {
       return show;
     },
     isCreator () {
-      return weex.supports && weex.supports('@component/FmOverlayNative');
+      return this.useNative && weex.supports && weex.supports('@component/FmOverlayNative');
     }
   },
   methods: {

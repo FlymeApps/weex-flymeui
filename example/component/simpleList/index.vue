@@ -90,16 +90,16 @@ export default {
       color: '#DC2A2A'
     }],
     listData3: [{
-      title: '王者荣耀',
+      title: '王者荣耀 -- 决战到底',
       color: '#198DED',
       leftIcon: 'biaoqing',
       leftColor: '#DC2A2A'
     }, {
-      title: '这是一段文字超长的描述这是一段文字超长的描述这是一段文字超长的描述这是一段文字超长的描述',
+      title: '绝地求生 -- 刺激战场',
       color: '#3BC06B',
       leftIcon: 'gongjuxiang'
     }, {
-      title: '震惊！Flyme 竟然还有这个功能！',
+      title: '逆水寒 -- 会呼吸的江湖',
       color: '#DC2A2A',
       leftIcon: 'hongxin'
     }],

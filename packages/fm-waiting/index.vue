@@ -9,14 +9,19 @@
          class="fm-waiting"
          @click="warpperClicked"
          @touchend="handleTouchEnd">
-      <div class="waiting-wrapper"
-          v-if="show || showIn">
-          <div class="waiting-circle">
-              <div class="waiting--dot waiting--dot-1" ref="dot-1"></div>
-              <div class="waiting--dot waiting--dot-2" ref="dot-2"></div>
-              <div class="waiting--dot waiting--dot-3" ref="dot-3"></div>
-          </div>
-          <text class="waiting--text">{{ title }}</text>
+      <div :class="['waiting-wrapper', !isCreator ? 'waiting-wrapper-H5' : '']"
+           v-if="show || showIn">
+          <template v-if="!isCreator">
+            <div class="waiting-circle">
+                <div class="waiting--dot waiting--dot-1" ref="dot-1"></div>
+                <div class="waiting--dot waiting--dot-2" ref="dot-2"></div>
+                <div class="waiting--dot waiting--dot-3" ref="dot-3"></div>
+            </div>
+            <text class="waiting--text">{{ title }}</text>
+          </template>
+          <template v-else>
+            <FmNativeWaiting :text="title"></FmNativeWaiting>
+          </template>
       </div>
     </div>
   </div>
@@ -55,6 +60,9 @@ export default {
         backgroundColor: `rgba(0, 0, 0, ${backgroundOpacity})`,
         opacity: !showIn ? 0 : 1
       };
+    },
+    isCreator () {
+      return weex.supports && weex.supports('@component/FmNativeWaiting');
     }
   },
   methods: {
@@ -214,28 +222,33 @@ export default {
       this.dot3Queue = Queue(this.dot3, steps3);
     },
     active () {
-      if (this.show) {
-        return;
-      }
+      if (this.show) { return; }
+
       this.show = true;
       this.loadingStart = new Date().getTime();
-      setTimeout(() => {
-        this.appear(true);
-        this.start();
-      }, 20);
+
+      if (this.isCreator) {
+        this.$nextTick(() => {
+          this.appear(true);
+        })
+      } else {
+        setTimeout(() => {
+          this.appear(true);
+          this.start();
+        }, 20);
+      }
     },
     hide () {
-      if (!this.show) {
-        return;
-      }
+      if (!this.show) { return; }
+
       this.show = false;
-      let timeout = 20;
+      let timeout = 0;
       if (new Date().getTime() - this.loadingStart <= 500) {
         timeout = 500;
       }
       setTimeout(() => {
         this.appear(false);
-        this.stop();
+        !this.isCreator && this.stop();
       }, timeout);
     }
   }
@@ -260,8 +273,12 @@ export default {
     align-items: center;
     height: 240px;
     border-radius: 18px;
-    padding: 0 72px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: #FFFFFF;
+    padding: 0 36px;
+  }
+
+  .waiting-wrapper-H5 {
+    padding: 0 108px;
   }
 
   .waiting--text {

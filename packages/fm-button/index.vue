@@ -179,13 +179,13 @@ export default {
     }
   },
   mounted () {
-    setTimeout(() => {
+    this.$nextTick(() => {
       dom.getComponentRect(this.$refs['fm-button'], option => {
         if (option.size.width >= 240) {
           this.padding = 24;
         }
       });
-    }, 50);
+    });
   }
 };
 </script>

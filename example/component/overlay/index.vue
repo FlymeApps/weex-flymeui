@@ -11,12 +11,20 @@
                     :hasAnimation="hasAnimation"
                     :timingFunction="timingFunction"
                     @fmOverlayBodyClicked="fmOverlayBodyClicked"
-                    opacity="0.5"></fm-overlay>
+                    opacity="0.5">
+                    <div class="test"></div>
+
+                    </fm-overlay>
     </div>
   </scroller>
 </template>
 
 <style scoped>
+.test {
+  background-color: #198ded;
+  width: 200px;
+  height: 200px;
+}
   .mzui-demo {
     align-items: center;
     position: absolute;

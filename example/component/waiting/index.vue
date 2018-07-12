@@ -11,7 +11,7 @@
 
       <fm-waiting
         ref="fm-waiting"
-        title="FlymeUI"
+        title="正在保存图像"
         :can-auto-close="canAutoClose"
         @fmWaitingDisappeared="fmWaitingDisappeared"></fm-waiting>
     </scroller>

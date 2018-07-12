@@ -4,7 +4,7 @@
       <title link="https://yanjiie.github.io/weex-flymeui/#/packages/fm-action-sheet/"></title>
       <category title="底部删除弹框"></category>
         <div class="container row">
-          <fm-button class="btn" @buttonClick="click" >点击弹起</fm-button>
+          <fm-button class="btn" @buttonClicked="click" >点击弹起</fm-button>
         </div>
     </scroller>
 

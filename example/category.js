@@ -56,6 +56,11 @@ export default {
       icon: 'http://p1nq9peby.bkt.clouddn.com/weex-flymeui/tabpage.png',
       path: 'component/tabPage'
     }, {
+      name: '原生标签页',
+      subname: 'FmNativeTab',
+      icon: 'http://p1nq9peby.bkt.clouddn.com/weex-flymeui/tabpage.png',
+      path: 'component/nativeTab'
+    }, {
       name: '底部操作栏',
       subname: 'FmTabbar',
       icon: 'http://p1nq9peby.bkt.clouddn.com/weex-flymeui/tabbar.png',
@@ -158,6 +163,16 @@ export default {
       subname: 'FmDialog',
       icon: 'http://p1nq9peby.bkt.clouddn.com/weex-flymeui/dialog.png',
       path: 'component/dialog'
+    }, {
+      name: 'Loading 对话框',
+      subname: 'FmWating',
+      icon: 'http://p1nq9peby.bkt.clouddn.com/weex-flymeui/btnbar.png',
+      path: 'component/waiting'
+    }, {
+      name: 'Loading 加载',
+      subname: 'FmLoading',
+      icon: 'http://p1nq9peby.bkt.clouddn.com/weex-flymeui/dialog.png',
+      path: 'component/loading'
     }, {
       name: '气泡菜单',
       subname: 'FmPopOver',
