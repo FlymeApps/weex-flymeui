@@ -12,44 +12,48 @@
                   :opacity="overlayOpacity"
                   @fmOverlayBodyClicked="overlayClicked"
                   ref="fm-overlay"></fm-overlay>
-      <div class="dialog-box"
-           :class="!isCreator && ['dialog-box-H5']"
-           ref="dialog-box"
-           v-if="self_show || isCreator"
-           :style="dialogStyle"
-           @touchend="handleTouchEnd">
-        <div class="dialog-content">
-          <slot name="title">
-            <template v-if="contentType === 'select'">
-              <fm-text class="content-title--input" :style="titleStyles" :value="title"></fm-text>
-            </template>
-            <fm-text v-else class="content-title" font-weight="medium" size="large" :style="titleStyles" :value="title"></fm-text>
-          </slot>
-            <slot name="content">
-              <!-- Normal Dialog -->
-              <template v-if="contentType === 'default'">
-                <fm-text class="content-subtext" :style="contentStyles" :value="content"></fm-text>
-              </template>
-              <!-- Input Dialog -->
-              <template v-if="contentType === 'input'">
-                <fm-input class="input" ref="inputEl" :default-value="inputText" type="text" :placeholder="placeholder" :autofocus="true" @input="inputing" />
-              </template>
-              <!-- Select Dialog -->
+      <div class="dialog-container"
+           :class="!isCreator && ['dialog-container-H5']"
+           v-if="self_show || isCreator">
+        <div class="dialog-box"
+            :class="!isCreator && ['dialog-box-H5']"
+            ref="dialog-box"
+            v-if="self_show || isCreator"
+            :style="dialogStyle"
+            @touchend="handleTouchEnd">
+          <div class="dialog-content">
+            <slot name="title">
               <template v-if="contentType === 'select'">
-                <fm-checkbox-list
-                  ref="selectEl"
-                  :list="selectDataIn"
-                  :single="selectModel === 'single'"
-                  :limit="selectLimit"
-                  :last-border-hidden="selectModel === 'single'"
-                  @fmCheckBoxListChecked="onSelect" />
+                <fm-text class="content-title--input" :style="titleStyles" :value="title"></fm-text>
               </template>
+              <fm-text v-else class="content-title" font-weight="medium" size="large" :style="titleStyles" :value="title"></fm-text>
             </slot>
-        </div>
-        <div class="dialog-footer" :style="btnStyle" v-if="contentType !== 'select' || selectModel !== 'single'">
-          <slot name="btn-group">
-            <fm-simple-btn v-for="(btn, index) in dialogBtns" scene="dialog" v-bind="btn" @click="btnClick" :key="index"></fm-simple-btn>
-          </slot>
+              <slot name="content">
+                <!-- Normal Dialog -->
+                <template v-if="contentType === 'default'">
+                  <fm-text class="content-subtext" :style="contentStyles" :value="content"></fm-text>
+                </template>
+                <!-- Input Dialog -->
+                <template v-if="contentType === 'input'">
+                  <fm-input class="input" ref="inputEl" :default-value="inputText" type="text" :placeholder="placeholder" :autofocus="true" @input="inputing" />
+                </template>
+                <!-- Select Dialog -->
+                <template v-if="contentType === 'select'">
+                  <fm-checkbox-list
+                    ref="selectEl"
+                    :list="selectDataIn"
+                    :single="selectModel === 'single'"
+                    :limit="selectLimit"
+                    :last-border-hidden="selectModel === 'single'"
+                    @fmCheckBoxListChecked="onSelect" />
+                </template>
+              </slot>
+          </div>
+          <div class="dialog-footer" :style="btnStyle" v-if="contentType !== 'select' || selectModel !== 'single'">
+            <slot name="btn-group">
+              <fm-simple-btn v-for="(btn, index) in dialogBtns" scene="dialog" v-bind="btn" @click="btnClick" :key="index"></fm-simple-btn>
+            </slot>
+          </div>
         </div>
       </div>
   </component>
@@ -59,8 +63,23 @@
   .container {
     position: fixed;
     width: 1080px;
+    align-items: center;
+    justify-content: center;
     /*兼容H5异常*/
     z-index: 99999;
+  }
+
+  .dialog-container {
+    width: 1080px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dialog-container-H5 {
+    position: fixed;
+    width: 1080px;
+    top: 0px;
+    bottom: 0px;
   }
 
   .dialog-box {
@@ -71,8 +90,8 @@
   }
 
   .dialog-box-H5 {
-    position: fixed;
-    left: 72px;
+    /* position: fixed;
+    left: 72px; */
   }
 
   .content-title {
@@ -255,6 +274,7 @@ export default {
     this.self_show = this.show;
     this.inputText = this.inputDefaultText;
     this.selectDataIn = this.selectData;
+    this.show && (this.dialogOpacity = 1);
   },
   watch: {
     show (val, oldVal) {
@@ -309,8 +329,8 @@ export default {
     },
     dialogStyle () {
       return Object.assign({
-        opacity: this.dialogOpacity,
-        top: (!this.isCreator ? this.top : 0) + 'px'
+        opacity: this.dialogOpacity
+        // top: (!this.isCreator ? this.top : 0) + 'px'
       }, this.bodyStyles);
     },
     btnStyle () {

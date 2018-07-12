@@ -15,18 +15,6 @@
           <fm-button class="btn" @buttonClicked="click7">弹出输入</fm-button>
         </div>
 
-        <fm-dialog :show="show"
-                   title="退出浏览器并清空历史记录"
-                   content="弹框内容区域此处展示各种描述弹框内容区域此处展示各种"
-                   @fmDialogBtnClicked="btnClick"
-                   :can-auto-close="false">
-                   <div slot="btn-group">
-                      <fm-dialog-btn type="1" text="12321"></fm-dialog-btn>
-                      <fm-dialog-btn type="2" text="12321"></fm-dialog-btn>
-                      <fm-dialog-btn type="3" text="12321"></fm-dialog-btn>
-                   </div>
-                   </fm-dialog>
-
         <fm-dialog :show="checkListShow"
                    title="选择语言"
                    content-type="select"
