@@ -40,15 +40,13 @@ export default {
   },
   mockData: {
     items: [{
-      src: 'http://gw.alicdn.com/imgextra/i4/169/TB2TlW1aLuSBuNkHFqDXXXfhVXa_!!169-0-lubanu.jpg_q50.jpg'
+      src: 'http://image.res.meizu.com/image/flyme-icon/400b7d70e80f4a78906529e78f463c8dz'
     }, {
-      src: 'http://gw.alicdn.com/imgextra/TB2nu8oev5TBuNjSspcXXbnGFXa_!!103-0-lubanu.jpg_q50.jpg'
+      src: 'http://image.res.meizu.com/image/flyme-icon/f7fdc7ab6bea4b21a995876be3fcdc9fz'
     }, {
-      src: 'http://gw.alicdn.com/imgextra/TB2dprKdFuWBuNjSszbXXcS7FXa_!!124-0-luban.jpg_q50.jpg'
+      src: 'http://image.res.meizu.com/image/flyme-icon/27c95bfe694344edb231ad9751617a99z'
     }, {
-      src: 'http://img.alicdn.com/imgextra/i4/18/TB28vYEdL9TBuNjy0FcXXbeiFXa_!!18-0-luban.jpg_q50.jpg'
-    }, {
-      src: 'http://aecpm.alicdn.com/simba/img/TB14ab1KpXXXXclXFXXSutbFXXX.jpg_q50.jpg'
+      src: 'http://image.res.meizu.com/image/flyme-icon/4306b23856484446bd6d53220f36159cz'
     }]
   },
   thumbnail: 'http://image.res.meizu.com/image/flyme-icon/b6d95a8e362b4587b22228bc6f68b5a9z'

@@ -116,7 +116,7 @@ export default {
       }
     },
     autoError: {
-      type: String,
+      type: Boolean,
       default: true
     },
     maxlength: [String, Number],
