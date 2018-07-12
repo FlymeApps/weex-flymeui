@@ -28,26 +28,26 @@
               </template>
               <fm-text v-else class="content-title" font-weight="medium" size="large" :style="titleStyles" :value="title"></fm-text>
             </slot>
-              <slot name="content">
-                <!-- Normal Dialog -->
-                <template v-if="contentType === 'default'">
-                  <fm-text class="content-subtext" :style="contentStyles" :value="content"></fm-text>
-                </template>
-                <!-- Input Dialog -->
-                <template v-if="contentType === 'input'">
-                  <fm-input class="input" ref="inputEl" :default-value="inputText" type="text" :placeholder="placeholder" :autofocus="true" @input="inputing" />
-                </template>
-                <!-- Select Dialog -->
-                <template v-if="contentType === 'select'">
-                  <fm-checkbox-list
-                    ref="selectEl"
-                    :list="selectDataIn"
-                    :single="selectModel === 'single'"
-                    :limit="selectLimit"
-                    :last-border-hidden="selectModel === 'single'"
-                    @fmCheckBoxListChecked="onSelect" />
-                </template>
-              </slot>
+            <slot name="content">
+              <!-- Normal Dialog -->
+              <template v-if="contentType === 'default'">
+                <fm-text class="content-subtext" :style="contentStyles" :value="content"></fm-text>
+              </template>
+              <!-- Input Dialog -->
+              <template v-if="contentType === 'input'">
+                <fm-input class="input" ref="inputEl" :default-value="inputText" type="text" :placeholder="placeholder" :autofocus="true" @input="inputing" />
+              </template>
+              <!-- Select Dialog -->
+              <template v-if="contentType === 'select'">
+                <fm-checkbox-list
+                  ref="selectEl"
+                  :list="selectDataIn"
+                  :single="selectModel === 'single'"
+                  :limit="selectLimit"
+                  :last-border-hidden="selectModel === 'single'"
+                  @fmCheckBoxListChecked="onSelect" />
+              </template>
+            </slot>
           </div>
           <div class="dialog-footer" :style="btnStyle" v-if="contentType !== 'select' || selectModel !== 'single'">
             <slot name="btn-group">

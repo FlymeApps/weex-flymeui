@@ -19,7 +19,7 @@ export default {
     contentType: {
       type: VALUE.SELECT,
       desc: '内容类型',
-      default: 'confirm',
+      default: 'default',
       props: {
         options: ['default', 'input', 'select']
       }

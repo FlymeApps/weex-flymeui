@@ -22,17 +22,17 @@ export default {
     focusColor: {
       type: VALUE.COLOR,
       desc: '球的聚焦颜色',
-      default: '#FFFFFF'
+      default: ''
     },
     blurColor: {
       type: VALUE.COLOR,
       desc: '球的失焦颜色',
-      default: '#FFFFFF'
+      default: ''
     },
     borderColor: {
       type: VALUE.COLOR,
       desc: '边框颜色',
-      default: ''
+      default: '#D9D9D9'
     },
     backgroundColor: {
       type: VALUE.COLOR,
