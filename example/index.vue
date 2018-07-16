@@ -108,7 +108,9 @@ export default {
           target = path;
         }
         navigator.push({
+          key: target,
           url: target,
+          router: path,
           animated: 'true'
         });
       }

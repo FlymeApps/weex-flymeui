@@ -98,7 +98,8 @@ export default {
             default: false
           }
         }
-      }
+      },
+      default: []
     },
     selectModel: {
       type: VALUE.SELECT,
