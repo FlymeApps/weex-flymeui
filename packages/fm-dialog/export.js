@@ -34,6 +34,11 @@ export default {
       desc: '内容',
       default: ''
     },
+    bodyBackground: {
+      type: VALUE.STRING,
+      desc: '背景颜色',
+      default: '#FFFFFF'
+    },
     placeholder: {
       type: VALUE.STRING,
       desc: '输入框提示文案',
@@ -68,6 +73,11 @@ export default {
       type: VALUE.BOOLEAN,
       desc: '隐藏弹框内容',
       default: false
+    },
+    canAutoClose: {
+      type: VALUE.BOOLEAN,
+      desc: '点击蒙层自动关闭',
+      default: true
     }
   },
   events: {

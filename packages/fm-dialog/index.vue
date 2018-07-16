@@ -170,6 +170,10 @@ export default {
       type: Number,
       default: 400
     },
+    bodyBackground: {
+      type: String,
+      default: '#FFFFFF'
+    },
     bodyStyles: {
       type: Object,
       default: () => ({})
@@ -331,7 +335,8 @@ export default {
     },
     dialogStyle () {
       return Object.assign({
-        opacity: this.dialogOpacity
+        opacity: this.dialogOpacity,
+        backgroundColor: this.bodyBackground
         // top: (!this.isCreator ? this.top : 0) + 'px'
       }, this.bodyStyles);
     },
