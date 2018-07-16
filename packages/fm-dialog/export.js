@@ -35,7 +35,7 @@ export default {
       default: ''
     },
     bodyBackground: {
-      type: VALUE.STRING,
+      type: VALUE.COLOR,
       desc: '背景颜色',
       default: '#FFFFFF'
     },
