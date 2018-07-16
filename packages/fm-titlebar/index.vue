@@ -2,7 +2,7 @@
 <!-- Created and Update by Yanjiie on 2018/04/12. -->
 <template>
   <div v-if="show">
-    <div class="fm-status-bar" v-if="statusbar" :style="{ backgroundColor: backgroundColor, height: `${height - 144}` }"></div>
+    <div class="fm-status-bar" v-if="statusbar" :style="{ backgroundColor: backgroundColor, height: `${height - 144}px` }"></div>
     <div class="fm-title-bar" :style="barStyle">
       <slot name="left" v-if="hasPrev">
         <fm-icon @fmIconClicked="onBack" class="title-bar-back" name="fanhui" :icon-style="72" :color="leftColor" />

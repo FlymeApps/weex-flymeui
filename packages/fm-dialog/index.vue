@@ -21,17 +21,19 @@
             v-if="self_show || isCreator"
             :style="dialogStyle"
             @touchend="handleTouchEnd">
-          <div class="dialog-content">
+          <div class="dialog-content" :style="(title || content) && !contentHidden ? { paddingTop: '63px' } : {}">
             <slot name="title">
               <template v-if="contentType === 'select'">
                 <fm-text class="content-title--input" :style="titleStyles" :value="title"></fm-text>
               </template>
-              <fm-text v-else class="content-title" font-weight="medium" size="large" :style="titleStyles" :value="title"></fm-text>
+              <template v-else>
+                <fm-text v-if="title && !contentHidden" class="content-title" font-weight="medium" size="large" :style="titleStyles" :value="title"></fm-text>
+              </template>
             </slot>
             <slot name="content">
               <!-- Normal Dialog -->
               <template v-if="contentType === 'default'">
-                <fm-text class="content-subtext" :style="contentStyles" :value="content"></fm-text>
+                <fm-text v-if="content && !contentHidden" class="content-subtext" :style="contentStyles" :value="content"></fm-text>
               </template>
               <!-- Input Dialog -->
               <template v-if="contentType === 'input'">
@@ -49,11 +51,11 @@
               </template>
             </slot>
           </div>
-          <div class="dialog-footer" :style="btnStyle" v-if="contentType !== 'select' || selectModel !== 'single'">
-            <slot name="btn-group">
-              <fm-simple-btn v-for="(btn, index) in dialogBtns" scene="dialog" v-bind="btn" @click="btnClick" :key="index"></fm-simple-btn>
-            </slot>
-          </div>
+          <slot name="btn-group">
+            <div class="dialog-footer" :style="btnStyle" v-if="(contentType !== 'select' || selectModel !== 'single') && !contentHidden">
+                <fm-simple-btn v-for="(btn, index) in dialogBtns" scene="dialog" v-bind="btn" @click="btnClick" :key="index"></fm-simple-btn>
+            </div>
+          </slot>
         </div>
       </div>
   </component>
@@ -95,7 +97,6 @@
   }
 
   .content-title {
-    margin-top: 63px;
     padding-left: 72px;
     padding-right: 72px;
     margin-bottom: 1.5px;
@@ -258,7 +259,8 @@ export default {
     overlayOpacity: {
       type: Number,
       default: 0.5
-    }
+    },
+    contentHidden: Boolean
   },
   data: () => ({
     pageHeight: 1334,
