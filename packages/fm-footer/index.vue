@@ -1,13 +1,15 @@
 <!-- CopyRight (C) 2018-2022 FlymeApps Team Holding Limited. -->
 <!-- Created by Yanjiie on 2018/03/13. -->
 <template>
-  <div class="fm-footer" :style="footerStyle">
-    <slot></slot>
+  <div class="fm-footer--wrap">
+    <div class="fm-footer" :style="footerStyle">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
 <style scoped>
-  .fm-footer {
+  .fm-footer--wrap {
     flex-direction: row;
     position: fixed;
     right: 0;
@@ -20,20 +22,15 @@
     border-top-color: rgba(0, 0, 0, 0.1);
   }
 
-  .fm-footer- {
-    justify-content: center;
-  }
-
-  .fm-footer-small {
-    padding: 0 48px;
-  }
-
-  .fm-footer-middle {
-    padding:  0px 90px
-  }
-
-  .fm-footer-large {
-    padding: 0 111px;
+  .fm-footer {
+    flex-direction: row;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    justify-content: space-between;
+    align-items: center;
   }
 </style>
 
@@ -57,17 +54,20 @@ export default {
       switch (this.paddingSize) {
         case 'small':
           typeStyle = {
-            padding: '0 48px'
+            'padding': '0 48px',
+            'justify-content': 'space-between'
           }
           break;
         case 'middle':
           typeStyle = {
-            padding: '0 90px'
+            'padding': '0 90px',
+            'justify-content': 'space-between'
           }
           break;
         case 'large':
           typeStyle = {
-            padding: '0 111px'
+            'padding': '0 111px',
+            'justify-content': 'space-between'
           }
           break;
         default:

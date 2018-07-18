@@ -59,7 +59,7 @@ export default {
   },
   size: {
     width: 1080,
-    height: 204
+    height: 396
   },
   slots: [{
     name: 'left',
@@ -87,8 +87,10 @@ export default {
       title: '换机助手'
     }, {
       title: 'Flyme Design'
+    }, {
+      title: 'Creator'
     }],
-    title: 'Creator'
+    title: '应用'
   },
   thumbnail: 'http://image.res.meizu.com/image/flyme-icon/5eddc64f41f143c8b28f965e3c890ad0z'
 };
