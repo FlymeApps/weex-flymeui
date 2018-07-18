@@ -77,7 +77,18 @@ export default {
       color: '#FC5B23'
     }, {
       title: '小睡眠'
-    }]
+    }, {
+      title: '音乐'
+    }, {
+      title: '购物'
+    }, {
+      title: '时间管理'
+    }, {
+      title: '换机助手'
+    }, {
+      title: 'Flyme Design'
+    }],
+    title: 'Creator'
   },
   thumbnail: 'http://image.res.meizu.com/image/flyme-icon/5eddc64f41f143c8b28f965e3c890ad0z'
 };

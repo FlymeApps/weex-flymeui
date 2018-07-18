@@ -151,7 +151,7 @@ export default {
         borderBottomStyle: 'solid',
         borderBottomWidth: `${2}px`,
         borderBottomColor: 'rgba(0, 0, 0, 0.1)',
-        paddingRight: `${this.rightBtns ? 0 : 48}px`
+        paddingRight: `${this.rightBtns || this.rightText ? 0 : 48}px`
       };
       Object.assign(style, this.borderStyle);
       style.backgroundColor = this.backgroundColor;

@@ -36,9 +36,9 @@ export default {
     height: 72
   },
   mockData: {
-    name: 'zhuye',
+    name: 'fanhui',
     iconStyle: 72,
-    color: '#000000'
+    color: '#666666'
   },
-  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/52710e0c44bf44ebabe628d0e43cf0edz'
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/2a36e8f553fc42d1b0394620f369acadz'
 };

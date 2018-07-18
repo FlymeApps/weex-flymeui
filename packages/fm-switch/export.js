@@ -50,7 +50,8 @@ export default {
     height: 72
   },
   mockData: {
-    solid: false
+    solid: false,
+    checked: true
   },
   thumbnail: 'http://image.res.meizu.com/image/flyme-icon/cd999618bc794dfc986bab6cd429857ez'
 };

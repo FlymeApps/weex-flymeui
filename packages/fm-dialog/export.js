@@ -90,7 +90,8 @@ export default {
   },
   size: {
     width: 1080,
-    height: 1920
+    height: 1920,
+    resize: false
   },
   slots: [{
     name: 'title',
@@ -103,8 +104,8 @@ export default {
     desc: '自定义底部'
   }],
   mockData: {
-    title: '标题',
-    content: '内容'
+    title: '退出浏览器并清空历史记录',
+    content: '退出浏览器并清空历史记录弹框内容区域此处展示描述'
   },
   thumbnail: 'http://image.res.meizu.com/image/flyme-icon/dd5cd5bebc414beb8cf385b528131fb2z'
 };

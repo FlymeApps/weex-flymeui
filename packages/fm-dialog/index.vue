@@ -14,7 +14,8 @@
                   ref="fm-overlay"></fm-overlay>
       <div class="dialog-container"
            :class="!isCreator && ['dialog-container-H5']"
-           v-if="self_show || isCreator">
+           v-if="self_show || isCreator"
+           :style="{ top: `${statusHeight}px` }">
         <div class="dialog-box"
             :class="!isCreator && ['dialog-box-H5']"
             ref="dialog-box"
@@ -272,7 +273,8 @@ export default {
     dialogOpacity: 0,
     inputText: '',
     selectList: [],
-    selectDataIn: []
+    selectDataIn: [],
+    statusHeight: 66
   }),
   created () {
     const { env: { deviceHeight, deviceWidth }} = weex.config;
@@ -281,6 +283,9 @@ export default {
     this.inputText = this.inputDefaultText;
     this.selectDataIn = this.selectData;
     this.show && (this.dialogOpacity = 1);
+    if (weex.supports && weex.supports('@module/view.getStatusBarHeight')) {
+      this.statusHeight = weex.requireModule('view').getStatusBarHeight() * 3;
+    }
   },
   watch: {
     show (val, oldVal) {
@@ -337,7 +342,6 @@ export default {
       return Object.assign({
         opacity: this.dialogOpacity,
         backgroundColor: this.bodyBackground
-        // top: (!this.isCreator ? this.top : 0) + 'px'
       }, this.bodyStyles);
     },
     btnStyle () {
@@ -364,7 +368,6 @@ export default {
       e.preventDefault && e.preventDefault();
     },
     overlayClicked () {
-      console.log(213132)
       if (this.canAutoClose) {
         this.$emit('update:show', false);
         this.appearDialog(false);

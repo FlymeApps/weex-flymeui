@@ -60,5 +60,5 @@ export default {
     desc: '自定义标题右边'
   }],
   mockData: null,
-  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/c734fae3d4a94c43af644ffce519423az'
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/bd60a8d9ef2942b392d2ee5fcb6c8725z'
 };

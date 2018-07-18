@@ -93,6 +93,8 @@ export default {
     name: 'right',
     desc: '自定义搜索按钮'
   }],
-  mockData: null,
-  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/a849dc3ed5714146b5c70a7e22666c5fz'
+  mockData: {
+    placeholder: '梦幻西游'
+  },
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/d4e704c777844175b14acb92ea8e6934z'
 };

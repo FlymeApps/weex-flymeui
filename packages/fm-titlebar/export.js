@@ -8,6 +8,11 @@ export default {
       desc: '标题',
       default: '标题'
     },
+    rightText: {
+      type: VALUE.STRING,
+      desc: '右边按钮文案',
+      default: ''
+    },
     titleColor: {
       type: VALUE.COLOR,
       desc: '标题颜色',
@@ -51,6 +56,9 @@ export default {
     name: 'right',
     desc: '自定义右边按钮'
   }],
-  mockData: null,
-  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/ef2fc22e42c14fc49846b2cc0faa06f2z'
+  mockData: {
+    title: '标题栏',
+    rightText: '更多'
+  },
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/5b31033454514276976b84d5e51e4515z'
 };

@@ -1,7 +1,7 @@
 <!-- CopyRight (C) 2018-2022 FlymeApps Team Holding Limited. -->
 <!-- Created by Yanjiie on 2018/03/13. -->
 <template>
-  <div class="fm-footer" :class="['fm-footer-' + paddingSize]" :style="{ backgroundColor: backgroundColor }">
+  <div class="fm-footer" :style="footerStyle">
     <slot></slot>
   </div>
 </template>
@@ -48,6 +48,34 @@ export default {
     backgroundColor: {
       type: String,
       default: '#FFFFFF'
+    }
+  },
+  computed: {
+    footerStyle() {
+      let style = { backgroundColor: this.backgroundColor };
+      let typeStyle;
+      switch (this.paddingSize) {
+        case 'small':
+          typeStyle = {
+            padding: '0 48px'
+          }
+          break;
+        case 'middle':
+          typeStyle = {
+            padding: '0 90px'
+          }
+          break;
+        case 'large':
+          typeStyle = {
+            padding: '0 111px'
+          }
+          break;
+        default:
+          typeStyle = {
+            'justify-content': 'center'
+          }
+      }
+      return Object.assign({}, style, typeStyle);
     }
   }
 };

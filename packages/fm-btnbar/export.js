@@ -68,10 +68,11 @@ export default {
   },
   mockData: {
     items: [{
-      title: '取消'
+      title: '取消订单',
+      color: '#b2b2b2'
     }, {
-      title: '确定',
-      color: '#dc2a2a'
+      title: '提交订单',
+      color: '#198DED'
     }]
   },
   thumbnail: 'http://image.res.meizu.com/image/flyme-icon/4bbc52b26c7841c98baf90e5fc1ad216z'

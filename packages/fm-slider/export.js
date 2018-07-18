@@ -49,5 +49,5 @@ export default {
       src: 'http://image.res.meizu.com/image/flyme-icon/4306b23856484446bd6d53220f36159cz'
     }]
   },
-  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/b6d95a8e362b4587b22228bc6f68b5a9z'
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/c4437e77c9424899b972ec07407d2573z'
 };
