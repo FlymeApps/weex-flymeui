@@ -21,7 +21,7 @@
             v-if="self_show || isCreator"
             :style="dialogStyle"
             @touchend="handleTouchEnd">
-          <div class="dialog-content" :style="(title || content) && !contentHidden ? { paddingTop: '63px' } : {}">
+          <div class="dialog-content" :style="(title || content) && !contentHidden && contentType !== 'select' ? { paddingTop: '63px' } : {}">
             <slot name="title">
               <template v-if="contentType === 'select'">
                 <fm-text class="content-title--input" :style="titleStyles" :value="title"></fm-text>
@@ -364,11 +364,17 @@ export default {
       e.preventDefault && e.preventDefault();
     },
     overlayClicked () {
-      this.canAutoClose && (this.appearDialog(false) || this.$emit('fmDialogDisappeared', {}));
+      console.log(213132)
+      if (this.canAutoClose) {
+        this.$emit('update:show', false);
+        this.appearDialog(false);
+        this.$emit('fmDialogDisappeared', {});
+      }
       this.cancelCb && this.cancelCb();
     },
     btnClick (btn) {
       const { eventMsg } = this;
+      this.$emit('update:show', false);
       if (btn.type && btn.type === 'cancel') {
         this.$emit('fmDialogBtnClicked', { type: 'cancel' });
         this.cancelCb && this.cancelCb();
@@ -411,6 +417,7 @@ export default {
     onSelect (e) {
       this.selectList = e.checkedList;
       if (this.selectModel === 'single') {
+        this.$emit('update:show', false);
         this.$emit('fmDialogSingleSelected', { selectList: this.selectList });
       }
     }

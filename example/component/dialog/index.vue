@@ -15,7 +15,7 @@
           <fm-button class="btn" @buttonClicked="click7">弹出输入</fm-button>
         </div>
 
-        <fm-dialog :show="checkListShow"
+        <fm-dialog :show.sync="checkListShow"
                    title="选择语言"
                    content-type="select"
                    @fmDialogDisappeared="overlayClick"
@@ -25,7 +25,7 @@
                    :overlayOpacity="0.1">
         </fm-dialog>
 
-        <fm-dialog :show="checkListShow1"
+        <fm-dialog :show.sync="checkListShow1"
                    title="选择语言"
                    content-type="select"
                    @fmDialogDisappeared="overlayClick"
@@ -37,7 +37,7 @@
                    :overlayOpacity="0.1">
         </fm-dialog>
 
-        <fm-dialog :show="inputShow"
+        <fm-dialog :show.sync="inputShow"
                    title="弹出输入"
                    content-type="input"
                    placeholder="提示文本"
@@ -47,7 +47,7 @@
                    :inputDefaultText="inputText">
         </fm-dialog>
 
-        <fm-dialog :show="show"
+        <fm-dialog :show.sync="show"
                    :title="title"
                    :content="content"
                    @fmDialogBtnClicked="btnClick"
@@ -189,22 +189,23 @@ export default {
       } else {
         modal.toast({ message: btn.text });
       }
-      this.show = false;
+      // console.log(this.show)
+      // this.show = false;
     },
     overlayClick () {
-      this.show = false;
-      this.inputShow = false;
-      this.checkListShow = false;
-      this.checkListShow1 = false;
+      // this.show = false;
+      // this.inputShow = false;
+      // this.checkListShow = false;
+      // this.checkListShow1 = false;
     },
     checkListClick (e) {
       modal.toast({ message: '选择了: ' + e.selectList.map(item => item.title).toString() });
-      this.checkListShow = false;
-      this.checkListShow1 = false;
+      // this.checkListShow = false;
+      // this.checkListShow1 = false;
     },
     checkListOverlayClick () {
-      this.checkListShow = true;
-      this.checkListShow1 = true;
+      // this.checkListShow = true;
+      // this.checkListShow1 = true;
     },
     inputClick (e) {
       if (e.type === 'cancel') {
@@ -214,7 +215,7 @@ export default {
       } else {
         modal.toast({ message: e.text });
       }
-      this.inputShow = false;
+      // this.inputShow = false;
     },
     inputing (e) {
       this.inputText = e.value;
