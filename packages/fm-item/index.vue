@@ -164,7 +164,7 @@ export default {
   },
   watch: {
     type (val) {
-      this.scene = val;
+      this.scene = Scene[val];
     }
   },
   created () {
@@ -180,5 +180,3 @@ export default {
   }
 };
 </script>
-
-

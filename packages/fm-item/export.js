@@ -8,7 +8,7 @@ export default {
       desc: '列表类型',
       default: 'normal',
       props: {
-        options: ['normal', 'single', 'avatar', 'icon-small', 'icon-middle', 'icon-large']
+        options: ['normal', 'single', 'avatar-single', 'avatar-normal', 'icon-small', 'icon-middle', 'icon-large']
       }
     },
     title: {
