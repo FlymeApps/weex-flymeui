@@ -117,7 +117,11 @@ export default {
       const { borderWidth, borderColor } = this;
       return {
         borderBottomWidth: borderWidth + 'px',
-        borderColor
+        borderColor,
+        height: '144px',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
       };
     },
     titleStyle () {
