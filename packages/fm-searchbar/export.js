@@ -94,7 +94,7 @@ export default {
     desc: '自定义搜索按钮'
   }],
   mockData: {
-    placeholder: '梦幻西游'
+    inputValue: '梦幻西游'
   },
-  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/d4e704c777844175b14acb92ea8e6934z'
+  thumbnail: 'http://image.res.meizu.com/image/flyme-icon/172eec2b06a44915bda2496c27363816z'
 };

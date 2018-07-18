@@ -2,7 +2,7 @@
 <!-- Created by Yanjiie on 18/02/26-->
 <template>
   <div v-if="show">
-    <div class="fm-status-bar" v-if="statusbar" :style="{ backgroundColor: backgroundColor }"></div>
+    <div class="fm-status-bar" v-if="statusbar" :style="{ backgroundColor: backgroundColor, height: `${height - 144}px` }"></div>
     <div class="fm-search-bar" :style="barStyle">
       <slot name="left" v-if="hasPrev">
         <fm-icon @fmIconClicked="onBack" class="search-bar-back" name="fanhui" :icon-style="72" :color="leftColor"/>
@@ -215,7 +215,9 @@ export default {
   },
   data: () => ({
     isFocus: false,
-    value: ''
+    value: '',
+    height: 210,
+    statusHeight: 66
   }),
   computed: {
     delShow () {
@@ -287,6 +289,12 @@ export default {
   },
   mounted () {
     this.value = this.inputValue || '';
+  },
+  created () {
+    if (weex.supports && weex.supports('@module/view.getStatusBarHeight')) {
+      this.statusHeight = weex.requireModule('view').getStatusBarHeight() * 3;
+      this.height = this.statusHeight + 144;
+    }
   }
 };
 </script>

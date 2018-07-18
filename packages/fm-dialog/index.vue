@@ -280,9 +280,12 @@ export default {
     const { env: { deviceHeight, deviceWidth }} = weex.config;
     this.pageHeight = deviceHeight / deviceWidth * 1080;
     this.self_show = this.show;
+    this.show && (this.dialogOpacity = 1);
     this.inputText = this.inputDefaultText;
     this.selectDataIn = this.selectData;
-    this.show && (this.dialogOpacity = 1);
+    if (this.show) {
+      this.appearDialog(true);
+    }
     if (weex.supports && weex.supports('@module/view.getStatusBarHeight')) {
       this.statusHeight = weex.requireModule('view').getStatusBarHeight() * 3;
     }
@@ -371,7 +374,6 @@ export default {
       if (this.canAutoClose) {
         this.$emit('update:show', false);
         this.appearDialog(false);
-        this.$emit('fmDialogDisappeared', {});
       }
       this.cancelCb && this.cancelCb();
     },
@@ -389,6 +391,9 @@ export default {
       }
     },
     appearDialog (bool, duration = this.duration) {
+      if (!bool) {
+        this.$emit('fmDialogDisappeared', {});
+      }
       const { hasAnimation, timingFunction, isCreator } = this;
       if (isCreator) {
         this.self_show = bool;
