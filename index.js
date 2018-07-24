@@ -16,13 +16,11 @@ import FmImage from './packages/fm-image';
 import FmOverlay from './packages/fm-overlay';
 import FmDialog from './packages/fm-dialog';
 import FmSimpleBtn from './packages/fm-simple-btn';
-import { confirm, alert } from './packages/module/dialog.js';
 import FmPopup from './packages/fm-popup';
 import FmActionSheet from './packages/fm-action-sheet';
 import FmItem from './packages/fm-item';
 import FmRater from './packages/fm-rater';
 import FmSnackBar from './packages/fm-snack-bar';
-import showSnackBar from './packages/module/snackbar.js';
 import FmCheckbox from './packages/fm-checkbox';
 import FmCheckboxList from './packages/fm-checkbox-list';
 import FmActionView from './packages/fm-action-view';
@@ -64,14 +62,11 @@ export {
   FmOverlay,
   FmDialog,
   FmSimpleBtn,
-  confirm,
-  alert,
   FmPopup,
   FmActionSheet,
   FmItem,
   FmRater,
   FmSnackBar,
-  showSnackBar,
   FmCheckbox,
   FmCheckboxList,
   FmActionView,
