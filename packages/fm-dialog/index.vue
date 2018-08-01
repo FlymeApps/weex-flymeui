@@ -342,10 +342,18 @@ export default {
       return btns;
     },
     dialogStyle () {
+      let extraStyle = {};
+      if (this.contentHidden) {
+        extraStyle = {
+          backgroundColor: 'transparent',
+          alignItems: 'center',
+          boxShadow: 'none'
+        }
+      }
       return Object.assign({
         opacity: this.dialogOpacity,
         backgroundColor: this.bodyBackground
-      }, this.bodyStyles);
+      }, extraStyle, this.bodyStyles);
     },
     btnStyle () {
       const { btnDirection, btns } = this;

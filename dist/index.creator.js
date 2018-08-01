@@ -9669,10 +9669,18 @@ exports.default = {
       return btns;
     },
     dialogStyle: function dialogStyle() {
+      var extraStyle = {};
+      if (this.contentHidden) {
+        extraStyle = {
+          backgroundColor: 'transparent',
+          alignItems: 'center',
+          boxShadow: 'none'
+        };
+      }
       return Object.assign({
         opacity: this.dialogOpacity,
         backgroundColor: this.bodyBackground
-      }, this.bodyStyles);
+      }, extraStyle, this.bodyStyles);
     },
     btnStyle: function btnStyle() {
       var btnDirection = this.btnDirection,
