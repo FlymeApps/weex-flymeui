@@ -92,7 +92,7 @@
 <script>
 const animation = weex.requireModule('animation');
 import Utils from '../utils';
-import BindEnv from '../utils/bind-env';
+import BindEnv from '../bind-env';
 import Binding from 'weex-bindingx/lib/index.weex.js';
 
 export default {

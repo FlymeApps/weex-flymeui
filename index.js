@@ -1,5 +1,5 @@
 import Utils from './packages/utils';
-import BindEnv from './packages/utils/bind-env.js';
+import BindEnv from './packages/bind-env';
 import FmSwitch from './packages/fm-switch';
 import FmTag from './packages/fm-tag';
 import FmTagWall from './packages/fm-tag-wall';
@@ -42,6 +42,10 @@ import FmSlider from './packages/fm-slider';
 import FmPopover from './packages/fm-popover';
 import FmWaiting from './packages/fm-waiting';
 import FmLoading from './packages/fm-loading';
+
+import showSnackBar from './packages/show-snack-bar';
+import alert from './packages/alert';
+import confirm from './packages/confirm';
 
 export {
   Utils,
@@ -87,5 +91,8 @@ export {
   FmSlider,
   FmPopover,
   FmWaiting,
-  FmLoading
+  FmLoading,
+  showSnackBar,
+  confirm,
+  alert
 };

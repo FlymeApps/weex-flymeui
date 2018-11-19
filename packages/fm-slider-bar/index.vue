@@ -55,7 +55,7 @@
 import Binding from 'weex-bindingx/lib/index.weex.js';
 import STYLE from 'weex-flymeui/lib/theme/default/index.js';
 import Utils from '../utils';
-import BindEnv from '../utils/bind-env';
+import BindEnv from '../bind-env';
 
 const animation = weex.requireModule('animation');
 const dom = weex.requireModule('dom');
