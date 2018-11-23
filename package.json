@@ -21,6 +21,11 @@
         "Weex",
         "UI library"
     ],
+    "files": [
+      "packages",
+      "lib",
+      "dist"
+    ],
     "author": "Yanjiie",
     "license": "MIT",
     "devDependencies": {
