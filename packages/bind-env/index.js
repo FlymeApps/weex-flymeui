@@ -3,7 +3,7 @@
  * Created by Yanjiie on 2018/03/18. Fork from alibaba/weex-ui.
  */
 import Binding from 'weex-bindingx/lib/index.weex.js';
-import Utils from './index';
+import Utils from '../utils/index';
 
 const BindEnv = {
   supportsEB () {

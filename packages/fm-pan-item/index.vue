@@ -24,7 +24,7 @@
 <script>
 import Binding from 'weex-bindingx/lib/index.weex.js';
 import Utils from '../utils';
-import BindEnv from '../utils/bind-env';
+import BindEnv from '../bind-env';
 
 export default {
   props: {

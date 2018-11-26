@@ -19,9 +19,9 @@
 </style>
 
 <script>
-import { CheckIcon } from '../../../index';
+// import { CheckIcon } from '../../../index';
 export default {
-  components: { CheckIcon },
+  // components: { CheckIcon },
   props: {
     checking: Boolean,
     check: Boolean
